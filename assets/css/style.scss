@@ -35,7 +35,6 @@ body {
   color: #fff;
   text-align: center;
   background-color: #155799;
-  background-image: linear-gradient(120deg, #155799, #155799)
 }
 
 @media screen and (min-width: 64em) { .front-page-header { padding: 5rem 6rem } }
@@ -80,8 +79,6 @@ li {
 
 /* Style the links inside the navigation bar */
 .topnav a {
-  float: left;
-  display: block;
   color: #f2f2f2;
   text-align: center;
   padding: 14px 10px;
