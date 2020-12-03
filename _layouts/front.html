@@ -54,10 +54,13 @@
       </div>
     </footer>
   </main>
-   <header class="front-page-header" role="banner">
-    <h1 class="project-name">{{ page.title | default: site.title | default: site.github.repository_name }}</h1>
-    <h2 class="project-tagline">I wanted a website so I built one...</h2>
-     </header>
+  <header class="front-page-header" role="banner">
+    <h1 class="project-name">Blog</h1>
+  </header>
+
+  <main id="content" class="main-content" role="main">
+    {% include blog.html %} 
+  </main>
 {% include menu-bar.js %}
 </body>
 </html>
