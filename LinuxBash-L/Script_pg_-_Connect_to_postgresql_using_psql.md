@@ -1,0 +1,37 @@
+---
+title: pg - Connect to postgresql using psql
+---
+
+```bash
+#!/bin/bash
+help_text="
+NAME
+   pg - Connect to postgresql using psql.
+
+USAGE
+   pg [options] <parameters>
+
+OPTIONS
+   -x
+      Description...
+
+   -h|--help
+      Show help text.
+
+DESCRIPTION
+   Connect to postgresql using psql.
+
+AUTHOR
+  mjnurse.dev - 2020
+"
+help_line="Connect to postgresql using psql"
+desc_line="Connect to postgresql using psql"
+
+export PGPASSWORD=postgres
+
+if [[ "$1" == "" ]]; then
+   psql --host=localhost -U postgres $*
+else
+   psql --host=localhost -U postgres -f $1
+fi
+```
