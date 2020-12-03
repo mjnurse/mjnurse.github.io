@@ -54,6 +54,10 @@
       </div>
     </footer>
   </main>
+   <header class="front-page-header" role="banner">
+    <h1 class="project-name">{{ page.title | default: site.title | default: site.github.repository_name }}</h1>
+    <h2 class="project-tagline">I wanted a website so I built one...</h2>
+     </header>
 {% include menu-bar.js %}
 </body>
 </html>
