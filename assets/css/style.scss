@@ -46,6 +46,10 @@ main {
 @media screen and (min-width: 42em) and (max-width: 64em) { .front-page-header { padding: 3rem 4rem } }
 @media screen and (max-width: 42em) { .front-page-header { padding: 2rem 1rem } }
 
+.project-name {
+  font-size: 4em;
+}
+
 .project-tagline {
   margin-bottom: 1rem;
 }
