@@ -8,12 +8,12 @@ title: HTML Colour Converter
 <input type="number" id="b" name="b" maxlength=3 min=0 max=255 value=255 onchange="rgbVal(this);">
 <label for="h">HEX:</label>
 <input type="text" id="h" name="h" maxlength=6 size=6 value="FFFFFF" onchange="hexVal(this);">
-<div id="c1" style="width: 100%; height: 40px; border: 5px solid white;"></div>
-<div id="c2" style="width: 100%; height: 40px; border: 5px solid white;"></div>
-<div id="c3" style="width: 100%; height: 40px; border: 5px solid white;"></div>
-<div id="c4" style="width: 100%; height: 40px; border: 5px solid white;"></div>
-<div id="c5" style="width: 100%; height: 40px; border: 5px solid white;"></div>
-<div id="c6" style="width: 100%; height: 40px; border: 5px solid white;"></div>
+<div id="c1" style="width: 100%; height: 40px; border: 5px solid white; padding: 10px;"></div>
+<div id="c2" style="width: 100%; height: 40px; border: 5px solid white; padding: 10px;"></div>
+<div id="c3" style="width: 100%; height: 40px; border: 5px solid white; padding: 10px;"></div>
+<div id="c4" style="width: 100%; height: 40px; border: 5px solid white; padding: 10px;"></div>
+<div id="c5" style="width: 100%; height: 40px; border: 5px solid white; padding: 10px;"></div>
+<div id="c6" style="width: 100%; height: 40px; border: 5px solid white; padding: 10px;"></div>
 
 <script>
   function setColors() {
