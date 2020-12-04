@@ -8,6 +8,10 @@ title: HTML Colour Converter
 <input type="number" id="b" name="b" maxlength=3 min=0 max=255 value=255 onchange="rgbVal(this);">
 <label for="h">HEX:</label>
 <input type="text" id="h" name="h" maxlength=6 size=6 value="155799" onchange="hexVal(this);">
+<hr>
+
+I've found switching the RGB values around can give some colours that work well together.  Not sure if this has a name...
+
 <div id="c1" style="width: 100%; border: 5px solid white; padding: 0.5em;"></div>
 <div id="c2" style="width: 100%; border: 5px solid white; padding: 0.5em;"></div>
 <div id="c3" style="width: 100%; border: 5px solid white; padding: 0.5em;"></div>
