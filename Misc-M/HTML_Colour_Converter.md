@@ -10,14 +10,11 @@ title: HTML Colour Converter
 <input type="text" id="h" name="h" maxlength=6 size=6 value="155799" onchange="hexVal(this);">
 <hr>
 
-I've found switching the RGB values around can give some colours that work well together.  Not sure if this has a name...
+I've found rotating the RGB values around can give some colours that work well together.  Not sure if this has a name...
 
 <div id="c1" style="width: 100%; border: 5px solid white; padding: 0.5em;"></div>
 <div id="c2" style="width: 100%; border: 5px solid white; padding: 0.5em;"></div>
 <div id="c3" style="width: 100%; border: 5px solid white; padding: 0.5em;"></div>
-<div id="c4" style="width: 100%; border: 5px solid white; padding: 0.5em;"></div>
-<div id="c5" style="width: 100%; border: 5px solid white; padding: 0.5em;"></div>
-<div id="c6" style="width: 100%; border: 5px solid white; padding: 0.5em;"></div>
 
 <script>
   function setColors() {
@@ -30,25 +27,13 @@ I've found switching the RGB values around can give some colours that work well 
     document.getElementById('c1').style.backgroundColor = '#' + color;
     document.getElementById('c1').innerHTML = '<span style="color: black">#' +
       color + '</span>&nbsp;<span style="color: white">#' + color + '</span>';
-    color = rh + bh + gh;
+    color = bh + rh + gh;
     document.getElementById('c2').style.backgroundColor = '#' + color;
     document.getElementById('c2').innerHTML = '<span style="color: black">#' +
       color + '</span>&nbsp;<span style="color: white">#' + color + '</span>';
-    color = gh + rh + bh;
+    color = gh + bh + rh;
     document.getElementById('c3').style.backgroundColor = '#' + color;
     document.getElementById('c3').innerHTML = '<span style="color: black">#' +
-      color + '</span>&nbsp;<span style="color: white">#' + color + '</span>';
-    color = gh + bh + rh;
-    document.getElementById('c4').style.backgroundColor = '#' + color;
-    document.getElementById('c4').innerHTML = '<span style="color: black">#' +
-      color + '</span>&nbsp;<span style="color: white">#' + color + '</span>';
-    color = bh + rh + gh;
-    document.getElementById('c5').style.backgroundColor = '#' + color;
-    document.getElementById('c5').innerHTML = '<span style="color: black">#' +
-      color + '</span>&nbsp;<span style="color: white">#' + color + '</span>';
-    color = bh + gh + rh;
-    document.getElementById('c6').style.backgroundColor = '#' + color;
-    document.getElementById('c6').innerHTML = '<span style="color: black">#' +
       color + '</span>&nbsp;<span style="color: white">#' + color + '</span>';
   }
 
