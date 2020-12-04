@@ -13,6 +13,9 @@ body {
   font-family: sans-serif;
 }
 
+main {
+  background-color: #fff;
+}
 .main-content h1 {
   font-weight: bold;
   color: #155799;
@@ -46,9 +49,13 @@ body {
   margin-bottom: 1rem;
 }
 
+footer {
+  background-color: #333;
+}
 .site-footer-icons {
   text-align: center;
   font-size: 28px;
+  color: #fff;
 }
 
 td, th {
