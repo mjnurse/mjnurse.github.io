@@ -4,8 +4,8 @@ title: HTML Colour Converter
 
 <label for="r">RGB:</label>
 <input type="number" id="r" name="r" maxlength=3 min=0 max=255 value=21 onchange="rgbVal(this);">
-<input type="number" id="g" name="g" maxlength=3 min=0 max=255 value=153 onchange="rgbVal(this);">
-<input type="number" id="b" name="b" maxlength=3 min=0 max=255 value=87 onchange="rgbVal(this);">
+<input type="number" id="g" name="g" maxlength=3 min=0 max=255 value=87 onchange="rgbVal(this);">
+<input type="number" id="b" name="b" maxlength=3 min=0 max=255 value=153 onchange="rgbVal(this);">
 <label for="h">HEX:</label>
 <input type="text" id="h" name="h" maxlength=6 size=6 value="155799" onchange="hexVal(this);">
 <hr>
