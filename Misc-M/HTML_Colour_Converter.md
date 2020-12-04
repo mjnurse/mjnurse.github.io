@@ -7,13 +7,13 @@ title: HTML Colour Converter
 <input type="number" id="g" name="g" maxlength=3 min=0 max=255 value=255 onchange="rgbVal(this);">
 <input type="number" id="b" name="b" maxlength=3 min=0 max=255 value=255 onchange="rgbVal(this);">
 <label for="h">HEX:</label>
-<input type="text" id="h" name="h" maxlength=6 size=6 value="FFFFFF" onchange="hexVal(this);">
-<div id="c1" style="width: 100%; height: 40px; border: 5px solid white; padding: 10px;"></div>
-<div id="c2" style="width: 100%; height: 40px; border: 5px solid white; padding: 10px;"></div>
-<div id="c3" style="width: 100%; height: 40px; border: 5px solid white; padding: 10px;"></div>
-<div id="c4" style="width: 100%; height: 40px; border: 5px solid white; padding: 10px;"></div>
-<div id="c5" style="width: 100%; height: 40px; border: 5px solid white; padding: 10px;"></div>
-<div id="c6" style="width: 100%; height: 40px; border: 5px solid white; padding: 10px;"></div>
+<input type="text" id="h" name="h" maxlength=6 size=6 value="155799" onchange="hexVal(this);">
+<div id="c1" style="width: 100%; border: 5px solid white; padding: 0.5em;"></div>
+<div id="c2" style="width: 100%; border: 5px solid white; padding: 0.5em;"></div>
+<div id="c3" style="width: 100%; border: 5px solid white; padding: 0.5em;"></div>
+<div id="c4" style="width: 100%; border: 5px solid white; padding: 0.5em;"></div>
+<div id="c5" style="width: 100%; border: 5px solid white; padding: 0.5em;"></div>
+<div id="c6" style="width: 100%; border: 5px solid white; padding: 0.5em;"></div>
 
 <script>
   function setColors() {
@@ -25,27 +25,27 @@ title: HTML Colour Converter
     color = rh + gh + bh;
     document.getElementById('c1').style.backgroundColor = '#' + color;
     document.getElementById('c1').innerHTML = '<span style="color: black">#' +
-      color + '</span><span style="color: white">#' + color + '</span>';
+      color + '</span>&nbsp;<span style="color: white">#' + color + '</span>';
     color = rh + bh + gh;
     document.getElementById('c2').style.backgroundColor = '#' + color;
     document.getElementById('c2').innerHTML = '<span style="color: black">#' +
-      color + '</span><span style="color: white">#' + color + '</span>';
+      color + '</span>&nbsp;<span style="color: white">#' + color + '</span>';
     color = gh + rh + bh;
     document.getElementById('c3').style.backgroundColor = '#' + color;
     document.getElementById('c3').innerHTML = '<span style="color: black">#' +
-      color + '</span><span style="color: white">#' + color + '</span>';
+      color + '</span>&nbsp;<span style="color: white">#' + color + '</span>';
     color = gh + bh + rh;
     document.getElementById('c4').style.backgroundColor = '#' + color;
     document.getElementById('c4').innerHTML = '<span style="color: black">#' +
-      color + '</span><span style="color: white">#' + color + '</span>';
+      color + '</span>&nbsp;<span style="color: white">#' + color + '</span>';
     color = bh + rh + gh;
     document.getElementById('c5').style.backgroundColor = '#' + color;
     document.getElementById('c5').innerHTML = '<span style="color: black">#' +
-      color + '</span><span style="color: white">#' + color + '</span>';
+      color + '</span>&nbsp;<span style="color: white">#' + color + '</span>';
     color = bh + gh + rh;
     document.getElementById('c6').style.backgroundColor = '#' + color;
     document.getElementById('c6').innerHTML = '<span style="color: black">#' +
-      color + '</span><span style="color: white">#' + color + '</span>';
+      color + '</span>&nbsp;<span style="color: white">#' + color + '</span>';
   }
 
   function rgbVal(input) {
