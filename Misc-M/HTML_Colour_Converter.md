@@ -83,8 +83,8 @@ I've found switching the RGB values around can give some colours that work well 
     let h = document.getElementById('h');
 
     r.value = parseInt('0x' + input.value.slice(0,2));
-    b.value = parseInt('0x' + input.value.slice(2,4));
-    g.value = parseInt('0x' + input.value.slice(4,6));
+    g.value = parseInt('0x' + input.value.slice(2,4));
+    b.value = parseInt('0x' + input.value.slice(4,6));
 
     setColors();
   }
