@@ -36,10 +36,6 @@ main {
   color: #eee;
 }
 
-@media screen and (min-width: 64em) { .footer-content { padding: 2rem 1rem } }
-@media screen and (min-width: 42em) and (max-width: 64em) { .footer-content { padding: 2rem 1rem } }
-@media screen and (max-width: 42em) { .footer-content { padding: 2rem 1rem } }
-
 @media screen and (min-width: 64em) { .main-content { padding: 2rem 1rem } }
 @media screen and (min-width: 42em) and (max-width: 64em) { .main-content { padding: 2rem 1rem } }
 @media screen and (max-width: 42em) { .main-content { padding: 2rem 1rem } }
@@ -161,7 +157,6 @@ li {
   float: left;
   width: 50%;
   padding: 20px;
-  color: #333333;
 }
 
 .tilelink {
