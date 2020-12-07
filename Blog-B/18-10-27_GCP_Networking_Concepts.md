@@ -2,7 +2,7 @@
 title: 18-10-27 - GCP Networking Concepts
 ---
 
-See https://cloud.google.com/vpc for details.
+See [here](https://cloud.google.com/vpc) for details.
 
 - Networks are owned by GCP Projects.  A GCP Network is called a VPC (Virtual Private Cloud) but is also referred to as a network.  For clarity I will call these GCP Networks.
 - A GCP Project can contain many GCP Networks. 
