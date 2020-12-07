@@ -51,13 +51,16 @@ main {
   background-color: #155799;
 }
 
-@media screen and (min-width: 64em) { .front-page-header { padding: 5rem 6rem } }
-@media screen and (min-width: 42em) and (max-width: 64em) { .front-page-header { padding: 3rem 4rem } }
-@media screen and (max-width: 42em) { .front-page-header { padding: 2rem 1rem } }
-
 .project-name {
   font-size: 4em;
 }
+
+@media screen and (min-width: 42em) and (max-width: 64em) { .project-name { font-size: 3rem } }
+@media screen and (max-width: 42em) { .project-name { font-size: 2em } }
+
+@media screen and (min-width: 64em) { .front-page-header { padding: 5rem 6rem } }
+@media screen and (min-width: 42em) and (max-width: 64em) { .front-page-header { padding: 3rem 4rem } }
+@media screen and (max-width: 42em) { .front-page-header { padding: 2rem 1rem } }
 
 .project-tagline {
   margin-bottom: 1rem;
