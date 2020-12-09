@@ -25,6 +25,6 @@ Worm Game</a>&nbsp;<span style="color: #AAAAAA">(4)</span><br>
 Yeah - I made a (javascript) snake game and called it Worm...
 </div>
 <hr>
-<h1>Blog</h1>
+<h2>Blog</h2>
 </div>
 <script>gMaxNum=5-1</script>
