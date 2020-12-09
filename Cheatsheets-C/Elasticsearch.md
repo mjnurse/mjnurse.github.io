@@ -2,8 +2,9 @@
 title: ElasticSearch Cheat Sheet
 ---
 
-### Using Curl
-```
+## Using Curl
+
+```json
 # Note: '?v' add headers to the table of results.
 > curl --request GET http://localhost:9200/_cat/health?v  
 
@@ -11,8 +12,9 @@ title: ElasticSearch Cheat Sheet
 > curl --request GET http://localhost:9200/_search -H 'Content-Type: application/json' -d'
   { <json> }
 ```
-----
-### Utilities
+
+## Utilities
+
 ```
 # Index details
 GET _cat/<indices|shards|segments>/<index name (wildcards allowed)>?v
@@ -24,9 +26,11 @@ POST /<index name>/_forcemerge?[max_num_segments=<num>]&[only_expunge_deletes=<t
 GET _tasks?actions=*reindex*&detailed
 POST _tasks/oTUltX4IQMOUUVeiohTt8A:12345/_cancel
 ```
-----
-### Create / Insert
-#### Create
+
+## Create / Insert
+
+### Create
+
 ```
 PUT <index-name>
 {
@@ -38,7 +42,9 @@ PUT <index-name>
     }
 }
 ```
-#### Create a Copy of an Index
+
+### Create a Copy of an Index
+
 ```
 POST _reindex
 {
@@ -52,7 +58,8 @@ POST _reindex
 ```
 Note the new index can already exist.  Can also add a query to the source or specify a type to filter the documents copied.
 
-#### Insert
+### Insert
+
 ```
 POST /<index>/<type use:default>
 {
@@ -60,7 +67,9 @@ POST /<index>/<type use:default>
    "age" : 21
 }
 ```
-#### Bulk Insert
+
+### Bulk Insert
+
 Note: Newlines are important separators for each command and data JSON statement.
 ```
 POST /<index>/<type use:default>/_bulk
@@ -70,18 +79,24 @@ POST /<index>/<type use:default>/_bulk
 { "name" : "carl", "age" : 12 }
 etc...
 ```
-----
-### Search
+
+## Search
+
 ```
 GET <index>/_search 
 { <json> }
 ```
-##### JSON can include
-###### Alter number of results
+
+### JSON can include
+
+### Alter number of results
+
 ```
 { "from" : 0, "size" : 10000 }
 ```
-###### Query definitions
+
+### Query definitions
+
 Wildcard queries:
 ```
 { "query" : { "wildcard" : { "<path>.<field>" : "<search_string>*" } } }
@@ -103,11 +118,15 @@ Matching one or more of many terms
    } 
 }
 ```
-###### Alter the fields returned
+
+### Alter the fields returned
+
 ```
 { "_source" : [ "<path>.<field>" ], "query" : { ... } }
 ```
-### Multi Search
+
+## Multi Search
+
 Note: Newlines are important separators for each command and data JSON statement.
 ```
 GET <index>/_msearch 
@@ -118,7 +137,8 @@ GET <index>/_msearch
 etc...
 ```
 
-### Scrolling Search Results
+## Scrolling Search Results
+
 A walk-through example:
 ```
 # 1. Create an index
