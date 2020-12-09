@@ -15,7 +15,7 @@ title: ElasticSearch Cheat Sheet
 
 ## Utilities
 
-```
+```bash
 # Index details
 GET _cat/<indices|shards|segments>/<index name (wildcards allowed)>?v
 
@@ -31,7 +31,7 @@ POST _tasks/oTUltX4IQMOUUVeiohTt8A:12345/_cancel
 
 ### Create
 
-```
+```bash
 PUT <index-name>
 {
     "settings" : {
@@ -45,7 +45,7 @@ PUT <index-name>
 
 ### Create a Copy of an Index
 
-```
+```bash
 POST _reindex
 {
   "source": {
@@ -56,11 +56,12 @@ POST _reindex
   }
 }
 ```
+
 Note the new index can already exist.  Can also add a query to the source or specify a type to filter the documents copied.
 
 ### Insert
 
-```
+```bash
 POST /<index>/<type use:default>
 {
    "name" : "martin",
@@ -71,7 +72,8 @@ POST /<index>/<type use:default>
 ### Bulk Insert
 
 Note: Newlines are important separators for each command and data JSON statement.
-```
+
+```bash
 POST /<index>/<type use:default>/_bulk
 { "index" : { } }
 { "name" : "bill", "age" : 43 }
@@ -82,7 +84,7 @@ etc...
 
 ## Search
 
-```
+```bash
 GET <index>/_search 
 { <json> }
 ```
@@ -91,23 +93,28 @@ GET <index>/_search
 
 ### Alter number of results
 
-```
+```bash
 { "from" : 0, "size" : 10000 }
 ```
 
 ### Query definitions
 
 Wildcard queries:
-```
+
+```bash
 { "query" : { "wildcard" : { "<path>.<field>" : "<search_string>*" } } }
 ```
+
 Matching a value or a list of values:
-```
+
+```bash
 { "query" : { "term" : { "<path>.<field>" : "<search_string>" } } }
 { "query" : { "terms" : { "<path>.<field>" : ["<search_string1>", "<search_string2>"] } } }
 ```
+
 Matching one or more of many terms
-```
+
+```bash
 { "query" : 
    { "dis_max" : 
       { "queries" : 
@@ -121,14 +128,15 @@ Matching one or more of many terms
 
 ### Alter the fields returned
 
-```
+```bash
 { "_source" : [ "<path>.<field>" ], "query" : { ... } }
 ```
 
 ## Multi Search
 
 Note: Newlines are important separators for each command and data JSON statement.
-```
+
+```bash
 GET <index>/_msearch 
 { "index" : "<index>" }
 { "query" : { "terms" : { "<path>.<field>" : ["<search_str1>", "<search_str2>"] } } }
@@ -140,7 +148,8 @@ etc...
 ## Scrolling Search Results
 
 A walk-through example:
-```
+
+```bash
 # 1. Create an index
 PUT /mjn/default/_bulk
 {"index":{}}
