@@ -10,25 +10,27 @@ title: Cheatsheets
 
 <span style="color: grey">4.</span>&nbsp;&nbsp;&nbsp; <a id="listitem4" href="Draw_IO.html">Draw IO</a>
 
-<span style="color: grey">5.</span>&nbsp;&nbsp;&nbsp; <a id="listitem5" href="English.html">English</a>
+<span style="color: grey">5.</span>&nbsp;&nbsp;&nbsp; <a id="listitem5" href="Elastic_Search.html">Elastic Search</a>
 
-<span style="color: grey">6.</span>&nbsp;&nbsp;&nbsp; <a id="listitem6" href="Excel.html">Excel</a>
+<span style="color: grey">6.</span>&nbsp;&nbsp;&nbsp; <a id="listitem6" href="English.html">English</a>
 
-<span style="color: grey">7.</span>&nbsp;&nbsp;&nbsp; <a id="listitem7" href="Git.html">Git</a>
+<span style="color: grey">7.</span>&nbsp;&nbsp;&nbsp; <a id="listitem7" href="Excel.html">Excel</a>
 
-<span style="color: grey">8.</span>&nbsp;&nbsp;&nbsp; <a id="listitem8" href="Gmail.html">Gmail</a>
+<span style="color: grey">8.</span>&nbsp;&nbsp;&nbsp; <a id="listitem8" href="Git.html">Git</a>
 
-<span style="color: grey">9.</span>&nbsp;&nbsp;&nbsp; <a id="listitem9" href="Javascript.html">Javascript</a>
+<span style="color: grey">9.</span>&nbsp;&nbsp;&nbsp; <a id="listitem9" href="Gmail.html">Gmail</a>
 
-<span style="color: grey">10.</span>&nbsp;&nbsp;&nbsp; <a id="listitem10" href="Kubernetes.html">Kubernetes</a>
+<span style="color: grey">10.</span>&nbsp;&nbsp;&nbsp; <a id="listitem10" href="Javascript.html">Javascript</a>
 
-<span style="color: grey">11.</span>&nbsp;&nbsp;&nbsp; <a id="listitem11" href="Microsoft_Word.html">Microsoft Word</a>
+<span style="color: grey">11.</span>&nbsp;&nbsp;&nbsp; <a id="listitem11" href="Kubernetes.html">Kubernetes</a>
 
-<span style="color: grey">12.</span>&nbsp;&nbsp;&nbsp; <a id="listitem12" href="Python.html">Python</a>
+<span style="color: grey">12.</span>&nbsp;&nbsp;&nbsp; <a id="listitem12" href="Microsoft_Word.html">Microsoft Word</a>
 
-<span style="color: grey">13.</span>&nbsp;&nbsp;&nbsp; <a id="listitem13" href="Scala.html">Scala</a>
+<span style="color: grey">13.</span>&nbsp;&nbsp;&nbsp; <a id="listitem13" href="Python.html">Python</a>
 
-<span style="color: grey">14.</span>&nbsp;&nbsp;&nbsp; <a id="listitem14" href="SQLite.html">SQLite</a>
+<span style="color: grey">14.</span>&nbsp;&nbsp;&nbsp; <a id="listitem14" href="Scala.html">Scala</a>
 
-<span style="color: grey">15.</span>&nbsp;&nbsp;&nbsp; <a id="listitem15" href="ViM.html">ViM</a>
-<script>gMaxNum=16-1</script>
+<span style="color: grey">15.</span>&nbsp;&nbsp;&nbsp; <a id="listitem15" href="SQLite.html">SQLite</a>
+
+<span style="color: grey">16.</span>&nbsp;&nbsp;&nbsp; <a id="listitem16" href="ViM.html">ViM</a>
+<script>gMaxNum=17-1</script>
