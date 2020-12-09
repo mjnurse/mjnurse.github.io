@@ -24,7 +24,7 @@ The oldest page on this website and its predecessors.  A history of the cars I'v
 Worm Game</a>&nbsp;<span style="color: #AAAAAA">(4)</span><br>
 Yeah - I made a (javascript) snake game and called it Worm...
 </div>
+</div>
 <hr>
 <h2>Blog</h2>
-</div>
 <script>gMaxNum=5-1</script>
