@@ -4,7 +4,7 @@ title: ElasticSearch Cheat Sheet
 
 ## Using Curl
 
-```json
+```bash
 # Note: '?v' add headers to the table of results.
 > curl --request GET http://localhost:9200/_cat/health?v  
 
