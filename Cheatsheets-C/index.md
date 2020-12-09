@@ -10,7 +10,7 @@ title: Cheatsheets
 
 <span style="color: grey">4.</span>&nbsp;&nbsp;&nbsp; <a id="listitem4" href="Draw_IO.html">Draw IO</a>
 
-<span style="color: grey">5.</span>&nbsp;&nbsp;&nbsp; <a id="listitem5" href="Elastic_Search.html">Elastic Search</a>
+<span style="color: grey">5.</span>&nbsp;&nbsp;&nbsp; <a id="listitem5" href="Elasticsearch.html">Elasticsearch</a>
 
 <span style="color: grey">6.</span>&nbsp;&nbsp;&nbsp; <a id="listitem6" href="English.html">English</a>
 
