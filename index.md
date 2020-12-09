@@ -28,11 +28,11 @@ Yeah - I made a (javascript) snake game and called it Worm...
 <hr>
 <h2>Blog</h2>
 
-<a class="bloglist" id="listitem5" href="Blog-B/18-10-27_GCP_Networking_Concepts.html">18-10-27 GCP Networking Concepts</a> <span style="color: grey">(5)</span>
+<a class="bloglistlink" id="listitem5" href="Blog-B/18-10-27_GCP_Networking_Concepts.html">18-10-27 GCP Networking Concepts</a> <span style="color: grey">(5)</span>
 
-<a class="bloglist" id="listitem6" href="Blog-B/19-01-14_snake_case.html">19-01-14 snake case</a> <span style="color: grey">(6)</span>
+<a class="bloglistlink" id="listitem6" href="Blog-B/19-01-14_snake_case.html">19-01-14 snake case</a> <span style="color: grey">(6)</span>
 
-<a class="bloglist" id="listitem7" href="Blog-B/19-01-22_Emulating_sudo_in_dos_cmd.html">19-01-22 Emulating sudo in dos cmd</a> <span style="color: grey">(7)</span>
+<a class="bloglistlink" id="listitem7" href="Blog-B/19-01-22_Emulating_sudo_in_dos_cmd.html">19-01-22 Emulating sudo in dos cmd</a> <span style="color: grey">(7)</span>
 
-<a class="bloglist" id="listitem8" href="Blog-B/19-02-14_JWT_-_JSON_Web_Tokens.html">19-02-14 JWT - JSON Web Tokens</a> <span style="color: grey">(8)</span>
+<a class="bloglistlink" id="listitem8" href="Blog-B/19-02-14_JWT_-_JSON_Web_Tokens.html">19-02-14 JWT - JSON Web Tokens</a> <span style="color: grey">(8)</span>
 <script>gMaxNum=9-1</script>
