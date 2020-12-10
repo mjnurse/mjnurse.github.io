@@ -53,7 +53,15 @@
          {% if f != l %}
            <a href="{{ site.url }}/{{ f }}/{{ l }}">{{ l | split: "-" | first | replace: '_',' ' }}</a> /
          {% endif %}
-         {{ page.name | replace:'.md','' | replace:'_',' ' }}
+         {% if f != l %}
+            <span onclick="copyToClipboard('{{ f }}/{{ l }}/{{ page.name }}');">
+               {{ page.name | replace:'.md','' | replace:'_',' ' }}
+            </span>
+         {% else %}
+            <span onclick="copyToClipboard('{{ f }}/{{ page.name }}');">
+               {{ page.name | replace:'.md','' | replace:'_',' ' }}
+            </span>
+         {% endif %}
       </p>
       <hr>
       <h1>Contents</h1>
