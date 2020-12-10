@@ -6,7 +6,7 @@ Some stuff that interests me or made me smile.  The scripts I write.  GCP, Hadoo
 
 <hr>
 <div id='quote'></div>
-</hr>
+<hr>
 
 <script type='text/javascript'>
 const getQuote = async () => {
