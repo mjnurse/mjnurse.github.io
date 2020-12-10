@@ -16,23 +16,20 @@ This isn't easy to calculate.  We need to work out all the combinations of die s
 
 ----
 
- **First Roll** - 6 options, 1 is the bad side so chance of finding it is 1/6.          
-
- Calculation - `1/6 = 16.7%`                                                      
+**First Roll** - 6 options, 1 is the bad side so chance of finding it is 1/6.
+**Calculation** - `1/6 = 16.7%`
 
 ----
 
-||| **Second Roll** ||| If role 1 finds a bad side then we stop, there is a 1/6 chance of this. |||
-||| ||| If roll one finds a good side (there is a 5/6 chance of this), we roll again.           |||
-||| ||| The second roll has a 1/6 chance of being bad.                                          |||
-||| Calculation ||| `1/6 + (5/6 x 1/6) = 30.6%`                                                 |||
+**Second Roll**  If role 1 finds a bad side then we stop, there is a 1/6 chance of this.  If roll one finds a good side (there is a 5/6 chance of this), we roll again.           The second roll has a 1/6 chance of being bad.
+ Calculation  `1/6 + (5/6 x 1/6) = 30.6%`
 ----
-||| **Third Roll** ||| - If role 1 finds a bad side then we stop, there is a 1/6 chance of this.|||
-||| ||| - If roll 1 finds a good side (there is a 5/6 chance of this), we roll again.           |||
-||| ||| - Roll 2 roll has a 1/6 chance of being bad, if we find bad side we stop.               |||
-||| ||| - If role 2 finds a good side (there is a 5/6 chance of this), we roll again.           |||
-||| ||| - Roll 3 has a 1/6 chance of being bad.                                                 |||
-||| Calculation ||| `1/6 + (5/6 x (1/6 + (5/6 x 1/6))) = 42.1%`                                 |||
+ **Third Roll**  - If role 1 finds a bad side then we stop, there is a 1/6 chance of this.
+  - If roll 1 finds a good side (there is a 5/6 chance of this), we roll again.
+  - Roll 2 roll has a 1/6 chance of being bad, if we find bad side we stop.
+  - If role 2 finds a good side (there is a 5/6 chance of this), we roll again.
+  - Roll 3 has a 1/6 chance of being bad.
+ Calculation  `1/6 + (5/6 x (1/6 + (5/6 x 1/6))) = 42.1%`
 ----
 This gets very complicated very quick.
 
@@ -44,7 +41,8 @@ For 3 planned rolls the chance I won't find the faulty side is `5/6 x 5/6 x 5/6 
 
 So lets see how many times I would need to plan to roll the die to be 99% sure I'll find the faulty side.
 
-|| Roll Number || % Chance Wont Find                    || % Chance Will Find   ||
+|  Roll Number |  % Chance Wont Find                    |  % Chance Will Find   |
+|--------------|----------------------------------------|-----------------------|
 |  1           |  5/6 = 83.3%                           |  16.7%                |
 |  2           |  5/6 x 5/6 = (5/6)<sup>2</sup> = 69.4% |  30.6%                |
 |  3           |  (5/6)<sup>3</sup> = 57.9%             |  98.5%                |
@@ -63,25 +61,26 @@ If we swap the die analogy for a bag containing six balls where, ideally, all th
 Looking at each test in turn:
 
 ----
-||| **Ball 1**  ||| For ball 1 taken from the bag there is a 1/6 chance it will be black     |||
-||| Calculation ||| `1/6 = 16.7% `                                                           |||
+ **Ball 1**   For ball 1 taken from the bag there is a 1/6 chance it will be black
+ Calculation  `1/6 = 16.7% `
 ----
-||| **Ball 2**  ||| - If ball 1 is black then we stop, there is a 1/6 chance of this.        |||
-|||             ||| - If ball 1 is white (there is a 5/6 chance of this), we take out ball 2.|||
-|||             ||| - For ball 2 there is a 1/5 chance of it being black.                    |||
-||| Calculation ||| `1/6 + (5/6 x 1/5) = 33.3%`                                              |||
+ **Ball 2**   - If ball 1 is black then we stop, there is a 1/6 chance of this.
+              - If ball 1 is white (there is a 5/6 chance of this), we take out ball 2.
+              - For ball 2 there is a 1/5 chance of it being black.
+ Calculation  `1/6 + (5/6 x 1/5) = 33.3%`
 ----
-||| **Ball 3**  ||| - If ball 1 is black then we stop, there is a 1/6 chance of this.        |||
-|||             ||| - If ball 1 is white (there is a 5/6 chance of this), we take ball 2.    |||
-|||             ||| - Ball 2 has a 1/5 chance of being black, if we find it we stop.         |||
-|||             ||| - If ball 2 is white (there is a 4/5 chance of this), we take ball 3.    |||
-|||             ||| - Ball 3 has a 1/6 chance of being black.                                |||
-||| Calculation ||| `1/6 + (5/6 x (1/5 + (4/5 x 1/4))) = 55.3%`                              |||
+ **Ball 3**   - If ball 1 is black then we stop, there is a 1/6 chance of this.
+              - If ball 1 is white (there is a 5/6 chance of this), we take ball 2.
+              - Ball 2 has a 1/5 chance of being black, if we find it we stop.
+              - If ball 2 is white (there is a 4/5 chance of this), we take ball 3.
+              - Ball 3 has a 1/6 chance of being black.
+ Calculation  `1/6 + (5/6 x (1/5 + (4/5 x 1/4))) = 55.3%`
 ----
 
 Again, using the won't find calculation, and asking the question up front, how many balls will I need to remove to be 99% sure there isn't a black ball the math is:
 
-|| Ball Number || % Chance Wont Find                     || % Chance Will Find ||
+|  Ball Number |  % Chance Wont Find                     |  % Chance Will Find |
+|--------------|-----------------------------------------|---------------------|
 |  1           |  83.3% (5/6)                            |  16.7%              |
 |  2           |  66.7% (5/6 x 4/5)                      |  33.3%              |
 |  3           |  50.0% (5/6 x 4/5 x 3/4)                |  50.0%              |
@@ -97,7 +96,7 @@ If we choose a percentage `p%` likelihood of there being a bad side / bad ball /
 
 The above examples had a set of 6 sides / items / records and the two (records remain or removed) equations gave very different results but, as the set side increases the difference between the 2 should decrease.  Lets write a python program to test this assumption.
 
-The Python programs is [stats_test.py](Python-stats_test.py_-_Calculate_the_number_of_tests_required_to_reach_a_level_of_assurance_errors_don't_exist.html) 
+The Python programs is [stats_test.py](Python-stats_test.py_-_Calculate_the_number_of_tests_required_to_reach_a_level_of_assurance_errors_don't_exist.html)
 
 # The Statistics
 
@@ -180,7 +179,7 @@ The number of tests does go up, a lot.
 # Double Checking These Results
 Lets check the math is correct by simulating a real scenario.  I wrote a function in `stats_test.py` to do this.  Below I calculate the test required for a few different scenarios and then test the values.
 
-#### Scenario 1: 
+#### Scenario 1:
 ##### Calculate number of tests
 ```
 > python3 stats_test.py 0.01 1000000 99.9
@@ -201,7 +200,7 @@ num test sets: 10000 , num which found bad record: 9996 , percentage: 99.96%
 ```
 Above, I ran 10,000 iterations of a test scenario which tests that I find a bad record by checking up to 69,075 records.  Of the 10,000 iterations, 9,996 found a bad record which is 99.96% of cases.  This confirms the suggested number of tests is good.
 
-#### Scenario 2: 
+#### Scenario 2:
 ##### Calculate number of tests
 ```
 > python3 stats_test.py 0.1 10000 50
@@ -222,7 +221,7 @@ num test sets: 100000 , num which found bad record: 51357 , percentage: 51.36%
 ```
 Above, I ran 100,000 iterations of a test scenario which tests that I find a bad record by checking up to 693 records.  Of the 100,000 iterations, 51,357 found a bad record which is 51.36% of cases.  This confirms the suggested number of tests is good.
 
-#### Scenario 3: 
+#### Scenario 3:
 ##### Calculate number of tests
 Repeating the die test again.
 ```
