@@ -49,7 +49,7 @@ Yeah - I made a (javascript) snake game and called it Worm...
 <p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-04-11 -  <a class="bloglistlink" id="listitem11" href="Blog-B/19-04-11_-_Formatting_Python.html">Formatting Python</a> <span style="color: grey">(11)</span></p>
 <p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-03-13 -  <a class="bloglistlink" id="listitem12" href="Blog-B/19-03-13_-_Dont_Tell_Anyone_But_Ive_Stopped_My_Screen_Locking_In_Windows_Using_AHK.html">Dont Tell Anyone But Ive Stopped My Screen Locking In Windows Using AHK</a> <span style="color: grey">(12)</span></p>
 <p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-02-25 -  <a class="bloglistlink" id="listitem13" href="Blog-B/19-02-25_-_Quick_and_Easy_Creation_of_an_Oracle_Database_in_Docker.html">Quick and Easy Creation of an Oracle Database in Docker</a> <span style="color: grey">(13)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-02-22 -  <a class="bloglistlink" id="listitem14" href="Blog-B/19-02-22_-_Creating_a_Compute_Instance_on_GCP_Using_Terraform.html">Creating a Compute Instance on GCP Using Terraform</a> <span style="color: grey">(14)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-02-14 -  <a class="bloglistlink" id="listitem14" href="Blog-B/19-02-14_-_JWT_-_JSON_Web_Tokens.html">JWT - JSON Web Tokens</a> <span style="color: grey">(14)</span></p>
 <p><a href="Blog-B">More</a></p>
 <script>gMaxNum=15-1</script>
 
