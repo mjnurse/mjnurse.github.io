@@ -3,9 +3,11 @@ title: SQLite
 layout: page-with-contents-list
 ---
 
-## sqlite3
+## Syntax Diagrams
 
-Settings
+[Syntax Diagrams](https://sqlite.org/syntaxdiagrams.html)
+
+## Session Settings
 
 | Setting                  | Description |
 |--------------------------|-------------|
