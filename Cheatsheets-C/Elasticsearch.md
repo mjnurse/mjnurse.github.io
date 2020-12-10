@@ -1,5 +1,5 @@
 ---
-title: ElasticSearch Cheat Sheet
+title: Elasticsearch Cheat Sheet
 ---
 
 ## Using Curl
