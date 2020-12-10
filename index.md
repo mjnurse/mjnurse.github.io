@@ -26,15 +26,18 @@ Yeah - I made a (javascript) snake game and called it Worm...
 </div>
 </div>
 <hr>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 20-10-29 -  <a class="bloglistlink" id="listitem5" href="Blog-B/20-10-29_Using_the_console.log_Alternatives.html">Using the console.log Alternatives</a> <span style="color: grey">(5)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-11-11 -  <a class="bloglistlink" id="listitem6" href="Blog-B/19-11-11_Oracle_and_Postgres_Schema_Copy_Process.html">Oracle and Postgres Schema Copy Process</a> <span style="color: grey">(6)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-11-04 -  <a class="bloglistlink" id="listitem7" href="Blog-B/19-11-04_Text_To_Speech_-_Clipboard.html">Text To Speech - Clipboard</a> <span style="color: grey">(7)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-06-18 -  <a class="bloglistlink" id="listitem8" href="Blog-B/19-06-18_Building_a_bash_CLI_for_GCP.html">Building a bash CLI for GCP</a> <span style="color: grey">(8)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-06-12 -  <a class="bloglistlink" id="listitem9" href="Blog-B/19-06-12_Setting_Prompt_Colour_In_bash_and_Putty.html">Setting Prompt Colour In bash and Putty</a> <span style="color: grey">(9)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-05-02 -  <a class="bloglistlink" id="listitem10" href="Blog-B/19-05-02_Statistical_Testing.html">Statistical Testing</a> <span style="color: grey">(10)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-04-11 -  <a class="bloglistlink" id="listitem11" href="Blog-B/19-04-11_Formatting_Python.html">Formatting Python</a> <span style="color: grey">(11)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-03-13 -  <a class="bloglistlink" id="listitem12" href="Blog-B/19-03-13_Dont_Tell_Anyone_But_Ive_Stopped_My_Screen_Locking_In_Windows_Using_AHK.html">Dont Tell Anyone But Ive Stopped My Screen Locking In Windows Using AHK</a> <span style="color: grey">(12)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-02-25 -  <a class="bloglistlink" id="listitem13" href="Blog-B/19-02-25_Quick_and_Easy_Creation_of_an_Oracle_Database_in_Docker.html">Quick and Easy Creation of an Oracle Database in Docker</a> <span style="color: grey">(13)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-02-22 -  <a class="bloglistlink" id="listitem14" href="Blog-B/19-02-22_Creating_a_Compute_Instance_on_GCP_Using_Terraform.html">Creating a Compute Instance on GCP Using Terraform</a> <span style="color: grey">(14)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 20-12-10 -  <a class="bloglistlink" id="listitem5" href="Blog-B/20-12-10_-_Async_Await_with_Array_Assignment.html">- Async Await with Array Assignment</a> <span style="color: grey">(5)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 20-10-29 -  <a class="bloglistlink" id="listitem6" href="Blog-B/20-10-29_-_Using_the_console.log_Alternatives.html">- Using the console.log Alternatives</a> <span style="color: grey">(6)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-11-11 -  <a class="bloglistlink" id="listitem7" href="Blog-B/19-11-11_-_Oracle_and_Postgres_Schema_Copy_Process.html">- Oracle and Postgres Schema Copy Process</a> <span style="color: grey">(7)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-11-04 -  <a class="bloglistlink" id="listitem8" href="Blog-B/19-11-04_-_Text_To_Speech_-_Clipboard.html">- Text To Speech - Clipboard</a> <span style="color: grey">(8)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-06-18 -  <a class="bloglistlink" id="listitem9" href="Blog-B/19-06-18_-_Building_a_bash_CLI_for_GCP.html">- Building a bash CLI for GCP</a> <span style="color: grey">(9)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-06-12 -  <a class="bloglistlink" id="listitem10" href="Blog-B/19-06-12_-_Setting_Prompt_Colour_In_bash_and_Putty.html">- Setting Prompt Colour In bash and Putty</a> <span style="color: grey">(10)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-05-02 -  <a class="bloglistlink" id="listitem11" href="Blog-B/19-05-02_-_Statistical_Testing.html">- Statistical Testing</a> <span style="color: grey">(11)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-04-11 -  <a class="bloglistlink" id="listitem12" href="Blog-B/19-04-11_-_Formatting_Python.html">- Formatting Python</a> <span style="color: grey">(12)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-03-13 -  <a class="bloglistlink" id="listitem13" href="Blog-B/19-03-13_-_Dont_Tell_Anyone_But_Ive_Stopped_My_Screen_Locking_In_Windows_Using_AHK.html">- Dont Tell Anyone But Ive Stopped My Screen Locking In Windows Using AHK</a> <span style="color: grey">(13)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-02-25 -  <a class="bloglistlink" id="listitem14" href="Blog-B/19-02-25_-_Quick_and_Easy_Creation_of_an_Oracle_Database_in_Docker.html">- Quick and Easy Creation of an Oracle Database in Docker</a> <span style="color: grey">(14)</span></p>
 <p><a href="Blog-B">More</a></p>
 <script>gMaxNum=15-1</script>
+
+<hr>
+<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.</p>
