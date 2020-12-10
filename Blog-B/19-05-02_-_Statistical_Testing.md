@@ -15,23 +15,37 @@ Lets assume there **is** a fault on one side of the die (and I can only see the 
 This isn't easy to calculate.  We need to work out all the combinations of die sides on top (after n throws). These will include throws with our bad side on top.
 
 ----
+
 **First Roll** 
+
 - 6 options, 1 is the bad side so chance of finding it is 1/6.
+
 **Calculation** - `1/6 = 16.7%`
+
 ----
+
 **Second Roll** 
+
 - If role 1 finds a bad side then we stop, there is a 1/6 chance of this.  
 - If roll one finds a good side (there is a 5/6 chance of this), we roll again.          
 - The second roll has a 1/6 chance of being bad.
+
 **Calculation** - `1/6 + (5/6 x 1/6) = 30.6%`
+
 ----
-**Third Roll**  - If role 1 finds a bad side then we stop, there is a 1/6 chance of this.
-  - If roll 1 finds a good side (there is a 5/6 chance of this), we roll again.
-  - Roll 2 roll has a 1/6 chance of being bad, if we find bad side we stop.
-  - If role 2 finds a good side (there is a 5/6 chance of this), we roll again.
-  - Roll 3 has a 1/6 chance of being bad.
- Calculation  `1/6 + (5/6 x (1/6 + (5/6 x 1/6))) = 42.1%`
+
+**Third Roll**  
+
+- If role 1 finds a bad side then we stop, there is a 1/6 chance of this.
+- If roll 1 finds a good side (there is a 5/6 chance of this), we roll again.
+- Roll 2 roll has a 1/6 chance of being bad, if we find bad side we stop.
+- If role 2 finds a good side (there is a 5/6 chance of this), we roll again.
+- Roll 3 has a 1/6 chance of being bad.
+
+**Calculation** - `1/6 + (5/6 x (1/6 + (5/6 x 1/6))) = 42.1%`
+
 ----
+
 This gets very complicated very quick.
 
 However, this question can be reversed and instead we can ask - *"What is the chance that each time I roll the die I won't find the bad side?"*  For each roll of the die there is a `5/6 = 83.3%` chance I won't find the bad side and that is true for every roll of the die regardless of the outcome of any earlier rolls.
