@@ -126,7 +126,7 @@ If we choose a percentage `p%` likelihood of there being a bad side / bad ball /
 
 The above examples had a set of 6 sides / items / records and the two (records remain or removed) equations gave very different results but, as the set side increases the difference between the 2 should decrease.  Lets write a python program to test this assumption.
 
-The Python programs is [stats_test.py](Python-stats_test.py_-_Calculate_the_number_of_tests_required_to_reach_a_level_of_assurance_errors_don't_exist.html)
+The Python programs is [stats_test.py](attatchments/stats_test.py)
 
 # The Statistics
 
