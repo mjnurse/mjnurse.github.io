@@ -21,11 +21,17 @@ We can also grant the destination schema user access to the application tables i
 Step:
 
 1) A Bash script running on the Edge Node server connects to Oracle as the source schema user using SQLPlus and executes the SCHEMA_COPY_EXTRACT_DDL procedure.
+
 2) The SCHEMA_COPY_EXTRACT_DDL procedure extracts the DDL from the data dictionary and writes this to the SCHEMA_COPY_DDL_CACHE table.
+
 3) A Bash script running on the Edge Node server connects to Oracle as the destination schema using SQLPlus and executes the SCHEMA_COPY_CREATE_OBJECTS procedure.
+
 4) The SCHEMA_COPY_CREATE_OBJECTS procedure deletes all existing objects in the destination schema.
+
 5) The SCHEMA_COPY_CREATE_OBJECTS procedure creates the new objects in the destination schema (with the referential integrity constraints disabled).
+
 6) The SCHEMA_COPY_CREATE_OBJECTS procedure copies the data from the source schema to the destination schema and then enables the integrity constraints.
+
 7) Progress (and potentially error) messages are written to the SCHEMA_COPY_LOG table and a file on the Edge Node.
 
 ## Postgres Specific Solution
@@ -36,11 +42,17 @@ The Postgres solution makes use of the Postgres pg_dump utility.  This is used t
 
 Step:
 1) A Bash script running on the Edge Node server manages the schema copy process.
+
 2) The pg_dump utility is used to extract object delete statements from the destination schema which is then use to drop all the objects in the destination schema.
+
 3) The pg_dump utility is used to extract the DDL which will create all objects in the source schema.
+
 4) The extract DDL is written to a file in the Edge node.
+
 5) The psql utility is used to execute the extracted DDL to create the objects in the destination schema.  The steps to create the referential integrity constraints and the Id population triggers are skipped.
+
 6) The psql utility is used to execute SQL to copy the data from the source schema tables to the destination schema.  Then the integrity constraints and Id population triggers are created.
+
 7) Progress (and potentially error) messages are written to the SCHEMA_COPY_LOG table and a file on the Edge Node.
 
 
