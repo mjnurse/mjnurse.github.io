@@ -88,9 +88,10 @@ title: The Great Weight Race
           '</tr>';
 
       dte = new Date(
+'20'+dateStr.substr(6,2)
+(dateStr.substr(3,2)-1), 
 dateStr.substr(0,2),
-dateStr.substr(3,2), 
-'20'+dateStr.substr(6,2));
+);
 
 console.log(dte);
 
