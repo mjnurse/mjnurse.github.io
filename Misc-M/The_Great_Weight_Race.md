@@ -87,14 +87,7 @@ title: The Great Weight Race
           '<td>' + ((pmStWgt-pmWgt)/(pmStWgt-pmTgWgt)*100).toFixed(1) + '%</td>' +
           '</tr>';
 
-      dte = new Date(
-'20'+dateStr.substr(6,2),
-(dateStr.substr(3,2)-1), 
-dateStr.substr(0,2),
-);
-
-console.log(dte);
-
+      dte = new Date('20'+dateStr.substr(6,2), (dateStr.substr(3,2)-1), dateStr.substr(0,2));
       chtData.push([ dte, 
           ((mnWgt-mnStWgt)/(mnTgWgt-mnStWgt)*100), 
           ((pmWgt-pmStWgt)/(pmTgWgt-pmStWgt)*100)]);
