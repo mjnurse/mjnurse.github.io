@@ -88,9 +88,10 @@ title: The Great Weight Race
           '</tr>';
 
       console.log('20'+dateStr.substr(6,2), dateStr.substr(3,2), dateStr.substr(0,2));
-      dte = new Date('20'+dateStr.substr(6,2), dateStr.substr(3,2), dateStr.substr(0,2));
-      console.log(dte);
-      chtData.push([ dte, 
+      //dte = new Date('20'+dateStr.substr(6,2), dateStr.substr(3,2), dateStr.substr(0,2));
+      //console.log(dte);
+      console.log(Date(dateStr.substr(0,2), dateStr.substr(3,2), '20'+dateStr.substr(6,2)));
+      chtData.push([Date(dateStr.substr(0,2), dateStr.substr(3,2), '20'+dateStr.substr(6,2)), 
           ((mnWgt-mnStWgt)/(mnTgWgt-mnStWgt)*100), 
           ((pmWgt-pmStWgt)/(pmTgWgt-pmStWgt)*100)]);
 
