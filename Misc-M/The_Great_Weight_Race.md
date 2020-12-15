@@ -87,7 +87,7 @@ title: The Great Weight Race
           '<td>' + ((pmStWgt-pmWgt)/(pmStWgt-pmTgWgt)*100).toFixed(1) + '%</td>' +
           '</tr>';
 
-      chtData.push([ i, 
+      chtData.push([ dateStr, 
           ((mnWgt-mnStWgt)/(mnTgWgt-mnStWgt)*100), 
           ((pmWgt-pmStWgt)/(pmTgWgt-pmStWgt)*100)]);
 
