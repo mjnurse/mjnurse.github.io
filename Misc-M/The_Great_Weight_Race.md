@@ -91,7 +91,7 @@ title: The Great Weight Race
       dte = new Date(dateStr.substr(0,2), dateStr.substr(3,2), '20'+dateStr.substr(6,2));
       console.log(dte);
       chtData.push(dte,
-          ((mnWgt-mnStWgt)/(mnTgWgt-mnStWgt)*100), 
+          ((mnWgt-mnStWgt)/(mnTgWgt-mnStWgt)*100),
           ((pmWgt-pmStWgt)/(pmTgWgt-pmStWgt)*100)]);
 
       mnPrevWgt = mnWgt;
