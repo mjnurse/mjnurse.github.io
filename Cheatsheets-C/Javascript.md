@@ -400,7 +400,8 @@ parseInt();              // Parses a string and returns an integer
 ## Mouse
 
 ```javascript
-onclick, oncontextmenu, ondblclick, onmousedown, onmouseenter, onmouseleave, onmousemove, onmouseover, onmouseout, onmouseup
+onclick, oncontextmenu, ondblclick, onmousedown, onmouseenter, onmouseleave, onmousemove,
+onmouseover, onmouseout, onmouseup
 ```
 
 ## Keyboard
@@ -412,13 +413,15 @@ onkeydown, onkeypress, onkeyup
 ## Frame
 
 ```javascript
-onabort, onbeforeunload, onerror, onhashchange, onload, onpageshow, onpagehide, onresize, onscroll, onunload
+onabort, onbeforeunload, onerror, onhashchange, onload, onpageshow, onpagehide, onresize,
+onscroll, onunload
 ```
 
 ## Form
 
 ```javascript
-onblur, onchange, onfocus, onfocusin, onfocusout, oninput, oninvalid, onreset, onsearch, onselect, onsubmit
+onblur, onchange, onfocus, onfocusin, onfocusout, oninput, oninvalid, onreset, onsearch,
+onselect, onsubmit
 ```
 
 ## Drag
@@ -436,7 +439,9 @@ oncopy, oncut, onpaste
 ## Media
 
 ```javascript
-onabort, oncanplay, oncanplaythrough, ondurationchange, onended, onerror, onloadeddata, onloadedmetadata, onloadstart, onpause, onplay, onplaying, onprogress, onratechange, onseeked, onseeking, onstalled, onsuspend, ontimeupdate, onvolumechange, onwaiting
+onabort, oncanplay, oncanplaythrough, ondurationchange, onended, onerror, onloadeddata,
+onloadedmetadata, onloadstart, onpause, onplay, onplaying, onprogress, onratechange,
+onseeked, onseeking, onstalled, onsuspend, ontimeupdate, onvolumechange, onwaiting
 ```
 
 ## Animation
@@ -448,22 +453,27 @@ animationend, animationiteration, animationstart
 ## Miscellaneous
 
 ```javascript
-transitionend, onmessage, onmousewheel, ononline, onoffline, onpopstate, onshow, onstorage, ontoggle, onwheel, ontouchcancel, ontouchend, ontouchmove, ontouchstart
+transitionend, onmessage, onmousewheel, ononline, onoffline, onpopstate, onshow,
+onstorage, ontoggle, onwheel, ontouchcancel, ontouchend, ontouchmove, ontouchstart
 ```
 
 ## Regular Expressions
 
 ```javascript
 var a=str.search(/CheatSheet/i);
+```
 
-// Modifiers
+## Modifiers
 
+```javascript
 i  // Perform case-insensitive matching
 g  // Perform a global match
 m  // Perform multiline matching
+```
 
-// Patterns
+## Patterns
 
+```javascript
 \         // Escape character
 \d        // Find a digit
 \s        // Find a whitespace character
@@ -505,13 +515,17 @@ try {                    // Block of code to try
 catch(err) {             // Block to handle errors
     console.log(err.message);
 }
+```
 
-// Throw error
+## Throw error
 
+```javascript
 throw "My error message"; // Throw a text
+```
 
-// Input validation
+## Input validation
 
+```javascript
 var x=document.getElementById("mynum").value; // Get input value
 try {
     if(x == "")  throw "empty";         // Error cases
@@ -526,9 +540,11 @@ catch(err) {                            // If there's an error
 finally {
     document.write("</br />Done");      // Executed regardless of the try / catch result
 }
+```
 
-// Error name values
+## Error name values
 
+```javascript
 RangeError     // A number is "out of range"
 ReferenceError // An illegal reference has occurred
 SyntaxError    // A syntax error has occurred
@@ -541,19 +557,24 @@ URIError       // An encodeURI() error has occurred
 ```javascript
 // Create JSON object
 
+```javascript
 var str='{"names":[{"first":"Hakuna","lastN":"Matata"},{"first":"Air","last":"Jordan"}]}';
 
 obj=JSON.parse(str);                 // Parse
 document.write(obj.names[1].first);  // Access
+```
 
-// Send
+## Send
 
+```javascript
 var myObj={"name":"Jane", "age":18,"city":"Chicago"};  // Create object
 var myJSON=JSON.stringify(myObj);                      // Stringify
 window.location="demo.php?x=" + myJSON;                // Send to php
+```
 
-// Storing and Retrieving
+## Storing and Retrieving
 
+```javascript
 myJSON=JSON.stringify(myObj);            // Storing data
 localStorage.setItem("testJSON", myJSON);
 text=localStorage.getItem("testJSON");   // Retrieving data
@@ -561,7 +582,7 @@ obj=JSON.parse(text);
 document.write(obj.name);
 ```
 
-## Promises
+# Promises
 
 ```javascript
 function sum (a, b) {
@@ -584,17 +605,23 @@ myPromsise.then(function (result) {
 }).catch(function (err) {    // The catch handler is called instead, after another second
    console.error(err);       // => Please provide two numbers to sum.
 });
+```
 
-// States
+## States
 
+```javascript
 pending, fulfilled, rejected
+```
 
-// Properties
+## Properties
 
+```javascript
 Promise.length, Promise.prototype
+```
 
-// Methods
+## Methods
 
+```javascript
 Promise.all(iterable), Promise.race(iterable), Promise.reject(reason), Promise.resolve(value)
 ```
 
