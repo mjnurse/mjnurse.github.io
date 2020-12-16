@@ -3,7 +3,9 @@ title: Javascript Cheat Sheet
 layout: page-with-contents-list
 ---
 
-## Basics
+# Basics
+
+## Including Javascript on a Page
 
 ```javascript
 // On page script.
@@ -11,7 +13,9 @@ layout: page-with-contents-list
 
 // Include external JS file.
 <script src="filename.js"></script>
+```
 
+```javascript
 // Delay - 1 second timeout.
 setTimeout(function () { ...  }, 1000);
 
