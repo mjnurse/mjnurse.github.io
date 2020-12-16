@@ -171,27 +171,37 @@ if (!val) {
 }
 ```
 
-## Loops
+# Loops
+
+## For Loop
 
 ```javascript
-// For Loop.
 var arr=[1, 2, 4]; var sum=0;
 for (var i=0; i<a.length; i++) {
     sum += a[i];
 }
 html="";
 for (var i of custOrder) { ... }
+```
 
-// While Loop / Do While Loop.
+## While Loop / Do While Loop
+
+```javascript
 while (i<100) { ...  }
 do { ... } while i<100);
+```
 
-// Break.
+## Break
+
+```javascript
 for (var i=0; i<10; i++) {
-    if (i == 5) { break; }
+  if (i == 5) { break; }
 }
+```
 
-// Continue.
+## Continue
+
+```javascript
 for (var i=0; i<10; i++) {
   if (i == 5) { continue; } // Skips the rest of the cycle
   document.write(i + ", "); // 5 not output
