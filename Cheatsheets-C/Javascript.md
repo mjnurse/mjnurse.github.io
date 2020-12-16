@@ -9,10 +9,10 @@ layout: page-with-contents-list
 ## Including Javascript on a Page
 
 ```javascript
-// On page script.
+// On page script
 <script type="text/javascript">  ...  </script>
 
-// Include external JS file.
+// Include external JS file
 <script src="filename.js"></script>
 ```
 ## Functions
@@ -21,24 +21,24 @@ layout: page-with-contents-list
 // Standard function
 function addNumbers(a, b) { return a + b; }
 
-// Lamda function.
+// Lamda function
 const isEven = (number) => { return number % 2 === 0; };
 ```
 
 ## Misc
 
 ```javascript
-// Edit DOM element.
+// Edit DOM element
 document.getElementById("elementID").innerHTML="Hello World!";
 
-// Output.
+// Output
 console.log(a);          // Write to the browser console
 document.write(a);       // Write to the HTML
 alert(a);                // Output in an alert box
 confirm("Really?");      // Yes/no dialogue, returns true/false depending on user click
 prompt("Your age?","0"); // Input dialogue. Second argument is the initial value
 
-// Comments.
+// Comments
 /* Multi line
    comment */
 
@@ -111,7 +111,8 @@ x=100%48; // 4 Modulo 100/48
 ^  // XOR         5 ^ 1  (0101 ^ 0001) (100)   4
 << // left shift  5 << 1 (0101 << 1)   (1010) 10
 >> // right shift 5 >> 1 (0101 >> 1)   (10)    2
-
+```
+```javascript
 person.age === person[age] // Member
 !(a == b)   // Logical not
 typeof a    // Type (number, object, function...)
@@ -164,10 +165,10 @@ switch (new Date().getDay()) {
 let val;
 
 if (val) {
-  // Not here.
+  // Not here
 }
 if (!val) {
-  // Here.
+  // Here
 }
 ```
 
@@ -213,6 +214,8 @@ for (var i=0; i<10; i++) {
 ```javascript
 var esc='I don\'t \n know'; // \n new line
 var len=abc.length;         // String length
+```
+```javascript
 "abc".indexOf("lmno");      // Find substring, -1 if doesn't contain
 "abc".lastIndexOf("lmno");  // Last occurrence
 "abc".slice(3, 6);          // Cuts out "def", negative values count from behind
@@ -238,7 +241,8 @@ pi.toFixed(0);    // Returns 3
 pi.toFixed(2);    // Returns 3.14 - for working with money
 pi.toPrecision(2) // Returns 3.1
 pi.valueOf();     // Returns number
-
+```
+```javascript
 Number(true);           // Converts to number
 Number(new Date())      // Number of milliseconds since 1970
 parseInt("3 months");   // Returns the first number: 3
@@ -247,7 +251,8 @@ Number.MAX_VALUE        // Largest possible JS number
 Number.MIN_VALUE        // Smallest possible JS number
 Number.NEGATIVE_INFINITY
 Number.POSITIVE_INFINITY
-
+```
+```javascript
 var pi=Math.PI;
 Math.round(4.4);       // 4 - rounded
 Math.pow(2,8);         // 256 - 2 to the power of 8
@@ -261,7 +266,8 @@ Math.max(0, 3, -2, 2); // 3 - the highest value
 Math.log(1);           // 0 natural logarithm
 Math.exp(1);           // 2.7182 pow(E,x)
 Math.random();         // Random number between 0 and 1
-
+```
+```javascript
 Math.floor(Math.random() * 5) + 1; // Random integer, from 1 to 5
 ```
 
@@ -272,9 +278,11 @@ Date("2017-06-23"); // Date declaration. Also: Date("June 23 2017")
 Date("2017");       // Is set to Jan 01
 Date("2017-06-23T12:00:00-09:45");
 Date("Jun 23 2017 07:45:00 GMT+0100 (Tokyo Time)");
-
+```
+```javascript
 Date.now());         // Milliseconds passed since 1970
-
+```
+```javascript
 var d=new Date();    // Thu Aug 22 2019 16:26:11 GMT+0100 (British Summer Time)
 Number(d)            // Milliseconds passed since 1970
 d.getDay();          // Getting the weekday
@@ -287,7 +295,8 @@ d.getMinutes();      // Minutes (0-59)
 d.getMonth();        // Month (0-11)
 d.getSeconds();      // Seconds (0-59)
 d.getTime();         // Milliseconds since 1970
-
+```
+```javascript
 d.setDate();         // Day as a number (1-31)
 d.setFullYear();     // Year (optionally month and day)
 d.setHours();        // Hour (0-23)
@@ -305,12 +314,15 @@ d.setDate(d.getDate()+7); // Adds a week to a date
 ```javascript
 var dogs=["Bulldog", "Beagle", "Labrador"];
 var dogs=new Array("Bulldog", "Beagle", "Labrador");  // Declaration
-
+```
+```javascript
 alert(dogs[1]);         // Access value at index, first item being [0]
 dogs[0]="Bull Terrier"; // Change the first item
-
+```
+```javascript
 for (var i=0; i<dogs.length; i++) { console.log(dogs[i]); }
-
+```
+```javascript
 dogs.toString();                     // Convert to string: results "Bulldog,Beagle,Labrador"
 dogs.join(" * ");                    // Join: "Bulldog * Beagle * Labrador"
 dogs.pop();                          // Remove last element
@@ -327,10 +339,14 @@ dogs.reverse();                      // Sort string in descending order
 x.sort(function(a, b){return a-b});  // Numeric sort
 x.sort(function(a, b){return b-a});  // Numeric descending sort
 highest=x[0];                        // First item in sorted array is the lowest (or highest) value
-
+```
+```javascript
 x.sort(function(a, b){return 0.5-Math.random()}); // Random order sort
+```
 
-// Others.
+## Others
+
+```javascript
 concat, copyWithin, every, fill, filter, find, findIndex, forEach, indexOf, isArray, join,
 lastIndexOf, map, pop, push, reduce, reduceRight, reverse, shift, slice, some, sort, splice,
 toString, unshift, valueOf
@@ -379,32 +395,59 @@ parseInt();              // Parses a string and returns an integer
 
 ```javascript
 <button onclick="myFunction();"> Click here </button>
+```
 
-// Mouse.
+## Mouse
+
+```javascript
 onclick, oncontextmenu, ondblclick, onmousedown, onmouseenter, onmouseleave, onmousemove, onmouseover, onmouseout, onmouseup
+```
 
-// Keyboard.
+## Keyboard
+
+```javascript
 onkeydown, onkeypress, onkeyup
+```
 
-// Frame.
+## Frame
+
+```javascript
 onabort, onbeforeunload, onerror, onhashchange, onload, onpageshow, onpagehide, onresize, onscroll, onunload
+```
 
-// Form.
+## Form
+
+```javascript
 onblur, onchange, onfocus, onfocusin, onfocusout, oninput, oninvalid, onreset, onsearch, onselect, onsubmit
+```
 
-// Drag.
+## Drag
+
+```javascript
 ondrag, ondragend, ondragenter, ondragleave, ondragover, ondragstart, ondrop
+```
 
-// Clipboard.
+## Clipboard
+
+```javascript
 oncopy, oncut, onpaste
+```
 
-// Media.
+## Media
+
+```javascript
 onabort, oncanplay, oncanplaythrough, ondurationchange, onended, onerror, onloadeddata, onloadedmetadata, onloadstart, onpause, onplay, onplaying, onprogress, onratechange, onseeked, onseeking, onstalled, onsuspend, ontimeupdate, onvolumechange, onwaiting
+```
 
-// Animation.
+## Animation
+
+```javascript
 animationend, animationiteration, animationstart
+```
 
-// Miscellaneous.
+## Miscellaneous
+
+```javascript
 transitionend, onmessage, onmousewheel, ononline, onoffline, onpopstate, onshow, onstorage, ontoggle, onwheel, ontouchcancel, ontouchend, ontouchmove, ontouchstart
 ```
 
@@ -413,12 +456,14 @@ transitionend, onmessage, onmousewheel, ononline, onoffline, onpopstate, onshow,
 ```javascript
 var a=str.search(/CheatSheet/i);
 
-// Modifiers.
+// Modifiers
+
 i  // Perform case-insensitive matching
 g  // Perform a global match
 m  // Perform multiline matching
 
-// Patterns.
+// Patterns
+
 \         // Escape character
 \d        // Find a digit
 \s        // Find a whitespace character
@@ -461,10 +506,12 @@ catch(err) {             // Block to handle errors
     console.log(err.message);
 }
 
-// Throw error.
+// Throw error
+
 throw "My error message"; // Throw a text
 
-// Input validation.
+// Input validation
+
 var x=document.getElementById("mynum").value; // Get input value
 try {
     if(x == "")  throw "empty";         // Error cases
@@ -480,7 +527,8 @@ finally {
     document.write("</br />Done");      // Executed regardless of the try / catch result
 }
 
-// Error name values.
+// Error name values
+
 RangeError     // A number is "out of range"
 ReferenceError // An illegal reference has occurred
 SyntaxError    // A syntax error has occurred
@@ -491,18 +539,21 @@ URIError       // An encodeURI() error has occurred
 ## JSON
 
 ```javascript
-// Create JSON object.
+// Create JSON object
+
 var str='{"names":[{"first":"Hakuna","lastN":"Matata"},{"first":"Air","last":"Jordan"}]}';
 
 obj=JSON.parse(str);                 // Parse
 document.write(obj.names[1].first);  // Access
 
-// Send.
+// Send
+
 var myObj={"name":"Jane", "age":18,"city":"Chicago"};  // Create object
 var myJSON=JSON.stringify(myObj);                      // Stringify
 window.location="demo.php?x=" + myJSON;                // Send to php
 
-// Storing and Retrieving.
+// Storing and Retrieving
+
 myJSON=JSON.stringify(myObj);            // Storing data
 localStorage.setItem("testJSON", myJSON);
 text=localStorage.getItem("testJSON");   // Retrieving data
@@ -534,13 +585,16 @@ myPromsise.then(function (result) {
    console.error(err);       // => Please provide two numbers to sum.
 });
 
-// States.
+// States
+
 pending, fulfilled, rejected
 
-// Properties.
+// Properties
+
 Promise.length, Promise.prototype
 
-// Methods.
+// Methods
+
 Promise.all(iterable), Promise.race(iterable), Promise.reject(reason), Promise.resolve(value)
 ```
 
