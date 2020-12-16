@@ -15,10 +15,13 @@ layout: page-with-contents-list
 <script src="filename.js"></script>
 ```
 
-```javascript
-// Delay - 1 second timeout.
-setTimeout(function () { ...  }, 1000);
+## Delay - 1 second timeout.
 
+```javascript
+setTimeout(function () { ...  }, 1000);
+```
+
+```javascript
 // Functions.
 function addNumbers(a, b) { return a + b; }
 
