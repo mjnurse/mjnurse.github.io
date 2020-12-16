@@ -340,16 +340,38 @@ toString, unshift, valueOf
 
 ```javascript
 eval();                  // Executes a string as if it was script code
+```
+```javascript
 String(23);              // Return string from number
+```
+```javascript
 (23).toString();         // Return string from number
+```
+```javascript
 Number("23");            // Return number from string
+```
+```javascript
 decodeURI(enc);          // Decode URI. Result: "my page.asp"
+```
+```javascript
 encodeURI(uri);          // Encode URI. Result: "my%page.asp"
+```
+```javascript
 decodeURIComponent(enc); // Decode a URI component
+```
+```javascript
 encodeURIComponent(uri); // Encode a URI component
+```
+```javascript
 isFinite();              // Is variable a finite, legal number
+```
+```javascript
 isNaN();                 // Is variable an illegal number
+```
+```javascript
 parseFloat();            // Returns floating point number of string
+```
+```javascript
 parseInt();              // Parses a string and returns an integer
 ```
 
