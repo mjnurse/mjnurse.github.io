@@ -14,13 +14,6 @@ layout: page-with-contents-list
 // Include external JS file.
 <script src="filename.js"></script>
 ```
-
-## Delay - 1 second timeout.
-
-```javascript
-setTimeout(function () { ...  }, 1000);
-```
-
 ## Functions.
 
 ```javascript
@@ -30,6 +23,8 @@ function addNumbers(a, b) { return a + b; }
 // Lamda function.
 const isEven = (number) => { return number % 2 === 0; };
 ```
+
+## Misc
 
 ```javascript
 // Edit DOM element.
@@ -45,9 +40,12 @@ prompt("Your age?","0"); // Input dialogue. Second argument is the initial value
 // Comments.
 /* Multi line
    comment */
+
+// Delay 1 second
+setTimeout(function () { ...  }, 1000);
 ```
 
-## Data Types
+# Data Types
 
 ```javascript
 var age=18;                           // Number
@@ -57,8 +55,11 @@ var truth=false;                      // Boolean
 var sheets=["HTML","CSS","JS"];       // Array
 var a; typeof a;                      // Undefined
 var a=null;                           // Value null
+```
 
-// Objects.
+# Objects
+
+```javascript
 var student={ // Object name
   firstName: "Jane", // List of properties and values
   lastName: "Doe",
