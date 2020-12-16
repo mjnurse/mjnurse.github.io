@@ -331,10 +331,12 @@ highest=x[0];                        // First item in sorted array is the lowest
 x.sort(function(a, b){return 0.5-Math.random()}); // Random order sort
 
 // Others.
-concat, copyWithin, every, fill, filter, find, findIndex, forEach, indexOf, isArray, join, lastIndexOf, map, pop, push, reduce, reduceRight, reverse, shift, slice, some, sort, splice, toString, unshift, valueOf
+concat, copyWithin, every, fill, filter, find, findIndex, forEach, indexOf, isArray, join,
+lastIndexOf, map, pop, push, reduce, reduceRight, reverse, shift, slice, some, sort, splice,
+toString, unshift, valueOf
 ```
 
-## Global Functions()
+# Global Functions()
 
 ```javascript
 eval();                  // Executes a string as if it was script code
