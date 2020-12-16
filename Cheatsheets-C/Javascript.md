@@ -2,7 +2,7 @@
 title: Javascript Cheat Sheet
 layout: page-with-contents-list
 ---
-<style>code {font-size: 1.4em !important} </style>
+<style>code {font-size: 1.3em !important} </style>
 
 # Basics
 
@@ -73,7 +73,7 @@ student.age=19;          // Setting value
 name=student.fullName(); // Call object function
 ```
 
-## Variables
+# Variables
 
 ```javascript
 var b="init";       // String
@@ -83,18 +83,27 @@ var g=/()/;         // RegEx
 var h=function(){}; // Function object
 const PI=3.14;      // Constant
 let z='zzz';        // Block scope local variable
+```
 
-// Strict mode.
+## Strict mode
+
+```javascript
 "use strict"; // Use strict mode to write secure code
 x=1;          // Throws an error because variable is not declared
+```
 
-// Values.
+## Values
+
+```javascript
 false, true                  // Boolean
 18, 3.14, 0b10011, 0xF6, NaN // Number
 "flower", 'John'             // String
 undefined, null ,Infinity    // Special
+```
 
-// Operators.
+## Operators
+
+```javascript
 x=100%48; // 4 Modulo 100/48
 &  // AND         5 & 1  (0101 & 0001) (1)     1
 |  // OR          5 | 1  (0101 | 0001) (101)   5
@@ -114,7 +123,9 @@ a && b
 a || b
 ```
 
-## If Then Else / Switch
+# Conditions
+
+## If Then Else
 
 ```javascript
 if ((age >= 14) && (age < 19)) {
@@ -124,9 +135,17 @@ if ((age >= 14) && (age < 19)) {
 } else {
   group = 3;
 }
+```
 
+## In line
+
+```javascript
 console.log(a>b?'a biggest':'b biggest');
+```
 
+## Switch
+
+```javascript
 switch (new Date().getDay()) {
     case 6:
         text="Saturday";
@@ -137,7 +156,11 @@ switch (new Date().getDay()) {
     default:
         text="Whatever";
 }
+```
 
+## Defined or not
+
+```javascript
 let val;
 
 if (val) {
