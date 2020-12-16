@@ -17,6 +17,7 @@ setTimeout(function () { ...  }, 1000);
 
 // Functions.
 function addNumbers(a, b) { return a + b; }
+
 // Lamda function.
 const isEven = (number) => { return number % 2 === 0; };
 
