@@ -625,7 +625,7 @@ Promise.length, Promise.prototype
 Promise.all(iterable), Promise.race(iterable), Promise.reject(reason), Promise.resolve(value)
 ```
 
-## Save Text To Local File
+# Save Text To Local File
 
 ```javascript
 function saveText(text, fileName) {
@@ -643,7 +643,7 @@ function saveText(text, fileName) {
 }
 ```
 
-## Command Line Arguments / process
+# Command Line Arguments / process
 
 ```
 let args = process.argv;
@@ -655,7 +655,7 @@ let args = process.argv;
 process.exit(1);
 ```
 
-## JSDoc
+# JSDoc
 
 ```javascript
 /**
