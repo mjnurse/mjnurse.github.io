@@ -2,7 +2,7 @@
 title: Javascript Cheat Sheet
 layout: page-with-contents-list
 ---
-<style>code {font-size: 1.4em} </style>
+<style>code {font-size: 1.4em !important} </style>
 
 # Basics
 
