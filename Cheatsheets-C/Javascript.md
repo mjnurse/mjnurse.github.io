@@ -208,7 +208,7 @@ for (var i=0; i<10; i++) {
 }
 ```
 
-## Strings
+# Strings
 
 ```javascript
 var esc='I don\'t \n know'; // \n new line
@@ -230,7 +230,7 @@ var len=abc.length;         // String length
 "abc".padStart(4,'-');      // Lpad
 ```
 
-## Numbers and Math
+# Numbers and Math
 
 ```javascript
 var pi=3.141;
@@ -265,7 +265,7 @@ Math.random();         // Random number between 0 and 1
 Math.floor(Math.random() * 5) + 1; // Random integer, from 1 to 5
 ```
 
-## Dates / Times
+# Dates / Times
 
 ```javascript
 Date("2017-06-23"); // Date declaration. Also: Date("June 23 2017")
@@ -300,7 +300,7 @@ d.setTime();         // Milliseconds since 1970)
 d.setDate(d.getDate()+7); // Adds a week to a date
 ```
 
-## Arrays
+# Arrays
 
 ```javascript
 var dogs=["Bulldog", "Beagle", "Labrador"];
