@@ -2,6 +2,7 @@
 title: Javascript Cheat Sheet
 layout: page-with-contents-list
 ---
+<style>code {font-size: 1.4em} </style>
 
 # Basics
 
@@ -14,7 +15,7 @@ layout: page-with-contents-list
 // Include external JS file.
 <script src="filename.js"></script>
 ```
-## Functions.
+## Functions
 
 ```javascript
 // Standard function
