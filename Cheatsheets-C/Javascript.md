@@ -21,13 +21,17 @@ layout: page-with-contents-list
 setTimeout(function () { ...  }, 1000);
 ```
 
+## Functions.
+
 ```javascript
-// Functions.
+// Standard function
 function addNumbers(a, b) { return a + b; }
 
 // Lamda function.
 const isEven = (number) => { return number % 2 === 0; };
+```
 
+```javascript
 // Edit DOM element.
 document.getElementById("elementID").innerHTML="Hello World!";
 
