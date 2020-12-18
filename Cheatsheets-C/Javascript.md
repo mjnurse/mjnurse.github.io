@@ -6,7 +6,7 @@ layout: page-with-contents-list
 
 # Basics
 
-## Including Javascript on a Page
+## Including Javascript On A Page
 
 ```javascript
 // On page script
@@ -17,12 +17,36 @@ layout: page-with-contents-list
 ```
 ## Functions
 
-```javascript
-// Standard function
-function addNumbers(a, b) { return a + b; }
+## Standard Function
 
-// Lamda function
-const isEven = (number) => { return number % 2 === 0; };
+```javascript
+function add(a, b) {return a + b;}
+
+console.log(add(1, 2)); // 3
+```
+
+## Lamda Function / Arrow Function
+
+```javascript
+const add = function(a, b) {return a + b;}
+
+console.log(add(1, 2)); // 3
+
+const add = (a, b) => {return a + b;}
+
+console.log(add(1, 2)); // 3
+
+// One parameter
+
+const cube = a => {return a * a * a;}
+
+console.log(cube(2)); // 8
+
+// No parameters
+
+const rnd = _ => {return Math.random();}
+
+console.log(rnd()); // Some random number
 ```
 
 ## Misc
@@ -85,7 +109,7 @@ const PI=3.14;      // Constant
 let z='zzz';        // Block scope local variable
 ```
 
-## Strict mode
+## Strict Mode
 
 ```javascript
 "use strict"; // Use strict mode to write secure code
@@ -138,7 +162,7 @@ if ((age >= 14) && (age < 19)) {
 }
 ```
 
-## In line
+## In Line
 
 ```javascript
 console.log(a>b?'a biggest':'b biggest');
@@ -159,7 +183,7 @@ switch (new Date().getDay()) {
 }
 ```
 
-## Defined or not
+## Defined Or Not
 
 ```javascript
 let val;
@@ -517,13 +541,13 @@ catch(err) {             // Block to handle errors
 }
 ```
 
-## Throw error
+## Throw Error
 
 ```javascript
 throw "My error message"; // Throw a text
 ```
 
-## Input validation
+## Input Validation
 
 ```javascript
 var x=document.getElementById("mynum").value; // Get input value
@@ -542,7 +566,7 @@ finally {
 }
 ```
 
-## Error name values
+## Error Name Values
 
 ```javascript
 RangeError     // A number is "out of range"
@@ -572,7 +596,7 @@ var myJSON=JSON.stringify(myObj);                      // Stringify
 window.location="demo.php?x=" + myJSON;                // Send to php
 ```
 
-## Storing and Retrieving
+## Storing And Retrieving
 
 ```javascript
 myJSON=JSON.stringify(myObj);            // Storing data
