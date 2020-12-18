@@ -6,7 +6,7 @@ title: Search
 <script src="../assets/javascript/search-docs.js"></script>
 <script src="../assets/javascript/search.js"></script>
 
-<input type="text" id="searchInput" placeholder="Search" onKeyUp="search()" autofocus>
+<input type="search" id="searchInput" placeholder="Search" onKeyUp="search()" autofocus>
 <input type="button" style="width:120px;" value="Go" id="searchButton" onclick="search()">
 <div id="results"></div>
 <hr>
