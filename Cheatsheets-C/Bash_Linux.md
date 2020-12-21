@@ -24,7 +24,7 @@ $RANDOM                # eg echo $((RANDOM%100)).
 $?                     # Last command exit status.
 ${var//[$'\n\r']}      # Strip newlines from var.
 ```
-#### Indirect variable references
+### Indirect variable references
 ```bash
 export varname=size; export size=100; echo ${varname} ${!varname} # Yields: size 100
 ```
@@ -89,19 +89,19 @@ esac
 
 ## Looping
 
+### Infinite loop
 ```bash
-# Infinite loop
 while [ 1 ]; do 
   echo 'infinite loop';
 done
 ```
+### Loop Through Files
 ```bash
-# Loop Through Files
 for file in *.txt; do echo $f; done
 for file in $(find .); do vi file: $f; done
 ```
+### Loop Through Dates
 ```bash
-# Loop Through Dates
 start_date="2015-01-27"; end_date="2015-02-02"
 d=$start_date
 while [[ "$d" < "$end_date" || "$d" = "$end_date" ]]; do
@@ -109,8 +109,8 @@ while [[ "$d" < "$end_date" || "$d" = "$end_date" ]]; do
    d=$(date -I -d "$d + 1 day")
 done
 ```
+### Process File Line By Line
 ```bash
-# Process File Line By Line
 while read line; do
 done < filename
 ```
