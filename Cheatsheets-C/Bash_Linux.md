@@ -37,6 +37,8 @@ export varname=size; export size=100; echo ${varname} ${!varname} # Yields: size
 export PATH=$PATH:.
 ```
 
+----
+
 ## Arrays
 
 ```bash
@@ -51,6 +53,8 @@ echo ${arr[@]}   # Yields: Martin is cool ace
 echo ${arr[3]}   # Yields nothing
 echo ${arr[10]}  # Yields: ace
 ```
+
+----
 
 ## Files
 
@@ -67,6 +71,8 @@ Check for files: [ -<see below> "<filename>" ] # Check for files.
 #   -w filename   - Check if file is writable.
 #   -x filename   - Check if file is executable.
 ```
+
+----
 
 ## IF THEN ELSE, CASE
 
@@ -90,6 +96,8 @@ esac
 ```bash
 [[ $var =~ .*hello.* ]] # Regexp match.
 ```
+
+----
 
 ## Looping
 
@@ -126,8 +134,9 @@ while read line; do
 done < filename
 ```
 
-## Functions
 ----
+
+## Functions
 
 ```bash
 function check_params() {
@@ -149,6 +158,8 @@ if ! [[ $sleep_sec =~ ^[0-9]+$ ]] ; then
 fi
 ```
 
+----
+
 ## Scripts
 
 ```bash
@@ -164,6 +175,8 @@ while [ "$1" != "" ]; do
    shift
 done
 ```
+
+----
 
 # LINUX
 
@@ -181,6 +194,8 @@ w            # Display who is online
 whoami       # Who you are logged in as 
 finger user  # Display information about user 
 ```
+
+----
 
 ## Hardware
 
@@ -200,6 +215,8 @@ hdparm -tT /dev/sda    # Do a read speed test on disk sda
 badblocks -s /dev/sda  # Test for unreadable blocks on disk sda
 ```
 
+----
+
 ## Users
 
 ```bash
@@ -212,6 +229,8 @@ userdel sam                            # Delete user sam
 adduser sam                            # Add user "sam"
 usermod                                # Modify user information
 ```
+
+----
 
 ## File Commands
 
@@ -252,6 +271,8 @@ wc                                  # print the number of bytes, words, and line
 xargs                               # Execute command lines from standard input
 ```
 
+----
+
 ## Diff
 
 ```bash
@@ -262,6 +283,8 @@ xargs                               # Execute command lines from standard input
 > ccc
 # To change a into b, remove line with aaa and add line with ccc.
 ```
+
+----
 
 ## Process
 
@@ -278,6 +301,8 @@ foreground fg           # Brings the most recent job to foreground
 fg n                    # Brings job n to the foreground:$
 ```
 
+----
+
 ## File Permissions
 
 ```bash
@@ -287,6 +312,8 @@ chmod 755 /data/test.c                # Set rwx permission for owner,rx for grou
 chown owner-user file                 # Change owner of the file or directory
 chown owner-user:owner-group filename # Change owner and group owner of the file
 ```
+
+----
 
 ## Network 
 
@@ -305,6 +332,8 @@ wget file                            # Download file
 netstat -tupl                        # Listing all active listening ports
 ```
 
+----
+
 ## Compression / Archives
 
 ```bash
@@ -314,12 +343,16 @@ tar czf file.tar.gz files  # Create a tar with gzip compression
 gzip file                  # Compress file and renames it to file.gz
 ```
 
+----
+
 ## Install Package
 
 ```bash
 rpm -i pkgname.rpm  # Install rpm based package
 rpm -e pkgname      # Remove package
 ```
+
+----
 
 ## Search
 
@@ -331,6 +364,8 @@ find /home/tom -name 'index*' # Find files names that start with "index"
 find /home -size +10000k      # Find files larger than 10000k in /home
 ```
 
+----
+
 ## Login (SSH And TELNET) 
 
 ```bash
@@ -339,12 +374,16 @@ ssh -p port user@host  # Connect to host using specific port
 telnet host            # Connect to the system using telnet port
 ```
 
+----
+
 ## File Transfer
 
 ```bash
 scp file.txt server2:/tmp      # Secure copy file.txt to remote host /tmp folder
 rsync -a /home/apps /backup/   # Synchronize source to destination
 ```
+
+----
 
 ## Disk Usage
 
@@ -357,6 +396,8 @@ du -sh                         # Display total disk usage on the current directo
 findmnt                        # Displays target mount point for all filesystem
 mount device-path mount-point  # Mount a device
 ```
+
+----
 
 ## Security
 
