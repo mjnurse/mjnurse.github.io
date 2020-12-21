@@ -24,12 +24,12 @@ $RANDOM                # eg echo $((RANDOM%100)).
 $?                     # Last command exit status.
 ${var//[$'\n\r']}      # Strip newlines from var.
 ```
+#### Indirect variable references
 ```bash
-# Indirect variable references
 export varname=size; export size=100; echo ${varname} ${!varname} # Yields: size 100
 ```
+### Setting session path to include current directory
 ```bash
-# Setting session path to include current directory
 export PATH=$PATH:.
 ```
 
@@ -64,14 +64,14 @@ Check for files: [ -<see below> "<filename>" ] # Check for files.
 #   -x filename   - Check if file is executable.
 ```
 
-## IF THEN ELSE (and / or), CASE
+## IF THEN ELSE, CASE
 
 ```bash
 if [[ "$1" == "-a" || "$1" == "" ]]; then
    echo great!
 fi
-
-# CASE
+```
+```bash
 case $1 in
    [1-3])      echo "matches 1 to 3" ;;
    [4-6]*)     echo "matches 4 to 6 followed by any thing" ;;
@@ -82,9 +82,9 @@ case $1 in
    ?*)         echo "matches anything except nothing" ;;
    *)          echo "matches anything including nothing" ;;
 esac
-
-# REGEXP
-[[ $var =~ .*hello.* ]] | Regexp match.
+```
+```bash
+[[ $var =~ .*hello.* ]] # Regexp match.
 ```
 
 ## Looping
@@ -94,11 +94,13 @@ esac
 while [ 1 ]; do 
   echo 'infinite loop';
 done
-
+```
+```bash
 # Loop Through Files
 for file in *.txt; do echo $f; done
 for file in $(find .); do vi file: $f; done
-
+```
+```bash
 # Loop Through Dates
 start_date="2015-01-27"; end_date="2015-02-02"
 d=$start_date
@@ -106,7 +108,8 @@ while [[ "$d" < "$end_date" || "$d" = "$end_date" ]]; do
    echo $d
    d=$(date -I -d "$d + 1 day")
 done
-
+```
+```bash
 # Process File Line By Line
 while read line; do
 done < filename
