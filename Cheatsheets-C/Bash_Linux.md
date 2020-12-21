@@ -11,20 +11,24 @@ layout: page-with-contents-list
 ```bash
 ${#var}                # var length.
 ${var:-default}        # If missing use default.
-${var:0:4} ${var:(-3)} # Substr - if -n then take from end (need brackets as :- sets default).
+${var:0:4} ${var:(-3)} # Substr if -n then take from end (need brackets as :- sets default)
 ${var/hello/bye}       # Search/replace
 ${var//hello/bye}      # Search/replace all
 $s ${s^} ${s^^}        # Change case - hello Hello HELLO.  (uppercase)
 $s ${s,} ${s,,}        # Change case - HELLO hELLO hello.  (lowercase)
 ${var##*str}           # Left Trim - trim up to and inc this string.
 ${var%%str*}           # Right Trim - trim from and inc this string.
+```
+```bash
 $RANDOM                # eg echo $((RANDOM%100)).
 $?                     # Last command exit status.
 ${var//[$'\n\r']}      # Strip newlines from var.
-
+```
+```bash
 # Indirect variable references
 export varname=size; export size=100; echo ${varname} ${!varname} # Yields: size 100
-
+```
+```bash
 # Setting session path to include current directory
 export PATH=$PATH:.
 ```
