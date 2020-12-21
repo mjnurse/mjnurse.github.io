@@ -2,11 +2,8 @@
 title: Bash / Linux Cheatsheet
 layout: page-with-contents-list
 ---
-<style>
-.main-content pre code { 
-  font-size: 1.2em;
-}
-</style>
+<style>code {font-size: 1.3em !important} </style>
+
 # BASH
 
 ## Variables
