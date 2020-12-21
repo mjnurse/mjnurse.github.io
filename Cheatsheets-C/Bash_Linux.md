@@ -24,11 +24,15 @@ $RANDOM                # eg echo $((RANDOM%100)).
 $?                     # Last command exit status.
 ${var//[$'\n\r']}      # Strip newlines from var.
 ```
+
 ### Indirect variable references
+
 ```bash
 export varname=size; export size=100; echo ${varname} ${!varname} # Yields: size 100
 ```
+
 ### Setting session path to include current directory
+
 ```bash
 export PATH=$PATH:.
 ```
@@ -90,17 +94,22 @@ esac
 ## Looping
 
 ### Infinite loop
+
 ```bash
 while [ 1 ]; do 
   echo 'infinite loop';
 done
 ```
+
 ### Loop Through Files
+
 ```bash
 for file in *.txt; do echo $f; done
 for file in $(find .); do vi file: $f; done
 ```
+
 ### Loop Through Dates
+
 ```bash
 start_date="2015-01-27"; end_date="2015-02-02"
 d=$start_date
@@ -109,13 +118,16 @@ while [[ "$d" < "$end_date" || "$d" = "$end_date" ]]; do
    d=$(date -I -d "$d + 1 day")
 done
 ```
+
 ### Process File Line By Line
+
 ```bash
 while read line; do
 done < filename
 ```
 
 ## Functions
+----
 
 ```bash
 function check_params() {
@@ -352,7 +364,7 @@ mount device-path mount-point  # Mount a device
 sudo /usr/sbin/visudo  # Alter sudu
 ```
 
-# USEFUL
+# Useful / Other
 
 ```bash
 > tar -cvzf filename sourcedir # Create tarball
