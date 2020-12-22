@@ -362,7 +362,6 @@ dogs.sort();                         // Sort string alphabetically
 dogs.reverse();                      // Sort string in descending order
 x.sort(function(a, b){return a-b});  // Numeric sort
 x.sort(function(a, b){return b-a});  // Numeric descending sort
-highest=x[0];                        // First item in sorted array is the lowest (or highest) value
 ```
 ```javascript
 x.sort(function(a, b){return 0.5-Math.random()}); // Random order sort
