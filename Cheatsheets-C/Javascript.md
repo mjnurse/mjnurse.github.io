@@ -611,8 +611,8 @@ document.write(obj.name);
 ```javascript
 function sum (a, b) {
    return Promise(function (resolve, reject) {
-      setTimeout(function () {                                      // Send the response after 1 second
-         if (typeof a !== "number" || typeof b !== "number") {      // Testing input types
+      setTimeout(function () {  // Send the response after 1 second
+         if (typeof a !== "number" || typeof b !== "number") {  // Testing input types
             return reject(new TypeError("Inputs must be numbers"));
          }
          resolve(a + b);
