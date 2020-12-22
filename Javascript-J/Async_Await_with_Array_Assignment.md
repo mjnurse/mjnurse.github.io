@@ -1,5 +1,5 @@
 ---
-title: 20-12-10 - Async Await with Array Assignment
+title: Async Await with Array Assignment
 section: Javascript
 ---
 
