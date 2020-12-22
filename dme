@@ -1,0 +1,14 @@
+cd Blog-B
+for f in *.md; do
+  section="$(head -5 $f | grep 'section:' | sed 's/section: *//')"
+  if [[ "$section" != "" ]]; then
+    tmp="${f:0:11}"
+    blogdate="${tmp//_/ }}"
+    newfile="${f:11:999}"
+    folder="$(ls .. | grep ${section}*)"
+    echo "$f -> ../${folder}/$newfile"
+    cat $f | sed "s/title: ${blogdate}/title: /" > ../${folder}/$newfile
+  else
+    echo "$f -> NO SECTION SET"
+  fi
+done
