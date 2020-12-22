@@ -50,22 +50,32 @@ clog(timeMS(STARTTIME), 'main', 'fetchData 1,2,3 invoked');
 clog(timeMS(STARTTIME), 'main', 'end (outside await)');
 ```
 
-The output when running the above Javascript is as follows:
+The output when running the above Javascript is as follows.  Note field 1 in the output is ms since since execution of the main body began.
 
 ```bash
-martin@DESKTOP-RFCK470:/c/MJN/github/javascript$ node await-example.js
+$> node await-example.js
+
 [ 0, 'main', 'begin' ]
+
 [ 3, 'fetchData', 1, 'begin' ]  # A message from within fetchData function which
 [ 4, 'fetchData', 2, 'begin' ]  # shows the function is running.  3 parallel
 [ 5, 'fetchData', 3, 'begin' ]  # instances running.
-[ 6, 'main', 'fetchData 1,2,3 invoked' ] # The main  
-[ 7, 'main', 'end (outside await)' ]
-[ 326, 'fetchData', 2, 'end' ]
-[ 363, 'fetchData', 3, 'end' ]
-[ 606, 'fetchData', 1, 'end' ]
-[ 607, 'main', 'fetchData 1 finished' ]
-[ 608, 'main', 'fetchData 2 finished' ]
-[ 609, 'main', 'fetchData 3 finished' ]
+
+[ 6, 'main', 'fetchData 1,2,3 invoked' ] # The main body has finished invoking fetchData
+
+[ 7, 'main', 'end (outside await)' ] # The main body, outside the AWAIT on fetchData
+                                     # finishes running
+
+[ 326, 'fetchData', 2, 'end' ]  # A message from inside fetchData function which 
+[ 363, 'fetchData', 3, 'end' ]  # shows each of the 3 instances finish running.
+[ 606, 'fetchData', 1, 'end' ]  # Note they finsih in a different order than which
+                                # they were invoked.
+
+[ 607, 'main', 'fetchData 1 finished' ]  # The AWAIT on fetchData statements finish.
+[ 608, 'main', 'fetchData 2 finished' ]  # Note that as invocation 2 and 3 complete
+[ 609, 'main', 'fetchData 3 finished' ]  # before invocation 1, as soon as 1 finishes
+                                         # the other 2 have no waiting left to do so
+                                         # finish immediatly.
 ```
 
 <hr>
