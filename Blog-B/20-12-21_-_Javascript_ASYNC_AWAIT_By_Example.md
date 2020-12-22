@@ -1,5 +1,6 @@
 ---
 title: 20-12-21 - Javascript ASYNC AWAIT By Example
+section: Javascript
 ---
 
 At first sight the Javascript ASYNC / AWAIT commands can look quite confusing when in use.  But, once I wrote a worked example, it was actually quite clear.
