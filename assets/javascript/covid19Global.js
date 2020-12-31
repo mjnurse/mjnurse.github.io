@@ -41,18 +41,14 @@ function drawCht() {
 
   let title = '';
   switch (measure) {
-    case '1': title = 'Cases Per Day'; break;
-    case '2': title = 'Cases Total'; break;
-    case '3': title = 'Cases 7 Day Average'; break;
-    case '4': title = 'Deaths Per Day'; break;
-    case '5': title = 'Deaths Total'; break;
-    case '6': title = 'Deaths 7 Day Average'; break;
-    case '7': title = 'Cases Per Million Per Day'; break;
-    case '8': title = 'Cases Per Million Total'; break;
-    case '9': title = 'Cases Per Million 7 Day Average'; break;
-    case '10': title = 'Deaths Per Million Per Day'; break;
-    case '11': title = 'Deaths Per Million Total'; break;
-    case '12': title = 'Deaths Per Million 7 Day Average'; break;
+    case '0': title = 'Cases Per Day'; break;
+    case '1': title = 'Cases Total'; break;
+    case '2': title = 'Deaths Per Day'; break;
+    case '3': title = 'Deaths Total'; break;
+    case '4': title = 'Cases Per Million Per Day'; break;
+    case '5': title = 'Cases Per Million Total'; break;
+    case '6': title = 'Deaths Per Million Per Day'; break;
+    case '7': title = 'Deaths Per Million Total'; break;
   }
   chartTitle.innerHTML = title;
   tableTitle.innerHTML = title;
