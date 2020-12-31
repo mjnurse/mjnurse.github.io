@@ -27,23 +27,23 @@ layout: covid
 <form id="measureForm">
 <div class="measureBox">
 <p><b>Cases</b></p>
-<input type="radio" name="measure" id="measure01" onchange="drawCht();" value="0"> - Per Day<br>
-<input type="radio" name="measure" id="measure02" onchange="drawCht();" value="1"> - Total<br>
+<input type="radio" name="measure" id="measure1" onchange="drawCht();" value="0"> - Per Day<br>
+<input type="radio" name="measure" id="measure2" onchange="drawCht();" value="1"> - Total<br>
 </div>
 <div class="measureBox">
 <p><b>Deaths</b></p>
-<input type="radio" name="measure" id="measure04" onchange="drawCht();" value="4"> - Per Day<br>
-<input type="radio" name="measure" id="measure05" onchange="drawCht();" value="5"> - Total<br>
+<input type="radio" name="measure" id="measure2" onchange="drawCht();" value="2"> - Per Day<br>
+<input type="radio" name="measure" id="measure3" onchange="drawCht();" value="3"> - Total<br>
 </div>
 <div class="measureBox">
 <p><b>Cases Per Million</b></p>
-<input type="radio" name="measure" id="measure07" onchange="drawCht();" value="7"> - Per Day<br>
-<input type="radio" name="measure" id="measure08" onchange="drawCht();" value="8"> - Total<br>
+<input type="radio" name="measure" id="measure4" onchange="drawCht();" value="4"> - Per Day<br>
+<input type="radio" name="measure" id="measure5" onchange="drawCht();" value="5"> - Total<br>
 </div>
 <div class="measureBox">
 <p><b>Deaths Per Million</b></p>
-<input type="radio" name="measure" id="measure10" onchange="drawCht();" value="10"> - Per Day<br>
-<input type="radio" name="measure" id="measure11" onchange="drawCht();" value="11"> - Total<br>
+<input type="radio" name="measure" id="measure6" onchange="drawCht();" value="6"> - Per Day<br>
+<input type="radio" name="measure" id="measure7" onchange="drawCht();" value="7"> - Total<br>
 </div>
 </form>
 </div>
