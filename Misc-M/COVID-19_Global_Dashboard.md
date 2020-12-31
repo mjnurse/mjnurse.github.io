@@ -28,7 +28,7 @@ layout: covid
 <div class="measureBox">
 <p><b>Cases</b></p>
 <input type="radio" name="measure" id="measure1" onchange="drawCht();" value="0"> - Per Day<br>
-<input type="radio" name="measure" id="measure2" onchange="drawCht();" value="1"> - Total<br>
+<input type="radio" name="measure" id="measure2" onchange="drawCht();" value="1" checked> - Total<br>
 </div>
 <div class="measureBox">
 <p><b>Deaths</b></p>
