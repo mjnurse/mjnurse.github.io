@@ -5,19 +5,15 @@ layout: page-with-contents-list
 <style>code {font-size: 1.3em !important} </style>
 
 ```javascript
-const rndInt = (max) => {return Math.floor(Math.random() * max) + 1}
+const rndInt = (max) => Math.floor(Math.random() * max) + 1;
 ```
 
 ```javascript
-const timeMS = (prevTime = 0) => {return Date.now() - prevTime}
+const timeMS = (prevTime = 0) => Date.now() - prevTime;
 ```
 
 ```javascript
-const clog = (...args) => {console.log(args)}
-```
-
-```javascript
-const DEBUG=true; const debug = (...args) => {if (DEBUG) {console.log('DEBUG:', args);}}
+let DEBUG=true; const debug = (...args) => DEBUG && console.log('DEBUG:', args);
 ```
 
 <hr>
