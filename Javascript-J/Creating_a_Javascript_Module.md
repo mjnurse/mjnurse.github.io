@@ -8,7 +8,7 @@ title: Creating a Javascript Module
 
 This contains one private function `rndInt` and one public (exported) function `rndColor`.
 
-I have also included a check with code which will run when `myModule.js` is run directly.  This might be useful for unit texts in the module (not sure).
+I have also included a check with code which will run when `myModule.js` is run directly.  This might be useful for unit tests in the module (not sure).
 
 ```javascript
 const rndInt = (max) => Math.floor(Math.random() * max) + 1;
