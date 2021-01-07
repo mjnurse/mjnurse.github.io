@@ -118,7 +118,7 @@ function drawCht() {
     width: '100%',
     legend: 'bottom',
     hAxis: {showTextEvery: 7},
-    vAxis: {viewWindow: {min: 0}},
+    vAxis: {viewWindow: {min: 0, max: 4000000}},
     curveType: 'function',
   };
 
