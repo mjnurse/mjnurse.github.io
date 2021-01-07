@@ -64,6 +64,7 @@ function drawCht() {
   if (CHARTMEASURE != measure) {
     CHARTMAX = 0;
     CHARTMEASURE = measure;
+    document.getElementById('vmax').value = '';
   }
 
   for (let day=2; day<gd.length; day++) {
