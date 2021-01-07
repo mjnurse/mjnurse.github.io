@@ -18,7 +18,7 @@ for (let ctry=numCtrys+1; ctry<=numCtrys+10; ctry++) {
 
 let sc = 1;
 for (let ctry=1; ctry<=numCtrys; ctry++) {
-  let ctryBox = document.getElementById('ctryCb'+ctry);
+  const ctryBox = document.getElementById('ctryCb'+ctry);
   if (ctryBox != undefined && ctryBox.checked) {
     gSelectedCountries[sc] = ctry;
     sc += 1;
