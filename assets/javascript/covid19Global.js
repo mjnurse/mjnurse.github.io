@@ -37,6 +37,7 @@ for (let day=2; day<gd.length; day++) {
 
 const setChartMax = () => {
   CHARTMAX = document.getElementById('vmax').value;
+  drawCht();
 };
 
 function drawCht() {
