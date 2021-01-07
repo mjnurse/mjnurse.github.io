@@ -3,7 +3,7 @@ title: Shortcut Keys
 layout: page-with-contents-list
 ---
 
-## Visual Studio Code Sample
+## Visual Studio Code
 
 `CTRL+SHIFT+V` - Markdown editing - Switch between text and preview.
 
