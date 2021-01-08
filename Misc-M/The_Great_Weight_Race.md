@@ -52,8 +52,8 @@ title: The Great Weight Race
     let tabHTML = '<table>';
     tabHTML += '<tr style="font-size: 0.9em">' +
         '<th></th>' +
-        '<th colspan="4">Martin (Target Weight: ' + mnTgWgt+ 'Kg)</th>' +
-        '<th colspan="4">Phil (Target Weight: ' + pmTgWgt + 'Kg)</th>' +
+        '<th colspan="5">Martin (Target Weight: ' + mnTgWgt+ 'Kg)</th>' +
+        '<th colspan="5">Phil (Target Weight: ' + pmTgWgt + 'Kg)</th>' +
         '</tr>';
     tabHTML += '<tr style="font-size: 0.9em">' +
         '<th>Date</th>' +
@@ -61,10 +61,12 @@ title: The Great Weight Race
         '<th>Delta</th>' +
         '<th>Loss</th>' +
         '<th>% Target</th>' +
+        '<th>BMI</th>' +
         '<th>Weight</th>' +
         '<th>Delta</th>' +
         '<th>Loss</th>' +
         '<th>% Target</th>' +
+        '<th>BMI</th>' +
         '</tr>';
 
     let chtData = [['Date','Martin','Phil']]
@@ -83,10 +85,12 @@ title: The Great Weight Race
           '<td>' + (mnWgt-mnPrevWgt).toFixed(1) + '</td>' +
           '<td>' + (mnStWgt-mnWgt).toFixed(1) + '</td>' +
           '<td>' + ((mnStWgt-mnWgt)/(mnStWgt-mnTgWgt)*100).toFixed(1) + '%</td>' +
+          '<td>' + (mnWgt/3.0625).toFixed(1) + '</td>' +
           '<td>' + pmWgt.toFixed(1) + '</td>' +
           '<td>' + (pmWgt-pmPrevWgt).toFixed(1) + '</td>' +
           '<td>' + (pmStWgt-pmWgt).toFixed(1) + '</td>' +
           '<td>' + ((pmStWgt-pmWgt)/(pmStWgt-pmTgWgt)*100).toFixed(1) + '%</td>' +
+          '<td>' + (pmWgt/3.4225).toFixed(1) + '</td>' +
           '</tr>';
 
       dte = new Date('20'+dateStr.substr(6,2), (dateStr.substr(3,2)-1), dateStr.substr(0,2));
