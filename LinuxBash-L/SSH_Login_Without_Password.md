@@ -4,7 +4,7 @@ title: SSH Login Without Password
 
 Create public and private keys using ssh-key-gen on local machine.
 
-```
+```bash
 $> ssh-keygen
 
 Generating public/private rsa key pair.
@@ -19,7 +19,7 @@ SHA256:sfuidygosifudyosiduygosidfuygosiduygisdyuiy martin@local
 
 Copy the public key to remote-host using ssh-copy-id
 
-```
+```bash
 $> ssh-copy-id -i ~/.ssh/id_rsa.pub martin@192.168.0.1
 
 martin@192.168.0.1's password:
