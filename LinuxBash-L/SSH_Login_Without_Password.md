@@ -22,7 +22,7 @@ Copy the public key to remote-host using ssh-copy-id
 ```bash
 $> ssh-copy-id -i ~/.ssh/id_rsa.pub martin@192.168.0.1
 
-martin@192.168.0.1's password:
+martin@192.168.0.1 password:
 
 Number of key(s) added: 1
 ```
