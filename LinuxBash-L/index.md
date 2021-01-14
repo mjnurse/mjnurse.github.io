@@ -4,43 +4,45 @@ title: LinuxBash
 
 <span style="color: grey">1.</span>&nbsp;&nbsp;&nbsp; <a id="listitem1" href="Setting_Prompt_Colour_In_bash_and_Putty.html">Setting Prompt Colour In bash and Putty</a>
 
+<span style="color: grey">2.</span>&nbsp;&nbsp;&nbsp; <a id="listitem2" href="SSH_Login_Without_Password.html">SSH Login Without Password</a>
+
 ## Scripts
 
 
-<span style="color: grey">2.</span>&nbsp;&nbsp;&nbsp; <a id="listitem2" href="Script_ah_-_Add_header_to_web_page_markdown_document.html">ah - Add header to web page markdown document</a>
+<span style="color: grey">3.</span>&nbsp;&nbsp;&nbsp; <a id="listitem3" href="Script_ah_-_Add_header_to_web_page_markdown_document.html">ah - Add header to web page markdown document</a>
 
-<span style="color: grey">3.</span>&nbsp;&nbsp;&nbsp; <a id="listitem3" href="Script_article_-_Creates_a_new_website_article.html">article - Creates a new website article</a>
+<span style="color: grey">4.</span>&nbsp;&nbsp;&nbsp; <a id="listitem4" href="Script_article_-_Creates_a_new_website_article.html">article - Creates a new website article</a>
 
-<span style="color: grey">4.</span>&nbsp;&nbsp;&nbsp; <a id="listitem4" href="Script_blog_-_Creates_a_Blog_article.html">blog - Creates a Blog article</a>
+<span style="color: grey">5.</span>&nbsp;&nbsp;&nbsp; <a id="listitem5" href="Script_blog_-_Creates_a_Blog_article.html">blog - Creates a Blog article</a>
 
-<span style="color: grey">5.</span>&nbsp;&nbsp;&nbsp; <a id="listitem5" href="Script_calc_-_tbc.html">calc - tbc</a>
+<span style="color: grey">6.</span>&nbsp;&nbsp;&nbsp; <a id="listitem6" href="Script_calc_-_tbc.html">calc - tbc</a>
 
-<span style="color: grey">6.</span>&nbsp;&nbsp;&nbsp; <a id="listitem6" href="Script_cls_-_Clear_terminal_and_putty_terminal_buffer.html">cls - Clear terminal and putty terminal buffer</a>
+<span style="color: grey">7.</span>&nbsp;&nbsp;&nbsp; <a id="listitem7" href="Script_cls_-_Clear_terminal_and_putty_terminal_buffer.html">cls - Clear terminal and putty terminal buffer</a>
 
-<span style="color: grey">7.</span>&nbsp;&nbsp;&nbsp; <a id="listitem7" href="Script_crreadme_-_Creates_a_README.html_document_from_READMEscr.md.md">crreadme - Creates a README document from READMEscr.md.md</a>
+<span style="color: grey">8.</span>&nbsp;&nbsp;&nbsp; <a id="listitem8" href="Script_crreadme_-_Creates_a_README.html_document_from_READMEscr.md.md">crreadme - Creates a README document from READMEscr.md.md</a>
 
-<span style="color: grey">8.</span>&nbsp;&nbsp;&nbsp; <a id="listitem8" href="Script_csvplot_-_Generates_a_HTML_page_containing_a_Google_Chart_plotting_the_csv_data.html">csvplot - Generates a HTML page containing a Google Chart plotting the csv data</a>
+<span style="color: grey">9.</span>&nbsp;&nbsp;&nbsp; <a id="listitem9" href="Script_csvplot_-_Generates_a_HTML_page_containing_a_Google_Chart_plotting_the_csv_data.html">csvplot - Generates a HTML page containing a Google Chart plotting the csv data</a>
 
-<span style="color: grey">9.</span>&nbsp;&nbsp;&nbsp; <a id="listitem9" href="Script_gen-search-doc-list_-_tbc.html">gen-search-doc-list - tbc</a>
+<span style="color: grey">10.</span>&nbsp;&nbsp;&nbsp; <a id="listitem10" href="Script_gen-search-doc-list_-_tbc.html">gen-search-doc-list - tbc</a>
 
-<span style="color: grey">10.</span>&nbsp;&nbsp;&nbsp; <a id="listitem10" href="Script_gvim_-_Runs_windows_gvim_and_fixes_file_paths.html">gvim - Runs windows gvim and fixes file paths</a>
+<span style="color: grey">11.</span>&nbsp;&nbsp;&nbsp; <a id="listitem11" href="Script_gvim_-_Runs_windows_gvim_and_fixes_file_paths.html">gvim - Runs windows gvim and fixes file paths</a>
 
-<span style="color: grey">11.</span>&nbsp;&nbsp;&nbsp; <a id="listitem11" href="Script_h_-_Extracts_and_displays_the_help_lines.html">h - Extracts and displays the help lines</a>
+<span style="color: grey">12.</span>&nbsp;&nbsp;&nbsp; <a id="listitem12" href="Script_h_-_Extracts_and_displays_the_help_lines.html">h - Extracts and displays the help lines</a>
 
-<span style="color: grey">12.</span>&nbsp;&nbsp;&nbsp; <a id="listitem12" href="Script_or_-_Connect_to_oracle_using_sqlplus.html">or - Connect to oracle using sqlplus</a>
+<span style="color: grey">13.</span>&nbsp;&nbsp;&nbsp; <a id="listitem13" href="Script_or_-_Connect_to_oracle_using_sqlplus.html">or - Connect to oracle using sqlplus</a>
 
-<span style="color: grey">13.</span>&nbsp;&nbsp;&nbsp; <a id="listitem13" href="Script_parseparam_-_A_script_containing_an_example_of_how_to_parse_command_line_parameters.html">parseparam - A script containing an example of how to parse command line parameters</a>
+<span style="color: grey">14.</span>&nbsp;&nbsp;&nbsp; <a id="listitem14" href="Script_parseparam_-_A_script_containing_an_example_of_how_to_parse_command_line_parameters.html">parseparam - A script containing an example of how to parse command line parameters</a>
 
-<span style="color: grey">14.</span>&nbsp;&nbsp;&nbsp; <a id="listitem14" href="Script_pg_-_Connect_to_postgresql_using_psql.html">pg - Connect to postgresql using psql</a>
+<span style="color: grey">15.</span>&nbsp;&nbsp;&nbsp; <a id="listitem15" href="Script_pg_-_Connect_to_postgresql_using_psql.html">pg - Connect to postgresql using psql</a>
 
-<span style="color: grey">15.</span>&nbsp;&nbsp;&nbsp; <a id="listitem15" href="Script_sl_-_tbc.html">sl - tbc</a>
+<span style="color: grey">16.</span>&nbsp;&nbsp;&nbsp; <a id="listitem16" href="Script_sl_-_tbc.html">sl - tbc</a>
 
-<span style="color: grey">16.</span>&nbsp;&nbsp;&nbsp; <a id="listitem16" href="Script_sqlite-load-csv_-_Load_a_csv_file_into_a_sqlite3_database.html">sqlite-load-csv - Load a csv file into a sqlite3 database</a>
+<span style="color: grey">17.</span>&nbsp;&nbsp;&nbsp; <a id="listitem17" href="Script_sqlite-load-csv_-_Load_a_csv_file_into_a_sqlite3_database.html">sqlite-load-csv - Load a csv file into a sqlite3 database</a>
 
-<span style="color: grey">17.</span>&nbsp;&nbsp;&nbsp; <a id="listitem17" href="Script_tidy_-_Fixes_eg_permission_issues_with_files.html">tidy - Fixes eg permission issues with files</a>
+<span style="color: grey">18.</span>&nbsp;&nbsp;&nbsp; <a id="listitem18" href="Script_tidy_-_Fixes_eg_permission_issues_with_files.html">tidy - Fixes eg permission issues with files</a>
 
-<span style="color: grey">18.</span>&nbsp;&nbsp;&nbsp; <a id="listitem18" href="Script_utils_-_tbc.html">utils - tbc</a>
-<script>gMaxNum=19-1</script>
+<span style="color: grey">19.</span>&nbsp;&nbsp;&nbsp; <a id="listitem19" href="Script_utils_-_tbc.html">utils - tbc</a>
+<script>gMaxNum=20-1</script>
 
 <hr>
 <p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.</p>
