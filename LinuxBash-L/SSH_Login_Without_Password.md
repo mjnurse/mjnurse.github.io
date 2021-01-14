@@ -2,7 +2,7 @@
 title: SSH Login Without Password
 ---
 
-## ssh Command Line
+# ssh Command Line
 
 Create public and private keys using ssh-key-gen on local machine.
 
@@ -29,9 +29,9 @@ martin@192.168.0.1 password:
 Number of key(s) added: 1
 ```
 
-## PuTTY
+# PuTTY
 
-### Generate PuTTY Key
+## Generate PuTTY Key
 
 Putty (for windows) doesn't support OpenSSH keys directly so we need to create a new ssh key for Putty.  The PuTTYgen tool can do this.
 
@@ -47,7 +47,7 @@ Putty (for windows) doesn't support OpenSSH keys directly so we need to create a
 
 - Save the private key as `id_rsa.ppk`.
 
-### Add key to PuTTY
+## Add key to PuTTY
 
 - Enter the remote server Host Name or IP address under `Session`.
 
