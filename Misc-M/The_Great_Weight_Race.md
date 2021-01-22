@@ -65,11 +65,13 @@ title: The Great Weight Race
         '<th>Delta</th>' +
         '<th>Loss</th>' +
         '<th>% Target</th>' +
+        '<th>% Lost</th>' +
         '<th>BMI</th>' +
         '<th>Weight</th>' +
         '<th>Delta</th>' +
         '<th>Loss</th>' +
         '<th>% Target</th>' +
+        '<th>% Lost</th>' +
         '<th>BMI</th>' +
         '</tr>';
 
@@ -89,11 +91,13 @@ title: The Great Weight Race
           '<td>' + (mnWgt-mnPrevWgt).toFixed(1) + '</td>' +
           '<td>' + (mnStWgt-mnWgt).toFixed(1) + '</td>' +
           '<td>' + ((mnStWgt-mnWgt)/(mnStWgt-mnTgWgt)*100).toFixed(1) + '%</td>' +
+          '<td>' + ((mnStWgt-mnWgt)/mnStWgt)*100).toFixed(1) + '%</td>' +
           '<td>' + (mnWgt/3.0625).toFixed(1) + '</td>' +
           '<td>' + pmWgt.toFixed(1) + '</td>' +
           '<td>' + (pmWgt-pmPrevWgt).toFixed(1) + '</td>' +
           '<td>' + (pmStWgt-pmWgt).toFixed(1) + '</td>' +
           '<td>' + ((pmStWgt-pmWgt)/(pmStWgt-pmTgWgt)*100).toFixed(1) + '%</td>' +
+          '<td>' + ((pmStWgt-pmWgt)/pmStWgt)*100).toFixed(1) + '%</td>' +
           '<td>' + (pmWgt/3.4225).toFixed(1) + '</td>' +
           '</tr>';
 
