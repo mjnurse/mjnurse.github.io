@@ -56,8 +56,8 @@ title: The Great Weight Race
     let tabHTML = '<table>';
     tabHTML += '<tr style="font-size: 0.9em">' +
         '<th></th>' +
-        '<th colspan="5">Martin (Target Weight: ' + mnTgWgt+ 'Kg)</th>' +
-        '<th colspan="5">Phil (Target Weight: ' + pmTgWgt + 'Kg)</th>' +
+        '<th colspan="6">Martin (Target Weight: ' + mnTgWgt+ 'Kg)</th>' +
+        '<th colspan="6">Phil (Target Weight: ' + pmTgWgt + 'Kg)</th>' +
         '</tr>';
     tabHTML += '<tr style="font-size: 0.9em">' +
         '<th>Date</th>' +
