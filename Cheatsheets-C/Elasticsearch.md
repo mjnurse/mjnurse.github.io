@@ -4,7 +4,7 @@ title: Elasticsearch Cheat Sheet
 
 # Using Curl
 
-```bash
+```json
 # Note: '?v' add headers to the table of results.
 > curl --request GET http://localhost:9200/_cat/health?v  
 
@@ -14,7 +14,7 @@ title: Elasticsearch Cheat Sheet
 
 # Utilities
 
-```bash
+```json
 # Index details
 GET _cat/<indices|shards|segments>/<index name (wildcards allowed)>?v
 
@@ -28,7 +28,7 @@ POST _tasks/oTUltX4IQMOUUVeiohTt8A:12345/_cancel
 
 # Create
 
-```bash
+```json
 PUT <index-name>
 {
     "settings" : {
@@ -42,7 +42,7 @@ PUT <index-name>
 
 ## Create a Copy of an Index
 
-```bash
+```json
 POST _reindex
 {
   "source": {
@@ -58,7 +58,7 @@ Note the new index can already exist.  Can also add a query to the source or spe
 
 # Insert
 
-```bash
+```json
 POST /<index>/<type use:default>
 {
    "name" : "martin",
@@ -70,7 +70,7 @@ POST /<index>/<type use:default>
 
 Note: Newlines are important separators for each command and data JSON statement.
 
-```bash
+```json
 POST /<index>/<type use:default>/_bulk
 { "index" : { } }
 { "name" : "bill", "age" : 43 }
@@ -81,7 +81,7 @@ etc...
 
 # Search
 
-```bash
+```json
 GET <index>/_search 
 { <json> }
 ```
@@ -90,7 +90,7 @@ GET <index>/_search
 
 ## Alter number of results
 
-```bash
+```json
 { "from" : 0, "size" : 10000 }
 ```
 
@@ -98,13 +98,13 @@ GET <index>/_search
 
 Wildcard queries:
 
-```bash
+```json
 { "query" : { "wildcard" : { "<path>.<field>" : "<search_string>*" } } }
 ```
 
 Matching a value or a list of values:
 
-```bash
+```json
 { "query" : { "term" : { "<path>.<field>" : "<search_string>" } } }
 { "query" : { "terms" : { "<path>.<field>" : ["<search_string1>", "<search_string2>"] } } }
 ```
@@ -125,7 +125,7 @@ Matching one or more of many terms
 
 ## Specify the fields returned
 
-```bash
+```json
 { "_source" : [ "<path>.<field>" ], "query" : { ... } }
 ```
 
@@ -133,7 +133,7 @@ Matching one or more of many terms
 
 Note: Newlines are important separators for each command and data JSON statement.
 
-```bash
+```json
 GET <index>/_msearch 
 { "index" : "<index>" }
 { "query" : { "terms" : { "<path>.<field>" : ["<search_str1>", "<search_str2>"] } } }
@@ -146,7 +146,7 @@ etc...
 
 A walk-through example:
 
-```bash
+```json
 # 1. Create an index
 PUT /mjn/default/_bulk
 {"index":{}}
