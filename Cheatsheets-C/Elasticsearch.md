@@ -2,18 +2,17 @@
 title: Elasticsearch Cheat Sheet
 ---
 
-## Using Curl
+# Using Curl
 
 ```bash
 # Note: '?v' add headers to the table of results.
 > curl --request GET http://localhost:9200/_cat/health?v  
 
 # Passing JSON into the curl
-> curl --request GET http://localhost:9200/_search -H 'Content-Type: application/json' -d'
-  { <json> }
+> curl --request GET http://localhost:9200/_search -H 'Content-Type: application/json' -d '{ <json> }'
 ```
 
-## Utilities
+# Utilities
 
 ```bash
 # Index details
@@ -27,9 +26,7 @@ GET _tasks?actions=*reindex*&detailed
 POST _tasks/oTUltX4IQMOUUVeiohTt8A:12345/_cancel
 ```
 
-## Create / Insert
-
-### Create
+# Create
 
 ```bash
 PUT <index-name>
@@ -43,7 +40,7 @@ PUT <index-name>
 }
 ```
 
-### Create a Copy of an Index
+## Create a Copy of an Index
 
 ```bash
 POST _reindex
@@ -59,7 +56,7 @@ POST _reindex
 
 Note the new index can already exist.  Can also add a query to the source or specify a type to filter the documents copied.
 
-### Insert
+# Insert
 
 ```bash
 POST /<index>/<type use:default>
@@ -69,7 +66,7 @@ POST /<index>/<type use:default>
 }
 ```
 
-### Bulk Insert
+## Bulk Insert
 
 Note: Newlines are important separators for each command and data JSON statement.
 
@@ -82,22 +79,22 @@ POST /<index>/<type use:default>/_bulk
 etc...
 ```
 
-## Search
+# Search
 
 ```bash
 GET <index>/_search 
 { <json> }
 ```
 
-### JSON can include
+## JSON can include
 
-### Alter number of results
+## Alter number of results
 
 ```bash
 { "from" : 0, "size" : 10000 }
 ```
 
-### Query definitions
+## Query definitions
 
 Wildcard queries:
 
@@ -114,7 +111,7 @@ Matching a value or a list of values:
 
 Matching one or more of many terms
 
-```bash
+```json
 { "query" : 
    { "dis_max" : 
       { "queries" : 
@@ -126,13 +123,13 @@ Matching one or more of many terms
 }
 ```
 
-### Alter the fields returned
+## Specify the fields returned
 
 ```bash
 { "_source" : [ "<path>.<field>" ], "query" : { ... } }
 ```
 
-## Multi Search
+# Multi Search
 
 Note: Newlines are important separators for each command and data JSON statement.
 
@@ -145,7 +142,7 @@ GET <index>/_msearch
 etc...
 ```
 
-## Scrolling Search Results
+# Scrolling Search Results
 
 A walk-through example:
 

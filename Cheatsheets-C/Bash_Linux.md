@@ -148,6 +148,7 @@ function check_params() {
       echo "$3"
       exit
    fi
+}
 
 check_params #$ 2 "Usage: this_script <username>"
 
