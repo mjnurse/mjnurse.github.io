@@ -86,7 +86,13 @@ GET <index>/_search
 { <json> }
 ```
 
-## JSON can include
+## JSON Can Include Sections Which
+
+## Specify the fields returned
+
+```bash
+{ "_source" : [ "<path>.<field>" ], "query" : { ... } }
+```
 
 ## Alter number of results
 
@@ -94,22 +100,22 @@ GET <index>/_search
 { "from" : 0, "size" : 10000 }
 ```
 
-## Query definitions
+## JSON Query Definitions
 
-Wildcard queries:
+### Wildcard Queries
 
 ```bash
 { "query" : { "wildcard" : { "<path>.<field>" : "<search_string>*" } } }
 ```
 
-Matching a value or a list of values:
+### Matching a Value or a List of Values
 
 ```bash
 { "query" : { "term" : { "<path>.<field>" : "<search_string>" } } }
 { "query" : { "terms" : { "<path>.<field>" : ["<search_string1>", "<search_string2>"] } } }
 ```
 
-Matching one or more of many terms
+### Matching One or More of Many Terms
 
 ```bash
 { "query" : 
@@ -123,10 +129,10 @@ Matching one or more of many terms
 }
 ```
 
-## Specify the fields returned
+### Boolean Queries
 
 ```bash
-{ "_source" : [ "<path>.<field>" ], "query" : { ... } }
+
 ```
 
 # Multi Search
