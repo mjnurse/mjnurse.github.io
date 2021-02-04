@@ -13,38 +13,60 @@ title: LinuxBash
 
 <span style="color: grey">4.</span>&nbsp;&nbsp;&nbsp; <a id="listitem4" href="Script_article_-_Creates_a_new_website_article.html">article - Creates a new website article</a>
 
-<span style="color: grey">5.</span>&nbsp;&nbsp;&nbsp; <a id="listitem5" href="Script_blog_-_Creates_a_Blog_article.html">blog - Creates a Blog article</a>
+<span style="color: grey">5.</span>&nbsp;&nbsp;&nbsp; <a id="listitem5" href="Script_bash-func_-_tbc.html">bash-func - tbc</a>
 
-<span style="color: grey">6.</span>&nbsp;&nbsp;&nbsp; <a id="listitem6" href="Script_calc_-_tbc.html">calc - tbc</a>
+<span style="color: grey">6.</span>&nbsp;&nbsp;&nbsp; <a id="listitem6" href="Script_blog_-_Creates_a_Blog_article.html">blog - Creates a Blog article</a>
 
-<span style="color: grey">7.</span>&nbsp;&nbsp;&nbsp; <a id="listitem7" href="Script_cls_-_Clear_terminal_and_putty_terminal_buffer.html">cls - Clear terminal and putty terminal buffer</a>
+<span style="color: grey">7.</span>&nbsp;&nbsp;&nbsp; <a id="listitem7" href="Script_calc_-_Command_line_calculator.html">calc - Command line calculator</a>
 
-<span style="color: grey">8.</span>&nbsp;&nbsp;&nbsp; <a id="listitem8" href="Script_crreadme_-_Creates_a_README.html_document_from_READMEscr.md.md">crreadme - Creates a README document from READMEscr.md.md</a>
+<span style="color: grey">8.</span>&nbsp;&nbsp;&nbsp; <a id="listitem8" href="Script_cls_-_Clear_terminal_and_putty_terminal_buffer.html">cls - Clear terminal and putty terminal buffer</a>
 
-<span style="color: grey">9.</span>&nbsp;&nbsp;&nbsp; <a id="listitem9" href="Script_csvplot_-_Generates_a_HTML_page_containing_a_Google_Chart_plotting_the_csv_data.html">csvplot - Generates a HTML page containing a Google Chart plotting the csv data</a>
+<span style="color: grey">9.</span>&nbsp;&nbsp;&nbsp; <a id="listitem9" href="Script_crreadme_-_Creates_a_README.html_document_from_READMEscr.md.md">crreadme - Creates a README document from READMEscr.md.md</a>
 
-<span style="color: grey">10.</span>&nbsp;&nbsp;&nbsp; <a id="listitem10" href="Script_gen-search-doc-list_-_tbc.html">gen-search-doc-list - tbc</a>
+<span style="color: grey">10.</span>&nbsp;&nbsp;&nbsp; <a id="listitem10" href="Script_csvplot_-_Generates_a_HTML_page_containing_a_Google_Chart_plotting_the_csv_data.html">csvplot - Generates a HTML page containing a Google Chart plotting the csv data</a>
 
-<span style="color: grey">11.</span>&nbsp;&nbsp;&nbsp; <a id="listitem11" href="Script_gvim_-_Runs_windows_gvim_and_fixes_file_paths.html">gvim - Runs windows gvim and fixes file paths</a>
+<span style="color: grey">11.</span>&nbsp;&nbsp;&nbsp; <a id="listitem11" href="Script_doit_-_tbc.html">doit - tbc</a>
 
-<span style="color: grey">12.</span>&nbsp;&nbsp;&nbsp; <a id="listitem12" href="Script_h_-_Extracts_and_displays_the_help_lines.html">h - Extracts and displays the help lines</a>
+<span style="color: grey">12.</span>&nbsp;&nbsp;&nbsp; <a id="listitem12" href="Script_e_-_tbc.html">e - tbc</a>
 
-<span style="color: grey">13.</span>&nbsp;&nbsp;&nbsp; <a id="listitem13" href="Script_or_-_Connect_to_oracle_using_sqlplus.html">or - Connect to oracle using sqlplus</a>
+<span style="color: grey">13.</span>&nbsp;&nbsp;&nbsp; <a id="listitem13" href="Script_filemail_-_tbc.html">filemail - tbc</a>
 
-<span style="color: grey">14.</span>&nbsp;&nbsp;&nbsp; <a id="listitem14" href="Script_parseparam_-_A_script_containing_an_example_of_how_to_parse_command_line_parameters.html">parseparam - A script containing an example of how to parse command line parameters</a>
+<span style="color: grey">14.</span>&nbsp;&nbsp;&nbsp; <a id="listitem14" href="Script_filename-cleanse_-_tbc.html">filename-cleanse - tbc</a>
 
-<span style="color: grey">15.</span>&nbsp;&nbsp;&nbsp; <a id="listitem15" href="Script_pg_-_Connect_to_postgresql_using_psql.html">pg - Connect to postgresql using psql</a>
+<span style="color: grey">15.</span>&nbsp;&nbsp;&nbsp; <a id="listitem15" href="Script_find-large-files_-_tbc.html">find-large-files - tbc</a>
 
-<span style="color: grey">16.</span>&nbsp;&nbsp;&nbsp; <a id="listitem16" href="Script_sck_-_.html">sck - </a>
+<span style="color: grey">16.</span>&nbsp;&nbsp;&nbsp; <a id="listitem16" href="Script_gen-search-doc-list_-_tbc.html">gen-search-doc-list - tbc</a>
 
-<span style="color: grey">17.</span>&nbsp;&nbsp;&nbsp; <a id="listitem17" href="Script_sl_-_tbc.html">sl - tbc</a>
+<span style="color: grey">17.</span>&nbsp;&nbsp;&nbsp; <a id="listitem17" href="Script_github-badchars_-_tbc.html">github-badchars - tbc</a>
 
-<span style="color: grey">18.</span>&nbsp;&nbsp;&nbsp; <a id="listitem18" href="Script_sqlite-load-csv_-_Load_a_csv_file_into_a_sqlite3_database.html">sqlite-load-csv - Load a csv file into a sqlite3 database</a>
+<span style="color: grey">18.</span>&nbsp;&nbsp;&nbsp; <a id="listitem18" href="Script_gvim_-_Runs_windows_gvim_and_fixes_file_paths.html">gvim - Runs windows gvim and fixes file paths</a>
 
-<span style="color: grey">19.</span>&nbsp;&nbsp;&nbsp; <a id="listitem19" href="Script_tidy_-_Fixes_eg_permission_issues_with_files.html">tidy - Fixes eg permission issues with files</a>
+<span style="color: grey">19.</span>&nbsp;&nbsp;&nbsp; <a id="listitem19" href="Script_h_-_Extracts_and_displays_the_help_lines.html">h - Extracts and displays the help lines</a>
 
-<span style="color: grey">20.</span>&nbsp;&nbsp;&nbsp; <a id="listitem20" href="Script_utils_-_tbc.html">utils - tbc</a>
-<script>gMaxNum=21-1</script>
+<span style="color: grey">20.</span>&nbsp;&nbsp;&nbsp; <a id="listitem20" href="Script_lf_-_A_script_to_recursively_list_folders_and_show_folder_details.html">lf - A script to recursively list folders and show folder details</a>
+
+<span style="color: grey">21.</span>&nbsp;&nbsp;&nbsp; <a id="listitem21" href="Script_mn_-_tbc.html">mn - tbc</a>
+
+<span style="color: grey">22.</span>&nbsp;&nbsp;&nbsp; <a id="listitem22" href="Script_or_-_Connect_to_oracle_using_sqlplus.html">or - Connect to oracle using sqlplus</a>
+
+<span style="color: grey">23.</span>&nbsp;&nbsp;&nbsp; <a id="listitem23" href="Script_pack_-_tbc.html">pack - tbc</a>
+
+<span style="color: grey">24.</span>&nbsp;&nbsp;&nbsp; <a id="listitem24" href="Script_pg_-_Connect_to_postgresql_using_psql.html">pg - Connect to postgresql using psql</a>
+
+<span style="color: grey">25.</span>&nbsp;&nbsp;&nbsp; <a id="listitem25" href="Script_rmyn_-_tbc.html">rmyn - tbc</a>
+
+<span style="color: grey">26.</span>&nbsp;&nbsp;&nbsp; <a id="listitem26" href="Script_sck_-_.html">sck - </a>
+
+<span style="color: grey">27.</span>&nbsp;&nbsp;&nbsp; <a id="listitem27" href="Script_script-template_-_A_script_containing_an_example_script-template.html">script-template - A script containing an example script-template</a>
+
+<span style="color: grey">28.</span>&nbsp;&nbsp;&nbsp; <a id="listitem28" href="Script_sl_-_tbc.html">sl - tbc</a>
+
+<span style="color: grey">29.</span>&nbsp;&nbsp;&nbsp; <a id="listitem29" href="Script_sqlite-load-csv_-_Load_a_csv_file_into_a_sqlite3_database.html">sqlite-load-csv - Load a csv file into a sqlite3 database</a>
+
+<span style="color: grey">30.</span>&nbsp;&nbsp;&nbsp; <a id="listitem30" href="Script_tidy_-_Fixes_eg_permission_issues_with_files.html">tidy - Fixes eg permission issues with files</a>
+
+<span style="color: grey">31.</span>&nbsp;&nbsp;&nbsp; <a id="listitem31" href="Script_utils_-_tbc.html">utils - tbc</a>
+<script>gMaxNum=32-1</script>
 
 <hr>
 <p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.</p>
