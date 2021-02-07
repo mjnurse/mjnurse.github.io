@@ -53,7 +53,7 @@ title: LinuxBash
 
 <span style="color: grey">24.</span>&nbsp;&nbsp;&nbsp; <a id="listitem24" href="Script_rmyn_-_tbc.html">rmyn - tbc</a>
 
-<span style="color: grey">25.</span>&nbsp;&nbsp;&nbsp; <a id="listitem25" href="Script_sck_-_Query_shortcut_keys.__Options_to_add,_edit,_delete..html">sck - Query shortcut keys.  Options to add, edit, delete.</a>
+<span style="color: grey">25.</span>&nbsp;&nbsp;&nbsp; <a id="listitem25" href="Script_sck_-_Query_shortcut_keys_-_Options_to_add_edit_delete.html">sck - Query shortcut keys - Options to add edit delete</a>
 
 <span style="color: grey">26.</span>&nbsp;&nbsp;&nbsp; <a id="listitem26" href="Script_script-template_-_A_script_containing_an_example_script-template.html">script-template - A script containing an example script-template</a>
 
