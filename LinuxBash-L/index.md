@@ -23,17 +23,17 @@ title: LinuxBash
 
 <span style="color: grey">9.</span>&nbsp;&nbsp;&nbsp; <a id="listitem9" href="Script_crreadme_-_Creates_a_README.html_document_from_READMEscr.md.md">crreadme - Creates a README document from READMEscr.md.md</a>
 
-<span style="color: grey">10.</span>&nbsp;&nbsp;&nbsp; <a id="listitem10" href="Script_csvplot_-_Generates_a_HTML_page_containing_a_Google_Chart_plotting_the_csv_data.html">csvplot - Generates a HTML page containing a Google Chart plotting the csv data</a>
+<span style="color: grey">10.</span>&nbsp;&nbsp;&nbsp; <a id="listitem10" href="Script_csv-plot_-_Generates_a_HTML_page_containing_a_Google_Chart_plotting_the_csv_data.html">csv-plot - Generates a HTML page containing a Google Chart plotting the csv data</a>
 
 <span style="color: grey">11.</span>&nbsp;&nbsp;&nbsp; <a id="listitem11" href="Script_doit_-_tbc.html">doit - tbc</a>
 
 <span style="color: grey">12.</span>&nbsp;&nbsp;&nbsp; <a id="listitem12" href="Script_e_-_tbc.html">e - tbc</a>
 
-<span style="color: grey">13.</span>&nbsp;&nbsp;&nbsp; <a id="listitem13" href="Script_filemail_-_tbc.html">filemail - tbc</a>
+<span style="color: grey">13.</span>&nbsp;&nbsp;&nbsp; <a id="listitem13" href="Script_file-mail_-_Move_images_of_mail_from_Google_Scanner_a_chosen_folder.html">file-mail - Move images of mail from Google Scanner a chosen folder</a>
 
-<span style="color: grey">14.</span>&nbsp;&nbsp;&nbsp; <a id="listitem14" href="Script_filename-cleanse_-_tbc.html">filename-cleanse - tbc</a>
+<span style="color: grey">14.</span>&nbsp;&nbsp;&nbsp; <a id="listitem14" href="Script_file-watch-do_-_Watch_a_file_and_each_time_it_is_modified_run_a_command.html">file-watch-do - Watch a file and each time it is modified run a command</a>
 
-<span style="color: grey">15.</span>&nbsp;&nbsp;&nbsp; <a id="listitem15" href="Script_filewatch_-_Watch_a_file_and_each_time_it_is_modified_run_a_command.html">filewatch - Watch a file and each time it is modified run a command</a>
+<span style="color: grey">15.</span>&nbsp;&nbsp;&nbsp; <a id="listitem15" href="Script_filename-cleanse_-_Rename_files_to_only_lowercase_characters_and_a_dash..html">filename-cleanse - Rename files to only lowercase characters and a dash.</a>
 
 <span style="color: grey">16.</span>&nbsp;&nbsp;&nbsp; <a id="listitem16" href="Script_find-large-files_-_tbc.html">find-large-files - tbc</a>
 
