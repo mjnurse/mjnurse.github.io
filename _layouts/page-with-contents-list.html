@@ -12,7 +12,7 @@
       </script>
     {% endif %}
     <script src="/assets/javascript/nav.js"></script>
-    <script src="/assets/javascript/copyToClipboard.js"></script>
+    <script src="/assets/javascript/copyPageNameToClipboard.js"></script>
     <meta charset="UTF-8">
 
 {% seo %}
@@ -55,11 +55,11 @@
            <a href="{{ site.url }}/{{ f }}/{{ l }}">{{ l | split: "-" | first | replace: '_',' ' }}</a> /
          {% endif %}
          {% if f != l %}
-            <span onclick="copyToClipboard('{{ f }}/{{ l }}/{{ page.name }}');">
+            <span onclick="copyPageNameToClipboard('{{ f }}/{{ l }}/{{ page.name }}');">
                {{ page.name | replace:'.md','' | replace:'_',' ' }}
             </span>
          {% else %}
-            <span onclick="copyToClipboard('{{ f }}/{{ page.name }}');">
+            <span onclick="copyPageNameToClipboard('{{ f }}/{{ page.name }}');">
                {{ page.name | replace:'.md','' | replace:'_',' ' }}
             </span>
          {% endif %}
