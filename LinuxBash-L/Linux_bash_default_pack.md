@@ -6,11 +6,12 @@ Packs contain bash scripts which have been compressed and converted to a
 base64 string.  This is a convenient wat to copy a set of bash scripts
 into a linux environment using only a command line terminal.
 
+Contents
 ```bash
 c - calc:                Command line calculator 
     cls:                 Clear terminal and putty terminal buffer 
 f - file-watch-do:       Watch a file and each time it is modified run a command 
-```bash
+```
 
 ```bash
 # --------------------------------------------------------------------------------------------------
