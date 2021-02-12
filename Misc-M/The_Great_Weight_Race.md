@@ -48,6 +48,7 @@ title: The Great Weight Race
     ['02/02/21',88.6,109.6],
     ['06/02/21',88.6,110.1],
     ['09/02/21',88.6,109.4],
+    ['12/02/21',88.6,108.7],
   ];
 
   google.charts.load("current", {"packages": ["corechart"]});
