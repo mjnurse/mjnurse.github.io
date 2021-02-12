@@ -16,7 +16,6 @@ function copyPageNameToClipboard(text) {
 function copyToClipboard(text) {
   const el = document.createElement('textarea');
   el.value = text;
-  alert(el.value + ' copied to clipboard');
   document.body.appendChild(el);
   el.select();
   document.execCommand('copy');
