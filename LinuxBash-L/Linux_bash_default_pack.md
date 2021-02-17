@@ -26,21 +26,22 @@ YFAAA=
 # --------------------------------------------------------------------------------------------------
 # FILE: cls 
 # --------------------------------------------------------------------------------------------------
-echo 'H4sIAAAAAAACA5WQvU7DMBRG9/sUF3fIAmkhE0OGqFRQJFrUnwmkyHGuVVPbiewbQt+eRAgxVSrrkb6jo29yNa2Mn1YyHu
-BAti2ZvjgXsCpeFoCIyka8wbklGZApOOOlRelrbDvm0x+qOq0pAOy3xePvEOBhsZ1vlq+75Xo1sks1KUCx3z2tN+PIffguREpr+h
-xK7ma39yB+Uq3xlItLpQJ6qsqaovr3sJXqWDpyFYVcDFcZFa9r0rKzLAAmWDcUfcIobS9PEfsmHFGbEBnZOMLQdIM7Nsi9UZRCG4
-xnjcn7LMvesucE1FhyDn8DexD8WqIBAAA=
+echo 'H4sIAAAAAAACA5WQvU7DMBRG9/sUF3fIAmkhE0OGqFRQJFrUnwmkyHGuVVPbiewbQt8eI5CYkMp6pO/o6JtcTBvjp42MBz
+iQ7WumDy4FrKqnBSAqG/EK55ZkQKbgjJcWpW+xH5hPv6gZtKYAsN9W9z87gLvFdr5ZPu+W61VC50pygGq/e1hv0sa9+SFEylt6Tx
+k3s+tbEN+Z1ngqxblOASM1dUtR/XvYS3WsHbmGQinSTUbFy5a0HCwLgAm2HUWfMUo7ylPEsQtH1CZERjaOMHRDcscOeTSKcuiD8a
+wxe50VxUvxmIH6KvkLfwKk3vGFngEAAA==
 ' | base64 -d | gunzip > cls; chmod u+x cls
 # --------------------------------------------------------------------------------------------------
 # FILE: file-watch-do 
 # --------------------------------------------------------------------------------------------------
-echo 'H4sIAAAAAAACA6VT32/aMBB+919xM6nYkEJK39Y1TGhDXR9WKn5oD4CQIZfFK3GQ44xWK//7zg6kkFaa1OXl7O+7+/ydz2
+echo 'H4sIAAAAAAACA6VT32/aMBB+919xM6nYkEJK39Y1TGhDXR9WKn5oD4CQIZfFG3GQ45RWK//7zg6kkFaa1OXl7O+7+/ydz2
 m8C5ZSBUuRJyzB9WZh8MGEnN32vvcZQCzX6G+FWSV+lIEPP+wShMNBqAhQ0N7IFEEakDmkWSRjiRHoQlHeKktTSmszNhn1rl8qXj
-khJVLswtU+uQvTwxI2QhNnUOfdOWNf+6Mvw5u78c3glpTe7qU3GX8bDEki/aUKnWO7uKfeLs47Hxkvb2EtFYb8jSdwtsXlIsJ89b
-86G7G6X6SYLlGHPMJYFGvDGbP3FXp/zoNZexbsmNGPIR/rR2h6lgE/aUKcaVLVdICiZSqMzBRVNuAaDRS5+IkQ6yyFauZt5lCSra
-BGo+WmtqsoF8/OBm4Eo9YL4q43pHcz7g9f4Y6GVyeDYOo1Z2qmm/MaQxYA4ADyiQ2XsCd31JCMYToF7nU4hCFw37fuOTw9HWHJ6f
-4zh/n8E5gEFT0BwFWSEVl1zR34IA2L5bP+RVn7aqkzw48AGsipih38opxah+WJjA3baPy9cHgkDOHvbQBfg1clf2BOzztNZUdFNW
-ab2Ac2hQ6QySizFvaQbaHKK1upFZedlUX05WvEDXT2u3/5pJQoU2hjva9nd4f7qR1Mfx4MC3VJjlru1rwWc2LsL21v6eWcBAAA
+khJVLswtU+uQvTwxI2QhNnUOfdOWNf+6Mvw5u78c3glpTe7qU3GX8bDEki/aUKnWM7wntq7uK885Hx8hrWUmHI33gEZ1tcLiLMV/
++rsxGr34sU0yXqkEcYi2JtOGP2wkLvz3kwa8+CHTP6MeRj/QhNzzLgJ02IM02qmg5QtEyFkZmiygZco4EiFz8RYp2lUA29zRxKsh
+XUaLTc2HYV5eLZ2cDNYNR6Qdz1hvRwxv3hK9zR9OpkEEy95kzNdHNeY8gCABxAPrHhEvbkjhqSMUynwL0OhzAE7vvWPYenpyMsOd
+1/5jCffwKToKI3ALhKMiKrrrkDH6RhsXzWvyhrXy11ZvgRQAM5VbGDX5RT67A8kbFhG433C4dHwhD+3gbwNXhV8gfm9LzTVHZUVG
+O2iX1gU+gAmYwya2EP2RaqvLKVWnHZWVlEX75G3EBnv/uXT0qJMoU21vt6dne4n9rB9OfBsFCX5Kjlbs1rMSfG/gKWG8WgnQQAAA
+==
 ' | base64 -d | gunzip > file-watch-do; chmod u+x file-watch-do
 `;
 </script>
@@ -74,20 +75,24 @@ YFAAA=
 # --------------------------------------------------------------------------------------------------
 # FILE: cls 
 # --------------------------------------------------------------------------------------------------
-echo 'H4sIAAAAAAACA5WQvU7DMBRG9/sUF3fIAmkhE0OGqFRQJFrUnwmkyHGuVVPbiewbQt+eRAgxVSrrkb6jo29yNa2Mn1YyHu
-BAti2ZvjgXsCpeFoCIyka8wbklGZApOOOlRelrbDvm0x+qOq0pAOy3xePvEOBhsZ1vlq+75Xo1sks1KUCx3z2tN+PIffguREpr+h
-xK7ma39yB+Uq3xlItLpQJ6qsqaovr3sJXqWDpyFYVcDFcZFa9r0rKzLAAmWDcUfcIobS9PEfsmHFGbEBnZOMLQdIM7Nsi9UZRCG4
-xnjcn7LMvesucE1FhyDn8DexD8WqIBAAA=
+echo 'H4sIAAAAAAACA5WQvU7DMBRG9/sUF3fIAmkhE0OGqFRQJFrUnwmkyHGuVVPbiewbQt8eI5CYkMp6pO/o6JtcTBvjp42MBz
+iQ7WumDy4FrKqnBSAqG/EK55ZkQKbgjJcWpW+xH5hPv6gZtKYAsN9W9z87gLvFdr5ZPu+W61VC50pygGq/e1hv0sa9+SFEylt6Tx
+k3s+tbEN+Z1ngqxblOASM1dUtR/XvYS3WsHbmGQinSTUbFy5a0HCwLgAm2HUWfMUo7ylPEsQtH1CZERjaOMHRDcscOeTSKcuiD8a
+wxe50VxUvxmIH6KvkLfwKk3vGFngEAAA==
 ' | base64 -d | gunzip > cls; chmod u+x cls
 # --------------------------------------------------------------------------------------------------
 # FILE: file-watch-do 
 # --------------------------------------------------------------------------------------------------
-echo 'H4sIAAAAAAACA6VT32/aMBB+919xM6nYkEJK39Y1TGhDXR9WKn5oD4CQIZfFK3GQ44xWK//7zg6kkFaa1OXl7O+7+/ydz2
+echo 'H4sIAAAAAAACA6VT32/aMBB+919xM6nYkEJK39Y1TGhDXR9WKn5oD4CQIZfFG3GQ45RWK//7zg6kkFaa1OXl7O+7+/ydz2
 m8C5ZSBUuRJyzB9WZh8MGEnN32vvcZQCzX6G+FWSV+lIEPP+wShMNBqAhQ0N7IFEEakDmkWSRjiRHoQlHeKktTSmszNhn1rl8qXj
-khJVLswtU+uQvTwxI2QhNnUOfdOWNf+6Mvw5u78c3glpTe7qU3GX8bDEki/aUKnWO7uKfeLs47Hxkvb2EtFYb8jSdwtsXlIsJ89b
-86G7G6X6SYLlGHPMJYFGvDGbP3FXp/zoNZexbsmNGPIR/rR2h6lgE/aUKcaVLVdICiZSqMzBRVNuAaDRS5+IkQ6yyFauZt5lCSra
-BGo+WmtqsoF8/OBm4Eo9YL4q43pHcz7g9f4Y6GVyeDYOo1Z2qmm/MaQxYA4ADyiQ2XsCd31JCMYToF7nU4hCFw37fuOTw9HWHJ6f
-4zh/n8E5gEFT0BwFWSEVl1zR34IA2L5bP+RVn7aqkzw48AGsipih38opxah+WJjA3baPy9cHgkDOHvbQBfg1clf2BOzztNZUdFNW
-ab2Ac2hQ6QySizFvaQbaHKK1upFZedlUX05WvEDXT2u3/5pJQoU2hjva9nd4f7qR1Mfx4MC3VJjlru1rwWc2LsL21v6eWcBAAA
+khJVLswtU+uQvTwxI2QhNnUOfdOWNf+6Mvw5u78c3glpTe7qU3GX8bDEki/aUKnWM7wntq7uK885Hx8hrWUmHI33gEZ1tcLiLMV/
++rsxGr34sU0yXqkEcYi2JtOGP2wkLvz3kwa8+CHTP6MeRj/QhNzzLgJ02IM02qmg5QtEyFkZmiygZco4EiFz8RYp2lUA29zRxKsh
+XUaLTc2HYV5eLZ2cDNYNR6Qdz1hvRwxv3hK9zR9OpkEEy95kzNdHNeY8gCABxAPrHhEvbkjhqSMUynwL0OhzAE7vvWPYenpyMsOd
+1/5jCffwKToKI3ALhKMiKrrrkDH6RhsXzWvyhrXy11ZvgRQAM5VbGDX5RT67A8kbFhG433C4dHwhD+3gbwNXhV8gfm9LzTVHZUVG
+O2iX1gU+gAmYwya2EP2RaqvLKVWnHZWVlEX75G3EBnv/uXT0qJMoU21vt6dne4n9rB9OfBsFCX5Kjlbs1rMSfG/gKWG8WgnQQAAA
+==
 ' | base64 -d | gunzip > file-watch-do; chmod u+x file-watch-do
 ```
+
+<hr>
+<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 21/02/17 13:28</p>
