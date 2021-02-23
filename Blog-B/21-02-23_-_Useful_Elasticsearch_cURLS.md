@@ -3,31 +3,31 @@ title: 21-02-23 - Useful Elasticsearch cURLS
 section: Elasticsearch
 ---
 
-### Syntax Conventions:
+## Syntax Conventions:
 
 - `<parameter>` - a parameter to replace with actual values.
 
 - `[<parameter>]` - an optional parameter.
 
-## Cluster
+# Cluster
 
-### Clear Cache
+## Clear Cache
 
 Elasticsearch caches query results which can be use if the same query is run again.  This will clear results from the cache for a single named index or, if no index is specified, all indexes.
 
-```
+```jsjs
 curl -X POST http://localhost:9200/[<index_name>]/_cache/clear
 ```
 
-### Cluster Stats
+## Cluster Stats
 
-```
+```js
 curl -X GET http://localhost:9200/_cluster/stats?human
 ```
 
-## Index Manipulation
+# Index Manipulation
 
-### Create Index
+## Create Index
 
 ```js
 curl -X PUT http://localhost:9200/<index_name> -H Content-Type: application/json -d '
@@ -41,25 +41,25 @@ curl -X PUT http://localhost:9200/<index_name> -H Content-Type: application/json
 }'
 ```
 
-### Delete Index
+## Delete Index
 
-```
+```js
 curl -X DELETE http://localhost:9200/<index_name>
 ```
 
-### Open Index
+## Open Index
 
-```
+```js
 curl -X POST http://localhost:9200/<index_name>/_open
 ```
 
-### Close Index
+## Close Index
 
-```
+```js
 curl -X POST http://localhost:9200/<index_name>/_close
 ```
 
-### Enable Read Write
+## Enable Read Write
 
 ```js
 curl -X PUT http://localhost:9200/<index_name>/_settings -H Content-Type: application/json -d '
@@ -68,7 +68,7 @@ curl -X PUT http://localhost:9200/<index_name>/_settings -H Content-Type: applic
 }'
 ```
 
-### Reindex Index
+## Reindex Index
 
 ```js
 curl -X POST http://localhost:9200/_reindex -H Content-Type: application/json -d '
@@ -82,165 +82,165 @@ curl -X POST http://localhost:9200/_reindex -H Content-Type: application/json -d
 }'
 ```
 
-### Forcemerge
+## Forcemerge
 
-```
+```js
 curl -X POST http://localhost:9200/<index_name>/_forcemerge?max_num_segments=<max_num_segments>
 ```
 
-### Move Shard
+## Move Shard
 
-```
+```js
 curl -X POST http://localhost:9200/_cluster/reroute -H Content-Type: application/json -d '
 { "commands":[ { "move": { "index": "<index_name>","shard": <shard_num>,"from_node": "<from_node_name>","to_node": "<to_node_name>" } } ] }
 '
 ```
 
-### Alter Number Replicas
+## Alter Number Replicas
 
-```
+```js
 curl -X PUT http://localhost:9200/<index_name>/_settings -H Content-Type: application/json -d '
 { "index": { "number_of_replicas": <number_of_replicas> } }
 '
 ```
 
-### Disable Shard Allocation
+## Disable Shard Allocation
 
-```
+```js
 curl -X PUT http://localhost:9200/_cluster/settings -H Content-Type: application/json -d '
 { "persistent": { "cluster.routing.allocation.enable": "primaries" } }
 '
 ```
 
-### Re-enable Shard Allocation
+## Re-enable Shard Allocation
 
-```
+```js
 curl -X PUT http://localhost:9200/_cluster/settings -H Content-Type: application/json -d '
 { "persistent": { "cluster.routing.allocation.enable":null } }
 '
 ```
 
-## Index Interrogation 
+# Index Interrogation 
 
-### List Aliases
+## List Aliases
 
-```
+```js
 curl -X GET http://localhost:9200/_cat/aliases?v&s=[<order_by_field_name>]
 ```
 
-### List Indices
+## List Indices
 
-```
+```js
 curl -X GET http://localhost:9200/_cat/indices/[<index_name>]?v&h=health,status,index,pri,rep,docs.count,docs.deleted,store.size,pri.store.size&s=index
 ```
 
-### List Shards
+## List Shards
 
-```
+```js
 curl -X GET http://localhost:9200/_cat/shards/[<index_name>]?v&h=index,shard,prirep,state,docs,store,node&s=index,shard,prirep
 ```
 
-### List Shard Details
+## List Shard Details
 
-```
+```js
 curl -X GET http://localhost:9200/_cat/shards/[<index_name>]?v&h=index,shard,prirep,state,docs,store,ip,segments.count,unassigned.reason,unassigned.for,node&s=[<order_by_field_name>]
 ```
 
-### List Segments
+## List Segments
 
-```
+```js
 curl -X GET http://localhost:9200/_cat/segments/[<index_name>]?v&s=index,shard,prirep
 ```
 
-### List Segmented Shards
+## List Segmented Shards
 
-```
+```js
 curl -X GET http://localhost:9200/_cat/shards/[<index_name>]?v&h=index,shard,prirep,state,docs,node,segments.count&s=index,shard,prirep,node
 ```
 
-### Get Index Mapping
+## Get Index Mapping
 
-```
+```js
 curl -X GET http://localhost:9200/<index_name>/_mapping?pretty
 ```
 
-### List Unassigned Shards
+## List Unassigned Shards
 
-```
+```js
 curl -X GET http://localhost:9200/_cat/shards?v&h=index,shard,prirep,state,docs,segments.count&s=index,shard,prirep
 ```
 
-### Forcemerge Progress
+## Forcemerge Progress
 
-```
+```js
 curl -X GET http://localhost:9200/_cat/nodes?v&h=name,cpu,load_1m,merges.current,merges.current_docs,merges.total,merges.total_docs&s=name
 ```
 
-## Index Entry Manipulation
+# Index Entry Manipulation
 
-### Add Entry
+## Add Entry
 
-```
+```js
 curl -X POST http://localhost:9200/<index_name>/_doc -H Content-Type: application/json -d <entry_json>
 ```
 
-## Nodes
+# Nodes
 
-### List Nodes
+## List Nodes
 
-```
+```js
 curl -X GET http://localhost:9200/_cat/nodes?v&h=name,ip,nodeRole,m,heapPercent,ramPercent,cpu,load_1m,load_5m,load_15m,disk.total,disk.used_percent&s=name
 ```
 
-### List Nodes Queries
+## List Nodes Queries
 
-```
+```js
 curl -X GET http://localhost:9200/_cat/nodes?v&h=name,ip,nodeRole,m,heapPercent,ramPercent,cpu,load_1m,load_5m,load_15m,disk.total,disk.used_percent&s=name
 ```
 
-### Search Nodes
+## Search Nodes
 
-```
+```js
 curl -X GET http://localhost:9200/_nodes
 ```
 
-### Node Active Threads
+## Node Active Threads
 
-```
+```js
 curl -X GET http://localhost:9200/_cat/thread_pool?v&s=node_name,name
 ```
 
+# Search
+
 ## Search
 
-### Search
-
-```
+```js
 curl -X GET http://localhost:9200/<index_name>/_search?q=<search_term>&pretty
 ```
 
-### Search Json
+## Search Json
 
-```
+```js
 curl -X GET http://localhost:9200/json/_search?q=<index_name>&pretty
 ```
 
-### Search Summary
+## Search Summary
 
-```
+```js
 curl -X GET http://localhost:9200/summary/_search?q=<index_name>&pretty
 ```
 
-## Tasks
+# Tasks
 
-### List Tasks
+## List Tasks
 
-```
+```js
 curl -X GET http://localhost:9200/_cat/tasks?v&h=action,type,start_time,timestamp,running_time,node&s=[<sort_field>]
 ```
 
-### List Tasks Detail
+## List Tasks Detail
 
-```
+```js
 curl -X GET http://localhost:9200/_cat/tasks?v&h=action,type,start_time,timestamp,running_time,node&s=detail
 ```
 
