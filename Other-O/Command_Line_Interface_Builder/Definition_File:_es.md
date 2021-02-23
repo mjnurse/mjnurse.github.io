@@ -2,7 +2,7 @@
 title: es.def
 ---
 
-```
+```bash
 # ----------------------------------------------------------------------------------------------------------------------------------
 = CLUSTER
 # ----------------------------------------------------------------------------------------------------------------------------------
@@ -15,7 +15,7 @@ cluster stats (cs) :: \
             -f 's/.*\("cluster_name":"[^"]*"\).*\("query_cache":{[^}]*}\).*\("mem":{[^}]*}\).*/\1\n   \2\n   \3\n/'
 
 # ----------------------------------------------------------------------------------------------------------------------------------
-= INDEX INTERROGATION
+= INDEX INTERROGATION 
 # ----------------------------------------------------------------------------------------------------------------------------------
 
 list aliases (la) [<filter>] [<order_by_field_name>] :: \
@@ -139,108 +139,108 @@ generic (g) <type-GET/POST/PUT> <api_call> :: query-es -d -o $1 -a "$2"
 ### curl -s -u $CRED -XGET $EHOST'/_cat/indices?help'
 
 ### _cat api provides compact columns for human readability
-###
+### 
 ### curl -s -u $CRED -XGET $EHOST'/_cluster/stats?human&pretty'
 
 ### overview perf:
-###
+### 
 ### curl -s -u $CRED -XGET $EHOST'/_cat/nodes?v&h=ip,port,role,master,cpu,ft,ftt,iic,iif,mt,mtt,d,mcs' | sort
 
 ### disk space:
-###
+### 
 ### curl -s -u $CRED -XGET $EHOST'/_cat/allocation?v'
 
 ### list node attributes:
-###
+### 
 ### curl -s -u $CRED -XGET $EHOST'/_cat/nodeattrs?v&s=node'
 
 ### get cluster settings - shows what has been set through api, does not show config file settings:
-###
+### 
 ### curl -s -u $CRED - XGET $EHOST'/_cluster/settings?pretty'
 
 ### debug
 ### enable debug for every node:
-###
+### 
 ### curl -s -u $CRED -XPUT $EHOST'/_cluster/settings?pretty' -d'{"transient": {"logger.discovery.zen":"TRACE"}}'
 
 ### debug security logger:
-###
+### 
 ### "logger.org.elasticsearch.xpack.security" : "TRACE"
 ### debug ldap logger:
-###
-### "logger.org.elasticsearch.xpack.security.authc.ldap" : "TRACE"
+### 
+### "logger.org.elasticsearch.xpack.security.authc.ldap" : "TRACE" 
 ### dump of all cluster state: nodes, indexes, shards and placements - BIG:
-###
+### 
 ### curl -s -u $CRED -XPUT $EHOST'/_cluster/state'
 
 ### overview:
-###
+### 
 ### get _cat/nodes?v&s=name&h=name,fielddataMemory,fielddataEvictions
 ### detailed stats on a per field/node basis:
-###
-### GET /_nodes/stats/indices/fielddata?fields=*
+### 
+### GET /_nodes/stats/indices/fielddata?fields=* 
 ### performance: request cache
 ### This cache is hit first on the coordinating node and caches a result in its entirety
-###
+### 
 ### full request cache stats on a per cluster and per index basis:
-###
+### 
 ### GET /_stats/request_cache?human
-### TODO: more
-###
+### TODO: more 
+### 
 ### performance: shard cache
 ### This cache is hit second on the participating nodes and caches the shard contents
-###
+### 
 ### https://www.elastic.co/guide/en/elasticsearch/reference/master/shard-request-cache.html
-###
+### 
 ### TODO: more
-###
+### 
 ### threads
 ### whats running:
-###
+### 
 ### curl -s -u $CRED -XGET $EHOST'/_cat/thread_pool'
 
 ### thread pool sizes:
-###
+### 
 ### curl -s -u $CRED -XGET $EHOST'/_cat/thread_pool?v&h=node_name,name,size,active,queue,queue_size,largest,min,max&s=node_name,name'
 
 ### aliases
 ### list aliases:
-###
+### 
 ### curl -s -u $CRED -XGET $EHOST'/_cat/aliases?v'
 
 ### change security/kibana index:
-###
+### 
 ### curl -s -u $CRED -XPUT $EHOST'/.kibana/_settings?pretty' -d' {"index" : {"number_of_replicas" : 9, "auto_expand_replicas" : false} }'
 
 ### templates
 ### list templates:
-###
+### 
 ### curl -s -u $CRED -XGET $EHOST'/_cat/templates?v'
 
 ### get security templates:
-###
+### 
 ### curl -s -u $CRED -XGET $EHOST'/_template/security-index-template?pretty'
 
 ### shards, replicas & recovery
 ### view the shard states for an index:
-###
+### 
 ### curl -k -s -u $CRED -XGET $EHOST'/_cat/shards/ams-txn-061918_jaro?v&s=index,node,sh&h=index,node,sh,pr,state,docs,store,recoverysource.type,unassigned.reason,unassigned.for'
 
 ### set replicas for all gsna* indices that are open:
-###
+### 
 ### curl -s -u $CRED -XPUT $EHOST'/gsna*/_settings?pretty&expand_wildcards=open' -d' {   "index" : {"number_of_replicas" : 2} }'
 
 ### explain allocation - explain why we have unallocated shards:
-###
+### 
 ### curl -s -u $CRED -XGET $EHOST'/_cluster/allocation/explain?pretty'
 
 ### list . indices repl:
-###
+### 
 ### curl -s -u $CRED -XGET $EHOST'/_cat/indices/.*?v'
 
-### recovery status:
-###
-### curl -s -u $CRED -XGET $EHOST'/_cat/recovery?v'
+### recovery status: 
+### 
+### curl -s -u $CRED -XGET $EHOST'/_cat/recovery?v' 
 
 # PUT _cluster/settings
 # {
