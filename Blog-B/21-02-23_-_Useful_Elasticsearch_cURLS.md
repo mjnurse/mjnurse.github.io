@@ -21,7 +21,7 @@ curl -X GET http://localhost:9200/_cluster/stats?human
 
 ### Create Index
 
-```
+```json
 curl -X PUT http://localhost:9200/<index_name> -H Content-Type: application/json -d '
 { 
   "settings": { 
@@ -30,8 +30,7 @@ curl -X PUT http://localhost:9200/<index_name> -H Content-Type: application/json
       "number_of_replicas": <number_of_replicas>
     }
   }
-}
-'
+}'
 ```
 
 ### Delete Index
@@ -54,10 +53,11 @@ curl -X POST http://localhost:9200/<index_name>/_close
 
 ### Enable Read Write
 
-```
+```bash
 curl -X PUT http://localhost:9200/<index_name>/_settings -H Content-Type: application/json -d '
-{ "index.blocks.read_only_allow_delete": null }
-'
+{ 
+  "index.blocks.read_only_allow_delete": null
+}'
 ```
 
 ### Reindex Index
