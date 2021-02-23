@@ -23,7 +23,14 @@ curl -X GET http://localhost:9200/_cluster/stats?human
 
 ```
 curl -X PUT http://localhost:9200/<index_name> -H Content-Type: application/json -d '
-{ "settings": { "index": { "number_of_shards": <number_of_shards>,"number_of_replicas": <number_of_replicas> } } }
+{ 
+  "settings": { 
+    "index": { 
+      "number_of_shards": <number_of_shards>,
+      "number_of_replicas": <number_of_replicas>
+    }
+  }
+}
 '
 ```
 
