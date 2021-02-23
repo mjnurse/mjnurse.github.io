@@ -2,6 +2,12 @@
 title: gi.def
 ---
 
+This bash script generates a cli (command line interface) bash script from a
+definition file.  The structure of the definition file is code header below. 
+This script also generates an alias file which contains a set of alias
+commands which run each command in the definition file using the associated
+shortcut prepended with an '@'.
+
 ```bash
 # ---------------------------------------------------------------------------------------
 = HISTORY
