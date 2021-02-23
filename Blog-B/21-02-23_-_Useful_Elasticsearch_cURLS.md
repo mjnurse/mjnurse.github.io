@@ -3,11 +3,15 @@ title: 21-02-23 - Useful Elasticsearch cURLS
 section: Elasticsearch
 ---
 
-## Syntax Conventions:
+## Syntax Convention:
 
 - `<parameter>` - a parameter to replace with actual values.
 
 - `[<parameter>]` - an optional parameter.
+
+- `${HOSTNAME}` - a bash variable containing the Elasticsearch Host Name.
+
+- `${PORT}` - a bash variable containing the Elasticsearch Port Number.
 
 # Cluster
 
