@@ -3,9 +3,17 @@ title: 21-02-23 - Useful Elasticsearch cURLS
 section: Elasticsearch
 ---
 
+### Syntax Conventions:
+
+- `<parameter>` - a parameter to replace with actual values.
+
+- `[<parameter>]` - an optional parameter.
+
 ## Cluster
 
 ### Clear Cache
+
+Elasticsearch caches query results which can be use if the same query is run again.  This will clear results from the cache for a single named index or, if no index is specified, all indexes.
 
 ```
 curl -X POST http://localhost:9200/[<index_name>]/_cache/clear
