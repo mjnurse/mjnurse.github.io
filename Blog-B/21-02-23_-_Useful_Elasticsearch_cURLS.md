@@ -15,8 +15,8 @@ section: Elasticsearch
 
 Elasticsearch caches query results which can be use if the same query is run again.  This will clear results from the cache for a single named index or, if no index is specified, all indexes.
 
-```jsjs
-curl -X POST http://localhost:9200/[<index_name>]/_cache/clear
+```js
+curl -X POST http://${HOSTNAME}:${PORT}/[<index_name>]/_cache/clear
 ```
 
 ## Cluster Stats
