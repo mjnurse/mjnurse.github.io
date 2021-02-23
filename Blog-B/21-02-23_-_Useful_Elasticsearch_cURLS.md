@@ -19,22 +19,30 @@ section: Elasticsearch
 
 Elasticsearch caches query results which can be use if the same query is run again.  This will clear results from the cache for a single named index or, if no index is specified, all indexes.
 
-```js
+```basic
 curl -X POST http://${HOSTNAME}:${PORT}/[<index_name>]/_cache/clear
 ```
 
 ## Cluster Stats
 
-```js
-curl -X GET http://localhost:9200/_cluster/stats?human
+Basic Cluster Stats:
+
+```basic
+curl -X GET http://${HOSTNAME}:${PORT}/_cluster/stats?human
+```
+
+Comprehensive Cluster Stats:
+
+```basic
+curl -X GET http://${HOSTNAME}:${PORT}/_cluster/stats?pretty
 ```
 
 # Index Manipulation
 
 ## Create Index
 
-```js
-curl -X PUT http://localhost:9200/<index_name> -H Content-Type: application/json -d '
+```basic
+curl -X PUT http://${HOSTNAME}:${PORT}/<index_name> -H Content-Type: application/json -d '
 { 
   "settings": { 
     "index": { 
@@ -47,26 +55,26 @@ curl -X PUT http://localhost:9200/<index_name> -H Content-Type: application/json
 
 ## Delete Index
 
-```js
-curl -X DELETE http://localhost:9200/<index_name>
+```basic
+curl -X DELETE http://${HOSTNAME}:${PORT}/<index_name>
 ```
 
 ## Open Index
 
-```js
-curl -X POST http://localhost:9200/<index_name>/_open
+```basic
+curl -X POST http://${HOSTNAME}:${PORT}/<index_name>/_open
 ```
 
 ## Close Index
 
-```js
-curl -X POST http://localhost:9200/<index_name>/_close
+```basic
+curl -X POST http://${HOSTNAME}:${PORT}/<index_name>/_close
 ```
 
 ## Enable Read Write
 
-```js
-curl -X PUT http://localhost:9200/<index_name>/_settings -H Content-Type: application/json -d '
+```basic
+curl -X PUT http://${HOSTNAME}:${PORT}/<index_name>/_settings -H Content-Type: application/json -d '
 { 
   "index.blocks.read_only_allow_delete": null
 }'
@@ -74,8 +82,8 @@ curl -X PUT http://localhost:9200/<index_name>/_settings -H Content-Type: applic
 
 ## Reindex Index
 
-```js
-curl -X POST http://localhost:9200/_reindex -H Content-Type: application/json -d '
+```basic
+curl -X POST http://${HOSTNAME}:${PORT}/_reindex -H Content-Type: application/json -d '
 {
   "source": {
     "index": "<source_index_name>"
@@ -88,38 +96,38 @@ curl -X POST http://localhost:9200/_reindex -H Content-Type: application/json -d
 
 ## Forcemerge
 
-```js
-curl -X POST http://localhost:9200/<index_name>/_forcemerge?max_num_segments=<max_num_segments>
+```basic
+curl -X POST http://${HOSTNAME}:${PORT}/<index_name>/_forcemerge?max_num_segments=<max_num_segments>
 ```
 
 ## Move Shard
 
-```js
-curl -X POST http://localhost:9200/_cluster/reroute -H Content-Type: application/json -d '
+```basic
+curl -X POST http://${HOSTNAME}:${PORT}/_cluster/reroute -H Content-Type: application/json -d '
 { "commands":[ { "move": { "index": "<index_name>","shard": <shard_num>,"from_node": "<from_node_name>","to_node": "<to_node_name>" } } ] }
 '
 ```
 
 ## Alter Number Replicas
 
-```js
-curl -X PUT http://localhost:9200/<index_name>/_settings -H Content-Type: application/json -d '
+```basic
+curl -X PUT http://${HOSTNAME}:${PORT}/<index_name>/_settings -H Content-Type: application/json -d '
 { "index": { "number_of_replicas": <number_of_replicas> } }
 '
 ```
 
 ## Disable Shard Allocation
 
-```js
-curl -X PUT http://localhost:9200/_cluster/settings -H Content-Type: application/json -d '
+```basic
+curl -X PUT http://${HOSTNAME}:${PORT}/_cluster/settings -H Content-Type: application/json -d '
 { "persistent": { "cluster.routing.allocation.enable": "primaries" } }
 '
 ```
 
 ## Re-enable Shard Allocation
 
-```js
-curl -X PUT http://localhost:9200/_cluster/settings -H Content-Type: application/json -d '
+```basic
+curl -X PUT http://${HOSTNAME}:${PORT}/_cluster/settings -H Content-Type: application/json -d '
 { "persistent": { "cluster.routing.allocation.enable":null } }
 '
 ```
@@ -128,126 +136,126 @@ curl -X PUT http://localhost:9200/_cluster/settings -H Content-Type: application
 
 ## List Aliases
 
-```js
-curl -X GET http://localhost:9200/_cat/aliases?v&s=[<order_by_field_name>]
+```basic
+curl -X GET http://${HOSTNAME}:${PORT}/_cat/aliases?v&s=[<order_by_field_name>]
 ```
 
 ## List Indices
 
-```js
-curl -X GET http://localhost:9200/_cat/indices/[<index_name>]?v&h=health,status,index,pri,rep,docs.count,docs.deleted,store.size,pri.store.size&s=index
+```basic
+curl -X GET http://${HOSTNAME}:${PORT}/_cat/indices/[<index_name>]?v&h=health,status,index,pri,rep,docs.count,docs.deleted,store.size,pri.store.size&s=index
 ```
 
 ## List Shards
 
-```js
-curl -X GET http://localhost:9200/_cat/shards/[<index_name>]?v&h=index,shard,prirep,state,docs,store,node&s=index,shard,prirep
+```basic
+curl -X GET http://${HOSTNAME}:${PORT}/_cat/shards/[<index_name>]?v&h=index,shard,prirep,state,docs,store,node&s=index,shard,prirep
 ```
 
 ## List Shard Details
 
-```js
-curl -X GET http://localhost:9200/_cat/shards/[<index_name>]?v&h=index,shard,prirep,state,docs,store,ip,segments.count,unassigned.reason,unassigned.for,node&s=[<order_by_field_name>]
+```basic
+curl -X GET http://${HOSTNAME}:${PORT}/_cat/shards/[<index_name>]?v&h=index,shard,prirep,state,docs,store,ip,segments.count,unassigned.reason,unassigned.for,node&s=[<order_by_field_name>]
 ```
 
 ## List Segments
 
-```js
-curl -X GET http://localhost:9200/_cat/segments/[<index_name>]?v&s=index,shard,prirep
+```basic
+curl -X GET http://${HOSTNAME}:${PORT}/_cat/segments/[<index_name>]?v&s=index,shard,prirep
 ```
 
 ## List Segmented Shards
 
-```js
-curl -X GET http://localhost:9200/_cat/shards/[<index_name>]?v&h=index,shard,prirep,state,docs,node,segments.count&s=index,shard,prirep,node
+```basic
+curl -X GET http://${HOSTNAME}:${PORT}/_cat/shards/[<index_name>]?v&h=index,shard,prirep,state,docs,node,segments.count&s=index,shard,prirep,node
 ```
 
 ## Get Index Mapping
 
-```js
-curl -X GET http://localhost:9200/<index_name>/_mapping?pretty
+```basic
+curl -X GET http://${HOSTNAME}:${PORT}/<index_name>/_mapping?pretty
 ```
 
 ## List Unassigned Shards
 
-```js
-curl -X GET http://localhost:9200/_cat/shards?v&h=index,shard,prirep,state,docs,segments.count&s=index,shard,prirep
+```basic
+curl -X GET http://${HOSTNAME}:${PORT}/_cat/shards?v&h=index,shard,prirep,state,docs,segments.count&s=index,shard,prirep
 ```
 
 ## Forcemerge Progress
 
-```js
-curl -X GET http://localhost:9200/_cat/nodes?v&h=name,cpu,load_1m,merges.current,merges.current_docs,merges.total,merges.total_docs&s=name
+```basic
+curl -X GET http://${HOSTNAME}:${PORT}/_cat/nodes?v&h=name,cpu,load_1m,merges.current,merges.current_docs,merges.total,merges.total_docs&s=name
 ```
 
 # Index Entry Manipulation
 
 ## Add Entry
 
-```js
-curl -X POST http://localhost:9200/<index_name>/_doc -H Content-Type: application/json -d <entry_json>
+```basic
+curl -X POST http://${HOSTNAME}:${PORT}/<index_name>/_doc -H Content-Type: application/json -d <entry_json>
 ```
 
 # Nodes
 
 ## List Nodes
 
-```js
-curl -X GET http://localhost:9200/_cat/nodes?v&h=name,ip,nodeRole,m,heapPercent,ramPercent,cpu,load_1m,load_5m,load_15m,disk.total,disk.used_percent&s=name
+```basic
+curl -X GET http://${HOSTNAME}:${PORT}/_cat/nodes?v&h=name,ip,nodeRole,m,heapPercent,ramPercent,cpu,load_1m,load_5m,load_15m,disk.total,disk.used_percent&s=name
 ```
 
 ## List Nodes Queries
 
-```js
-curl -X GET http://localhost:9200/_cat/nodes?v&h=name,ip,nodeRole,m,heapPercent,ramPercent,cpu,load_1m,load_5m,load_15m,disk.total,disk.used_percent&s=name
+```basic
+curl -X GET http://${HOSTNAME}:${PORT}/_cat/nodes?v&h=name,ip,nodeRole,m,heapPercent,ramPercent,cpu,load_1m,load_5m,load_15m,disk.total,disk.used_percent&s=name
 ```
 
 ## Search Nodes
 
-```js
-curl -X GET http://localhost:9200/_nodes
+```basic
+curl -X GET http://${HOSTNAME}:${PORT}/_nodes
 ```
 
 ## Node Active Threads
 
-```js
-curl -X GET http://localhost:9200/_cat/thread_pool?v&s=node_name,name
+```basic
+curl -X GET http://${HOSTNAME}:${PORT}/_cat/thread_pool?v&s=node_name,name
 ```
 
 # Search
 
 ## Search
 
-```js
-curl -X GET http://localhost:9200/<index_name>/_search?q=<search_term>&pretty
+```basic
+curl -X GET http://${HOSTNAME}:${PORT}/<index_name>/_search?q=<search_term>&pretty
 ```
 
 ## Search Json
 
-```js
-curl -X GET http://localhost:9200/json/_search?q=<index_name>&pretty
+```basic
+curl -X GET http://${HOSTNAME}:${PORT}/json/_search?q=<index_name>&pretty
 ```
 
 ## Search Summary
 
-```js
-curl -X GET http://localhost:9200/summary/_search?q=<index_name>&pretty
+```basic
+curl -X GET http://${HOSTNAME}:${PORT}/summary/_search?q=<index_name>&pretty
 ```
 
 # Tasks
 
 ## List Tasks
 
-```js
-curl -X GET http://localhost:9200/_cat/tasks?v&h=action,type,start_time,timestamp,running_time,node&s=[<sort_field>]
+```basic
+curl -X GET http://${HOSTNAME}:${PORT}/_cat/tasks?v&h=action,type,start_time,timestamp,running_time,node&s=[<sort_field>]
 ```
 
 ## List Tasks Detail
 
-```js
-curl -X GET http://localhost:9200/_cat/tasks?v&h=action,type,start_time,timestamp,running_time,node&s=detail
+```basic
+curl -X GET http://${HOSTNAME}:${PORT}/_cat/tasks?v&h=action,type,start_time,timestamp,running_time,node&s=detail
 ```
 
 
 <hr>
-<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 21/02/23 10:19</p>
+<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 21/02/23 11:05</p>
