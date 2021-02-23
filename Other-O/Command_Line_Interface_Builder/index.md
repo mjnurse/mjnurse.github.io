@@ -2,9 +2,9 @@
 title: Command Line Interface Builder
 ---
 
-<span style="color: grey">1.</span>&nbsp;&nbsp; &nbsp;<a id="listitem1" href="Definition_File:_es.html">Definition File: es</a>
+<span style="color: grey">1.</span>&nbsp;&nbsp; &nbsp;<a id="listitem1" href="Definition_File_es.html">Definition File es</a>
 
-<span style="color: grey">2.</span>&nbsp;&nbsp; &nbsp;<a id="listitem2" href="Definition_File:_gi.html">Definition File: gi</a>
+<span style="color: grey">2.</span>&nbsp;&nbsp; &nbsp;<a id="listitem2" href="Definition_File_gi.html">Definition File gi</a>
 <script>gMaxNum=3-1</script>
 
 <hr>
