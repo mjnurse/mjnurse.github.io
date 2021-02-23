@@ -21,7 +21,7 @@ curl -X GET http://localhost:9200/_cluster/stats?human
 
 ### Create Index
 
-```json
+```bash
 curl -X PUT http://localhost:9200/<index_name> -H Content-Type: application/json -d '
 { 
   "settings": { 
@@ -62,10 +62,16 @@ curl -X PUT http://localhost:9200/<index_name>/_settings -H Content-Type: applic
 
 ### Reindex Index
 
-```
+```js
 curl -X POST http://localhost:9200/_reindex -H Content-Type: application/json -d '
-{ "source": { "index": "<source_index_name>" },"dest": { "index": "<dest_index_name>" } }
-'
+{
+  "source": {
+    "index": "<source_index_name>"
+  },
+  "dest": {
+    "index": "<dest_index_name>"
+  }
+}'
 ```
 
 ### Forcemerge
