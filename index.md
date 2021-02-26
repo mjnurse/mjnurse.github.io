@@ -19,9 +19,8 @@ getQuote();
 </script>
 <div class="row">
 <div class="tile">
-<img src="images/Star.png" width="20px"><a class="tilelink" id="listitem1" href="/Misc-M/COVID-19_Global_Dashboard">
-Elasticsearch-E/Useful_Elasticsearch_cURLS.html</a>&nbsp;<span style="color: #AAAAAA">(1)</span><br>
-Useful Elastic cURLs
+<img src="images/Star.png" width="20px"><a class="tilelink" id="listitem1" href="/Elasticsearch-E/Useful_Elasticsearch_cURLS.html">
+Useful Elastic cURLs</a>&nbsp;<span style="color: #AAAAAA">(1)</span><br>
 A collection of cURL commands to interrogate and manage an Elasticsearch cluster.
 </div>
 <div class="tile">
