@@ -194,7 +194,7 @@ Protect against incoming connections.
 
 ### Default Firewalls
 
-![](/GCP-G/GCP_Training/images/default-firewalls)
+![](/GCP-G/GCP_Training/images/default-firewalls.png)
 
 ## Pricing
 
