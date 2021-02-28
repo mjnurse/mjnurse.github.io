@@ -85,17 +85,20 @@ When symmetric hash algorithms are used, the authentication service needs to sha
 An Asymmetric encryption algorithm allows the signature to be created (encrypted) using a private key when the JWT is created.  To assure the JWT, the application / service can decrypt the signature using the public key.  The application can then compare this to the header and payload to assure the JWT is valid.
 
 As pseudo code:
-```
-# Creating a JWT
 
+**Creating a JWT**
+
+```
 body = base64urlEncode( headerJSON ) + '.' + base64urlEncode( payloadJSON );
 
 signature = base64urlEncode( hash_algorithm_encode( body, private_key ) );
 
 JWT = body + '.' + signature;
+```
 
-# Assuring the JWT
+**Assuring the JWT**
 
+```
 split( JWT ) => header, payload, signature;
 
 body = header + '.' + payload;
