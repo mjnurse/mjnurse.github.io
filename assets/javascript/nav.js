@@ -86,7 +86,6 @@ case "KeyM": window.location.assign( "/Misc-M/" ); break;
 case "KeyN": window.location.assign( "/Notes-N/" ); break;
 case "KeyO": window.location.assign( "/Other-O/" ); break;
 case "KeyP": window.location.assign( "/Postgres-P/" ); break;
-case "KeyW": window.location.assign( "/What_Is-W/" ); break;
     }
 
     if (event.key >= '0' && event.key <= '9') {

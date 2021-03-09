@@ -10,10 +10,10 @@ title: es.def
 # ----------------------------------------------------------------------------------------------------------------------------------
 
 clear cache (cc) [<index_name>] :: \
-   query-es -d -o POST -a "$1/_cache/clear"
+   query-es -o POST -a "$1/_cache/clear"
 
 cluster stats (cs) :: \
-   query-es -d -o GET -a "_cluster/stats?human" \
+   query-es -o GET -a "_cluster/stats?human" \
             -f 's/.*\("cluster_name":"[^"]*"\).*\("query_cache":{[^}]*}\).*\("mem":{[^}]*}\).*/\1\n   \2\n   \3\n/'
 
 # ----------------------------------------------------------------------------------------------------------------------------------
@@ -21,90 +21,90 @@ cluster stats (cs) :: \
 # ----------------------------------------------------------------------------------------------------------------------------------
 
 list aliases (la) [<filter>] [<order_by_field_name>] :: \
-   query-es -d -o GET -a "_cat/aliases?v&s=$2" -r 1 -f '1p;t; s/\(.*'$1'.*$\)/\1/;t;d'
+   query-es -o GET -a "_cat/aliases?v&s=$2" -r 1 -f '1p;t; s/\(.*'$1'.*$\)/\1/;t;d'
 
 list indices (li) [<index_name>] :: \
-   query-es -d -o GET -a "_cat/indices/$1?v&h=health,status,index,pri,rep,docs.count,docs.deleted,store.size,pri.store.size&s=index" -r 1
+   query-es -o GET -a "_cat/indices/$1?v&h=health,status,index,pri,rep,docs.count,docs.deleted,store.size,pri.store.size&s=index" -r 1
 
 list shards (ls) [<index_name>] :: \
-   query-es -d -o GET -a "_cat/shards/$1?v&h=index,shard,prirep,state,docs,store,node&s=index,shard,prirep" -r 1
+   query-es -o GET -a "_cat/shards/$1?v&h=index,shard,prirep,state,docs,store,node&s=index,shard,prirep" -r 1
 
 list shard details (lsd) [<index_name>] [<order_by_field_name>] :: \
-   query-es -d -o GET -a "_cat/shards/$1?v&h=index,shard,prirep,state,docs,store,ip,segments.count,unassigned.reason,unassigned.for,node&s=$2"
+   query-es -o GET -a "_cat/shards/$1?v&h=index,shard,prirep,state,docs,store,ip,segments.count,unassigned.reason,unassigned.for,node&s=$2"
 
 list segments (le) [<index_name>] :: \
-   query-es -d -o GET -a "_cat/segments/$1?v&s=index,shard,prirep"
+   query-es -o GET -a "_cat/segments/$1?v&s=index,shard,prirep"
 
 list segmented shards (lss) [<index_name>] :: \
-   query-es -d -o GET -a "_cat/shards/$1?v&h=index,shard,prirep,state,docs,node,segments.count&s=index,shard,prirep,node" -f '/ 1$/d'
+   query-es -o GET -a "_cat/shards/$1?v&h=index,shard,prirep,state,docs,node,segments.count&s=index,shard,prirep,node" -f '/ 1$/d'
 
 get index mapping (gim) <index_name> :: \
-   query-es -d -o GET -a "/$1/_mapping?pretty"
+   query-es -o GET -a "/$1/_mapping?pretty"
 
-list unassigned shards (lus) :: query-es -d -o GET -a "_cat/shards?v&h=index,shard,prirep,state,docs,segments.count&s=index,shard,prirep" \
+list unassigned shards (lus) :: query-es -o GET -a "_cat/shards?v&h=index,shard,prirep,state,docs,segments.count&s=index,shard,prirep" \
    -f 's/\(.* \(INITIALIZING\|UNASSIGNED\) .*\)/\1/;t;d'
 
 forcemerge progress (fmp) :: \
-   query-es -d -o GET -a "/_cat/nodes?v&h=name,cpu,load_1m,merges.current,merges.current_docs,merges.total,merges.total_docs&s=name"
+   query-es -o GET -a "/_cat/nodes?v&h=name,cpu,load_1m,merges.current,merges.current_docs,merges.total,merges.total_docs&s=name"
 
 # ----------------------------------------------------------------------------------------------------------------------------------
 = INDEX MANIPULATION
 # ----------------------------------------------------------------------------------------------------------------------------------
 
 create index (ci) <index_name> <number_of_shards> <number_of_replicas> :: \
-   query-es -d -o PUT -a "$1" -j '{"settings":{"index":{"number_of_shards":'$2',"number_of_replicas":'$3'}}}'
+   query-es -o PUT -a "$1" -j '{"settings":{"index":{"number_of_shards":'$2',"number_of_replicas":'$3'}}}'
 
 delete index (di) <index_name> :: \
-   query-es -d -o DELETE -a "$1"
+   query-es -o DELETE -a "$1"
 
 open index (opi) <index_name> :: \
-   query-es -d -o POST -a "$1/_open"
+   query-es -o POST -a "$1/_open"
 
 close index (cli) <index_name> :: \
-   query-es -d -o POST -a "$1/_close"
+   query-es -o POST -a "$1/_close"
 
 enable read write (erw) <index_name> :: \
-   query-es -d -o PUT -a "$1/_settings" -j '{"index.blocks.read_only_allow_delete": null}'
+   query-es -o PUT -a "$1/_settings" -j '{"index.blocks.read_only_allow_delete": null}'
 
 reindex index (ri) <source_index_name> <dest_index_name> :: \
-   query-es -d -o POST -a "_reindex" -j '{"source":{"index":"'$1'"},"dest":{"index":"'$2'"}}'
+   query-es -o POST -a "_reindex" -j '{"source":{"index":"'$1'"},"dest":{"index":"'$2'"}}'
 
 forcemerge (fm) <index_name> <max_num_segments> :: \
-   query-es -d -o POST -a "$1/_forcemerge?max_num_segments=$2"
+   query-es -o POST -a "$1/_forcemerge?max_num_segments=$2"
 
 move shard (ms) <index_name> <shard_num> <from_node_name> <to_node_name> :: \
-   query-es -d -o POST -a "_cluster/reroute" -j '{"commands":[{"move":{"index":"'$1'","shard":'$2',"from_node":"'$3'","to_node":"'$4'"}}]}'
+   query-es -o POST -a "_cluster/reroute" -j '{"commands":[{"move":{"index":"'$1'","shard":'$2',"from_node":"'$3'","to_node":"'$4'"}}]}'
 
 alter number replicas (anr) <index_name> <number_of_replicas> :: \
-   query-es -d -o PUT -a "$1/_settings" -j '{"index":{"number_of_replicas":'$2'}}'
+   query-es -o PUT -a "$1/_settings" -j '{"index":{"number_of_replicas":'$2'}}'
 
 disable shard allocation (dsa) :: \
-   query-es -d -o PUT -a "_cluster/settings" -j '{"persistent":{"cluster.routing.allocation.enable":"primaries"}}'
+   query-es -o PUT -a "_cluster/settings" -j '{"persistent":{"cluster.routing.allocation.enable":"primaries"}}'
 
 reenable shard allocation (rsa) :: \
-   query-es -d -o PUT -a "_cluster/settings" -j '{"persistent":{"cluster.routing.allocation.enable":null}}'
+   query-es -o PUT -a "_cluster/settings" -j '{"persistent":{"cluster.routing.allocation.enable":null}}'
 
 # ----------------------------------------------------------------------------------------------------------------------------------
 = INDEX ENTRY MANIPULATION
 # ----------------------------------------------------------------------------------------------------------------------------------
 
-add entry (ae) <index_name> <entry_json> :: query-es -d -o POST -a /$1/_doc -j "$2"
+add entry (ae) <index_name> <entry_json> :: query-es -o POST -a /$1/_doc -j "$2"
 
 # ----------------------------------------------------------------------------------------------------------------------------------
 = NODES
 # ----------------------------------------------------------------------------------------------------------------------------------
 
 list nodes (ln) :: \
-   query-es -d -r 1 -o GET -a "_cat/nodes?v&h=name,ip,nodeRole,m,heapPercent,ramPercent,cpu,load_1m,load_5m,load_15m,disk.total,disk.used_percent&s=name"
+   query-es -r 1 -o GET -a "_cat/nodes?v&h=name,ip,nodeRole,m,heapPercent,ramPercent,cpu,load_1m,load_5m,load_15m,disk.total,disk.used_percent&s=name"
 
 list nodes queries (lnq) :: \
-   query-es -d -r 1 -o GET -a "_cat/nodes?v&h=name,nodeRole,search,queryTotal,searchFetchTotal,requestCacheHitCount&s=name"
+   query-es -r 1 -o GET -a "_cat/nodes?v&h=name,nodeRole,search,queryTotal,searchFetchTotal,requestCacheHitCount&s=name"
 
 search nodes (sn) :: \
-   query-es -d -o GET -a "_nodes" -f "$1"
+   query-es -o GET -a "_nodes" -f "$1"
 
 node active threads (at) :: \
-   query-es -d -o GET -a "_cat/thread_pool?v&s=node_name,name" \
+   query-es -o GET -a "_cat/thread_pool?v&s=node_name,name" \
             -f 's/\(.*node_name.*\|.* [1-9] .*$\)/\1/;t;d'
 
 # ----------------------------------------------------------------------------------------------------------------------------------
@@ -112,30 +112,30 @@ node active threads (at) :: \
 # ----------------------------------------------------------------------------------------------------------------------------------
 
 search (s) <index_name> <search_term> :: \
-   query-es -d -o GET -a "$1/_search?q=$2&pretty"
+   query-es -o GET -a "$1/_search?q=$2&pretty"
 
 search json (sj) <index_name> <search_json> :: \
-   query-es -d -o GET -a "$1/_search?pretty" -j "$2"
+   query-es -o GET -a "$1/_search?pretty" -j "$2"
 
 search summary (ss) <index_name> <search_term> :: \
-   query-es -d -o GET -a "$1/_search?q=$Qzz\("took":[0-9]*\).*\("_shards":{[^}]*}\).*\("total":[0-9]*,"max_score":[0-9\.]*\)/\1 \2 \3"
+   query-es -o GET -a "$1/_search?q=$Qzz\("took":[0-9]*\).*\("_shards":{[^}]*}\).*\("total":[0-9]*,"max_score":[0-9\.]*\)/\1 \2 \3"
 
 # ----------------------------------------------------------------------------------------------------------------------------------
 = TASKS
 # ----------------------------------------------------------------------------------------------------------------------------------
 
 list tasks (lt) [<sort_field>] :: \
-   query-es -d -o GET -a "/_cat/tasks?v&h=action,type,start_time,timestamp,running_time,node&s=$1" \
+   query-es -o GET -a "/_cat/tasks?v&h=action,type,start_time,timestamp,running_time,node&s=$1" \
             -f '/monitor\/tasks\/lists/d'
 
 list tasks detail (ltd) [<sort_field>] :: \
-   query-es -d -o GET -a "/_cat/tasks?v&s=$1"
+   query-es -o GET -a "/_cat/tasks?v&s=$1"
 
 # ----------------------------------------------------------------------------------------------------------------------------------
 = GENERIC
 # ----------------------------------------------------------------------------------------------------------------------------------
 
-generic (g) <type-GET/POST/PUT> <api_call> :: query-es -d -o $1 -a "$2"
+generic (g) <type-GET/POST/PUT> <api_call> :: query-es -o $1 -a "$2"
 
 
 ### curl -s -u $CRED -XGET $EHOST'/_cat/indices?help'
@@ -256,4 +256,4 @@ generic (g) <type-GET/POST/PUT> <api_call> :: query-es -d -o $1 -a "$2"
 ```
 
 <hr>
-<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 21/02/23 15:42</p>
+<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 21/03/03 23:48</p>
