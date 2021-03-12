@@ -3,11 +3,11 @@ title: SQLite
 layout: page-with-contents-list
 ---
 
-## Syntax Diagrams
+# Syntax Diagrams
 
 [Syntax Diagrams](https://sqlite.org/syntaxdiagrams.html)
 
-## Session Settings
+# Session Settings
 
 | Setting                  | Description |
 |--------------------------|-------------|
@@ -18,7 +18,7 @@ layout: page-with-contents-list
 | `.trace stdout`          | Outputs each statement (can be to a file) |
 | `.width [n] [n] ... [n]` | Column widths |
 
-## Datatypes
+# Datatypes
 
 | Datatype | Description |
 |----|----|
@@ -28,7 +28,7 @@ layout: page-with-contents-list
 | TEXT | The value is a text string, stored using the database encoding (UTF-8, UTF-16BE or UTF-16LE). |
 | BLOB | The value is a blob of data, stored exactly as it was input.xxx |
 
-## Comments
+# Comments
 
 ```sql
 -- One line comment
@@ -37,7 +37,7 @@ Mutliple line comment
 */
 ```
 
-## Functions / Expressions
+# Functions / Expressions
 
 | Function | Description |
 |----------|-------------|
@@ -74,7 +74,7 @@ Mutliple line comment
 | `upper(X)` | Uppercase. |
 | `zeroblob(N)` | Returns a BLOB consisting of N bytes of 0x00. |
 
-## Operators
+# Operators
 
 SQLite understands the following binary operators, in order from highest to lowest precedence:
 
@@ -99,7 +99,7 @@ The COLLATE operator is a unary postfix operator that assigns a collating sequen
 
 The `IS` and `IS NOT` operators work like `=` and `!=` except `NULL IS NULL` is true and `1 IS NOT NULL` is true.
 
-## Literal Values (Constants)
+# Literal Values (Constants)
 
 A literal value represents a constant. Literal values may be integers, floating point numbers, strings, BLOBs, or NULLs.
 
@@ -112,7 +112,7 @@ A literal value represents a constant. Literal values may be integers, floating 
 
 A literal value can also be the token "NULL".
 
-## Parameters
+# Parameters
 
 A "variable" or "parameter" token specifies a placeholder in the expression for a value that is filled in at runtime.
 
@@ -126,7 +126,7 @@ A "variable" or "parameter" token specifies a placeholder in the expression for 
 
 Parameters that are not assigned values are treated as NULL.
 
-## LIKE, GLOB, REGEXP and BETWEEN 
+# LIKE, GLOB, REGEXP and BETWEEN 
 
 | Operator | Description |
 |----------|-------------|
@@ -135,7 +135,7 @@ Parameters that are not assigned values are treated as NULL.
 | `REGEXP` | `X REGEXP Y` operator will be implemented as a call to the user function "regexp(Y,X)". |
 | `BETWEEN` | `x BETWEEN y AND z` is logically `x>=y AND x<=z` |
 
-## CASE 
+# CASE 
 
 ```sql
 CASE x WHEN w1 THEN r1 WHEN w2 THEN r2 ELSE r3 END
@@ -148,37 +148,37 @@ If the base expression is NULL then the result of the CASE is always the result 
 
 Both forms of the CASE expression use lazy, or short-circuit, evaluation.
 
-## IN and NOT IN 
+# IN and NOT IN 
 
 ```sql
 SELECT v FROM t WHERE v IN (1, 4, 9);
 SELECT v FROM t WHERE v IN (SELECT y FROM z);
 ```
-## ROWID
+# ROWID
 
 `ROWID`, `OID`, or `_ROWID_`
 
 The three special identifiers describe the unique integer key (the rowid) associated with every row of every table.
 
-## EXISTS 
+# EXISTS 
 
 ```sql
 SELECT v FROM t WHERE EXISTS (SELECT a FROM b WHERE y = z);
 ```
 
-## CAST expressions
+# CAST expressions
 
 `CAST(expr AS datatype-name)`
 
 If the value of expr is NULL, then the result of the CAST expression is also NULL.
 
-## Boolean Expressions
+# Boolean Expressions
 
 Beginning with SQLite 3.23.0 (2018-04-02), SQLite recognizes the identifiers "TRUE" and "FALSE" as boolean literals, if and only if those identifiers are not already used for some other meaning. 
 
 The boolean identifiers TRUE and FALSE are usually just aliases for the integer values 1 and 0, respectively. 
 
-## Date / Time
+# Date / Time
 
 SQLite supports five date and time functions as follows:
 
@@ -202,7 +202,7 @@ All five date and time functions take a time string as an argument. The time str
 | `julianday()` | Returns the Julian day - the number of days since November 24, 4714 B.C. |
 | `strftime()` | Returns the date formatted according to the format string specified as the first argument. |
 
-### Date Format String
+## Date Format String
 
 | String | Description |
 |--------|-------------|
@@ -231,7 +231,7 @@ Notice that all other date and time functions can be expressed in terms of strft
 
 The only reasons for providing functions other than strftime() is for convenience and for efficiency.
 
-### Time Format String
+## Time Format String
 
 | String |
 |--------|
@@ -248,7 +248,7 @@ The only reasons for providing functions other than strftime() is for convenienc
 | `now` |
 | `DDDDDDDDDD` |
 
-### Modifiers
+## Modifiers
 
 The time string can be followed by zero or more modifiers that alter date and/or time. Each modifier is a transformation that is applied to the time value to its left. Modifiers are applied from left to right; order is important. The available modifiers are as follows.
 
@@ -268,7 +268,7 @@ The time string can be followed by zero or more modifiers that alter date and/or
 | `localtime` |
 | `utc` |
 
-### Examples
+## Examples
 
 | Example | Description |
 |---------|-------------|
@@ -282,7 +282,7 @@ The time string can be followed by zero or more modifiers that alter date and/or
 | `SELECT date('now','start of year','+9 months','weekday 2');` | Compute the date of the first Tuesday in October for the current year. |
 | `SELECT (julianday('now')-2440587.5)*86400.0;` | Compute the time since the unix epoch in seconds (like strftime('%s','now') except includes fractional part): |
 
-## Explain Plan
+# Explain Plan
 
 ```sql
 EXPLAIN QUERY PLAN
@@ -291,7 +291,7 @@ FROM   tab
 WHERE  col = 'bloggs';
 ```
 
-## Load CSV Data
+# Load CSV Data
 
 ```sql
 .mode csv
@@ -299,4 +299,4 @@ WHERE  col = 'bloggs';
 ```
 
 <hr>
-<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 20/11/20 11:11</p>
+<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 21/03/10 23:15</p>
