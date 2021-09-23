@@ -24,34 +24,29 @@ Useful Elastic cURLs</a>&nbsp;<span style="color: #AAAAAA">(1)</span><br>
 A collection of cURL commands to interrogate and manage an Elasticsearch cluster.
 </div>
 <div class="tile">
-<img src="images/Star.png" width="20px"><a class="tilelink" id="listitem2" href="/Misc-M/COVID-19_UK_Dashboard">
-My Covid-19 UK Dashboard</a>&nbsp;<span style="color: #AAAAAA">(2)</span><br>
-To get straight to the facts that I want to see, I created myself a dashboard.  This is a UK focus dashboard.
-</div>
-<div class="tile">
-<img src="images/Star.png" width="20px"><a class="tilelink" id="listitem3" href="/Misc-M/History_Of_My_Cars">
-History Of My Cars</a>&nbsp;<span style="color: #AAAAAA">(3)</span><br>
+<img src="images/Star.png" width="20px"><a class="tilelink" id="listitem2" href="/Misc-M/History_Of_My_Cars">
+History Of My Cars</a>&nbsp;<span style="color: #AAAAAA">(2)</span><br>
 The oldest page on this website and its predecessors.  A history of the cars I've owned.
 </div>
 <div class="tile">
-<img src="images/Star.png" width="20px"><a class="tilelink" id="listitem4" href="/Misc-M/Worm_Game">
-Worm Game</a>&nbsp;<span style="color: #AAAAAA">(4)</span><br>
+<img src="images/Star.png" width="20px"><a class="tilelink" id="listitem3" href="/Misc-M/Worm_Game">
+Worm Game</a>&nbsp;<span style="color: #AAAAAA">(3)</span><br>
 Yeah - I made a (javascript) snake game and called it Worm...
 </div>
 </div>
 <hr>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 21-02-23 -  <a class="bloglistlink" id="listitem5" href="Blog-B/21-02-23_-_Useful_Elasticsearch_cURLS.html">Useful Elasticsearch cURLS</a> <span style="color: grey">(5)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 21-01-11 -  <a class="bloglistlink" id="listitem6" href="Blog-B/21-01-11_-_HTML_datalist.html">HTML datalist</a> <span style="color: grey">(6)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 20-12-21 -  <a class="bloglistlink" id="listitem7" href="Blog-B/20-12-21_-_Javascript_ASYNC_AWAIT_By_Example.html">Javascript ASYNC AWAIT By Example</a> <span style="color: grey">(7)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 20-12-10 -  <a class="bloglistlink" id="listitem8" href="Blog-B/20-12-10_-_Async_Await_with_Array_Assignment.html">Async Await with Array Assignment</a> <span style="color: grey">(8)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 20-10-29 -  <a class="bloglistlink" id="listitem9" href="Blog-B/20-10-29_-_Using_the_console.log_Alternatives.html">Using the console.log Alternatives</a> <span style="color: grey">(9)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-11-11 -  <a class="bloglistlink" id="listitem10" href="Blog-B/19-11-11_-_Oracle_and_Postgres_Schema_Copy_Process.html">Oracle and Postgres Schema Copy Process</a> <span style="color: grey">(10)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-11-04 -  <a class="bloglistlink" id="listitem11" href="Blog-B/19-11-04_-_Text_To_Speech_-_Clipboard.html">Text To Speech - Clipboard</a> <span style="color: grey">(11)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-06-12 -  <a class="bloglistlink" id="listitem12" href="Blog-B/19-06-12_-_Setting_Prompt_Colour_In_bash_and_Putty.html">Setting Prompt Colour In bash and Putty</a> <span style="color: grey">(12)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-05-02 -  <a class="bloglistlink" id="listitem13" href="Blog-B/19-05-02_-_Statistical_Testing.html">Statistical Testing</a> <span style="color: grey">(13)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-04-11 -  <a class="bloglistlink" id="listitem14" href="Blog-B/19-04-11_-_Formatting_Python.html">Formatting Python</a> <span style="color: grey">(14)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 21-02-23 -  <a class="bloglistlink" id="listitem4" href="Blog-B/21-02-23_-_Useful_Elasticsearch_cURLS.html">Useful Elasticsearch cURLS</a> <span style="color: grey">(4)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 21-01-11 -  <a class="bloglistlink" id="listitem5" href="Blog-B/21-01-11_-_HTML_datalist.html">HTML datalist</a> <span style="color: grey">(5)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 20-12-21 -  <a class="bloglistlink" id="listitem6" href="Blog-B/20-12-21_-_Javascript_ASYNC_AWAIT_By_Example.html">Javascript ASYNC AWAIT By Example</a> <span style="color: grey">(6)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 20-12-10 -  <a class="bloglistlink" id="listitem7" href="Blog-B/20-12-10_-_Async_Await_with_Array_Assignment.html">Async Await with Array Assignment</a> <span style="color: grey">(7)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 20-10-29 -  <a class="bloglistlink" id="listitem8" href="Blog-B/20-10-29_-_Using_the_console.log_Alternatives.html">Using the console.log Alternatives</a> <span style="color: grey">(8)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-11-11 -  <a class="bloglistlink" id="listitem9" href="Blog-B/19-11-11_-_Oracle_and_Postgres_Schema_Copy_Process.html">Oracle and Postgres Schema Copy Process</a> <span style="color: grey">(9)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-11-04 -  <a class="bloglistlink" id="listitem10" href="Blog-B/19-11-04_-_Text_To_Speech_-_Clipboard.html">Text To Speech - Clipboard</a> <span style="color: grey">(10)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-06-12 -  <a class="bloglistlink" id="listitem11" href="Blog-B/19-06-12_-_Setting_Prompt_Colour_In_bash_and_Putty.html">Setting Prompt Colour In bash and Putty</a> <span style="color: grey">(11)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-05-02 -  <a class="bloglistlink" id="listitem12" href="Blog-B/19-05-02_-_Statistical_Testing.html">Statistical Testing</a> <span style="color: grey">(12)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-04-11 -  <a class="bloglistlink" id="listitem13" href="Blog-B/19-04-11_-_Formatting_Python.html">Formatting Python</a> <span style="color: grey">(13)</span></p>
 <p><a href="Blog-B">More</a></p>
-<script>gMaxNum=15-1</script>
+<script>gMaxNum=14-1</script>
 
 <hr>
 <p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.</p>
