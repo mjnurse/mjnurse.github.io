@@ -12,7 +12,7 @@ object Main extends App {
 }
 ```
 
-### Values And Variables
+## Values And Variables
 
 ```scala
 val a, b: Int = 2     // Eval when set. Constant. Both set to 2.
@@ -22,15 +22,26 @@ var y: Char = '2'     // Eval when set, can be updated, avoid.
 var z: Any = 12       // Can store any value.
 ```
 
-### Tuples
+## Tuples
 
 ```scala
 val person = ("MN", 21, 1.84)
 println("Age:" + person._2) // In a Tuple, position starts with 1.
 val (name,age,height) = person // Note: val (name, _, _) = person - will just set name.
+
+@ val person = ("MN", 21, 1.84)
+person: (String, Int, Double) = ("MN", 21, 1.84)
+
+@ println("Age:" + person._2) // In a Tuple, position starts with 1.
+Age:21
+
+@ val (name,age,height) = person
+name: String = "MN"
+age: Int = 21
+height: Double = 1.84
 ```
 
-### Types Are Classes
+## Types Are Classes
 
 ```scala
 a.toString // As toString has no parameters the () are omitted.
@@ -41,35 +52,35 @@ a.toString // As toString has no parameters the () are omitted.
 var v = 0; v.+=(1); v+=1;  // v++ not allowed.
 ```
 
-### Mathematical Functions
+## Mathematical Functions
 
 ```scala
 import math._  // same as import scala.math._ (scala can be omitted).
 sqrt(2) // Obv. many many more functions.
 ```
 
-### The apply Method
+## The apply Method
 
 ```scala
 "hello"(0) == "hello".apply(0) // Both yield 'h'.
 BigInt("100") == BigInt.apply("100")
 ```
 
-### Conditional Expressions
+## Conditional Expressions
 
 ```scala
 val c = if (a >= 2) 2 else -2 // if(a >= 1) x = 1 else x = -1.  Needs x to be a var.
 val d = if (a >= 2) 2 else () // () is a Class called Unit - it represents "no value".
 ```
 
-### Block Expressions
+## Block Expressions
 
 ```scala
 val e = {val f = 2; val g = 2; f + g} // e == 4, takes last value of block.
 val h = {val i = 2} // h == (), the Unit value. i == 2.
 ```
 
-### Input / Output
+## Input / Output
 
 ```scala
 print("Hello: "); println("Martin") // Hello: Martin
@@ -79,7 +90,7 @@ val name = readLine("Your Name: ") // Note: only works in interactive session.
 print("You Age: "); val age = readInt()
 ```
 
-### Loops
+## Loops
 
 ```scala
 var i = 3
@@ -98,7 +109,7 @@ for (i <- "Hi") yield BigInt(i) // Yields a collection of BigInt ascii values.
 // Note: can use {} in place of the outer () in a for loop. {} can span multiple lines.
 ```
 
-### Functions
+## Functions
 
 ```scala
 def func( p1: Int, p2: Int = 0, p3: Int = 0) = (p1, p2, p3) // p2 defaults to 0.  Yields a Tuple.
@@ -117,7 +128,7 @@ sum(1 to 5: _*) // _* syntax is specific to parameters.
 def proc( name: String ) {"Hello " + name} // Returns Unit ie. ().  Can declare as proc(...): Unit = {...}.
 ```
 
-### Arrays
+## Arrays
 
 ```scala
 // Fixed length Arrays.
@@ -154,7 +165,7 @@ val triangle = new Array[Array[Int]](10) // An Array of variable length Arrays.
 for (i <- 0 until triangle.length) triangle(i) = new Array[Int](i + 1) // Triangle shaped Array.
 ```
 
-### Maps (hash tables)
+## Maps (hash tables)
 
 ```scala
 val ages = Map("MN" -> 21, "FB" -> 44) // OR Map(("MN", 21), ("FB", 44)).  -> is pair operator.
@@ -174,7 +185,7 @@ val names3 = Array("MN", "FB"); val ages3 = Array(21, 34)
 val people = names3.zip(ages3) // Yields Array((MN,21), (FB,34)).
 ```
 
-### Classes (Note Classes can be nested)
+## Classes (Note Classes can be nested)
 
 ```scala
 class Per { var age = 0 }
@@ -216,7 +227,7 @@ class Per5 (val name: String = "no name") {
 val per5 = new Per5("MN"); println(per5.who) // Prints This is MN.
 ```
 
-### Objects
+## Objects
 
 ```scala
 // Singletons - Constructor run on first use.
@@ -252,7 +263,7 @@ val x: TrafficLightColor = Red;
 println(TrafficLightColor.values) // Yields a set of all the values.
 ```
 
-### Packages
+## Packages
 
 ```scala
 // Every package can have a single package object.  it shares the same name as the package
@@ -292,7 +303,7 @@ import java.awt.{Color, Font} // Import only a few members
 import java.awt.{Color => AwtColor} // Rename members
 ```
 
-### Inheritance
+## Inheritance
 
 ```scala
 // Notes: Only a primary subclass constructor can call super class constructor.
@@ -330,7 +341,7 @@ abstract class Person4 { def id: Int } // abstract method - we don't know how to
 class Worker4 extends Person4 { def id: Int = 1231 } // Override keyword not required.
 ```
 
-### Files
+## Files
 
 ```scala
 import com.sun.org.apache.bcel.internal.classfile.SourceFile
@@ -368,7 +379,7 @@ val srcFile3 = Source.fromString("one two three"); srcFile3.close() // Useful fo
 // val savedFred = in.readObject().asInstanceOf[Person6]
 ```
 
-### sys Process
+## sys Process
 
 ```scala
 import sys.process._
@@ -381,7 +392,7 @@ import sys.process._
 // "ls" #> new File("x") !
 ```
 
-### Regexp
+## Regexp
 
 ```scala
 import util.matching.Regex
@@ -398,4 +409,4 @@ val numItemPttn(num, item) = "99 bottles" // Yields num=99, item=bottles
 for (numItemPttn(num, item) <- numItemPttn.findAllIn("5 cats, 3 dogs")) { println(item, num)} // Yields (cats,5)(dogs,3)
 ```
 <hr>
-<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 21/10/18 23:50</p>
+<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 21/10/18 23:57</p>
