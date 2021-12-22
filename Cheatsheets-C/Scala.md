@@ -66,16 +66,16 @@ Byte -> Short -> Int -> Long -> Float -> Double
 # Values And Variables
 
 ```scala
-val a, b: Int = 2     // Eval when set. Constant. Both set to 2.
-lazy val c: Int = 2   // Eval FIRST time used.
-def x: String = "22"  // Eval EVERY time used. Constant.
-var y: Char = '2'     // Eval when set, can be updated, avoid.
-var z: Any = 12       // Can store any value.
+val a, b: Int = 2     // Eval when set. Constant. Both set to 2
+lazy val c: Int = 2   // Eval FIRST time used
+def x: String = "22"  // Eval EVERY time used. Constant
+var y: Char = '2'     // Eval when set, can be updated, avoid
+var z: Any = 12       // Can store any value
 
-val i: Int = 0x0FF    // i = 255.  Assigning a Hex literal.
-val l: Long = 0x0FFL  // l = 255.  'L' signifies a Long literal.
-val f: Float = 1.5e2F // f = 150.  'F' signifies a Float literal.
-val d: Double = 1.5e3 // d = 1500.
+val i: Int = 0x0FF    // i = 255.  Assigning a Hex literal
+val l: Long = 0x0FFL  // l = 255.  'L' signifies a Long literal
+val f: Float = 1.5e2F // f = 150.  'F' signifies a Float literal
+val d: Double = 1.5e3 // d = 1500
 val b: Boolean = true
 
 val s = "hi"
@@ -85,40 +85,38 @@ println(s.isInstanceOf[Int])  // false
 
 ## String / Char Literals
 
-Char | Description
---- | ---
-`\n` | linefeed
-`\b` | backspace
-`\t` | tab
-`\f` | form feed
-`\r` | carriage return
-`\"` | double quote
-`\’` | single quote
-`\\` | backslash
+Char | Description | | Char | Description
+--- | --- | --- | --- | ---
+`\n` | linefeed | | `\b` | backspace
+`\t` | tab | | `\f` | form feed
+`\r` | carriage return | | `\"` | double quote
+`\’` | single quote | | `\\` | backslash
 
 # Operators
 
 ```scala
-1.+(3)  // 4.  1 + 3.
+1.+(3)  // 4.  1 + 3
 10 / 7  // Yields: Int = 1 
 10F / 7 // Yields: Float 1.42..
 
 val t: Boolean = true; val f: Boolean = false
 println(t || f, t && f, !f)  // Yields: (true, false, true)
 
-a += 1; b -= 1; c*= 2; d /= 2; val e = 5; e %= 3 // Yields 2.
+a += 1; b -= 1; c*= 2; d /= 2; val e = 5; e %= 3 // Yields: 2
 ```
 
 **Note**: Scala uses short-circuit (lazy) evaluation so with  `(false || val)`, `val` will not be evaluated.
 
 # Strings
 
+`"""` - triple double quotes - mulitline string.
+
 ## s"String"
 
 ```scala
-val v = "Yo"; println(v + " Martin")     // Yields "Yo Martin".
-val v = "Yo"; println(s"$v ${v} Martin") // Yields "Yo Yo Martin".
-println(s"${3+4}")                       // Yields "7".
+val v = "Yo"; println(v + " Martin")     // Yields: "Yo Martin"
+val v = "Yo"; println(s"$v ${v} Martin") // Yields: "Yo Yo Martin"
+println(s"${3+4}")                       // Yields: "7"
 ```
 
 ## f"String"
@@ -131,18 +129,30 @@ println(s"${3+4}")                       // Yields "7".
 
 ```scala
 val pi = 3.14159F
-println(f"$pi%6.2f")   // Yields "  3.14"
-println(f"$pi%-6.2f")  // Yields "3.14  "
-println(f"$pi%+6.2f")  // Yields "+3.14 "
-println(f"$pi%06.2f")  // Yields "003.14"
+println(f"$pi%6.2f")   // Yields: "  3.14"
+println(f"$pi%-6.2f")  // Yields: "3.14  "
+println(f"$pi%+6.2f")  // Yields: "+3.14 "
+println(f"$pi%06.2f")  // Yields: "003.14"
 val d = 100000000
-println(f"$d%,d")      // Yields "100,000,000"
+println(f"$d%,d")      // Yields: "100,000,000"
 ```
 
 ## raw"String"
 
 ```scala
-println(raw"one\ntwo") // Yields "one\ntwo"
+println(raw"one\ntwo") // Yields: "one\ntwo"
+```
+
+## String Functions
+
+```scala
+val v1 = "hello".toUpperString; val v2 = "HI".toLowerCase
+"a b c".split(' ') // Yields: Array("a", "b", "c")
+"[a-z].*".r        // Yields: scala.util.matching.Regex = [a-z].*
+"th. ".r.findFirstIn("there's the dog") // Yields: Option[String] = Some("the ")
+"t.* ".r.findAllIn("there's the dog")   // Yields: scala.util.matching.Regex.MatchIterator
+"t.* ".r.findAllIn("there's the dog").foreach(println) // Yields: there's the
+
 ```
 
 # Tuples
@@ -214,16 +224,16 @@ print("You Age: "); val age = readInt()
 ```scala
 var i = 3
 while (i > 0) { println(i); i -= 1 }
-for (i <- 1 to 3) println(i) // Yields 1 2 3. Note: (i -< 3 to 1 by -1) is a desc loop.
-for (i <- 0 until "dog".length) println(i.toString + ":" + "dog"(i) + ",") // Yields 0:d,1:o,2:g,
-for (ch <- "Hello") println(ch) // Yields Hello
+for (i <- 1 to 3) println(i) // Yields: 1 2 3. Note: (i -< 3 to 1 by -1) is a desc loop.
+for (i <- 0 until "dog".length) println(i.toString + ":" + "dog"(i) + ",") // Yields: 0:d,1:o,2:g,
+for (ch <- "Hello") println(ch) // Yields: Hello
 
 // Complex loop and loops with other vars.
-for (i <- 0 to 1; j <- 10 to 12; if (j != 11)) println(i,j) // Yields 10 12 12 13
-for (i <- 0 to 1; k = i + 10; j <- k to (k + 1)) println(i,j) // Yields 10 11 12 13 14 15
+for (i <- 0 to 1; j <- 10 to 12; if (j != 11)) println(i,j) // Yields: 10 12 12 13
+for (i <- 0 to 1; k = i + 10; j <- k to (k + 1)) println(i,j) // Yields: 10 11 12 13 14 15
 
 // Yield after for loop constructs a collection - called a comprehension.
-for (i <- "Hi") yield BigInt(i) // Yields a collection of BigInt ascii values.
+for (i <- "Hi") yield BigInt(i) // Yields: a collection of BigInt ascii values.
 
 // Note: can use {} in place of the outer () in a for loop. {} can span multiple lines.
 ```
@@ -231,8 +241,8 @@ for (i <- "Hi") yield BigInt(i) // Yields a collection of BigInt ascii values.
 ## Functions
 
 ```scala
-def func( p1: Int, p2: Int = 0, p3: Int = 0) = (p1, p2, p3) // p2 defaults to 0.  Yields a Tuple.
-val res = func( 2, p3 = 3 ) // Yields 2,0,3.
+def func( p1: Int, p2: Int = 0, p3: Int = 0) = (p1, p2, p3) // p2 defaults to 0.  Yields: a Tuple.
+val res = func( 2, p3 = 3 ) // Yields: 2,0,3.
 def fac(v: Int) = {var rv = 1; for( i <- 1 to v ) rv = rv * i; rv} // Returns Int.
 
 // Recursive functions need a return type specifying.
@@ -276,7 +286,7 @@ val re2 = fixBuff.filter(_ > 0).map(10 / _)
 Array(1,2,3,4).sum // Works for Array Buffer too.
 val fb = ArrayBuffer(1,3,2); fb.sorted
 val a = Array(1, 7, 2); scala.util.Sorting.quickSort(a); a // a is now Array(1, 2, 7).
-a.mkString( "<", ",", ">") // Yields "<1,7,2>" - Note: toString yields the data type.
+a.mkString( "<", ",", ">") // Yields: "<1,7,2>" - Note: toString Yields: the data type.
 
 // Multidimensional Arrays - Arrays of Arrays.
 val matrix = Array.ofDim[Int](3,4); matrix(2)(1) = 15
@@ -301,7 +311,7 @@ val agesOrd = collection.immutable.SortedMap("MN" -> 18, "FB" -> 26) // Stores s
 
 // 'Zipping' Array to create a Map
 val names3 = Array("MN", "FB"); val ages3 = Array(21, 34)
-val people = names3.zip(ages3) // Yields Array((MN,21), (FB,34)).
+val people = names3.zip(ages3) // Yields: Array((MN,21), (FB,34)).
 ```
 
 ## Classes (Note Classes can be nested)
@@ -379,7 +389,7 @@ object TrafficLightColor extends Enumeration {
 }
 import TrafficLightColor._
 val x: TrafficLightColor = Red;
-println(TrafficLightColor.values) // Yields a set of all the values.
+println(TrafficLightColor.values) // Yields: a set of all the values.
 ```
 
 ## Packages
@@ -444,7 +454,7 @@ class Worker extends Person3 {
    }
 }
 val per = new Person3;
-val wkr = new Worker; wkr.name="Fred"; wkr.getName  // Yields Worker:Name:Fred
+val wkr = new Worker; wkr.name="Fred"; wkr.getName  // Yields: Worker:Name:Fred
 // Note wkr.age and per.age not visible.
 (wkr.isInstanceOf[Person3], wkr.isInstanceOf[Worker])  // True, True
 (wkr.getClass == classOf[Person3], wkr.getClass == classOf[Worker]) // False, True
@@ -516,16 +526,16 @@ import sys.process._
 ```scala
 import util.matching.Regex
 val numPattern = "[0-9]+".r
-for (n <- numPattern.findAllIn("a11b12c13")) println(n) // Yields 11 12 13
-numPattern.findAllIn("a 2 3").toArray // Yields Array(2,3)
-numPattern.replaceAllIn("a 2 3", "x").toArray // Yields Array(a,x,x)
+for (n <- numPattern.findAllIn("a11b12c13")) println(n) // Yields: 11 12 13
+numPattern.findAllIn("a 2 3").toArray // Yields: Array(2,3)
+numPattern.replaceAllIn("a 2 3", "x").toArray // Yields: Array(a,x,x)
 val spacePattern = """\s+""".r  // Instead of "\\s+"
-for (s <- spacePattern.findAllIn("abc 12 def")) println("found") // Yields found found
+for (s <- spacePattern.findAllIn("abc 12 def")) println("found") // Yields: found found
 
 // Regexp Groups
 val numItemPttn = "([0-9]+) ([a-z]+)".r()
-val numItemPttn(num, item) = "99 bottles" // Yields num=99, item=bottles
-for (numItemPttn(num, item) <- numItemPttn.findAllIn("5 cats, 3 dogs")) { println(item, num)} // Yields (cats,5)(dogs,3)
+val numItemPttn(num, item) = "99 bottles" // Yields: num=99, item=bottles
+for (numItemPttn(num, item) <- numItemPttn.findAllIn("5 cats, 3 dogs")) { println(item, num)} // Yields: (cats,5)(dogs,3)
 ```
 <hr>
-<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 21/12/22 15:50</p>
+<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 21/12/22 17:37</p>
