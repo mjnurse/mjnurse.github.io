@@ -5,8 +5,6 @@ $header-bg-color: #155799;
 $header-bg-color-secondary: #155799;
 $section-headings-color: black;
 
-@import "jekyll-theme-cayman";
-
 $base00: #000000 !important;
 $base01: #242422 !important;
 $base02: #484844 !important;
@@ -23,6 +21,8 @@ $base0c: #c6c5fe !important;
 $base0d: #96cbfe !important;
 $base0e: #ff73fd !important;
 $base0f: #b18a3d !important;
+
+@import "jekyll-theme-cayman";
 
 body {
   color: #222;
