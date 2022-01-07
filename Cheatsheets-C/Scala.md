@@ -49,18 +49,15 @@ object Main extends App {
 ## Hierarchy
 
 ```scala
-Any _ AnyVal _ Double, Float, Long, Int, Short, Byte, Char, Unit, Boolean
-   |
-   |_ AnyRef _ List, Iterable, Seq, Strings, Other Scala / Java Classes
+Any -> AnyVal -> Double, Float, Long, Int, Short, Byte, Char, Unit, Boolean
+    -> AnyRef -> List, Iterable, Seq, Strings, Other Scala / Java Classes
 ```
 
 ## Type Casting
 
 ```scala
 Byte -> Short -> Int -> Long -> Float -> Double
-                  ^
-                  |
-                 Char   (Char -> Int gives ASCII code)
+                     <- Char  (Char -> Int gives ASCII code)
 ```
 
 # Values And Variables
@@ -147,63 +144,45 @@ println(raw"one\ntwo") // Yields: "one\ntwo"
 
 ## String Functions
 
-### compareTo
 ```scala
+// compareTo
 String1.compareTo(string2) -> Int : greater/less/equal
 "A".compareTo("A") // Yields: 0
 "A".compareTo("B") // Yields: -1
 "C".compareTo("A") // Yields: 2
-```
 
-### equals / equalsIgnoreCase
-```scala
+// equals / equalsIgnoreCase
 String1.equals(String2) -> Boolean
 "martin".equals("fred") // Yields: false
-```
 
-### findAllIn
-```scala
+// findAllIn
 Regex.findAllIn(String) -> Iterator
 "t.* ".r.findAllIn("there's the dog") // Yields: scala.util.matching.Regex.MatchIterator
 "t.* ".r.findAllIn("there's the dog").foreach(println) // Yields: there's the
-```
 
-### findFirstIn
-```scala
+// findFirstIn
 Regex.findFirstIn(String) -> String
 "th. ".r.findFirstIn("there's the dog") // Yields: Option[String] = Some("the ")
-```
 
-### intersect
-```scala
+// intersect
 String1.intersect(String2) -> String
 "Martin".intersect("tank") // Yields: "atn"
-```
 
-### matches
-```scala
+// matches
 String1.matches(String2) -> Boolean : String2 is Regex Expression
 "martin".matches("m.{4}n") // Yields: true 
-```
 
-### split
-```scala
+// split
 String.split(Char) -> Array(String, ..)
 "a b c".split(' ') // Yields: Array("a", "b", "c")
-```
 
-### toLowerCase
-```scala
+// toLowerCase
 "HI".toLowerCase // As toLowerCase has no parameters the () are omitted.
-```
 
-## toString
-```scala
+// toString
 val v = 123; v.toString // As toString has no parameters the () are omitted.
-```
 
-### toUpperCase
-```scala
+// toUpperCase
 "hello".toUpperCase // As toUpperCase has no parameters the () are omitted.
 ```
 
@@ -231,21 +210,83 @@ for (numItemPttn(num, item) <- numItemPttn.findAllIn("5 cats, 3 dogs")) {
 
 ## Seq
 
-```scala
-@ val s = Seq(1, 2, 'a', "b")
+### Hierarchy
 
+```scala
+Seq -> IndexedSeq -> Vector, Array, ArrayBuffer, Range 
+    -> LinearSeq  -> List, Stream
+```
+
+**LinearSeq** collections have efficient head and tail operations. 
+**IndexedSeq** collections have efficient apply and length operations.
+
+### Examples
+
+```scala
+@ val s = Seq(1, "two", '3', 1) // s: Seq[Any] = List(1, "two", '3', 1)
+@ s.apply(1) // res1: Any = "two"
+@ s(2)       // res2: Any = '3'
+@ s.foreach(println) // Prints all elements
+@ s.filter(_.isInstanceOf[Int]) //res3: Seq[Any] = List(1, 1)
+
+// Arrays (an IndexedSeq) Fixed Length
+@ val a = Array(5,2,3,4,1)     // a: Array[Int] = Array(1, 2, 3, 4, 5)
+@ val e = a.filter(_ % 2 == 0) // e: Array[Int] = Array(2, 4)
+@ val d = a.map(_ * 2)         // d: Array[Int] = Array(10, 4, 6, 8, 2)
+@ val r = d.sorted.reverse     // r: Array[Int] = Array(10, 8, 6, 4, 2)
+// range(start, end, [interval])
+@ val a = Array.range(0, 10, 3) // a: Array[Int] = Array(0, 3, 6, 9)
+@ val a = Array.fill(2)("a")    // a: Array[String] = Array("a", "a")
+@ val a = new Array[Int](4)     // a: Array[Int] = Array(0, 0, 0, 0)
+@ a(2) = 2; a                   // a: Array[Int] = Array(0, 0, 2, 0)
+
+// Variable Length Arrays - Array Buffers.
+import scala.collection.mutable.ArrayBuffer
+val buff = ArrayBuffer[Int]()
+buff += 9; buff += (2,3,4,5,6)
+buff.trimEnd(2)
+buff.insert(2,7); buff // Insert 6 before index 2.
+buff.remove(2,3); buff // Remove starting pos 2, 3 elements.
+buff.toArray // Creates a fixed size Array from Array Buffer.
+val arrBuff = nums.toBuffer // Creates an Array Buffer from a fixed size Array.
+
+// Traverse Array.
+for (i <- fixBuff) println(i)
+for (i <- (0 until fixBuff.length).reverse) println(i, fixBuff(i)) // In reverse.
+for (i <- (0 until (fixBuff.length, 2))) println(i, fixBuff(i)) // Every other.
+
+// Transforming Arrays.
+val re1 = for (i <- fixBuff if i > 0) yield 10/i
+val re2 = fixBuff.filter(_ > 0).map(10 / _)
+Array(1,2,3,4).sum // Works for Array Buffer too.
+val fb = ArrayBuffer(1,3,2); fb.sorted
+val a = Array(1, 7, 2); scala.util.Sorting.quickSort(a); a // a is now Array(1, 2, 7).
+a.mkString( "<", ",", ">") // Yields: "<1,7,2>" - Note: toString Yields: the data type.
+
+// Multidimensional Arrays - Arrays of Arrays.
+val matrix = Array.ofDim[Int](3,4); matrix(2)(1) = 15
+val triangle = new Array[Array[Int]](10) // An Array of variable length Arrays.
+for (i <- 0 until triangle.length) triangle(i) = new Array[Int](i + 1) // Triangle shaped Array.
 ```
 
 ## Set
 
+Duplicates values removed.
+
 ```scala
-la la la 
+@ val s = Set(1, "two", '3', 1) // s: Set[Any] = Set(1, "two", '3') - no dupes
+@ s(2) // res1: Boolean = false - Int: 2 not in set
+@ s.apply("two") // res2: Boolean = true - String: "two" in set
 ```
 
 ## Map (hash table)
 
 ```scala
-val ages = Map("MN" -> 21, "FB" -> 44) // OR Map(("MN", 21), ("FB", 44)).  -> is pair operator.
+@ val m = Map(("a", 25), ('b', 50), (3, 'a')) // m: Map[Any, AnyVal] = Map("a" -> 25, 'b' -> 50, 3 -> 'a')
+@ m("a")     // res1: AnyVal = 25
+@ m.apply(3) // res2: AnyVal = 'a'
+@ m(1)       // java.util.NoSuchElementException: key not found: 1
+
 val agesMut =  collection.mutable.Map("MN" -> 21, "FB" -> 44)
 val mnAge = ages("MN") // Same as ages.get("MN").
 val xxAge = ages.getOrElse("XX", 0) // Shortcut for if (ages.contains("XX")) ages("XX") else 0.
@@ -351,43 +392,6 @@ sum(1 to 5: _*) // _* syntax is specific to parameters.
 
 // Procedures - no "=" between (param) and {code...}
 def proc( name: String ) {"Hello " + name} // Returns Unit ie. ().  Can declare as proc(...): Unit = {...}.
-```
-
-## Arrays
-
-```scala
-// Fixed length Arrays.
-val nums = new Array[Int](10)
-nums(0)=10; // Can update array elements.
-val strs = Array("one","two") // no new.
-
-// Variable Length Arrays - Array Buffers.
-import scala.collection.mutable.ArrayBuffer
-val buff = ArrayBuffer[Int]()
-buff += 9; buff += (2,3,4,5,6)
-buff.trimEnd(2)
-buff.insert(2,7); buff // Insert 6 before index 2.
-buff.remove(2,3); buff // Remove starting pos 2, 3 elements.
-buff.toArray // Creates a fixed size Array from Array Buffer.
-val arrBuff = nums.toBuffer // Creates an Array Buffer from a fixed size Array.
-
-// Traverse Array.
-for (i <- fixBuff) println(i)
-for (i <- (0 until fixBuff.length).reverse) println(i, fixBuff(i)) // In reverse.
-for (i <- (0 until (fixBuff.length, 2))) println(i, fixBuff(i)) // Every other.
-
-// Transforming Arrays.
-val re1 = for (i <- fixBuff if i > 0) yield 10/i
-val re2 = fixBuff.filter(_ > 0).map(10 / _)
-Array(1,2,3,4).sum // Works for Array Buffer too.
-val fb = ArrayBuffer(1,3,2); fb.sorted
-val a = Array(1, 7, 2); scala.util.Sorting.quickSort(a); a // a is now Array(1, 2, 7).
-a.mkString( "<", ",", ">") // Yields: "<1,7,2>" - Note: toString Yields: the data type.
-
-// Multidimensional Arrays - Arrays of Arrays.
-val matrix = Array.ofDim[Int](3,4); matrix(2)(1) = 15
-val triangle = new Array[Array[Int]](10) // An Array of variable length Arrays.
-for (i <- 0 until triangle.length) triangle(i) = new Array[Int](i + 1) // Triangle shaped Array.
 ```
 
 ## Classes (Note Classes can be nested)
@@ -598,4 +602,4 @@ import sys.process._
 ```
 
 <hr>
-<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 22/01/06 17:23</p>
+<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 22/01/07 10:54</p>
