@@ -214,7 +214,7 @@ for (numItemPttn(num, item) <- numItemPttn.findAllIn("5 cats, 3 dogs")) {
 
 ```scala
 Seq -> IndexedSeq -> Vector, Array, ArrayBuffer, Range 
-    -> LinearSeq  -> List, Stream
+    -> LinearSeq  -> List, Stream (now called a LazyList)
 ```
 
 **LinearSeq** collections have efficient head and tail operations. 
@@ -228,45 +228,105 @@ Seq -> IndexedSeq -> Vector, Array, ArrayBuffer, Range
 @ s(2)       // res2: Any = '3'
 @ s.foreach(println) // Prints all elements
 @ s.filter(_.isInstanceOf[Int]) //res3: Seq[Any] = List(1, 1)
+```
 
-// Arrays (an IndexedSeq) Fixed Length
-@ val a = Array(5,2,3,4,1)     // a: Array[Int] = Array(1, 2, 3, 4, 5)
-@ val e = a.filter(_ % 2 == 0) // e: Array[Int] = Array(2, 4)
-@ val d = a.map(_ * 2)         // d: Array[Int] = Array(10, 4, 6, 8, 2)
-@ val r = d.sorted.reverse     // r: Array[Int] = Array(10, 8, 6, 4, 2)
+### Arrays (an IndexedSeq) Fixed Length
+
+```scala
+
+// filter(), map(), sorted, reverse, length
+@ val a = Array(5, 2, 3, 4, 1)  // a: Array[Int] = Array(5, 2, 3, 4, 1)
+@ val e = a.filter(_ % 2 == 0)  // e: Array[Int] = Array(2, 4)
+@ val d = a.map(_ * 2)          // d: Array[Int] = Array(10, 4, 6, 8, 2)
+@ val r = d.sorted.reverse      // r: Array[Int] = Array(10, 8, 6, 4, 2)
+@ val l = d.length              // l: Int = 5
+
+// mkString(separator: String) or mkString(start: String, sep: String, end: String)
+@ val s = a.mkString("")            // s: String = "52341"
+@ val s = a.mkString("[", ",", "]") // s: String = "[5,2,3,4,1]"
+
 // range(start, end, [interval])
 @ val a = Array.range(0, 10, 3) // a: Array[Int] = Array(0, 3, 6, 9)
+
+// fill(number of entries)(value)
 @ val a = Array.fill(2)("a")    // a: Array[String] = Array("a", "a")
+
+// Create a fixed size 'empty' array
 @ val a = new Array[Int](4)     // a: Array[Int] = Array(0, 0, 0, 0)
+
+// Update array element
 @ a(2) = 2; a                   // a: Array[Int] = Array(0, 0, 2, 0)
 
-// Variable Length Arrays - Array Buffers.
-import scala.collection.mutable.ArrayBuffer
-val buff = ArrayBuffer[Int]()
-buff += 9; buff += (2,3,4,5,6)
-buff.trimEnd(2)
-buff.insert(2,7); buff // Insert 6 before index 2.
-buff.remove(2,3); buff // Remove starting pos 2, 3 elements.
-buff.toArray // Creates a fixed size Array from Array Buffer.
-val arrBuff = nums.toBuffer // Creates an Array Buffer from a fixed size Array.
+// toArray
+@ val a = "Hello".toArray       // a: Array[Char] = Array('H', 'e', 'l', 'l', 'o') 
+
+// Multi dimensional Array - An Array or Array's
+@ val a = Array.ofDim[Int](2, 3) // a: Array[Array[Int]] = Array(Array(0, 0, 0), Array(0, 0, 0))
 
 // Traverse Array.
-for (i <- fixBuff) println(i)
-for (i <- (0 until fixBuff.length).reverse) println(i, fixBuff(i)) // In reverse.
-for (i <- (0 until (fixBuff.length, 2))) println(i, fixBuff(i)) // Every other.
+for (i <- a) println(i)
+```
 
-// Transforming Arrays.
-val re1 = for (i <- fixBuff if i > 0) yield 10/i
-val re2 = fixBuff.filter(_ > 0).map(10 / _)
-Array(1,2,3,4).sum // Works for Array Buffer too.
-val fb = ArrayBuffer(1,3,2); fb.sorted
-val a = Array(1, 7, 2); scala.util.Sorting.quickSort(a); a // a is now Array(1, 2, 7).
-a.mkString( "<", ",", ">") // Yields: "<1,7,2>" - Note: toString Yields: the data type.
+### List 
 
-// Multidimensional Arrays - Arrays of Arrays.
-val matrix = Array.ofDim[Int](3,4); matrix(2)(1) = 15
-val triangle = new Array[Array[Int]](10) // An Array of variable length Arrays.
-for (i <- 0 until triangle.length) triangle(i) = new Array[Int](i + 1) // Triangle shaped Array.
+**Lists** are Immutable.  **ListBuffer** is the Mutable counterpart.
+
+Lists are linear.  This means is that if you want to access a central element in a List, the compiler has to start from the beginning and linearly progress through the List until it finds the element you are trying to access.
+
+```scala
+// ::, Nil - element::list is know as cons, Nil is a list terminator
+@ val l = 1::(2::(3::Nil)) // l: List[Int] = List(1, 2, 3)
+@ val l = 1::2::3::Nil     // l: List[Int] = List(1, 2, 3) - can avoid brackets
+
+// Append: use :+, Prepend: use ::, Concat two lists: use :::
+@ val l2 = l:+0    // l2: List[Int] = List(1, 2, 3, 0)
+@ val l3 = 9::l    // l3: List[Int] = List(9, 1, 2, 3)
+@ val l4 = l2:::l3 // l4: List[Int] = List(1, 2, 3, 0, 9, 1, 2, 3)
+
+// head, tail, value at position 
+@ val h = l4.head // h: Int = 1
+@ val t = l4.tail // t: List[Int] = List(2, 3, 0, 9, 1, 2, 3)
+@ val i = l4(1)   // i: Int = 2
+```
+
+### Vector
+
+Vectors are indexed, when you want to access a central element in a Vector, the compiler can directly go to that index and access the element in constant time.
+
+```scala
+@ val v = Vector.empty       // v: Vector[Nothing] = Vector()
+@ val v = Vector(1, 2, 3, 0) // v: Vector[Int] = Vector(1, 2, 3, 0)
+
+// Prepend / Append: use +:,  Concatenation: use ++
+@ val v2 = 8+:v   // v2: Vector[Int] = Vector(8, 1, 2, 3, 0)
+@ val v2 = v::v2  // v3: Vector[Int] = Vector(1, 2, 3, 0, 8, 1, 2, 3, 0)
+```
+
+### Range 
+
+```scala
+@ val r = 1 to 6       // r: Range.Inclusive = Range(1, 2, 3, 4, 5, 6)
+@ val r = 1 to 6 by 3  // r: Range = Range(1, 4)
+@ val r = 1 until 6    // r: Range = Range(1, 2, 3, 4, 5)
+```
+
+### Variable Length Arrays - Array Buffers
+
+```scala
+import scala.collection.mutable.ArrayBuffer
+@ val a = ArrayBuffer[Any]() // a: ArrayBuffer[Any] = ArrayBuffer()
+
+// +=, -=, remove(position, [num elements]), insert(after position, value), trimEnd(num elements)
+@ a += ('a', 1, "hi", 'a')   // res1: ArrayBuffer[Any] = ArrayBuffer('a', 1, "hi", 'a')
+@ a -= 'a'                   // res2: ArrayBuffer[Any] = ArrayBuffer(1, "hi", 'a')
+@ a.remove(1)                // res3: Any = "hi"
+@ a                          // res4: ArrayBuffer[Any] = ArrayBuffer(1, 'a')
+@ a.insert(1, "hi"); a       // res5: ArrayBuffer[Any] = ArrayBuffer(1, "hi", 'a')
+@ a.trimEnd(2); a            // res6: ArrayBuffer[Any] = ArrayBuffer(1)
+
+// toArray, toBuffer
+@ a.toArray  // Creates a fixed size Array from Array Buffer.
+@ a.toBuffer // Creates an Array Buffer from a fixed size Array.
 ```
 
 ## Set
@@ -283,24 +343,24 @@ Duplicates values removed.
 
 ```scala
 @ val m = Map(("a", 25), ('b', 50), (3, 'a')) // m: Map[Any, AnyVal] = Map("a" -> 25, 'b' -> 50, 3 -> 'a')
-@ m("a")     // res1: AnyVal = 25
+@ m("a")     // res1: AnyVal = 25 - Same as m.get("a")
 @ m.apply(3) // res2: AnyVal = 'a'
 @ m(1)       // java.util.NoSuchElementException: key not found: 1
+@ val v = m.getOrElse(1, "none") // v: Any = "none"
 
-val agesMut =  collection.mutable.Map("MN" -> 21, "FB" -> 44)
-val mnAge = ages("MN") // Same as ages.get("MN").
-val xxAge = ages.getOrElse("XX", 0) // Shortcut for if (ages.contains("XX")) ages("XX") else 0.
-// ages2("MN") = 18 // not working in Intellij
-agesMut += ("XX" -> 2, "YY" -> 34)
-agesMut -= "FB"
-val newAges = ages + ("XX" -> 16) // Note is ages was a var we could use age = ages + ...
-for ((k, v) <- ages) println(k, v)
-ages.keySet; ages.values // To yield the keys or the values.
-val agesOrd = collection.immutable.SortedMap("MN" -> 18, "FB" -> 26) // Stores sorted on key.
+// Mutable Map
+@ val m = collection.mutable.Map("MN" -> 21, "FB" -> 44)
+@ m += ("XX" -> 2, "YY" -> 34) // res1: collection.mutable.Map[String, Int] = 
+                               // HashMap("XX" -> 2, "YY" -> 34, "MN" -> 21, "FB" -> 44)
+@ m -= "XX"                    // res2: collection.mutable.Map[String, Int] = 
+                               // HashMap("YY" -> 34, "MN" -> 21, "FB" -> 44)
+                               
+// Sorted Map - Stores sorted on key
+val agesOrd = collection.immutable.SortedMap("MN" -> 18, "FB" -> 26) 
 
 // 'Zipping' Array to create a Map
-val names3 = Array("MN", "FB"); val ages3 = Array(21, 34)
-val people = names3.zip(ages3) // Yields: Array((MN,21), (FB,34)).
+@ val names3 = Array("MN", "FB"); val ages3 = Array(21, 34)
+@ val people = names3.zip(ages3) // Yields: Array((MN,21), (FB,34)).
 ```
 
 ## Tuple
@@ -323,13 +383,6 @@ height: Double = 1.84
 ```scala
 import math._  // same as import scala.math._ (scala can be omitted).
 sqrt(2) // Obv. many many more functions.
-```
-
-# The apply Method
-
-```scala
-"hello"(0) == "hello".apply(0) // Both yield 'h'.
-BigInt("100") == BigInt.apply("100")
 ```
 
 # Conditional Expressions
@@ -602,4 +655,4 @@ import sys.process._
 ```
 
 <hr>
-<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 22/01/07 10:54</p>
+<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 22/01/07 15:58</p>
