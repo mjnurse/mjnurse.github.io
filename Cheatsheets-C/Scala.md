@@ -335,14 +335,14 @@ Duplicates values removed.
 
 ```scala
 @ val s = Set(1, "two", '3', 1) // s: Set[Any] = Set(1, "two", '3') - no dupes
-@ s(2) // res1: Boolean = false - Int: 2 not in set
-@ s.apply("two") // res2: Boolean = true - String: "two" in set
+@ s(2)                          // res1: Boolean = false - Int: 2 not in set
+@ s.apply("two")                // res2: Boolean = true - String: "two" in set
 ```
 
 ## Map (hash table)
 
 ```scala
-@ val m = Map(("a", 25), ('b', 50), (3, 'a')) // m: Map[Any, AnyVal] = Map("a" -> 25, 'b' -> 50, 3 -> 'a')
+@ val m = Map(("a",25), ('b',50), (3,'a')) // m: Map[Any, AnyVal] = Map("a"->25, 'b'->50, 3->'a')
 @ m("a")     // res1: AnyVal = 25 - Same as m.get("a")
 @ m.apply(3) // res2: AnyVal = 'a'
 @ m(1)       // java.util.NoSuchElementException: key not found: 1
@@ -354,7 +354,7 @@ Duplicates values removed.
                                // HashMap("XX" -> 2, "YY" -> 34, "MN" -> 21, "FB" -> 44)
 @ m -= "XX"                    // res2: collection.mutable.Map[String, Int] = 
                                // HashMap("YY" -> 34, "MN" -> 21, "FB" -> 44)
-                               
+
 // Sorted Map - Stores sorted on key
 val agesOrd = collection.immutable.SortedMap("MN" -> 18, "FB" -> 26) 
 
@@ -366,23 +366,44 @@ val agesOrd = collection.immutable.SortedMap("MN" -> 18, "FB" -> 26)
 ## Tuple
 
 ```scala
-@ val person = ("MN", 21, 1.84)
-person: (String, Int, Double) = ("MN", 21, 1.84)
-
-@ println("Age:" + person._2) // In a Tuple, position starts with 1.
-Age:21
-
-@ val (name,age,height) = person
-name: String = "MN"
-age: Int = 21
-height: Double = 1.84
+@ val person = ("MN", 21, 1.84)  // person: (String, Int, Double) = ("MN", 21, 1.84)
+@ println("Age:" + person._2)    // Age: 21 - In a Tuple, position starts with 1.
+@ val (name,age,height) = person // name: String = "MN" age: Int = 21 height: Double = 1.84
 ```
 
-# Mathematical Functions
+# Conditional Control
 
 ```scala
-import math._  // same as import scala.math._ (scala can be omitted).
-sqrt(2) // Obv. many many more functions.
+// if
+@ val (i, j) = (1, 2)
+@ if (i == j) {
+     println("match")
+  } else {
+     println("no match")
+  }
+
+// match
+@ val i = 1
+@ i match { case 1 => "one"; case _ => "other" }  // Yields: "one"
+
+// match - Seq
+@ val s = Array(1, 2, 3)
+@ s match { 
+      case Array(1,_,_) => "match"
+      case _ => "other"
+    } // Yields: "match"
+
+// match - Tuple
+@ val t: Any = (1, "hi", true)
+@ t match { case (1, _, true) => "match"; case _ => "other" } // Yields "match"
+
+// match - Types
+@ val v: Any = "hi"
+@ v match {
+      case x: String => "a string"
+      case x: Int => "an int"
+      case x: Boolean => "a boolean"
+    } // Yields: "a string"
 ```
 
 # Conditional Expressions
@@ -399,36 +420,49 @@ val e = {val f = 2; val g = 2; f + g} // e == 4, takes last value of block.
 val h = {val i = 2} // h == (), the Unit value. i == 2.
 ```
 
-# Input / Output
+# Loops
+
+Loops are not expressions - they have a return type of unit which is a *void* value.
 
 ```scala
-print("Hello: "); println("Martin") // Hello: Martin
-printf("Hello, %s! You are %d years old.\n", "Fred", 42)
+// while loop
+var i = 3; while (i > 0) { println(i); i -= 1 }
 
-val name = readLine("Your Name: ") // Note: only works in interactive session. 
-print("You Age: "); val age = readInt()
-```
+// do-while loop
+do { println("here") } while (0 == 1) // Yields: here (always executes ay least once)
 
-## Loops
+// for loop: for (variable <- generator expression) { block of code }
+for (i <- 1 to 3) println(i)                                // Yields: 1 2 3
+for (i <- 3 to 1 bi -1) println(i)                          // Yields: 3 2 1
+for (i <- 0 until "dog".length) println(i + ":" + "dog"(i)) // Yields: 0:d 1:o 2:g
+for (ch <- "Hello") println(ch)                             // Yields: H e l l o
 
-```scala
-var i = 3
-while (i > 0) { println(i); i -= 1 }
-for (i <- 1 to 3) println(i) // Yields: 1 2 3. Note: (i -< 3 to 1 by -1) is a desc loop.
-for (i <- 0 until "dog".length) println(i.toString + ":" + "dog"(i) + ",") // Yields: 0:d,1:o,2:g,
-for (ch <- "Hello") println(ch) // Yields: Hello
+// Complex for loops with other vars
+for (i <- 0 to 1; j <- 10 to 12; if (j != 11)) println(i,j)   // Yields: (0,10)(0,12)(1,10)(1,12)
+for (i <- 0 to 1; k = i + 10; j <- k to (k + 1)) println(i,j) // Yields: (0,10)(0,11)(1,11)(1,12)
 
-// Complex loop and loops with other vars.
-for (i <- 0 to 1; j <- 10 to 12; if (j != 11)) println(i,j) // Yields: 10 12 12 13
-for (i <- 0 to 1; k = i + 10; j <- k to (k + 1)) println(i,j) // Yields: 10 11 12 13 14 15
-
-// Yield after for loop constructs a collection - called a comprehension.
-for (i <- "Hi") yield BigInt(i) // Yields: a collection of BigInt ascii values.
+// Yield creates a return expression - called a comprehension.
+@ for (i <- "Hi") yield BigInt(i) // res1: IndexedSeq[BigInt] = ArraySeq(72, 105)
 
 // Note: can use {} in place of the outer () in a for loop. {} can span multiple lines.
 ```
 
-## Functions
+# Exception Handling
+
+```scala
+try { 
+  val quotient = 10/0
+  println(quotient)
+}
+catch {
+  case ex: ArithmeticException => println("Dividing by zero is not allowed")
+  case ex: ...
+}
+```
+
+# Functions
+
+`def functionName(parameters): returnType = {function body}`
 
 ```scala
 def func( p1: Int, p2: Int = 0, p3: Int = 0) = (p1, p2, p3) // p2 defaults to 0.  Yields: a Tuple.
@@ -445,6 +479,13 @@ sum(1 to 5: _*) // _* syntax is specific to parameters.
 
 // Procedures - no "=" between (param) and {code...}
 def proc( name: String ) {"Hello " + name} // Returns Unit ie. ().  Can declare as proc(...): Unit = {...}.
+```
+
+# Mathematical Functions
+
+```scala
+import math._  // same as import scala.math._ (scala can be omitted).
+sqrt(2) // Obv. many many more functions.
 ```
 
 ## Classes (Note Classes can be nested)
@@ -655,4 +696,4 @@ import sys.process._
 ```
 
 <hr>
-<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 22/01/07 15:58</p>
+<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 22/01/13 17:40</p>
