@@ -16,7 +16,7 @@ section: Elasticsearch
 Elasticsearch caches query results which can be use if the same query is run again.  This will clear results from the cache for a single named index or, if no index is specified, all indexes.
 
 ```bash
-# [<index_name>]/_cache/clear
+# .../[<index_name>]/_cache/clear
 
 curl -X POST "http://localhost:9200/_cache/clear"
 ```
@@ -39,7 +39,7 @@ curl -X GET "http://localhost:9200/_cluster/stats?pretty"
 
 ```bash
 curl -X PUT "http://localhost:9200/<index_name>" \ 
-     -H Content-Type: application/json -d '
+     -H "Content-Type: application/json" -d '
 { 
   "settings": { 
     "index": { 
@@ -72,7 +72,7 @@ curl -X POST "http://localhost:9200/<index_name>/_close"
 
 ```bash
 curl -X PUT "http://localhost:9200/<index_name>/_settings" \
-     -H Content-Type: application/json -d '
+     -H "Content-Type: application/json" -d '
 { 
   "index.blocks.read_only_allow_delete": null
 }'
@@ -82,7 +82,7 @@ curl -X PUT "http://localhost:9200/<index_name>/_settings" \
 
 ```bash
 curl -X POST "http://localhost:9200/_reindex" \
-     -H Content-Type: application/json -d '
+     -H "Content-Type: application/json" -d '
 {
   "source": { "index": "<source_index_name>" },
   "dest": { "index": "<dest_index_name>" }
@@ -99,7 +99,7 @@ curl -X POST "http://localhost:9200/<index_name>/_forcemerge?max_num_segments=<n
 
 ```bash
 curl -X POST "http://localhost:9200/_cluster/reroute" \
-     -H Content-Type: application/json -d '
+     -H "Content-Type: application/json" -d '
 { 
   "commands": [ {
     "move": {
@@ -116,7 +116,7 @@ curl -X POST "http://localhost:9200/_cluster/reroute" \
 
 ```bash
 curl -X PUT "http://localhost:9200/<index_name>/_settings" \
-     -H Content-Type: application/json -d '
+     -H "Content-Type: application/json" -d '
 {
   "index": { "number_of_replicas": <number_of_replicas> }
 }'
@@ -128,7 +128,7 @@ curl -X PUT "http://localhost:9200/<index_name>/_settings" \
 # Disable
 
 curl -X PUT "http://localhost:9200/_cluster/settings" \
-     -H Content-Type: application/json -d '
+     -H "Content-Type: application/json" -d '
 {
   "persistent": { "cluster.routing.allocation.enable": "primaries" }
 }'
@@ -136,76 +136,62 @@ curl -X PUT "http://localhost:9200/_cluster/settings" \
 # Re-enable
 
 curl -X PUT "http://localhost:9200/_cluster/settings" \
-     -H Content-Type: application/json -d '
+     -H "Content-Type: application/json" -d '
 { 
-  "persistent": { 
-    "cluster.routing.allocation.enable": null
-  }
+  "persistent": { "cluster.routing.allocation.enable": null }
 }'
 ```
 
 # Index Interrogation 
 
-## List Aliases
-
 ```bash
-curl -X GET http://localhost:9200/_cat/aliases?v&s=[<order_by_field_name>]
-```
+# List Aliases
 
-## List Indices
+curl -X GET "http://localhost:9200/_cat/aliases?v"
 
-```bash
-curl -X GET http://localhost:9200/_cat/indices/[<index_name>]?v&h=health,status,index,pri,rep,docs.count,docs.deleted,store.size,pri.store.size&s=index
-```
+# List Indices (.../_cat/indices/[<index_name>]...)
 
-## List Shards
+curl -X GET "http://localhost:9200/_cat/indices/?v"\
+"&h=health,status,index,pri,rep,docs.count,docs.deleted,store.size,pri.store.size"\
+"&s=index"
 
-```bash
-curl -X GET http://localhost:9200/_cat/shards/[<index_name>]?v&h=index,shard,prirep,state,docs,store,node&s=index,shard,prirep
-```
+# List Shards (.../_cat/shards/[<index_name>]...)
 
-## List Shard Details
+curl -X GET "http://localhost:9200/_cat/shards/?v"\
+"&h=index,shard,prirep,state,docs,store,node&s=index,shard,prirep"\
+"&s=index"
 
-```bash
-curl -X GET http://localhost:9200/_cat/shards/[<index_name>]?v&h=index,shard,prirep,state,docs,store,ip,segments.count,unassigned.reason,unassigned.for,node&s=[<order_by_field_name>]
-```
+# List Shard Details
 
-## List Segments
+curl -X GET "http://localhost:9200/_cat/shards/?v"\
+"&h=index,shard,prirep,state,docs,store,ip,segments.count,"\
+"unassigned.reason,unassigned.for,node&s=[<order_by_field_name>]"
 
-```bash
-curl -X GET http://localhost:9200/_cat/segments/[<index_name>]?v&s=index,shard,prirep
-```
+# List Segments
 
-## List Segmented Shards
+curl -X GET "http://localhost:9200/_cat/segments/?v&s=index,shard,prirep"
 
-```bash
-curl -X GET http://localhost:9200/_cat/shards/[<index_name>]?v&h=index,shard,prirep,state,docs,node,segments.count&s=index,shard,prirep,node
-```
+# Get Index Mapping
 
-## Get Index Mapping
+curl -X GET "http://localhost:9200/<index_name>/_mapping?pretty"
 
-```bash
-curl -X GET http://localhost:9200/<index_name>/_mapping?pretty
-```
+# Forcemerge Progress
 
-## List Unassigned Shards
-
-```bash
-curl -X GET http://localhost:9200/_cat/shards?v&h=index,shard,prirep,state,docs,segments.count&s=index,shard,prirep
-```
-
-## Forcemerge Progress
-
-```bash
-curl -X GET http://localhost:9200/_cat/nodes?v&h=name,cpu,load_1m,merges.current,merges.current_docs,merges.total,merges.total_docs&s=name
+curl -X GET "http://localhost:9200/_cat/nodes?v"\
+"&h=name,cpu,load_1m,merges.current,merges.current_docs,merges.total,merges.total_docs"\
+"&s=name"
 ```
 
 # Index Entry Manipulation
 
-## Add Entry
-
 ```bash
-curl -X POST http://localhost:9200/<index_name>/_doc -H Content-Type: application/json -d <entry_json>
+# Add Entry
+
+curl -X POST "http://localhost:9200/<index_name>/_doc" \
+     -H "Content-Type: application/json" -d '
+{ 
+  <entry_json>
+}'
 ```
 
 # Nodes
@@ -269,4 +255,4 @@ curl -X GET http://localhost:9200/_cat/tasks?v&h=action,type,start_time,timestam
 ```
 
 <hr>
-<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 22/02/09 17:44</p>
+<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 22/02/09 18:21</p>
