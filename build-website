@@ -69,13 +69,16 @@ gen-cli-builder-pages
 
 cd /c/MJN/github/mjnurse-github-io
 
-if [[ "$1" == "-a" || "$1" == "-d" ]]; then
-   cd /c/MJN/github/cv19dashboard
-   #echo_h2 -lblue "Running cv-global dashboard refresh"
-   #cv-global
-   echo_h2 -lblue "Running cv-UK dashboard refresh"
-   cv-UK
-fi
+echo_h2 -lblue "Copy query-es to github/bash"
+
+
+#if [[ "$1" == "-a" || "$1" == "-d" ]]; then
+#   cd /c/MJN/github/cv19dashboard
+#   #echo_h2 -lblue "Running cv-global dashboard refresh"
+#   #cv-global
+#   echo_h2 -lblue "Running cv-UK dashboard refresh"
+#   cv-UK
+#fi
 cd /c/MJN/github/mjnurse-github-io
 if [[ "$1" == "-a" ]]; then
    gen-search-doc-list
