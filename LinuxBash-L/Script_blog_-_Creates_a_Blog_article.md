@@ -8,7 +8,7 @@ title: blog - Creates a Blog article
 <script>
 function copyCode() {
   text = `#!/bin/bash
-help_text="
+help_text=\"
 NAME
   blog - Creates a new Blog article
 
@@ -20,13 +20,13 @@ DESCRIPTION
 
 AUTHOR
   mjnurse.dev - 2021
-"
+\"
 
-help_line="Creates a Blog article: blog <title: spaces allowed>"
-web_desc_line="Creates a Blog article"
+help_line=\"Creates a Blog article: blog <title: spaces allowed>\"
+web_desc_line=\"Creates a Blog article\"
 
-if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
-   echo "$help_text"
+if [ \"$1\" == \"-h\" ] || [ \"$1\" == \"--help\" ]; then
+   echo \"$help_text\"
    exit
 fi
 
@@ -34,23 +34,23 @@ params=$*
 date_str=$(date +'%y-%m-%d')
 
 filename=${date_str}_-_${params// /_}.md
-file="/c/MJN/github/mjnurse-github-io/Blog-B/$filename"
+file=\"/c/MJN/github/mjnurse-github-io/Blog-B/$filename\"
 echo $filename
 
 if [[ -f $file ]]; then
-  read -p "File already exists - open now [yN]: " yn
-  if [ "${yn^}" == "Y" ]; then
+  read -p \"File already exists - open now [yN]: \" yn
+  if [ \"${yn^}\" == \"Y\" ]; then
     gvim $file
   fi
   exit
 fi
 
-read -p "Create [yN]: " yn
+read -p \"Create [yN]: \" yn
 
-if [ "${yn^}" == "Y" ]; then
-   echo "---" > $file
-   echo "title: ${date_str} - ${params}" >> $file
-   echo "---" >> $file
+if [ \"${yn^}\" == \"Y\" ]; then
+   echo \"---\" > $file
+   echo \"title: ${date_str} - ${params}\" >> $file
+   echo \"---\" >> $file
    gvim $file
 fi
 `

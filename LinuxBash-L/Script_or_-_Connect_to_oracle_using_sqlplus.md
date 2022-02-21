@@ -8,7 +8,7 @@ title: or - Connect to oracle using sqlplus
 <script>
 function copyCode() {
   text = `#!/bin/bash
-help_text="
+help_text=\"
 NAME
   or - Connect to oracle using sqlplus.
 
@@ -20,9 +20,9 @@ DESCRIPTION
 
 AUTHOR
   mjnurse.dev - 2020
-"
-help_line="Connect to oracle using sqlplus"
-web_desc_line="Connect to oracle using sqlplus"
+\"
+help_line=\"Connect to oracle using sqlplus\"
+web_desc_line=\"Connect to oracle using sqlplus\"
 
 export ORACLE_PATH=.:/c/MJN/gdrive/code/oracle:/c/MJN/gdrive/code/private/oracle
 

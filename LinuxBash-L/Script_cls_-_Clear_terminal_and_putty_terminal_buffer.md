@@ -8,7 +8,7 @@ title: cls - Clear terminal and putty terminal buffer
 <script>
 function copyCode() {
   text = `#!/bin/bash
-help_text="
+help_text=\"
 NAME
   cls - Clear terminal and putty terminal buffer
 
@@ -20,10 +20,10 @@ DESCRIPTION
 
 AUTHOR
   mjnurse.dev - 2019
-"
-help_line="Clear terminal and putty terminal buffer"
-web_desc_line="Clear terminal and putty terminal buffer"
-pack_member="basics,default"
+\"
+help_line=\"Clear terminal and putty terminal buffer\"
+web_desc_line=\"Clear terminal and putty terminal buffer\"
+pack_member=\"basics,default\"
 
 # doesn't always work first time round so twice.
 printf '\033[3J'

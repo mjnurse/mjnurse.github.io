@@ -8,7 +8,7 @@ title: calc - Command line calculator
 <script>
 function copyCode() {
   text = `#!/bin/bash
-help_text="
+help_text=\"
 NAME
   calc - Command line calculator
 
@@ -30,49 +30,49 @@ DESCRIPTION
 
 AUTHOR
   mjnurse.dev - 2020
-"
-help_line="Command line calculator"
-web_desc_line="Command line calculator"
-pack_member="default"
+\"
+help_line=\"Command line calculator\"
+web_desc_line=\"Command line calculator\"
+pack_member=\"default\"
 
-try="Try ${0##*/} -h for more information"
-tmp="${help_text##*USAGE}"
-usage=$(echo "Usage: ${tmp%%OPTIONS*}" | tr -d "\n" | sed "s/  */ /g")
+try=\"Try ${0##*/} -h for more information\"
+tmp=\"${help_text##*USAGE}\"
+usage=$(echo \"Usage: ${tmp%%OPTIONS*}\" | tr -d \"\n\" | sed \"s/  */ /g\")
 
-if [[ "$1" == "" ]]; then
-  echo "${usage}"
-  echo "${try}"
+if [[ \"$1\" == \"\" ]]; then
+  echo \"${usage}\"
+  echo \"${try}\"
   exit 1
 fi
 
-prev_res="$(cat /tmp/calc)"
-if [[ "$prev_res" == "" ]]; then
+prev_res=\"$(cat /tmp/calc)\"
+if [[ \"$prev_res\" == \"\" ]]; then
   prev_res=0
 fi
 
-while [[ "$1" != "" ]]; do
+while [[ \"$1\" != \"\" ]]; do
   case $1 in
     -h|--help)
-      echo "$help_text"
+      echo \"$help_text\"
       exit
       ;;
     -i|--interactive)
       bc -l
       ;;
     -s|--sizes)
-      echo "B : $2"
-      echo "KB: $(echo "scale=2; $2/1024" | bc -l)"
-      echo "MB: $(echo "scale=2; $2/1024/1024" | bc -l)"
-      echo "GB: $(echo "scale=2; $2/1024/1024/1024" | bc -l)"
-      echo "TB: $(echo "scale=2; $2/1024/1024/1024/1024" | bc -l)"
-      echo "PB: $(echo "scale=2; $2/1024/1024/1024/1024/1024" | bc -l)"
+      echo \"B : $2\"
+      echo \"KB: $(echo \"scale=2; $2/1024\" | bc -l)\"
+      echo \"MB: $(echo \"scale=2; $2/1024/1024\" | bc -l)\"
+      echo \"GB: $(echo \"scale=2; $2/1024/1024/1024\" | bc -l)\"
+      echo \"TB: $(echo \"scale=2; $2/1024/1024/1024/1024\" | bc -l)\"
+      echo \"PB: $(echo \"scale=2; $2/1024/1024/1024/1024/1024\" | bc -l)\"
       break
       ;;
     *)
-      formula="$(echo $* | sed "s/x/\*/g; s/ //g; s/r/${prev_res}/g")"
-      result="$(echo $formula | sed 's/^/scale=3;/ ' | bc -l)"
+      formula=\"$(echo $* | sed \"s/x/\*/g; s/ //g; s/r/${prev_res}/g\")\"
+      result=\"$(echo $formula | sed 's/^/scale=3;/ ' | bc -l)\"
       echo $formula = $result
-      echo "$result" > /tmp/calc
+      echo \"$result\" > /tmp/calc
       break
       ;;
   esac

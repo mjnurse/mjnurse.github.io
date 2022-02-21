@@ -8,7 +8,7 @@ title: lf - A script to recursively list folders and show folder details
 <script>
 function copyCode() {
   text = `#!/bin/bash
-help_text="
+help_text=\"
 NAME
   lf - A script to recursively list folders and show folder details.
 
@@ -31,21 +31,21 @@ DESCRIPTION
 
 AUTHOR
   mjnurse.dev - 2020
-"
-help_line="A script to recursively list folders and show folder details"
-web_desc_line="A script to recursively list folders and show folder details"
+\"
+help_line=\"A script to recursively list folders and show folder details\"
+web_desc_line=\"A script to recursively list folders and show folder details\"
 
-try="Try ${0##*/} -h for more information"
-tmp="${help_text##*USAGE}"
-usage="$(echo Usage: ${tmp%%OPTIONS*})"
+try=\"Try ${0##*/} -h for more information\"
+tmp=\"${help_text##*USAGE}\"
+usage=\"$(echo Usage: ${tmp%%OPTIONS*})\"
 
 file_type_count_yn=n
 max_depth=999
 
-while [[ "$1" != "" ]]; do
+while [[ \"$1\" != \"\" ]]; do
   case $1 in 
     -h|--help)
-      echo "$help_text"
+      echo \"$help_text\"
       exit
       ;;
     -m|--maxdepth)
@@ -62,30 +62,30 @@ while [[ "$1" != "" ]]; do
   shift
 done 
 
-if [[ "$1" == "" ]]; then
-  echo "${usage}"
-  echo "${try}"
+if [[ \"$1\" == \"\" ]]; then
+  echo \"${usage}\"
+  echo \"${try}\"
   exit 1
 fi
 
-green="\e[92m"
-white="\e[39m"
-ind="__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __" 
+green=\"\e[92m\"
+white=\"\e[39m\"
+ind=\"__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __\" 
 
 function f() {
-  if [[ "$1" != "" ]]; then
-    curr_dir="${1:0:-1}"
+  if [[ \"$1\" != \"\" ]]; then
+    curr_dir=\"${1:0:-1}\"
   fi
-  depth="$2"
-  file_count="$(find $curr_dir -maxdepth 1 -type f | wc -l)"
-  size="$(du $curr_dir -d 0 -h)"
-  size="${size%%/*}"
-  echo -e "${ind:0:$depth}${curr_dir##*/}${green} - ${file_count} files ${white}${size}"
+  depth=\"$2\"
+  file_count=\"$(find $curr_dir -maxdepth 1 -type f | wc -l)\"
+  size=\"$(du $curr_dir -d 0 -h)\"
+  size=\"${size%%/*}\"
+  echo -e \"${ind:0:$depth}${curr_dir##*/}${green} - ${file_count} files ${white}${size}\"
   if [[ $file_type_count_yn == y ]]; then
-    echo "${ind:0:$depth}__ ( $(find $curr_dir -maxdepth 1 -type f \
+    echo \"${ind:0:$depth}__ ( $(find $curr_dir -maxdepth 1 -type f \
       | sed 's/^[^\.]*$/other/; s/.*\.//' \
       | sort | uniq -c | tr -d '\n' \
-      | sed 's/   */, /g; s/^,  *//') )"
+      | sed 's/   */, /g; s/^,  *//') )\"
   fi
   if [[ $depth -lt $max_depth ]]; then
     for d in $(ls -d ${curr_dir}/*/ 2>/dev/null); do
@@ -96,15 +96,15 @@ function f() {
   fi
 }
 
-if [[ "${1:0:1}" == "/" ]]; then
-  dir="$1"
+if [[ \"${1:0:1}\" == \"/\" ]]; then
+  dir=\"$1\"
 else
-  dir="$(pwd)/$1"
+  dir=\"$(pwd)/$1\"
 fi
 
 cd $dir || exit 1
 
-f  "$(pwd)/" 0
+f  \"$(pwd)/\" 0
 `
   navigator.clipboard.writeText(text);
 }

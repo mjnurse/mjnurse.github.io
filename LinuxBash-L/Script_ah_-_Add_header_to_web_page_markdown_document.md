@@ -8,7 +8,7 @@ title: ah - Add header to web page markdown document
 <script>
 function copyCode() {
   text = `#!/bin/bash
-help_text="
+help_text=\"
 NAME
   ah - Add header to web page markdown document
 
@@ -20,17 +20,17 @@ DESCRIPTION
 
 AUTHOR
   mjnurse.dev - 2020
-"
-help_line="Add header to web page markdown document"
-web_desc_line="Add header to web page markdown document"
+\"
+help_line=\"Add header to web page markdown document\"
+web_desc_line=\"Add header to web page markdown document\"
 
-tmp="${1/.md/}"
-title="${tmp//_/ }"
+tmp=\"${1/.md/}\"
+title=\"${tmp//_/ }\"
 
-echo "---" > ah.tmp
-echo "title: $title" >> ah.tmp
-echo "layout: page-with-contents-list" >> ah.tmp
-echo "---" >> ah.tmp
+echo \"---\" > ah.tmp
+echo \"title: $title\" >> ah.tmp
+echo \"layout: page-with-contents-list\" >> ah.tmp
+echo \"---\" >> ah.tmp
 cat $1 >> ah.tmp
 mv ah.tmp $1
 `

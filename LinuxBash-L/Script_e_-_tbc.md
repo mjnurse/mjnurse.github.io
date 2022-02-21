@@ -8,7 +8,7 @@ title: e - tbc
 <script>
 function copyCode() {
   text = `#!/bin/bash
-help_text="
+help_text=\"
 NAME
   e - One line description.
 
@@ -27,25 +27,25 @@ DESCRIPTION
 
 AUTHOR
   mjnurse.dev - 2020
-"
-help_line="tbc"
-web_desc_line="tbc"
+\"
+help_line=\"tbc\"
+web_desc_line=\"tbc\"
 
-try="Try ${0##*/} -h for more information"
-tmp="${help_text##*USAGE}"
-usage="$(echo Usage: ${tmp%%OPTIONS*})"
+try=\"Try ${0##*/} -h for more information\"
+tmp=\"${help_text##*USAGE}\"
+usage=\"$(echo Usage: ${tmp%%OPTIONS*})\"
 run_grep=n
 
-if [[ "$1" == "" ]]; then
-  echo "${usage}"
-  echo "${try}"
+if [[ \"$1\" == \"\" ]]; then
+  echo \"${usage}\"
+  echo \"${try}\"
   exit 1
 fi
 
-while [[ "$1" != "" ]]; do
+while [[ \"$1\" != \"\" ]]; do
    case $1 in 
       -h|--help)
-         echo "$help_text"
+         echo \"$help_text\"
          exit
          ;;
       -g)
@@ -61,14 +61,14 @@ done
 
 tmp=/tmp/e.tmp
 rm -f $tmp
-words="${*}"
-words="*${words// /*}*"
+words=\"${*}\"
+words=\"*${words// /*}*\"
 
 if [[ $run_grep == y ]]; then
-  grep -ril "${words:1}" /c/MJN/github/* >> $tmp
-  echo "--------------------------------------------------------------------------------" >> $tmp
+  grep -ril \"${words:1}\" /c/MJN/github/* >> $tmp
+  echo \"--------------------------------------------------------------------------------\" >> $tmp
 fi
-find /c/MJN/github -iname "$words" -print >> $tmp
+find /c/MJN/github -iname \"$words\" -print >> $tmp
 
 let c=1
 while read line; do
@@ -80,24 +80,24 @@ done < $tmp
 
 if [[ $run_grep == n ]]; then
   echo
-  echo "NOTE: No grep run.  Use -g to run a grep"
+  echo \"NOTE: No grep run.  Use -g to run a grep\"
 fi
 echo
-read -p "Enter Number (# or v# - Vim, m# - MS Code): " n
+read -p \"Enter Number (# or v# - Vim, m# - MS Code): \" n
 
-editor="gvim"
-if [[ "${n:0:1}" == "v" ]]; then
-  editor="gvim"
-  n="${n:1}"
-elif [[ "${n:0:1}" == "m" ]]; then
-  editor="code"
-  n="${n:1}"
+editor=\"gvim\"
+if [[ \"${n:0:1}\" == \"v\" ]]; then
+  editor=\"gvim\"
+  n=\"${n:1}\"
+elif [[ \"${n:0:1}\" == \"m\" ]]; then
+  editor=\"code\"
+  n=\"${n:1}\"
 fi
 
 let c=1
 while read line; do
   if [[ $c == $n ]]; then
-    $editor "$line"
+    $editor \"$line\"
   fi
   let c=c+1
 done < $tmp

@@ -8,7 +8,7 @@ title: find-large-files - tbc
 <script>
 function copyCode() {
   text = `#!/bin/bash
-help_text="
+help_text=\"
 NAME
   find-large-files - One line description.
 
@@ -27,37 +27,37 @@ DESCRIPTION
 
 AUTHOR
   mjnurse.dev - 2020
-"
-help_line="tbc"
-web_desc_line="tbc"
+\"
+help_line=\"tbc\"
+web_desc_line=\"tbc\"
 
-try="Try ${0##*/} -h for more information"
-tmp="${help_text##*USAGE}"
-usage=$(echo "Usage: ${tmp%%OPTIONS*}" | tr -d "\n" | sed "s/  */ /g")
+try=\"Try ${0##*/} -h for more information\"
+tmp=\"${help_text##*USAGE}\"
+usage=$(echo \"Usage: ${tmp%%OPTIONS*}\" | tr -d \"\n\" | sed \"s/  */ /g\")
 
-if [[ "$1" == "" ]]; then
-  echo "${usage}"
-  echo "${try}"
+if [[ \"$1\" == \"\" ]]; then
+  echo \"${usage}\"
+  echo \"${try}\"
   exit 1
 fi
 
-if [[ "$1" == "--help" || "$1" == "-h" || "$1" == "?" ]]; then
-   echo "$help_text"
+if [[ \"$1\" == \"--help\" || \"$1\" == \"-h\" || \"$1\" == \"?\" ]]; then
+   echo \"$help_text\"
    exit
 fi
 
 
 reuse_yn=n
-if [[ "$(ls /tmp/find-large-files:* 2> /dev/null | wc -l )" == "1" ]]; then
-  file="$(ls /tmp/find-large-files:*)"
-  echo "Scan last run: ${file##*:}"
-  read -p "Reuse this scan [yn]: " reuse_yn
+if [[ \"$(ls /tmp/find-large-files:* 2> /dev/null | wc -l )\" == \"1\" ]]; then
+  file=\"$(ls /tmp/find-large-files:*)\"
+  echo \"Scan last run: ${file##*:}\"
+  read -p \"Reuse this scan [yn]: \" reuse_yn
 fi
 
-if [[ "$reuse_yn" != "y" ]]; then
+if [[ \"$reuse_yn\" != \"y\" ]]; then
   rm -f /tmp/find-large-files:*
-  file="/tmp/find-large-files:$(date +'%y%m%d-%H%M')"
-  echo "Running Scan - this may take a while"
+  file=\"/tmp/find-large-files:$(date +'%y%m%d-%H%M')\"
+  echo \"Running Scan - this may take a while\"
   sudo du -a -t 1048576 -B M /c > $file
 fi
 

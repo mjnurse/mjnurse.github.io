@@ -8,7 +8,7 @@ title: csv-plot - Generates a HTML page containing a Google Chart plotting the c
 <script>
 function copyCode() {
   text = `#!/bin/bash
-help_text="
+help_text=\"
 NAME
   csv-plot - Generates a HTML page containing a Google Chart plotting the csv data.
 
@@ -36,29 +36,29 @@ DESCRIPTION
 
 AUTHOR
   mjnurse.dev - 2020
-"
-help_line="Generates a HTML page containing a Google Chart plotting the csv data"
-web_desc_line="Generates a HTML page containing a Google Chart plotting the csv data"
+\"
+help_line=\"Generates a HTML page containing a Google Chart plotting the csv data\"
+web_desc_line=\"Generates a HTML page containing a Google Chart plotting the csv data\"
 
-try="Try ${0##*/} -h for more information"
-tmp="${help_text##*USAGE}"
-usage="$(echo Usage: ${tmp%%OPTIONS*})"
+try=\"Try ${0##*/} -h for more information\"
+tmp=\"${help_text##*USAGE}\"
+usage=\"$(echo Usage: ${tmp%%OPTIONS*})\"
 
-if [[ "$1" == "" ]]; then
-  echo "${usage}"
-  echo "${try}"
+if [[ \"$1\" == \"\" ]]; then
+  echo \"${usage}\"
+  echo \"${try}\"
   exit 1
 fi
 
 font_size=12
 smooth=n
-haxis="H-Axis"
-vaxis="V-Axis"
+haxis=\"H-Axis\"
+vaxis=\"V-Axis\"
 
-while [[ "$1" != "" ]]; do
+while [[ \"$1\" != \"\" ]]; do
    case $1 in 
       -h|--help|?)
-         echo "$help_text"
+         echo \"$help_text\"
          exit
          ;;
       -f|--fontsize)
@@ -70,11 +70,11 @@ while [[ "$1" != "" ]]; do
          ;;
       -x|--xaxis|--haxis)
          shift
-         haxis="$1"
+         haxis=\"$1\"
          ;;
       -y|--yaxis|--vaxis)
          shift
-         vaxis="$1"
+         vaxis=\"$1\"
          ;;
       ?*)
          break
@@ -84,7 +84,7 @@ while [[ "$1" != "" ]]; do
 done 
 
 if [[ $smooth == y ]]; then
-  smooth_cmd='curveType: "function",'
+  smooth_cmd='curveType: \"function\",'
 else
   smooth_cmd=''
 fi
@@ -107,28 +107,28 @@ echo '<!DOCTYPE html>
         bottom: 0;
       }
     </style>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load("current", {"packages": ["corechart"]});
+    <script type=\"text/javascript\" src=\"https://www.gstatic.com/charts/loader.js\"></script>
+    <script type=\"text/javascript\">
+      google.charts.load(\"current\", {\"packages\": [\"corechart\"]});
       google.charts.setOnLoadCallback(drawCht);
       function drawCht() {
         const gChtData = google.visualization.arrayToDataTable([' > $html_doc
 
-cat $cf | sed "s/\"/'/g; s/^/[/; s/$/],/" | \
-          sed "1s/\]/'\]/; 1s/\[/\['/; 1s/,/','/g; 1s/''/'/g; 1s/','$/,/" >> $html_doc
+cat $cf | sed \"s/\\"/'/g; s/^/[/; s/$/],/\" | \
+          sed \"1s/\]/'\]/; 1s/\[/\['/; 1s/,/','/g; 1s/''/'/g; 1s/','$/,/\" >> $html_doc
 
 echo '    ]);
         const chtOptions = {
-          backgroundColor: "#FFFFFF",
-          chartArea: { left: "10%", top: "6%", height: "80%", width: "84%" },
+          backgroundColor: \"#FFFFFF\",
+          chartArea: { left: \"10%\", top: \"6%\", height: \"80%\", width: \"84%\" },
           pointsVisible: false,
           fontSize: '$font_size',
-          height: "100%",
-          width: "100%",
-          legend: "bottom",
+          height: \"100%\",
+          width: \"100%\",
+          legend: \"bottom\",
           vAxis: { 
             viewWindow: {min: 0},
-            title: "'$vaxis'",
+            title: \"'$vaxis'\",
             titleTextStyle: {
               // color: <string>,
               // fontName: <string>,
@@ -138,7 +138,7 @@ echo '    ]);
             },
           },
           hAxis: {
-            title: "'$haxis'",
+            title: \"'$haxis'\",
             titleTextStyle: {
               // color: <string>,
               // fontName: <string>,
@@ -148,11 +148,11 @@ echo '    ]);
             },
           }, '$smooth_cmd'
         };
-        const chart = new google.visualization.LineChart( document.getElementById("gChart"));
+        const chart = new google.visualization.LineChart( document.getElementById(\"gChart\"));
         chart.draw(gChtData, chtOptions);
       }
     </script>
-    <div id="gChartBox"><div id="gChart"></div></div><div>
+    <div id=\"gChartBox\"><div id=\"gChart\"></div></div><div>
   </body>
 </html>
 ' >> $html_doc

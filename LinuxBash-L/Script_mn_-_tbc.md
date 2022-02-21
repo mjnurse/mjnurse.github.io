@@ -8,7 +8,7 @@ title: mn - tbc
 <script>
 function copyCode() {
   text = `#!/bin/bash
-help_text="
+help_text=\"
 NAME
   mn - One line description.
 
@@ -27,32 +27,32 @@ DESCRIPTION
 
 AUTHOR
   mjnurse.dev - 2020
-"
-help_line="tbc"
-web_desc_line="tbc"
+\"
+help_line=\"tbc\"
+web_desc_line=\"tbc\"
 
-try="Try ${0##*/} -h for more information"
-tmp="${help_text##*USAGE}"
-usage=$(echo "Usage: ${tmp%%OPTIONS*}" | tr -d "\n" | sed "s/  */ /g")
+try=\"Try ${0##*/} -h for more information\"
+tmp=\"${help_text##*USAGE}\"
+usage=$(echo \"Usage: ${tmp%%OPTIONS*}\" | tr -d \"\n\" | sed \"s/  */ /g\")
 
-if [[ "$1" == "" ]]; then
-  echo "${usage}"
-  echo "${try}"
+if [[ \"$1\" == \"\" ]]; then
+  echo \"${usage}\"
+  echo \"${try}\"
   exit 1
 fi
 
-if [[ "$1" == "--help" || "$1" == "-h" || "$1" == "?" ]]; then
-   echo "$help_text"
+if [[ \"$1\" == \"--help\" || \"$1\" == \"-h\" || \"$1\" == \"?\" ]]; then
+   echo \"$help_text\"
    exit
 fi
 
-div="#@&#"
+div=\"#@&#\"
 reuse_yn=n
 
-while [[ "$1" != "" ]]; do
+while [[ \"$1\" != \"\" ]]; do
    case $1 in
       -h|--help)
-         echo "$help_text"
+         echo \"$help_text\"
          exit
          ;;
       -r|--reuse)
@@ -62,64 +62,64 @@ while [[ "$1" != "" ]]; do
    shift
 done
 
-if [[ "$reuse_yn" == "y" ]]; then
-  tmp="$(ls /tmp/mn:*.db)"
-  file="${tmp/.db/}"
+if [[ \"$reuse_yn\" == \"y\" ]]; then
+  tmp=\"$(ls /tmp/mn:*.db)\"
+  file=\"${tmp/.db/}\"
 else
-  if [[ "$(ls /tmp/mn:* 2> /dev/null | wc -l )" == "1" ]]; then
-    tmp="$(ls /tmp/mn:*.db)"
-    file="${tmp/.db/}"
-    echo "Scan last run: ${file##*:}"
-    read -p "Reuse this scan [yn]: " reuse_yn
+  if [[ \"$(ls /tmp/mn:* 2> /dev/null | wc -l )\" == \"1\" ]]; then
+    tmp=\"$(ls /tmp/mn:*.db)\"
+    file=\"${tmp/.db/}\"
+    echo \"Scan last run: ${file##*:}\"
+    read -p \"Reuse this scan [yn]: \" reuse_yn
   fi
 fi
 
-if [[ "$reuse_yn" != "y" ]]; then
+if [[ \"$reuse_yn\" != \"y\" ]]; then
   rm -f /tmp/mn:*
-  file="/tmp/mn:$(date +'%y%m%d-%H%M')"
-  echo "Running Scan - this may take a while"
-  echo "f,d,s,b,t" > $file.csv
-  find . -printf "%f${div}%h${div}%s${div}%b${div}%y\n" | sed "s/,//g; s/${div}/,/g" >> $file.csv
+  file=\"/tmp/mn:$(date +'%y%m%d-%H%M')\"
+  echo \"Running Scan - this may take a while\"
+  echo \"f,d,s,b,t\" > $file.csv
+  find . -printf \"%f${div}%h${div}%s${div}%b${div}%y\n\" | sed \"s/,//g; s/${div}/,/g\" >> $file.csv
 
   echo -e '.mode csv\n.import '$file.csv' files\n' | sqlite3 $file.db
   #echo 'DELETE FROM files WHERE s>1024 AND b=0'
   rm -f $file.csv
 fi
 
-prompt="$(pwd) > "
-filename_filter="%"
-min_size_filter="0"
+prompt=\"$(pwd) > \"
+filename_filter=\"%\"
+min_size_filter=\"0\"
 
-std_filter="AND d NOT LIKE '%oracle_client%' AND d NOT LIKE '%\/.git\/%'"
-std_filter="$std_filter AND d NOT LIKE '%\/node_modules\/%'"
+std_filter=\"AND d NOT LIKE '%oracle_client%' AND d NOT LIKE '%\/.git\/%'\"
+std_filter=\"$std_filter AND d NOT LIKE '%\/node_modules\/%'\"
 
 function sq() {
-  table="(SELECT * FROM files WHERE f LIKE '${filename_filter}' AND (s+0) > ${min_size_filter} $std_filter)"
-  #echo "std_filter: $std_filter"
-  #echo "table: $table"
-  #echo "$1" | sed "s/^ *//; s/{table}/$table/;" 
-  #read -p "Press a key" dummy
-  echo "$1" | sed "s/^ *//; s/{table}/$table/;" | sqlite3 $file.db
+  table=\"(SELECT * FROM files WHERE f LIKE '${filename_filter}' AND (s+0) > ${min_size_filter} $std_filter)\"
+  #echo \"std_filter: $std_filter\"
+  #echo \"table: $table\"
+  #echo \"$1\" | sed \"s/^ *//; s/{table}/$table/;\" 
+  #read -p \"Press a key\" dummy
+  echo \"$1\" | sed \"s/^ *//; s/{table}/$table/;\" | sqlite3 $file.db
 }
 
 function set_filter() {
   case $2 in
     fn|filename)
-      filename_filter="$3"
+      filename_filter=\"$3\"
       ;;
     ms|min_size)
-      min_size_filter="$3"
+      min_size_filter=\"$3\"
       ;;
   esac
 }
 
-file_count="
+file_count=\"
   .mode column
   .headers on
   SELECT t AS type, COUNT(*) num FROM {table} GROUP BY t;
-"
+\"
 
-file_dups="
+file_dups=\"
   .mode column
   .width 40 10 100
   SELECT    f, s, details
@@ -146,17 +146,17 @@ file_dups="
       GROUP BY  f, s
       HAVING    COUNT(*) > 1 )
     ORDER BY 1,2,3
-  );"
-largest_files="
+  );\"
+largest_files=\"
   .mode column
   .headers on
   .width 40 10 100
   SELECT f, (s/1024/1024)||'MB' AS mb, d||'/'||f AS file
   FROM   {table}
   ORDER BY (s+0) desc
-  LIMIT 100;"
+  LIMIT 100;\"
 
-dir_sizes="
+dir_sizes=\"
   .mode column
   .headers on
   .width 40 10 100
@@ -176,40 +176,40 @@ dir_sizes="
   WHERE   files.t = 'f'
   GROUP BY  dirs.d
   ORDER BY  dirs.d;
-"
+\"
 
 while [ 1 ]; do
-  read -e -p "$prompt" option
-  history -s "$option"
+  read -e -p \"$prompt\" option
+  history -s \"$option\"
 
   case $option in
     c)
-      sq "$file_count"
+      sq \"$file_count\"
       ;;
     ds)
-      sq "$dir_sizes"
+      sq \"$dir_sizes\"
       ;;
     fd)
-      sq "$file_dups"
+      sq \"$file_dups\"
       ;;
     f)
-      echo "Filters:"
-      echo "- filename filter (fn): ${filename_filter}"
-      echo "- min size filter (ms): ${min_size_filter}"
+      echo \"Filters:\"
+      echo \"- filename filter (fn): ${filename_filter}\"
+      echo \"- min size filter (ms): ${min_size_filter}\"
       ;;
     f*)
       set_filter $option
       ;;
     h|help)
-      echo -e " fd    - file duplicates\n" \
-              "fi     - show/set filters\n" \
-              "sq     - open sqlite3\n" \
-              "!<cmd> - Run shell command\n" \
-              "\n" \
-              "q    - quit\n"
+      echo -e \" fd    - file duplicates\n\" \
+              \"fi     - show/set filters\n\" \
+              \"sq     - open sqlite3\n\" \
+              \"!<cmd> - Run shell command\n\" \
+              \"\n\" \
+              \"q    - quit\n\"
       ;;
     lg)
-      sq "$largest_files"
+      sq \"$largest_files\"
       ;;
     q|quit)
       exit;
@@ -221,7 +221,7 @@ while [ 1 ]; do
       ${option:1}
       ;;
     *)
-      echo "No such option.  Try h for help"
+      echo \"No such option.  Try h for help\"
       ;;
    esac
 done

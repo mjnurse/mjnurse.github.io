@@ -8,7 +8,7 @@ title: pg - Connect to postgresql using psql
 <script>
 function copyCode() {
   text = `#!/bin/bash
-help_text="
+help_text=\"
 NAME
   pg - Connect to postgresql using psql.
 
@@ -27,13 +27,13 @@ DESCRIPTION
 
 AUTHOR
   mjnurse.dev - 2020
-"
-help_line="Connect to postgresql using psql"
-web_desc_line="Connect to postgresql using psql"
+\"
+help_line=\"Connect to postgresql using psql\"
+web_desc_line=\"Connect to postgresql using psql\"
 
 export PGPASSWORD=postgres
 
-if [[ "$1" == "" ]]; then
+if [[ \"$1\" == \"\" ]]; then
    psql --host=localhost -U postgres $*
 else
    psql --host=localhost -U postgres -f $1

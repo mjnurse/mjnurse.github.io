@@ -8,7 +8,7 @@ title: file-watch-do - Watch a file and each time it is modified run a command
 <script>
 function copyCode() {
   text = `#!/bin/bash
-help_text="
+help_text=\"
 NAME
   file-watch-do - Watch a file and each time it is modified run a command.
 
@@ -20,13 +20,13 @@ DESCRIPTION
 
 AUTHOR
   mjnurse.dev - 2019
-"
-help_line="Watch a file and each time it is modified run a command"
-web_desc_line="Watch a file and each time it is modified run a command"
-pack_member="default"
+\"
+help_line=\"Watch a file and each time it is modified run a command\"
+web_desc_line=\"Watch a file and each time it is modified run a command\"
+pack_member=\"default\"
 
 name=${0/\.\/}
-try="Try '$name -h' for more information"
+try=\"Try '$name -h' for more information\"
 
 # Get usage from help_text.
 usage=${help_text##*USAGE}
@@ -35,16 +35,16 @@ usage=${usage%%PARAMETERS*}
 usage=${usage%%DESCRIPTION*}
 usage=${usage//[$'\n\r']}
 usage=${usage##*   }
-usage="Usage: ${usage}"
+usage=\"Usage: ${usage}\"
 
-if [[ "$1" == "--help" || "$1" == "-h" || "$1" == "?" ]]; then
-   echo "$help_text"
+if [[ \"$1\" == \"--help\" || \"$1\" == \"-h\" || \"$1\" == \"?\" ]]; then
+   echo \"$help_text\"
    exit
 fi
 
-if [[ "$2" == "" ]]; then
-   echo "$usage"
-   echo "$try"
+if [[ \"$2\" == \"\" ]]; then
+   echo \"$usage\"
+   echo \"$try\"
    exit
 fi
 
@@ -54,12 +54,12 @@ prev_file_date=$(date -r $file_name)
 echo $prev_file_date
 file_date=$prev_file_date
 while [ 1 ]; do
-   while [[ "$file_date" == "$prev_file_date" ]]; do
+   while [[ \"$file_date\" == \"$prev_file_date\" ]]; do
       sleep 1
       file_date=$(date -r $file_name)
    done
    prev_file_date=$file_date
-   echo $prev_file_date -  Run: "$*"
+   echo $prev_file_date -  Run: \"$*\"
    $*
 done
 `

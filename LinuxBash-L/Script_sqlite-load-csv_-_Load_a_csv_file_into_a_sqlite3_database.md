@@ -8,7 +8,7 @@ title: sqlite-load-csv - Load a csv file into a sqlite3 database
 <script>
 function copyCode() {
   text = `#!/bin/bash
-help_text="
+help_text=\"
 NAME
   sqlite-load-csv - Load a csv file into a sqlite3 database.
 
@@ -34,31 +34,31 @@ DESCRIPTION
 
 AUTHOR
   mjnurse.dev - 2020
-"
-help_line="Load a csv file into a sqlite3 database"
-web_desc_line="Load a csv file into a sqlite3 database"
+\"
+help_line=\"Load a csv file into a sqlite3 database\"
+web_desc_line=\"Load a csv file into a sqlite3 database\"
 
-try="Try ${0##*/} -h for more information"
-tmp="${help_text##*USAGE}"
-usage="$(echo Usage: ${tmp%%OPTIONS*})"
+try=\"Try ${0##*/} -h for more information\"
+tmp=\"${help_text##*USAGE}\"
+usage=\"$(echo Usage: ${tmp%%OPTIONS*})\"
 
-if [[ "$1" == "" ]]; then
-  echo "${usage}"
-  echo "${try}"
+if [[ \"$1\" == \"\" ]]; then
+  echo \"${usage}\"
+  echo \"${try}\"
   exit 1
 fi
 
-table_name=""
+table_name=\"\"
 
-while [[ "$1" != "" ]]; do
+while [[ \"$1\" != \"\" ]]; do
    case $1 in
       -h|--help)
-         echo "$help_text"
+         echo \"$help_text\"
          exit
          ;;
       -t|--table)
          shift
-         table_name="$1"
+         table_name=\"$1\"
          ;;
       ?*)
          break
@@ -67,21 +67,21 @@ while [[ "$1" != "" ]]; do
    shift
 done
 
-csv_filepathname="$1"
-csv_filename="${1##*/}"
-if [[ "$table_name" == "" ]]; then
-  table_name="${csv_filename/.csv/}"
+csv_filepathname=\"$1\"
+csv_filename=\"${1##*/}\"
+if [[ \"$table_name\" == \"\" ]]; then
+  table_name=\"${csv_filename/.csv/}\"
 fi
-db_name="${2/.db/}"
+db_name=\"${2/.db/}\"
 
-if [[ "$db_name" == "" ]]; then
-  db_name="${csv_filename/.csv/}"
+if [[ \"$db_name\" == \"\" ]]; then
+  db_name=\"${csv_filename/.csv/}\"
 fi 
-db_name="${db_name}.db"
+db_name=\"${db_name}.db\"
 
 echo loading: $csv_filepathname into table: $table_name in database: $db_name 
 
-cat $csv_filepathname | sed "s/ *, */,/g" > $0.tmpcsv
+cat $csv_filepathname | sed \"s/ *, */,/g\" > $0.tmpcsv
 
 echo 'drop table '$table_name';' | sqlite3 $db_name > /dev/null 2>&1
 

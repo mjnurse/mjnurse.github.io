@@ -8,7 +8,7 @@ title: gen-search-doc-list - tbc
 <script>
 function copyCode() {
   text = `#!/bin/bash
-help_text="
+help_text=\"
 NAME
   gen-search-doc-list - One line description.
 
@@ -27,43 +27,43 @@ DESCRIPTION
 
 AUTHOR
   mjnurse.dev - 2020
-"
-help_line="tbc"
-web_desc_line="tbc"
+\"
+help_line=\"tbc\"
+web_desc_line=\"tbc\"
 
 
-sd="/c/MJN/github/mjnurse-github-io/assets/javascript/search-docs.js"
+sd=\"/c/MJN/github/mjnurse-github-io/assets/javascript/search-docs.js\"
 
-rm -f "$sd"
+rm -f \"$sd\"
 
-echo "var index = elasticlunr(function () {" >> $sd
-echo "  this.addField('title');" >> $sd
-echo "  this.addField('url');" >> $sd
-echo "  this.addField('body');" >> $sd
-echo "  this.setRef('id');" >> $sd
-echo "});" >> $sd
+echo \"var index = elasticlunr(function () {\" >> $sd
+echo \"  this.addField('title');\" >> $sd
+echo \"  this.addField('url');\" >> $sd
+echo \"  this.addField('body');\" >> $sd
+echo \"  this.setRef('id');\" >> $sd
+echo \"});\" >> $sd
 
 cd /c/MJN/github/mjnurse-github-io
 
 (( i=1 ))
-for f in $(find . -name "*.md" -print); do
+for f in $(find . -name \"*.md\" -print); do
 
-   if [[ ! "$f" =~ .*index.md ]]; then
+   if [[ ! \"$f\" =~ .*index.md ]]; then
 
       echo $f
 
-      title="$(echo $f | sed 's/\.md//; s/^\.\///; s/-.\// - /; s/\// - /g; s/_/ /g')"
-      url="$(echo $f | sed 's/^\.\///; s/\.md/\.html/')"
-      body="$(cat $f | dos2unix | sed "/^---/d; /^title:/d; /^layout:/d" | 
-         tr '\n' ' ' | tr -c '[:alnum:]-' ' ' | sed 's/  */ /g')"
+      title=\"$(echo $f | sed 's/\.md//; s/^\.\///; s/-.\// - /; s/\// - /g; s/_/ /g')\"
+      url=\"$(echo $f | sed 's/^\.\///; s/\.md/\.html/')\"
+      body=\"$(cat $f | dos2unix | sed \"/^---/d; /^title:/d; /^layout:/d\" | 
+         tr '\n' ' ' | tr -c '[:alnum:]-' ' ' | sed 's/  */ /g')\"
 
-      echo "var doc = {" >> $sd
-      echo "  \"id\": $i," >> $sd
-      echo "  \"title\": \"$title\"," >> $sd
-      echo "  \"url\": \"$url\"," >> $sd
-      echo "  \"body\": \"$body $title\"" >> $sd
-      echo "}" >> $sd
-      echo "index.addDoc(doc);" >> $sd
+      echo \"var doc = {\" >> $sd
+      echo \"  \\"id\\": $i,\" >> $sd
+      echo \"  \\"title\\": \\"$title\\",\" >> $sd
+      echo \"  \\"url\\": \\"$url\\",\" >> $sd
+      echo \"  \\"body\\": \\"$body $title\\"\" >> $sd
+      echo \"}\" >> $sd
+      echo \"index.addDoc(doc);\" >> $sd
 
       (( i=i+1 ))
    fi

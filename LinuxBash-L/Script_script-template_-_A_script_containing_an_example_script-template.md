@@ -8,7 +8,7 @@ title: script-template - A script containing an example script-template
 <script>
 function copyCode() {
   text = `#!/bin/bash
-help_text="
+help_text=\"
 NAME
   script-template - A script containing an example script-template.
 
@@ -27,27 +27,27 @@ DESCRIPTION
 
 AUTHOR
   mjnurse.dev - 2021
-"
-help_line="A script containing an example script-template"
-web_desc_line="A script containing an example script-template"
+\"
+help_line=\"A script containing an example script-template\"
+web_desc_line=\"A script containing an example script-template\"
 
-try="Try ${0##*/} -h for more information"
-tmp="${help_text##*USAGE}"
-usage="$(echo Usage: ${tmp%%OPTIONS*})"
+try=\"Try ${0##*/} -h for more information\"
+tmp=\"${help_text##*USAGE}\"
+usage=\"$(echo Usage: ${tmp%%OPTIONS*})\"
 
-if [[ "$1" == "" ]]; then
-  echo "${usage}"
-  echo "${try}"
+if [[ \"$1\" == \"\" ]]; then
+  echo \"${usage}\"
+  echo \"${try}\"
   exit 1
 fi
 
 logging_yn=n
 max_value=-1
 
-while [[ "$1" != "" ]]; do
+while [[ \"$1\" != \"\" ]]; do
   case $1 in 
     -h|--help)
-      echo "$help_text"
+      echo \"$help_text\"
       exit
       ;;
     -l|--logging)

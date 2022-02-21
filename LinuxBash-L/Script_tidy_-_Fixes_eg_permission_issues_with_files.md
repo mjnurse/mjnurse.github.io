@@ -8,7 +8,7 @@ title: tidy - Fixes eg permission issues with files
 <script>
 function copyCode() {
   text = `#!/bin/bash
-help_text="
+help_text=\"
 NAME
   tidy - Fixes issues such as permission issues with files in current directory.
 
@@ -22,20 +22,20 @@ DESCRIPTION
 
 AUTHOR
   mjnurse.dev - 2020
-"
-help_line="Fixes issues such as permission issues with files in current directory"
-web_desc_line="Fixes eg permission issues with files"
+\"
+help_line=\"Fixes issues such as permission issues with files in current directory\"
+web_desc_line=\"Fixes eg permission issues with files\"
 
-if [[ "$1" != "" ]]; then
+if [[ \"$1\" != \"\" ]]; then
   cd $1
 fi
 
 for f in $(find . -maxdepth 1 -executable); do
 
   if [[ -f $f && ! -L $f ]]; then
-    line1="$(head -1 $f)"
+    line1=\"$(head -1 $f)\"
     line1=${line1//[$' \t\r\n']}
-    if [[ "$line1" != "#!/bin/bash" ]]; then
+    if [[ \"$line1\" != \"#!/bin/bash\" ]]; then
       echo
       echo ================================================================================
       echo Executable but not '#!/bin/bash'
@@ -46,7 +46,7 @@ for f in $(find . -maxdepth 1 -executable); do
       echo --------------
       head -5 $f
       echo
-      read -p "[i]gnore rule, [r]emove exec, [a]dd '#!/bin/bash', [s]kip, q[uit]. [iraSq]?: " opt
+      read -p \"[i]gnore rule, [r]emove exec, [a]dd '#!/bin/bash', [s]kip, q[uit]. [iraSq]?: \" opt
       case $opt in
         r|R)
           chmod a-x $f;;
@@ -63,9 +63,9 @@ done
 
 for f in $(find . -maxdepth 1 ! -executable); do
   if [[ -f $f && ! -L $f ]]; then
-    line1="$(head -1 $f)"
+    line1=\"$(head -1 $f)\"
     line1=${line1//[$' \t\r\n']}
-    if [[ "$line1" == "#!/bin/bash" ]]; then
+    if [[ \"$line1\" == \"#!/bin/bash\" ]]; then
       echo
       echo ================================================================================
       echo '#!/bin/bash' but not Executable
@@ -76,7 +76,7 @@ for f in $(find . -maxdepth 1 ! -executable); do
         echo --------------
       head -5 $f
       echo
-      read -p "[i]gnore rule, [d]elete '#!/bin/bash', [m]ake exec, [s]kip, q[uit]. [idmSq]?: " opt
+      read -p \"[i]gnore rule, [d]elete '#!/bin/bash', [m]ake exec, [s]kip, q[uit]. [idmSq]?: \" opt
       case $opt in
         d|D)
           sed -i '1d' $f;;
@@ -99,7 +99,7 @@ for f in $(find . -maxdepth 1 -perm -o=w); do
     echo ================================================================================
     ls -al $f
     echo
-    read -p "[i]gnore rule, [r]remove writeable other, [s]kip, q[uit]. [irSq]?: " opt
+    read -p \"[i]gnore rule, [r]remove writeable other, [s]kip, q[uit]. [irSq]?: \" opt
     case $opt in
       r|R)
         chmod o-w $f;;
@@ -119,7 +119,7 @@ for f in $(find . -maxdepth 1 -perm -g=w); do
     echo ================================================================================
     ls -al $f
     echo
-    read -p "[i]gnore rule, [r]remove writeable group, [s]kip, q[uit]. [irSq]?: " opt
+    read -p \"[i]gnore rule, [r]remove writeable group, [s]kip, q[uit]. [irSq]?: \" opt
     case $opt in
       r|R)
         chmod g-w $f;;
@@ -139,7 +139,7 @@ for f in $(find . -maxdepth 1 -perm -o=x); do
     echo ================================================================================
     ls -al $f
     echo
-    read -p "[i]gnore rule, [r]remove Exec other, [s]kip, q[uit]. [irSq]?: " opt
+    read -p \"[i]gnore rule, [r]remove Exec other, [s]kip, q[uit]. [irSq]?: \" opt
     case $opt in
       r|R)
         chmod o-x $f;;
@@ -159,7 +159,7 @@ for f in $(find . -maxdepth 1 -perm -g=x); do
     echo ================================================================================
     ls -al $f
     echo
-    read -p "[i]gnore rule, [r]remove Exec group, [s]kip, q[uit]. [irSq]?: " opt
+    read -p \"[i]gnore rule, [r]remove Exec group, [s]kip, q[uit]. [irSq]?: \" opt
     case $opt in
       r|R)
         chmod g-x $f;;
@@ -173,20 +173,20 @@ done
 
 for f in $(find . -maxdepth 1 -executable); do
   if [[ -f $f && ! -L $f ]]; then
-    l2="$(cat $f | sed -n '2p')"
-    if [[ "${l2:0:10}" != "help_text=" ]]; then
+    l2=\"$(cat $f | sed -n '2p')\"
+    if [[ \"${l2:0:10}\" != \"help_text=\" ]]; then
       echo
       echo ================================================================================
       echo No header
       echo ================================================================================
       ls -al $f
       echo
-      read -p "[i]gnore , [a]dd header, [s]kip, q[uit]. [iaSq]?: " opt
+      read -p \"[i]gnore , [a]dd header, [s]kip, q[uit]. [iaSq]?: \" opt
       case $opt in
         a|A)
-          tidytmp="/tmp/tidy.tmp"
+          tidytmp=\"/tmp/tidy.tmp\"
 echo '#!/bin/bash
-help_text="
+help_text=\"
 NAME
   '${f:2}' - One line description.
 
@@ -205,22 +205,22 @@ DESCRIPTION
 
 AUTHOR
   mjnurse.dev - 2021
-"
-help_line="'tbc'"
-web_desc_line="'tbc'"
+\"
+help_line=\"'tbc'\"
+web_desc_line=\"'tbc'\"
 
-try="Try ${0##*/} -h for more information"
-tmp="${help_text##*USAGE}"
-usage=$(echo "Usage: ${tmp%%OPTIONS*}" | tr -d "\n" | sed "s/  */ /g")
+try=\"Try ${0##*/} -h for more information\"
+tmp=\"${help_text##*USAGE}\"
+usage=$(echo \"Usage: ${tmp%%OPTIONS*}\" | tr -d \"\n\" | sed \"s/  */ /g\")
 
-if [[ "$1" == "" ]]; then
-  echo "${usage}"
-  echo "${try}"
+if [[ \"$1\" == \"\" ]]; then
+  echo \"${usage}\"
+  echo \"${try}\"
   exit 1
 fi
 
-if [[ "$1" == "--help" || "$1" == "-h" || "$1" == "?" ]]; then
-  echo "$help_text"
+if [[ \"$1\" == \"--help\" || \"$1\" == \"-h\" || \"$1\" == \"?\" ]]; then
+  echo \"$help_text\"
   exit
 fi
 ' > $tidytmp

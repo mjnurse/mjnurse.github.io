@@ -8,7 +8,7 @@ title: img - A script containing an example script-template
 <script>
 function copyCode() {
   text = `#!/bin/bash
-help_text="
+help_text=\"
 NAME
   script-template - A script containing an example script-template.
 
@@ -27,22 +27,22 @@ DESCRIPTION
 
 AUTHOR
   mjnurse.dev - 2020
-"
-help_line="A script containing an example script-template"
-web_desc_line="A script containing an example script-template"
+\"
+help_line=\"A script containing an example script-template\"
+web_desc_line=\"A script containing an example script-template\"
 
-try="Try ${0##*/} -h for more information"
-tmp="${help_text##*USAGE}"
-usage="$(echo Usage: ${tmp%%OPTIONS*})"
+try=\"Try ${0##*/} -h for more information\"
+tmp=\"${help_text##*USAGE}\"
+usage=\"$(echo Usage: ${tmp%%OPTIONS*})\"
 
 logging_yn=n
 max_value=-1
-tmp="/tmp/img.tmp"
+tmp=\"/tmp/img.tmp\"
 
-while [[ "$1" != "" ]]; do
+while [[ \"$1\" != \"\" ]]; do
   case $1 in 
     -h|--help)
-      echo "$help_text"
+      echo \"$help_text\"
       exit
       ;;
     -l|--logging)
@@ -59,31 +59,31 @@ while [[ "$1" != "" ]]; do
   shift
 done 
 
-echo "IMAGE SOURCE:"
-echo "- c: current dir"
-echo "- o: other - enter full path/filename"
-echo "- s: screen shots"
+echo \"IMAGE SOURCE:\"
+echo \"- c: current dir\"
+echo \"- o: other - enter full path/filename\"
+echo \"- s: screen shots\"
 echo
-read -p "[coS]: " cos
+read -p \"[coS]: \" cos
 
-source_dir=""
-img_filename=""
+source_dir=\"\"
+img_filename=\"\"
 case $cos in
   c)
-    source_dir="$(pwd)"
+    source_dir=\"$(pwd)\"
     ;;
   o)
-    read -p "path/filename: " img_filename
+    read -p \"path/filename: \" img_filename
     ;;
   s)
-    source_dir="/c/MJN/screenshots"
+    source_dir=\"/c/MJN/screenshots\"
     ;;
   *)
-    echo "Error: Invalid option"
+    echo \"Error: Invalid option\"
     exit 1
 esac
 
-if [[ "$source_dir" != "" ]]; then
+if [[ \"$source_dir\" != \"\" ]]; then
   cd $source_dir
   ls | sort > $tmp
   num=1
@@ -91,14 +91,14 @@ if [[ "$source_dir" != "" ]]; then
     echo $num: $line
     let num=num+1
   done < $tmp
-  read -p "Enter Number (blank to quit): " selection
-  if [[ "$selection" == "" ]]; then
+  read -p \"Enter Number (blank to quit): \" selection
+  if [[ \"$selection\" == \"\" ]]; then
     exit
   fi
   num=1
   while read line; do
     if [[ $num == $selection ]]; then
-      img_filename="${line}"
+      img_filename=\"${line}\"
     fi
     let num=num+1
   done < $tmp
@@ -106,12 +106,12 @@ fi
 
 echo $source_dir/$img_filename 
 if [[ ! -f $source_dir/$img_filename ]]; then
-  echo "File: $img_filename - not found"
+  echo \"File: $img_filename - not found\"
   exit
 fi
 
 echo
-echo "IMAGE DESTINATION"
+echo \"IMAGE DESTINATION\"
 cd /c/MJN/github/mjnurse-github-io
 
 find . -name images -print | sort > $tmp
@@ -120,50 +120,50 @@ while read line; do
   echo $num: $line
   let num=num+1
 done < $tmp
-read -p "Enter Number (blank to quit): " selection
-if [[ "$selection" == "" ]]; then
+read -p \"Enter Number (blank to quit): \" selection
+if [[ \"$selection\" == \"\" ]]; then
   exit
 fi
 num=1
 
-dest_dir=""
+dest_dir=\"\"
 while read line; do
   if [[ $num == $selection ]]; then
-    dest_dir="$line"
+    dest_dir=\"$line\"
   fi
   let num=num+1
 done < $tmp
 
-if [[ "$dest_dir" == "" ]]; then
-  echo "No such directory: $dest_dir"
+if [[ \"$dest_dir\" == \"\" ]]; then
+  echo \"No such directory: $dest_dir\"
   exit
 fi
 
 echo
-read -p "Enter Destination image name (blank to use existing name): " new_name
+read -p \"Enter Destination image name (blank to use existing name): \" new_name
 
-if [[ "$new_name" == "" ]]; then
-  new_name="${img_filename##*/}"
-  new_name="${new_name// /-}"
-  new_name="${new_name,,}"
+if [[ \"$new_name\" == \"\" ]]; then
+  new_name=\"${img_filename##*/}\"
+  new_name=\"${new_name// /-}\"
+  new_name=\"${new_name,,}\"
 fi
 
-if [[ "${new_name##*.}" != "png" &&  \
-      "${new_name##*.}" != "jpg" ]]; then
-  echo "$new_name - is not a valid image filename"
+if [[ \"${new_name##*.}\" != \"png\" &&  \
+      \"${new_name##*.}\" != \"jpg\" ]]; then
+  echo \"$new_name - is not a valid image filename\"
   exit
 fi
 
 echo
-echo "Copying: $source_dir/$img_filename"
-echo "To: $dest_dir/$new_name"
+echo \"Copying: $source_dir/$img_filename\"
+echo \"To: $dest_dir/$new_name\"
 echo
-read -p "Continue [yN]? " yn
+read -p \"Continue [yN]? \" yn
 
 if [[ ${yn,,} == y ]]; then
-  cp "$source_dir/$img_filename" $dest_dir/$new_name
+  cp \"$source_dir/$img_filename\" $dest_dir/$new_name
   echo
-  echo "Image md tag: ![](${dest_dir:1}/$new_name)"
+  echo \"Image md tag: ![](${dest_dir:1}/$new_name)\"
 fi
 `
   navigator.clipboard.writeText(text);

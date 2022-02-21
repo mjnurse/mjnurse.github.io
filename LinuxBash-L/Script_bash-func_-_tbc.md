@@ -8,7 +8,7 @@ title: bash-func - tbc
 <script>
 function copyCode() {
   text = `#!/bin/bash
-help_text="
+help_text=\"
 NAME
   bash-func - One line description.
 
@@ -27,22 +27,22 @@ DESCRIPTION
 
 AUTHOR
   mjnurse.dev - 2020
-"
-help_line="tbc"
-web_desc_line="tbc"
+\"
+help_line=\"tbc\"
+web_desc_line=\"tbc\"
 
-try="Try ${0##*/} -h for more information"
-tmp="${help_text##*USAGE}"
-usage=$(echo "Usage: ${tmp%%OPTIONS*}" | tr -d "\n" | sed "s/  */ /g")
+try=\"Try ${0##*/} -h for more information\"
+tmp=\"${help_text##*USAGE}\"
+usage=$(echo \"Usage: ${tmp%%OPTIONS*}\" | tr -d \"\n\" | sed \"s/  */ /g\")
 
-if [[ "$1" == "" ]]; then
-  echo "${usage}"
-  echo "${try}"
+if [[ \"$1\" == \"\" ]]; then
+  echo \"${usage}\"
+  echo \"${try}\"
   exit 1
 fi
 
-if [[ "$1" == "--help" || "$1" == "-h" || "$1" == "?" ]]; then
-   echo "$help_text"
+if [[ \"$1\" == \"--help\" || \"$1\" == \"-h\" || \"$1\" == \"?\" ]]; then
+   echo \"$help_text\"
    exit
 fi
 
@@ -58,36 +58,36 @@ fi
 #*
 function desc() {
   optional_yn=n
-  echo "#*"
-  echo "#* DESC"
-  echo "#*"
+  echo \"#*\"
+  echo \"#* DESC\"
+  echo \"#*\"
   shift
-  while [[ "$1" ]]; do
+  while [[ \"$1\" ]]; do
     case $1 in
       -o|--optional)
         optional_yn=y
         ;;
       -f|--flag)
         shift
-        echo "#* {flag} -${1} ${2}_yn - DESC"
+        echo \"#* {flag} -${1} ${2}_yn - DESC\"
         shift
         ;;
       -fv|--flag-value)
         shift
-        echo "#* {flag-value} -${1} <${2}> - DESC"
+        echo \"#* {flag-value} -${1} <${2}> - DESC\"
         shift
         ;;
       ?*)
         if [[ ${optional_yn} == n ]]; then
-          echo "#* {param} <${1}> - DESC"
+          echo \"#* {param} <${1}> - DESC\"
         else
-          echo "#* {opt-param} <${1}> - DESC"
+          echo \"#* {opt-param} <${1}> - DESC\"
         fi
         ;;
     esac
     shift
   done
-  echo "#*"
+  echo \"#*\"
 }
 
 #*
@@ -95,10 +95,10 @@ function desc() {
 #*
 function flag_error() {
   echo
-  echo "########################################################"
-  echo "ERROR: Flag or flag with value listed after a parameter."
-  echo "       Flags cannot follow a parameter."
-  echo "########################################################"
+  echo \"########################################################\"
+  echo \"ERROR: Flag or flag with value listed after a parameter.\"
+  echo \"       Flags cannot follow a parameter.\"
+  echo \"########################################################\"
   exit 1
 }
 
@@ -106,16 +106,16 @@ function func() {
   optional_yn=n
   param_pos=1
   flags_yn=n
-  function_name="$1"
+  function_name=\"$1\"
   shift
-  echo "function ${function_name} () {"
-  echo ""
+  echo \"function ${function_name} () {\"
+  echo \"\"
   if [[ $1 =~ -.* ]]; then
-    echo "  while [[ \"\$1 ]]; do"
-    echo "    case \$1 in"
+    echo \"  while [[ \\"\$1 ]]; do\"
+    echo \"    case \$1 in\"
     flags_yn=y
   fi
-  while [[ "$1" ]]; do
+  while [[ \"$1\" ]]; do
     case $1 in
       -o|--optional)
         optional_yn=y
@@ -125,9 +125,9 @@ function func() {
           flag_error
         fi
         shift
-        echo "      -${1})"
-        echo "        ${2}_yn=y"
-        echo "        ;;"
+        echo \"      -${1})\"
+        echo \"        ${2}_yn=y\"
+        echo \"        ;;\"
         shift
         ;;
       -fv|--flag-value)
@@ -135,27 +135,27 @@ function func() {
           flag_error
         fi
         shift
-        echo "      -${1})"
-        echo "        ${2}=\"\${2}\""
-        echo "        shift"
-        echo "        ;;"
+        echo \"      -${1})\"
+        echo \"        ${2}=\\"\${2}\\"\"
+        echo \"        shift\"
+        echo \"        ;;\"
         shift
         ;;
       ?*)
         if [[ ${flags_yn} == y ]]; then
           flags_yn=n;
-          echo "    esac"
-          echo "    shift"
-          echo "  done"
+          echo \"    esac\"
+          echo \"    shift\"
+          echo \"  done\"
         fi
         if [[ ${optional_yn} == n ]]; then
-          echo "  ${1}=\"\${${param_pos}}\""
-          echo "  if [[ \"\$$1\" == \"\" ]]; then"
-          echo "    echo \"Error: Function: $function_name.  Mandatory parameter <$1> not set\""
-          echo "    exit 1"
-          echo "  fi"
+          echo \"  ${1}=\\"\${${param_pos}}\\"\"
+          echo \"  if [[ \\"\$$1\\" == \\"\\" ]]; then\"
+          echo \"    echo \\"Error: Function: $function_name.  Mandatory parameter <$1> not set\\"\"
+          echo \"    exit 1\"
+          echo \"  fi\"
         else
-          echo "  ${1}=\"\${${param_pos}}\" # Optional parameter"
+          echo \"  ${1}=\\"\${${param_pos}}\\" # Optional parameter\"
         fi
         let param_pos=param_pos+1
         ;;

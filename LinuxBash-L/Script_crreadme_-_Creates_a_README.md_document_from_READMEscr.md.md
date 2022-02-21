@@ -8,7 +8,7 @@ title: crreadme - Creates a README.md document from READMEscr.md
 <script>
 function copyCode() {
   text = `#!/bin/bash
-help_text="
+help_text=\"
 NAME
   crreadme - Creates a README.md document from READMEscr.md
 
@@ -20,22 +20,22 @@ DESCRIPTION
 
 AUTHOR
   mjnurse.dev - 2020
-"
-help_line="Creates a README.md document from READMEscr.md"
-web_desc_line="Creates a README.md document from READMEscr.md"
+\"
+help_line=\"Creates a README.md document from READMEscr.md\"
+web_desc_line=\"Creates a README.md document from READMEscr.md\"
 
 mv -f README.md /tmp
 
 while read line; do
-  if [[ "$line" == "[[help_lines]]" ]]; then
+  if [[ \"$line\" == \"[[help_lines]]\" ]]; then
     echo '```' >> README.md
     h >> README.md
     echo '```' >> README.md
-  elif [[ "$line" =~ \[\[.*\]\] ]]; then
+  elif [[ \"$line\" =~ \[\[.*\]\] ]]; then
     fn=${line//[/}
     line=${fn//]/}
-    echo "File: $line" >> README.md
-    if [[ "$line" =~ .*.js ]]; then
+    echo \"File: $line\" >> README.md
+    if [[ \"$line\" =~ .*.js ]]; then
       echo '```javascript' >> README.md
     else
       echo '```bash' >> README.md
@@ -43,7 +43,7 @@ while read line; do
     cat $line >> README.md
     echo '```' >> README.md
   else
-    echo "$line" >> README.md
+    echo \"$line\" >> README.md
   fi
 done < READMEsrc.md
 `
