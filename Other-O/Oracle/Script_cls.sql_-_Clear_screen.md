@@ -3,7 +3,6 @@ title: cls.sql - Clear screen
 ---
 
 
-
 <button onclick="copyCode()">Copy Code</button>
 
 <script>
@@ -27,13 +26,7 @@ function copyCode() {
 
 host cls
 `
-  
-
-  
   navigator.clipboard.writeText(text);
-  
-  /* Alert the copied text */
-  alert("Copied the text: " + text);
 }
 </script>
 

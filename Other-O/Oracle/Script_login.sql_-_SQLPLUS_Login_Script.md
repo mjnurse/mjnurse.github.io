@@ -3,7 +3,6 @@ title: login.sql - SQLPLUS Login Script
 ---
 
 
-
 <button onclick="copyCode()">Copy Code</button>
 
 <script>
@@ -95,13 +94,7 @@ SET TRIMSPOOL ON
 COL break_skip_1 NOPRINT
 BREAK ON break_skip_1 SKIP 1
 `
-  
-
-  
   navigator.clipboard.writeText(text);
-  
-  /* Alert the copied text */
-  alert("Copied the text: " + text);
 }
 </script>
 

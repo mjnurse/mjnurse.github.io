@@ -3,7 +3,6 @@ title: size.sql - Display the size of objects.
 ---
 
 
-
 <button onclick="copyCode()">Copy Code</button>
 
 <script>
@@ -164,13 +163,7 @@ UNDEF 1 2 3 4 5 6 7 v_results_on_off v_type v_owner v_top_n v_usage_help_cmd v_u
 GET buf.tmp
 SET TERM ON
 `
-  
-
-  
   navigator.clipboard.writeText(text);
-  
-  /* Alert the copied text */
-  alert("Copied the text: " + text);
 }
 </script>
 

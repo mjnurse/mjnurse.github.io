@@ -3,7 +3,6 @@ title: c.sql - Count records in a table (optionally with group by)
 ---
 
 
-
 <button onclick="copyCode()">Copy Code</button>
 
 <script>
@@ -110,13 +109,7 @@ UNDEF 1 2 v_usage_help_cmd v_usage_help_on_off v_results_on_off
 GET buf.tmp
 SET TERM ON
 `
-  
-
-  
   navigator.clipboard.writeText(text);
-  
-  /* Alert the copied text */
-  alert("Copied the text: " + text);
 }
 </script>
 

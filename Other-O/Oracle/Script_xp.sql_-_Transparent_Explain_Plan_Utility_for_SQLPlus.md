@@ -3,7 +3,6 @@ title: xp.sql - Transparent Explain Plan Utility for SQLPlus
 ---
 
 
-
 <button onclick="copyCode()">Copy Code</button>
 
 <script>
@@ -93,13 +92,7 @@ HOST DEL sqlplus_settings.sql
  
 SET TERM ON 
 `
-  
-
-  
   navigator.clipboard.writeText(text);
-  
-  /* Alert the copied text */
-  alert("Copied the text: " + text);
 }
 </script>
 
