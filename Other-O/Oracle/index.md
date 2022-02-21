@@ -17,7 +17,7 @@ title: Oracle
 ## Scripts
 
 
-<span style="color: grey">7.</span>&nbsp;&nbsp; &nbsp;<a id="listitem7" href="Script_sel.sql_-_Generate_Select_Statement:_@sel_[options]_<table_name>.html">sel.sql - Generate Select Statement: @sel [options] <table name></a>
+<span style="color: grey">7.</span>&nbsp;&nbsp; &nbsp;<a id="listitem7" href="Script_sel.sql_-_Generate_Select_Statement.html">sel.sql - Generate Select Statement</a>
 <script>gMaxNum=8-1</script>
 
 <hr>
