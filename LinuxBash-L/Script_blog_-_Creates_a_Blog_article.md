@@ -2,6 +2,62 @@
 title: blog - Creates a Blog article
 ---
 
+
+<button onclick="copyCode()">Copy Code</button>
+
+<script>
+function copyCode() {
+  text = `#!/bin/bash
+help_text="
+NAME
+  blog - Creates a new Blog article
+
+USAGE
+  blog <title: spaces allowed>
+
+DESCRIPTION
+  A basic script to create a new blog article.
+
+AUTHOR
+  mjnurse.dev - 2021
+"
+
+help_line="Creates a Blog article: blog <title: spaces allowed>"
+web_desc_line="Creates a Blog article"
+
+if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+   echo "$help_text"
+   exit
+fi
+
+params=$*
+date_str=$(date +'%y-%m-%d')
+
+filename=${date_str}_-_${params// /_}.md
+file="/c/MJN/github/mjnurse-github-io/Blog-B/$filename"
+echo $filename
+
+if [[ -f $file ]]; then
+  read -p "File already exists - open now [yN]: " yn
+  if [ "${yn^}" == "Y" ]; then
+    gvim $file
+  fi
+  exit
+fi
+
+read -p "Create [yN]: " yn
+
+if [ "${yn^}" == "Y" ]; then
+   echo "---" > $file
+   echo "title: ${date_str} - ${params}" >> $file
+   echo "---" >> $file
+   gvim $file
+fi
+`
+  navigator.clipboard.writeText(text);
+}
+</script>
+
 ```bash
 #!/bin/bash
 help_text="

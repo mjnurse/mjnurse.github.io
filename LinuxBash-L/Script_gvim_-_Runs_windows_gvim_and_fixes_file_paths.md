@@ -2,6 +2,36 @@
 title: gvim - Runs windows gvim and fixes file paths
 ---
 
+
+<button onclick="copyCode()">Copy Code</button>
+
+<script>
+function copyCode() {
+  text = `#!/bin/bash
+help_text="
+NAME
+  gvim - Runs windows gvim and fixes files paths
+
+USAGE
+  gvim <filename(s)>
+
+DESCRIPTION
+  Runs windows gvim and fixes files paths.
+
+AUTHOR
+  mjnurse.dev - 2020
+"
+help_line="Runs windows gvim and fixes file paths"
+web_desc_line="Runs windows gvim and fixes file paths"
+
+files="$*"
+fixed_files="$(echo $files | sed 's/\/c\//C:\//g')"
+gvim.exe $fixed_files &
+`
+  navigator.clipboard.writeText(text);
+}
+</script>
+
 ```bash
 #!/bin/bash
 help_text="

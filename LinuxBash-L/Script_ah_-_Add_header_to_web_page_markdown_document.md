@@ -2,6 +2,42 @@
 title: ah - Add header to web page markdown document
 ---
 
+
+<button onclick="copyCode()">Copy Code</button>
+
+<script>
+function copyCode() {
+  text = `#!/bin/bash
+help_text="
+NAME
+  ah - Add header to web page markdown document
+
+USAGE
+  ah <Web page markdown document>
+
+DESCRIPTION
+  Add header to web page markdown document.
+
+AUTHOR
+  mjnurse.dev - 2020
+"
+help_line="Add header to web page markdown document"
+web_desc_line="Add header to web page markdown document"
+
+tmp="${1/.md/}"
+title="${tmp//_/ }"
+
+echo "---" > ah.tmp
+echo "title: $title" >> ah.tmp
+echo "layout: page-with-contents-list" >> ah.tmp
+echo "---" >> ah.tmp
+cat $1 >> ah.tmp
+mv ah.tmp $1
+`
+  navigator.clipboard.writeText(text);
+}
+</script>
+
 ```bash
 #!/bin/bash
 help_text="
