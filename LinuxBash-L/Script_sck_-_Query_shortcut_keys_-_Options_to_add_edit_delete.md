@@ -35,13 +35,13 @@ web_desc_line=\"Query shortcut keys - Options to add edit delete\"
 sck_csv=\"/c/MJN/github/shortcut-keys/sck.csv\"
 tmp_file=\"/tmp/sck.tmp\"
 
-try=\"Try \\"${0##*/} -h\\" for more information\"
-tmp=\"${help_text##*USAGE}\"
-usage=\"$(echo Usage: ${tmp%%OPTIONS*})\"
+try=\"Try \\"$\{0##*/\} -h\\" for more information\"
+tmp=\"$\{help_text##*USAGE\}\"
+usage=\"$(echo Usage: $\{tmp%%OPTIONS*\})\"
 
 if [[ \"$1\" == \"\" ]]; then
-  echo \"${usage}\"
-  echo \"${try}\"
+  echo \"$\{usage\}\"
+  echo \"$\{try\}\"
   echo \"     \\"sck .\\" to list all records\"
   exit 1
 fi
@@ -117,7 +117,7 @@ else
     srch=\"*\"
   fi
   words=\"$*\"
-  words=\"${words// /\\|}\"
+  words=\"$\{words// /\\|\}\"
   echo
   grep -i --color=auto \"$words\" $sck_csv | sort | \
     sed \"s/\\",\\"/ - /g; s/^\\"//; s/\\"$//; s/ -  - / - /\" | grep -i --color=auto \"$words\"

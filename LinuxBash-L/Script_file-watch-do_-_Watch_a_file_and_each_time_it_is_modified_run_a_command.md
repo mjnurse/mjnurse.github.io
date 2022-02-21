@@ -25,17 +25,17 @@ help_line=\"Watch a file and each time it is modified run a command\"
 web_desc_line=\"Watch a file and each time it is modified run a command\"
 pack_member=\"default\"
 
-name=${0/\.\/}
+name=$\{0/\.\/\}
 try=\"Try '$name -h' for more information\"
 
 # Get usage from help_text.
-usage=${help_text##*USAGE}
-usage=${usage%%OPTIONS*}
-usage=${usage%%PARAMETERS*}
-usage=${usage%%DESCRIPTION*}
-usage=${usage//[$'\n\r']}
-usage=${usage##*   }
-usage=\"Usage: ${usage}\"
+usage=$\{help_text##*USAGE\}
+usage=$\{usage%%OPTIONS*\}
+usage=$\{usage%%PARAMETERS*\}
+usage=$\{usage%%DESCRIPTION*\}
+usage=$\{usage//[$'\n\r']\}
+usage=$\{usage##*   \}
+usage=\"Usage: $\{usage\}\"
 
 if [[ \"$1\" == \"--help\" || \"$1\" == \"-h\" || \"$1\" == \"?\" ]]; then
    echo \"$help_text\"

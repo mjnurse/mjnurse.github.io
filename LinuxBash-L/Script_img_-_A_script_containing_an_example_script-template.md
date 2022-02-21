@@ -31,9 +31,9 @@ AUTHOR
 help_line=\"A script containing an example script-template\"
 web_desc_line=\"A script containing an example script-template\"
 
-try=\"Try ${0##*/} -h for more information\"
-tmp=\"${help_text##*USAGE}\"
-usage=\"$(echo Usage: ${tmp%%OPTIONS*})\"
+try=\"Try $\{0##*/\} -h for more information\"
+tmp=\"$\{help_text##*USAGE\}\"
+usage=\"$(echo Usage: $\{tmp%%OPTIONS*\})\"
 
 logging_yn=n
 max_value=-1
@@ -98,7 +98,7 @@ if [[ \"$source_dir\" != \"\" ]]; then
   num=1
   while read line; do
     if [[ $num == $selection ]]; then
-      img_filename=\"${line}\"
+      img_filename=\"$\{line\}\"
     fi
     let num=num+1
   done < $tmp
@@ -143,13 +143,13 @@ echo
 read -p \"Enter Destination image name (blank to use existing name): \" new_name
 
 if [[ \"$new_name\" == \"\" ]]; then
-  new_name=\"${img_filename##*/}\"
-  new_name=\"${new_name// /-}\"
-  new_name=\"${new_name,,}\"
+  new_name=\"$\{img_filename##*/\}\"
+  new_name=\"$\{new_name// /-\}\"
+  new_name=\"$\{new_name,,\}\"
 fi
 
-if [[ \"${new_name##*.}\" != \"png\" &&  \
-      \"${new_name##*.}\" != \"jpg\" ]]; then
+if [[ \"$\{new_name##*.\}\" != \"png\" &&  \
+      \"$\{new_name##*.\}\" != \"jpg\" ]]; then
   echo \"$new_name - is not a valid image filename\"
   exit
 fi
@@ -160,10 +160,10 @@ echo \"To: $dest_dir/$new_name\"
 echo
 read -p \"Continue [yN]? \" yn
 
-if [[ ${yn,,} == y ]]; then
+if [[ $\{yn,,\} == y ]]; then
   cp \"$source_dir/$img_filename\" $dest_dir/$new_name
   echo
-  echo \"Image md tag: ![](${dest_dir:1}/$new_name)\"
+  echo \"Image md tag: ![]($\{dest_dir:1\}/$new_name)\"
 fi
 `
   navigator.clipboard.writeText(text);

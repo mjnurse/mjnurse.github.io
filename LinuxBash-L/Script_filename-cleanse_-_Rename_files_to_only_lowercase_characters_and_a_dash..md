@@ -29,13 +29,13 @@ AUTHOR
 help_line=\"Rename files to only lowercase characters and a dash.\"
 web_desc_line=\"Rename files to only lowercase characters and a dash.\"
 
-try=\"Try ${0##*/} -h for more information\"
-tmp=\"${help_text##*USAGE}\"
-usage=$(echo \"Usage: ${tmp%%OPTIONS*}\" | tr -d \"\n\" | sed \"s/  */ /g\")
+try=\"Try $\{0##*/\} -h for more information\"
+tmp=\"$\{help_text##*USAGE\}\"
+usage=$(echo \"Usage: $\{tmp%%OPTIONS*\}\" | tr -d \"\n\" | sed \"s/  */ /g\")
 
 if [[ \"$1\" == \"\" ]]; then
-  echo \"${usage}\"
-  echo \"${try}\"
+  echo \"$\{usage\}\"
+  echo \"$\{try\}\"
   exit 1
 fi
 
@@ -47,8 +47,8 @@ fi
 files_found_yn=n
 
 for f in $*; do
-  nf=\"${f,,}\"
-  nf=\"${nf//_/-}\"
+  nf=\"$\{f,,\}\"
+  nf=\"$\{nf//_/-\}\"
   if [[ \"$nf\" != \"$f\" && ! $f =~ .*\* ]]; then
     files_found_yn=y
     echo \"$f -> $nf\"
@@ -59,10 +59,10 @@ echo
 if [[ $files_found_yn == y ]]; then
   read -p \"Rename Files [yN]? \" yn
 
-  if [[ \"${yn^^}\" == \"Y\" ]]; then
+  if [[ \"$\{yn^^\}\" == \"Y\" ]]; then
     for f in $*; do
-      nf=\"${f,,}\"
-      nf=\"${nf//_/-}\"
+      nf=\"$\{f,,\}\"
+      nf=\"$\{nf//_/-\}\"
       if [[ \"$nf\" != \"$f\" ]]; then
         # mv thinks two files with only case differences are the same so mv twice
         mv $f $f.filename-cleanse-tmp

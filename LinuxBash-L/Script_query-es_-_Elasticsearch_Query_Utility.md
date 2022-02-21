@@ -104,9 +104,9 @@ url=\"$host$port/$basepath/$api\"
 
 # Replace any // with a / (this allows us to miss index names from some commands to run on all indexes)
 if [[ \"$QES_HTTPS_YN\" == \"Y\" || \"$QES_HTTPS_YN\" == \"y\" ]]; then
-  url=\"https://${url//\/\///}\"
+  url=\"https://$\{url//\/\///\}\"
 else
-  url=\"http://${url//\/\///}\"
+  url=\"http://$\{url//\/\///\}\"
 fi
 
 cmd=\"Command: $opn $url\"
@@ -159,7 +159,7 @@ else
 fi
 
 reshead=\"$(head -1 $tmpfile)\"
-if [[ \"${reshead:2:5}\" == \"error\" ]]; then
+if [[ \"$\{reshead:2:5\}\" == \"error\" ]]; then
    echo
    echo ERROR:
    cat $tmpfile

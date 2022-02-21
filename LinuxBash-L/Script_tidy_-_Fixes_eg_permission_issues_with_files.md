@@ -34,7 +34,7 @@ for f in $(find . -maxdepth 1 -executable); do
 
   if [[ -f $f && ! -L $f ]]; then
     line1=\"$(head -1 $f)\"
-    line1=${line1//[$' \t\r\n']}
+    line1=$\{line1//[$' \t\r\n']\}
     if [[ \"$line1\" != \"#!/bin/bash\" ]]; then
       echo
       echo ================================================================================
@@ -64,7 +64,7 @@ done
 for f in $(find . -maxdepth 1 ! -executable); do
   if [[ -f $f && ! -L $f ]]; then
     line1=\"$(head -1 $f)\"
-    line1=${line1//[$' \t\r\n']}
+    line1=$\{line1//[$' \t\r\n']\}
     if [[ \"$line1\" == \"#!/bin/bash\" ]]; then
       echo
       echo ================================================================================
@@ -174,7 +174,7 @@ done
 for f in $(find . -maxdepth 1 -executable); do
   if [[ -f $f && ! -L $f ]]; then
     l2=\"$(cat $f | sed -n '2p')\"
-    if [[ \"${l2:0:10}\" != \"help_text=\" ]]; then
+    if [[ \"$\{l2:0:10\}\" != \"help_text=\" ]]; then
       echo
       echo ================================================================================
       echo No header
@@ -188,10 +188,10 @@ for f in $(find . -maxdepth 1 -executable); do
 echo '#!/bin/bash
 help_text=\"
 NAME
-  '${f:2}' - One line description.
+  '$\{f:2\}' - One line description.
 
 USAGE
-  '${f:2}' [options] <parameters>
+  '$\{f:2\}' [options] <parameters>
 
 OPTIONS
   -x
@@ -209,13 +209,13 @@ AUTHOR
 help_line=\"'tbc'\"
 web_desc_line=\"'tbc'\"
 
-try=\"Try ${0##*/} -h for more information\"
-tmp=\"${help_text##*USAGE}\"
-usage=$(echo \"Usage: ${tmp%%OPTIONS*}\" | tr -d \"\n\" | sed \"s/  */ /g\")
+try=\"Try $\{0##*/\} -h for more information\"
+tmp=\"$\{help_text##*USAGE\}\"
+usage=$(echo \"Usage: $\{tmp%%OPTIONS*\}\" | tr -d \"\n\" | sed \"s/  */ /g\")
 
 if [[ \"$1\" == \"\" ]]; then
-  echo \"${usage}\"
-  echo \"${try}\"
+  echo \"$\{usage\}\"
+  echo \"$\{try\}\"
   exit 1
 fi
 

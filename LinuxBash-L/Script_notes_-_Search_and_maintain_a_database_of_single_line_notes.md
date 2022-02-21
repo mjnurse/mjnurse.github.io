@@ -34,13 +34,13 @@ AUTHOR
 help_line=\"Search and maintain a database of single line notes\"
 web_desc_line=\"Search and maintain a database of single line notes\"
 
-try=\"Try ${0##*/} -h for more information\"
-tmp=\"${help_text##*USAGE}\"
-usage=\"$(echo Usage: ${tmp%%OPTIONS*})\"
+try=\"Try $\{0##*/\} -h for more information\"
+tmp=\"$\{help_text##*USAGE\}\"
+usage=\"$(echo Usage: $\{tmp%%OPTIONS*\})\"
 
 if [[ \"$1\" == \"\" ]]; then
-  echo \"${usage}\"
-  echo \"${try}\"
+  echo \"$\{usage\}\"
+  echo \"$\{try\}\"
   exit 1
 fi
 

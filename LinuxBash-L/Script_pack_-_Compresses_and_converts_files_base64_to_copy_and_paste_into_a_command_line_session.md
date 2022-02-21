@@ -38,17 +38,17 @@ AUTHOR
 help_line=\"Compresses and converts files base64 to copy and paste into a command line session\"
 web_desc_line=\"Compresses and converts files base64 to copy and paste into a command line session\"
 
-try=\"Try ${0##*/} -h for more information\"
-tmp=\"${help_text##*USAGE}\"
-usage=$(echo \"Usage: ${tmp%%OPTIONS*}\" | tr -d \"\n\" | sed \"s/  */ /g\")
+try=\"Try $\{0##*/\} -h for more information\"
+tmp=\"$\{help_text##*USAGE\}\"
+usage=$(echo \"Usage: $\{tmp%%OPTIONS*\}\" | tr -d \"\n\" | sed \"s/  */ /g\")
 
 line=\"-------------------------------------------------\"; line=\"# $line$line\"
 silent_yn=n
 force_yn=n
 
 if [[ \"$1\" == \"\" ]]; then
-  echo \"${usage}\"
-  echo \"${try}\"
+  echo \"$\{usage\}\"
+  echo \"$\{try\}\"
   exit 1
 fi
 
@@ -76,14 +76,14 @@ while [[ \"$1\" != \"\" ]]; do
 done
 
 if [[ $# == 1 ]]; then
-  pack_name=\"${pack_name:-${1}}.pack\"
+  pack_name=\"$\{pack_name:-$\{1\}\}.pack\"
 else
-  pack_name=\"${pack_name:-multi}.pack\"
+  pack_name=\"$\{pack_name:-multi\}.pack\"
 fi
 
 if [[ -f $pack_name && $force_yn == n ]]; then
-  read -p \"File '${pack_name}' already exists.  Overwrite [yN]? \" yn
-  if [[ \"${yn,,}\" != y ]]; then
+  read -p \"File '$\{pack_name\}' already exists.  Overwrite [yN]? \" yn
+  if [[ \"$\{yn,,\}\" != y ]]; then
     exit
   fi
 fi
@@ -94,7 +94,7 @@ multi_yn=n
 if [[ $# != 1 ]]; then
   echo \"$line\" >> $pack_name
   files=\"$( echo \" $* \" | sed 's/ pack / /g; s/ [^ ]*\.pack / /g; s/^  *//; s/  *$//;')\"
-  echo \"${files// /, }\" | fold -w 88 -s \
+  echo \"$\{files// /, \}\" | fold -w 88 -s \
       | sed \"1s/^/# CONTENTS: /; 2,99s/^/#           /\" >> $pack_name
   multi_yn=y
 fi
@@ -102,9 +102,9 @@ fi
 for f in $*; do
   if [[ \"$f\" != \"pack\" && ! \"$f\" =~ .*pack ]]; then
     if [[ $multi_yn == y ]]; then
-      echo \"${line}\" >> $pack_name
+      echo \"$\{line\}\" >> $pack_name
       echo \"# FILE: $f \" >> $pack_name
-      echo \"${line}\" >> $pack_name
+      echo \"$\{line\}\" >> $pack_name
     fi
     echo \"$(cat $f | gzip -f -9 | base64 -w 999999999 )\" | sed \"s/^/echo '/\" \
         | fold -w 100 >> $pack_name

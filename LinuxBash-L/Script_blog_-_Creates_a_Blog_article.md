@@ -33,13 +33,13 @@ fi
 params=$*
 date_str=$(date +'%y-%m-%d')
 
-filename=${date_str}_-_${params// /_}.md
+filename=$\{date_str\}_-_$\{params// /_\}.md
 file=\"/c/MJN/github/mjnurse-github-io/Blog-B/$filename\"
 echo $filename
 
 if [[ -f $file ]]; then
   read -p \"File already exists - open now [yN]: \" yn
-  if [ \"${yn^}\" == \"Y\" ]; then
+  if [ \"$\{yn^\}\" == \"Y\" ]; then
     gvim $file
   fi
   exit
@@ -47,9 +47,9 @@ fi
 
 read -p \"Create [yN]: \" yn
 
-if [ \"${yn^}\" == \"Y\" ]; then
+if [ \"$\{yn^\}\" == \"Y\" ]; then
    echo \"---\" > $file
-   echo \"title: ${date_str} - ${params}\" >> $file
+   echo \"title: $\{date_str\} - $\{params\}\" >> $file
    echo \"---\" >> $file
    gvim $file
 fi

@@ -31,14 +31,14 @@ AUTHOR
 help_line=\"tbc\"
 web_desc_line=\"tbc\"
 
-try=\"Try ${0##*/} -h for more information\"
-tmp=\"${help_text##*USAGE}\"
-usage=\"$(echo Usage: ${tmp%%OPTIONS*})\"
+try=\"Try $\{0##*/\} -h for more information\"
+tmp=\"$\{help_text##*USAGE\}\"
+usage=\"$(echo Usage: $\{tmp%%OPTIONS*\})\"
 run_grep=n
 
 if [[ \"$1\" == \"\" ]]; then
-  echo \"${usage}\"
-  echo \"${try}\"
+  echo \"$\{usage\}\"
+  echo \"$\{try\}\"
   exit 1
 fi
 
@@ -61,11 +61,11 @@ done
 
 tmp=/tmp/e.tmp
 rm -f $tmp
-words=\"${*}\"
-words=\"*${words// /*}*\"
+words=\"$\{*\}\"
+words=\"*$\{words// /*\}*\"
 
 if [[ $run_grep == y ]]; then
-  grep -ril \"${words:1}\" /c/MJN/github/* >> $tmp
+  grep -ril \"$\{words:1\}\" /c/MJN/github/* >> $tmp
   echo \"--------------------------------------------------------------------------------\" >> $tmp
 fi
 find /c/MJN/github -iname \"$words\" -print >> $tmp
@@ -86,12 +86,12 @@ echo
 read -p \"Enter Number (# or v# - Vim, m# - MS Code): \" n
 
 editor=\"gvim\"
-if [[ \"${n:0:1}\" == \"v\" ]]; then
+if [[ \"$\{n:0:1\}\" == \"v\" ]]; then
   editor=\"gvim\"
-  n=\"${n:1}\"
-elif [[ \"${n:0:1}\" == \"m\" ]]; then
+  n=\"$\{n:1\}\"
+elif [[ \"$\{n:0:1\}\" == \"m\" ]]; then
   editor=\"code\"
-  n=\"${n:1}\"
+  n=\"$\{n:1\}\"
 fi
 
 let c=1

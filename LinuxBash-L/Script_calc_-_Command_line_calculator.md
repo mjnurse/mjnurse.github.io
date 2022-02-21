@@ -35,13 +35,13 @@ help_line=\"Command line calculator\"
 web_desc_line=\"Command line calculator\"
 pack_member=\"default\"
 
-try=\"Try ${0##*/} -h for more information\"
-tmp=\"${help_text##*USAGE}\"
-usage=$(echo \"Usage: ${tmp%%OPTIONS*}\" | tr -d \"\n\" | sed \"s/  */ /g\")
+try=\"Try $\{0##*/\} -h for more information\"
+tmp=\"$\{help_text##*USAGE\}\"
+usage=$(echo \"Usage: $\{tmp%%OPTIONS*\}\" | tr -d \"\n\" | sed \"s/  */ /g\")
 
 if [[ \"$1\" == \"\" ]]; then
-  echo \"${usage}\"
-  echo \"${try}\"
+  echo \"$\{usage\}\"
+  echo \"$\{try\}\"
   exit 1
 fi
 
@@ -69,7 +69,7 @@ while [[ \"$1\" != \"\" ]]; do
       break
       ;;
     *)
-      formula=\"$(echo $* | sed \"s/x/\*/g; s/ //g; s/r/${prev_res}/g\")\"
+      formula=\"$(echo $* | sed \"s/x/\*/g; s/ //g; s/r/$\{prev_res\}/g\")\"
       result=\"$(echo $formula | sed 's/^/scale=3;/ ' | bc -l)\"
       echo $formula = $result
       echo \"$result\" > /tmp/calc

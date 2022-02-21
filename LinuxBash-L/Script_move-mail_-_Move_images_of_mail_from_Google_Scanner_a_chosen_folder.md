@@ -28,13 +28,13 @@ AUTHOR
 help_line=\"Move images of mail from Google Scanner a chosen folder\"
 web_desc_line=\"Move images of mail from Google Scanner a chosen folder\"
 
-try=\"Try ${0##*/} -h for more information\"
-tmp=\"${help_text##*USAGE}\"
-usage=$(echo \"Usage: ${tmp%%OPTIONS*}\" | tr -d \"\n\" | sed \"s/  */ /g\")
+try=\"Try $\{0##*/\} -h for more information\"
+tmp=\"$\{help_text##*USAGE\}\"
+usage=$(echo \"Usage: $\{tmp%%OPTIONS*\}\" | tr -d \"\n\" | sed \"s/  */ /g\")
 
 if [[ \"$1\" == \"\" ]]; then
-  echo \"${usage}\"
-  echo \"${try}\"
+  echo \"$\{usage\}\"
+  echo \"$\{try\}\"
   exit 1
 fi
 
@@ -61,7 +61,7 @@ for file in $files; do
   echo FILE :$file
   echo
   read -p \"View file in Chrome [yN]: \" yn
-  if [[ ${yn^^} == Y ]]; then
+  if [[ $\{yn^^\} == Y ]]; then
     /c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe \"$file\"
   fi
   echo
@@ -97,7 +97,7 @@ for file in $files; do
   else
     echo
     read -p \"Create folder $dest [yN]? : \" yn
-    if [[ ${yn^^} == Y ]]; then
+    if [[ $\{yn^^\} == Y ]]; then
       mkdir /c/MJN/gdrive/mail/$dest
     else
       exit
@@ -115,10 +115,10 @@ for file in $files; do
     desc=\"-$desc\"
   fi
  
-  target=\"/c/MJN/gdrive/mail/${dest}/${dest}${desc}-${d}.pdf\"
+  target=\"/c/MJN/gdrive/mail/$\{dest\}/$\{dest\}$\{desc\}-$\{d\}.pdf\"
   echo
   read -p \"Move: $file to $target [yN]? : \" yn
-  if [[ ${yn^^} == Y ]]; then
+  if [[ $\{yn^^\} == Y ]]; then
     mv \"$file\" \"$target\"
   else
     echo

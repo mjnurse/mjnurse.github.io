@@ -24,8 +24,8 @@ AUTHOR
 help_line=\"Add header to web page markdown document\"
 web_desc_line=\"Add header to web page markdown document\"
 
-tmp=\"${1/.md/}\"
-title=\"${tmp//_/ }\"
+tmp=\"$\{1/.md/\}\"
+title=\"$\{tmp//_/ \}\"
 
 echo \"---\" > ah.tmp
 echo \"title: $title\" >> ah.tmp

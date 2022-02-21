@@ -82,7 +82,7 @@ grep -s -e \"^help_line=\" -e \"^-- help_line:\" $files | \
     /^h:/d; s/help_line=//; s/-- help_line://; s/\"/ /g;
     /tidy:.*echo/d; /^README.*md/d' | \
   sort | while IFS= read -r line ; do 
-    curr_char=\"${line:0:1}\"
+    curr_char=\"$\{line:0:1\}\"
     if [[ \"$curr_char\" != \"$prev_char\" ]]; then
          prev_char=\"$curr_char\"
          echo \"$curr_char - $line\"

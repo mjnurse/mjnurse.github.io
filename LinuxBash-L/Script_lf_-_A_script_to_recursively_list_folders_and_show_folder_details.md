@@ -35,9 +35,9 @@ AUTHOR
 help_line=\"A script to recursively list folders and show folder details\"
 web_desc_line=\"A script to recursively list folders and show folder details\"
 
-try=\"Try ${0##*/} -h for more information\"
-tmp=\"${help_text##*USAGE}\"
-usage=\"$(echo Usage: ${tmp%%OPTIONS*})\"
+try=\"Try $\{0##*/\} -h for more information\"
+tmp=\"$\{help_text##*USAGE\}\"
+usage=\"$(echo Usage: $\{tmp%%OPTIONS*\})\"
 
 file_type_count_yn=n
 max_depth=999
@@ -50,7 +50,7 @@ while [[ \"$1\" != \"\" ]]; do
       ;;
     -m|--maxdepth)
       shift
-      (( max_depth=${1}*3 ))
+      (( max_depth=$\{1\}*3 ))
       ;;
     -t|--filetypecount)
       file_type_count_yn=y
@@ -63,8 +63,8 @@ while [[ \"$1\" != \"\" ]]; do
 done 
 
 if [[ \"$1\" == \"\" ]]; then
-  echo \"${usage}\"
-  echo \"${try}\"
+  echo \"$\{usage\}\"
+  echo \"$\{try\}\"
   exit 1
 fi
 
@@ -72,31 +72,31 @@ green=\"\e[92m\"
 white=\"\e[39m\"
 ind=\"__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __\" 
 
-function f() {
+function f() \{
   if [[ \"$1\" != \"\" ]]; then
-    curr_dir=\"${1:0:-1}\"
+    curr_dir=\"$\{1:0:-1\}\"
   fi
   depth=\"$2\"
   file_count=\"$(find $curr_dir -maxdepth 1 -type f | wc -l)\"
   size=\"$(du $curr_dir -d 0 -h)\"
-  size=\"${size%%/*}\"
-  echo -e \"${ind:0:$depth}${curr_dir##*/}${green} - ${file_count} files ${white}${size}\"
+  size=\"$\{size%%/*\}\"
+  echo -e \"$\{ind:0:$depth\}$\{curr_dir##*/\}$\{green\} - $\{file_count\} files $\{white\}$\{size\}\"
   if [[ $file_type_count_yn == y ]]; then
-    echo \"${ind:0:$depth}__ ( $(find $curr_dir -maxdepth 1 -type f \
+    echo \"$\{ind:0:$depth\}__ ( $(find $curr_dir -maxdepth 1 -type f \
       | sed 's/^[^\.]*$/other/; s/.*\.//' \
       | sort | uniq -c | tr -d '\n' \
       | sed 's/   */, /g; s/^,  *//') )\"
   fi
   if [[ $depth -lt $max_depth ]]; then
-    for d in $(ls -d ${curr_dir}/*/ 2>/dev/null); do
+    for d in $(ls -d $\{curr_dir\}/*/ 2>/dev/null); do
       (( depth=depth+3 ))
       f $d $depth
       (( depth=depth-3 ))
     done
   fi
-}
+\}
 
-if [[ \"${1:0:1}\" == \"/\" ]]; then
+if [[ \"$\{1:0:1\}\" == \"/\" ]]; then
   dir=\"$1\"
 else
   dir=\"$(pwd)/$1\"

@@ -34,9 +34,9 @@ AUTHOR
 help_line=\"tbc\"
 web_desc_line=\"tbc\"
 
-try=\"Try ${0##*/} -h for more information\"
-tmp=\"${help_text##*USAGE}\"
-usage=\"$(echo Usage: ${tmp%%OPTIONS*})\"
+try=\"Try $\{0##*/\} -h for more information\"
+tmp=\"$\{help_text##*USAGE\}\"
+usage=\"$(echo Usage: $\{tmp%%OPTIONS*\})\"
 
 if [[ \"$1\" == \"--help\" || \"$1\" == \"-h\" || \"$1\" == \"?\" ]]; then
    echo \"$help_text\"
@@ -46,22 +46,22 @@ fi
 debug_yn=n
 spool_file=\"/dev/null\"
 
-function debug() {
+function debug() \{
   if [[ $debug_yn == y ]]; then
     echo $*
   fi
-}
+\}
 
-function run() {
+function run() \{
   if [[ \"$buf\" == \"\" ]]; then
     buf=\"$line\"
   elif [[ \"$line\" != \"\" ]]; then
     buf=\"$buf\n$line\"
   fi
-  history -s \"${buf/;/}\"
+  history -s \"$\{buf/;/\}\"
   echo -e \"$buf\" | sqlite3 $sl_options $db | tee -a $spool_file
   mode=run
-}
+\}
 
 while [[ \"$1\" != \"\" ]]; do
    case $1 in
@@ -134,7 +134,7 @@ while [[ 1 ]]; do
         run
         ;;
       *\;)
-        line=\"${line::-1}\"
+        line=\"$\{line::-1\}\"
         run
         ;;
       *)
@@ -151,7 +151,7 @@ while [[ 1 ]]; do
         if [[ $mode == run ]]; then
           buf=\"\"
         fi
-        line=\"${line::-1}\"
+        line=\"$\{line::-1\}\"
         run
         ;;
       .*)
@@ -159,9 +159,9 @@ while [[ 1 ]]; do
         run
         ;;
       @*)
-        file=\"${line:1}\"
+        file=\"$\{line:1\}\"
         if [[ ! -f $file ]]; then
-          file=\"${file}.sql\"
+          file=\"$\{file\}.sql\"
         fi
         if [[ ! -f $file ]]; then
           echo \"no such file\"
@@ -185,14 +185,14 @@ while [[ 1 ]]; do
         echo \"Use 'g <filename>' to load a file to the buffer\"
         ;;
       g\ *)
-        file=\"${line:2}\"
+        file=\"$\{line:2\}\"
         if [[ ! -f $file ]]; then
-          file=\"${file}.sql\"
+          file=\"$\{file\}.sql\"
         fi
         if [[ ! -f $file ]]; then
           echo \"no such file\"
         else
-          history -s \"${line}\"
+          history -s \"$\{line\}\"
           buf=\"$(cat $file)\"
           echo -e \"$buf\"
         fi
@@ -210,8 +210,8 @@ while [[ 1 ]]; do
         echo \"Use 'o <database name>' to open a database\"
         ;;
       o\ *)
-        history -s \"${line}\"
-        db=\"${line:2}\"
+        history -s \"$\{line\}\"
+        db=\"$\{line:2\}\"
         if [[ ! -f $db ]]; then
           echo \"database:$db does not exist\"
           db=\"\"
@@ -224,9 +224,9 @@ while [[ 1 ]]; do
         ;;
       s\ *|save\ *)
         if [[ \"$line\" =~ s\ .* ]]; then
-          file=\"${line:2}\"
+          file=\"$\{line:2\}\"
         else
-          file=\"${line:5}\"
+          file=\"$\{line:5\}\"
         fi
         if [[ \"$file\" == \"\" ]]; then
           file=\"buf.sql\"
@@ -238,8 +238,8 @@ while [[ 1 ]]; do
         echo \"use 'spool <filename>' to spool output to a file\"
         ;;
       spool\ *)
-        spool_file=\"${line:6}\"
-        if [[ ${spool_file,,} == off ]]; then
+        spool_file=\"$\{line:6\}\"
+        if [[ $\{spool_file,,\} == off ]]; then
           spool_file=\"/dev/null\"
           echo \"Spooling off\"
         else

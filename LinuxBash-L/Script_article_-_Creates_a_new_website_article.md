@@ -61,18 +61,18 @@ if [[ \"$section_name\" == \"\" ]]; then
    done < /tmp/article.tmp
 fi
 
-cd /c/MJN/github/mjnurse-github-io/\"${section_name}\"
+cd /c/MJN/github/mjnurse-github-io/\"$\{section_name\}\"
 ls | sort -f
-filename=${params// /_}.md
+filename=$\{params// /_\}.md
 echo ------------------------------
-echo \"Folder:   ${section_name}\"
+echo \"Folder:   $\{section_name\}\"
 echo \"New File: $filename\"
 
 read -rp \"Create [yN]: \" yn
 
-if [ \"${yn^}\" == \"Y\" ]; then
+if [ \"$\{yn^\}\" == \"Y\" ]; then
    echo \"---\" > \"$filename\"
-   echo \"title: ${params}\" >> \"$filename\"
+   echo \"title: $\{params\}\" >> \"$filename\"
    echo \"layout: page-with-contents-list\" >> \"$filename\"
    echo \"---\" >> \"$filename\"
    gvim \"$filename\"

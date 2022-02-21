@@ -38,13 +38,13 @@ AUTHOR
 help_line=\"Load a csv file into a sqlite3 database\"
 web_desc_line=\"Load a csv file into a sqlite3 database\"
 
-try=\"Try ${0##*/} -h for more information\"
-tmp=\"${help_text##*USAGE}\"
-usage=\"$(echo Usage: ${tmp%%OPTIONS*})\"
+try=\"Try $\{0##*/\} -h for more information\"
+tmp=\"$\{help_text##*USAGE\}\"
+usage=\"$(echo Usage: $\{tmp%%OPTIONS*\})\"
 
 if [[ \"$1\" == \"\" ]]; then
-  echo \"${usage}\"
-  echo \"${try}\"
+  echo \"$\{usage\}\"
+  echo \"$\{try\}\"
   exit 1
 fi
 
@@ -68,16 +68,16 @@ while [[ \"$1\" != \"\" ]]; do
 done
 
 csv_filepathname=\"$1\"
-csv_filename=\"${1##*/}\"
+csv_filename=\"$\{1##*/\}\"
 if [[ \"$table_name\" == \"\" ]]; then
-  table_name=\"${csv_filename/.csv/}\"
+  table_name=\"$\{csv_filename/.csv/\}\"
 fi
-db_name=\"${2/.db/}\"
+db_name=\"$\{2/.db/\}\"
 
 if [[ \"$db_name\" == \"\" ]]; then
-  db_name=\"${csv_filename/.csv/}\"
+  db_name=\"$\{csv_filename/.csv/\}\"
 fi 
-db_name=\"${db_name}.db\"
+db_name=\"$\{db_name\}.db\"
 
 echo loading: $csv_filepathname into table: $table_name in database: $db_name 
 

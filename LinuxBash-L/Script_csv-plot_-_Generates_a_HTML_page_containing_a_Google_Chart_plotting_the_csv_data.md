@@ -40,13 +40,13 @@ AUTHOR
 help_line=\"Generates a HTML page containing a Google Chart plotting the csv data\"
 web_desc_line=\"Generates a HTML page containing a Google Chart plotting the csv data\"
 
-try=\"Try ${0##*/} -h for more information\"
-tmp=\"${help_text##*USAGE}\"
-usage=\"$(echo Usage: ${tmp%%OPTIONS*})\"
+try=\"Try $\{0##*/\} -h for more information\"
+tmp=\"$\{help_text##*USAGE\}\"
+usage=\"$(echo Usage: $\{tmp%%OPTIONS*\})\"
 
 if [[ \"$1\" == \"\" ]]; then
-  echo \"${usage}\"
-  echo \"${try}\"
+  echo \"$\{usage\}\"
+  echo \"$\{try\}\"
   exit 1
 fi
 
@@ -90,7 +90,7 @@ else
 fi
 
 cf=$1
-html_doc=${cf/.csv/}.html
+html_doc=$\{cf/.csv/\}.html
 rm -f $html_doc
 
 echo '<!DOCTYPE html>
@@ -99,58 +99,58 @@ echo '<!DOCTYPE html>
   </head>
   <body>
     <style>
-      #gChart {
+      #gChart \{
         position: absolute;
         top:0;
         left:0;
         right: 0;
         bottom: 0;
-      }
+      \}
     </style>
     <script type=\"text/javascript\" src=\"https://www.gstatic.com/charts/loader.js\"></script>
     <script type=\"text/javascript\">
-      google.charts.load(\"current\", {\"packages\": [\"corechart\"]});
+      google.charts.load(\"current\", \{\"packages\": [\"corechart\"]\});
       google.charts.setOnLoadCallback(drawCht);
-      function drawCht() {
+      function drawCht() \{
         const gChtData = google.visualization.arrayToDataTable([' > $html_doc
 
 cat $cf | sed \"s/\\"/'/g; s/^/[/; s/$/],/\" | \
           sed \"1s/\]/'\]/; 1s/\[/\['/; 1s/,/','/g; 1s/''/'/g; 1s/','$/,/\" >> $html_doc
 
 echo '    ]);
-        const chtOptions = {
+        const chtOptions = \{
           backgroundColor: \"#FFFFFF\",
-          chartArea: { left: \"10%\", top: \"6%\", height: \"80%\", width: \"84%\" },
+          chartArea: \{ left: \"10%\", top: \"6%\", height: \"80%\", width: \"84%\" \},
           pointsVisible: false,
           fontSize: '$font_size',
           height: \"100%\",
           width: \"100%\",
           legend: \"bottom\",
-          vAxis: { 
-            viewWindow: {min: 0},
+          vAxis: \{ 
+            viewWindow: \{min: 0\},
             title: \"'$vaxis'\",
-            titleTextStyle: {
+            titleTextStyle: \{
               // color: <string>,
               // fontName: <string>,
               fontSize: '$font_size',
               bold: true,
               italic: false,
-            },
-          },
-          hAxis: {
+            \},
+          \},
+          hAxis: \{
             title: \"'$haxis'\",
-            titleTextStyle: {
+            titleTextStyle: \{
               // color: <string>,
               // fontName: <string>,
               fontSize: '$font_size',
               bold: true,
               italic: false,
-            },
-          }, '$smooth_cmd'
-        };
+            \},
+          \}, '$smooth_cmd'
+        \};
         const chart = new google.visualization.LineChart( document.getElementById(\"gChart\"));
         chart.draw(gChtData, chtOptions);
-      }
+      \}
     </script>
     <div id=\"gChartBox\"><div id=\"gChart\"></div></div><div>
   </body>

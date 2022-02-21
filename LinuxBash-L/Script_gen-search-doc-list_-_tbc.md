@@ -36,12 +36,12 @@ sd=\"/c/MJN/github/mjnurse-github-io/assets/javascript/search-docs.js\"
 
 rm -f \"$sd\"
 
-echo \"var index = elasticlunr(function () {\" >> $sd
+echo \"var index = elasticlunr(function () \{\" >> $sd
 echo \"  this.addField('title');\" >> $sd
 echo \"  this.addField('url');\" >> $sd
 echo \"  this.addField('body');\" >> $sd
 echo \"  this.setRef('id');\" >> $sd
-echo \"});\" >> $sd
+echo \"\});\" >> $sd
 
 cd /c/MJN/github/mjnurse-github-io
 
@@ -57,12 +57,12 @@ for f in $(find . -name \"*.md\" -print); do
       body=\"$(cat $f | dos2unix | sed \"/^---/d; /^title:/d; /^layout:/d\" | 
          tr '\n' ' ' | tr -c '[:alnum:]-' ' ' | sed 's/  */ /g')\"
 
-      echo \"var doc = {\" >> $sd
+      echo \"var doc = \{\" >> $sd
       echo \"  \\"id\\": $i,\" >> $sd
       echo \"  \\"title\\": \\"$title\\",\" >> $sd
       echo \"  \\"url\\": \\"$url\\",\" >> $sd
       echo \"  \\"body\\": \\"$body $title\\"\" >> $sd
-      echo \"}\" >> $sd
+      echo \"\}\" >> $sd
       echo \"index.addDoc(doc);\" >> $sd
 
       (( i=i+1 ))

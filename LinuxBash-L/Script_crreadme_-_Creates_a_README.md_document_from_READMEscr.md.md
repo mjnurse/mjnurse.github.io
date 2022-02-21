@@ -32,8 +32,8 @@ while read line; do
     h >> README.md
     echo '```' >> README.md
   elif [[ \"$line\" =~ \[\[.*\]\] ]]; then
-    fn=${line//[/}
-    line=${fn//]/}
+    fn=$\{line//[/\}
+    line=$\{fn//]/\}
     echo \"File: $line\" >> README.md
     if [[ \"$line\" =~ .*.js ]]; then
       echo '```javascript' >> README.md

@@ -31,9 +31,9 @@ AUTHOR
 help_line=\"tbc\"
 web_desc_line=\"tbc\"
 
-try=\"Try ${0##*/} -h for more information\"
-tmp=\"${help_text##*USAGE}\"
-usage=$(echo \"Usage: ${tmp%%OPTIONS*}\" | tr -d \"\n\" | sed \"s/  */ /g\")
+try=\"Try $\{0##*/\} -h for more information\"
+tmp=\"$\{help_text##*USAGE\}\"
+usage=$(echo \"Usage: $\{tmp%%OPTIONS*\}\" | tr -d \"\n\" | sed \"s/  */ /g\")
 
 if [[ \"$1\" == \"--help\" || \"$1\" == \"-h\" || \"$1\" == \"?\" ]]; then
    echo \"$help_text\"
@@ -55,11 +55,11 @@ dte=\"$(date +'%y/%m/%d-%H:00')\"
 
 repeat_yn=y
 
-while [[ ${repeat_yn} == y ]]; do
+while [[ $\{repeat_yn\} == y ]]; do
   echo
   read -p \"What did you do? \" did
   echo
-  echo \"${dte} - ${did}\"
+  echo \"$\{dte\} - $\{did\}\"
   echo
   read -p \"Save [yN] \" yn
   if [[ $yn == y ]]; then
@@ -69,16 +69,16 @@ done
 
 i_did=\"/c/MJN/gdrive/i-did.txt\"
 
-echo \"${dte} - ${did}\" >> ${i_did}
+echo \"$\{dte\} - $\{did\}\" >> $\{i_did\}
 
 echo
-cat ${i_did}
+cat $\{i_did\}
 
 echo
 read -p \"Press RTN to close (e RTN to edit I did) \" v
 
-if [[ \"${v}\" == \"e\" ]]; then
-  gvim ${i_did}
+if [[ \"$\{v\}\" == \"e\" ]]; then
+  gvim $\{i_did\}
 fi
 `
   navigator.clipboard.writeText(text);

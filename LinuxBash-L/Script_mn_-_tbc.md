@@ -31,13 +31,13 @@ AUTHOR
 help_line=\"tbc\"
 web_desc_line=\"tbc\"
 
-try=\"Try ${0##*/} -h for more information\"
-tmp=\"${help_text##*USAGE}\"
-usage=$(echo \"Usage: ${tmp%%OPTIONS*}\" | tr -d \"\n\" | sed \"s/  */ /g\")
+try=\"Try $\{0##*/\} -h for more information\"
+tmp=\"$\{help_text##*USAGE\}\"
+usage=$(echo \"Usage: $\{tmp%%OPTIONS*\}\" | tr -d \"\n\" | sed \"s/  */ /g\")
 
 if [[ \"$1\" == \"\" ]]; then
-  echo \"${usage}\"
-  echo \"${try}\"
+  echo \"$\{usage\}\"
+  echo \"$\{try\}\"
   exit 1
 fi
 
@@ -64,12 +64,12 @@ done
 
 if [[ \"$reuse_yn\" == \"y\" ]]; then
   tmp=\"$(ls /tmp/mn:*.db)\"
-  file=\"${tmp/.db/}\"
+  file=\"$\{tmp/.db/\}\"
 else
   if [[ \"$(ls /tmp/mn:* 2> /dev/null | wc -l )\" == \"1\" ]]; then
     tmp=\"$(ls /tmp/mn:*.db)\"
-    file=\"${tmp/.db/}\"
-    echo \"Scan last run: ${file##*:}\"
+    file=\"$\{tmp/.db/\}\"
+    echo \"Scan last run: $\{file##*:\}\"
     read -p \"Reuse this scan [yn]: \" reuse_yn
   fi
 fi
@@ -79,7 +79,7 @@ if [[ \"$reuse_yn\" != \"y\" ]]; then
   file=\"/tmp/mn:$(date +'%y%m%d-%H%M')\"
   echo \"Running Scan - this may take a while\"
   echo \"f,d,s,b,t\" > $file.csv
-  find . -printf \"%f${div}%h${div}%s${div}%b${div}%y\n\" | sed \"s/,//g; s/${div}/,/g\" >> $file.csv
+  find . -printf \"%f$\{div\}%h$\{div\}%s$\{div\}%b$\{div\}%y\n\" | sed \"s/,//g; s/$\{div\}/,/g\" >> $file.csv
 
   echo -e '.mode csv\n.import '$file.csv' files\n' | sqlite3 $file.db
   #echo 'DELETE FROM files WHERE s>1024 AND b=0'
@@ -93,16 +93,16 @@ min_size_filter=\"0\"
 std_filter=\"AND d NOT LIKE '%oracle_client%' AND d NOT LIKE '%\/.git\/%'\"
 std_filter=\"$std_filter AND d NOT LIKE '%\/node_modules\/%'\"
 
-function sq() {
-  table=\"(SELECT * FROM files WHERE f LIKE '${filename_filter}' AND (s+0) > ${min_size_filter} $std_filter)\"
+function sq() \{
+  table=\"(SELECT * FROM files WHERE f LIKE '$\{filename_filter\}' AND (s+0) > $\{min_size_filter\} $std_filter)\"
   #echo \"std_filter: $std_filter\"
   #echo \"table: $table\"
-  #echo \"$1\" | sed \"s/^ *//; s/{table}/$table/;\" 
+  #echo \"$1\" | sed \"s/^ *//; s/\{table\}/$table/;\" 
   #read -p \"Press a key\" dummy
-  echo \"$1\" | sed \"s/^ *//; s/{table}/$table/;\" | sqlite3 $file.db
-}
+  echo \"$1\" | sed \"s/^ *//; s/\{table\}/$table/;\" | sqlite3 $file.db
+\}
 
-function set_filter() {
+function set_filter() \{
   case $2 in
     fn|filename)
       filename_filter=\"$3\"
@@ -111,12 +111,12 @@ function set_filter() {
       min_size_filter=\"$3\"
       ;;
   esac
-}
+\}
 
 file_count=\"
   .mode column
   .headers on
-  SELECT t AS type, COUNT(*) num FROM {table} GROUP BY t;
+  SELECT t AS type, COUNT(*) num FROM \{table\} GROUP BY t;
 \"
 
 file_dups=\"
@@ -128,7 +128,7 @@ file_dups=\"
             , s
             , 0
             , COUNT(*)||' ----------------------------------' AS details 
-    FROM      {table}
+    FROM      \{table\}
     WHERE     t = 'f'
     GROUP BY  f
             , s
@@ -138,10 +138,10 @@ file_dups=\"
             , s
             , 1
             , d||'/'||f AS details
-    FROM      {table}
+    FROM      \{table\}
     WHERE     (f, s) IN (
       SELECT    f, s
-      FROM      {table}
+      FROM      \{table\}
       WHERE     t = 'f'
       GROUP BY  f, s
       HAVING    COUNT(*) > 1 )
@@ -152,7 +152,7 @@ largest_files=\"
   .headers on
   .width 40 10 100
   SELECT f, (s/1024/1024)||'MB' AS mb, d||'/'||f AS file
-  FROM   {table}
+  FROM   \{table\}
   ORDER BY (s+0) desc
   LIMIT 100;\"
 
@@ -167,7 +167,7 @@ dir_sizes=\"
     SELECT    d
     FROM      files
     WHERE     (LENGTH(d) - LENGTH(REPLACE(d, '/', '')))
-          -  (LENGTH('./MJN') - LENGTH(REPLACE('./MJN', '/', ''))) < {max_depth} 
+          -  (LENGTH('./MJN') - LENGTH(REPLACE('./MJN', '/', ''))) < \{max_depth\} 
     AND       d like './c/MJN%'
     GROUP BY  LENGTH(d) - LENGTH(REPLACE(d, '/', '')), d
   ) dirs
@@ -194,8 +194,8 @@ while [ 1 ]; do
       ;;
     f)
       echo \"Filters:\"
-      echo \"- filename filter (fn): ${filename_filter}\"
-      echo \"- min size filter (ms): ${min_size_filter}\"
+      echo \"- filename filter (fn): $\{filename_filter\}\"
+      echo \"- min size filter (ms): $\{min_size_filter\}\"
       ;;
     f*)
       set_filter $option
@@ -218,7 +218,7 @@ while [ 1 ]; do
       sqlite3 $file.db
       ;;
     !*)
-      ${option:1}
+      $\{option:1\}
       ;;
     *)
       echo \"No such option.  Try h for help\"
