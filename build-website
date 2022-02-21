@@ -97,7 +97,6 @@ echo Adding Timestamps:
 echo ------------------
 for f in $(git status | grep "\.md$" | sed "/^[^\t]*$/d; /deleted:/d; s/[^:]*: *//" | sort -u); do
   if [[ ! "$f" =~ .*folder_desc.md ]]; then 
-    #echo "fd=\"(date +'%y/%m/%d %H:%M' -r $f)\""
     fd="$(date +'%y/%m/%d %H:%M' -r $f)"
     fdr="$(date -r $f)"
     if [[ $(grep "Page last modified:" $f | wc -l) == 0 ]]; then
