@@ -34,7 +34,7 @@ function copyCode() {
 -- help_line: Display the size of objects: @size [options] <object_ name>
 -- desc_line: Display the size of objects.
 
-DEFINE script_name="size.sql"
+DEFINE script_name=\"size.sql\"
 
 SET TERM OFF DEF ON
 STORE SET sqlplus_settings.sql REPLACE
@@ -49,13 +49,13 @@ COLUMN 5 NEW_VALUE 5
 COLUMN 6 NEW_VALUE 6
 COLUMN 7 NEW_VALUE 7
 SELECT 1, 2, 3, 4, 5, 6, 7 FROM dual WHERE 0 = 1;
-SELECT NVL('&1', '##nothing') AS "1"
-     , NVL('&2', '##nothing') AS "2"
-     , NVL('&3', '##nothing') AS "3"
-     , NVL('&4', '##nothing') AS "4"
-     , NVL('&5', '##nothing') AS "5"
-     , NVL('&6', '##nothing') AS "6"
-     , NVL('&7', '##nothing') AS "7"
+SELECT NVL('&1', '##nothing') AS \"1\"
+     , NVL('&2', '##nothing') AS \"2\"
+     , NVL('&3', '##nothing') AS \"3\"
+     , NVL('&4', '##nothing') AS \"4\"
+     , NVL('&5', '##nothing') AS \"5\"
+     , NVL('&6', '##nothing') AS \"6\"
+     , NVL('&7', '##nothing') AS \"7\"
 FROM   dual;
 
 COLUMN v_type NEW_VALUE v_type
@@ -89,13 +89,13 @@ COLUMN v_results_on_off NEW_VALUE v_results_on_off
 -- parameters we need only check the last mandatory parameter because for it to be missing then the previous
 -- parameters must also be missing.
 
-SELECT   'type &script_name | findstr "^...Usage: "' AS v_usage_help_cmd 
+SELECT   'type &script_name | findstr \"^...Usage: \"' AS v_usage_help_cmd 
       ,  'ON' as v_usage_help_on_off
 FROM     dual 
 WHERE    '&v_object' = '##nothing'
 --OR       '&2' IN ('?', '##missing', '-h', '-help' )
 /
-SELECT   'type &script_name | findstr "^\*\* "' AS v_usage_help_cmd 
+SELECT   'type &script_name | findstr \"^\*\* \"' AS v_usage_help_cmd 
       ,  'ON' as v_usage_help_on_off
 FROM     dual 
 WHERE    '&v_object' IN ('?', '-h', '-help' )
@@ -121,8 +121,8 @@ COLUMN object_name FOR a30
 COLUMN tablespace_name FOR a20
 COLUMN type FOR a12
 COLUMN parent_object FOR a20
-COLUMN mbytes FORMAT "9,999,990.00" JUSTIFY RIGHT
-COLUMN extents FOR "999,990"
+COLUMN mbytes FORMAT \"9,999,990.00\" JUSTIFY RIGHT
+COLUMN extents FOR \"999,990\"
 COMPUTE SUM OF mbytes ON REPORT
 COMPUTE SUM OF extents ON REPORT
 BREAK ON REPORT

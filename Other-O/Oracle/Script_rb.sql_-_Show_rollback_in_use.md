@@ -71,7 +71,7 @@ PROMPT
 
 --DEFINE o_demo_yn=N
 --COLUMN o_demo_yn NEW_VALUE o_demo_yn
---SELECT   '&2' AS "1", 'Y' AS o_demo_yn
+--SELECT   '&2' AS \"1\", 'Y' AS o_demo_yn
 --FROM     dual
 --WHERE    '&1' = '-a';
 

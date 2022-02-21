@@ -43,8 +43,8 @@ COLUMN 1 NEW_VALUE 1
 COLUMN 2 NEW_VALUE 2
 SELECT 1, 2 FROM dual WHERE 0 = 1;
 
-SELECT   NVL('&1', '') AS "1"
-      ,  NVL('&2', '') AS "2"
+SELECT   NVL('&1', '') AS \"1\"
+      ,  NVL('&2', '') AS \"2\"
 FROM   dual;
 
 -- Set local variables which determine is the script should run or a usage message shown.

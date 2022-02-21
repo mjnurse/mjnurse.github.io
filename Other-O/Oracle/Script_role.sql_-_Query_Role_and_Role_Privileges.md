@@ -74,11 +74,11 @@ PROMPT
 
 DEFINE o_privs_yn=N
 COLUMN o_privs_yn NEW_VALUE o_privs_yn
-SELECT   '&2' AS "1", 'Y' AS o_privs_yn
+SELECT   '&2' AS \"1\", 'Y' AS o_privs_yn
 FROM     dual
 WHERE    '&1' = '-p';
 
-SELECT NVL('&1','%') AS "1" FROM dual;
+SELECT NVL('&1','%') AS \"1\" FROM dual;
 
 SET TERM &v_results_on_off HEAD ON
 

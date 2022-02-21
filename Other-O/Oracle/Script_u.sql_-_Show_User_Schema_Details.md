@@ -47,8 +47,8 @@ COLUMN 1 NEW_VALUE 1
 COLUMN 2 NEW_VALUE 2
 SELECT 1, 2 FROM dual WHERE 0 = 1;
 
-SELECT   NVL('&1', '%') AS "1"
-      ,  NVL('&2', '') AS "2"
+SELECT   NVL('&1', '%') AS \"1\"
+      ,  NVL('&2', '') AS \"2\"
 FROM   dual;
 
 -- Set local variables which determine is the script should run or a usage message shown.
@@ -79,7 +79,7 @@ PROMPT
 
 DEFINE o_all_yn=N
 COLUMN o_all_yn NEW_VALUE o_all_yn
-SELECT   '&2' AS "1"
+SELECT   '&2' AS \"1\"
       ,  'Y' AS o_all_yn
 FROM     dual
 WHERE    '&1' = '-a';

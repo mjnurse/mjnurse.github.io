@@ -74,12 +74,12 @@ PROMPT
 
 DEFINE o_all_yn=N
 COLUMN o_all_yn NEW_VALUE o_all_yn
-SELECT   '&2' AS "1", 'Y' AS o_all_yn
+SELECT   '&2' AS \"1\", 'Y' AS o_all_yn
 FROM     dual
 WHERE    '&1' = '-a';
 
 SET TERM OFF
-SELECT NVL('&1','%') AS "1" FROM dual;
+SELECT NVL('&1','%') AS \"1\" FROM dual;
 
 SET TERM &v_results_on_off HEAD ON
 

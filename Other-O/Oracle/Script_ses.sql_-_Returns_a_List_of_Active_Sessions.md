@@ -73,14 +73,14 @@ SET TERM &v_results_on_off HEAD ON
 
 -- Main script
 
-COL sid FOR a4 TRUNCATE HEADING "SID" 
-COL username FOR a20 TRUNCATE HEADING "Oracle User" 
-COL os_mach_prog FOR a60 TRUNCATE HEADING "OS User - Machine Name - Program" 
-COL logon_time FOR a11 TRUNCATE HEADING "Logon Time" 
-COL program FOR a30 TRUNCATE HEADING "Program" 
-COL state FOR a20 TRUNCATE HEADING "State" 
-COL client_info FOR a10 TRUNCATE HEADING "Client Info" 
-COL last_call_et FOR 0 TRUNCATE HEADING "Last Call Et" 
+COL sid FOR a4 TRUNCATE HEADING \"SID\" 
+COL username FOR a20 TRUNCATE HEADING \"Oracle User\" 
+COL os_mach_prog FOR a60 TRUNCATE HEADING \"OS User - Machine Name - Program\" 
+COL logon_time FOR a11 TRUNCATE HEADING \"Logon Time\" 
+COL program FOR a30 TRUNCATE HEADING \"Program\" 
+COL state FOR a20 TRUNCATE HEADING \"State\" 
+COL client_info FOR a10 TRUNCATE HEADING \"Client Info\" 
+COL last_call_et FOR 0 TRUNCATE HEADING \"Last Call Et\" 
 
 SELECT   SUBSTR(sid,1,4) AS sid--, serial#
        , username

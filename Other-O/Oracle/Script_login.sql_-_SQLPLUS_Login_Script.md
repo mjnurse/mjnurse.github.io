@@ -34,7 +34,7 @@ SAVE buf_login.tmp REPLACE
 DEFINE _editor='/home/martin/bin/gv'
 
 -- Set a sensible name for the default edit file.
-SET EDITFILE "buf.sql"
+SET EDITFILE \"buf.sql\"
 
 -- Construct the command prompt: username@DATABASE(SID) - it it fails default to NONE.
 DEFINE prompt=NONE

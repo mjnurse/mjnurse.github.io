@@ -42,8 +42,8 @@ FROM   (SELECT SYS_CONTEXT('USERENV', 'MODULE') AS script_name FROM dual);
 COLUMN 1 NEW_VALUE 1
 COLUMN 2 NEW_VALUE 2
 SELECT 1, 2 FROM dual WHERE 0 = 1;
-SELECT NVL('&1', 'dual') AS "1" 
-     , NVL('&2', '123456789') AS "2" 
+SELECT NVL('&1', 'dual') AS \"1\" 
+     , NVL('&2', '123456789') AS \"2\" 
 FROM dual;
 
 -- Set local variables which determine is the script should run or a usage message shown.
@@ -63,7 +63,7 @@ SELECT   'cat' AS v_usage_help_cmd
       ,  'ON' as v_usage_help_on_off
       ,  'N' AS v_run_cmd_yn
       ,  'OFF' AS v_results_on_off
-      ,  'dual' AS "1"
+      ,  'dual' AS \"1\"
 FROM     dual
 WHERE    '&1' IN ('-h', '--help');
 
@@ -81,7 +81,7 @@ PROMPT
 
 --DEFINE o_demo_yn=N
 --COLUMN o_demo_yn NEW_VALUE o_demo_yn
---SELECT   '&2' AS "1", 'Y' AS o_demo_yn
+--SELECT   '&2' AS \"1\", 'Y' AS o_demo_yn
 --FROM     dual
 --WHERE    '&1' = '-a';
 

@@ -43,7 +43,7 @@ COLUMN 1 NEW_VALUE 1
 COLUMN 2 NEW_VALUE 2
 SELECT 1, 2 FROM dual WHERE 0 = 1;
 
-SELECT NVL('&1',10) AS "1"
+SELECT NVL('&1',10) AS \"1\"
 FROM   dual;
 
 -- Set local variables which determine is the script should run or a usage message shown.
@@ -79,7 +79,7 @@ COL state FOR a30
 COL sql FOR a80
 BREAK ON hh_mi SKIP 1
 COL hh_mi FOR a5
-COL "#SES" FOR 999
+COL \"#SES\" FOR 999
 COL num FOR 9999
 
 WITH details AS
@@ -103,7 +103,7 @@ WITH details AS
 SELECT      hh_mi
          ,  sql_id
          ,  sql
-         ,  ses AS "#SES"
+         ,  ses AS \"#SES\"
          ,  num
          ,  DECODE(
                state
