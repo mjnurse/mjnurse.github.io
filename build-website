@@ -81,6 +81,7 @@ echo_h2 -lblue "Copy query-es to github/bash"
 #fi
 cd /c/MJN/github/mjnurse-github-io
 if [[ "$1" == "-a" ]]; then
+   echo_h2 -lblue "Generate search page"
    gen-search-doc-list
 fi
 
