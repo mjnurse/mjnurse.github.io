@@ -117,5 +117,9 @@ done
 echo
 fi
 
-pu $2
+if [[ "$1" == "-f" ]]; then
+  pu -f
+else
+  pu $2
+fi
 
