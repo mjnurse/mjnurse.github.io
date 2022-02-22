@@ -68,7 +68,7 @@ WHERE    '&1' IN ('-h', '--help');
 SET HEAD OFF FEED OFF VER OFF
 SET TERM &v_usage_help_on_off
 
-!&v_usage_help_cmd &script_name | grep -e '^\*\*\*.*$' | sed 's/\*\*\* \{0,1\}//;'
+!&v_usage_help_cmd &script_name | grep -e '^\*\*\*.*$' | sed 's/\*\*\* \\{0,1\\}//;'
 
 -- Main script
 -- If no parameter 1 has been passed then display a usage message.

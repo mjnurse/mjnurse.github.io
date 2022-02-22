@@ -67,7 +67,7 @@ SET HEAD OFF FEED OFF VER OFF
 SET TERM &v_usage_help_on_off
 
 PROMPT 
-!&v_usage_help_cmd &script_name | grep -e '^\*\*\*.*$' | sed 's/\*\*\* \{0,1\}//;'
+!&v_usage_help_cmd &script_name | grep -e '^\*\*\*.*$' | sed 's/\*\*\* \\{0,1\\}//;'
 
 --DEFINE o_demo_yn=N
 --COLUMN o_demo_yn NEW_VALUE o_demo_yn
