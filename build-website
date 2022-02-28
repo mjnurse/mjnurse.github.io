@@ -88,7 +88,9 @@ fi
 if [[ "$1" == "-m" ]]; then
    echo_h2 -red "no script builds"
 else
+   echo_h2 -lblue "Generate bash script pages"
    gen-bash-web-pgs
+   echo_h2 -lblue "Generate Oracle script pages"
    gen-ora-web-pgs
 fi
 gen-web-menus
