@@ -4,16 +4,16 @@ title: LinuxBash
 
 <span style="color: grey">1.</span>&nbsp;&nbsp;&nbsp; <a id="listitem1" href="Linux_bash_default_pack.html">Linux bash default pack</a>
 
-## Scripts
-
-
-<span style="color: grey">2.</span>&nbsp;&nbsp;&nbsp; <a id="listitem2" href="Linux_go_Script.html">Linux go Script</a>
+<span style="color: grey">2.</span>&nbsp;&nbsp;&nbsp; <a id="listitem2" href="My_Linux_g_Command.html">My Linux g Command</a>
 
 <span style="color: grey">3.</span>&nbsp;&nbsp;&nbsp; <a id="listitem3" href="Setting_Prompt_Colour_In_bash_and_Putty.html">Setting Prompt Colour In bash and Putty</a>
 
 <span style="color: grey">4.</span>&nbsp;&nbsp;&nbsp; <a id="listitem4" href="SSH_Login_Without_Password.html">SSH Login Without Password</a>
 
 <span style="color: grey">5.</span>&nbsp;&nbsp;&nbsp; <a id="listitem5" href="WSL_Hadoop_3.0.html">WSL Hadoop 3.0</a>
+
+## Scripts
+
 
 <span style="color: grey">6.</span>&nbsp;&nbsp;&nbsp; <a id="listitem6" href="Script_ah_-_Add_header_to_web_page_markdown_document.html">ah - Add header to web page markdown document</a>
 
