@@ -31,7 +31,7 @@ while read line; do
     echo '```' >> README.md
     h >> README.md
     echo '```' >> README.md
-  elif [[ \"$line\" =~ \[\[.*\]\] ]]; then
+  elif [[ \"$line\" =~ \\[\\[.*\\]\\] ]]; then
     fn=$\{line//[/\}
     line=$\{fn//]/\}
     echo \"File: $line\" >> README.md

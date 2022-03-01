@@ -30,7 +30,7 @@ web_desc_line=\"Move images of mail from Google Scanner a chosen folder\"
 
 try=\"Try $\{0##*/\} -h for more information\"
 tmp=\"$\{help_text##*USAGE\}\"
-usage=$(echo \"Usage: $\{tmp%%OPTIONS*\}\" | tr -d \"\n\" | sed \"s/  */ /g\")
+usage=$(echo \"Usage: $\{tmp%%OPTIONS*\}\" | tr -d \"\\n\" | sed \"s/  */ /g\")
 
 if [[ \"$1\" == \"\" ]]; then
   echo \"$\{usage\}\"
@@ -62,7 +62,7 @@ for file in $files; do
   echo
   read -p \"View file in Chrome [yN]: \" yn
   if [[ $\{yn^^\} == Y ]]; then
-    /c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe \"$file\"
+    /c/Program\\ Files\\ \\(x86\\)/Google/Chrome/Application/chrome.exe \"$file\"
   fi
   echo
 

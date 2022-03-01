@@ -48,8 +48,8 @@ files=\"00000000000000000 $files\"
 
 if [[ $matches_only_yn == n ]]; then
 
-  grep --exclude-dir=\"*\" -s -L -e \"^help_line=\" -e \"^-- help_line:\" $files \
-      | sed '/README.*.md/d; /^h:/d' \
+  grep --exclude-dir=\"*\" -s -L -e \"^help_line=\" -e \"^-- help_line:\" $files \\
+      | sed '/README.*.md/d; /^h:/d' \\
       | sort -f > /tmp/h.tmp
 
   if [[ $(cat /tmp/h.tmp | wc -l) != 0 ]]; then
@@ -59,8 +59,8 @@ if [[ $matches_only_yn == n ]]; then
     cat /tmp/h.tmp
   fi
 
-  grep -s -l -e \"help_line=.*tbc.*\" $files \
-      | sed '/README.*.md/d; /^h$/d' \
+  grep -s -l -e \"help_line=.*tbc.*\" $files \\
+      | sed '/README.*.md/d; /^h$/d' \\
       | sort -f > /tmp/h.tmp
 
   if [[ $(cat /tmp/h.tmp | wc -l) != 0 ]]; then
@@ -76,11 +76,11 @@ if [[ $matches_only_yn == n ]]; then
 fi
 
 prev_chr=\"\"
-grep -s -e \"^help_line=\" -e \"^-- help_line:\" $files | \
+grep -s -e \"^help_line=\" -e \"^-- help_line:\" $files | \\
   sed ' 
     /help_line=.*tbc.*/d
     /^h:/d; s/help_line=//; s/-- help_line://; s/\"/ /g;
-    /tidy:.*echo/d; /^README.*md/d' | \
+    /tidy:.*echo/d; /^README.*md/d' | \\
   sort | while IFS= read -r line ; do 
     curr_char=\"$\{line:0:1\}\"
     if [[ \"$curr_char\" != \"$prev_char\" ]]; then
@@ -91,7 +91,7 @@ grep -s -e \"^help_line=\" -e \"^-- help_line:\" $files | \
     fi
   done | sed  '
     s/: /:                        /;
-    s/\(.........................\) *\(.*\)/\1\2/; /tidy:.*echo/d' > .h.out
+    s/\\(.........................\\) *\\(.*\\)/\\1\\2/; /tidy:.*echo/d' > .h.out
 cat .h.out
 rm -f .h.out
 `

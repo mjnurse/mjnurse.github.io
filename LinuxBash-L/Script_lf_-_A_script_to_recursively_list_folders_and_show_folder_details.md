@@ -68,8 +68,8 @@ if [[ \"$1\" == \"\" ]]; then
   exit 1
 fi
 
-green=\"\e[92m\"
-white=\"\e[39m\"
+green=\"\\e[92m\"
+white=\"\\e[39m\"
 ind=\"__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __\" 
 
 function f() \{
@@ -82,9 +82,9 @@ function f() \{
   size=\"$\{size%%/*\}\"
   echo -e \"$\{ind:0:$depth\}$\{curr_dir##*/\}$\{green\} - $\{file_count\} files $\{white\}$\{size\}\"
   if [[ $file_type_count_yn == y ]]; then
-    echo \"$\{ind:0:$depth\}__ ( $(find $curr_dir -maxdepth 1 -type f \
-      | sed 's/^[^\.]*$/other/; s/.*\.//' \
-      | sort | uniq -c | tr -d '\n' \
+    echo \"$\{ind:0:$depth\}__ ( $(find $curr_dir -maxdepth 1 -type f \\
+      | sed 's/^[^\\.]*$/other/; s/.*\\.//' \\
+      | sort | uniq -c | tr -d '\\n' \\
       | sed 's/   */, /g; s/^,  *//') )\"
   fi
   if [[ $depth -lt $max_depth ]]; then

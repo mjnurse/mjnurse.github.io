@@ -41,7 +41,7 @@ params=$*
 
 cd /c/MJN/github/mjnurse-github-io || exit
 if [[ \"$section_name\" == \"\" ]]; then
-   find . -type d -print | sed \"s/^\.//; /^\/[^A-Z]/d; /images$/d; /All-A/d; /^$/d\" \
+   find . -type d -print | sed \"s/^\\.//; /^\\/[^A-Z]/d; /images$/d; /All-A/d; /^$/d\" \\
       > /tmp/article.tmp
 
    ((section_num = 1))

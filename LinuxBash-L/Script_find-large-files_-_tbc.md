@@ -33,7 +33,7 @@ web_desc_line=\"tbc\"
 
 try=\"Try $\{0##*/\} -h for more information\"
 tmp=\"$\{help_text##*USAGE\}\"
-usage=$(echo \"Usage: $\{tmp%%OPTIONS*\}\" | tr -d \"\n\" | sed \"s/  */ /g\")
+usage=$(echo \"Usage: $\{tmp%%OPTIONS*\}\" | tr -d \"\\n\" | sed \"s/  */ /g\")
 
 if [[ \"$1\" == \"\" ]]; then
   echo \"$\{usage\}\"

@@ -24,7 +24,7 @@ OPTIONS
     Show help text.
 
 DESCRIPTION
-  Query shortcut keys. To show all records use \\".\\" as the search string.
+  Query shortcut keys. To show all records use \\\".\\\" as the search string.
 
 AUTHOR
   mjnurse.dev - 2020
@@ -35,14 +35,14 @@ web_desc_line=\"Query shortcut keys - Options to add edit delete\"
 sck_csv=\"/c/MJN/github/shortcut-keys/sck.csv\"
 tmp_file=\"/tmp/sck.tmp\"
 
-try=\"Try \\"$\{0##*/\} -h\\" for more information\"
+try=\"Try \\\"$\{0##*/\} -h\\\" for more information\"
 tmp=\"$\{help_text##*USAGE\}\"
 usage=\"$(echo Usage: $\{tmp%%OPTIONS*\})\"
 
 if [[ \"$1\" == \"\" ]]; then
   echo \"$\{usage\}\"
   echo \"$\{try\}\"
-  echo \"     \\"sck .\\" to list all records\"
+  echo \"     \\\"sck .\\\" to list all records\"
   exit 1
 fi
 
@@ -65,7 +65,7 @@ while [[ \"$1\" != \"\" ]]; do
         k=\"$2\"
         d=\"$3\"
       fi
-      echo \"\\"$a\\",\\"$k\\",\\"$d\\"\" >> $sck_csv
+      echo \"\\\"$a\\\",\\\"$k\\\",\\\"$d\\\"\" >> $sck_csv
       exit
       ;;
     -e|--edit)
@@ -87,8 +87,8 @@ while [[ \"$1\" != \"\" ]]; do
 done 
 
 if [[ $gen_md_yn == y ]]; then
-  sort $sck_csv | \
-    sed 's/^\"\(.*\)\",\"\(.*\)\",\"\(.*\)\",\"\(.*\)\"$/\1\n\2\n| \`\3\` | \4 |/' \
+  sort $sck_csv | \\
+    sed 's/^\"\\(.*\\)\",\"\\(.*\\)\",\"\\(.*\\)\",\"\\(.*\\)\"$/\\1\\n\\2\\n| \\`\\3\\` | \\4 |/' \\
     > $tmp_file
   prev_heading=\"\"
   prev_subheading=\"\"
@@ -117,10 +117,10 @@ else
     srch=\"*\"
   fi
   words=\"$*\"
-  words=\"$\{words// /\\|\}\"
+  words=\"$\{words// /\\\\|\}\"
   echo
-  grep -i --color=auto \"$words\" $sck_csv | sort | \
-    sed \"s/\\",\\"/ - /g; s/^\\"//; s/\\"$//; s/ -  - / - /\" | grep -i --color=auto \"$words\"
+  grep -i --color=auto \"$words\" $sck_csv | sort | \\
+    sed \"s/\\\",\\\"/ - /g; s/^\\\"//; s/\\\"$//; s/ -  - / - /\" | grep -i --color=auto \"$words\"
   echo
 fi
 `

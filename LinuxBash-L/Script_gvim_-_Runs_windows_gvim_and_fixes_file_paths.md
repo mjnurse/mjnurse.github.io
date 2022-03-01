@@ -25,7 +25,7 @@ help_line=\"Runs windows gvim and fixes file paths\"
 web_desc_line=\"Runs windows gvim and fixes file paths\"
 
 files=\"$*\"
-fixed_files=\"$(echo $files | sed 's/\/c\//C:\//g')\"
+fixed_files=\"$(echo $files | sed 's/\\/c\\//C:\\//g')\"
 gvim.exe $fixed_files &
 `
   navigator.clipboard.writeText(text);

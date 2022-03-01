@@ -40,17 +40,17 @@ if [[ $# == 0 ]]; then
    echo \"Usage: query_es options\"
    echo
    echo \"   -a  api (mandatory)\"
-   echo \"   -bp base path (default:\$QES_BASE_PATH=$QES_BASE_PATH)\"
+   echo \"   -bp base path (default:\\$QES_BASE_PATH=$QES_BASE_PATH)\"
    echo \"   -d  debug y/n (default:n)\"
    echo \"   -f  filter_regex\"
-   echo \"   -h  host (default:\$QES_HOST=$QES_HOST)\"
+   echo \"   -h  host (default:\\$QES_HOST=$QES_HOST)\"
    echo \"   -j  json\"
    echo \"   -o  opn (mandatory)\"
-   echo \"   -p  port (default:\$QES_PORT=$QES_PORT)\"
-   echo \"   -pa proxy authentication (default:\$QES_PROXY_AUTH=$QES_PROXY_AUTH)\"
+   echo \"   -p  port (default:\\$QES_PORT=$QES_PORT)\"
+   echo \"   -pa proxy authentication (default:\\$QES_PROXY_AUTH=$QES_PROXY_AUTH)\"
    echo \"   -r  header rows (default:0)\"
    echo \"   -s  show settings\"
-   echo \"   -up username:password (default:\$QES_USER_PASS=$QES_USER_PASS)\" 
+   echo \"   -up username:password (default:\\$QES_USER_PASS=$QES_USER_PASS)\" 
 fi
 
 curlcmd=\"curl\"
@@ -104,9 +104,9 @@ url=\"$host$port/$basepath/$api\"
 
 # Replace any // with a / (this allows us to miss index names from some commands to run on all indexes)
 if [[ \"$QES_HTTPS_YN\" == \"Y\" || \"$QES_HTTPS_YN\" == \"y\" ]]; then
-  url=\"https://$\{url//\/\///\}\"
+  url=\"https://$\{url//\\/\\///\}\"
 else
-  url=\"http://$\{url//\/\///\}\"
+  url=\"http://$\{url//\\/\\///\}\"
 fi
 
 cmd=\"Command: $opn $url\"
@@ -116,11 +116,11 @@ if [[ $show_settings_yn == y ]]; then
   echo 
   echo Settings:
   echo
-  echo host=\"\\"$host\\"\"
-  echo port=\"\\"$port\\"\"
-  echo basepath=\"\\"$basepath\\"\"
-  echo userpass=\"\\"$userpass\\"\"
-  echo proxyauth=\"\\"$proxyauth\\"\"
+  echo host=\"\\\"$host\\\"\"
+  echo port=\"\\\"$port\\\"\"
+  echo basepath=\"\\\"$basepath\\\"\"
+  echo userpass=\"\\\"$userpass\\\"\"
+  echo proxyauth=\"\\\"$proxyauth\\\"\"
   echo
   exit
 fi
@@ -137,7 +137,7 @@ if [[ \"$json\" != \"\" ]]; then
       echo ==================================================
       echo COMMAND
       echo ==================================================
-      echo $curlcmd $userpass $proxyauth -X $opn \"$url\"  -H 'Content-Type: application/json' -d \"$json\" | tr -d \"\n\" | sed \"s/  */ /g\"
+      echo $curlcmd $userpass $proxyauth -X $opn \"$url\"  -H 'Content-Type: application/json' -d \"$json\" | tr -d \"\\n\" | sed \"s/  */ /g\"
       echo
       echo ==================================================
       echo RESULTS
@@ -149,7 +149,7 @@ else
       echo ==================================================
       echo COMMAND
       echo ==================================================
-      echo $curlcmd $userpass $proxyauth -X $opn \"$url\" | tr -d \"\n\" | sed \"s/  */ /g\"
+      echo $curlcmd $userpass $proxyauth -X $opn \"$url\" | tr -d \"\\n\" | sed \"s/  */ /g\"
       echo
       echo ==================================================
       echo RESULTS
@@ -166,7 +166,7 @@ if [[ \"$\{reshead:2:5\}\" == \"error\" ]]; then
    exit
 fi
 
-#sed -i \"s/->/\n   ->/g\" $tmpfile
+#sed -i \"s/->/\\n   ->/g\" $tmpfile
 cat $tmpfile
 
 num_lines=$(cat $tmpfile | wc -l)

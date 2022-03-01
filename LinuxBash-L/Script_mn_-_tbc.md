@@ -33,7 +33,7 @@ web_desc_line=\"tbc\"
 
 try=\"Try $\{0##*/\} -h for more information\"
 tmp=\"$\{help_text##*USAGE\}\"
-usage=$(echo \"Usage: $\{tmp%%OPTIONS*\}\" | tr -d \"\n\" | sed \"s/  */ /g\")
+usage=$(echo \"Usage: $\{tmp%%OPTIONS*\}\" | tr -d \"\\n\" | sed \"s/  */ /g\")
 
 if [[ \"$1\" == \"\" ]]; then
   echo \"$\{usage\}\"
@@ -79,9 +79,9 @@ if [[ \"$reuse_yn\" != \"y\" ]]; then
   file=\"/tmp/mn:$(date +'%y%m%d-%H%M')\"
   echo \"Running Scan - this may take a while\"
   echo \"f,d,s,b,t\" > $file.csv
-  find . -printf \"%f$\{div\}%h$\{div\}%s$\{div\}%b$\{div\}%y\n\" | sed \"s/,//g; s/$\{div\}/,/g\" >> $file.csv
+  find . -printf \"%f$\{div\}%h$\{div\}%s$\{div\}%b$\{div\}%y\\n\" | sed \"s/,//g; s/$\{div\}/,/g\" >> $file.csv
 
-  echo -e '.mode csv\n.import '$file.csv' files\n' | sqlite3 $file.db
+  echo -e '.mode csv\\n.import '$file.csv' files\\n' | sqlite3 $file.db
   #echo 'DELETE FROM files WHERE s>1024 AND b=0'
   rm -f $file.csv
 fi
@@ -90,8 +90,8 @@ prompt=\"$(pwd) > \"
 filename_filter=\"%\"
 min_size_filter=\"0\"
 
-std_filter=\"AND d NOT LIKE '%oracle_client%' AND d NOT LIKE '%\/.git\/%'\"
-std_filter=\"$std_filter AND d NOT LIKE '%\/node_modules\/%'\"
+std_filter=\"AND d NOT LIKE '%oracle_client%' AND d NOT LIKE '%\\/.git\\/%'\"
+std_filter=\"$std_filter AND d NOT LIKE '%\\/node_modules\\/%'\"
 
 function sq() \{
   table=\"(SELECT * FROM files WHERE f LIKE '$\{filename_filter\}' AND (s+0) > $\{min_size_filter\} $std_filter)\"
@@ -201,12 +201,12 @@ while [ 1 ]; do
       set_filter $option
       ;;
     h|help)
-      echo -e \" fd    - file duplicates\n\" \
-              \"fi     - show/set filters\n\" \
-              \"sq     - open sqlite3\n\" \
-              \"!<cmd> - Run shell command\n\" \
-              \"\n\" \
-              \"q    - quit\n\"
+      echo -e \" fd    - file duplicates\\n\" \\
+              \"fi     - show/set filters\\n\" \\
+              \"sq     - open sqlite3\\n\" \\
+              \"!<cmd> - Run shell command\\n\" \\
+              \"\\n\" \\
+              \"q    - quit\\n\"
       ;;
     lg)
       sq \"$largest_files\"

@@ -40,7 +40,7 @@ web_desc_line=\"Compresses and converts files base64 to copy and paste into a co
 
 try=\"Try $\{0##*/\} -h for more information\"
 tmp=\"$\{help_text##*USAGE\}\"
-usage=$(echo \"Usage: $\{tmp%%OPTIONS*\}\" | tr -d \"\n\" | sed \"s/  */ /g\")
+usage=$(echo \"Usage: $\{tmp%%OPTIONS*\}\" | tr -d \"\\n\" | sed \"s/  */ /g\")
 
 line=\"-------------------------------------------------\"; line=\"# $line$line\"
 silent_yn=n
@@ -93,8 +93,8 @@ rm -f $pack_name
 multi_yn=n
 if [[ $# != 1 ]]; then
   echo \"$line\" >> $pack_name
-  files=\"$( echo \" $* \" | sed 's/ pack / /g; s/ [^ ]*\.pack / /g; s/^  *//; s/  *$//;')\"
-  echo \"$\{files// /, \}\" | fold -w 88 -s \
+  files=\"$( echo \" $* \" | sed 's/ pack / /g; s/ [^ ]*\\.pack / /g; s/^  *//; s/  *$//;')\"
+  echo \"$\{files// /, \}\" | fold -w 88 -s \\
       | sed \"1s/^/# CONTENTS: /; 2,99s/^/#           /\" >> $pack_name
   multi_yn=y
 fi
@@ -106,7 +106,7 @@ for f in $*; do
       echo \"# FILE: $f \" >> $pack_name
       echo \"$\{line\}\" >> $pack_name
     fi
-    echo \"$(cat $f | gzip -f -9 | base64 -w 999999999 )\" | sed \"s/^/echo '/\" \
+    echo \"$(cat $f | gzip -f -9 | base64 -w 999999999 )\" | sed \"s/^/echo '/\" \\
         | fold -w 100 >> $pack_name
     echo \"' | base64 -d | gunzip > $f; chmod u+x $f\" >> $pack_name
   fi

@@ -31,7 +31,7 @@ web_desc_line=\"Rename files to only lowercase characters and a dash.\"
 
 try=\"Try $\{0##*/\} -h for more information\"
 tmp=\"$\{help_text##*USAGE\}\"
-usage=$(echo \"Usage: $\{tmp%%OPTIONS*\}\" | tr -d \"\n\" | sed \"s/  */ /g\")
+usage=$(echo \"Usage: $\{tmp%%OPTIONS*\}\" | tr -d \"\\n\" | sed \"s/  */ /g\")
 
 if [[ \"$1\" == \"\" ]]; then
   echo \"$\{usage\}\"
@@ -49,7 +49,7 @@ files_found_yn=n
 for f in $*; do
   nf=\"$\{f,,\}\"
   nf=\"$\{nf//_/-\}\"
-  if [[ \"$nf\" != \"$f\" && ! $f =~ .*\* ]]; then
+  if [[ \"$nf\" != \"$f\" && ! $f =~ .*\\* ]]; then
     files_found_yn=y
     echo \"$f -> $nf\"
   fi

@@ -34,7 +34,7 @@ for f in $(find . -maxdepth 1 -executable); do
 
   if [[ -f $f && ! -L $f ]]; then
     line1=\"$(head -1 $f)\"
-    line1=$\{line1//[$' \t\r\n']\}
+    line1=$\{line1//[$' \\t\\r\\n']\}
     if [[ \"$line1\" != \"#!/bin/bash\" ]]; then
       echo
       echo ================================================================================
@@ -64,7 +64,7 @@ done
 for f in $(find . -maxdepth 1 ! -executable); do
   if [[ -f $f && ! -L $f ]]; then
     line1=\"$(head -1 $f)\"
-    line1=$\{line1//[$' \t\r\n']\}
+    line1=$\{line1//[$' \\t\\r\\n']\}
     if [[ \"$line1\" == \"#!/bin/bash\" ]]; then
       echo
       echo ================================================================================
@@ -211,7 +211,7 @@ web_desc_line=\"'tbc'\"
 
 try=\"Try $\{0##*/\} -h for more information\"
 tmp=\"$\{help_text##*USAGE\}\"
-usage=$(echo \"Usage: $\{tmp%%OPTIONS*\}\" | tr -d \"\n\" | sed \"s/  */ /g\")
+usage=$(echo \"Usage: $\{tmp%%OPTIONS*\}\" | tr -d \"\\n\" | sed \"s/  */ /g\")
 
 if [[ \"$1\" == \"\" ]]; then
   echo \"$\{usage\}\"

@@ -114,8 +114,8 @@ echo '<!DOCTYPE html>
       function drawCht() \{
         const gChtData = google.visualization.arrayToDataTable([' > $html_doc
 
-cat $cf | sed \"s/\\"/'/g; s/^/[/; s/$/],/\" | \
-          sed \"1s/\]/'\]/; 1s/\[/\['/; 1s/,/','/g; 1s/''/'/g; 1s/','$/,/\" >> $html_doc
+cat $cf | sed \"s/\\\"/'/g; s/^/[/; s/$/],/\" | \\
+          sed \"1s/\\]/'\\]/; 1s/\\[/\\['/; 1s/,/','/g; 1s/''/'/g; 1s/','$/,/\" >> $html_doc
 
 echo '    ]);
         const chtOptions = \{

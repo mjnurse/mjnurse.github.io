@@ -148,7 +148,7 @@ if [[ \"$new_name\" == \"\" ]]; then
   new_name=\"$\{new_name,,\}\"
 fi
 
-if [[ \"$\{new_name##*.\}\" != \"png\" &&  \
+if [[ \"$\{new_name##*.\}\" != \"png\" &&  \\
       \"$\{new_name##*.\}\" != \"jpg\" ]]; then
   echo \"$new_name - is not a valid image filename\"
   exit

@@ -33,7 +33,7 @@ web_desc_line=\"tbc\"
 
 try=\"Try $\{0##*/\} -h for more information\"
 tmp=\"$\{help_text##*USAGE\}\"
-usage=$(echo \"Usage: $\{tmp%%OPTIONS*\}\" | tr -d \"\n\" | sed \"s/  */ /g\")
+usage=$(echo \"Usage: $\{tmp%%OPTIONS*\}\" | tr -d \"\\n\" | sed \"s/  */ /g\")
 
 if [[ \"$1\" == \"\" ]]; then
   echo \"$\{usage\}\"
@@ -111,8 +111,8 @@ function func() \{
   echo \"function $\{function_name\} () \{\"
   echo \"\"
   if [[ $1 =~ -.* ]]; then
-    echo \"  while [[ \\"\$1 ]]; do\"
-    echo \"    case \$1 in\"
+    echo \"  while [[ \\\"\\$1 ]]; do\"
+    echo \"    case \\$1 in\"
     flags_yn=y
   fi
   while [[ \"$1\" ]]; do
@@ -136,7 +136,7 @@ function func() \{
         fi
         shift
         echo \"      -$\{1\})\"
-        echo \"        $\{2\}=\\"\$\{2\}\\"\"
+        echo \"        $\{2\}=\\\"\\$\{2\}\\\"\"
         echo \"        shift\"
         echo \"        ;;\"
         shift
@@ -149,13 +149,13 @@ function func() \{
           echo \"  done\"
         fi
         if [[ $\{optional_yn\} == n ]]; then
-          echo \"  $\{1\}=\\"\$\{$\{param_pos\}\}\\"\"
-          echo \"  if [[ \\"\$$1\\" == \\"\\" ]]; then\"
-          echo \"    echo \\"Error: Function: $function_name.  Mandatory parameter <$1> not set\\"\"
+          echo \"  $\{1\}=\\\"\\$\{$\{param_pos\}\}\\\"\"
+          echo \"  if [[ \\\"\\$$1\\\" == \\\"\\\" ]]; then\"
+          echo \"    echo \\\"Error: Function: $function_name.  Mandatory parameter <$1> not set\\\"\"
           echo \"    exit 1\"
           echo \"  fi\"
         else
-          echo \"  $\{1\}=\\"\$\{$\{param_pos\}\}\\" # Optional parameter\"
+          echo \"  $\{1\}=\\\"\\$\{$\{param_pos\}\}\\\" # Optional parameter\"
         fi
         let param_pos=param_pos+1
         ;;

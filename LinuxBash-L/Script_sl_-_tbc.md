@@ -56,7 +56,7 @@ function run() \{
   if [[ \"$buf\" == \"\" ]]; then
     buf=\"$line\"
   elif [[ \"$line\" != \"\" ]]; then
-    buf=\"$buf\n$line\"
+    buf=\"$buf\\n$line\"
   fi
   history -s \"$\{buf/;/\}\"
   echo -e \"$buf\" | sqlite3 $sl_options $db | tee -a $spool_file
@@ -107,7 +107,7 @@ sl_options=\"-csv -header\"
 #    -list                set output mode to 'list'
 #    -lookaside SIZE N    use N entries of SZ bytes for lookaside memory
 #    -mmap N              default mmap size set to N
-#    -newline SEP         set output row separator. Default: '\n'
+#    -newline SEP         set output row separator. Default: '\\n'
 #    -nullvalue TEXT      set text string for NULL values. Default ''
 #    -pagecache SIZE N    use N slots of SZ bytes each for page cache memory
 #    -quote               set output mode to 'quote'
@@ -129,25 +129,25 @@ while [[ 1 ]]; do
     mode=null
   elif [[ $mode == ins ]]; then
     case \"$line\" in
-      \;)
+      \\;)
         line=\"\"
         run
         ;;
-      *\;)
+      *\\;)
         line=\"$\{line::-1\}\"
         run
         ;;
       *)
-        buf=\"$buf\n$line\"
+        buf=\"$buf\\n$line\"
         ;;
     esac
   else
     case \"$line\" in
-      \;)
+      \\;)
         line=\"\"
         run
         ;;
-      *\;)
+      *\\;)
         if [[ $mode == run ]]; then
           buf=\"\"
         fi
@@ -184,7 +184,7 @@ while [[ 1 ]]; do
       g)
         echo \"Use 'g <filename>' to load a file to the buffer\"
         ;;
-      g\ *)
+      g\\ *)
         file=\"$\{line:2\}\"
         if [[ ! -f $file ]]; then
           file=\"$\{file\}.sql\"
@@ -209,7 +209,7 @@ while [[ 1 ]]; do
       o)
         echo \"Use 'o <database name>' to open a database\"
         ;;
-      o\ *)
+      o\\ *)
         history -s \"$\{line\}\"
         db=\"$\{line:2\}\"
         if [[ ! -f $db ]]; then
@@ -222,8 +222,8 @@ while [[ 1 ]]; do
       q|x|quit|exit)
         exit
         ;;
-      s\ *|save\ *)
-        if [[ \"$line\" =~ s\ .* ]]; then
+      s\\ *|save\\ *)
+        if [[ \"$line\" =~ s\\ .* ]]; then
           file=\"$\{line:2\}\"
         else
           file=\"$\{line:5\}\"
@@ -237,7 +237,7 @@ while [[ 1 ]]; do
       spool)
         echo \"use 'spool <filename>' to spool output to a file\"
         ;;
-      spool\ *)
+      spool\\ *)
         spool_file=\"$\{line:6\}\"
         if [[ $\{spool_file,,\} == off ]]; then
           spool_file=\"/dev/null\"
