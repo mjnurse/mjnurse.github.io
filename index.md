@@ -35,7 +35,7 @@ Yeah - I made a (javascript) snake game and called it Worm...
 </div>
 <div class="tile">
 <img src="images/Star.png" width="20px"><a class="tilelink" id="listitem4" href="/Blog-B/20-10-29_-_Using_the_console.log_Alternatives">
-Javasctipt console.log Alternatives</a>&nbsp;<span style="color: #AAAAAA">(4)</span><br>
+JS console.log Alternatives</a>&nbsp;<span style="color: #AAAAAA">(4)</span><br>
 Clean up Javacript logging.
 </div>
 </div>
