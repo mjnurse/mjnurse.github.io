@@ -40,16 +40,16 @@ Clean up Javacript logging.
 </div>
 </div>
 <hr>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 22-06-17 -  <a class="bloglistlink" id="listitem5" href="Blog-B/22-06-17_-_A_Wrote_A_Bash_Function_To_Parse_And_Describe_A_Scripts_Parameters.html">A Wrote A Bash Function To Parse And Describe A Scripts Parameters</a> <span style="color: grey">(5)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 22-05-18 -  <a class="bloglistlink" id="listitem6" href="Blog-B/22-05-18_-_Read_Aloud_In_MS_Word.html">Read Aloud In MS Word</a> <span style="color: grey">(6)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 22-03-22 -  <a class="bloglistlink" id="listitem7" href="Blog-B/22-03-22_-_LDAP_SAML.html">LDAP SAML</a> <span style="color: grey">(7)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 21-02-23 -  <a class="bloglistlink" id="listitem8" href="Blog-B/21-02-23_-_Useful_Elasticsearch_cURLS.html">Useful Elasticsearch cURLS</a> <span style="color: grey">(8)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 21-01-11 -  <a class="bloglistlink" id="listitem9" href="Blog-B/21-01-11_-_HTML_datalist.html">HTML datalist</a> <span style="color: grey">(9)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 20-12-21 -  <a class="bloglistlink" id="listitem10" href="Blog-B/20-12-21_-_Javascript_ASYNC_AWAIT_By_Example.html">Javascript ASYNC AWAIT By Example</a> <span style="color: grey">(10)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 20-12-10 -  <a class="bloglistlink" id="listitem11" href="Blog-B/20-12-10_-_Async_Await_with_Array_Assignment.html">Async Await with Array Assignment</a> <span style="color: grey">(11)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 20-10-29 -  <a class="bloglistlink" id="listitem12" href="Blog-B/20-10-29_-_Using_the_console.log_Alternatives.html">Using the console.log Alternatives</a> <span style="color: grey">(12)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-11-11 -  <a class="bloglistlink" id="listitem13" href="Blog-B/19-11-11_-_Oracle_and_Postgres_Schema_Copy_Process.html">Oracle and Postgres Schema Copy Process</a> <span style="color: grey">(13)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-11-04 -  <a class="bloglistlink" id="listitem14" href="Blog-B/19-11-04_-_Text_To_Speech_-_Clipboard.html">Text To Speech - Clipboard</a> <span style="color: grey">(14)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 22-06-22 -  <a class="bloglistlink" id="listitem5" href="Blog-B/22-06-22_-_One_Liner_to_Run_SQL_Over_a_CSV_File_Using_Sqlite.html">One Liner to Run SQL Over a CSV File Using Sqlite</a> <span style="color: grey">(5)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 22-06-17 -  <a class="bloglistlink" id="listitem6" href="Blog-B/22-06-17_-_A_Wrote_A_Bash_Function_To_Parse_And_Describe_A_Scripts_Parameters.html">A Wrote A Bash Function To Parse And Describe A Scripts Parameters</a> <span style="color: grey">(6)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 22-05-18 -  <a class="bloglistlink" id="listitem7" href="Blog-B/22-05-18_-_Read_Aloud_In_MS_Word.html">Read Aloud In MS Word</a> <span style="color: grey">(7)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 22-03-22 -  <a class="bloglistlink" id="listitem8" href="Blog-B/22-03-22_-_LDAP_SAML.html">LDAP SAML</a> <span style="color: grey">(8)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 21-02-23 -  <a class="bloglistlink" id="listitem9" href="Blog-B/21-02-23_-_Useful_Elasticsearch_cURLS.html">Useful Elasticsearch cURLS</a> <span style="color: grey">(9)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 21-01-11 -  <a class="bloglistlink" id="listitem10" href="Blog-B/21-01-11_-_HTML_datalist.html">HTML datalist</a> <span style="color: grey">(10)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 20-12-21 -  <a class="bloglistlink" id="listitem11" href="Blog-B/20-12-21_-_Javascript_ASYNC_AWAIT_By_Example.html">Javascript ASYNC AWAIT By Example</a> <span style="color: grey">(11)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 20-12-10 -  <a class="bloglistlink" id="listitem12" href="Blog-B/20-12-10_-_Async_Await_with_Array_Assignment.html">Async Await with Array Assignment</a> <span style="color: grey">(12)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 20-10-29 -  <a class="bloglistlink" id="listitem13" href="Blog-B/20-10-29_-_Using_the_console.log_Alternatives.html">Using the console.log Alternatives</a> <span style="color: grey">(13)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 19-11-11 -  <a class="bloglistlink" id="listitem14" href="Blog-B/19-11-11_-_Oracle_and_Postgres_Schema_Copy_Process.html">Oracle and Postgres Schema Copy Process</a> <span style="color: grey">(14)</span></p>
 <p><a href="Blog-B">More</a></p>
 <script>gMaxNum=15-1</script>
 
