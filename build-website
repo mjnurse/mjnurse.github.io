@@ -30,8 +30,8 @@ sck_pg="Misc-M/Shortcut_Keys.md"
 echo "---" > $sck_pg
 echo "title: Shortcut Keys" >> $sck_pg
 echo "layout: page-with-contents-list" >> $sck_pg
-echo '**Note**: This page is automatically generated using `sck`' > $sck_pg
 echo "---" >> $sck_pg
+echo '**Note**: This page is automatically generated using `sck`' >> $sck_pg
 sck -m >> $sck_pg
 
 echo_h2 -lblue "Copy Javascript from javascript directory to assets/javascript directory"
