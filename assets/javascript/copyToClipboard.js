@@ -3,7 +3,7 @@
 function copyToClipboard(text) {
   const el = document.createElement('textarea');
   el.value =
-    ('gvim C:/MJN/github/mjnurse-github-io/' + text).replace(/\//g, '\\');
+    ('gvim C:/MJN/github/drive/mjnurse-github-io/' + text).replace(/\//g, '\\');
   alert(el.value + ' copied to clipboard');
   document.body.appendChild(el);
   el.select();
@@ -13,7 +13,7 @@ function copyToClipboard(text) {
 function copyPageNameToClipboard(text) {
   const el = document.createElement('textarea');
   el.value =
-    ('gvim C:/MJN/github/mjnurse-github-io/' + text).replace(/\//g, '\\');
+    ('gvim C:/MJN/drive/github/mjnurse-github-io/' + text).replace(/\//g, '\\');
   alert(el.value + ' copied to clipboard');
   document.body.appendChild(el);
   el.select();
