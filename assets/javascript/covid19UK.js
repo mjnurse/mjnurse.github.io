@@ -83,7 +83,7 @@ function drawCht() {
     },
     pointsVisible: false,
     series: {
-      200: {color: '#B82E2E'},
+       200: {color: '#B82E2E'},
     },
     fontSize: 10,
     height: '100%',

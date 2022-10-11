@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable require-jsdoc */
 
 google.charts.load('current', {'packages': ['corechart']});
@@ -9,8 +8,6 @@ const gSelectedCountries= new Array(11);
 for (let c=1; c<=10; c++) {
   gSelectedCountries[c] = 0;
 }
-let CHARTMAX = 0;
-let CHARTMEASURE = 'none';
 
 gChtData[0] = gd[0];
 gChtData[1] = gd[1];
@@ -21,7 +18,7 @@ for (let ctry=numCtrys+1; ctry<=numCtrys+10; ctry++) {
 
 let sc = 1;
 for (let ctry=1; ctry<=numCtrys; ctry++) {
-  const ctryBox = document.getElementById('ctryCb'+ctry);
+  let ctryBox = document.getElementById('ctryCb'+ctry);
   if (ctryBox != undefined && ctryBox.checked) {
     gSelectedCountries[sc] = ctry;
     sc += 1;
@@ -34,11 +31,6 @@ for (let day=2; day<gd.length; day++) {
     gChtData[day][ctry] = null;
   }
 }
-
-const setChartMax = () => {
-  CHARTMAX = document.getElementById('vmax').value;
-  drawCht();
-};
 
 function drawCht() {
   const form = document.getElementById('measureForm');
@@ -60,12 +52,6 @@ function drawCht() {
   }
   chartTitle.innerHTML = title;
   tableTitle.innerHTML = title;
-
-  if (CHARTMEASURE != measure) {
-    CHARTMAX = 0;
-    CHARTMEASURE = measure;
-    document.getElementById('vmax').value = '';
-  }
 
   for (let day=2; day<gd.length; day++) {
     gChtData[day][0] = gd[day][0];
@@ -135,10 +121,6 @@ function drawCht() {
     vAxis: {viewWindow: {min: 0}},
     curveType: 'function',
   };
-
-  if (CHARTMAX > 0) {
-    chtOptions.vAxis.viewWindow.max = CHARTMAX;
-  }
 
   chtOptions.series[numCtrys+1] = {color: '#3366CC'};
   chtOptions.series[numCtrys+2] = {color: '#DC3912'};
