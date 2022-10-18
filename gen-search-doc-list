@@ -1,8 +1,3 @@
----
-title: gen-search-doc-list - tbc
----
-
-```bash
 #!/bin/bash
 help_text="
 NAME
@@ -28,7 +23,7 @@ help_line="tbc"
 web_desc_line="tbc"
 
 
-sd="/c/MJN/github/mjnurse-github-io/assets/javascript/search-docs.js"
+sd="/c/MJN/drive/github/mjnurse-github-io/assets/javascript/search-docs.js"
 
 rm -f "$sd"
 
@@ -39,7 +34,7 @@ echo "  this.addField('body');" >> $sd
 echo "  this.setRef('id');" >> $sd
 echo "});" >> $sd
 
-cd /c/MJN/github/mjnurse-github-io
+cd /c/MJN/drive/github/mjnurse-github-io
 
 (( i=1 ))
 for f in $(find . -name "*.md" -print); do
@@ -66,4 +61,3 @@ for f in $(find . -name "*.md" -print); do
 done
 
 
-```
