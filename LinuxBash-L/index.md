@@ -25,7 +25,7 @@ title: LinuxBash
 
 <span style="color: grey">10.</span>&nbsp;&nbsp;&nbsp; <a id="listitem10" href="Script_article_-_Creates_a_new_website_article.html">article - Creates a new website article</a>
 
-<span style="color: grey">11.</span>&nbsp;&nbsp;&nbsp; <a id="listitem11" href="Script_bash-func_-_Example_Bash_Script.html">bash-func - Example Bash Script</a>
+<span style="color: grey">11.</span>&nbsp;&nbsp;&nbsp; <a id="listitem11" href="Script_bash-script-example_-_Example_Bash_Script.html">bash-script-example - Example Bash Script</a>
 
 <span style="color: grey">12.</span>&nbsp;&nbsp;&nbsp; <a id="listitem12" href="Script_blog_-_Creates_a_Blog_article.html">blog - Creates a Blog article</a>
 
