@@ -23,19 +23,28 @@ for f in $(grep -l "^web_desc_line" *); do
 
   dest=$(echo "/c/MJN/drive/github/mjnurse-github-io/LinuxBash-L/Script $f - $dl.md" | sed "s/ /_/g")
 
-  echo dest_file: $dest
+  if [[ "$dl" == "tbc" ]]; then
+  
+    echo Skipping: $f - web_desc_line: $dl
 
-  echo "---" > $dest
-  echo "title: $f - $dl" >> $dest
-  echo "---" >> $dest
-  echo "" >> $dest
-  echo "\`\`\`bash" >> $dest
-  cat $f >> $dest
-  echo "\`\`\`" >> $dest
+  else
 
-  fdr="$(date -r $f)"
-  touch -d "$fdr" $dest
+    echo $dest | sed "s/.*\//dest_file: /"
+
+    echo "---" > $dest
+    echo "title: $f - $dl" >> $dest
+    echo "---" >> $dest
+    echo "" >> $dest
+    echo "\`\`\`bash" >> $dest
+    cat $f >> $dest
+    echo "\`\`\`" >> $dest
+
+    fdr="$(date -r $f)"
+    touch -d "$fdr" $dest
+  fi
 done
+
+exit
 
 # Create bash script packs and pack pages
 
