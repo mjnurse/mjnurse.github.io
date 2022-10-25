@@ -85,7 +85,7 @@ case "KeyL": window.location.assign( "/LinuxBash-L/" ); break;
 case "KeyM": window.location.assign( "/Misc-M/" ); break;
 case "KeyN": window.location.assign( "/Notes-N/" ); break;
 case "KeyO": window.location.assign( "/Other-O/" ); break;
-case "KeyP": window.location.assign( "/Postgres-P/" ); break;
+case "KeyS": window.location.assign( "/ShortcutKeys-S/" ); break;
     }
 
     if (event.key >= '0' && event.key <= '9') {
