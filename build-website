@@ -28,7 +28,7 @@ cd /c/MJN/drive/github/mjnurse-github-io
 # ------------------------------------------------------------------------------
 echo_h2 -lblue "Generate shortcut keys page"
 # ------------------------------------------------------------------------------
-sck_pg="Misc-M/Shortcut_Keys.md"
+sck_pg="ShortcutKeys-S/Shortcut_Keys.md"
 echo "---" > $sck_pg
 echo "title: Shortcut Keys" >> $sck_pg
 echo "layout: page-with-contents-list" >> $sck_pg
