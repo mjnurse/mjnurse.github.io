@@ -13,7 +13,7 @@ title: All
 
 <span style="color: grey">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5.</span>&nbsp;&nbsp; &nbsp;<a id="listitem5" href="/GCP-G/GCP_Training/">GCP Training</a>
 
-<span style="color: grey">6.</span>&nbsp;&nbsp;&nbsp; <a id="listitem6" href="https://mjnurse.github.io/Javascript-J/">Javascript</a>
+<span style="color: grey">6.</span>&nbsp;&nbsp;&nbsp; <a id="listitem6" href="https://mjnurse.github.io/JS-J/">JS</a>
 
 <span style="color: grey">7.</span>&nbsp;&nbsp;&nbsp; <a id="listitem7" href="https://mjnurse.github.io/LinuxBash-L/">LinuxBash</a>
 

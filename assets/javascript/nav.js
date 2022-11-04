@@ -80,7 +80,7 @@ case "KeyB": window.location.assign( "/Blog-B/" ); break;
 case "KeyC": window.location.assign( "/Cheatsheets-C/" ); break;
 case "KeyE": window.location.assign( "/Elasticsearch-E/" ); break;
 case "KeyG": window.location.assign( "/GCP-G/" ); break;
-case "KeyJ": window.location.assign( "/Javascript-J/" ); break;
+case "KeyJ": window.location.assign( "/JS-J/" ); break;
 case "KeyL": window.location.assign( "/LinuxBash-L/" ); break;
 case "KeyM": window.location.assign( "/Misc-M/" ); break;
 case "KeyN": window.location.assign( "/Notes-N/" ); break;
