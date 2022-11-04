@@ -163,7 +163,9 @@ for l1_dir in */; do
             scripts=n
             for file in $(ls *.md | sed "/folder_desc.*/d; s/^Script/zzzScript/" | \
                           sort -f | sed "s/^zzz//"); do
+echo $file
                if [[ $file =~ zzzScript.* && $scripts == n ]]; then
+echo SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
                   echo >> index.md
                   echo "## Scripts" >> index.md
                   echo >> index.md
@@ -191,7 +193,7 @@ for l1_dir in */; do
       fi
       for file in $(ls *.md | sed "/folder_desc.*/d; s/^Script/zzzScript/" | \
                     sort -f $rev | sed "s/^zzz//"); do
-         if [[ $file =~ Script.* && $scripts == n ]]; then
+         if [[ $file =~ zzzScript.* && $scripts == n ]]; then
             echo >> index.md
             echo "## Scripts" >> index.md
             echo >> index.md

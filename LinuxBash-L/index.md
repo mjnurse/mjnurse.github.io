@@ -18,9 +18,6 @@ title: LinuxBash
 
 <span style="color: grey">8.</span>&nbsp;&nbsp;&nbsp; <a id="listitem8" href="WSL_Hadoop_3.0.html">WSL Hadoop 3.0</a>
 
-## Scripts
-
-
 <span style="color: grey">9.</span>&nbsp;&nbsp;&nbsp; <a id="listitem9" href="Script_ah_-_Add_header_to_web_page_markdown_document.html">ah - Add header to web page markdown document</a>
 
 <span style="color: grey">10.</span>&nbsp;&nbsp;&nbsp; <a id="listitem10" href="Script_article_-_Creates_a_new_website_article.html">article - Creates a new website article</a>
