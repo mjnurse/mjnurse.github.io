@@ -6,7 +6,7 @@ title: Blog
 
 <span style="color: grey">2.</span>&nbsp;&nbsp;&nbsp; <a id="listitem2" href="22-06-22_-_One_Liner_to_Run_SQL_Over_a_CSV_File_Using_Sqlite.html">22-06-22 - One Liner to Run SQL Over a CSV File Using Sqlite</a>
 
-<span style="color: grey">3.</span>&nbsp;&nbsp;&nbsp; <a id="listitem3" href="22-06-17_-_A_Wrote_A_Bash_Function_To_Parse_And_Describe_A_Scripts_Parameters.html">22-06-17 - A Wrote A Bash Function To Parse And Describe A Scripts Parameters</a>
+<span style="color: grey">3.</span>&nbsp;&nbsp;&nbsp; <a id="listitem3" href="22-06-17_-_I_Wrote_A_Bash_Function_To_Parse_And_Describe_A_Scripts_Parameters.html">22-06-17 - I Wrote A Bash Function To Parse And Describe A Scripts Parameters</a>
 
 <span style="color: grey">4.</span>&nbsp;&nbsp;&nbsp; <a id="listitem4" href="22-05-18_-_Read_Aloud_In_MS_Word.html">22-05-18 - Read Aloud In MS Word</a>
 
