@@ -20,7 +20,7 @@ A collection of content which is not a part of the site top level navigation.
 
 <span style="color: grey">7.</span>&nbsp;&nbsp;&nbsp; <b><a id="listitem7" href="/Other-O/Scala/">Scala</a></b>
 
-<span style="color: grey">8.</span>&nbsp;&nbsp;&nbsp; <b><a id="listitem8" href="/Other-O/Spark/">Spark</a></b>
+<span style="color: grey">8.</span>&nbsp;&nbsp;&nbsp; <b><a id="listitem8" href="/Other-O/Spark_and_Hadoop_HDFS/">Spark and Hadoop HDFS</a></b>
 
 <span style="color: grey">9.</span>&nbsp;&nbsp;&nbsp; <b><a id="listitem9" href="/Other-O/WSL/">WSL</a></b>
 
