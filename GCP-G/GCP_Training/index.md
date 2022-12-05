@@ -38,7 +38,7 @@ title: GCP Training
 
 <span style="color: grey">18.</span>&nbsp;&nbsp; &nbsp;<a id="listitem18" href="Section_1_-_GCS_-_Compute_Engine.html">Section 1 - GCS - Compute Engine</a>
 
-<span style="color: grey">19.</span>&nbsp;&nbsp; &nbsp;<a id="listitem19" href="Section_2_-_GCS_-_Instance_Groups_and_Load_Balanncing.html">Section 2 - GCS - Instance Groups and Load Balanncing</a>
+<span style="color: grey">19.</span>&nbsp;&nbsp; &nbsp;<a id="listitem19" href="Section_2_-_GCS_-_Instance_Groups_and_Load_Balancing.html">Section 2 - GCS - Instance Groups and Load Balancing</a>
 
 <span style="color: grey">20.</span>&nbsp;&nbsp; &nbsp;<a id="listitem20" href="Stackdriver.html">Stackdriver</a>
 
