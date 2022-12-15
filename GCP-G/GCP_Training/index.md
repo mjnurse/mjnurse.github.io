@@ -36,7 +36,7 @@ title: GCP Training
 
 <span style="color: grey">17.</span>&nbsp;&nbsp; &nbsp;<a id="listitem17" href="Ref_-_Network_Layers.html">Ref - Network Layers</a>
 
-<span style="color: grey">18.</span>&nbsp;&nbsp; &nbsp;<a id="listitem18" href="Section_0_-_An_Intraduction_and_Overview.html">Section 0 - An Intraduction and Overview</a>
+<span style="color: grey">18.</span>&nbsp;&nbsp; &nbsp;<a id="listitem18" href="Section_0_-_An_Introduction_and_Overview.html">Section 0 - An Introduction and Overview</a>
 
 <span style="color: grey">19.</span>&nbsp;&nbsp; &nbsp;<a id="listitem19" href="Section_1_-_GCS_-_Compute_Engine.html">Section 1 - GCS - Compute Engine</a>
 
