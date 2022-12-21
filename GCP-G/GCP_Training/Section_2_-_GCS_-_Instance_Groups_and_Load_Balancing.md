@@ -19,10 +19,10 @@ Can be in a single Zone or over a Region.
 ## Managed Instance Groups
 
 - Maintain certain number of instances (If an instance crashes, MIG launches another instance).
-- Detect application failures using health checks (Self Healing)
-- Increase and decrease instances based on load (Auto Scaling)
+- Detect application failures using health checks (Self Healing).
+- Increase and decrease instances based on load (Auto Scaling).
 - Add Load Balancer to distribute load.
-- Create instances in multiple zones (regional MIGs)
+- Create instances in multiple zones (regional MIGs).
   - Regional MIGs provide higher availability compared to zonal MIGs.
 - Release new application versions without downtime.
   - Rolling updates: Release new version step by step (gradually). Update a percentage of instances to the new version at a time.
@@ -37,8 +37,8 @@ Can configure:
 - Maximum number of instances.
 - Autoscaling metrics: 
   - CPU Utilization target or Load Balancer Utilization target or Any other metric from Stack Driver.
-  - Cool-down period: How long to wait before looking at auto scaling metrics again? (to prevent frequent scaling up / down)
-  - Scale In Controls: Prevent a sudden drop in no of VM instances (Example: Don't scale in by more than 10% or 3 instances in 5 minutes)
+  - Cool-down period: How long to wait before looking at auto scaling metrics again? (to prevent frequent scaling up / down).
+  - Scale In Controls: Prevent a sudden drop in no of VM instances (Example: Don't scale in by more than 10% or 3 instances in 5 minutes).
 
 ### Rolling Updates
 
@@ -86,7 +86,7 @@ Distributes user traffic across instances of an application in single region or 
 - Host and path rules (For HTTP(S) Load Balancing) - Define rules redirecting the traffic to different backends:
   - Based on path - xxx.com/a vs xxx.com/b
   - Based on Host - a.xxx.com vs b.xxx.com
-  - Based on HTTP headers (Authorization header) and methods (POST, GET, etc)
+  - Based on HTTP headers (Authorization header) and methods (POST, GET, etc).
   - etc.
 
 ### SSL/TLS Termination/Offloading
@@ -141,10 +141,97 @@ Internal NW TCP/UDP | Regional, Internal, TCP/UDP | Pass-through | Any
 
 #### Scenario 2 - Multiple Microservices
 
+- Multiple Backend Services (one per Microservice).
+- multiple Backend (each Microservice can have multiple MIGs multiple regions).
+- URL Map for each Microservice backend (e.g `URL /service-a`).
 
+# Availability
 
+- 99.99% - four 9's availability - 4.5 minutes downtime a month.
+- 99.999% - 26 seconds downtime per month.
 
+## Highly Available Architecture:
 
+- Multiple Regional Instance Groups for each Microservice.
+- Distribute Load using a Global HTTPS Load Balancing.
+- Configure Health Checks for Instance Group and Load Balancing.
+- Enable Live Migration for VM instances.
+
+Advantages:
+- Instances distributed across regions - even if a region is down, your app is available.
+- Global Load Balancing is highly available.
+- Health checks ensure auto healing.
+
+# Scalability
+
+- Vertical Scaling - increase machine size.
+- Horizontal Scaling - auto scale Managed Instance Group, distribute load using a Load Balancer.
+
+# Live Migration
+
+- Running instance is migrated to another host in the same zone.
+- Does NOT change any attributes or properties of the VM.
+- SUPPORT for instances with local SSDs.
+- NO SUPPORT for GPUs and preemptible instances.
+
+Availability Policy:
+- On host maintenance: What should happen during periodic infrastructure maintenance?
+  - Migrate (default): Migrate VM instance to other hardware.
+  - Terminate: Stop the VM instance (required for VMs with GPU).
+- Automatic restart - Restart VM instances if they are terminated due to non-user-initiated reasons (maintenance event, hardware failure etc).
+
+# Security
+
+- Use Firewall Rules to restrict traffic.
+- Use Internal IP Addresses as much as possible.
+- Use Sole-tenant nodes when you have regulatory needs.
+- Create a hardened custom image to launch your VMs.
+
+# Performance
+
+- Use GPUs to accelerate machine learning and data processing workloads.
+- Use TPUs for massive matrix operations performed in your machine learning workloads.
+- Prefer creating a hardened custom image to installing software at startup.
+
+# Resiliency
+
+- Build Resilient Architectures (run VMs in MIG behind global load balancing).
+- Have the right data available:
+  - Use Cloud Monitoring for monitoring.
+  - Install logging agent to send logs to Cloud Logging.
+- Be prepared for the unexpected (and changes)
+  - Enable Live Migration and Automatic restart when available.
+  - Configure the right health checks.
+  - DR- Up to date image copied to multiple regions.
+
+# Sustained Use Discounts
+
+- Automatic discounts for running VM instances for significant portion of the billing month.
+- Example: If you use N1, N2 machine types for more than 25% of a month, you get a 20% to 50% discount on every incremental minute.
+- Discount increases with usage.
+- No action required on your part.
+- Applicable for instances created by Google Kubernetes Engine and Compute Engine.
+- Does NOT apply on certain machine types (eg. E2, A2) or instances created by App Engine flexible and Dataflow.
+
+# Committed Use Discounts
+
+- For predictable requirements.
+- 1 - 3 years.
+- Up to 70% discount (certain machine types / GPUs).
+- Applicable for instances created by Google Kubernetes Engine and Compute Engine.
+- NOT applicable for instances created by App Engine flexible and Dataflow.
+
+# Preemptible VMs
+
+- Up to 80% saving.
+- Can be killed at anytime within 24 hours - Instances get 30 second warning.
+
+# Billing
+
+- Billed by second (minimum 1 minute).
+- Not billed when VM stopped (storage billed).
+- Create budgets alerts.
+- Use auto scaling to have optimal number of VMs running.
 
 <hr>
-<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 22/12/21 19:31</p>
+<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 22/12/21 20:11</p>
