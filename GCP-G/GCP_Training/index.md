@@ -14,7 +14,7 @@ title: GCP Training
 
 <span style="color: grey">6.</span>&nbsp;&nbsp; &nbsp;<a id="listitem6" href="Section_3_-_gcloud.html">Section 3 - gcloud</a>
 
-<span style="color: grey">7.</span>&nbsp;&nbsp; &nbsp;<a id="listitem7" href="Section_4_-_Managed_Services.html">Section 4 - Managed Services</a>
+<span style="color: grey">7.</span>&nbsp;&nbsp; &nbsp;<a id="listitem7" href="Section_4_-_App_Engine.html">Section 4 - App Engine</a>
 
 <span style="color: grey">8.</span>&nbsp;&nbsp; &nbsp;<a id="listitem8" href="Worked_Example_-_Create_Load_Balanced_Web-Server_Managed_Instance_Group.html">Worked Example - Create Load Balanced Web-Server Managed Instance Group</a>
 
