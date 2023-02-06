@@ -46,8 +46,6 @@ cp /c/MJN/drive/github/javascript/googleCharts.js \
    /c/MJN/drive/github/mjnurse-github-io/assets/javascript
 cp /c/MJN/drive/github/javascript/search.js \
    /c/MJN/drive/github/mjnurse-github-io/assets/javascript
-cp /c/MJN/drive/github/javascript/covid19*.js \
-   /c/MJN/drive/github/mjnurse-github-io/assets/javascript
 cp /c/MJN/drive/github/javascript/copyToClipboard.js \
    /c/MJN/drive/github/mjnurse-github-io/assets/javascript
 
