@@ -25,9 +25,9 @@ title: All
 
 <span style="color: grey">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 11.</span>&nbsp;&nbsp; &nbsp;<a id="listitem11" href="/Other-O/Command_Line_Interface_Builder/">Command Line Interface Builder</a>
 
-<span style="color: grey">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 12.</span>&nbsp;&nbsp; &nbsp;<a id="listitem12" href="/Other-O/Docker/">Docker</a>
+<span style="color: grey">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 12.</span>&nbsp;&nbsp; &nbsp;<a id="listitem12" href="/Other-O/HTML/">HTML</a>
 
-<span style="color: grey">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 13.</span>&nbsp;&nbsp; &nbsp;<a id="listitem13" href="/Other-O/HTML/">HTML</a>
+<span style="color: grey">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 13.</span>&nbsp;&nbsp; &nbsp;<a id="listitem13" href="/Other-O/Kubernetes_and_Docker/">Kubernetes and Docker</a>
 
 <span style="color: grey">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 14.</span>&nbsp;&nbsp; &nbsp;<a id="listitem14" href="/Other-O/Oracle/">Oracle</a>
 

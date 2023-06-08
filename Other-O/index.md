@@ -8,9 +8,9 @@ A collection of content which is not a part of the site top level navigation.
 
 <span style="color: grey">1.</span>&nbsp;&nbsp;&nbsp; <b><a id="listitem1" href="/Other-O/Command_Line_Interface_Builder/">Command Line Interface Builder</a></b>
 
-<span style="color: grey">2.</span>&nbsp;&nbsp;&nbsp; <b><a id="listitem2" href="/Other-O/Docker/">Docker</a></b>
+<span style="color: grey">2.</span>&nbsp;&nbsp;&nbsp; <b><a id="listitem2" href="/Other-O/HTML/">HTML</a></b>
 
-<span style="color: grey">3.</span>&nbsp;&nbsp;&nbsp; <b><a id="listitem3" href="/Other-O/HTML/">HTML</a></b>
+<span style="color: grey">3.</span>&nbsp;&nbsp;&nbsp; <b><a id="listitem3" href="/Other-O/Kubernetes_and_Docker/">Kubernetes and Docker</a></b>
 
 <span style="color: grey">4.</span>&nbsp;&nbsp;&nbsp; <b><a id="listitem4" href="/Other-O/Oracle/">Oracle</a></b>
 
