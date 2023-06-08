@@ -1,5 +1,6 @@
 ---
-title: sed
+title: sed Cheatsheet
+layout: page-with-contents-list
 ---
 ## Overview
 
@@ -27,6 +28,16 @@ title: sed
 
 ```
 > sed -n '/^SEARCH-STRING/,$p' file
+```
+
+## Delete text between two matching lines
+
+```
+# Delete including matching lines
+> cat file | sed sed '/^startstring/,/^endstring}/d'
+
+# Delete excluding matching lines
+> cat file | sed sed '/^startstring/,/^endstring}/{//!d;}'
 ```
 
 ## Case insensitive search/replace
