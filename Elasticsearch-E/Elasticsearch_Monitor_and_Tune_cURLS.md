@@ -1,19 +1,22 @@
 ---
-title: Elasticsearch Monitor and Tune `cUR`````````LS
+title: Elasticsearch Monitor and Tune cURLS
 layout: page-with-contents-list
 ---
 
-# General monitoring API endpoints
+# Monitoring
+
+## General monitoring API endpoints
 
 | Stats from all nodes | `curl 'localhost:9200/_nodes/stats'` |
 | Stats from specific nodes | `curl 'localhost:9200/_nodes/node1,node2/stats'` |
 | Stats from a specific index | `curl 'localhost:9200/<INDEX_NAME>/_stats'` |
 | Cluster-wide stats | `curl 'localhost:9200/_cluster/stats'` |
 
-### Cluster health—more info
+## Cluster health—more info
 
 | Cluster status & unassigned shards | `curl 'localhost:9200/_cat/health?v'` |
-Search performance—more info
+
+## Search performance—more info
 
 | Total number of queries | `curl 'localhost:9200/_cat/nodes?v&h=name,searchQueryTotal'` |
 | Total time spent on queries | `curl 'localhost:9200/_cat/nodes?v&h=name,searchQueryTime'` |
@@ -21,47 +24,36 @@ Search performance—more info
 | Total number of fetches | `curl 'localhost:9200/_cat/nodes?v&h=name,searchFetchTotal'` |
 | Total time spent on fetches | `curl 'localhost:9200/_cat/nodes?v&h=name,searchFetchTime'` |
 | Number of fetches currently in progress | `curl 'localhost:9200/_cat/nodes?v&h=name,searchFetchCurrent'` |
-Indexing performance—more info
+
+## Indexing performance—more info
 
 | Total number of documents indexed | `curl 'localhost:9200/_cat/nodes?v&h=name,indexingIndexTotal'` |
 | Total time spent indexing documents | `curl 'localhost:9200/_cat/nodes?v&h=name,indexingIndexTime'` |
-Number of documents currently being
-| indexed | `curl 'localhost:9200/_cat/nodes?v&h=name,indexingIndexCurrent'` |
+| Number of documents currently being indexed | `curl 'localhost:9200/_cat/nodes?v&h=name,indexingIndexCurrent'` |
 | Total number of index flushes to disk | `curl 'localhost:9200/_cat/nodes?v&h=name,flushTotal'` |
 | Total time spent on flushing indices to disk | `curl 'localhost:9200/_cat/nodes?v&h=name,flushTotalTime'` |
-JVM heap usage—more info
 
-| Garbage collection frequency and duration | `curl 'localhost:9200/_nodes/stats/jvm' | jq '.nodes[] | {node_` |
-name: .name, young_gc_count:
-.jvm.gc.collectors.young.collection_count, young_gc_time: .jvm.
-gc.collectors.young.collection_time_in_millis,
-old_gc_count: .jvm.gc.collectors.old.collection_count,
-old_gc_time:
-.jvm.gc.collectors.old.collection_time_in_millis}'
+## JVM heap usage—more info
+
+| Garbage collection frequency and duration | `curl 'localhost:9200/_nodes/stats/jvm' | jq '.nodes[] | {node_name: .name, young_gc_count: .jvm.gc.collectors.young.collection_count, young_gc_time: .jvm.  gc.collectors.young.collection_time_in_millis, old_gc_count: .jvm.gc.collectors.old.collection_count, old_gc_time: .jvm.gc.collectors.old.collection_time_in_millis}' ` |
 | Percent of JVM heap currently in use | `curl 'localhost:9200/_cat/nodes?v&h=name,heapPercent'` |
-Pending tasks
+
+## Pending tasks
 
 | Number of pending tasks | `curl 'localhost:9200/_cluster/pending_tasks'` |
-Thread pool queues & rejections—more info
 
-| Number of queued threads in a thread pool | `curl 'localhost:9200/_nodes/stats/thread_pool' | jq '.nodes[] |` |
-{node_name: .name, bulk_queue: .thread_pool.bulk.queue, search_
-queue: .thread_pool.search.queue, index_queue: .thread_pool.
-index.queue}'
-| Number of rejected threads in a thread pool | `curl 'localhost:9200/_nodes/stats/thread_pool' |` |
-jq '.nodes[] | {node_name: .name, bulk_rejected:
-.thread_pool.bulk.rejected, search_rejected:
-.thread_pool.search.rejected, index_rejected:
-.thread_pool.index.rejected}'
-Fielddata cache usage
+## Thread pool queues & rejections—more info
+
+| Number of queued threads in a thread pool | `curl 'localhost:9200/_nodes/stats/thread_pool' | jq '.nodes[] | {node_name: .name, bulk_queue: .thread_pool.bulk.queue, search_queue: .thread_pool.search.queue, index_queue: .thread_pool.  index.queue}'` |
+| Number of rejected threads in a thread pool | `curl 'localhost:9200/_nodes/stats/thread_pool' | jq '.nodes[] | {node_name: .name, bulk_rejected: .thread_pool.bulk.rejected, search_rejected: .thread_pool.search.rejected, index_rejected: .thread_pool.index.rejected}' ` |
+
+## Fielddata cache usage
 
 | Size of the fielddata cache (bytes) | `curl 'localhost:9200/_cat/nodes?v&h=name,fielddataMemory'` |
-Number of evictions from the fielddata
-| cache | `curl 'localhost:9200/_cat/nodes?v&h=name,fielddataEvictions'` |
-Number of times the fielddata circuit breaker
-| has been tripped (ES version >=1.3) | `curl 'localhost:9200/_nodes/stats/breaker' | jq '.nodes[] |` |
-{node_name: .name, fielddata: .breakers.fielddata}'
-Host-level network and system metrics—more info
+| Number of evictions from the fielddata cache | `curl 'localhost:9200/_cat/nodes?v&h=name,fielddataEvictions'` |
+| Number of times the fielddata circuit breaker has been tripped (ES version >=1.3) | `curl 'localhost:9200/_nodes/stats/breaker' | jq '.nodes[] | {node_name: .name, fielddata: .breakers.fielddata}' ` |
+
+## Host-level network and system metrics—more info
 
 Disk space total, free,
 | available | `curl 'localhost:9200/_nodes/stats/fs' | jq '.nodes[] | {node_name:` |
@@ -188,4 +180,4 @@ curl -XPUT 'localhost:9200/<INDEX_NAME>/_mapping/<DOC_TYPE>'
 
 
 <hr>
-<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 23/06/20 14:23</p>
+<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 23/06/20 14:33</p>
