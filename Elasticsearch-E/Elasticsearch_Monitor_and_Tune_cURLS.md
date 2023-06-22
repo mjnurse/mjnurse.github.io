@@ -78,77 +78,107 @@ layout: page-with-contents-list
 
 ### Suggested Action
 
-Reduce number of replicas for an index (master will not assign multiple copies of a shard on the same node).
+- Reduce number of replicas for an index (master will not assign multiple copies of a shard on the same node).
 
 ```bash
 curl -XPUT 'localhost:9200/<INDEX_NAME>/_settings' -d '{"number_of_replicas": <DESIRED NUMBER OF REPLICAS>}'
 ```
-Re-enable shard allocation 
+
+- Re-enable shard allocation 
 
 ```bash
 curl -XPUT 'localhost:9200/_cluster/settings' -d '{"transient": {"cluster.routing.allocation.enable": "all"}}'
 ```
 
-Manually allocate an unassigned shard 
+- Manually allocate an unassigned shard 
 
 ```bash
-curl -XPOST 'localhost:9200/_cluster/reroute' -d '{"commands": [{"allocate": {"index": "<INDEX_NAME>", "shard": <SHARD_NUMBER>, "node": "<NODE_NAME>"}}]}'
+curl -XPOST 'localhost:9200/_cluster/reroute' \
+     -d '{"commands": [{"allocate": {"index": "<INDEX_NAME>", 
+                                     "shard": <SHARD_NUMBER>,
+                                     "node": "<NODE_NAME>"}}]}'
 ```
 
-Check disk usage; master node will not assign shards to any node using >85% of disk
+- Check disk usage; master node will not assign shards to any node using >85% of disk
 
 ```bash
 curl 'localhost:9200/_cat/allocation?v'
 ```
 
-Check that every node is running the same version of Elasticsearch; master node will not assign to older version
+- Check that every node is running the same version of Elasticsearch; master node will not assign to older version
 
 ```bash
 curl 'localhost:9200/_cat/nodes?v&h=host,name,version'
 ```
 
-Search performance—more info
+## Search performance—more info
+
 Log slow queries in slow search log (replace with your desired thresholds):
+
+```bash
 curl -XPUT 'localhost:9200/<INDEX_NAME>/_settings' -d '{
  "index.search.slowlog.threshold.query.warn" : "10s",
  "index.search.slowlog.threshold.fetch.debug": "500ms",
  "index.indexing.slowlog.threshold.index.info": "5s"
 }'
+```
+
 ### Suggested Action
 
-Route high-priority, low-volume documents
-of
-a <DOC_TYPE> to the same place so only one shard will be queried
-curl -XPUT 'localhost:9200/<INDEX_NAME>' -d '{"mappings": {"<DOC_
-TYPE>": {"_routing": {"required": true}}}}'
-Merge segments in an index ES versions 2.1.0+:
+- Route high-priority, low-volume documents of a <DOC_TYPE> to the same place so only one shard will be queried
+
+```bash
+curl -XPUT 'localhost:9200/<INDEX_NAME>' \
+     -d '{"mappings": {"<DOC_TYPE>": {"_routing": {"required": true}}}}'
+```
+
+- Merge segments in an index ES versions 2.1.0+
+
+```bash
 curl -XPOST 'localhost:9200/<INDEX_NAME>/_forcemerge'
-ES versions prior to 2.1.0:
-curl -XPOST 'localhost:9200/<INDEX_NAME>/_optimize'
-Indexing performance—more info
+```
+
+## Indexing performance—more info
+
 ### Suggested Action
 
-Bulk index documents from a JSON
-file
-curl -XPOST 'localhost:9200/<INDEX_NAME>/<MY_TYPE>/_bulk?pretty'
---data-binary "@<YOUR_FILE>.json"
-Increase refresh interval to optimize
-indexing, rather than making new
-data immediately searchable
-curl -XPUT 'localhost:9200/<INDEX_NAME>/_settings' -d '{"index":
-{"refresh_interval": DESIRED_INTERVAL, e.g. "30s"}}'
-Disable merge throttling to leave
-more
-resources for indexing, not merging
-curl -XPUT 'localhost:9200/_cluster/settings' -d '{"transient":
-{"indices.store.throttle.type": "none"}}'
-| Disable shard replication | `curl -XPUT 'localhost:9200/<INDEX_NAME>/_settings' -d` |
-'{"number_of_replicas": 0}'
-Commit translog to disk less
-| frequently | `curl -XPUT 'localhost:9200/<INDEX_NAME>/_settings' -d '{"index":` |
-{"translog": {"durability": "async"}}}'
-Tune the JVM heap size
-Note: The Elasticsearch docs recommend setting your heap size below 50% of a node's available memory (and never going above 32GB), to leave more memory for the file system cache.
+- Bulk index documents from a JSON file
+
+```bash
+curl -XPOST 'localhost:9200/<INDEX_NAME>/<MY_TYPE>/_bulk?pretty' --data-binary "@<YOUR_FILE>.json"
+```
+
+- Increase refresh interval to optimize indexing, rather than making new data immediately searchable
+
+```bash
+curl -XPUT 'localhost:9200/<INDEX_NAME>/_settings' \
+     -d '{"index": {"refresh_interval": DESIRED_INTERVAL, e.g. "30s"}}'
+```
+
+- Disable merge throttling to leave more resources for indexing, not merging
+
+```bash
+curl -XPUT 'localhost:9200/_cluster/settings' \
+     -d '{"transient": {"indices.store.throttle.type": "none"}}'
+```
+
+- Disable shard replication 
+
+```bash
+curl -XPUT 'localhost:9200/<INDEX_NAME>/_settings' \
+     -d '{"number_of_replicas": 0}'
+```
+
+- Commit translog to disk less frequently 
+
+```bash
+curl -XPUT 'localhost:9200/<INDEX_NAME>/_settings' \
+     -d '{"index": {"translog": {"durability": "async"}}}'
+
+## Tune the JVM heap size.
+
+*Note*: The Elasticsearch docs recommend setting your heap size below 50% of a node's available memory (and never going above 32GB), to leave more memory for the file system cache).
+
 ### Suggested Action
 
 Set heap size upon starting up Elasticsearch ES_HEAP_SIZE=DESIRED_SIZE (e.g. "3g")
@@ -172,4 +202,4 @@ curl -XPUT 'localhost:9200/<INDEX_NAME>/_mapping/<DOC_TYPE>'
 
 
 <hr>
-<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 23/06/22 15:01</p>
+<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 23/06/22 15:11</p>
