@@ -7,8 +7,8 @@ layout: page-with-contents-list
 
 ## General monitoring API endpoints
 
-| Stats from all nodes | ```bash curl 'localhost:9200/_nodes/stats'``` |
-| Stats from specific nodes | ```curl 'localhost:9200/_nodes/node1,node2/stats'``` |
+| Stats from all nodes | `curl 'localhost:9200/_nodes/stats'` |
+| Stats from specific nodes | `curl 'localhost:9200/_nodes/node1,node2/stats'` |
 | Stats from a specific index | `curl 'localhost:9200/<INDEX_NAME>/_stats'` |
 | Cluster-wide stats | `curl 'localhost:9200/_cluster/stats'` |
 
@@ -35,7 +35,7 @@ layout: page-with-contents-list
 
 ## JVM heap usage
 
-| Garbage collection frequency and duration | ```curl 'localhost:9200/_nodes/stats/jvm' ``` |
+| Garbage collection frequency and duration | `curl 'localhost:9200/_nodes/stats/jvm' ` |
 | Percent of JVM heap currently in use | `curl 'localhost:9200/_cat/nodes?v&h=name,heapPercent'` |
 
 ## Pending tasks
