@@ -27,7 +27,7 @@ Clean up Javacript logging.
 </div>
 </div>
 <hr>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 23-06-27 -  <a class="bloglistlink" id="listitem5" href="Blog-B/23-06-27_-_Generate_a_Bookmarks_Page_From_a_Chrome_Bookmarks_Folder.html">Generate a Bookmarks Page From a Chrome Bookmarks Folder</a> <span style="color: grey">(5)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 23-06-27 -  <a class="bloglistlink" id="listitem5" href="Blog-B/23-06-27_-_Generating_a_Bookmarks_Page_From_a_Chrome_Bookmarks_Folder.html">Generating a Bookmarks Page From a Chrome Bookmarks Folder</a> <span style="color: grey">(5)</span></p>
 <p class="bloglist"><img src="images\/Dot.png" width="15px"> 22-10-06 -  <a class="bloglistlink" id="listitem6" href="Blog-B/22-10-06_-_Create_The_Equivalent_To_.bashrc_For_Windows_CMD.html">Create The Equivalent To .bashrc For Windows CMD</a> <span style="color: grey">(6)</span></p>
 <p class="bloglist"><img src="images\/Dot.png" width="15px"> 22-06-22 -  <a class="bloglistlink" id="listitem7" href="Blog-B/22-06-22_-_One_Liner_to_Run_SQL_Over_a_CSV_File_Using_Sqlite.html">One Liner to Run SQL Over a CSV File Using Sqlite</a> <span style="color: grey">(7)</span></p>
 <p class="bloglist"><img src="images\/Dot.png" width="15px"> 22-06-17 -  <a class="bloglistlink" id="listitem8" href="Blog-B/22-06-17_-_I_Wrote_A_Bash_Function_To_Parse_And_Describe_A_Scripts_Parameters.html">I Wrote A Bash Function To Parse And Describe A Scripts Parameters</a> <span style="color: grey">(8)</span></p>

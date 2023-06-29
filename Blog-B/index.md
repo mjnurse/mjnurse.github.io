@@ -2,7 +2,7 @@
 title: Blog
 ---
 
-<span style="color: grey">1.</span>&nbsp;&nbsp;&nbsp; <a id="listitem1" href="23-06-27_-_Generate_a_Bookmarks_Page_From_a_Chrome_Bookmarks_Folder.html">23-06-27 - Generate a Bookmarks Page From a Chrome Bookmarks Folder</a>
+<span style="color: grey">1.</span>&nbsp;&nbsp;&nbsp; <a id="listitem1" href="23-06-27_-_Generating_a_Bookmarks_Page_From_a_Chrome_Bookmarks_Folder.html">23-06-27 - Generating a Bookmarks Page From a Chrome Bookmarks Folder</a>
 
 <span style="color: grey">2.</span>&nbsp;&nbsp;&nbsp; <a id="listitem2" href="22-10-06_-_Create_The_Equivalent_To_.bashrc_For_Windows_CMD.html">22-10-06 - Create The Equivalent To .bashrc For Windows CMD</a>
 
