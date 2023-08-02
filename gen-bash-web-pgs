@@ -44,9 +44,9 @@ for f in $(grep -l "^web_desc_line" *); do
   fi
 done
 
-exit
+# exit
 
-# Create bash script packs and pack pages
+echo Create bash script packs and pack pages
 
 rm -f /c/MJN/drive/github/mjnurse-github-io/LinuxBash-L/Linux_bash*Pack.md
 
