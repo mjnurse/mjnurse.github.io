@@ -78,9 +78,9 @@ done
 # ------------------------------------------------------------------------------
 echo_h2 -lblue "Generate the CLI Builder pages."
 # ------------------------------------------------------------------------------
-gen-cli-builder-pages
 
 cd /c/MJN/drive/github/mjnurse-github-io
+gen-cli-builder-pages
 
 # ------------------------------------------------------------------------------
 echo_h2 -lblue "Copy query-es to github/bash"
