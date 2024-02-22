@@ -13,6 +13,9 @@ USAGE
 
 OPTIONS
 
+  -a|--activity <activity/task name>
+    Show hours per week for a single activity/task
+
   -e|--editlog
     Opens the idid log file in vi to edit.
 
@@ -107,12 +110,50 @@ tmp="${help_text##*USAGE}"
 usage=$(echo "Usage: ${tmp%%OPTIONS*}" | tr -d "\n" | sed "s/  */ /g")
 
 case $1 in
-  -h|--help|?)
+  -h|--help)
     echo "$help_text"
     exit
     ;;
   -l|--list)
     cat ${i_did}
+    exit
+    ;;
+  -a|--activity)
+    clear
+    tmpfile=/tmp/dme
+    tmpcsvfile=/tmp/dmecsvA
+    task=$2
+    rm -rf $tmpfile $tmpcsvfile
+    echo "dte,task,hrs" > $tmpcsvfile
+    cat $i_did | grep -o " [^ ]*:[^ ]*\|^........" > $tmpfile
+    dte=""
+    out=""
+    pdow=0
+    while read line; do
+      if [[ $line =~ ../../.. ]]; then
+        if [[ $line != $dte ]]; then
+          dte="$line"
+          dow="$(date -d  ${line//\//-} +'%u')"
+        fi
+      else
+        echo $dte:$line | sed "s/,//g;s/:/,/g" >> $tmpcsvfile
+      fi
+    done < $tmpfile
+    dt="$2"
+    if [[ "$dt" == "" ]]; then
+      dt="$(date -d'monday-14 days' +%y/%m/%d)"
+    fi
+    csvsql $tmpcsvfile "
+    SELECT STRFTIME('%W',DATE('20'||REPLACE(dte,'/','-'))) AS week,
+           task,
+           MIN(dte) AS start, MAX(dte) AS end,
+           SUM(hrs) *1.0 AS hrs
+    FROM '$tmpcsvfile' 
+    WHERE UPPER(task) = UPPER('$task')
+    GROUP BY STRFTIME('%W',DATE('20'||REPLACE(dte,'/','-')))  
+    ORDER BY 3
+    "
+    rm -rf $tmpfile $tmpcsvfile
     exit
     ;;
   -e|--editlog)
@@ -188,6 +229,35 @@ case $1 in
         echo $dte:$line | sed "s/,//g;s/:/,/g" >> $tmpcsvfile
       fi
     done < $tmpfile
+
+# import re
+# from datetime import datetime
+# 
+# tmpfile = 'path/to/your/tmpfile.txt'
+# tmpcsvfile = 'path/to/your/tmpcsvfile.csv'
+# 
+# # Open the files for reading and writing
+# with open(tmpfile, 'r') as infile, open(tmpcsvfile, 'w') as outfile:
+#     dte = None  # Variable to store the date
+#     dow = None  # Variable to store the day of the week
+# 
+#     # Read lines from the input file
+#     for line in infile:
+#         line = line.strip()  # Remove leading/trailing whitespaces
+# 
+#         # Check if the line matches the pattern ../../..
+#         if re.match(r'../../..', line):
+#             # If the line is a date and different from the stored date, update variables
+#             if line != dte:
+#                 dte = line
+#                 dow = datetime.strptime(line, '%m/%d/%y').strftime('%u')
+# 
+#         else:
+#             # If the line does not match the date pattern, format and write to CSV file
+#             if dte:
+#                 formatted_line = f'{dte},{line}'.replace(',', '').replace(':', ',')
+#                 outfile.write(formatted_line + '\n')
+
     dt="$2"
     if [[ "$dt" == "" ]]; then
       dt="$(date -d'monday-14 days' +%y/%m/%d)"
@@ -214,10 +284,17 @@ case $1 in
         )
       GROUP BY week, task
       UNION
-      SELECT 1, STRFTIME('%W',DATE('20'||REPLACE(dte,'/','-'))) AS week
-           , '', SUBSTR(MIN(dte),4), '', '' ,'', SUBSTR(MAX(dte), 4),'Tot'
-      FROM '$tmpcsvfile' 
-      WHERE dte >= '"$dt"'
+      SELECT 1, STRFTIME('%W',d) AS week
+           , ''
+           , STRFTIME('%m/%d', date(d, '-'||(MAX(STRFTIME('%w',d)-1))||' day'))
+           , '', '' ,''
+           , STRFTIME('%m/%d', date(d, '+'||(5-MAX(STRFTIME('%w',d)))||' day'))
+           , 'Tot'
+      FROM (
+        SELECT DATE('20'||REPLACE(dte,'/','-')) AS d
+        FROM '$tmpcsvfile' 
+        WHERE dte >= '"$dt"'
+        )
       GROUP BY 1, 2
       UNION
       SELECT 2, STRFTIME('%W',DATE('20'||REPLACE(dte,'/','-'))) AS week
@@ -302,12 +379,24 @@ case $1 in
     done
     exit
     ;;
+  ??/??)
+    dte="$(date +'%y')/$1"
+    echo date: $dte
+    ;;  
 esac
+
+cd /c/MJN/drive/github/todo-done
+/c/MJN/drive/github/todo-done/dne
+# /c/MJN/drive/github/todo-done/todo
+exit
 
 clear
 
-dte="$(date +'%y/%m/%d')"
-hour="$(date +'%H:00')"
+hour=""
+if [[ "$dte" == "" ]]; then
+  dte="$(date +'%y/%m/%d')"
+  hour="-$(date +'%H:00')"
+fi
 
 repeat_yn=y
 
@@ -315,7 +404,7 @@ while [[ ${repeat_yn} == y ]]; do
   echo
   read -p "What did you do? " did
   echo
-  echo "${dte}-{$hour} - ${did}"
+  echo "${dte}${hour} - ${did}"
   echo
   read -p "Save [yNq] (q - quit) " yn
   if [[ $yn == q ]]; then
@@ -325,18 +414,10 @@ while [[ ${repeat_yn} == y ]]; do
   fi
 done
 
-curr_max_date="$(sort /c/MJN/drive/i-did.txt | tail -1 | sed 's/-.*//')"
-
-echo $curr_max_date $dte
-
-if [[ $curr_max_date != $dte ]]; then
-  echo >> ${i_did}
-fi
-
-echo "${dte}-${hour} - ${did}" >> ${i_did}
+echo "${dte}${hour} - ${did}" >> ${i_did}
 
 echo
-cat ${i_did}
+tail -n 40 ${i_did}
 
 echo
 read -p "Press RTN to close (e RTN to edit I did, s RTN to see schedule) " v
@@ -356,7 +437,19 @@ case $v in
     ;;
 esac
 
+sort ${i_did} | sed "/^$/d" > /tmp/idid.tmp
+
+rm -f ${i_did}
+st=""
+while read line; do
+  if [[ "$st" != "${line:0:8}" ]]; then
+    echo >> ${i_did}
+    st=${line:0:8}
+  fi
+  echo $line >> ${i_did}
+done < /tmp/idid.tmp
+
 ```
 
 <hr>
-<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 23/11/17 13:03</p>
+<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 24/02/20 15:04</p>
