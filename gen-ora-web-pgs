@@ -14,14 +14,16 @@ AUTHOR
 "
 help_line="Creates web pages for Oracle scripts"
 
-rm -f /c/MJN/drive/github/mjnurse-github-io/Other-O/Oracle/Script*
+gh_home="/c/Users/MartinNurse/OneDrive - Quantexa Ltd/MJN/github"
 
-cd /c/MJN/drive/github/oracle
+rm -f "$gh_home"/mjnurse-github-io/Other-O/Oracle/Script*
+
+cd "$gh_home"/oracle
 
 for f in $(grep -l "^-- web_desc_line" *.sql); do
 
    dl="$(grep '^-- web_desc_line' $f | sed 's/-- web_desc_line: *//; s/ *$//')"
-   dest=$(echo "/c/MJN/drive/github/mjnurse-github-io/Other-O/Oracle/Script $f - $dl.md" | sed "s/ /_/g")
+   dest=$(echo "$gh_home/mjnurse-github-io/Other-O/Oracle/Script $f - $dl.md" | sed "s/ /_/g")
 
    echo "---" > $dest
    echo "title: $f - $dl" >> $dest

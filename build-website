@@ -23,7 +23,9 @@ help_line="tbc"
 
 source utils
 
-cd /c/MJN/drive/github/mjnurse-github-io
+gh_home="/c/Users/MartinNurse/OneDrive - Quantexa Ltd/MJN/github"
+
+cd "$gh_home"/mjnurse-github-io
 
 # ------------------------------------------------------------------------------
 echo_h2 -lblue "Generate shortcut keys page"
@@ -40,14 +42,14 @@ sck -m >> $sck_pg
 # ------------------------------------------------------------------------------
 echo_h2 -lblue "Copy Javascript from javascript directory to assets/javascript directory"
 # ------------------------------------------------------------------------------
-cp /c/MJN/drive/github/javascript/navigation.js \
-   /c/MJN/drive/github/mjnurse-github-io/assets/javascript
-cp /c/MJN/drive/github/javascript/googleCharts.js \
-   /c/MJN/drive/github/mjnurse-github-io/assets/javascript
-cp /c/MJN/drive/github/javascript/search.js \
-   /c/MJN/drive/github/mjnurse-github-io/assets/javascript
-cp /c/MJN/drive/github/javascript/copyToClipboard.js \
-   /c/MJN/drive/github/mjnurse-github-io/assets/javascript
+cp "$gh_home"/javascript/navigation.js \
+   "$gh_home"/mjnurse-github-io/assets/javascript
+cp "$gh_home"/javascript/googleCharts.js \
+   "$gh_home"/mjnurse-github-io/assets/javascript
+cp "$gh_home"/javascript/search.js \
+   "$gh_home"/mjnurse-github-io/assets/javascript
+cp "$gh_home"/javascript/copyToClipboard.js \
+   "$gh_home"/mjnurse-github-io/assets/javascript
 
 # ------------------------------------------------------------------------------
 echo_h2 -lblue "Copy Blogs to topic folder"
@@ -79,7 +81,7 @@ done
 echo_h2 -lblue "Generate the CLI Builder pages."
 # ------------------------------------------------------------------------------
 
-cd /c/MJN/drive/github/mjnurse-github-io
+cd "$gh_home"/mjnurse-github-io
 gen-cli-builder-pages
 
 # ------------------------------------------------------------------------------
@@ -88,13 +90,13 @@ echo_h2 -lblue "Copy query-es to github/bash"
 
 
 #if [[ "$1" == "-a" || "$1" == "-d" ]]; then
-#   cd /c/MJN/drive/github/cv19dashboard
+#   cd "$gh_home"/cv19dashboard
 #   #echo_h2 -lblue "Running cv-global dashboard refresh"
 #   #cv-global
 #   echo_h2 -lblue "Running cv-UK dashboard refresh"
 #   cv-UK
 #fi
-cd /c/MJN/drive/github/mjnurse-github-io
+cd "$gh_home"/mjnurse-github-io
 if [[ "$1" == "-a" ]]; then
    # ---------------------------------------------------------------------------
    echo_h2 -lblue "Generate search page"

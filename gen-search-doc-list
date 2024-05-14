@@ -22,8 +22,9 @@ AUTHOR
 help_line="tbc"
 web_desc_line="tbc"
 
+gh_home="/c/Users/MartinNurse/OneDrive - Quantexa Ltd/MJN/github"
 
-sd="/c/MJN/drive/github/mjnurse-github-io/assets/javascript/search-docs.js"
+sd="$gh_home/mjnurse-github-io/assets/javascript/search-docs.js"
 
 rm -f "$sd"
 
@@ -34,7 +35,7 @@ echo "  this.addField('body');" >> $sd
 echo "  this.setRef('id');" >> $sd
 echo "});" >> $sd
 
-cd /c/MJN/drive/github/mjnurse-github-io
+cd "$gh_home"/mjnurse-github-io
 
 (( i=1 ))
 for f in $(find . -name "*.md" -print); do

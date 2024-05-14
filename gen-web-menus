@@ -21,10 +21,12 @@ AUTHOR
 "
 help_line="Generates website menu pages"
 
-base_url="https://mjnurse.github.io"
-base_dir="/c/MJN/drive/github/mjnurse-github-io"
+gh_home="/c/Users/MartinNurse/OneDrive - Quantexa Ltd/MJN/github"
 
-cd $base_dir
+base_url="https://mjnurse.github.io"
+base_dir="$gh_home/mjnurse-github-io"
+
+cd "$base_dir"
 # Start the Front page
 echo --- > index.md
 { echo "title: mjnurse.dev"; 
@@ -46,9 +48,9 @@ echo "<div class=\"row\">" >> index.md
 
 # Start the ALL page
 all_page="${base_dir}/All-A/index.md"
-echo --- > $all_page
+echo --- > "$all_page"
 { echo "title: All Content"; 
-  echo "---"; } >> $all_page
+  echo "---"; } >> "$all_page"
 
 ((l1_num = 1))
 ((all_num = 0))
@@ -62,7 +64,7 @@ for l1_dir in */; do
          "$l1_dir" != _includes/ && "$l1_dir" != images/ &&  "$l1_dir" != attatchments/ && \
          "$l1_dir" != Search/ && "$l1_dir" != "Hide/" ]]; then
 
-      echo $l1_num - $l1_dir
+      echo "$l1_num - $l1_dir"
 
       n=$(echo "$l1_dir" | sed "s/\///g; s/-.$//; s/_/ /g; s/\.md//")
 
@@ -73,10 +75,10 @@ for l1_dir in */; do
       #      "href=\"/${l1_dir}\">${n}</a></p>" >> index.md
 
       # Add links to the all page
-      echo >> $all_page
+      echo >> "$all_page"
       echo "<span style=\"color: grey\">$all_num.</span>&nbsp;&nbsp;&nbsp;" \
            "<a id=\"listitem$all_num\" href=\"$base_url/${l1_dir}\">${n}</a>" \
-         | sed "s/All-A\///" >> $all_page
+         | sed "s/All-A\///" >> "$all_page"
       ((all_num = all_num + 1))
 
       # Add link to the menu bar
@@ -122,11 +124,11 @@ for l1_dir in */; do
                  "<b><a id=\"listitem$l2_num\" href=\"/${l1_dir}${l2_dir}\">$n</a></b>" >> index.md
 
             # Add child folder link to the all folder index
-            echo >> $all_page
+            echo >> "$all_page"
             echo "<span style=\"color: grey\">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" \
                  "$all_num.</span>&nbsp;&nbsp;" \
                  "&nbsp;<a id=\"listitem$all_num\" href=\"/${l1_dir}${l2_dir}\">$n</a>" \
-                 | sed "s/All-A\///" >> $all_page
+                 | sed "s/All-A\///" >> "$all_page"
 
             ((all_num = all_num + 1))
 
@@ -241,7 +243,7 @@ done
 echo "<p><a href=\"Blog-B\">More</a></p>" >> index.md
 
 echo "<script>gMaxNum=${l1_num}-1</script>" >> index.md
-echo "<script>gMaxNum=${all_num}-1</script>" >> $all_page
+echo "<script>gMaxNum=${all_num}-1</script>" >> "$all_page"
 
 echo "<a href=\"/Search/index.html\"><b>/</b> - Search</a>" >> _includes/menu-bar.html
 
