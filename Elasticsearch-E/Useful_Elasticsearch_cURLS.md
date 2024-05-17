@@ -9,6 +9,10 @@ section: Elasticsearch
 
 - `[<parameter>]` - an optional parameter.
 
+- `${HOSTNAME}` - a bash variable containing the Elasticsearch Host Name.
+
+- `${PORT}` - a bash variable containing the Elasticsearch Port Number.
+
 # Cluster
 
 ## Clear Cache
@@ -16,21 +20,21 @@ section: Elasticsearch
 Elasticsearch caches query results which can be use if the same query is run again.  This will clear results from the cache for a single named index or, if no index is specified, all indexes.
 
 ```bash
-# .../[<index_name>]/_cache/clear
-
-curl -X POST "http://localhost:9200/_cache/clear"
+curl -X POST http://${HOSTNAME}:${PORT}/[<index_name>]/_cache/clear
 ```
 
 ## Cluster Stats
 
+Basic Cluster Stats:
+
 ```bash
-# Basic Cluster Stats:
+curl -X GET http://${HOSTNAME}:${PORT}/_cluster/stats?human
+```
 
-curl -X GET "http://localhost:9200/_cluster/stats?human"
+Comprehensive Cluster Stats:
 
-#Comprehensive Cluster Stats:
-
-curl -X GET "http://localhost:9200/_cluster/stats?pretty"
+```bash
+curl -X GET http://${HOSTNAME}:${PORT}/_cluster/stats?pretty
 ```
 
 # Index Manipulation
@@ -38,8 +42,7 @@ curl -X GET "http://localhost:9200/_cluster/stats?pretty"
 ## Create Index
 
 ```bash
-curl -X PUT "http://localhost:9200/<index_name>" \ 
-     -H "Content-Type: application/json" -d '
+curl -X PUT http://${HOSTNAME}:${PORT}/<index_name> -H Content-Type: application/json -d '
 { 
   "settings": { 
     "index": { 
@@ -53,26 +56,25 @@ curl -X PUT "http://localhost:9200/<index_name>" \
 ## Delete Index
 
 ```bash
-curl -X DELETE "http://localhost:9200/<index_name>"
+curl -X DELETE http://${HOSTNAME}:${PORT}/<index_name>
 ```
 
-## Open / Close Index
+## Open Index
 
 ```bash
-# Open Index
+curl -X POST http://${HOSTNAME}:${PORT}/<index_name>/_open
+```
 
-curl -X POST "http://localhost:9200/<index_name>/_open"
+## Close Index
 
-# Close Index
-
-curl -X POST "http://localhost:9200/<index_name>/_close"
+```bash
+curl -X POST http://${HOSTNAME}:${PORT}/<index_name>/_close
 ```
 
 ## Enable Read Write
 
 ```bash
-curl -X PUT "http://localhost:9200/<index_name>/_settings" \
-     -H "Content-Type: application/json" -d '
+curl -X PUT http://${HOSTNAME}:${PORT}/<index_name>/_settings -H Content-Type: application/json -d '
 { 
   "index.blocks.read_only_allow_delete": null
 }'
@@ -81,25 +83,27 @@ curl -X PUT "http://localhost:9200/<index_name>/_settings" \
 ## Reindex Index
 
 ```bash
-curl -X POST "http://localhost:9200/_reindex" \
-     -H "Content-Type: application/json" -d '
+curl -X POST http://${HOSTNAME}:${PORT}/_reindex -H Content-Type: application/json -d '
 {
-  "source": { "index": "<source_index_name>" },
-  "dest": { "index": "<dest_index_name>" }
+  "source": {
+    "index": "<source_index_name>"
+  },
+  "dest": {
+    "index": "<dest_index_name>"
+  }
 }'
 ```
 
 ## Forcemerge
 
 ```bash
-curl -X POST "http://localhost:9200/<index_name>/_forcemerge?max_num_segments=<num>"
+curl -X POST http://${HOSTNAME}:${PORT}/<index_name>/_forcemerge?max_num_segments=<max_num_segments>
 ```
 
 ## Move Shard
 
 ```bash
-curl -X POST "http://localhost:9200/_cluster/reroute" \
-     -H "Content-Type: application/json" -d '
+curl -X POST http://${HOSTNAME}:${PORT}/_cluster/reroute -H Content-Type: application/json -d '
 { 
   "commands": [ {
     "move": {
@@ -115,140 +119,159 @@ curl -X POST "http://localhost:9200/_cluster/reroute" \
 ## Alter Number Replicas
 
 ```bash
-curl -X PUT "http://localhost:9200/<index_name>/_settings" \
-     -H "Content-Type: application/json" -d '
+curl -X PUT http://${HOSTNAME}:${PORT}/<index_name>/_settings -H Content-Type: application/json -d '
 {
-  "index": { "number_of_replicas": <number_of_replicas> }
+  "index": {
+    "number_of_replicas": <number_of_replicas>
+  }
 }'
 ```
 
-## Disable / Enable Shard Allocation
+## Disable Shard Allocation
 
 ```bash
-# Disable
-
-curl -X PUT "http://localhost:9200/_cluster/settings" \
-     -H "Content-Type: application/json" -d '
+curl -X PUT http://${HOSTNAME}:${PORT}/_cluster/settings -H Content-Type: application/json -d '
 {
-  "persistent": { "cluster.routing.allocation.enable": "primaries" }
+  "persistent": {
+    "cluster.routing.allocation.enable": "primaries"
+  }
 }'
+```
 
-# Re-enable
+## Re-enable Shard Allocation
 
-curl -X PUT "http://localhost:9200/_cluster/settings" \
-     -H "Content-Type: application/json" -d '
+```bash
+curl -X PUT http://${HOSTNAME}:${PORT}/_cluster/settings -H Content-Type: application/json -d '
 { 
-  "persistent": { "cluster.routing.allocation.enable": null }
+  "persistent": { 
+    "cluster.routing.allocation.enable": null
+  }
 }'
 ```
 
 # Index Interrogation 
 
+## List Aliases
+
 ```bash
-# List Aliases
+curl -X GET http://${HOSTNAME}:${PORT}/_cat/aliases?v&s=[<order_by_field_name>]
+```
 
-curl -X GET "http://localhost:9200/_cat/aliases?v"
+## List Indices
 
-# List Indices (.../_cat/indices/[<index_name>]...)
+```bash
+curl -X GET http://${HOSTNAME}:${PORT}/_cat/indices/[<index_name>]?v&h=health,status,index,pri,rep,docs.count,docs.deleted,store.size,pri.store.size&s=index
+```
 
-curl -X GET "http://localhost:9200/_cat/indices/?v"\
-"&h=health,status,index,pri,rep,docs.count,docs.deleted,store.size,pri.store.size"\
-"&s=index"
+## List Shards
 
-# List Shards (.../_cat/shards/[<index_name>]...)
+```bash
+curl -X GET http://${HOSTNAME}:${PORT}/_cat/shards/[<index_name>]?v&h=index,shard,prirep,state,docs,store,node&s=index,shard,prirep
+```
 
-curl -X GET "http://localhost:9200/_cat/shards/?v"\
-"&h=index,shard,prirep,state,docs,store,node&s=index,shard,prirep"\
-"&s=index"
+## List Shard Details
 
-# List Shard Details
+```bash
+curl -X GET http://${HOSTNAME}:${PORT}/_cat/shards/[<index_name>]?v&h=index,shard,prirep,state,docs,store,ip,segments.count,unassigned.reason,unassigned.for,node&s=[<order_by_field_name>]
+```
 
-curl -X GET "http://localhost:9200/_cat/shards/?v"\
-"&h=index,shard,prirep,state,docs,store,ip,segments.count,"\
-"unassigned.reason,unassigned.for,node&s=[<order_by_field_name>]"
+## List Segments
 
-# List Segments
+```bash
+curl -X GET http://${HOSTNAME}:${PORT}/_cat/segments/[<index_name>]?v&s=index,shard,prirep
+```
 
-curl -X GET "http://localhost:9200/_cat/segments/?v&s=index,shard,prirep"
+## List Segmented Shards
 
-# Get Index Mapping
+```bash
+curl -X GET http://${HOSTNAME}:${PORT}/_cat/shards/[<index_name>]?v&h=index,shard,prirep,state,docs,node,segments.count&s=index,shard,prirep,node
+```
 
-curl -X GET "http://localhost:9200/<index_name>/_mapping?pretty"
+## Get Index Mapping
 
-# Forcemerge Progress
+```bash
+curl -X GET http://${HOSTNAME}:${PORT}/<index_name>/_mapping?pretty
+```
 
-curl -X GET "http://localhost:9200/_cat/nodes?v"\
-"&h=name,cpu,load_1m,merges.current,merges.current_docs,merges.total,merges.total_docs"\
-"&s=name"
+## List Unassigned Shards
+
+```bash
+curl -X GET http://${HOSTNAME}:${PORT}/_cat/shards?v&h=index,shard,prirep,state,docs,segments.count&s=index,shard,prirep
+```
+
+## Forcemerge Progress
+
+```bash
+curl -X GET http://${HOSTNAME}:${PORT}/_cat/nodes?v&h=name,cpu,load_1m,merges.current,merges.current_docs,merges.total,merges.total_docs&s=name
 ```
 
 # Index Entry Manipulation
 
-```bash
-# Add Entry
+## Add Entry
 
-curl -X POST "http://localhost:9200/<index_name>/_doc" \
-     -H "Content-Type: application/json" -d '
-{ 
-  <entry_json>
-}'
+```bash
+curl -X POST http://${HOSTNAME}:${PORT}/<index_name>/_doc -H Content-Type: application/json -d <entry_json>
 ```
 
 # Nodes
 
+## List Nodes
+
 ```bash
-# List Nodes
+curl -X GET http://${HOSTNAME}:${PORT}/_cat/nodes?v&h=name,ip,nodeRole,m,heapPercent,ramPercent,cpu,load_1m,load_5m,load_15m,disk.total,disk.used_percent&s=name
+```
 
-curl -X GET "http://localhost:9200/_cat/nodes?v"\
-"&h=name,ip,nodeRole,m,heapPercent,ramPercent,cpu,load_1m,load_5m,load_15m,disk.total,disk.used_percent"\
-"&s=name"
+## List Nodes Queries
 
-# List Nodes Queries
+```bash
+curl -X GET http://${HOSTNAME}:${PORT}/_cat/nodes?v&h=name,ip,nodeRole,m,heapPercent,ramPercent,cpu,load_1m,load_5m,load_15m,disk.total,disk.used_percent&s=name
+```
 
-curl -X GET "http://localhost:9200/_cat/nodes?v"\
-"&h=name,ip,nodeRole,m,heapPercent,ramPercent,cpu,load_1m,load_5m,load_15m,disk.total,disk.used_percent"\
-"&s=name"
+## Search Nodes
 
-# Search Nodes
+```bash
+curl -X GET http://${HOSTNAME}:${PORT}/_nodes
+```
 
-curl -X GET "http://localhost:9200/_nodes"
+## Node Active Threads
 
-# Node Active Threads
-
-curl -X GET "http://localhost:9200/_cat/thread_pool?v&s=node_name,name"
+```bash
+curl -X GET http://${HOSTNAME}:${PORT}/_cat/thread_pool?v&s=node_name,name
 ```
 
 # Search
 
-This need completing...
+## Search
 
 ```bash
-# Search
+curl -X GET http://${HOSTNAME}:${PORT}/<index_name>/_search?q=<search_term>&pretty
+```
 
-curl -X GET "http://localhost:9200/<index_name>/_search?q=<search_term>&pretty"
+## Search Json
 
-# Search Json
+```bash
+curl -X GET http://${HOSTNAME}:${PORT}/json/_search?q=<index_name>&pretty
+```
 
-curl -X GET "http://localhost:9200/json/_search?q=<index_name>&pretty" \
-     -H "Content-Type: application/json" -d '
-{ 
-  <search_json>
-}'
+## Search Summary
 
-# Search Summary
-
-curl -X GET "http://localhost:9200/summary/_search?q=<index_name>&pretty"
+```bash
+curl -X GET http://${HOSTNAME}:${PORT}/summary/_search?q=<index_name>&pretty
 ```
 
 # Tasks
 
+## List Tasks
+
 ```bash
-# List Tasks
+curl -X GET http://${HOSTNAME}:${PORT}/_cat/tasks?v&h=action,type,start_time,timestamp,running_time,node&s=[<sort_field>]
+```
 
-curl -X GET "http://localhost:9200/_cat/tasks?v"\
-"&h=action,type,start_time,timestamp,running_time,node"
+## List Tasks Detail
 
+```bash
+curl -X GET http://${HOSTNAME}:${PORT}/_cat/tasks?v&h=action,type,start_time,timestamp,running_time,node&s=detail
 ```
 
 <hr>
-<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 22/02/09 18:40</p>
+<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 24/05/17 16:34</p>
