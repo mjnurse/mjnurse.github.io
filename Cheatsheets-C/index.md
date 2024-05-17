@@ -32,13 +32,13 @@ I love a cheatsheet.  A 'cheatsheet' or crib sheet is a **concise set of notes u
 
 <span style="color: grey">13.</span>&nbsp;&nbsp;&nbsp; <a id="listitem13" href="Microsoft_Word.html">Microsoft Word</a>
 
-<span style="color: grey">14.</span>&nbsp;&nbsp;&nbsp; <a id="listitem14" href="PySpark.html">PySpark</a>
+<span style="color: grey">14.</span>&nbsp;&nbsp;&nbsp; <a id="listitem14" href="Python.html">Python</a>
 
-<span style="color: grey">15.</span>&nbsp;&nbsp;&nbsp; <a id="listitem15" href="Python.html">Python</a>
+<span style="color: grey">15.</span>&nbsp;&nbsp;&nbsp; <a id="listitem15" href="Scala.html">Scala</a>
 
-<span style="color: grey">16.</span>&nbsp;&nbsp;&nbsp; <a id="listitem16" href="Scala.html">Scala</a>
+<span style="color: grey">16.</span>&nbsp;&nbsp;&nbsp; <a id="listitem16" href="sed.html">sed</a>
 
-<span style="color: grey">17.</span>&nbsp;&nbsp;&nbsp; <a id="listitem17" href="sed.html">sed</a>
+<span style="color: grey">17.</span>&nbsp;&nbsp;&nbsp; <a id="listitem17" href="Spark.html">Spark</a>
 
 <span style="color: grey">18.</span>&nbsp;&nbsp;&nbsp; <a id="listitem18" href="SQL.html">SQL</a>
 
