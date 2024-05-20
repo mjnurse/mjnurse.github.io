@@ -2,31 +2,40 @@
 title: Spark Cheatsheet
 ---
 
-## Client / Cluster Modes
+# Client / Cluster Mode
 
 Cluster mode create an Application Monitor container in the cluster.  Client mode run the application locally.
 
-## Data Frame API Categories
+# Data Frame API Categories
 
-### Transformations
+## Transformations
 
-#### Narrow Dependency
+### Narrow Dependency
 
 Performed in parallel on partitions eg. `select()`, `filter()`, `drop()`, `withColumn()`
 
-#### Wide Dependency
+### Wide Dependency
 
 Performed after grouping data from multiple partitions eg. `groupBy()`, `join()`, `cube()`, `rollup()`, `agg()`, `repartition()`
 
-### Actions
+## Actions
 
 Trigger a job eg. `read()`, `write()`, `collect()`, `take()`, `count()`
 
-### Job Execution Plans
+## Job Execution Plans
 
 Logical execution plans are broken by wide dependencies -> stages - these are separated by shuffle/sorts.
 
 If an executor has multiple cores then we call these multiple slots.  Each slot can process a partition.
+
+# Memory Allocation
+
+## Spark Driver
+
+`spark.driver.memory` - this is the memory allocated to the Spark driver.
+
+`spark.driver.memoryOverhead` - Container process or other none JVM processes in the container.  This is a percentage and the minimum allocated is `max(spark.driver.memoryOverhead * spark.driver.memory, 384MB)`.
+
 
 # PySPark
 
