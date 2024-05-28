@@ -5,3478 +5,627 @@ layout: page-with-contents-list
 
 **Note**: This page is automatically generated using `sck`
 
-## Bash
-
-!
-
-# | `!!` | Run last command |
-
-
-## Bash
-
-!
-
-# | `!$` | The last word of the previous command (same as ALT+.) |
-
-
-## Bash
-
-!
-
-# | `!$:p` | Print out the word that !$ would substitute |
-
-
-## Bash
-
-!
-
-# | `!*` | The previous command except for the first word (e.g., if you type find some_file.txt /, then !* would give you some_file.txt /) |
-
-
-## Bash
-
-!
-
-# | `!*:p` | Print out what !* would substitute |
-
-
-## Bash
-
-!
-
-# | `!blah` | Run the most recent command that starts with blah |
-
-
-## Bash
-
-!
-
-# | `!blah:p` | Print out the command that !blah would run (also adds it as the latest command in the command history |
-
-
-## Bash
-
-Command Control
-
-# | `CTRL+C` | Terminate the command |
-
-
-## Bash
-
-Command Control
-
-# | `CTRL+L` | Clear the screen |
-
-
-## Bash
-
-Command Control
-
-# | `CTRL+Q` | Allow output to the screen (if previously stopped using command above) |
-
-
-## Bash
-
-Command Control
-
-# | `CTRL+S` | Stops the output to the screen (for long running verbose command) |
-
-
-## Bash
-
-Command Control
-
-# | `CTRL+Z` | Suspend/stop the command |
-
-
-## Bash
-
-Command Editing
-
-# | `ALT+B ALT+F` | Move backward/forward one word (or go to start of word the cursor is currently on) |
-
-
-## Bash
-
-Command Editing
-
-# | `ALT+C` | Capitalize to end of word starting at cursor (whole word if cursor is at the beginning of word) |
-
-
-## Bash
-
-Command Editing
-
-# | `ALT+L` | Make lowercase from cursor to end of word |
-
-
-## Bash
-
-Command Editing
-
-# | `ALT+T` | Swap current word with previous |
-
-
-## Bash
-
-Command Editing
-
-# | `ALT+U` | Make uppercase from cursor to end of word |
-
-
-## Bash
-
-Command Editing
-
-# | `CTRL+A CTRL+E` | Go to the start/end of the command line |
-
-
-## Bash
-
-Command Editing
-
-# | `CTRL+D CTRL+H` | Delete character after/before under cursor |
-
-
-## Bash
-
-Command Editing
-
-# | `CTRL+F CTRL+B` | Move forward/backward one character |
-
-
-## Bash
-
-Command Editing
-
-# | `CTRL+T` | Swap character under cursor with the previous one |
-
-
-## Bash
-
-Command Editing
-
-# | `CTRL+U CTRL+K` | Delete from cursor to the start/end of the command line |
-
-
-## Bash
-
-Command Editing
-
-# | `CTRL+W ALT+D` | Delete from cursor to start/end of word (whole word if at the boundary) |
-
-
-## Bash
-
-Command Editing
-
-# | `CTRL+XX` | Move between start of command line and current cursor position (and back again) |
-
-
-## Bash
-
-Command Editing
-
-# | `CTRL+Y` | Paste word or text that was cut using one of the deletion shortcuts (such as the one above) after the cursor |
-
-
-## Bash
-
-command Recall
-
-# | `ALT+.` | Use the last word of the previous command |
-
-
-## Bash
-
-command Recall
-
-# | `CTRL+G` | Escape from history searching mode |
-
-
-## Bash
-
-command Recall
-
-# | `CTRL+J` | End the search at current history entry |
-
-
-## Bash
-
-command Recall
-
-# | `CTRL+N` | Next command in history (i.e., walk forward through the command history) |
-
-
-## Bash
-
-command Recall
-
-# | `CTRL+P` | Previous command in history (i.e., walk back through the command history) |
-
-
-## Bash
-
-command Recall
-
-# | `CTRL+R` | Search the history backwards |
-
-
-## Bash
-
-command Recall
-
-# | `CTRL+_` | Undo last command |
-
-
-## Confluence
-
-
-
-# | `//` | Opens the date picker |
-
-
-## Confluence
-
-
-
-# | `Alt +SHIFT+DOWN` | Insert table row after |
-
-
-## Confluence
-
-
-
-# | `Alt +SHIFT+UP` | Insert table row before |
-
-
-## Confluence
-
-
-
-# | `CTRL+0` | Set paragraph style |
-
-
-## Confluence
-
-
-
-# | `CTRL+1-6` | Set as heading 1-6 |
-
-
-## Confluence
-
-
-
-# | `CTRL+7` | Preformatted |
-
-
-## Confluence
-
-
-
-# | `CTRL+8` | Quote |
-
-
-## Confluence
-
-
-
-# | `CTRL+ENTER` | Publish page |
-
-
-## Confluence
-
-
-
-# | `CTRL+ENTER` | Publish |
-
-
-## Confluence
-
-
-
-# | `CTRL+SHIFT+I` | Insert table |
-
-
-## Confluence
-
-
-
-# | `CTRL+SHIFT+a` | Insert macro |
-
-
-## Confluence
-
-
-
-# | `CTRL+SHIFT+b` | Bulleted list |
-
-
-## Confluence
-
-
-
-# | `CTRL+SHIFT+d` | Insert markup |
-
-
-## Confluence
-
-
-
-# | `CTRL+SHIFT+e` | Preview |
-
-
-## Confluence
-
-
-
-# | `CTRL+SHIFT+n` | Numbered list |
-
-
-## Confluence
-
-
-
-# | `CTRL+SHIFT+s` | Strikethrough |
-
-
-## Confluence
-
-
-
-# | `CTRL+h` | Find / Replace |
-
-
-## Confluence
-
-
-
-# | `CTRL+k` | Insert link |
-
-
-## Confluence
-
-
-
-# | `CTRL+m` | Insert files & images |
-
-
-## Confluence
-
-
-
-# | `CTRL+y` | Redo |
-
-
-## Confluence
-
-
-
-# | `SHIFT+ENTER` | Insert a hard break |
-
-
-## Confluence
-
-
-
-# | `SHIFT+TAB` | Outdent item when in a list / Move cursor to previous cell in the table |
-
-
-## Confluence
-
-
-
-# | `TAB` | Indent item when in a list / Move cursor to next cell in the table |
-
-
-## Confluence
-
-
-
-# | `e` | Open the editor |
-
-
-## Draw IO
-
-Canvas
-
-# | `ALT+Connect` | Connect to a Fixed Point |
-
-
-## Draw IO
-
-Canvas
-
-# | `ALT+Shift+C/T` | Clear Waypoints / Edit Tooltip |
-
-
-## Draw IO
-
-Canvas
-
-# | `Backspace or Delete` | Delete Selected Cells |
-
-
-## Draw IO
-
-Canvas
-
-# | `CTRL / Meta+Resize` | Centered / Group Resize |
-
-
-## Draw IO
-
-Canvas
-
-# | `CTRL / Shift+Drag` | Clone cell/Disconnect edge |
-
-
-## Draw IO
-
-Canvas
-
-# | `CTRL+Delete` | Delete with Connections |
-
-
-## Draw IO
-
-Canvas
-
-# | `CTRL+End` | Expand Container |
-
-
-## Draw IO
-
-Canvas
-
-# | `CTRL+Enter / D` | Duplicate |
-
-
-## Draw IO
-
-Canvas
-
-# | `CTRL+G` | Group |
-
-
-## Draw IO
-
-Canvas
-
-# | `CTRL+Home` | Collapse Container |
-
-
-## Draw IO
-
-Canvas
-
-# | `CTRL+L / ALT+Shift+L` | Lock/Unlock / Edit Link |
-
-
-## Draw IO
-
-Canvas
-
-# | `CTRL+R` | Turn / Rotate 90 Clockwise |
-
-
-## Draw IO
-
-Canvas
-
-# | `CTRL+Shift+B` | Send to Back |
-
-
-## Draw IO
-
-Canvas
-
-# | `CTRL+Shift+End` | Enter Group |
-
-
-## Draw IO
-
-Canvas
-
-# | `CTRL+Shift+F` | Bring to Front |
-
-
-## Draw IO
-
-Canvas
-
-# | `CTRL+Shift+Home` | Exit Group |
-
-
-## Draw IO
-
-Canvas
-
-# | `CTRL+Shift+U` | Ungroup |
-
-
-## Draw IO
-
-Canvas
-
-# | `CTRL+Shift+Y` | Autosize |
-
-
-## Draw IO
-
-Canvas
-
-# | `Shift+Resize` | Maintain Proportions |
-
-
-## Draw IO
-
-Cursor/Page Keys
-
-# | `ALT+Cursor` | Scroll Page |
-
-
-## Draw IO
-
-Cursor/Page Keys
-
-# | `ALT+Shift+Cursor` | Clone and connect |
-
-
-## Draw IO
-
-Cursor/Page Keys
-
-# | `CTRL+Cursor` | Resize cell (pt, +Option on Mac) |
-
-
-## Draw IO
-
-Cursor/Page Keys
-
-# | `CTRL+Shift+Cursor` | Resize cell (grid size) |
-
-
-## Draw IO
-
-Cursor/Page Keys
-
-# | `CTRL+Shift+Pg Down` | Next Page |
-
-
-## Draw IO
-
-Cursor/Page Keys
-
-# | `CTRL+Shift+Pg Up` | Previous Page |
-
-
-## Draw IO
-
-Cursor/Page Keys
-
-# | `Cursor` | Scroll / Move cell (pt) |
-
-
-## Draw IO
-
-Cursor/Page Keys
-
-# | `Shift+Cursor` | Move cell (grid size) |
-
-
-## Draw IO
-
-Documents
-
-# | `ALT+Drag / Drop` | Force Rubberband / Ignore Group |
-
-
-## Draw IO
-
-Documents
-
-# | `ALT+Shift+A` | Connection Arrows |
-
-
-## Draw IO
-
-Documents
-
-# | `CTRL+K` | Insert Rectangle |
-
-
-## Draw IO
-
-Documents
-
-# | `CTRL+P` | Print |
-
-
-## Draw IO
-
-Documents
-
-# | `CTRL+S` | Save |
-
-
-## Draw IO
-
-Documents
-
-# | `CTRL+Shift+G` | Toggle grid |
-
-
-## Draw IO
-
-Documents
-
-# | `CTRL+Shift+K` | Insert Ellipse |
-
-
-## Draw IO
-
-Documents
-
-# | `CTRL+Shift+S` | Save as |
-
-
-## Draw IO
-
-Documents
-
-# | `CTRL+Shift+X` | Insert Text |
-
-
-## Draw IO
-
-Documents
-
-# | `CTRL+Shift+Z` | Redo (Linux/Mac) |
-
-
-## Draw IO
-
-Documents
-
-# | `CTRL+Y` | Redo (Windows) |
-
-
-## Draw IO
-
-Documents
-
-# | `CTRL+Z` | Undo |
-
-
-## Draw IO
-
-Documents
-
-# | `Esc` | Cancel Action |
-
-
-## Draw IO
-
-Documents
-
-# | `Hold ALT` | Ignores handles under the mouse |
-
-
-## Draw IO
-
-Labels
-
-# | `CTRL+. / ,` | Superscript/Subscript on Selected Text |
-
-
-## Draw IO
-
-Labels
-
-# | `CTRL+B / I` | Toggle Bold/Italic on Selected Text |
-
-
-## Draw IO
-
-Labels
-
-# | `CTRL+U` | Toggle Underline on Selected Text |
-
-
-## Draw IO
-
-Labels
-
-# | `Enter` | New Paragraph in Formatted Labels |
-
-
-## Draw IO
-
-Labels
-
-# | `F2 / Enter` | Start Editing Label of Selected Cell |
-
-
-## Draw IO
-
-Labels
-
-# | `F2 / Tab / Esc` | Stop Editing and Apply Value |
-
-
-## Draw IO
-
-Labels
-
-# | `Shift+Enter` | New Line in Formatted Labels |
-
-
-## Draw IO
-
-Other
-
-# | `ALT+Shift+P` | Connection Points |
-
-
-## Draw IO
-
-Other
-
-# | `CTRL / Shift+Esc` | Cancel Editing |
-
-
-## Draw IO
-
-Other
-
-# | `CTRL+Meta+Resize` | Centered group resize |
-
-
-## Draw IO
-
-Other
-
-# | `CTRL+Resize` | Non-recursive group resize |
-
-
-## Draw IO
-
-Selection
-
-# | `(Shift+)Tab` | Select Next / Previous |
-
-
-## Draw IO
-
-Selection
-
-# | `ALT+(Shift+)Tab` | Select Child / Parent |
-
-
-## Draw IO
-
-Selection
-
-# | `ALT+Click` | Select Cell Below |
-
-
-## Draw IO
-
-Selection
-
-# | `ALT+Shift+Drag` | Remove from Selection |
-
-
-## Draw IO
-
-Selection
-
-# | `CTRL / Shift+Click` | Toggle Selection State |
-
-
-## Draw IO
-
-Selection
-
-# | `CTRL+(Shift+)A` | Select All / None |
-
-
-## Draw IO
-
-Selection
-
-# | `CTRL+Shift+I / E` | Select Vertices / Edges |
-
-
-## Draw IO
-
-Selection
-
-# | `Shift+Drag` | Add to Selection |
-
-
-## Draw IO
-
-Sidebar/Connect
-
-# | `ALT+(Shift / CTRL)+Click on a sidebar item` | Inserts and connects the selected item (Shift ignores current style) |
-
-
-## Draw IO
-
-Sidebar/Connect
-
-# | `ALT+(Shift+)Drag from sidebar` | Disable replace, connect on drop (drop targets), Shift ignores current style |
-
-
-## Draw IO
-
-Sidebar/Connect
-
-# | `Click on a sidebar item` | Connects unconnected side of selected edge |
-
-
-## Draw IO
-
-Sidebar/Connect
-
-# | `Shift+Click on a sidebar item` | Replaces the selected item with the clicked one |
-
-
-## Draw IO
-
-Sidebar/Connect
-
-# | `Shift+Connect` | Connect to shape outline (ignore connection points) |
-
-
-## Draw IO
-
-Styles
-
-# | `CTRL+E` | Edit Style |
-
-
-## Draw IO
-
-Styles
-
-# | `CTRL+Shift+C` | Copy Style |
-
-
-## Draw IO
-
-Styles
-
-# | `CTRL+Shift+D` | Set as Default Style |
-
-
-## Draw IO
-
-Styles
-
-# | `CTRL+Shift+R` | Clear Default Style |
-
-
-## Draw IO
-
-Styles
-
-# | `CTRL+Shift+V` | Paste Style |
-
-
-## Draw IO
-
-Styles
-
-# | `Draw IO Styles :: ALT+Shift+V` | Paste Size |
-
-
-## Draw IO
-
-Styles
-
-# | `Draw IO Styles :: ALT+Shift+X` | Copy Size |
-
-
-## Draw IO
-
-Tools
-
-# | `CTRL+M` | Edit Metadata |
-
-
-## Draw IO
-
-Tools
-
-# | `CTRL+Shift+L` | Toggle Layers Window |
-
-
-## Draw IO
-
-Tools
-
-# | `CTRL+Shift+M` | Edit Vertex Geometry |
-
-
-## Draw IO
-
-Tools
-
-# | `CTRL+Shift+O` | Toggle Outline Window |
-
-
-## Draw IO
-
-Tools
-
-# | `CTRL+Shift+P` | Toggle Format Panel |
-
-
-## Draw IO
-
-View
-
-# | `ALT+Mouse wheel` | Canvas Zoom In/Out |
-
-
-## Draw IO
-
-View
-
-# | `CTRL + (Numpad)` | Zoom In |
-
-
-## Draw IO
-
-View
-
-# | `CTRL - (Numpad)` | Zoom Out |
-
-
-## Draw IO
-
-View
-
-# | `CTRL 0` | Custom Zoom |
-
-
-## Draw IO
-
-View
-
-# | `CTRL+H` | Reset View |
-
-
-## Draw IO
-
-View
-
-# | `CTRL+J` | Fit Page |
-
-
-## Draw IO
-
-View
-
-# | `CTRL+Shift+Connect` | Disable Connections |
-
-
-## Draw IO
-
-View
-
-# | `CTRL+Shift+Drag` | Create / Remove Space |
-
-
-## Draw IO
-
-View
-
-# | `CTRL+Shift+H` | Fit Window |
-
-
-## Draw IO
-
-View
-
-# | `CTRL+Shift+J` | Fit Two Pages |
-
-
-## Draw IO
-
-View
-
-# | `End` | Refresh |
-
-
-## Draw IO
-
-View
-
-# | `Home` | Home |
-
-
-## Draw IO
-
-View
-
-# | `Mouse wheel` | Canvas Vertical Scroll |
-
-
-## Draw IO
-
-View
-
-# | `Shift+Mouse wheel` | Canvas Horizontal Scroll |
-
-
-## Draw IO
-
-View
-
-# | `Space / Right mouse Drag` | Pan Canvas |
-
-
-## Drive
-
-
-
-# | `n` | Rename selected item. |
-
-
-## Drive
-
-
-
-# | `z` | Move selected items to new folder. |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Alt or F6` | Show the access keys in the ribbon |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Alt+B or Alt+Left` | Go back to previous view in the main Outlook window |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Alt+B or Alt+Left` | Go back to previous view |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Alt+Down` | Open split buttons |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Alt+F` | Open the File menu |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Alt+H` | Open the Home tab |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Alt+J,S` | Open the Send/Receive tab |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Alt+O` | Open the Folder tab |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Alt+Q` | Go to the Tell Me search field |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Alt+Right` | Go forward to next view in the main Outlook window |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Alt+Right` | Go forward to next view |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Alt+Up or Ctrl+Comma (,), or Alt+Page Up` | In the Reading pane, go to the previous message |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Alt+V` | Open the View tab |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Alt+V, B, and then C for Calendar, P for People, T for Tasks, or O for Off` | Show the To-Do bar (peek) |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Arrow keys` | Move around within the Folder pane |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Ctrl+1` | Switch to the Mail view |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Ctrl+2` | Switch to the Calendar view |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Ctrl+3` | Switch to the Contacts view |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Ctrl+4` | Switch to the Tasks view |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Ctrl+5` | Switch to the Notes |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Ctrl+6` | Switch to the Folder list in the Folder pane |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Ctrl+7` | Switch to Shortcuts |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Ctrl+8` | Open Journal |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Ctrl+Comma (,)` | Switch to previous open message |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Ctrl+E` | Open the Search tab |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Ctrl+Period (.)` | Switch to next open message |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Ctrl+Shift+B` | Open the Address Book |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Ctrl+Shift+F10` | Show the tooltip for the ribbon element currently in focus |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Ctrl+Shift+Tab key or Shift+Tab key` | Move between the Folder pane, the main Outlook window, the Reading pane, and the To-Do bar |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Ctrl+Shift+W` | Select the InfoBar and, if available, show the menu of commands |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Ctrl+Tab` | Move around message header lines in the Folder pane or an open message |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Ctrl+Tab` | Move between the Navigation pane and the calendar |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Ctrl+Y` | Go to a different folder |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `F3 or Ctrl+E` | Go to the Search box |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `F6` | Move between the ribbon and the calendar |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Left or Right, respectively` | Collapse or expand a group in the email message list |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Shift+Spacebar` | In the Reading pane, page up through the text |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Spacebar` | In the Reading pane, page down through the text |
-
-
-## Outlook
-
-Basic Navigation
-
-# | `Tab key or F6` | Move between the Outlook window, the smaller panes in the Folder pane, the Reading pane, and the sections in the To-Do bar |
-
-
-## Outlook
-
-Calendar Date Navigator
-
-# | `Alt+Down` | Go to the same day in the next week |
-
-
-## Outlook
-
-Calendar Date Navigator
-
-# | `Alt+End` | Go to the last day of the current week |
-
-
-## Outlook
-
-Calendar Date Navigator
-
-# | `Alt+Home` | Go to the first day of the current week |
-
-
-## Outlook
-
-Calendar Date Navigator
-
-# | `Alt+Up` | Go to the same day in the previous week |
-
-
-## Outlook
-
-Calendar Day/Week/Month
-
-# | `Alt+-` | Switch to the Week view |
-
-
-## Outlook
-
-Calendar Day/Week/Month
-
-# | `Alt+0` | View 10 days |
-
-
-## Outlook
-
-Calendar Day/Week/Month
-
-# | `Alt+=` | Switch to the Month view |
-
-
-## Outlook
-
-Calendar Day/Week/Month
-
-# | `Alt+Down` | Go to the same day in the next week |
-
-
-## Outlook
-
-Calendar Day/Week/Month
-
-# | `Alt+Up` | Go to the same day in the previous week |
-
-
-## Outlook
-
-Calendar Day/Week/Month
-
-# | `Alt+key for number of days` | View from one through nine days |
-
-
-## Outlook
-
-Calendar Day/Week/Month
-
-# | `Ctrl+Tab or F6` | Move between the Calendar view, TaskPad, and Folder list |
-
-
-## Outlook
-
-Calendar Day/Week/Month
-
-# | `Left` | Go to the previous day |
-
-
-## Outlook
-
-Calendar Day/Week/Month
-
-# | `Right` | Go to the next day |
-
-
-## Outlook
-
-Calendar Day/Week/Month
-
-# | `Shift+Tab` | Select the previous appointment |
-
-
-## Outlook
-
-Calendar Month View
-
-# | `Home` | Go to the first day of the week |
-
-
-## Outlook
-
-Calendar Month View
-
-# | `Page down` | Go to the same day of the week in the next page |
-
-
-## Outlook
-
-Calendar Month View
-
-# | `Page up` | Go to the same day of the week in the previous page |
-
-
-## Outlook
-
-Calendar Single Day View
-
-# | `Alt+Down` | Go to the same day in the next week |
-
-
-## Outlook
-
-Calendar Single Day View
-
-# | `Alt+Up` | Go to the same day in the previous week |
-
-
-## Outlook
-
-Calendar Single Day View
-
-# | `Down` | Select the next block of time |
-
-
-## Outlook
-
-Calendar Single Day View
-
-# | `End` | Select the time that ends your work day |
-
-
-## Outlook
-
-Calendar Single Day View
-
-# | `Home` | Select the time that begins your work day |
-
-
-## Outlook
-
-Calendar Single Day View
-
-# | `Page down` | Select the block of time at the bottom of the screen |
-
-
-## Outlook
-
-Calendar Single Day View
-
-# | `Page up` | Select the block of time at the top of the screen |
-
-
-## Outlook
-
-Calendar Single Day View
-
-# | `Shift+Up or Shift+Down` | Extend or reduce the selected time |
-
-
-## Outlook
-
-Calendar Single Day View
-
-# | `Up` | Select the previous block of time |
-
-
-## Outlook
-
-Calendar Week View
-
-# | `End` | Go to the end of work hours for the selected day |
-
-
-## Outlook
-
-Calendar Week View
-
-# | `Home` | Go to the start of work hours for the selected day |
-
-
-## Outlook
-
-Calendar Week View
-
-# | `Page down` | Go down one page view in the selected day |
-
-
-## Outlook
-
-Calendar Week View
-
-# | `Page up` | Go up one page view in the selected day |
-
-
-## Outlook
-
-Calendar Week View
-
-# | `Shift+Left, Shift+Right, Shift+Up, Shift+Down, Shift+Home, or Shift+End` | Change the duration of the selected block of time |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+- or Ctrl+Alt+3` | Switch to the Full Week view |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+0` | Show ten days in the calendar |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+1` | Show one day in the calendar |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+2` | Show two days in the calendar |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+3` | Show three days in the calendar |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+4` | Show four days in the calendar |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+5` | Show five days in the calendar |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+6` | Show six days in the calendar |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+7` | Show seven days in the calendar |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+8` | Show eight days in the calendar |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+9` | Show nine days in the calendar |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+= or Ctrl+Alt+4` | Switch to Month view |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+D` | Dismiss the reminder |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+Down` | Go to the next week |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+End` | Go to the end of the week |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+H+I` | Open the New Items menu to select which item you'd like to create |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+H+R or Ctrl+Alt+1` | Show the daily view |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+H,A,B` | Open the address book |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+H,C,G` | Create a new calendar group or add a department calendar |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+H,C,O` | Open the Outlook Options dialog box for calendars |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+H,E` | Email a selected calendar to a contact |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+H,F,C` | Search for contacts |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+H,F,P` | View and edit the sharing permissions for a folder |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+H,F,W or Ctrl+F` | Forward an appointment or meeting |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+H,O,C` | Add shared calendars from your contacts, or create a new calendar |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+H,O,D` | Show today in the calendar |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+H,P,O` | Publish a calendar online |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+H,S,C` | Share a calendar with others |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+H,S,V or Ctrl+Alt+5` | Show the selected schedule in a horizontal layout if you want to compare calendars to schedule meetings |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+H,X` | Show the next seven days |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+Home` | Go to the start of the week |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+O` | Open an appointment when the reminder appears |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+Page down` | Go to the next month |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+Page up` | Go to the previous month |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+S ` | Snooze the reminder |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+Up` | Go to the previous week |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+V,M` | Open the reminder window |
-
-
-## Outlook
-
-Calendar
-
-# | `Alt+X` | Open the calendar scheduling assistant from the meeting window |
-
-
-## Outlook
-
-Calendar
-
-# | `Ctrl+Alt+2` | Switch to the Work Week view |
-
-
-## Outlook
-
-Calendar
-
-# | `Ctrl+Comma (,) or Ctrl+Shift+Comma (,)` | Go to the previous appointment |
-
-
-## Outlook
-
-Calendar
-
-# | `Ctrl+E` | Jump to Search |
-
-
-## Outlook
-
-Calendar
-
-# | `Ctrl+G or Alt+H+L` | Go to a date |
-
-
-## Outlook
-
-Calendar
-
-# | `Ctrl+G` | Set up recurrence for an open appointment or meeting |
-
-
-## Outlook
-
-Calendar
-
-# | `Ctrl+Left` | Go to the previous day |
-
-
-## Outlook
-
-Calendar
-
-# | `Ctrl+N` | Create an appointment (when in the Calendar view) |
-
-
-## Outlook
-
-Calendar
-
-# | `Ctrl+Period (.) or Ctrl+Shift+Period (.)` | Go to the next appointment |
-
-
-## Outlook
-
-Calendar
-
-# | `Ctrl+R` | Reply to a meeting request with a message |
-
-
-## Outlook
-
-Calendar
-
-# | `Ctrl+Right` | Go to the next day |
-
-
-## Outlook
-
-Calendar
-
-# | `Ctrl+Shift+A` | Create an appointment (in any Outlook view) |
-
-
-## Outlook
-
-Calendar
-
-# | `Ctrl+Shift+Q or Alt+H,M,R` | Create a meeting request |
-
-
-## Outlook
-
-Calendar
-
-# | `Ctrl+Shift+R` | Select the Reply All option |
-
-
-## Outlook
-
-Create an Item or File
-
-# | `Ctrl+Shift+A` | Create an appointment |
-
-
-## Outlook
-
-Create an Item or File
-
-# | `Ctrl+Shift+C` | Create a contact |
-
-
-## Outlook
-
-Create an Item or File
-
-# | `Ctrl+Shift+E` | Create a folder |
-
-
-## Outlook
-
-Create an Item or File
-
-# | `Ctrl+Shift+H` | Create a Microsoft Office document |
-
-
-## Outlook
-
-Create an Item or File
-
-# | `Ctrl+Shift+K` | Create a task |
-
-
-## Outlook
-
-Create an Item or File
-
-# | `Ctrl+Shift+L` | Create a contact group |
-
-
-## Outlook
-
-Create an Item or File
-
-# | `Ctrl+Shift+M` | Create a message |
-
-
-## Outlook
-
-Create an Item or File
-
-# | `Ctrl+Shift+N` | Create a note |
-
-
-## Outlook
-
-Create an Item or File
-
-# | `Ctrl+Shift+P` | Create a Search folder |
-
-
-## Outlook
-
-Create an Item or File
-
-# | `Ctrl+Shift+Q` | Create a meeting request |
-
-
-## Outlook
-
-Create an Item or File
-
-# | `Ctrl+Shift+S` | Post to the selected folder |
-
-
-## Outlook
-
-Create an Item or File
-
-# | `Ctrl+Shift+X` | Create a fax |
-
-
-## Outlook
-
-Create an Item or File
-
-# | `Ctrl+T` | Post a reply in the selected folder |
-
-
-## Outlook
-
-Format Text
-
-# | `Alt+O` | Display the Format Text tab on the ribbon |
-
-
-## Outlook
-
-Format Text
-
-# | `Ctrl+B` | Apply bold formatting |
-
-
-## Outlook
-
-Format Text
-
-# | `Ctrl+C or Ctrl+Insert` | Copy a selection |
-
-
-## Outlook
-
-Format Text
-
-# | `Ctrl+E` | Center text |
-
-
-## Outlook
-
-Format Text
-
-# | `Ctrl+I` | Apply italic formatting |
-
-
-## Outlook
-
-Format Text
-
-# | `Ctrl+K` | Insert a hyperlink |
-
-
-## Outlook
-
-Format Text
-
-# | `Ctrl+L` | Left-align a paragraph |
-
-
-## Outlook
-
-Format Text
-
-# | `Ctrl+Left bracket ([) or Ctrl+Shift+Less-than sign (<)` | Decrease the font size |
-
-
-## Outlook
-
-Format Text
-
-# | `Ctrl+Q` | Remove paragraph formatting |
-
-
-## Outlook
-
-Format Text
-
-# | `Ctrl+R` | Right-align a paragraph |
-
-
-## Outlook
-
-Format Text
-
-# | `Ctrl+Right bracket (]) or Ctrl+Shift+Greater-than sign (>)` | Increase the font size |
-
-
-## Outlook
-
-Format Text
-
-# | `Ctrl+Shift+H` | Delete the next word |
-
-
-## Outlook
-
-Format Text
-
-# | `Ctrl+Shift+J` | Justify text (Stretch a paragraph to fit between the margins} |
-
-
-## Outlook
-
-Format Text
-
-# | `Ctrl+Shift+K` | Toggle the case of the selected text between small caps and all caps |
-
-
-## Outlook
-
-Format Text
-
-# | `Ctrl+Shift+L` | Add a bulleted list |
-
-
-## Outlook
-
-Format Text
-
-# | `Ctrl+Shift+P` | Display the Font dialog box |
-
-
-## Outlook
-
-Format Text
-
-# | `Ctrl+Shift+S` | Apply styles |
-
-
-## Outlook
-
-Format Text
-
-# | `Ctrl+Shift+T` | Decrease indent |
-
-
-## Outlook
-
-Format Text
-
-# | `Ctrl+Shift+T` | Reduce a hanging indent |
-
-
-## Outlook
-
-Format Text
-
-# | `Ctrl+Shift+Z or Ctrl+Spacebar` | Clear the formatting |
-
-
-## Outlook
-
-Format Text
-
-# | `Ctrl+T` | Create a hanging indent |
-
-
-## Outlook
-
-Format Text
-
-# | `Ctrl+T` | Increase indent |
-
-
-## Outlook
-
-Format Text
-
-# | `Ctrl+U` | Underline text |
-
-
-## Outlook
-
-Format Text
-
-# | `Ctrl+V or Shift+Insert` | Paste the copied or cut selection |
-
-
-## Outlook
-
-Format Text
-
-# | `Ctrl+X or Shift+Delete` | Cut a selection |
-
-
-## Outlook
-
-Format Text
-
-# | `Shift+F3` | Switch the case of the first letter in a selected word or line |
-
-
-## Outlook
-
-Frequently Used
-
-# | `Alt+H` | Go to the Home tab |
-
-
-## Outlook
-
-Frequently Used
-
-# | `Alt+H,F,W` | Forward a message |
-
-
-## Outlook
-
-Frequently Used
-
-# | `Alt+H,M,V, and select a folder from the list` | Move an item to a folder |
-
-
-## Outlook
-
-Frequently Used
-
-# | `Alt+H,R,A` | Select the Reply All option |
-
-
-## Outlook
-
-Frequently Used
-
-# | `Alt+H,R,P` | Reply to a message |
-
-
-## Outlook
-
-Frequently Used
-
-# | `Alt+J,A,2,A,V` | Open the Save As dialog box on the Attachment tab |
-
-
-## Outlook
-
-Frequently Used
-
-# | `Alt+J,S` | Go to the Send/Receive tab |
-
-
-## Outlook
-
-Frequently Used
-
-# | `Alt+N,A,F` | Insert a file |
-
-
-## Outlook
-
-Frequently Used
-
-# | `Alt+S` | Send a message |
-
-
-## Outlook
-
-Frequently Used
-
-# | `Ctrl+2` | Go to Calendar |
-
-
-## Outlook
-
-Frequently Used
-
-# | `Ctrl+C or Ctrl+Insert` | Copy an item |
-
-
-## Outlook
-
-Frequently Used
-
-# | `Ctrl+E or F3` | Search for an item |
-
-
-## Outlook
-
-Frequently Used
-
-# | `Ctrl+M or F9` | Check for new messages |
-
-
-## Outlook
-
-Frequently Used
-
-# | `Ctrl+Shift+A` | Create an appointment |
-
-
-## Outlook
-
-Frequently Used
-
-# | `Ctrl+Shift+K` | New task |
-
-
-## Outlook
-
-Frequently Used
-
-# | `Ctrl+Shift+M` | Create a new message |
-
-
-## Outlook
-
-Frequently Used
-
-# | `Delete` | Delete an item (when a message, task, or meeting is selected) |
-
-
-## Outlook
-
-Mail - Folder Pane
-
-# | `Shift+F10,D` | Delete a selected folder in the list (default folders, such as Inbox, Outbox, Drafts, and Sent cannot be deleted) |
-
-
-## Outlook
-
-Mail Folder Pane
-
-# | `F2` | Rename a selected folder in the list of folders |
-
-
-## Outlook
-
-Mail Folder Pane
-
-# | `Left` | Collapse a selected group or folder with subfolders |
-
-
-## Outlook
-
-Mail Folder Pane
-
-# | `Right` | Expand a selected group or folder with subfolders |
-
-
-## Outlook
-
-Mail Folder Pane
-
-# | `Shift+F10,N` | Create a new folder |
-
-
-## Outlook
-
-Mail Folder Pane
-
-# | `Spacebar or Enter` | Move to the Message list from the Folder pane |
-
-
-## Outlook
-
-Mail Folder Pane
-
-# | `Spacebar or Enter` | Open a selected item in the Folder pane |
-
-
-## Outlook
-
-Mail Folder Pane
-
-# | `Up and Down` | Move around within the Folder pane |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Alt+Enter` | Show email properties |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Alt+H+D` | Delete a message |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Alt+H,F,W` | Forward a message |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Alt+H,J,O` | Set the junk mail options |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Alt+H,R,A` | Select the Reply All option |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Alt+H,R,P` | Reply to a message |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Alt+H,X` | Ignore a message |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Alt+J,S,M,C` | Mark an item to download a copy |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Alt+J,S,M,T` | Mark an item to download |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Alt+J,S,U,K` | Unmark all items to download |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Alt+J,S,U,U` | Unmark an item to download |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Ctrl+Alt+S` | Set how often Outlook checks for new messages |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Ctrl+P` | Print a message |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Ctrl+Q` | Mark a message as read |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Ctrl+Shift+G` | Add Custom Flag to message |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Ctrl+Shift+S` | Post to a folder |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Ctrl+Shift+V` | Move message to folder |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Ctrl+Shift+W` | Display a blocked content menu |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Ctrl+Shift+W,P` | Download blocked pictures or images |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Ctrl+Shift+Y` | Copy item to a folder |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Ctrl+Spacebar` | Select or cancel selection of the active item |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Ctrl+U` | Mark a message as unread |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Ctrl+Up or Ctrl+Down` | Go to the next or previous item without extending the selection |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Ctrl+Up or Down, and then, to select each message, press Spacebar` | Select multiple non-adjacent messages |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Down and Up` | Move down and up in the message list |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Enter` | Open a message |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Left` | Collapse groups of messages (for example, Last Week) |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Page down` | Go to the item at the bottom of the screen |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Page up` | Go to the item at the top of the screen |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Right` | Expand groups of messages (for example, Last Week) |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Shift+Down or Up` | Select multiple adjacent messages |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Shift+F10,J,then the Up or Down, and then Enter` | Mark message as junk or not junk |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Shift+F10,U,T (in Narrator, Insert)` | Add Follow Up or Quick Flag to message |
-
-
-## Outlook
-
-Mail Message List
-
-# | `Shift+Up or Shift+Down` | Extend or reduce the selected items by one item |
-
-
-## Outlook
-
-Mail Reading Pane
-
-# | `Alt+R` | Jump to the Reply button |
-
-
-## Outlook
-
-Mail Reading Pane
-
-# | `Alt+Up or Ctrl+Comma (,), or Alt+Page up` | Go to the previous message |
-
-
-## Outlook
-
-Mail Reading Pane
-
-# | `Ctrl+Shift+W` | In an email message, select the InfoBar and, if available, show the options menu |
-
-
-## Outlook
-
-Mail Reading Pane
-
-# | `Esc` | Close the InfoBar menu |
-
-
-## Outlook
-
-Mail Reading Pane
-
-# | `Shift+Spacebar` | Page up through text |
-
-
-## Outlook
-
-Mail Reading Pane
-
-# | `Shift+Tab` | Move to previous field |
-
-
-## Outlook
-
-Mail Reading Pane
-
-# | `Spacebar` | Page down through text |
-
-
-## Outlook
-
-Mail Reading Pane
-
-# | `Tab key or Shift+Tab` | Move to the next or previous link |
-
-
-## Outlook
-
-Mail Reading Pane
-
-# | `Tab key` | Move to the next field |
-
-
-## Outlook
-
-Mail
-
-# | `Alt+Enter` | Show the properties for the selected item |
-
-
-## Outlook
-
-Mail
-
-# | `Alt+J,S,M,T` | Check the Mark for download status |
-
-
-## Outlook
-
-Mail
-
-# | `Alt+J,S,P (when a Send/Receive is in progress)` | Display the Send/Receive progress |
-
-
-## Outlook
-
-Mail
-
-# | `Alt+J,S,S` | Start a send/receive action |
-
-
-## Outlook
-
-Mail
-
-# | `Alt+S` | Send a message |
-
-
-## Outlook
-
-Mail
-
-# | `Ctrl+Alt+F` | Forward a message as an attachment |
-
-
-## Outlook
-
-Mail
-
-# | `Ctrl+Alt+J` | Mark a message as not junk |
-
-
-## Outlook
-
-Mail
-
-# | `Ctrl+Alt+M` | Mark an item for download |
-
-
-## Outlook
-
-Mail
-
-# | `Ctrl+Alt+P` | Open the MailTip in the composed message |
-
-
-## Outlook
-
-Mail
-
-# | `Ctrl+Alt+R` | Reply with a meeting request |
-
-
-## Outlook
-
-Mail
-
-# | `Ctrl+Alt+S` | Define Send/Receive groups |
-
-
-## Outlook
-
-Mail
-
-# | `Ctrl+Enter` | Send a message |
-
-
-## Outlook
-
-Mail
-
-# | `Ctrl+F` | Forward a message |
-
-
-## Outlook
-
-Mail
-
-# | `Ctrl+K` | Check names |
-
-
-## Outlook
-
-Mail
-
-# | `Ctrl+M or F9` | Check for new messages |
-
-
-## Outlook
-
-Mail
-
-# | `Ctrl+N` | Create a message (when in Mail view) |
-
-
-## Outlook
-
-Mail
-
-# | `Ctrl+O` | Open a received message |
-
-
-## Outlook
-
-Mail
-
-# | `Ctrl+P` | Print an item |
-
-
-## Outlook
-
-Mail
-
-# | `Ctrl+Q` | Mark a message as read |
-
-
-## Outlook
-
-Mail
-
-# | `Ctrl+R` | Reply to a message |
-
-
-## Outlook
-
-Mail
-
-# | `Ctrl+S` | Save an item |
-
-
-## Outlook
-
-Mail
-
-# | `Ctrl+Shift+B` | Open the Address Book |
-
-
-## Outlook
-
-Mail
-
-# | `Ctrl+Shift+D` | Delete and ignore a conversation |
-
-
-## Outlook
-
-Mail
-
-# | `Ctrl+Shift+G` | Display the Flag for follow up dialog box |
-
-
-## Outlook
-
-Mail
-
-# | `Ctrl+Shift+I` | Display blocked external content (in a message) |
-
-
-## Outlook
-
-Mail
-
-# | `Ctrl+Shift+I` | Switch to Inbox |
-
-
-## Outlook
-
-Mail
-
-# | `Ctrl+Shift+M` | Create a message (from any Outlook view) |
-
-
-## Outlook
-
-Mail
-
-# | `Ctrl+Shift+N` | Apply Normal style |
-
-
-## Outlook
-
-Mail
-
-# | `Ctrl+Shift+O` | Switch to Outbox |
-
-
-## Outlook
-
-Mail
-
-# | `Ctrl+Shift+R` | Select the Reply to All option |
-
-
-## Outlook
-
-Mail
-
-# | `Ctrl+Shift+S` | Post to a folder |
-
-
-## Outlook
-
-Mail
-
-# | `Ctrl+U` | Mark a message as unread |
-
-
-## Outlook
-
-Mail
-
-# | `Down` | Go to the next message |
-
-
-## Outlook
-
-Mail
-
-# | `F12` | Open the Save as dialog box |
-
-
-## Outlook
-
-Mail
-
-# | `F4` | Find or replace text |
-
-
-## Outlook
-
-Mail
-
-# | `Insert` | Add a Quick flag to an unopened message |
-
-
-## Outlook
-
-Mail
-
-# | `Shift+F4` | Find the next item |
-
-
-## Outlook
-
-Mail
-
-# | `Shift+F9` | Start a send/receive action for the current folder, retrieving full items (header, item, and any attachments) |
-
-
-## Outlook
-
-Mail
-
-# | `Up` | Go to the previous message |
-
-
-## Outlook
-
-Search
-
-# | `Ctrl+Alt+A` | Expand the search to include All Mail Items, All Calendar Items, or All Contact Items, depending on the module you are in |
-
-
-## Outlook
-
-Search
-
-# | `Ctrl+Alt+K` | Expand search to include items from the current folder |
-
-
-## Outlook
-
-Search
-
-# | `Ctrl+Alt+Z` | Expand search to include subfolders |
-
-
-## Outlook
-
-Search
-
-# | `Ctrl+E or F3` | Go to the Search field to find a message or another item |
-
-
-## Outlook
-
-Search
-
-# | `Ctrl+H` | Find and replace text, symbols, or some formatting commands when in the Reading pane or in an open item |
-
-
-## Outlook
-
-Search
-
-# | `Ctrl+Shift+F` | Use Advanced Find |
-
-
-## Outlook
-
-Search
-
-# | `Ctrl+Shift+P` | Create a Search folder |
-
-
-## Outlook
-
-Search
-
-# | `Esc` | Clear the search results |
-
-
-## Outlook
-
-Search
-
-# | `F4` | Search for text within an open item |
-
-
-## Outlook
-
-Tasks
-
-# | `Ctrl+A` | Select all items |
-
-
-## Outlook
-
-Tasks
-
-# | `Ctrl+C` | Accept a task request |
-
-
-## Outlook
-
-Tasks
-
-# | `Ctrl+D` | Decline a task request |
-
-
-## Outlook
-
-Tasks
-
-# | `Ctrl+D` | Delete selected item |
-
-
-## Outlook
-
-Tasks
-
-# | `Ctrl+E` | Find a task or other item |
-
-
-## Outlook
-
-Tasks
-
-# | `Ctrl+F` | Forward a task as an attachment |
-
-
-## Outlook
-
-Tasks
-
-# | `Ctrl+N` | Create a task when in Tasks view |
-
-
-## Outlook
-
-Tasks
-
-# | `Ctrl+O` | Open the selected item |
-
-
-## Outlook
-
-Tasks
-
-# | `Ctrl+P` | Print the selected item |
-
-
-## Outlook
-
-Tasks
-
-# | `Ctrl+Shift+Alt+U` | Create a task request |
-
-
-## Outlook
-
-Tasks
-
-# | `Ctrl+Shift+K` | Create a task from any Outlook view |
-
-
-## Outlook
-
-Tasks
-
-# | `Ctrl+Y` | Open the Go to Folder dialog box |
-
-
-## Outlook
-
-Tasks
-
-# | `Ctrl+Z` | Undo the last action |
-
-
-## Outlook
-
-Tasks
-
-# | `F6` | Switch between the Folder pane, Tasks list, and To-Do bar |
-
-
-## Outlook
-
-Tasks
-
-# | `Insert` | Flag an item or mark complete |
-
-
-## Outlook
-
-Use Flags
-
-# | `Ctrl+Shift+G` | Open the Flag for Follow Up dialog box to assign a flag |
-
-
-## Slack
-
-
-
-# | `+ (Plus) OR A` | Show invite list during call |
-
-
-## Slack
-
-
-
-# | `:[Character]` | Show autocomplete options for emoji |
-
-
-## Slack
-
-
-
-# | `@[Character]` | Show autocomplete options for display names |
-
-
-## Slack
-
-
-
-# | `@[username]` | Notify specific person |
-
-
-## Slack
-
-
-
-# | `@channel` | Notify all members of channel, whether they're active or not |
-
-
-## Slack
-
-
-
-# | `@everyone` | Notify all members of channel #general |
-
-
-## Slack
-
-
-
-# | `@here` | Notify active members of channel |
-
-
-## Slack
-
-
-
-# | `ALT+DownArrow` | Jump to next channel or DM |
-
-
-## Slack
-
-
-
-# | `ALT+SHIFT+DownArrow` | Jump to next unread channel or DM |
-
-
-## Slack
-
-
-
-# | `ALT+SHIFT+UpArrow` | Jump to previous unread channel or DM |
-
-
-## Slack
-
-
-
-# | `ALT+UpArrow` | Jump to previous channel or DM |
-
-
-## Slack
-
-
-
-# | `ALT+click message` | Mark message as oldest unread message |
-
-
-## Slack
-
-
-
-# | `CTRL+,` | Open Preferences |
-
-
-## Slack
-
-
-
-# | `CTRL+.` | Toggle right-hand pane |
-
-
-## Slack
-
-
-
-# | `CTRL+/` | Open Keyboard Shortcuts pane |
-
-
-## Slack
-
-
-
-# | `CTRL+ALT` | Show numbers assigned to workspaces in sidebar |
-
-
-## Slack
-
-
-
-# | `CTRL+B` | Bold selected text |
-
-
-## Slack
-
-
-
-# | `CTRL+F` | Search the current channel or DM |
-
-
-## Slack
-
-
-
-# | `CTRL+I` | Italicize selected text |
-
-
-## Slack
-
-
-
-# | `CTRL+K` | Open Quick Switcher |
-
-
-## Slack
-
-
-
-# | `CTRL+SHIFT+7` | Format selected text as numbered list |
-
-
-## Slack
-
-
-
-# | `CTRL+SHIFT+8` | Format selected text as bulleted list |
-
-
-## Slack
-
-
-
-# | `CTRL+SHIFT+>` | Indent selected text |
-
-
-## Slack
-
-
-
-# | `CTRL+SHIFT+A` | Open All Unreads view |
-
-
-## Slack
-
-
-
-# | `CTRL+SHIFT+C` | Format selected text as inline code |
-
-
-## Slack
-
-
-
-# | `CTRL+SHIFT+Enter` | Create snippet in current channel or DM |
-
-
-## Slack
-
-
-
-# | `CTRL+SHIFT+I` | Open Channel Details pane |
-
-
-## Slack
-
-
-
-# | `CTRL+SHIFT+K` | Browse DMs |
-
-
-## Slack
-
-
-
-# | `CTRL+SHIFT+L` | Browse channel list |
-
-
-## Slack
-
-
-
-# | `CTRL+SHIFT+M` | Open Activity pane |
-
-
-## Slack
-
-
-
-# | `CTRL+SHIFT+S` | Open Starred Items pane |
-
-
-## Slack
-
-
-
-# | `CTRL+SHIFT+T` | Open Threads view |
-
-
-## Slack
-
-
-
-# | `CTRL+SHIFT+W` | Open Workspace Directory |
-
-
-## Slack
-
-
-
-# | `CTRL+SHIFT+X` | Strike through selected text |
-
-
-## Slack
-
-
-
-# | `CTRL+SHIFT+Y` | Set or edit your Slack status |
-
-
-## Slack
-
-
-
-# | `CTRL+SHIFT+[` | Switch to previous workspace |
-
-
-## Slack
-
-
-
-# | `CTRL+SHIFT+]` | Switch to next workspace |
-
-
-## Slack
-
-
-
-# | `CTRL+U` | Upload file to current channel or DM |
-
-
-## Slack
-
-
-
-# | `CTRL+[Number]` | Switch to specific workspace |
-
-
-## Slack
-
-
-
-# | `ESC` | Mark all messages in current channel or DM as read |
-
-
-## Slack
-
-
-
-# | `SHIFT+DownArrow` | Select text to end of current line in message draft |
-
-
-## Slack
-
-
-
-# | `SHIFT+ESC` | Mark all messages as read |
-
-
-## Slack
-
-
-
-# | `SHIFT+Enter` | Insert new line in message draft |
-
-
-## Slack
-
-
-
-# | `SHIFT+UpArrow` | Select text to beginning of current line in message draft |
-
-
-## Slack
-
-
-
-# | `UpArrow` | Edit your last message in current channel or DM |
-
-
-## Slack
-
-
-
-# | `#[Character]` | Show autocomplete options for channel names |
-
-
-## Slack
-
-
-
-# | `e+(1-9)` | View and select emoji during call |
-
-
-## Slack
-
-
-
-# | `m` | Toggle mute during call |
-
-
-## Slack
-
-
-
-# | `v` | Toggle video during call |
-
-
-## VS Code
-
-
-
-# | `CTRL+K V` | Markdown editing - Show text and preview side-by-side. |
-
-
-## VS Code
-
-
-
-# | `SHIFT+CTRL+K` | Markdown editing - Switch between text and preview. |
-
-
-## Windows
-
-
-
-# | `CTRL-SHIFT-ESCAPE` | Task Manager |
-
-
-## Windows
-
-
-
-# | `WIN-X` | Quick Link Menu |
-
-
-## Bash Bang Shortcuts
-
-Command Control Shortcuts
-
-# Command Recall Shortcuts
-
-
+# Bash
+
+
+## !
+
+| `!!` | Run last command |
+| `!$` | The last word of the previous command (same as ALT+.) |
+| `!$:p` | Print out the word that !$ would substitute |
+| `!*` | The previous command except for the first word (e.g., if you type find some_file.txt /, then !* would give you some_file.txt /) |
+| `!*:p` | Print out what !* would substitute |
+| `!blah` | Run the most recent command that starts with blah |
+| `!blah:p` | Print out the command that !blah would run (also adds it as the latest command in the command history |
+
+## Command Control
+
+| `CTRL+C` | Terminate the command |
+| `CTRL+L` | Clear the screen |
+| `CTRL+Q` | Allow output to the screen (if previously stopped using command above) |
+| `CTRL+S` | Stops the output to the screen (for long running verbose command) |
+| `CTRL+Z` | Suspend/stop the command |
+
+## Command Editing
+
+| `ALT+B ALT+F` | Move backward/forward one word (or go to start of word the cursor is currently on) |
+| `ALT+C` | Capitalize to end of word starting at cursor (whole word if cursor is at the beginning of word) |
+| `ALT+L` | Make lowercase from cursor to end of word |
+| `ALT+T` | Swap current word with previous |
+| `ALT+U` | Make uppercase from cursor to end of word |
+| `CTRL+A CTRL+E` | Go to the start/end of the command line |
+| `CTRL+D CTRL+H` | Delete character after/before under cursor |
+| `CTRL+F CTRL+B` | Move forward/backward one character |
+| `CTRL+T` | Swap character under cursor with the previous one |
+| `CTRL+U CTRL+K` | Delete from cursor to the start/end of the command line |
+| `CTRL+W ALT+D` | Delete from cursor to start/end of word (whole word if at the boundary) |
+| `CTRL+XX` | Move between start of command line and current cursor position (and back again) |
+| `CTRL+Y` | Paste word or text that was cut using one of the deletion shortcuts (such as the one above) after the cursor |
+
+## command Recall
+
+| `ALT+.` | Use the last word of the previous command |
+| `CTRL+G` | Escape from history searching mode |
+| `CTRL+J` | End the search at current history entry |
+| `CTRL+N` | Next command in history (i.e., walk forward through the command history) |
+| `CTRL+P` | Previous command in history (i.e., walk back through the command history) |
+| `CTRL+R` | Search the history backwards |
+| `CTRL+_` | Undo last command |
+
+# Confluence
+
+| `//` | Opens the date picker |
+| `Alt +SHIFT+DOWN` | Insert table row after |
+| `Alt +SHIFT+UP` | Insert table row before |
+| `CTRL+0` | Set paragraph style |
+| `CTRL+1-6` | Set as heading 1-6 |
+| `CTRL+7` | Preformatted |
+| `CTRL+8` | Quote |
+| `CTRL+ENTER` | Publish page |
+| `CTRL+ENTER` | Publish |
+| `CTRL+SHIFT+I` | Insert table |
+| `CTRL+SHIFT+a` | Insert macro |
+| `CTRL+SHIFT+b` | Bulleted list |
+| `CTRL+SHIFT+d` | Insert markup |
+| `CTRL+SHIFT+e` | Preview |
+| `CTRL+SHIFT+n` | Numbered list |
+| `CTRL+SHIFT+s` | Strikethrough |
+| `CTRL+h` | Find / Replace |
+| `CTRL+k` | Insert link |
+| `CTRL+m` | Insert files & images |
+| `CTRL+y` | Redo |
+| `SHIFT+ENTER` | Insert a hard break |
+| `SHIFT+TAB` | Outdent item when in a list / Move cursor to previous cell in the table |
+| `TAB` | Indent item when in a list / Move cursor to next cell in the table |
+| `e` | Open the editor |
+
+# Draw IO
+
+
+## Canvas
+
+| `ALT+Connect` | Connect to a Fixed Point |
+| `ALT+Shift+C/T` | Clear Waypoints / Edit Tooltip |
+| `Backspace or Delete` | Delete Selected Cells |
+| `CTRL / Meta+Resize` | Centered / Group Resize |
+| `CTRL / Shift+Drag` | Clone cell/Disconnect edge |
+| `CTRL+Delete` | Delete with Connections |
+| `CTRL+End` | Expand Container |
+| `CTRL+Enter / D` | Duplicate |
+| `CTRL+G` | Group |
+| `CTRL+Home` | Collapse Container |
+| `CTRL+L / ALT+Shift+L` | Lock/Unlock / Edit Link |
+| `CTRL+R` | Turn / Rotate 90 Clockwise |
+| `CTRL+Shift+B` | Send to Back |
+| `CTRL+Shift+End` | Enter Group |
+| `CTRL+Shift+F` | Bring to Front |
+| `CTRL+Shift+Home` | Exit Group |
+| `CTRL+Shift+U` | Ungroup |
+| `CTRL+Shift+Y` | Autosize |
+| `Shift+Resize` | Maintain Proportions |
+
+## Cursor/Page Keys
+
+| `ALT+Cursor` | Scroll Page |
+| `ALT+Shift+Cursor` | Clone and connect |
+| `CTRL+Cursor` | Resize cell (pt, +Option on Mac) |
+| `CTRL+Shift+Cursor` | Resize cell (grid size) |
+| `CTRL+Shift+Pg Down` | Next Page |
+| `CTRL+Shift+Pg Up` | Previous Page |
+| `Cursor` | Scroll / Move cell (pt) |
+| `Shift+Cursor` | Move cell (grid size) |
+
+## Documents
+
+| `ALT+Drag / Drop` | Force Rubberband / Ignore Group |
+| `ALT+Shift+A` | Connection Arrows |
+| `CTRL+K` | Insert Rectangle |
+| `CTRL+P` | Print |
+| `CTRL+S` | Save |
+| `CTRL+Shift+G` | Toggle grid |
+| `CTRL+Shift+K` | Insert Ellipse |
+| `CTRL+Shift+S` | Save as |
+| `CTRL+Shift+X` | Insert Text |
+| `CTRL+Shift+Z` | Redo (Linux/Mac) |
+| `CTRL+Y` | Redo (Windows) |
+| `CTRL+Z` | Undo |
+| `Esc` | Cancel Action |
+| `Hold ALT` | Ignores handles under the mouse |
+
+## Labels
+
+| `CTRL+. / ,` | Superscript/Subscript on Selected Text |
+| `CTRL+B / I` | Toggle Bold/Italic on Selected Text |
+| `CTRL+U` | Toggle Underline on Selected Text |
+| `Enter` | New Paragraph in Formatted Labels |
+| `F2 / Enter` | Start Editing Label of Selected Cell |
+| `F2 / Tab / Esc` | Stop Editing and Apply Value |
+| `Shift+Enter` | New Line in Formatted Labels |
+
+## Other
+
+| `ALT+Shift+P` | Connection Points |
+| `CTRL / Shift+Esc` | Cancel Editing |
+| `CTRL+Meta+Resize` | Centered group resize |
+| `CTRL+Resize` | Non-recursive group resize |
+
+## Selection
+
+| `(Shift+)Tab` | Select Next / Previous |
+| `ALT+(Shift+)Tab` | Select Child / Parent |
+| `ALT+Click` | Select Cell Below |
+| `ALT+Shift+Drag` | Remove from Selection |
+| `CTRL / Shift+Click` | Toggle Selection State |
+| `CTRL+(Shift+)A` | Select All / None |
+| `CTRL+Shift+I / E` | Select Vertices / Edges |
+| `Shift+Drag` | Add to Selection |
+
+## Sidebar/Connect
+
+| `ALT+(Shift / CTRL)+Click on a sidebar item` | Inserts and connects the selected item (Shift ignores current style) |
+| `ALT+(Shift+)Drag from sidebar` | Disable replace, connect on drop (drop targets), Shift ignores current style |
+| `Click on a sidebar item` | Connects unconnected side of selected edge |
+| `Shift+Click on a sidebar item` | Replaces the selected item with the clicked one |
+| `Shift+Connect` | Connect to shape outline (ignore connection points) |
+
+## Styles
+
+| `CTRL+E` | Edit Style |
+| `CTRL+Shift+C` | Copy Style |
+| `CTRL+Shift+D` | Set as Default Style |
+| `CTRL+Shift+R` | Clear Default Style |
+| `CTRL+Shift+V` | Paste Style |
+| `Draw IO Styles :: ALT+Shift+V` | Paste Size |
+| `Draw IO Styles :: ALT+Shift+X` | Copy Size |
+
+## Tools
+
+| `CTRL+M` | Edit Metadata |
+| `CTRL+Shift+L` | Toggle Layers Window |
+| `CTRL+Shift+M` | Edit Vertex Geometry |
+| `CTRL+Shift+O` | Toggle Outline Window |
+| `CTRL+Shift+P` | Toggle Format Panel |
+
+## View
+
+| `ALT+Mouse wheel` | Canvas Zoom In/Out |
+| `CTRL + (Numpad)` | Zoom In |
+| `CTRL - (Numpad)` | Zoom Out |
+| `CTRL 0` | Custom Zoom |
+| `CTRL+H` | Reset View |
+| `CTRL+J` | Fit Page |
+| `CTRL+Shift+Connect` | Disable Connections |
+| `CTRL+Shift+Drag` | Create / Remove Space |
+| `CTRL+Shift+H` | Fit Window |
+| `CTRL+Shift+J` | Fit Two Pages |
+| `End` | Refresh |
+| `Home` | Home |
+| `Mouse wheel` | Canvas Vertical Scroll |
+| `Shift+Mouse wheel` | Canvas Horizontal Scroll |
+| `Space / Right mouse Drag` | Pan Canvas |
+
+# Drive
+
+| `n` | Rename selected item. |
+| `z` | Move selected items to new folder. |
+
+# Outlook
+
+
+## Basic Navigation
+
+| `Alt or F6` | Show the access keys in the ribbon |
+| `Alt+B or Alt+Left` | Go back to previous view in the main Outlook window |
+| `Alt+B or Alt+Left` | Go back to previous view |
+| `Alt+Down` | Open split buttons |
+| `Alt+F` | Open the File menu |
+| `Alt+H` | Open the Home tab |
+| `Alt+J,S` | Open the Send/Receive tab |
+| `Alt+O` | Open the Folder tab |
+| `Alt+Q` | Go to the Tell Me search field |
+| `Alt+Right` | Go forward to next view in the main Outlook window |
+| `Alt+Right` | Go forward to next view |
+| `Alt+Up or Ctrl+Comma (,), or Alt+Page Up` | In the Reading pane, go to the previous message |
+| `Alt+V` | Open the View tab |
+| `Alt+V, B, and then C for Calendar, P for People, T for Tasks, or O for Off` | Show the To-Do bar (peek) |
+| `Arrow keys` | Move around within the Folder pane |
+| `Ctrl+1` | Switch to the Mail view |
+| `Ctrl+2` | Switch to the Calendar view |
+| `Ctrl+3` | Switch to the Contacts view |
+| `Ctrl+4` | Switch to the Tasks view |
+| `Ctrl+5` | Switch to the Notes |
+| `Ctrl+6` | Switch to the Folder list in the Folder pane |
+| `Ctrl+7` | Switch to Shortcuts |
+| `Ctrl+8` | Open Journal |
+| `Ctrl+Comma (,)` | Switch to previous open message |
+| `Ctrl+E` | Open the Search tab |
+| `Ctrl+Period (.)` | Switch to next open message |
+| `Ctrl+Shift+B` | Open the Address Book |
+| `Ctrl+Shift+F10` | Show the tooltip for the ribbon element currently in focus |
+| `Ctrl+Shift+Tab key or Shift+Tab key` | Move between the Folder pane, the main Outlook window, the Reading pane, and the To-Do bar |
+| `Ctrl+Shift+W` | Select the InfoBar and, if available, show the menu of commands |
+| `Ctrl+Tab` | Move around message header lines in the Folder pane or an open message |
+| `Ctrl+Tab` | Move between the Navigation pane and the calendar |
+| `Ctrl+Y` | Go to a different folder |
+| `F3 or Ctrl+E` | Go to the Search box |
+| `F6` | Move between the ribbon and the calendar |
+| `Left or Right, respectively` | Collapse or expand a group in the email message list |
+| `Shift+Spacebar` | In the Reading pane, page up through the text |
+| `Spacebar` | In the Reading pane, page down through the text |
+| `Tab key or F6` | Move between the Outlook window, the smaller panes in the Folder pane, the Reading pane, and the sections in the To-Do bar |
+
+## Calendar Date Navigator
+
+| `Alt+Down` | Go to the same day in the next week |
+| `Alt+End` | Go to the last day of the current week |
+| `Alt+Home` | Go to the first day of the current week |
+| `Alt+Up` | Go to the same day in the previous week |
+
+## Calendar Day/Week/Month
+
+| `Alt+-` | Switch to the Week view |
+| `Alt+0` | View 10 days |
+| `Alt+=` | Switch to the Month view |
+| `Alt+Down` | Go to the same day in the next week |
+| `Alt+Up` | Go to the same day in the previous week |
+| `Alt+key for number of days` | View from one through nine days |
+| `Ctrl+Tab or F6` | Move between the Calendar view, TaskPad, and Folder list |
+| `Left` | Go to the previous day |
+| `Right` | Go to the next day |
+| `Shift+Tab` | Select the previous appointment |
+
+## Calendar Month View
+
+| `Home` | Go to the first day of the week |
+| `Page down` | Go to the same day of the week in the next page |
+| `Page up` | Go to the same day of the week in the previous page |
+
+## Calendar Single Day View
+
+| `Alt+Down` | Go to the same day in the next week |
+| `Alt+Up` | Go to the same day in the previous week |
+| `Down` | Select the next block of time |
+| `End` | Select the time that ends your work day |
+| `Home` | Select the time that begins your work day |
+| `Page down` | Select the block of time at the bottom of the screen |
+| `Page up` | Select the block of time at the top of the screen |
+| `Shift+Up or Shift+Down` | Extend or reduce the selected time |
+| `Up` | Select the previous block of time |
+
+## Calendar Week View
+
+| `End` | Go to the end of work hours for the selected day |
+| `Home` | Go to the start of work hours for the selected day |
+| `Page down` | Go down one page view in the selected day |
+| `Page up` | Go up one page view in the selected day |
+| `Shift+Left, Shift+Right, Shift+Up, Shift+Down, Shift+Home, or Shift+End` | Change the duration of the selected block of time |
+
+## Calendar
+
+| `Alt+- or Ctrl+Alt+3` | Switch to the Full Week view |
+| `Alt+0` | Show ten days in the calendar |
+| `Alt+1` | Show one day in the calendar |
+| `Alt+2` | Show two days in the calendar |
+| `Alt+3` | Show three days in the calendar |
+| `Alt+4` | Show four days in the calendar |
+| `Alt+5` | Show five days in the calendar |
+| `Alt+6` | Show six days in the calendar |
+| `Alt+7` | Show seven days in the calendar |
+| `Alt+8` | Show eight days in the calendar |
+| `Alt+9` | Show nine days in the calendar |
+| `Alt+= or Ctrl+Alt+4` | Switch to Month view |
+| `Alt+D` | Dismiss the reminder |
+| `Alt+Down` | Go to the next week |
+| `Alt+End` | Go to the end of the week |
+| `Alt+H+I` | Open the New Items menu to select which item you'd like to create |
+| `Alt+H+R or Ctrl+Alt+1` | Show the daily view |
+| `Alt+H,A,B` | Open the address book |
+| `Alt+H,C,G` | Create a new calendar group or add a department calendar |
+| `Alt+H,C,O` | Open the Outlook Options dialog box for calendars |
+| `Alt+H,E` | Email a selected calendar to a contact |
+| `Alt+H,F,C` | Search for contacts |
+| `Alt+H,F,P` | View and edit the sharing permissions for a folder |
+| `Alt+H,F,W or Ctrl+F` | Forward an appointment or meeting |
+| `Alt+H,O,C` | Add shared calendars from your contacts, or create a new calendar |
+| `Alt+H,O,D` | Show today in the calendar |
+| `Alt+H,P,O` | Publish a calendar online |
+| `Alt+H,S,C` | Share a calendar with others |
+| `Alt+H,S,V or Ctrl+Alt+5` | Show the selected schedule in a horizontal layout if you want to compare calendars to schedule meetings |
+| `Alt+H,X` | Show the next seven days |
+| `Alt+Home` | Go to the start of the week |
+| `Alt+O` | Open an appointment when the reminder appears |
+| `Alt+Page down` | Go to the next month |
+| `Alt+Page up` | Go to the previous month |
+| `Alt+S ` | Snooze the reminder |
+| `Alt+Up` | Go to the previous week |
+| `Alt+V,M` | Open the reminder window |
+| `Alt+X` | Open the calendar scheduling assistant from the meeting window |
+| `Ctrl+Alt+2` | Switch to the Work Week view |
+| `Ctrl+Comma (,) or Ctrl+Shift+Comma (,)` | Go to the previous appointment |
+| `Ctrl+E` | Jump to Search |
+| `Ctrl+G or Alt+H+L` | Go to a date |
+| `Ctrl+G` | Set up recurrence for an open appointment or meeting |
+| `Ctrl+Left` | Go to the previous day |
+| `Ctrl+N` | Create an appointment (when in the Calendar view) |
+| `Ctrl+Period (.) or Ctrl+Shift+Period (.)` | Go to the next appointment |
+| `Ctrl+R` | Reply to a meeting request with a message |
+| `Ctrl+Right` | Go to the next day |
+| `Ctrl+Shift+A` | Create an appointment (in any Outlook view) |
+| `Ctrl+Shift+Q or Alt+H,M,R` | Create a meeting request |
+| `Ctrl+Shift+R` | Select the Reply All option |
+
+## Create an Item or File
+
+| `Ctrl+Shift+A` | Create an appointment |
+| `Ctrl+Shift+C` | Create a contact |
+| `Ctrl+Shift+E` | Create a folder |
+| `Ctrl+Shift+H` | Create a Microsoft Office document |
+| `Ctrl+Shift+K` | Create a task |
+| `Ctrl+Shift+L` | Create a contact group |
+| `Ctrl+Shift+M` | Create a message |
+| `Ctrl+Shift+N` | Create a note |
+| `Ctrl+Shift+P` | Create a Search folder |
+| `Ctrl+Shift+Q` | Create a meeting request |
+| `Ctrl+Shift+S` | Post to the selected folder |
+| `Ctrl+Shift+X` | Create a fax |
+| `Ctrl+T` | Post a reply in the selected folder |
+
+## Format Text
+
+| `Alt+O` | Display the Format Text tab on the ribbon |
+| `Ctrl+B` | Apply bold formatting |
+| `Ctrl+C or Ctrl+Insert` | Copy a selection |
+| `Ctrl+E` | Center text |
+| `Ctrl+I` | Apply italic formatting |
+| `Ctrl+K` | Insert a hyperlink |
+| `Ctrl+L` | Left-align a paragraph |
+| `Ctrl+Left bracket ([) or Ctrl+Shift+Less-than sign (<)` | Decrease the font size |
+| `Ctrl+Q` | Remove paragraph formatting |
+| `Ctrl+R` | Right-align a paragraph |
+| `Ctrl+Right bracket (]) or Ctrl+Shift+Greater-than sign (>)` | Increase the font size |
+| `Ctrl+Shift+H` | Delete the next word |
+| `Ctrl+Shift+J` | Justify text (Stretch a paragraph to fit between the margins} |
+| `Ctrl+Shift+K` | Toggle the case of the selected text between small caps and all caps |
+| `Ctrl+Shift+L` | Add a bulleted list |
+| `Ctrl+Shift+P` | Display the Font dialog box |
+| `Ctrl+Shift+S` | Apply styles |
+| `Ctrl+Shift+T` | Decrease indent |
+| `Ctrl+Shift+T` | Reduce a hanging indent |
+| `Ctrl+Shift+Z or Ctrl+Spacebar` | Clear the formatting |
+| `Ctrl+T` | Create a hanging indent |
+| `Ctrl+T` | Increase indent |
+| `Ctrl+U` | Underline text |
+| `Ctrl+V or Shift+Insert` | Paste the copied or cut selection |
+| `Ctrl+X or Shift+Delete` | Cut a selection |
+| `Shift+F3` | Switch the case of the first letter in a selected word or line |
+
+## Frequently Used
+
+| `Alt+H` | Go to the Home tab |
+| `Alt+H,F,W` | Forward a message |
+| `Alt+H,M,V, and select a folder from the list` | Move an item to a folder |
+| `Alt+H,R,A` | Select the Reply All option |
+| `Alt+H,R,P` | Reply to a message |
+| `Alt+J,A,2,A,V` | Open the Save As dialog box on the Attachment tab |
+| `Alt+J,S` | Go to the Send/Receive tab |
+| `Alt+N,A,F` | Insert a file |
+| `Alt+S` | Send a message |
+| `Ctrl+2` | Go to Calendar |
+| `Ctrl+C or Ctrl+Insert` | Copy an item |
+| `Ctrl+E or F3` | Search for an item |
+| `Ctrl+M or F9` | Check for new messages |
+| `Ctrl+Shift+A` | Create an appointment |
+| `Ctrl+Shift+K` | New task |
+| `Ctrl+Shift+M` | Create a new message |
+| `Delete` | Delete an item (when a message, task, or meeting is selected) |
+
+## Mail - Folder Pane
+
+| `Shift+F10,D` | Delete a selected folder in the list (default folders, such as Inbox, Outbox, Drafts, and Sent cannot be deleted) |
+
+## Mail Folder Pane
+
+| `F2` | Rename a selected folder in the list of folders |
+| `Left` | Collapse a selected group or folder with subfolders |
+| `Right` | Expand a selected group or folder with subfolders |
+| `Shift+F10,N` | Create a new folder |
+| `Spacebar or Enter` | Move to the Message list from the Folder pane |
+| `Spacebar or Enter` | Open a selected item in the Folder pane |
+| `Up and Down` | Move around within the Folder pane |
+
+## Mail Message List
+
+| `Alt+Enter` | Show email properties |
+| `Alt+H+D` | Delete a message |
+| `Alt+H,F,W` | Forward a message |
+| `Alt+H,J,O` | Set the junk mail options |
+| `Alt+H,R,A` | Select the Reply All option |
+| `Alt+H,R,P` | Reply to a message |
+| `Alt+H,X` | Ignore a message |
+| `Alt+J,S,M,C` | Mark an item to download a copy |
+| `Alt+J,S,M,T` | Mark an item to download |
+| `Alt+J,S,U,K` | Unmark all items to download |
+| `Alt+J,S,U,U` | Unmark an item to download |
+| `Ctrl+Alt+S` | Set how often Outlook checks for new messages |
+| `Ctrl+P` | Print a message |
+| `Ctrl+Q` | Mark a message as read |
+| `Ctrl+Shift+G` | Add Custom Flag to message |
+| `Ctrl+Shift+S` | Post to a folder |
+| `Ctrl+Shift+V` | Move message to folder |
+| `Ctrl+Shift+W` | Display a blocked content menu |
+| `Ctrl+Shift+W,P` | Download blocked pictures or images |
+| `Ctrl+Shift+Y` | Copy item to a folder |
+| `Ctrl+Spacebar` | Select or cancel selection of the active item |
+| `Ctrl+U` | Mark a message as unread |
+| `Ctrl+Up or Ctrl+Down` | Go to the next or previous item without extending the selection |
+| `Ctrl+Up or Down, and then, to select each message, press Spacebar` | Select multiple non-adjacent messages |
+| `Down and Up` | Move down and up in the message list |
+| `Enter` | Open a message |
+| `Left` | Collapse groups of messages (for example, Last Week) |
+| `Page down` | Go to the item at the bottom of the screen |
+| `Page up` | Go to the item at the top of the screen |
+| `Right` | Expand groups of messages (for example, Last Week) |
+| `Shift+Down or Up` | Select multiple adjacent messages |
+| `Shift+F10,J,then the Up or Down, and then Enter` | Mark message as junk or not junk |
+| `Shift+F10,U,T (in Narrator, Insert)` | Add Follow Up or Quick Flag to message |
+| `Shift+Up or Shift+Down` | Extend or reduce the selected items by one item |
+
+## Mail Reading Pane
+
+| `Alt+R` | Jump to the Reply button |
+| `Alt+Up or Ctrl+Comma (,), or Alt+Page up` | Go to the previous message |
+| `Ctrl+Shift+W` | In an email message, select the InfoBar and, if available, show the options menu |
+| `Esc` | Close the InfoBar menu |
+| `Shift+Spacebar` | Page up through text |
+| `Shift+Tab` | Move to previous field |
+| `Spacebar` | Page down through text |
+| `Tab key or Shift+Tab` | Move to the next or previous link |
+| `Tab key` | Move to the next field |
+
+## Mail
+
+| `Alt+Enter` | Show the properties for the selected item |
+| `Alt+J,S,M,T` | Check the Mark for download status |
+| `Alt+J,S,P (when a Send/Receive is in progress)` | Display the Send/Receive progress |
+| `Alt+J,S,S` | Start a send/receive action |
+| `Alt+S` | Send a message |
+| `Ctrl+Alt+F` | Forward a message as an attachment |
+| `Ctrl+Alt+J` | Mark a message as not junk |
+| `Ctrl+Alt+M` | Mark an item for download |
+| `Ctrl+Alt+P` | Open the MailTip in the composed message |
+| `Ctrl+Alt+R` | Reply with a meeting request |
+| `Ctrl+Alt+S` | Define Send/Receive groups |
+| `Ctrl+Enter` | Send a message |
+| `Ctrl+F` | Forward a message |
+| `Ctrl+K` | Check names |
+| `Ctrl+M or F9` | Check for new messages |
+| `Ctrl+N` | Create a message (when in Mail view) |
+| `Ctrl+O` | Open a received message |
+| `Ctrl+P` | Print an item |
+| `Ctrl+Q` | Mark a message as read |
+| `Ctrl+R` | Reply to a message |
+| `Ctrl+S` | Save an item |
+| `Ctrl+Shift+B` | Open the Address Book |
+| `Ctrl+Shift+D` | Delete and ignore a conversation |
+| `Ctrl+Shift+G` | Display the Flag for follow up dialog box |
+| `Ctrl+Shift+I` | Display blocked external content (in a message) |
+| `Ctrl+Shift+I` | Switch to Inbox |
+| `Ctrl+Shift+M` | Create a message (from any Outlook view) |
+| `Ctrl+Shift+N` | Apply Normal style |
+| `Ctrl+Shift+O` | Switch to Outbox |
+| `Ctrl+Shift+R` | Select the Reply to All option |
+| `Ctrl+Shift+S` | Post to a folder |
+| `Ctrl+U` | Mark a message as unread |
+| `Down` | Go to the next message |
+| `F12` | Open the Save as dialog box |
+| `F4` | Find or replace text |
+| `Insert` | Add a Quick flag to an unopened message |
+| `Shift+F4` | Find the next item |
+| `Shift+F9` | Start a send/receive action for the current folder, retrieving full items (header, item, and any attachments) |
+| `Up` | Go to the previous message |
+
+## Search
+
+| `Ctrl+Alt+A` | Expand the search to include All Mail Items, All Calendar Items, or All Contact Items, depending on the module you are in |
+| `Ctrl+Alt+K` | Expand search to include items from the current folder |
+| `Ctrl+Alt+Z` | Expand search to include subfolders |
+| `Ctrl+E or F3` | Go to the Search field to find a message or another item |
+| `Ctrl+H` | Find and replace text, symbols, or some formatting commands when in the Reading pane or in an open item |
+| `Ctrl+Shift+F` | Use Advanced Find |
+| `Ctrl+Shift+P` | Create a Search folder |
+| `Esc` | Clear the search results |
+| `F4` | Search for text within an open item |
+
+## Tasks
+
+| `Ctrl+A` | Select all items |
+| `Ctrl+C` | Accept a task request |
+| `Ctrl+D` | Decline a task request |
+| `Ctrl+D` | Delete selected item |
+| `Ctrl+E` | Find a task or other item |
+| `Ctrl+F` | Forward a task as an attachment |
+| `Ctrl+N` | Create a task when in Tasks view |
+| `Ctrl+O` | Open the selected item |
+| `Ctrl+P` | Print the selected item |
+| `Ctrl+Shift+Alt+U` | Create a task request |
+| `Ctrl+Shift+K` | Create a task from any Outlook view |
+| `Ctrl+Y` | Open the Go to Folder dialog box |
+| `Ctrl+Z` | Undo the last action |
+| `F6` | Switch between the Folder pane, Tasks list, and To-Do bar |
+| `Insert` | Flag an item or mark complete |
+
+## Use Flags
+
+| `Ctrl+Shift+G` | Open the Flag for Follow Up dialog box to assign a flag |
+
+# Slack
+
+| `+ (Plus) OR A` | Show invite list during call |
+| `:[Character]` | Show autocomplete options for emoji |
+| `@[Character]` | Show autocomplete options for display names |
+| `@[username]` | Notify specific person |
+| `@channel` | Notify all members of channel, whether they're active or not |
+| `@everyone` | Notify all members of channel #general |
+| `@here` | Notify active members of channel |
+| `ALT+DownArrow` | Jump to next channel or DM |
+| `ALT+SHIFT+DownArrow` | Jump to next unread channel or DM |
+| `ALT+SHIFT+UpArrow` | Jump to previous unread channel or DM |
+| `ALT+UpArrow` | Jump to previous channel or DM |
+| `ALT+click message` | Mark message as oldest unread message |
+| `CTRL+,` | Open Preferences |
+| `CTRL+.` | Toggle right-hand pane |
+| `CTRL+/` | Open Keyboard Shortcuts pane |
+| `CTRL+ALT` | Show numbers assigned to workspaces in sidebar |
+| `CTRL+B` | Bold selected text |
+| `CTRL+F` | Search the current channel or DM |
+| `CTRL+I` | Italicize selected text |
+| `CTRL+K` | Open Quick Switcher |
+| `CTRL+SHIFT+7` | Format selected text as numbered list |
+| `CTRL+SHIFT+8` | Format selected text as bulleted list |
+| `CTRL+SHIFT+>` | Indent selected text |
+| `CTRL+SHIFT+A` | Open All Unreads view |
+| `CTRL+SHIFT+C` | Format selected text as inline code |
+| `CTRL+SHIFT+Enter` | Create snippet in current channel or DM |
+| `CTRL+SHIFT+I` | Open Channel Details pane |
+| `CTRL+SHIFT+K` | Browse DMs |
+| `CTRL+SHIFT+L` | Browse channel list |
+| `CTRL+SHIFT+M` | Open Activity pane |
+| `CTRL+SHIFT+S` | Open Starred Items pane |
+| `CTRL+SHIFT+T` | Open Threads view |
+| `CTRL+SHIFT+W` | Open Workspace Directory |
+| `CTRL+SHIFT+X` | Strike through selected text |
+| `CTRL+SHIFT+Y` | Set or edit your Slack status |
+| `CTRL+SHIFT+[` | Switch to previous workspace |
+| `CTRL+SHIFT+]` | Switch to next workspace |
+| `CTRL+U` | Upload file to current channel or DM |
+| `CTRL+[Number]` | Switch to specific workspace |
+| `ESC` | Mark all messages in current channel or DM as read |
+| `SHIFT+DownArrow` | Select text to end of current line in message draft |
+| `SHIFT+ESC` | Mark all messages as read |
+| `SHIFT+Enter` | Insert new line in message draft |
+| `SHIFT+UpArrow` | Select text to beginning of current line in message draft |
+| `UpArrow` | Edit your last message in current channel or DM |
+| `#[Character]` | Show autocomplete options for channel names |
+| `e+(1-9)` | View and select emoji during call |
+| `m` | Toggle mute during call |
+| `v` | Toggle video during call |
+
+# VS Code
+
+| `CTRL+K V` | Markdown editing - Show text and preview side-by-side. |
+| `SHIFT+CTRL+K` | Markdown editing - Switch between text and preview. |
+
+# Windows
+
+| `CTRL-SHIFT-ESCAPE` | Task Manager |
+| `WIN-X` | Quick Link Menu |
+
+# Bash Bang Shortcuts
+
+
+## Command Control Shortcuts
+
+Command Recall Shortcuts
 
 <hr>
-<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 24/05/28 12:36</p>
+<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 24/05/28 13:04</p>
