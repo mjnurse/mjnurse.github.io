@@ -5,7 +5,7 @@ section: python
 
 See [Faker](https://faker.readthedocs.io/en/master/index.html).
 
-```
+```python
 # Locale: ar_AA, ar_AE, ar_BH, ar_EG, ar_JO, ar_PS, ar_SA, az_AZ, bg_BG, bn_BD, bs_BA,
 #         cs_CZ, da_DK, de_AT, de_CH, de_DE, dk_DK, el_CY, el_GR, en_AU, en_BD, en_CA,
 #         en_GB, en_IE, en_IN, en_NZ, en_PH, en_TH, en_US, es_AR, es_CA, es_CL, es_CO,
@@ -199,8 +199,80 @@ print("phone_number:", f.unique.phone_number())
 print("ssn:", f.unique.ssn())
 # [unique.]vat_id() -> str
 print("vat_id:", f.unique.vat_id())
+
+# DATES
+# [unique.]century() -> str
+print("century:", century())
+# [unique.]date(pattern: str = '%Y-%m-%d', end_datetime: date | datetime | timedelta | str | int | None = None) -> str
+print("date:", date())
+# [unique.]date_between(start_date: date | datetime | timedelta | str | int = '-30y', end_date: date | datetime | timedelta | str | int = 'today') -> date
+print("date_between:", date_between())
+# [unique.]date_between_dates(date_start: date | datetime | timedelta | str | int | None = None, date_end: date | datetime | timedelta | str | int | None = None) -> date
+print("date_between_dates:", date_between_dates())
+# [unique.]date_object(end_datetime: datetime | None = None) -> date
+print("date_object:", date_object())
+# [unique.]date_of_birth(tzinfo: tzinfo | None = None, minimum_age: int = 0, maximum_age: int = 115) -> date
+print("date_of_birth:", date_of_birth())
+# [unique.]date_this_century(before_today: bool = True, after_today: bool = False) -> date
+print("date_this_century:", date_this_century())
+# [unique.]date_this_decade(before_today: bool = True, after_today: bool = False) -> date
+print("date_this_decade:", date_this_decade())
+# [unique.]date_this_month(before_today: bool = True, after_today: bool = False) -> date
+print("date_this_month:", date_this_month())
+# [unique.]date_this_year(before_today: bool = True, after_today: bool = False) -> date
+print("date_this_year:", date_this_year())
+# [unique.]date_time(tzinfo: tzinfo | None = None, end_datetime: date | datetime | timedelta | str | int | None = None) -> datetime
+print("date_time:", date_time())
+# [unique.]date_time_ad(tzinfo: tzinfo | None = None, end_datetime: date | datetime | timedelta | str | int | None = None, start_datetime: date | datetime | timedelta | str | int | None = None) -> datetime
+print("date_time_ad:", date_time_ad())
+# [unique.]date_time_between(start_date: date | datetime | timedelta | str | int = '-30y', end_date: date | datetime | timedelta | str | int = 'now', tzinfo: tzinfo | None = None) -> datetime
+print("date_time_between:", date_time_between())
+# [unique.]date_time_between_dates(datetime_start: date | datetime | timedelta | str | int | None = None, datetime_end: date | datetime | timedelta | str | int | None = None, tzinfo: tzinfo | None = None) -> datetime
+print("date_time_between_dates:", date_time_between_dates())
+# [unique.]date_time_this_century(before_now: bool = True, after_now: bool = False, tzinfo: tzinfo | None = None) -> datetime
+print("date_time_this_century:", date_time_this_century())
+# [unique.]date_time_this_decade(before_now: bool = True, after_now: bool = False, tzinfo: tzinfo | None = None) -> datetime
+print("date_time_this_decade:", date_time_this_decade())
+# [unique.]date_time_this_month(before_now: bool = True, after_now: bool = False, tzinfo: tzinfo | None = None) -> datetime
+print("date_time_this_month:", date_time_this_month())
+# [unique.]date_time_this_year(before_now: bool = True, after_now: bool = False, tzinfo: tzinfo | None = None) -> datetime
+print("date_time_this_year:", date_time_this_year())
+# [unique.]day_of_month() -> str
+print("day_of_month:", day_of_month())
+# [unique.]day_of_week() -> str
+print("day_of_week:", day_of_week())
+# [unique.]future_date(end_date: date | datetime | timedelta | str | int = '+30d', tzinfo: tzinfo | None = None) -> date
+print("future_date:", future_date())
+# [unique.]future_datetime(end_date: date | datetime | timedelta | str | int = '+30d', tzinfo: tzinfo | None = None) -> datetime
+print("future_datetime:", future_datetime())
+# [unique.]iso8601(tzinfo: tzinfo | None = None, end_datetime: date | datetime | timedelta | str | int | None = None, sep: str = 'T', timespec: str = 'auto') -> str
+print("iso8601:", iso8601())
+# [unique.]month() -> str
+print("month:", month())
+# [unique.]month_name() -> str
+print("month_name:", month_name())
+# [unique.]past_date(start_date: date | datetime | timedelta | str | int = '-30d', tzinfo: tzinfo | None = None) -> date
+print("past_date:", past_date())
+# [unique.]past_datetime(start_date: date | datetime | timedelta | str | int = '-30d', tzinfo: tzinfo | None = None) -> datetime
+print("past_datetime:", past_datetime())
+# [unique.]pytimezone(*args: Any, **kwargs: Any) -> tzinfo | None
+print("pytimezone:", pytimezone())
+# [unique.]time(pattern: str = '%H:%M:%S', end_datetime: date | datetime | timedelta | str | int | None = None) -> str
+print("time:", time())
+# [unique.]time_delta(end_datetime: date | datetime | timedelta | str | int | None = None) -> timedelta
+print("time_delta:", time_delta())
+# [unique.]time_object(end_datetime: date | datetime | timedelta | str | int | None = None) -> time
+print("time_object:", time_object())
+# [unique.]time_series(start_date: date | datetime | timedelta | str | int = '-30d', end_date: date | datetime | timedelta | str | int = 'now', precision: float | None = None, distrib: Callable[[datetime], float] | None = None, tzinfo: tzinfo | None = None) -> Iterator[Tuple[datetime, Any]]
+print("time_series:", time_series())
+# [unique.]timezone() -> str
+print("timezone:", timezone())
+# [unique.]unix_time(end_datetime: date | datetime | timedelta | str | int | None = None, start_datetime: date | datetime | timedelta | str | int | None = None) -> float
+print("unix_time:", unix_time())
+# [unique.]year() -> str
+print("year:", year())
 ```
 
 
 <hr>
-<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 24/06/07 17:39</p>
+<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 24/06/07 18:03</p>
