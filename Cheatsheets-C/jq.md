@@ -4,6 +4,7 @@ title: jq
 
 ## Multi-level filter
 
+Source JSON
 ```json
 {
   "a": 1,
@@ -45,7 +46,7 @@ Command: `jq '.b |= {c} | .e[] |={g} | {e, b, a}'`
 }
  ```
 
- ## Sort / Order a subset of keys / a sub-section
+## Sort / Order a subset of keys / a sub-section
 
  ```json
  {
