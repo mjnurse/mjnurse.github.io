@@ -27,7 +27,7 @@ Source JSON
 ```
 Filter section `b` to only show children `c` and filter section `e` to only show children `g`.
 
-Command: `jq '.b |= {c} | .e[] |={g} | {e, b, a}'`
+Command: `jq '.b |= {c} | .e[] |= {g} | {e, b, a}'`
 
 ```json
 {
@@ -48,6 +48,7 @@ Command: `jq '.b |= {c} | .e[] |={g} | {e, b, a}'`
 
 ## Sort / Order a subset of keys / a sub-section
 
+Source JSON
  ```json
  {
   "a": 1,
