@@ -37,7 +37,6 @@ In a windows `cmd` shell.
 
 # Or for, for example, version 22.04:
 
-
 > ubuntu2204 -- default-user martin
 ```
 
