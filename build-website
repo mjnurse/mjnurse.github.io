@@ -1,25 +1,46 @@
 #!/bin/bash
 help_text="
 NAME
-   r - One line description.
+   build-website - Script to build mjnurse website.
 
 USAGE
-   r [options] <parameters>
+   build-website [options]
 
 OPTIONS
-   -x
-      Description...
+   -a 
+      Build all including the search index.
+
+   -f 
+      Force the git push.
 
    -h|--help
       Show help text.
 
+   -m 
+      Skip building pages from bash, sql, etc. scripts.
+
 DESCRIPTION
-   Description description description description.
+   Script to build mjnurse website.
 
 AUTHOR
-  mjnurse.dev - 2020
+  mjnurse.dev - 2025
 "
 help_line="tbc"
+
+if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+   echo "$help_text"
+   exit
+fi
+
+
+if [[ "$1" == "-h" ]]; then
+   echo "Usage: build-website [OPTION]"
+   echo
+   echo "Build the mjnurse website."
+   echo
+   echo "Options:"
+   exit
+fi
 
 source utils
 
@@ -89,13 +110,6 @@ echo_h2 -lblue "Copy query-es to github/bash"
 # ------------------------------------------------------------------------------
 
 
-#if [[ "$1" == "-a" || "$1" == "-d" ]]; then
-#   cd "$gh_home"/cv19dashboard
-#   #echo_h2 -lblue "Running cv-global dashboard refresh"
-#   #cv-global
-#   echo_h2 -lblue "Running cv-UK dashboard refresh"
-#   cv-UK
-#fi
 cd "$gh_home"/mjnurse-github-io
 if [[ "$1" == "-a" ]]; then
    # ---------------------------------------------------------------------------
