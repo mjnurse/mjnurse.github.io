@@ -2,7 +2,7 @@
 title: 25-02-20 - A-series Paper Sizes
 ---
 
-Very Interesting...
+## Very Interesting...
 
 If you take a sheet of A-series sized paper and fold it in half, the ratio of `height` to `width` remains the same.
 
