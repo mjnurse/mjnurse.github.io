@@ -48,13 +48,12 @@ list segments (le) [<index_name>] :: \
    curl -X GET "http://$ES_HOST:$ES_PORT/_cat/segments/$1?v&s=index,shard,prirep"
 
 list segmented shards (lss) [<index_name>] :: \
-   curl -X GET "http://$ES_HOST:$ES_PORT/_cat/shards/$1?v&h=index,shard,prirep,state,docs,node,segments.count&s=index,shard,prirep,node" -f '/ 1$/d'"
+   curl -X GET "http://$ES_HOST:$ES_PORT/_cat/shards/$1?v&h=index,shard,prirep,state,docs,node,segments.count&s=index,shard,prirep,node"
 
 get index mapping (gim) <index_name> :: \
    curl -X GET "http://$ES_HOST:$ES_PORT/$1/_mapping?pretty"
 
-list unassigned shards (lus) :: curl -X GET "http://$ES_HOST:$ES_PORT/_cat/shards?v&h=index,shard,prirep,state,docs,segments.count&s=index,shard,prirep" \"
-   -f 's/\(.* \(INITIALIZING\|UNASSIGNED\) .*\)/\1/;t;d'
+list unassigned shards (lus) :: curl -X GET "http://$ES_HOST:$ES_PORT/_cat/shards?v&h=index,shard,prirep,state,docs,segments.count&s=index,shard,prirep" 
 
 forcemerge progress (fmp) :: \
    curl -X GET "http://$ES_HOST:$ES_PORT/_cat/nodes?v&h=name,cpu,load_1m,merges.current,merges.current_docs,merges.total,merges.total_docs&s=name"
@@ -64,16 +63,16 @@ forcemerge progress (fmp) :: \
 # ----------------------------------------------------------------------------------------------------------------------------------
 
 add index to alias (aita) <index_name> <alias_name> :: \
-   curl -X POST "http://$ES_HOST:$ES_PORT/_aliases" -H 'Content-Type: application/json' -d '{"actions":[{"add":{"index":"'$1'","alias":"'$2'"}}]}'"
+   curl -X POST "http://$ES_HOST:$ES_PORT/_aliases" -H 'Content-Type: application/json' -d '{"actions":[{"add":{"index":"'$1'","alias":"'$2'"}}]}'
 
 remove index from alias (rifa) <index_name> <alias_name> :: \
    curl -X DELETE "http://$ES_HOST:$ES_PORT/$1/_aliases/$2"
 
 create index (ci) <index_name> <number_of_shards> <number_of_replicas> :: \
-   curl -X PUT "http://$ES_HOST:$ES_PORT/$1" -H 'Content-Type: application/json' -d '{"settings":{"index":{"number_of_shards":'$2',"number_of_replicas":'$3'}}}'"
+   curl -X PUT "http://$ES_HOST:$ES_PORT/$1" -H 'Content-Type: application/json' -d '{"settings":{"index":{"number_of_shards":'$2',"number_of_replicas":'$3'}}}'
 
 create index from mapping (cifm) <index_name> <number_of_shards> <number_of_replicas> <mapping-json> :: \
-   curl -X PUT "http://$ES_HOST:$ES_PORT/$1" -H 'Content-Type: application/json' -d '{"settings":{"index":{"number_of_shards":'$2',"number_of_replicas":'$3'}},"mappings":'$4'}'"
+   curl -X PUT "http://$ES_HOST:$ES_PORT/$1" -H 'Content-Type: application/json' -d '{"settings":{"index":{"number_of_shards":'$2',"number_of_replicas":'$3'}},"mappings":'$4'}'
 
 clone index (clni) <index_name> <new_index_name> :: \
    curl -X POST "http://$ES_HOST:$ES_PORT/$1/_clone/$2"
@@ -88,25 +87,25 @@ close index (cli) <index_name> :: \
    curl -X POST "http://$ES_HOST:$ES_PORT/$1/_close"
 
 enable read only (ero) <index_name> :: \
-   curl -X PUT "http://$ES_HOST:$ES_PORT/$1/_settings" -H 'Content-Type: application/json' -d '{"index.blocks.write": true}'"
+   curl -X PUT "http://$ES_HOST:$ES_PORT/$1/_settings" -H 'Content-Type: application/json' -d '{"index.blocks.write": true}'
 
 enable read write (erw) <index_name> :: \
-   curl -X PUT "http://$ES_HOST:$ES_PORT/$1/_settings" -H 'Content-Type: application/json' -d '{"index.blocks.write": false}'"
+   curl -X PUT "http://$ES_HOST:$ES_PORT/$1/_settings" -H 'Content-Type: application/json' -d '{"index.blocks.write": false}'
 
 reindex index (ri) <source_index_name> <dest_index_name> :: \
-   curl -X POST "http://$ES_HOST:$ES_PORT/_reindex" -H 'Content-Type: application/json' -d '{"source":{"index":"'$1'"},"dest":{"index":"'$2'"}}'"
+   curl -X POST "http://$ES_HOST:$ES_PORT/_reindex" -H 'Content-Type: application/json' -d '{"source":{"index":"'$1'"},"dest":{"index":"'$2'"}}'
 
 move shard (ms) <index_name> <shard_num> <from_node_name> <to_node_name> :: \
-   curl -X POST "http://$ES_HOST:$ES_PORT/_cluster/reroute" -H 'Content-Type: application/json' -d '{"commands":[{"move":{"index":"'$1'","shard":'$2',"from_node":"'$3'","to_node":"'$4'"}}]}'"
+   curl -X POST "http://$ES_HOST:$ES_PORT/_cluster/reroute" -H 'Content-Type: application/json' -d '{"commands":[{"move":{"index":"'$1'","shard":'$2',"from_node":"'$3'","to_node":"'$4'"}}]}'
 
 alter number replicas (anr) <index_name> <number_of_replicas> :: \
-   curl -X PUT "http://$ES_HOST:$ES_PORT/$1/_settings" -H 'Content-Type: application/json' -d '{"index":{"number_of_replicas":'$2'}}'"
+   curl -X PUT "http://$ES_HOST:$ES_PORT/$1/_settings" -H 'Content-Type: application/json' -d '{"index":{"number_of_replicas":'$2'}}'
 
 disable shard allocation (dsa) :: \
-   curl -X PUT "http://$ES_HOST:$ES_PORT/_cluster/settings" -H 'Content-Type: application/json' -d '{"persistent":{"cluster.routing.allocation.enable":"primaries"}}'"
+   curl -X PUT "http://$ES_HOST:$ES_PORT/_cluster/settings" -H 'Content-Type: application/json' -d '{"persistent":{"cluster.routing.allocation.enable":"primaries"}}'
 
 reenable shard allocation (rsa) :: \
-   curl -X PUT "http://$ES_HOST:$ES_PORT/_cluster/settings" -H 'Content-Type: application/json' -d '{"persistent":{"cluster.routing.allocation.enable":null}}'"
+   curl -X PUT "http://$ES_HOST:$ES_PORT/_cluster/settings" -H 'Content-Type: application/json' -d '{"persistent":{"cluster.routing.allocation.enable":null}}'
 
 forcemerge (fm) <index_name> <max_num_segments> :: \
    curl -X POST "http://$ES_HOST:$ES_PORT/$1/_forcemerge?max_num_segments=$2"
@@ -118,7 +117,7 @@ refresh (r) <index_name> :: \
 = INDEX ENTRY MANIPULATION
 # ----------------------------------------------------------------------------------------------------------------------------------
 
-add entry (ae) <index_name> <entry_json> :: curl -X POST "http://$ES_HOST:$ES_PORT/1/_doc -H 'Content-Type: application/json' -d "$2"
+add entry (ae) <index_name> <entry_json> :: curl -X POST "http://$ES_HOST:$ES_PORT/1/_doc" -H 'Content-Type: application/json' -d "$2"
 
 # ----------------------------------------------------------------------------------------------------------------------------------
 = NODES
@@ -131,11 +130,10 @@ list nodes queries (lnq) :: \
    curl -X 1 -o GET "http://$ES_HOST:$ES_PORT/_cat/nodes?v&h=name,nodeRole,search,queryTotal,searchFetchTotal,requestCacheHitCount&s=name"
 
 search nodes (sn) :: \
-   curl -X GET "http://$ES_HOST:$ES_PORT/_nodes" -f "$1"
+   curl -X GET "http://$ES_HOST:$ES_PORT/_nodes"
 
 node active threads (at) :: \
-   curl -X GET "http://$ES_HOST:$ES_PORT/_cat/thread_pool?v&s=node_name,name" \"
-            -f 's/\(.*node_name.*\|.* [1-9] .*$\)/\1/;t;d'
+   curl -X GET "http://$ES_HOST:$ES_PORT/_cat/thread_pool?v&s=node_name,name"
 
 # ----------------------------------------------------------------------------------------------------------------------------------
 = SEARCH
@@ -148,21 +146,20 @@ search json (sj) <index_name> <search_json> :: \
    curl -X GET "http://$ES_HOST:$ES_PORT/$1/_search?pretty" -H 'Content-Type: application/json' -d "$2"
 
 search match (sm) <index_name> <field_name> <value> :: \
-   curl -X GET "http://$ES_HOST:$ES_PORT/$1/_search?pretty" -H 'Content-Type: application/json' -d '{"query": { "match": { "'$2'": "'$3'" } } }'"
+   curl -X GET "http://$ES_HOST:$ES_PORT/$1/_search?pretty" -H 'Content-Type: application/json' -d '{"query": { "match": { "'$2'": "'$3'" } } }'
 
 search term (st) <index_name> <field_name> <value> :: \
-   curl -X GET "http://$ES_HOST:$ES_PORT/$1/_search?pretty" -H 'Content-Type: application/json' -d '{"query": { "term": { "'$2'": "'$3'" } } }'"
+   curl -X GET "http://$ES_HOST:$ES_PORT/$1/_search?pretty" -H 'Content-Type: application/json' -d '{"query": { "term": { "'$2'": "'$3'" } } }'
 
 search summary (ss) <index_name> <search_term> :: \
-   curl -X GET "http://$ES_HOST:$ES_PORT/$1/_search?size=0&pretty" -H 'Content-Type: application/json' -d '{"aggs": {"count": {"terms": { "field" : "'$2'", "size" : 100 } } } }'"
+   curl -X GET "http://$ES_HOST:$ES_PORT/$1/_search?size=0&pretty" -H 'Content-Type: application/json' -d '{"aggs": {"count": {"terms": { "field" : "'$2'", "size" : 100 } } } }'
 
 # ----------------------------------------------------------------------------------------------------------------------------------
 = TASKS
 # ----------------------------------------------------------------------------------------------------------------------------------
 
 list tasks (lt) [<sort_field>] :: \
-   curl -X GET "http://$ES_HOST:$ES_PORT/_cat/tasks?v&h=action,type,start_time,timestamp,running_time,node&s=$1" \"
-            -f '/monitor\/tasks\/lists/d'
+   curl -X GET "http://$ES_HOST:$ES_PORT/_cat/tasks?v&h=action,type,start_time,timestamp,running_time,node&s=$1"
 
 list tasks detail (ltd) [<sort_field>] :: \
    curl -X GET "http://$ES_HOST:$ES_PORT/_cat/tasks?v&s=$1"
@@ -172,7 +169,7 @@ list tasks detail (ltd) [<sort_field>] :: \
 # ----------------------------------------------------------------------------------------------------------------------------------
 
 add repo (are) <repo_name> :: \
-   curl -X PUT "http://$ES_HOST:$ES_PORT/_snapshot/$1?pretty" -H 'Content-Type: application/json' -d '{ "type": "fs", "settings": { "location": "'$1'" } } '"
+   curl -X PUT "http://$ES_HOST:$ES_PORT/_snapshot/$1?pretty" -H 'Content-Type: application/json' -d '{ "type": "fs", "settings": { "location": "'$1'" } } '
 
 delete repo (dre) <repo_name> :: \
    curl -X DELETE "http://$ES_HOST:$ES_PORT/_snapshot/$1?pretty"
@@ -313,4 +310,4 @@ query-es settings (qes) :: query-es -s
 ```
 
 <hr>
-<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 25/04/01 09:54</p>
+<p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.  Page last modified: 25/04/15 18:06</p>
