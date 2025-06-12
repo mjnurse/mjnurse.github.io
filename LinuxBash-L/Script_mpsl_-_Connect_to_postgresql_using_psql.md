@@ -1,5 +1,5 @@
 ---
-title: pg - Connect to postgresql using psql
+title: mpsl - Connect to postgresql using psql
 ---
 
 ```bash

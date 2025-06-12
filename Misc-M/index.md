@@ -4,43 +4,43 @@ title: Misc
 
 <span style="color: grey">1.</span>&nbsp;&nbsp;&nbsp; <a id="listitem1" href="Azure_AD.html">Azure AD</a>
 
-<span style="color: grey">2.</span>&nbsp;&nbsp;&nbsp; <a id="listitem2" href="COVID-19_UK_Dashboard.html">COVID-19 UK Dashboard</a>
+<span style="color: grey">2.</span>&nbsp;&nbsp;&nbsp; <a id="listitem2" href="BMI_Calculator.html">BMI Calculator</a>
 
-<span style="color: grey">3.</span>&nbsp;&nbsp;&nbsp; <a id="listitem3" href="Dashboard_Design_Principles.html">Dashboard Design Principles</a>
+<span style="color: grey">3.</span>&nbsp;&nbsp;&nbsp; <a id="listitem3" href="COVID-19_UK_Dashboard.html">COVID-19 UK Dashboard</a>
 
-<span style="color: grey">4.</span>&nbsp;&nbsp;&nbsp; <a id="listitem4" href="Generating_a_Bookmarks_Page_From_a_Chrome_Bookmarks_Folder.html">Generating a Bookmarks Page From a Chrome Bookmarks Folder</a>
+<span style="color: grey">4.</span>&nbsp;&nbsp;&nbsp; <a id="listitem4" href="Dashboard_Design_Principles.html">Dashboard Design Principles</a>
 
-<span style="color: grey">5.</span>&nbsp;&nbsp;&nbsp; <a id="listitem5" href="Google_Charts.html">Google Charts</a>
+<span style="color: grey">5.</span>&nbsp;&nbsp;&nbsp; <a id="listitem5" href="Generating_a_Bookmarks_Page_From_a_Chrome_Bookmarks_Folder.html">Generating a Bookmarks Page From a Chrome Bookmarks Folder</a>
 
-<span style="color: grey">6.</span>&nbsp;&nbsp;&nbsp; <a id="listitem6" href="History_Of_My_Cars.html">History Of My Cars</a>
+<span style="color: grey">6.</span>&nbsp;&nbsp;&nbsp; <a id="listitem6" href="Google_Charts.html">Google Charts</a>
 
-<span style="color: grey">7.</span>&nbsp;&nbsp;&nbsp; <a id="listitem7" href="HTML_Colour_Converter.html">HTML Colour Converter</a>
+<span style="color: grey">7.</span>&nbsp;&nbsp;&nbsp; <a id="listitem7" href="History_Of_My_Cars.html">History Of My Cars</a>
 
-<span style="color: grey">8.</span>&nbsp;&nbsp;&nbsp; <a id="listitem8" href="Jekyll.html">Jekyll</a>
+<span style="color: grey">8.</span>&nbsp;&nbsp;&nbsp; <a id="listitem8" href="HTML_Colour_Converter.html">HTML Colour Converter</a>
 
-<span style="color: grey">9.</span>&nbsp;&nbsp;&nbsp; <a id="listitem9" href="JWT_-_JSON_Web_Tokens.html">JWT - JSON Web Tokens</a>
+<span style="color: grey">9.</span>&nbsp;&nbsp;&nbsp; <a id="listitem9" href="Jekyll.html">Jekyll</a>
 
-<span style="color: grey">10.</span>&nbsp;&nbsp;&nbsp; <a id="listitem10" href="Public_Key_Encryption_Analogy.html">Public Key Encryption Analogy</a>
+<span style="color: grey">10.</span>&nbsp;&nbsp;&nbsp; <a id="listitem10" href="JWT_-_JSON_Web_Tokens.html">JWT - JSON Web Tokens</a>
 
-<span style="color: grey">11.</span>&nbsp;&nbsp;&nbsp; <a id="listitem11" href="Read_Aloud_In_MS_Word.html">Read Aloud In MS Word</a>
+<span style="color: grey">11.</span>&nbsp;&nbsp;&nbsp; <a id="listitem11" href="Public_Key_Encryption_Analogy.html">Public Key Encryption Analogy</a>
 
-<span style="color: grey">12.</span>&nbsp;&nbsp;&nbsp; <a id="listitem12" href="Running_Spark_on_YARN_-_Cluster_or_Client_Mode.html">Running Spark on YARN - Cluster or Client Mode</a>
+<span style="color: grey">12.</span>&nbsp;&nbsp;&nbsp; <a id="listitem12" href="Read_Aloud_In_MS_Word.html">Read Aloud In MS Word</a>
 
-<span style="color: grey">13.</span>&nbsp;&nbsp;&nbsp; <a id="listitem13" href="Shortcut_Keys.html">Shortcut Keys</a>
+<span style="color: grey">13.</span>&nbsp;&nbsp;&nbsp; <a id="listitem13" href="Running_Spark_on_YARN_-_Cluster_or_Client_Mode.html">Running Spark on YARN - Cluster or Client Mode</a>
 
-<span style="color: grey">14.</span>&nbsp;&nbsp;&nbsp; <a id="listitem14" href="ssh.html">ssh</a>
+<span style="color: grey">14.</span>&nbsp;&nbsp;&nbsp; <a id="listitem14" href="Shortcut_Keys.html">Shortcut Keys</a>
 
-<span style="color: grey">15.</span>&nbsp;&nbsp;&nbsp; <a id="listitem15" href="Statistical_Testing.html">Statistical Testing</a>
+<span style="color: grey">15.</span>&nbsp;&nbsp;&nbsp; <a id="listitem15" href="ssh.html">ssh</a>
 
-<span style="color: grey">16.</span>&nbsp;&nbsp;&nbsp; <a id="listitem16" href="Text_To_Speech_-_Clipboard.html">Text To Speech - Clipboard</a>
+<span style="color: grey">16.</span>&nbsp;&nbsp;&nbsp; <a id="listitem16" href="Statistical_Testing.html">Statistical Testing</a>
 
-<span style="color: grey">17.</span>&nbsp;&nbsp;&nbsp; <a id="listitem17" href="The_Great_Weight_Race.html">The Great Weight Race</a>
+<span style="color: grey">17.</span>&nbsp;&nbsp;&nbsp; <a id="listitem17" href="Text_To_Speech_-_Clipboard.html">Text To Speech - Clipboard</a>
 
-<span style="color: grey">18.</span>&nbsp;&nbsp;&nbsp; <a id="listitem18" href="This_Sites_Markdown.html">This Sites Markdown</a>
+<span style="color: grey">18.</span>&nbsp;&nbsp;&nbsp; <a id="listitem18" href="The_Great_Weight_Race.html">The Great Weight Race</a>
 
-<span style="color: grey">19.</span>&nbsp;&nbsp;&nbsp; <a id="listitem19" href="Using_Git_and_GitHub_-_A_Walkthrough.html">Using Git and GitHub - A Walkthrough</a>
+<span style="color: grey">19.</span>&nbsp;&nbsp;&nbsp; <a id="listitem19" href="This_Sites_Markdown.html">This Sites Markdown</a>
 
-<span style="color: grey">20.</span>&nbsp;&nbsp;&nbsp; <a id="listitem20" href="Weight_Converter.html">Weight Converter</a>
+<span style="color: grey">20.</span>&nbsp;&nbsp;&nbsp; <a id="listitem20" href="Using_Git_and_GitHub_-_A_Walkthrough.html">Using Git and GitHub - A Walkthrough</a>
 
 <span style="color: grey">21.</span>&nbsp;&nbsp;&nbsp; <a id="listitem21" href="Worm_Game.html">Worm Game</a>
 <script>gMaxNum=22-1</script>
