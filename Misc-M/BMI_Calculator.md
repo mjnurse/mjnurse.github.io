@@ -107,7 +107,7 @@ function bmiChng() {
   setHTML('bmi25StLb', `${bmi25St}st ${bmi25Lb}lb (${bmi25StDiff}st ${Math.abs(bmi25LbDiff)}lb)`);
 
   const message = bmi25DiffKg < 0
-    ? `<hr><p>To get to a target BMI of <b>25</b> you need to lose <b>${(-bmi25DiffKg).toFixed(1)}kg.</b></p>
+    ? `<hr><p>To get to a target BMI of <b>25</b> you need to lose <b>${(-bmi25DiffKg).toFixed(1)}kg (${(-bmi25DiffStLb).toFixed(1)}lbs).</b></p>
        <p>This volume of fat is roughly the same as <b>${((-bmi25DiffKg / 0.9) * 3.13).toFixed(0)} cans of coke.</b></p>
        <p>This is roughly <b>${(-bmi25DiffKg * 7778).toFixed(0)}</b> calories.</p>`
     : '';
