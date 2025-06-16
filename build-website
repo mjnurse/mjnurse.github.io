@@ -1,0 +1,175 @@
+#!/bin/bash
+help_text="
+NAME
+   build-website - Script to build mjnurse website.
+
+USAGE
+   build-website [options]
+
+OPTIONS
+   -a 
+      Build all including the search index.
+
+   -f 
+      Force the git push.
+
+   -h|--help
+      Show help text.
+
+   -m 
+      Skip building pages from bash, sql, etc. scripts.
+
+DESCRIPTION
+   Script to build mjnurse website.
+
+AUTHOR
+  mjnurse.dev - 2025
+"
+help_line="tbc"
+
+if [ "$1" == "-h" ] || [ "$1" == "--help" ]; then
+   echo "$help_text"
+   exit
+fi
+
+
+if [[ "$1" == "-h" ]]; then
+   echo "Usage: build-website [OPTION]"
+   echo
+   echo "Build the mjnurse website."
+   echo
+   echo "Options:"
+   exit
+fi
+
+source utils
+
+gh_home="/c/Users/MartinNurse/OneDrive - Quantexa Ltd/MJN/github"
+
+cd "$gh_home"/mjnurse-github-io
+
+# ------------------------------------------------------------------------------
+echo_h2 -lblue "Generate shortcut keys page"
+# ------------------------------------------------------------------------------
+sck_pg="ShortcutKeys-S/Shortcut_Keys.md"
+echo "---" > $sck_pg
+echo "title: Shortcut Keys" >> $sck_pg
+echo "layout: page-with-contents-list" >> $sck_pg
+echo "---" >> $sck_pg
+echo "" >> $sck_pg
+echo '**Note**: This page is automatically generated using `sck`' >> $sck_pg
+sck -m >> $sck_pg
+
+# ------------------------------------------------------------------------------
+echo_h2 -lblue "Copy Javascript from javascript directory to assets/javascript directory"
+# ------------------------------------------------------------------------------
+cp "$gh_home"/javascript/navigation.js \
+   "$gh_home"/mjnurse-github-io/assets/javascript
+cp "$gh_home"/javascript/googleCharts.js \
+   "$gh_home"/mjnurse-github-io/assets/javascript
+cp "$gh_home"/javascript/search.js \
+   "$gh_home"/mjnurse-github-io/assets/javascript
+cp "$gh_home"/javascript/copyToClipboard.js \
+   "$gh_home"/mjnurse-github-io/assets/javascript
+
+# ------------------------------------------------------------------------------
+echo_h2 -lblue "Copy Blogs to topic folder"
+# ------------------------------------------------------------------------------
+cd Blog-B
+for f in *.md; do
+  section="$(head -5 $f | grep 'section:' | sed 's/section: *//')"
+  if [[ "$section" != "" ]]; then
+    tmp="${f:0:11}"
+    blogdate="${tmp//_/ }"
+    newfile="${f:11:999}"
+    folder="$(find .. -type d | grep -i ${section} | head -1)"
+    if [[ "$folder" != "" ]]; then
+      srcdate="$(stat -c %y $f)"
+      destdate="$(stat -c %y ${folder}/$newfile)"
+      if [[ "$srcdate" > "$destdate" ]]; then
+        echo "$f -> ${folder}/$newfile"
+        cat $f | sed "s/title: ${blogdate}/title: /" > ${folder}/$newfile
+      fi
+    else
+      echo "$f -> BAD SECTION SET"
+    fi
+  else
+    echo "$f -> NO SECTION SET"
+  fi
+done
+
+# ------------------------------------------------------------------------------
+echo_h2 -lblue "Generate the CLI Builder pages."
+# ------------------------------------------------------------------------------
+
+cd "$gh_home"/mjnurse-github-io
+gen-cli-builder-pages
+
+# ------------------------------------------------------------------------------
+echo_h2 -lblue "Copy query-es to github/bash"
+# ------------------------------------------------------------------------------
+
+
+cd "$gh_home"/mjnurse-github-io
+if [[ "$1" == "-a" ]]; then
+   # ---------------------------------------------------------------------------
+   echo_h2 -lblue "Generate search page"
+   # ---------------------------------------------------------------------------
+   gen-search-doc-list
+fi
+
+if [[ "$1" == "-m" ]]; then
+   # ---------------------------------------------------------------------------
+   echo_h2 -red "no script builds"
+   # ---------------------------------------------------------------------------
+else
+   # ---------------------------------------------------------------------------
+   echo_h2 -lblue "Generate bash script pages"
+   # ---------------------------------------------------------------------------
+   gen-bash-web-pgs
+   # ---------------------------------------------------------------------------
+   echo_h2 -lblue "Generate Oracle script pages"
+   # ---------------------------------------------------------------------------
+   gen-ora-web-pgs
+fi
+
+# ------------------------------------------------------------------------------
+echo_h2 -lblue "Generate Web Page Menus"
+# ------------------------------------------------------------------------------
+gen-web-menus
+
+if [[ "$1" != "-m" ]]; then
+   # ---------------------------------------------------------------------------
+   echo_h2 -lblue Adding Timestamps:
+   # ---------------------------------------------------------------------------
+   for f in $(git status | grep "\.md$" | sed "/^[^\t]*$/d; /deleted:/d; s/[^:]*: *//" | sort -u); do
+     if [[ ! "$f" =~ .*folder_desc.md ]]; then 
+       fd="$(date +'%y/%m/%d %H:%M' -r $f)"
+       fdr="$(date -r $f)"
+       if [[ $(grep "Page last modified:" $f | wc -l) == 0 ]]; then
+         echo "" >> $f
+         echo "<hr>" >> $f
+       else
+         sed -i "/Page last modified: /d" $f
+       fi
+       if [[ "$f" =~ .*index.md ]]; then
+         echo "<p class=\"pagedate\">This page was generated by <a href=\".\">GitHub Pages</a>.</p>" >> $f
+       else
+         echo $f - $fdr
+         echo "<p class=\"pagedate\">This page was generated by <a href=\".\">GitHub Pages</a>.  Page last modified: ${fd}</p>" >> $f
+       fi
+       touch -d "$fdr" $f
+     fi
+   done
+   echo
+fi
+
+# ------------------------------------------------------------------------------
+echo_h2 -lblue "Pushing Changes to GitHub"
+# ------------------------------------------------------------------------------
+if [[ "$1" == "-f" ]]; then
+  pu -f
+else
+  pu $2
+fi
+

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
+  <head>
+	  <!-- Global site tag (gtag.js) - Google Analytics -->
+	  <script async src="https://www.googletagmanager.com/gtag/js?id=G-WG742DBGRE"></script>
+	<script>
+		  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-WG742DBGRE');
+	</script>
+    <script src="/assets/javascript/nav.js"></script>
+    <script src="/assets/javascript/copyToClipboard.js"></script>
+    <meta charset="UTF-8">
+
+{% seo %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" type="image/png" href="/images/MJNIcon.png">
+  </head>
+  <body onLoad="addKeyListener();">
+    <div class="topnav" id="myTopnav">
+      {% include menu-bar.html %}
+      <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i>
+      </a>
+    </div>
+    <header class="page-header" role="banner">
+      <h1 class="project-name">{{ page.title | default: site.title | default: site.github.repository_name }}</h1>
+      <h2 class="project-tagline">{{ page.description | default: site.description | default: site.github.project_tagline }}</h2>
+      {% if site.github.is_project_page %}
+        <a href="{{ site.github.repository_url }}" class="btn">View on GitHub</a>
+      {% endif %}
+      {% if site.show_downloads %}
+        <a href="{{ site.github.zip_url }}" class="btn">Download .zip</a>
+        <a href="{{ site.github.tar_url }}" class="btn">Download .tar.gz</a>
+      {% endif %}
+    </header>
+
+    <main>
+    <div id="content" class="main-content" role="main">
+
+      {% assign: f = page.dir | remove_first: "/" | split: "/" | first %}
+      {% assign: l = page.dir | split: "/" | last %}
+  
+      <p><a href="{{ site.url }}">Home</a> / 
+         <a href="{{ site.url }}/{{ f }}">{{ f | split: "-" | first | replace: '_',' ' }}</a> /
+         {% if f != l %}
+           <a href="{{ site.url }}/{{ f }}/{{ l }}">{{ l | split: "-" | first | replace: '_',' ' }}</a> /
+         {% endif %}
+         {% if f != l %}
+            <span onclick="copyPageNameToClipboard('{{ f }}/{{ l }}/{{ page.name }}');">
+               {{ page.name | replace:'.md','' | replace:'_',' ' }}
+            </span>
+         {% else %}
+            <span onclick="copyPageNameToClipboard('{{ f }}/{{ page.name }}');">
+               {{ page.name | replace:'.md','' | replace:'_',' ' }}
+            </span>
+         {% endif %}
+      </p>
+      <hr>
+      <h1>Contents</h1>
+
+      {% include toc.html html=content %}
+
+      {{ content }}
+
+    </div>
+    </main>
+    <footer>
+      {% include footer.html %} 
+    </footer>
+    {% include menu-bar.js %}
+  </body>
+</html>
