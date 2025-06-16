@@ -44,7 +44,7 @@ fi
 
 source utils
 
-gh_home="/c/Users/MartinNurse/OneDrive - Quantexa Ltd/MJN/github"
+gh_home="$MJNWINROOT/MJN/github"
 
 cd "$gh_home"/mjnurse-github-io
 

@@ -14,7 +14,7 @@ AUTHOR
 "
 help_line="Creates webs pages for cli-builder and definition files"
 
-gh_home="/c/Users/MartinNurse/OneDrive - Quantexa Ltd/MJN/github"
+gh_home="$MJNWINROOT/MJN/github"
 
 cli_base="$gh_home/mjnurse-github-io/Other-O/Command_Line_Interface_Builder"
 

@@ -22,7 +22,7 @@ AUTHOR
 help_line="tbc"
 web_desc_line="tbc"
 
-gh_home="/c/Users/MartinNurse/OneDrive - Quantexa Ltd/MJN/github"
+gh_home="$MJNWINROOT/MJN/github"
 
 sd="$gh_home/mjnurse-github-io/assets/javascript/search-docs.js"
 

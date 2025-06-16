@@ -14,7 +14,7 @@ AUTHOR
 "
 help_line="Creates webs pages for bash scripts"
 
-gh_home="/c/Users/MartinNurse/OneDrive - Quantexa Ltd/MJN/github"
+gh_home="$MJNWINROOT/MJN/github"
 
 rm -f "$gh_home"/mjnurse-github-io/LinuxBash-L/Script*
 

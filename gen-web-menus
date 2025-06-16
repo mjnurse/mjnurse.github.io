@@ -21,7 +21,7 @@ AUTHOR
 "
 help_line="Generates website menu pages"
 
-gh_home="/c/Users/MartinNurse/OneDrive - Quantexa Ltd/MJN/github"
+gh_home="$MJNWINROOT/MJN/github"
 
 base_url="https://mjnurse.github.io"
 base_dir="$gh_home/mjnurse-github-io"
