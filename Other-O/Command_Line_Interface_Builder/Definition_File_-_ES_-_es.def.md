@@ -319,6 +319,7 @@ query-es settings (qes) :: query-es -s
 #     "cluster.info.update.interval": "1m"
 #   }
 # }
+
 ```
 
 <hr>

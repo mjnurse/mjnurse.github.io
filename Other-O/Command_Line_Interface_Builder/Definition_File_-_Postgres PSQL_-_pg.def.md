@@ -144,4 +144,5 @@ cmd sq=" \
 search dictionary (sd) <db_name> <search_term> :: \
     psql --host $PG_HOST -p $PG_PORT -d $1 -U $PG_USER -c "${sq//SEARCHTERM/$2}" \
     ## % matches multiple chars (inc. none), _ matches a single char
+
 ```
