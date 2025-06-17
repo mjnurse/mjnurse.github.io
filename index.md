@@ -21,29 +21,24 @@ Command Line Interface (CLI) Builder</a>&nbsp;<span style="color: #AAAAAA">(3)</
 A bash utility which generate CLIs for applications from a user defined definition file.
 </div>
 <div class="tile">
-<img src="images/Star.png" width="20px"><a class="tilelink" id="listitem4" href="/Other-O/Command_Line_Interface_Builder">
-Command Line Interface (CLI) Builder</a>&nbsp;<span style="color: #AAAAAA">(4)</span><br>
-A bash utility which generate CLIs for applications from a user defined definition file.
-</div>
-<div class="tile">
-<img src="images/Star.png" width="20px"><a class="tilelink" id="listitem5" href="/Blog-B/20-10-29_-_Using_the_console.log_Alternatives">
-JS console.log Alternatives</a>&nbsp;<span style="color: #AAAAAA">(5)</span><br>
+<img src="images/Star.png" width="20px"><a class="tilelink" id="listitem4" href="/Blog-B/20-10-29_-_Using_the_console.log_Alternatives">
+JS console.log Alternatives</a>&nbsp;<span style="color: #AAAAAA">(4)</span><br>
 Clean up Javacript logging.
 </div>
 </div>
 <hr>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 25-05-08 -  <a class="bloglistlink" id="listitem6" href="Blog-B/25-05-08_-_Python_Print_JSON_as_a_Table.html">Python Print JSON as a Table</a> <span style="color: grey">(6)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 25-02-20 -  <a class="bloglistlink" id="listitem7" href="Blog-B/25-02-20_-_A-series_Paper_Sizes.html">A-series Paper Sizes</a> <span style="color: grey">(7)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 25-02-11 -  <a class="bloglistlink" id="listitem8" href="Blog-B/25-02-11_-_Hash_Value_Clash_Probability.html">Hash Value Clash Probability</a> <span style="color: grey">(8)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 24-05-14 -  <a class="bloglistlink" id="listitem9" href="Blog-B/24-05-14_-_Kg_-_Stone-Lbs.html">Kg - Stone-Lbs</a> <span style="color: grey">(9)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 23-06-27 -  <a class="bloglistlink" id="listitem10" href="Blog-B/23-06-27_-_Generating_a_Bookmarks_Page_From_a_Chrome_Bookmarks_Folder.html">Generating a Bookmarks Page From a Chrome Bookmarks Folder</a> <span style="color: grey">(10)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 22-10-06 -  <a class="bloglistlink" id="listitem11" href="Blog-B/22-10-06_-_Create_The_Equivalent_To_.bashrc_For_Windows_CMD.html">Create The Equivalent To .bashrc For Windows CMD</a> <span style="color: grey">(11)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 22-06-22 -  <a class="bloglistlink" id="listitem12" href="Blog-B/22-06-22_-_One_Liner_to_Run_SQL_Over_a_CSV_File_Using_Sqlite.html">One Liner to Run SQL Over a CSV File Using Sqlite</a> <span style="color: grey">(12)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 22-06-17 -  <a class="bloglistlink" id="listitem13" href="Blog-B/22-06-17_-_I_Wrote_A_Bash_Function_To_Parse_And_Describe_A_Scripts_Parameters.html">I Wrote A Bash Function To Parse And Describe A Scripts Parameters</a> <span style="color: grey">(13)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 22-05-18 -  <a class="bloglistlink" id="listitem14" href="Blog-B/22-05-18_-_Read_Aloud_In_MS_Word.html">Read Aloud In MS Word</a> <span style="color: grey">(14)</span></p>
-<p class="bloglist"><img src="images\/Dot.png" width="15px"> 22-03-22 -  <a class="bloglistlink" id="listitem15" href="Blog-B/22-03-22_-_LDAP_SAML.html">LDAP SAML</a> <span style="color: grey">(15)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 25-05-08 -  <a class="bloglistlink" id="listitem5" href="Blog-B/25-05-08_-_Python_Print_JSON_as_a_Table.html">Python Print JSON as a Table</a> <span style="color: grey">(5)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 25-02-20 -  <a class="bloglistlink" id="listitem6" href="Blog-B/25-02-20_-_A-series_Paper_Sizes.html">A-series Paper Sizes</a> <span style="color: grey">(6)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 25-02-11 -  <a class="bloglistlink" id="listitem7" href="Blog-B/25-02-11_-_Hash_Value_Clash_Probability.html">Hash Value Clash Probability</a> <span style="color: grey">(7)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 24-05-14 -  <a class="bloglistlink" id="listitem8" href="Blog-B/24-05-14_-_Kg_-_Stone-Lbs.html">Kg - Stone-Lbs</a> <span style="color: grey">(8)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 23-06-27 -  <a class="bloglistlink" id="listitem9" href="Blog-B/23-06-27_-_Generating_a_Bookmarks_Page_From_a_Chrome_Bookmarks_Folder.html">Generating a Bookmarks Page From a Chrome Bookmarks Folder</a> <span style="color: grey">(9)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 22-10-06 -  <a class="bloglistlink" id="listitem10" href="Blog-B/22-10-06_-_Create_The_Equivalent_To_.bashrc_For_Windows_CMD.html">Create The Equivalent To .bashrc For Windows CMD</a> <span style="color: grey">(10)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 22-06-22 -  <a class="bloglistlink" id="listitem11" href="Blog-B/22-06-22_-_One_Liner_to_Run_SQL_Over_a_CSV_File_Using_Sqlite.html">One Liner to Run SQL Over a CSV File Using Sqlite</a> <span style="color: grey">(11)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 22-06-17 -  <a class="bloglistlink" id="listitem12" href="Blog-B/22-06-17_-_I_Wrote_A_Bash_Function_To_Parse_And_Describe_A_Scripts_Parameters.html">I Wrote A Bash Function To Parse And Describe A Scripts Parameters</a> <span style="color: grey">(12)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 22-05-18 -  <a class="bloglistlink" id="listitem13" href="Blog-B/22-05-18_-_Read_Aloud_In_MS_Word.html">Read Aloud In MS Word</a> <span style="color: grey">(13)</span></p>
+<p class="bloglist"><img src="images\/Dot.png" width="15px"> 22-03-22 -  <a class="bloglistlink" id="listitem14" href="Blog-B/22-03-22_-_LDAP_SAML.html">LDAP SAML</a> <span style="color: grey">(14)</span></p>
 <p><a href="Blog-B">More</a></p>
-<script>gMaxNum=16-1</script>
+<script>gMaxNum=15-1</script>
 
 <hr>
 <p class="pagedate">This page was generated by <a href=".">GitHub Pages</a>.</p>
