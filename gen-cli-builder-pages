@@ -45,7 +45,7 @@ touch -d "$fdr" "$dest"
 for f in *.def; do
   echo "Generating: $f page"
   title="$(head -1 $f | sed 's/^#  *//')"
-  dest="${cli_base}/Definition_File_-_${title}_-_${f// /_}.md"
+  dest="${cli_base}/Definition_File_-_${title// /_}_-_${f// /_}.md"
   echo "---" > "$dest"
   echo "title: $f" >> "$dest"
   echo "---" >> "$dest"
