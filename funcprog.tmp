@@ -1,0 +1,170 @@
+Understandine the Functional Programming Paradigm
+Immutability, Pure Functions, and Function Compositions
+Irene Smolchenko
+ITNEXT
+Irene Smolchenko
+
+·
+
+
+Functional programming (FP) is a paradigm that has gained significant popularity in the world of software development due to its focus on creating reliable, maintainable, and scalable code.
+
+Here we explore key concepts of the functional programming paradigm:
+
+. immutability, 
+. pure functions, and 
+. function compositions. 
+
+Functional programming is a coding paradigm centred around pure functions and expressions, prioritizing immutability and avoiding side effects. The core ideas of FP encompass immutability, pure functions, and function compositions, all working together to produce clear, predictable code that enhances readability and maintainability.
+
+It is based on the principles of declarative programming, where developers describe what they want the program to do, rather than explicitly specifying how it should be done.
+
+Foundational Principles
+Immutability
+In functional programming, data is treated as immutable, meaning once created, it cannot be changed. Instead of modifying existing data, new data structures are created, promoting a more predictable and thread-safe codebase.
+
+Immutability reduces the risk of side effects and makes debugging easier since each function operates solely on its input, without altering it. Additionally, immutability supports easier parallelization (allows multiple threads or processes to work on different parts of the data simultaneously without worrying about potential conflicts or synchronization issues), leading to better performance in modern multi-core processors.
+
+Let’s see a few examples that illustrate this concept and how it helps create new data structures without modifying the original ones.
+
+Example #1
+In the example below, we create a new nested object updatedNestedObject by spreading the properties of the originalNestedObject, and then spreading the person property and changing the value of the age property. The originalNestedObject remains unchanged, demonstrating immutability.
+
+// Original nested object
+const originalNestedObject = { 
+  person: { name: "Alice", age: 25 },
+  hobbies: ["reading", "painting"],
+};
+
+// Updating the nested object without modifying the original one
+const updatedNestedObject = {
+  ...originalNestedObject,
+  person: { ...originalNestedObject.person, age: 26 },
+};
+
+console.log(originalNestedObject);
+/*
+  {
+    person: { name: "Alice", age: 25 },
+    hobbies: ["reading", "painting"],
+  }
+*/
+
+console.log(updatedNestedObject);
+/*
+  {
+    person: { name: "Alice", age: 26 },
+    hobbies: ["reading", "painting"],
+  }
+*/
+Example #2
+In the example below, we use the immer library, which simplifies updating immutable data structures. The produce function creates a draft version of the originalData, where changes can be made as if it were mutable. However, the actual originalData remains unchanged, demonstrating immutability.
+
+// Using libraries like "immer" to achieve immutability
+import produce from "immer";
+
+const originalData = { count: 1, items: ["apple", "banana"] };
+
+const updatedData = produce(originalData, (draft) => {
+  draft.count += 1;
+  draft.items.push("orange");
+});
+
+console.log(originalData); // { count: 1, items: ["apple", "banana"] }
+console.log(updatedData);  // { count: 2, items: ["apple", "banana", "orange"] }
+The goal is to produce clear, predictable code that enhances readability and maintainability. Basically, if something has to change for your data structures, make changes to a copy. Also, remember that in objects, const isn’t enough. You should use persistent data structures, for example Object.freeze, to enforce immutability effectively.
+
+
+Object.freeze for object immutability
+Pure Functions
+Pure functions are functions that always produce the same output for a given set of inputs, and they have no side effects. Pure functions are predictable and do not rely on any external state, making them easier to test, understand and analyze.
+
+They enable “referential transparency”, which means that a function call can be replaced with its computed value without affecting the program’s behavior.
+
+Let’s review a few examples.
+
+Example #1
+In this example, the addPositiveNumbers function has a conditional check for positive numbers. However, even with conditional logic, it is still a pure function because it does not have side effects and returns the same output for the same input.
+
+// Pure function that adds two numbers only if they are positive
+function addPositiveNumbers(a, b) {
+  if (a > 0 && b > 0) {
+    return a + b;
+  }
+  return 0;
+}
+
+const result1 = addPositiveNumbers(3, 5); // Output: 8
+const result2 = addPositiveNumbers(-2, 4); // Output: 0
+
+console.log(result1); // Output: 8
+console.log(result2); // Output: 0
+Example #2
+In this example, the transformObjectValues function takes an object obj and returns a new object with its property values multiplied by 10. It does not modify the original object and does not rely on any external state, making it a pure function.
+
+// Pure function that transforms an object's property values
+function transformObjectValues(obj) {
+  const transformedObj = {};
+  for (const key in obj) {
+    transformedObj[key] = obj[key] * 10;
+  }
+  return transformedObj;
+}
+
+const originalObject = { a: 1, b: 2, c: 3 };
+const transformedObject = transformObjectValues(originalObject);
+
+console.log(originalObject);     // Output: { a: 1, b: 2, c: 3 }
+console.log(transformedObject);  // Output: { a: 10, b: 20, c: 30 }
+Function compositions
+Functional programming encourages composing functions to create more complex operations. Function composition allows developers to chain pure functions together, creating a pipeline where the output of one function becomes the input of another.
+
+This approach promotes code reusability, separation of concerns, and easier maintenance. Function compositions also lead to a more expressive and readable code, enhancing the overall developer experience.
+
+Let’s see a few examples.
+
+Example #1
+In this example, we use function composition with the map and filter array methods. First, we multiply each number in the numbers array by 2 using multiplyByTwo, and then we filter out the even numbers using isEven, resulting in [4, 8].
+
+// Pure function that multiplies a number by 2
+function multiplyByTwo(x) {
+  return x * 2;
+}
+
+// Pure function that checks if a number is even
+function isEven(x) {
+  return x % 2 === 0;
+}
+
+const numbers = [1, 2, 3, 4, 5];
+const result = numbers.map(multiplyByTwo).filter(isEven);
+
+console.log(result); // Output: [4, 8]
+Example #2
+In this example, we use function composition with the external library lodash. We have two pure functions, capitalizeString and reverseString, which use lodash methods upperFirst and reverse respectively. We then use function composition to first capitalize the text and then reverse it, resulting in “dlrow olleh”.
+
+// External library - lodash
+// Pure function that capitalizes a string
+function capitalizeString(str) {
+  return _.upperFirst(str);
+}
+
+// External library - lodash
+// Pure function that reverses a string
+function reverseString(str) {
+  return _.reverse(str.split('')).join('');
+}
+
+// Function composition that first capitalizes the string and then reverses it
+const text = "hello world";
+const result = reverseString(capitalizeString(text));
+
+console.log(result); // Output: "dlrow olleh"
+Function composition allows you to take multiple functions and turn them into one when needed. It’s a powerful way of architecting your code and keeps you from creating many functions copied and pasted with tiny differences between them.
+
+Wrap Up
+Functional programming is a paradigm focused on creating reliable, maintainable, and scalable code. By organizing your code into multiple isolated functions, each working independently, and embracing immutability, pure functions, and function compositions, functional programming enhances readability and predictability.
+
+Immutability ensures data remains unchanged, creating a more predictable codebase and supporting better performance in modern processors.
+Pure functions enable “referential transparency,” simplifying testing and analysis.
+Function compositions offer expressive pipelines, promoting code reusability, and facilitating easier maintenance.
