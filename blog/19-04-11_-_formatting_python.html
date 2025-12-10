@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="19-04-11 - Formatting Python" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>19-04-11 - Formatting Python</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>19-04-11 - Formatting Python</h1>
+<p>This week I got a little interested in best practice formatting for Python.</p>
+<p>Never been a big fan of formatting tools, however I found 2 python tools and I like them both.  Both are highly configurable but the only thing I've changed so far is to extend the max line length to 110 characters and to change the indent level to 3 characters.</p>
+<ul>
+<li>
+<p>pylint3 - this tool checks formatting and produces a detailed description of improvements which can be made.</p>
+</li>
+<li>
+<p>yapf - this formats python code.</p>
+</li>
+</ul>
+<h2 id="changing-the-config-options">Changing the config Options</h2>
+<p>For yapf - create a style definition document as follows and then modify to change the settings.</p>
+<div class="codehilite"><pre><span></span><code>yapf --style-help &gt; ~/.style.yapf
+</code></pre></div>
+
+<p>The changes I made are:</p>
+<div class="codehilite"><pre><span></span><code>continuation_indent_width=3
+indent_width=3
+column_limit=109
+</code></pre></div>
+
+<p>For pylint3, I've chosen to change the two settings using command line parameters.</p>
+<div class="codehilite"><pre><span></span><code>pylint3 --max-line-length=110 --indent-string=&#39;   &#39; --indent-after-paren=3 ...
+</code></pre></div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: November 25, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

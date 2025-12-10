@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Google Cloud Platform" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>Google Cloud Platform</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>Google Cloud Platform</h1>
+<h1 id="gcp-aead-sql-encryption">GCP AEAD SQL Encryption</h1>
+<p>A walk through using the AEAD SQL encryption functions (Private Beta as off Nov 2018)</p>
+<p>In this example I encrypt some PPI data (person name).  I encrypt each name twice.  </p>
+<ul>
+<li>
+<p>The first encryption uses a key which is unique to the person and is stored in a parallel person key table.  This type of encryption is a great way to implement the GDPR "right to be forgotten" rule.  To forget a person we don't need to locate and delete all PPI records in all tables, we just need to delete the person key record.  The renders all the person data encrypted using the person key unreadable.</p>
+</li>
+<li>
+<p>The second encryption uses a key unique to the field in the person record.  This key is passed as a parameter into the read / write SQL.  This key can be stored outside of GCP (or in a different project).  If this key is protected using a different authentication process, this gives cryptographically secured two factor authentication.</p>
+</li>
+</ul>
+<h2 id="step-1-create-a-keyset-json-string-to-use-in-following-queries-to-encrypt-the-column">Step 1: Create a keyset JSON string to use in following queries to encrypt the column</h2>
+<p>Exporting the key as a JSON document means we can pass this as a text parameter into BigQuery SQL queries.</p>
+<div class="codehilite"><pre><span></span><code><span class="nv">&gt;</span><span class="c"> bq query </span><span class="nb">--</span><span class="c">use_legacy_sql=false \</span>
+<span class="c">           &quot;SELECT KEYS</span><span class="nt">.</span><span class="c">KEYSET_TO_JSON(KEYS</span><span class="nt">.</span><span class="c">NEW_KEYSET(&#39;AEAD_AES_GCM_256&#39;))&quot;</span>
+
+<span class="c">Waiting on bqjob_r711c9125fb3c8635_00000166f7fcd20e_1 </span><span class="nt">...</span><span class="c"> (0s) Current status: DONE</span>
+
+<span class="nb">+----------------------------------------------------------------------------------------------------------------+</span>
+<span class="c">| f0_                                                                                                            |</span>
+<span class="nb">+----------------------------------------------------------------------------------------------------------------+</span>
+<span class="c">| {&quot;key&quot;:</span><span class="k">[</span><span class="c">{&quot;keyData&quot;:{&quot;keyMaterialType&quot;:&quot;SYMMETRIC&quot;</span><span class="nt">,</span><span class="c">&quot;typeUrl&quot;:&quot;type</span><span class="nt">.</span><span class="c">googleapis</span><span class="nt">.</span><span class="c">com/google</span><span class="nt">.</span><span class="c">crypto</span><span class="nt">.</span><span class="c">tink</span><span class="nt">.</span><span class="c">AesGcmKey&quot; |</span>
+<span class="c">| </span><span class="nt">,</span><span class="c">&quot;value&quot;:&quot;GiCUh160exVnX5GBZNsPAzeHamcuxMqIlzmzBAhcDg/mtQ==&quot;}                                                   |</span>
+<span class="c">| </span><span class="nt">,</span><span class="c">&quot;keyId&quot;:3252846060</span><span class="nt">,</span><span class="c">&quot;outputPrefixType&quot;:&quot;TINK&quot;</span><span class="nt">,</span><span class="c">&quot;status&quot;:&quot;ENABLED&quot;}</span><span class="k">]</span><span class="nt">,</span><span class="c">&quot;primaryKeyId&quot;:3252846060}                  |</span>
+<span class="nb">+----------------------------------------------------------------------------------------------------------------+</span>
+</code></pre></div>
+
+<h2 id="step-2-drop-the-person_source-table-if-it-exists-then-create-the-person_source-table">Step 2: Drop the person_source table if it exists, then create the person_source table</h2>
+<p>The person_source table is the un-encrypted version of the table which is only here as part of the example.  The protected table is called person_encrypted and is created below.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">&gt; </span><span class="ge">bq query --use_legacy_sql=false \</span>
+           &quot;DROP TABLE test.person_source&quot;
+
+Waiting on bqjob_r4f94c6b837a63b6d_00000166f7fce4b6_1 ... (0s) Current status: DONE
+
+<span class="k">&gt; </span><span class="ge">bq query --use_legacy_sql=false \</span>
+           &quot;CREATE TABLE test.person_source (id INT64, name STRING)&quot;
+
+Waiting on bqjob_r2a101370e655b92d_00000166f7fcf1cf_1 ... (0s) Current status: DONE
+</code></pre></div>
+
+<h2 id="step-3-load-names-into-the-person_source-table">Step 3: Load names into the person_source table</h2>
+<div class="codehilite"><pre><span></span><code><span class="k">&gt; </span><span class="ge">bq query --use_legacy_sql=false \</span>
+           &quot;INSERT test.person_source (id, name) VALUES (1, &#39;Jacob&#39;), (2, &#39;Michael&#39;), (3, &#39;Joshua&#39;) \
+                                                      , (4, &#39;Matthew&#39;), (5, &#39;Christopher&#39;), (6, &#39;Andrew&#39;) \
+                                                      , (7, &#39;Daniel&#39;), (8, &#39;Ethan&#39;), (9, &#39;Joseph&#39;) \
+                                                      , (10, &#39;William&#39;)&quot;
+
+Waiting on bqjob_r275805bf8882b248_00000166f7fd0090_1 ... (0s) Current status: DONE
+</code></pre></div>
+
+<h2 id="step-4-query-the-person_source-table">Step 4: Query the person_source table</h2>
+<div class="codehilite"><pre><span></span><code><span class="k">&gt; </span><span class="ge">bq query --use_legacy_sql=false \</span>
+           &quot;SELECT id
+                 , name
+            FROM   test.person_source&quot;
+
+Waiting on bqjob_ra54130d4805ac55_00000166f7fd12c5_1 ... (0s) Current status: DONE
+
++----+-------------+
+| id | name        |
++----+-------------+
+|  4 | Matthew     |
+|  8 | Ethan       |
+|  3 | Joshua      |
+|  7 | Daniel      |
+|  9 | Joseph      |
+|  5 | Christopher |
+| 10 | William     |
+|  1 | Jacob       |
+|  2 | Michael     |
+|  6 | Andrew      |
++----+-------------+
+</code></pre></div>
+
+<h2 id="step-5-drop-the-person_keys-table-if-it-exists-then-create-the-person_keys-table">Step 5:  Drop the person_keys table if it exists, then create the person_keys table</h2>
+<div class="codehilite"><pre><span></span><code>bq query --use_legacy_sql=false \
+         &quot;DROP TABLE test.person_keys&quot;
+
+Waiting on bqjob_r6df2b79bd19fadb8_00000166f7fd2875_1 ... (0s) Current status: DONE
+
+bq query --use_legacy_sql=false \
+         &quot;CREATE TABLE test.person_keys (id INT64, keyset BYTES)&quot;
+
+Waiting on bqjob_r3f0247c2f3912181_00000166f7fd3598_1 ... (0s) Current status: DONE
+</code></pre></div>
+
+<h2 id="step-6-insert-into-the-person_keys-table-a-keyset-for-each-record-in-the-person_source-table">Step 6:  Insert into the person_keys table a keyset for each record in the person_source table</h2>
+<p>Each person key is unique to the person.</p>
+<div class="codehilite"><pre><span></span><code>bq query --use_legacy_sql=false \
+         &quot;INSERT INTO test.person_keys (id, keyset)
+          SELECT id
+               , KEYS.NEW_KEYSET(&#39;AEAD_AES_GCM_256&#39;)
+          FROM   test.person_source&quot;
+
+Waiting on bqjob_r2ae1b537b3e743f3_00000166f7fd42b6_1 ... (0s) Current status: DONE
+</code></pre></div>
+
+<h2 id="step-7-query-the-person_keys-table">Step 7:  Query the person_keys table</h2>
+<p>To show the list of unique person keys.</p>
+<div class="codehilite"><pre><span></span><code>bq query --use_legacy_sql=false \
+         &quot;SELECT id
+               , key
+          FROM   test.person_keys&quot;
+
+Waiting on bqjob_r126311790a1faa8e_00000166f82de588_1 ... (0s) Current status: DONE
+
++----+----------------------------------------------------------------------------------------------------------+
+| id | keyset                                                                                                   |
++----+----------------------------------------------------------------------------------------------------------+
+|  1 | CMbb5eYIEmQKWAowdHlwZS5nb29nbGVhR2NtS2V5EiIaIGQQtS9JhdBiWYlZ0lL/NuJkQ23Yh8VGuVsb7X+Gu/d7GAEQARjG2+XmCCAB |
+|  7 | CJeR0f0BEmQKWAowdHlwZS5nb29nbGVhR2NtS2V5EiIaIPt8RBW3P8NfOY8qL8l/mIfjjuUdzqHvwQ33NfX0iTTcGAEQARiXkdH9ASAB |
+|  9 | CPH1jbwKEmQKWAowdHlwZS5nb29nbGVhR2NtS2V5EiIaIC5aRPGITVaHszgWsuMoCVBn2jVGzmyvgC0Zy8tCuZPmGAEQARjx9Y28CiAB |
+|  4 | CJbb7KcPEmQKWAowdHlwZS5nb29nbGVhR2NtS2V5EiIaIDGtQyKAkM7rf4HNYELpb7gPdbMnS32Qsm/AmXkJacWlGAEQARiW2+ynDyAB |
+|  2 | CPWcxLgOEmQKWAowdHlwZS5nb29nbGVhcGlzL2V5EiIaIBd9fsTUu2/CtdahrlUv8gl57DHv/1K2WWE+oMcToQ6MGAEQARj1nMS4DiAB |
+|  8 | CIGquPkEEmQKWAowdHlwZSRpbmsuQWVzR2NtS2V5EiIaIH01l1QYjACelMLlFfLXoYI1gXFUUr0Ct/gkRHb9pSr0GAEQARiBqrj5BCAB |
+|  3 | CMyWxb0IEmQKWAowdHlwZS5nb29nbGVhcGlzLmNvbS9nb29KBN8U7XfOwyh63hTzc2iOqD6FiZOQr2UF7FW791OVGAEQARjMlsW9CCAB |
+| 10 | CNro++sFEmQKWAowdHlwZS5nb29nbGVhcGlzLmNvbS9nb29nbGUuY3J5cHRvLG9Cr4QzamKkVWAQwl0HWqMYBpVQGAEQARja6PvrBSAB |
+|  5 | CKbPvJQGEmQKWAowdHlwZS5nb29nbGVhcGlzLmNvbS9nb29nbGUuY3J5cHRvLfqjE5mJcbcOdM5nH08jCj2lvepSGAEQARimz7yUBiAB |
+|  6 | CO/I2K8CEmQKWAowdHlwZS5nb29nbGVhcGlzLmNvbS9nb29nbGUuY3J5PyumQg+ac2LW/PNyI7mteVNtWQu+mfB6GAEQARjvyNivAiAB |
++----+----------------------------------------------------------------------------------------------------------+
+</code></pre></div>
+
+<h2 id="step-8-drop-the-person_encrypted-table-if-it-exists-then-create-the-person_encrypted-table">Step 8:  Drop the person_encrypted table if it exists, then create the person_encrypted table</h2>
+<div class="codehilite"><pre><span></span><code>bq query --use_legacy_sql=false \
+         &quot;DROP TABLE test.person_encrypted&quot;
+
+Waiting on bqjob_r65d6e288d1b49fe9_00000166f7fd602b_1 ... (0s) Current status: DONE
+
+bq query --use_legacy_sql=false \
+         &quot;CREATE TABLE test.person_encrypted (id INT64, name BYTES)&quot;
+
+Waiting on bqjob_r61cb90a9bc9bfc2a_00000166f7fd6eaf_1 ... (0s) Current status: DONE
+</code></pre></div>
+
+<h2 id="step-9-use-the-column-keyset-json-string-as-a-parameter-to-encrypt-the-data">Step 9:  Use the Column keyset JSON string as a parameter to encrypt the data</h2>
+<p>We pass in the column encryption key JSON text as a parameter to BigQuery.  I'm assume this is safe as bq utility will encrypt the data in transit to GCP.  person_source records are encrypted and stored in the person_encrypted table.</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">bq</span><span class="w"> </span><span class="nx">query</span><span class="w"> </span><span class="o">--</span><span class="nx">use_legacy_sql</span><span class="p">=</span><span class="kc">false</span><span class="w"> </span>\
+<span class="w">         </span><span class="o">--</span><span class="nx">parameter</span><span class="p">=</span><span class="nx">pKeysetJSON</span><span class="p">:</span><span class="kt">string</span><span class="p">:{</span><span class="s">&quot;key&quot;</span><span class="p">:[{</span><span class="s">&quot;keyData&quot;</span><span class="p">:{</span><span class="s">&quot;keyMaterialType&quot;</span><span class="p">:</span><span class="s">&quot;SYMMETRIC&quot;</span><span class="p">,</span><span class="s">&quot;typeUrl&quot;</span><span class="p">:</span><span class="s">&quot;type.googleapis.com/google.crypto.tink.AesGcmKey&quot;</span><span class="p">,</span><span class="s">&quot;value&quot;</span><span class="p">:</span><span class="s">&quot;GiBwYd/0Nq59woCCMf7s1msmKFhMIfSceoHUX0Fl3LiNWw==&quot;</span><span class="p">},</span><span class="s">&quot;keyId&quot;</span><span class="p">:</span><span class="mi">1869443697</span><span class="p">,</span><span class="s">&quot;outputPrefixType&quot;</span><span class="p">:</span><span class="s">&quot;TINK&quot;</span><span class="p">,</span><span class="s">&quot;status&quot;</span><span class="p">:</span><span class="s">&quot;ENABLED&quot;</span><span class="p">}],</span><span class="s">&quot;primaryKeyId&quot;</span><span class="p">:</span><span class="mi">1869443697</span><span class="p">}</span><span class="w"> </span>\
+<span class="w">         </span><span class="s">&quot;INSERT INTO test.person_encrypted (id, name)</span>
+<span class="s">          SELECT ps.id</span>
+<span class="s">               , AEAD.ENCRYPT(ck.keyset, AEAD.ENCRYPT(pk.keyset, ps.name, &#39;&#39;), ck.keyset)</span>
+<span class="s">          FROM   test.person_source ps</span>
+<span class="s">          JOIN   test.person_keys pk ON (s.id = ps.id)</span>
+<span class="s">          JOIN   (SELECT KEYS.KEYSET_FROM_JSON(@pKeysetJSON) AS keyset) ck ON person_enc(1=1)&quot;</span>
+
+<span class="nx">Waiting</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">bqjob_r5f7c1d15a55c1a4d_00000166f7fd7be1_1</span><span class="w"> </span><span class="o">...</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="nx">s</span><span class="p">)</span><span class="w"> </span><span class="nx">Current</span><span class="w"> </span><span class="nx">status</span><span class="p">:</span><span class="w"> </span><span class="nx">DONE</span>
+</code></pre></div>
+
+<h2 id="step-10-query-the-person_encrypted-table">Step 10:  Query the person_encrypted Table</h2>
+<p>The table contents are unreadable.</p>
+<div class="codehilite"><pre><span></span><code>bq query --use_legacy_sql=false \
+         &quot;SELECT id
+               , name
+          FROM   test.person_encrypted&quot;
+
+Waiting on bqjob_r72942984bbbbb556_00000166f7fd8e7f_1 ... (0s) Current status: DONE
+
++----+----------------------------------------------------------------------------------------------------------+
+| id | name                                                                                                     |
++----+----------------------------------------------------------------------------------------------------------+
+|  3 | AW9tcnED+aOoW5gjUBuzXY0zs5vmOagil3v8noyXAC0FD0X8bXrqjx2EhGv7KVsZjCrVNoTJuHRAh8ei0nimikhBCxFRxNdt         |
+| 10 | AW9tcnEfTXAPOCCmO9TLjM3u/RAkoDLSW/RMaFxnU9OZ249CJUZ8sHBdYMvHKDNGbkx6Kx0YQxpf+lUZWUjRPLOy5rjbTypXYA==     |
+|  4 | AW9tcnFQ/0s2NlmK/u+KT9aa/xGaqXzdj0DvoyKvdLz0jqxNesXqDdl3zWheaq5l40/ZZrZIbjQcI2s5cRYHaOq5/kMBJOVvug==     |
+|  6 | AW9tcnG6hl1aZZh9clBw/VA5kts9CX0dXyplNrjkUmSU/vwTimvh5qXurX8/ipj94putjiP3GKDCxuGqZzEoUrAZ9pS7BsuK         |
+|  1 | AW9tcnEnxzS/m57+E6vGBZuvDaTsNnrnzaGwFxfO+eAR89UZZB52fXv0syNMN/kDeFlcwKXSm/IN4KArKEj9yPI0LCCcmnQ=         |
+|  2 | AW9tcnGap7569wRg7z9IS2TcGw0zY3mtkCmWPVhfSdmkDwg15oyq+C6ZL/vdxZaM5csr8SrV1ZXcHnkb7OAMG2eNNVgL3Sb7cQ==     |
+|  9 | AW9tcnG9m7DBQFr+rOXBZ2V5YEs43sYEaGNK5Zy7IqFKtrzfbsSdWDm6xomnYRJ2dFE2j7W/x08c+48AJzBPT7CuIqQGZP+C         |
+|  5 | AW9tcnHvwirdA8MNtMoBMk/RF671wPW+8gTDVeLJ4O1CKxYYiQ9via94YeNBAI9gJ6aDg3LfHajguAb86LBh8SfF4U9yujbkJouRcc0= |
+|  7 | AW9tcnET849pBVdmbF+oq+PFAS4skW6e9S2cJU1EPF430TzHr/80E0NHfjHbngkFrZ7RWC4U/atDcdrCOLAzBK8n9WMl9pwp         |
+|  8 | AW9tcnHX01SlHSstEs2OfNXGTVB4IT0ouXfKNMZuiwG7FkXPPkv1mfWKEPwUSZcbEkNQLr0+VUXXQj0SDYZURTiQPV0SYr8=         |
++----+----------------------------------------------------------------------------------------------------------+
+</code></pre></div>
+
+<h2 id="step-11-query-person_encrypted-and-decrypt-at-query-time">Step 11:  Query person_encrypted and decrypt at query time</h2>
+<p>We pass in the column encryption key JSON text as a parameter to BigQuery.  I'm assume this is safe as bq utility will encrypt the data in transit to GCP.</p>
+<div class="codehilite"><pre><span></span><code><span class="p">&gt;</span><span class="w"> </span><span class="nx">bq</span><span class="w"> </span><span class="nx">query</span><span class="w"> </span><span class="o">--</span><span class="nx">use_legacy_sql</span><span class="p">=</span><span class="kc">false</span><span class="w"> </span>\
+<span class="w">           </span><span class="o">--</span><span class="nx">parameter</span><span class="p">=</span><span class="nx">pKeysetJSON</span><span class="p">:</span><span class="kt">string</span><span class="p">:{</span><span class="s">&quot;key&quot;</span><span class="p">:[{</span><span class="s">&quot;keyData&quot;</span><span class="p">:{</span><span class="s">&quot;keyMaterialType&quot;</span><span class="p">:</span><span class="s">&quot;SYMMETRIC&quot;</span><span class="p">,</span><span class="s">&quot;typeUrl&quot;</span><span class="p">:</span><span class="s">&quot;type.googleapis.com/google.crypto.tink.AesGcmKey&quot;</span><span class="p">,</span><span class="s">&quot;value&quot;</span><span class="p">:</span><span class="s">&quot;GiBwYd/0Nq59woCCMf7s1msmKFhMIfSceoHUX0Fl3LiNWw==&quot;</span><span class="p">},</span><span class="s">&quot;keyId&quot;</span><span class="p">:</span><span class="mi">1869443697</span><span class="p">,</span><span class="s">&quot;outputPrefixType&quot;</span><span class="p">:</span><span class="s">&quot;TINK&quot;</span><span class="p">,</span><span class="s">&quot;status&quot;</span><span class="p">:</span><span class="s">&quot;ENABLED&quot;</span><span class="p">}],</span><span class="s">&quot;primaryKeyId&quot;</span><span class="p">:</span><span class="mi">1869443697</span><span class="p">}</span><span class="w"> </span>\
+<span class="w">           </span><span class="s">&quot;SELECT pe.id</span>
+<span class="s">                 , AEAD.DECRYPT_STRING(s.keyset, AEAD.DECRYPT_BYTES(ck.keyset, pe.name, ck.keyset), &#39;&#39;) AS name</span>
+<span class="s">            FROM   test.person_encrypted pe</span>
+<span class="s">            JOIN   test.person_keys pk ON (pk.id = pe.id)</span>
+<span class="s">            JOIN   (SELECT KEYS.KEYSET_FROM_JSON(@pKeysetJSON) AS keyset) ck ON (1=1)&quot;</span>
+
+<span class="nx">Waiting</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">bqjob_r7541af8cd788eab7_00000166f7fda0ef_1</span><span class="w"> </span><span class="o">...</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="nx">s</span><span class="p">)</span><span class="w"> </span><span class="nx">Current</span><span class="w"> </span><span class="nx">status</span><span class="p">:</span><span class="w"> </span><span class="nx">DONE</span>
+
+<span class="o">+----+-------------+</span>
+<span class="o">|</span><span class="w"> </span><span class="nx">id</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">name</span><span class="w">        </span><span class="o">|</span>
+<span class="o">+----+-------------+</span>
+<span class="o">|</span><span class="w">  </span><span class="mi">3</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">Joshua</span><span class="w">      </span><span class="o">|</span>
+<span class="o">|</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">William</span><span class="w">     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">  </span><span class="mi">4</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">Matthew</span><span class="w">     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">  </span><span class="mi">6</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">Andrew</span><span class="w">      </span><span class="o">|</span>
+<span class="o">|</span><span class="w">  </span><span class="mi">1</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">Jacob</span><span class="w">       </span><span class="o">|</span>
+<span class="o">|</span><span class="w">  </span><span class="mi">2</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">Michael</span><span class="w">     </span><span class="o">|</span>
+<span class="o">|</span><span class="w">  </span><span class="mi">9</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">Joseph</span><span class="w">      </span><span class="o">|</span>
+<span class="o">|</span><span class="w">  </span><span class="mi">5</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">Christopher</span><span class="w"> </span><span class="o">|</span>
+<span class="o">|</span><span class="w">  </span><span class="mi">7</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">Daniel</span><span class="w">      </span><span class="o">|</span>
+<span class="o">|</span><span class="w">  </span><span class="mi">8</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">Ethan</span><span class="w">       </span><span class="o">|</span>
+<span class="o">+----+-------------+</span>
+</code></pre></div>
+
+<hr>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: November 25, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

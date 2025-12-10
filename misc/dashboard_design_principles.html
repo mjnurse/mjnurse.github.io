@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Dashboard Design Principles" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>Dashboard Design Principles</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>Dashboard Design Principles</h1>
+<p>'The greatest value of a picture is when it forces us to notice what we never expected to see'<em>John Tukey, 'Exploratory Data Analysis', 1977</em></p>
+<p>'A picture is worth a thousand words. An interface is worth a thousand pictures'<em>Ben Shneiderman, 2003</em></p>
+<p>'Data becomes useful knowledge of something that matters when it builds a bridge between a question and an answer. This connection is the signal.' <em>Stephen Few, 'Signal: Understanding What Matters in a World of Noise, 2015</em></p>
+<p>'Graphical excellence is that which gives to the viewer the greatest number of ideas in the shortest time with the least ink in the smallest space.' <em>Edward R. Tufte, 'The Visual Display of Quantitative Information', 2nd. Ed.</em></p>
+<p><em>Data Visualisation should enable us to present insights and better representations of the truth so that businesses can make accurate and informed decisions in the least amount of time.</em></p>
+<h1 id="choosing-the-right-chart-type">Choosing The Right Chart Type</h1>
+<h2 id="displaying-nominal-data">Displaying Nominal Data</h2>
+<p>Use bar charts for nominal data. A line chart suggests progression of data values left to right.</p>
+<p><img alt="" src="images/dashboard-design-01.png" /> <img alt="" src="images/dashboard-design-99.png" />
+<img alt="" src="images/dashboard-design-02.png" /> <img alt="" src="images/dashboard-design-97.png" /></p>
+<h2 id="displaying-qualitative-data">Displaying Qualitative Data</h2>
+<p>Bar charts, particularly stacked bar charts, work well with Qualitative data.</p>
+<p><img alt="" src="images/dashboard-design-05.png" /> <img alt="" src="images/dashboard-design-97.png" />
+<img alt="" src="images/dashboard-design-06.png" /> <img alt="" src="images/dashboard-design-98.png" /></p>
+<h2 id="displaying-sequential-data-trends-over-time">Displaying Sequential Data - Trends Over Time</h2>
+<p>Always left to right. Line graphs are good for comparing multiple trend categories.</p>
+<p><img alt="" src="images/dashboard-design-07.png" /> <img alt="" src="images/dashboard-design-99.png" />
+<img alt="" src="images/dashboard-design-08.png" /> <img alt="" src="images/dashboard-design-97.png" /></p>
+<h2 id="bubble-charts">Bubble Charts</h2>
+<p>Bubble charts are a powerful chart for showing data across 3 dimensions for multiple categories.</p>
+<p><img alt="" src="images/dashboard-design-09.png" />
+<img alt="" src="images/dashboard-design-10.png" /></p>
+<h2 id="take-care-with-bubbles-they-can-be-deceiving">Take Care With Bubbles - They Can Be Deceiving</h2>
+<p>In the charts below the UK value is half the US value but the UK bubble is deceivingly large.</p>
+<p><img alt="" src="images/dashboard-design-11.png" />
+<img alt="" src="images/dashboard-design-12.png" /></p>
+<h2 id="use-pie-charts-with-care">Use Pie Charts With Care</h2>
+<p>If you use a pie chart label the segments. For example which has larger sales, Rabbit or Rat?</p>
+<p><img alt="" src="images/dashboard-design-13.png" /> <img alt="" src="images/dashboard-design-99.png" />
+<img alt="" src="images/dashboard-design-14.png" /> <img alt="" src="images/dashboard-design-97.png" /></p>
+<h2 id="a-well-structured-bar-chart-is-often-much-clearer-and-more-compact-than-a-pie-chart">A Well Structured Bar Chart Is Often Much Clearer and More Compact Than a Pie Chart</h2>
+<p>Visual perception works better comparing attribute line length vs. angles and areas.</p>
+<p><img alt="" src="images/dashboard-design-15.png" /> <img alt="" src="images/dashboard-design-99.png" />
+<img alt="" src="images/dashboard-design-16.png" /> <img alt="" src="images/dashboard-design-97.png" /></p>
+<h1 id="using-colours-appropriately">Using Colours Appropriately</h1>
+<p>Use colours sparingly - only use colour when it has meaning. Note: 10% males and 1% females cannot distinguish between Red and Green</p>
+<p><img alt="" src="images/dashboard-design-17.png" /> <img alt="" src="images/dashboard-design-99.png" />
+<img alt="" src="images/dashboard-design-18.png" /> <img alt="" src="images/dashboard-design-97.png" /></p>
+<p>Use colour as a dimension.</p>
+<p><img alt="" src="images/dashboard-design-19.png" /> <img alt="" src="images/dashboard-design-97.png" />
+<img alt="" src="images/dashboard-design-20.png" /> <img alt="" src="images/dashboard-design-97.png" /></p>
+<h1 id="ordering-data">Ordering Data</h1>
+<h2 id="consider-ordering-by-measures-rather-than-categories">Consider Ordering By Measures Rather Than Categories</h2>
+<p>Ordering charts my the measure can help with comparisons and finding minimum/maximum values.</p>
+<p><img alt="" src="images/dashboard-design-21.png" /> <img alt="" src="images/dashboard-design-97.png" />
+<img alt="" src="images/dashboard-design-22.png" /> <img alt="" src="images/dashboard-design-98.png" /></p>
+<h2 id="grouping">Grouping</h2>
+<p>Group Low Value Categories To Save Space And Focus On The Key Items.</p>
+<p><img alt="" src="images/dashboard-design-23.png" /> <img alt="" src="images/dashboard-design-97.png" />
+<img alt="" src="images/dashboard-design-24.png" /> <img alt="" src="images/dashboard-design-98.png" /></p>
+<h1 id="chart-axis">Chart Axis</h1>
+<h2 id="axis-scales">Axis Scales</h2>
+<p><strong>Nominal</strong>: Discrete items from a shared category but with no intrinsic order: e.g. Red, Green, Blue, Yellow.</p>
+<p><strong>Ordinal</strong>: Items that have an intrinsic order but do not correspond to quantitative values: e.g. A,B,C,D,E</p>
+<p><strong>Interval</strong>: Items that have an intrinsic order and correspond to quantitative values: e.g. Jan, Feb, Mar, Apr, May...</p>
+<h2 id="orientation">Orientation</h2>
+<p>Charts should normally be wider than they are tall - typically 50% wider than tall.</p>
+<p>Eye is naturally practised in detecting deviations from the horizon.</p>
+<p>Where the X and Y axis values are compared (for example in scatter plot) then the Chart can be square to avoid any bias.</p>
+<h2 id="axis-labels">Axis Labels</h2>
+<p>Avoid overlapping labels - rotate text where appropriate. However if you see users tilting their head, consider swapping the axes.</p>
+<p><img alt="" src="images/dashboard-design-25.png" /> <img alt="" src="images/dashboard-design-99.png" />
+<img alt="" src="images/dashboard-design-26.png" /> <img alt="" src="images/dashboard-design-97.png" />
+<img alt="" src="images/dashboard-design-27.png" /> <img alt="" src="images/dashboard-design-97.png" /></p>
+<h2 id="bar-chart-axis-start-point">Bar Chart Axis Start Point</h2>
+<p>Bar Charts should normally start from 0 on the measure axis. A compressed axis can hide the differences.</p>
+<p><img alt="" src="images/dashboard-design-03.png" /> <img alt="" src="images/dashboard-design-97.png" />
+<img alt="" src="images/dashboard-design-04.png" /> <img alt="" src="images/dashboard-design-98.png" /></p>
+<h2 id="consider-using-charts-to-plot-percentage-change-rather-than-value">Consider Using Charts To Plot Percentage Change Rather Than Value</h2>
+<p>Use colours sparingly - only use colour when it has meaning. Note: 10% males and 1% females cannot distinguish between Red and Green</p>
+<p><img alt="" src="images/dashboard-design-28.png" /> <img alt="" src="images/dashboard-design-99.png" />
+<img alt="" src="images/dashboard-design-29.png" /> <img alt="" src="images/dashboard-design-97.png" /></p>
+<h1 id="formatting-charts">Formatting Charts</h1>
+<h2 id="remove-unnecessary-chart-decoration">Remove Unnecessary Chart Decoration</h2>
+<p>Any pixels which are not directly conveying data should be avoided/removed.</p>
+<p><img alt="" src="images/dashboard-design-30.png" /> <img alt="" src="images/dashboard-design-99.png" />
+<img alt="" src="images/dashboard-design-31.png" /> <img alt="" src="images/dashboard-design-97.png" /></p>
+<h2 id="3d-charts">3D Charts</h2>
+<p>Avoid 3D Charts - They rarely help to explain the data.</p>
+<p><img alt="" src="images/dashboard-design-32.png" /> <img alt="" src="images/dashboard-design-99.png" />
+<img alt="" src="images/dashboard-design-33.png" /> <img alt="" src="images/dashboard-design-99.png" /></p>
+<h1 id="simplify-charts">Simplify Charts</h1>
+<h2 id="consider-breaking-up-difficult-to-read-charts">Consider Breaking Up Difficult To Read Charts</h2>
+<p>Charts with multiple categories can confuse the message. Consider using a collection of simple charts in its place.</p>
+<p><img alt="" src="images/dashboard-design-34.png" /></p>
+<p>Create one chart for each category. Ensure all charts share the same axis range so charts can be compared.</p>
+<p><img alt="" src="images/dashboard-design-50.png" /></p>
+<h1 id="in-table-charts">In Table Charts</h1>
+<p>Small charts embedded in tables can bring the data to life.</p>
+<p><img alt="" src="images/dashboard-design-41.png" /></p>
+<h1 id="tables">Tables</h1>
+<h2 id="creating-effective-tables">Creating Effective Tables</h2>
+<ul>
+<li><strong>Do not use a grid </strong>to define rows and columns</li>
+<li>To separate rows, use only <strong>whitespace</strong> whenever possible</li>
+<li>Second choice: use a <strong>subtle fill color </strong>('zebra striping') or a <strong>subtle gridlines</strong> (grey, dotted)</li>
+<li>Columns rarely need anything other than whitespace and proper alignment (see next page)</li>
+<li>Use simple dark borders below the column headings and at the bottom of the table</li>
+<li>Text alignment/formatting <strong>Column headers </strong>should align with the information contained in the columns:</li>
+<li><strong>Text</strong> - Align left</li>
+<li><strong>Dates</strong> - Align left; make consistent width</li>
+<li><strong>Numbers</strong> - Align right; use consistent number of decimal places</li>
+</ul>
+<p><img alt="" src="images/dashboard-design-42.png" /> <img alt="" src="images/dashboard-design-99.png" />
+<img alt="" src="images/dashboard-design-43.png" /> <img alt="" src="images/dashboard-design-97.png" />
+<img alt="" src="images/dashboard-design-44.png" /> <img alt="" src="images/dashboard-design-97.png" />
+<img alt="" src="images/dashboard-design-45.png" /> <img alt="" src="images/dashboard-design-97.png" /></p>
+<h2 id="using-colour-in-tables-can-highlight-important-cells">Using Colour In Tables Can Highlight Important Cells</h2>
+<p>Limit the number of cells being coloured otherwise the value of the highlight can be lost. Limit the number of colours used.</p>
+<p><img alt="" src="images/dashboard-design-46.png" /> <img alt="" src="images/dashboard-design-99.png" />
+<img alt="" src="images/dashboard-design-47.png" /> <img alt="" src="images/dashboard-design-97.png" /></p>
+<hr>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: December 01, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

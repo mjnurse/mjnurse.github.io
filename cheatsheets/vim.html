@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="ViM CheatSheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>ViM CheatSheet</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>ViM CheatSheet</h1>
+<div class="table-of-contents">
+<h2>Contents</h2>
+<ul>
+<li><a href="#vim-cheat-sheet">ViM Cheat Sheet</a></li>
+<li class="toc-h2"><a href="#navigation">Navigation</a></li>
+<li class="toc-h2"><a href="#cut-and-paste">Cut and paste</a></li>
+<li class="toc-h2"><a href="#marks">Marks</a></li>
+<li class="toc-h2"><a href="#editing">Editing</a></li>
+<li class="toc-h2"><a href="#macros">Macros</a></li>
+<li class="toc-h2"><a href="#search-replace">Search Replace</a></li>
+<li class="toc-h2"><a href="#range">Range</a></li>
+<li class="toc-h2"><a href="#escaped-characters">Escaped Characters</a></li>
+<li class="toc-h2"><a href="#string-ranges">String Ranges</a></li>
+<li class="toc-h2"><a href="#using-matched-characters-in-replacement-string">Using Matched Characters In Replacement String</a></li>
+<li class="toc-h2"><a href="#alternations">Alternations</a></li>
+<li class="toc-h2"><a href="#regexp-operator-precedence">Regexp Operator Precedence</a></li>
+<li class="toc-h2"><a href="#global-command---global-search-and-execution">Global Command - Global search and execution</a></li>
+<li class="toc-h2"><a href="#misc">Misc</a></li>
+<li class="toc-h2"><a href="#vimrc">vimrc</a></li>
+</ul>
+</div>
+<h1 id="vim-cheat-sheet">ViM Cheat Sheet</h1>
+<h2 id="navigation">Navigation</h2>
+<p>| <code>h, j, k, l</code> | Move cursor left, down, up, right |
+| <code>w</code> | Jump to start of next word (W - words inc. punctuation) |
+| <code>e</code> | Jump to end of next word (E - words inc. punctuation) |
+| <code>b</code> | Jump to start of previous word (B - words inc. punctuation) |
+| <code>0</code> | Jump to the start of the line |
+| <code>^</code> | Jump to the first non-blank character of the line |
+| <code>$</code> | Jump to the end of the line |
+| <code>}, {</code> | Jump to next, previous paragraph |</p>
+<h2 id="cut-and-paste">Cut and paste</h2>
+<p>| <code>yy</code> | Yank (copy) a line (2yy - 2 lines) |
+| <code>yw</code> | Yank (copy) word |
+| <code>y$</code> | Yank (copy) to end of line |
+| <code>p</code> | Paste the clipboard after cursor (P - before) |
+| <code>dd</code> | Delete a line (2dd - 2 lines) |
+| <code>dw</code> | Delete word |
+| <code>D</code> | Delete to the end of the line |
+| <code>d$</code> | Delete to the end of the line |
+| <code>x</code> | Delete character |</p>
+<h2 id="marks">Marks</h2>
+<p>| <code>m[a-z]</code> | Create a mark labelled a,b,c..z |
+| <code>'[a-z]</code> | Jump to mark a.b.c..z (or use in range) |</p>
+<h2 id="editing">Editing</h2>
+<p>| <code>i</code> | Insert before cursor (I - beginning of line) |
+| <code>a</code> | Insert after cursor (A - end of line) |
+| <code>o</code> | Append (open) a new line below the current line |
+| <code>O</code> | Append (open) a new line above the current line |
+| <code>ea</code> | Insert (append) at the end of the word |
+| <code>Esc</code> | Exit insert mode |
+| <code>r</code> | Replace a single character (R - replace until Esc.) |
+| <code>J</code> | Join line below to the current one |
+| <code>cc</code> | Replace entire line |
+| <code>cw</code> | Replace to the end of the word |
+| <code>c$</code> | Replace to the end of the line |
+| <code>s</code> | Delete character and substitute text |
+| <code>S</code> | Delete line and substitute text (same as cc) |
+| <code>xp</code> | Transpose two letters (delete and paste) |
+| <code>u</code> | Undo (Ctrl+r - redo) |
+| <code>.</code> | Repeat last command |
+| <code>~</code> | Switch case |
+| <code>guw gUw</code> | Lower, upper case from current char to end word |</p>
+<h3 id="operator-text-object-motion">Operator - Text Object - Motion</h3>
+<p>Operator: <strong>d</strong>elete, <strong>c</strong>hange, <strong>v</strong>isual select , <strong>r</strong>eplace</p>
+<p>Text Object: <strong>i</strong>nside, <strong>a</strong>round</p>
+<p>Motion:</p>
+<p>| <code>w</code> | word |
+| <code>W</code> | WORD (includes special chars) |
+| <code>b</code> or <code>(</code> | block (of parentheses) |
+| <code>B</code> or <code>{</code> | BLOCK (of curly braces) |
+| <code>[</code> | brackets |
+| <code>'</code> | single quotes |
+| <code>"</code> | double quotes |
+| <code>t</code> | tag (html or xml <tag></tag>) |
+| <code>p</code> | paragraph |
+| <code>s</code> | sentence |</p>
+<p>eg.</p>
+<p>| <code>di{</code> | delete text inside the { } brackets |
+| <code>vo"</code> | visual select of text inside and including "'s |</p>
+<h2 id="macros">Macros</h2>
+<p>| <code>q[a-z]</code> | Start recording macro named a,b,c..z. q ends recording |
+| <code>@[a-z]</code> | Replay macro named a,b,c..z |</p>
+<h2 id="search-replace">Search Replace</h2>
+<p><code>:&lt;range&gt;s/&lt;search string&gt;/&lt;replace string&gt;[/cgiI]</code></p>
+<p>| <code>c</code> | Confirm each replacement |
+| <code>g</code> | All instances on a line |
+| <code>i</code> | Ignore case (I - don't ignore case) |</p>
+<h2 id="range">Range</h2>
+<p>| <code>num</code> | An absolute line number |
+| <code>.</code> | The current line |
+| <code>$</code> | The last line in the file |
+| <code>%</code> | The whole file. |
+| <code>'t</code> | Position of mark "t" |
+| <code>n..m</code> | Lines numbered n to m inclusive |</p>
+<h2 id="escaped-characters">Escaped Characters</h2>
+<p>| <code>.</code> | Any character except new line (.* - includes empty lines) |
+| <code>\.</code> | . character |
+| <code>\s</code> | Whitespace character (\S - non-whitespace character) |
+| <code>\d</code> | Digit (\D - non-digit) |
+| <code>\x</code> | Hex digit (\X - non-hex digit) |
+| <code>\o</code> | Octal digit (\O - non-octal digit) |
+| <code>\h</code> | Head of word character (a,b,c...z,A,B,C...Z and _) (\H - non-head of word character) |
+| <code>\p</code> | Printable character (\P - excluding digits) |
+| <code>\w</code> | Word character (\W - non-word character) |
+| <code>\a</code> | Alphabetic character (\A - non-alphabetic character) |
+| <code>\l</code> | Lowercase character (\L - non-lowercase character, more than A..Z) |
+| <code>\u</code> | Uppercase character (\U - non-uppercase character, more than a..z) |
+| <code>*</code> | Matches 0 or more of the preceding characters, ranges or metacharacters |
+| <code>\+</code> | Matches 1 or more of the preceding characters |
+| <code>\=</code> | Matches 0 or 1 more of the preceding characters |
+| <code>\{n,m}</code> | Matches from n to m of the preceding character |
+| <code>\{n}</code> | Matches exactly n times of the preceding characters |
+| <code>\{,m}</code> | Matches at most m (from 0 to m) of the preceding characters |
+| <code>\{n,}</code> | Matches at least n of of the preceding characters |
+| <code>\{-}</code> | Matches 0 or more of the preceding atom, as few as possible |
+| <code>\{-n,m}</code> | Matches 1 or more of the preceding characters |
+| <code>\{-n,}</code> | Matches at lease or more of the preceding characters |
+| <code>\{-,m}</code> | Matches 1 or more of the preceding characters |</p>
+<h2 id="string-ranges">String Ranges</h2>
+<p>| <code>[0123abAC]</code> | Matches any of the characters inside the brackets |
+| <code>[a-zA-Z0-9]</code> | Matches lowercase characters, uppercase characters and digits |
+| <code>[^a-zA-Z0-9]</code> | Matches anything but [a-zA-Z0-9] "^" will lose its special meaning if it's not the first character in the range. |</p>
+<h2 id="using-matched-characters-in-replacement-string">Using Matched Characters In Replacement String</h2>
+<p>Search strings inside "(" and ")" can be used in replacement string reference as \1, \2 etc</p>
+<p>Replacement String Special Character</p>
+<p>| <code>\0</code> | The whole matched pattern |
+| <code>\L</code> | The following characters are made lowercase (terminate with \E or \e) |
+| <code>\U</code> | The following characters are made uppercase (terminate with \E or \e) |
+| <code>\l</code> | Next character made lowercase |
+| <code>\u</code> | Next character made uppercase |
+| <code>\r</code> | Split line in two at this point |
+| <code>&amp;</code> | The whole matched pattern |
+| <code>~</code> | The previous substitute string |</p>
+<h2 id="alternations">Alternations</h2>
+<p>" | <code>" can combine several expressions into one. The first one matched will be used.
+eg.</code>(Date: | Subject: | From:)(\s.*)` - matches Date: or Subject: first then whitespace.</p>
+<h2 id="regexp-operator-precedence">Regexp Operator Precedence</h2>
+<p>| 1 | Grouping | <code>\(\)[a-zA-Z0-9]</code> |
+| 2 | Quantifiers | <code>\=,\+,*,\{n} etc.</code> |
+| 3 | Characters | Sequence of characters/metacharacters<code>|
+| 4 | Alternation |</code>[a-zA-Z0-9]` |</p>
+<h2 id="global-command-global-search-and-execution">Global Command - Global search and execution</h2>
+<p><code>:&lt;range&gt;g[!]/&lt;pattern&gt;/&lt;cmd&gt;</code></p>
+<p>Execute the Ex command <cmd> (default ":p") on the lines within <range> where <pattern matches >. !<pattern> only line which don't match.</p>
+<p>Example Ex commands :s[ubstitute], :co , :d[elete], :w[rite] etc.</p>
+<p>eg. <code>:g/^$/d</code> - delete all empty lines in a file.
+eg. <code>:g/^$/,/./-j</code> - reduce multiple blank lines to a single blank.
+eg. <code>:10,20g/^/ mo 10</code> - reverse the order of the lines starting from the line 10 up to the line 20.</p>
+<h2 id="misc">Misc</h2>
+<p><code>:set ic</code> - ignore case, <code>:set noic</code>, <code>:set ic!</code> - toggle.</p>
+<h2 id="vimrc">vimrc</h2>
+<p><code>.vimrc</code> file:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">set</span> <span class="nb">hlsearch</span>
+<span class="k">set</span> <span class="nb">incsearch</span>
+<span class="k">set</span> <span class="nb">ic</span>
+
+<span class="c">&quot; Lets put all the filename~ backup and swp / un file in the temp folder.</span>
+<span class="k">set</span> <span class="nb">backupdir</span><span class="p">=</span>/tmp
+<span class="k">set</span> <span class="nb">directory</span><span class="p">=</span>/tmp
+<span class="k">set</span> <span class="nb">undodir</span><span class="p">=</span>/tmp
+
+<span class="c">&quot; 3 Character tab and convert these to spaces.</span>
+<span class="k">set</span> <span class="nb">tabstop</span><span class="p">=</span><span class="m">3</span> <span class="nb">softtabstop</span><span class="p">=</span><span class="m">0</span> <span class="nb">expandtab</span> <span class="nb">shiftwidth</span><span class="p">=</span><span class="m">3</span>
+<span class="k">let</span> <span class="k">b</span>:did_indent <span class="p">=</span> <span class="m">1</span>
+
+<span class="c">&quot; Map F2 to auto complete words in inset mode and to clear the last search otherwise.</span>
+map<span class="p">!</span> <span class="p">&lt;</span>F2<span class="p">&gt;</span> <span class="p">&lt;</span>C<span class="p">-</span>N<span class="p">&gt;</span>
+map  <span class="p">&lt;</span>F2<span class="p">&gt;</span> :<span class="k">noh</span><span class="p">&lt;</span>CR<span class="p">&gt;</span>
+
+<span class="c">&quot; Enable spell check.</span>
+<span class="k">set</span> <span class="k">spell</span> <span class="nb">spelllang</span><span class="p">=</span>en_gb
+<span class="k">set</span> <span class="nb">spellfile</span><span class="p">=~</span>/.vimspellfile.add
+<span class="k">set</span> <span class="nb">spellcapcheck</span><span class="p">=</span><span class="s2">&quot;&quot;</span>
+
+map <span class="p">&lt;</span>C<span class="p">-</span><span class="k">n</span><span class="p">&gt;</span> ]s
+map <span class="p">&lt;</span>C<span class="p">-</span><span class="k">p</span><span class="p">&gt;</span> [s
+map <span class="p">&lt;</span>C<span class="p">-</span><span class="k">l</span><span class="p">&gt;</span> z<span class="p">=</span>
+map <span class="p">&lt;</span>C<span class="p">-</span><span class="k">k</span><span class="p">&gt;</span> zg
+
+<span class="c">&quot; Stop the bloody ping on error and flash the screen instead.</span>
+<span class="k">set</span> <span class="nb">vb</span>
+
+<span class="c">&quot; set columns=110</span>
+
+map <span class="p">&lt;</span>C<span class="p">-</span>D<span class="p">&gt;</span> <span class="m">110</span>A<span class="p">-&lt;</span>ESC<span class="p">&gt;</span>A<span class="p">&lt;</span>CR<span class="p">&gt;&lt;</span>ESC<span class="p">&gt;</span>
+
+<span class="c">&quot; Python (.py) specific indents</span>
+<span class="k">au</span> <span class="nb">BufNewFile</span><span class="p">,</span><span class="nb">BufRead</span> *.<span class="k">py</span>
+    \ <span class="k">set</span> <span class="nb">tabstop</span><span class="p">=</span><span class="m">3</span> <span class="p">|</span>
+    \ <span class="k">set</span> <span class="nb">softtabstop</span><span class="p">=</span><span class="m">3</span> <span class="p">|</span>
+    \ <span class="k">set</span> <span class="nb">shiftwidth</span><span class="p">=</span><span class="m">3</span> <span class="p">|</span>
+    \ <span class="k">set</span> <span class="nb">textwidth</span><span class="p">=</span><span class="m">109</span> <span class="p">|</span>
+    \ <span class="k">set</span> <span class="nb">expandtab</span> <span class="p">|</span>
+    \ <span class="k">set</span> <span class="nb">autoindent</span> <span class="p">|</span>
+    \ <span class="k">set</span> <span class="nb">fileformat</span><span class="p">=</span>unix
+
+<span class="c">&quot; set foldmethod=indent</span>
+<span class="c">&quot; map &lt;C-F&gt; zc</span>
+<span class="c">&quot; map &lt;A-left&gt; zc</span>
+</code></pre></div>
+
+<hr>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: December 10, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

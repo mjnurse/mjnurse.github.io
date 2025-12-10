@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="misc" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>misc</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>misc</h1>
+
+<ul class="page-list">
+  <li><a href="/misc/azure_ad.html" data-number="1"><span class="page-number">1</span>Azure AD - Find My AD Group Memberships</a></li>
+  <li><a href="/misc/bmi_calculator.html" data-number="2"><span class="page-number">2</span>BMI Calculator</a></li>
+  <li><a href="/misc/dashboard_design_principles.html" data-number="3"><span class="page-number">3</span>Dashboard Design Principles</a></li>
+  <li><a href="/misc/generating_a_bookmarks_page_from_a_chrome_bookmarks_folder.html" data-number="4"><span class="page-number">4</span>Generating a Bookmarks Page From a Chrome Bookmarks Folder</a></li>
+  <li><a href="/misc/google_charts.html" data-number="5"><span class="page-number">5</span>Google Charts</a></li>
+  <li><a href="/misc/html_colour_converter.html" data-number="6"><span class="page-number">6</span>HTML Colour Converter</a></li>
+  <li><a href="/misc/jwt_-_json_web_tokens.html" data-number="7"><span class="page-number">7</span>JWT - JSON Web Tokens</a></li>
+  <li><a href="/misc/jekyll.html" data-number="8"><span class="page-number">8</span>Jekyll Details</a></li>
+  <li><a href="/misc/public_key_encryption_analogy.html" data-number="9"><span class="page-number">9</span>Public Key Encryption Analogy</a></li>
+  <li><a href="/misc/read_aloud_in_ms_word.html" data-number="10"><span class="page-number">10</span>Read Aloud In MS Word</a></li>
+  <li><a href="/misc/running_spark_on_yarn_-_cluster_or_client_mode.html" data-number="11"><span class="page-number">11</span>Running Spark on YARN - Cluster or Client Mode</a></li>
+  <li><a href="/misc/shortcut_keys.html" data-number="12"><span class="page-number">12</span>Shortcut Keys</a></li>
+  <li><a href="/misc/statistical_testing.html" data-number="13"><span class="page-number">13</span>Statistical Testing</a></li>
+  <li><a href="/misc/text_to_speech_-_clipboard.html" data-number="14"><span class="page-number">14</span>Text To Speech - Clipboard</a></li>
+  <li><a href="/misc/the_great_weight_race.html" data-number="15"><span class="page-number">15</span>The Great Weight Race</a></li>
+  <li><a href="/misc/this_sites_markdown.html" data-number="16"><span class="page-number">16</span>This Sites Markdown</a></li>
+  <li><a href="/misc/using_git_and_github_-_a_walkthrough.html" data-number="17"><span class="page-number">17</span>Using Git and GitHub - A Walk-through</a></li>
+  <li><a href="/misc/worm_game.html" data-number="18"><span class="page-number">18</span>Worm</a></li>
+  <li><a href="/misc/history_of_my_cars.html" data-number="19"><span class="page-number">19</span>History Of My Cars</a></li>
+  <li><a href="/misc/ssh.html" data-number="20"><span class="page-number">20</span>ssh</a></li>
+</ul>
+
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: </p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

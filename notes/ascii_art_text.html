@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="ASCII Art Text" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>ASCII Art Text</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>ASCII Art Text</h1>
+<h1 id="ascii-art-text-generation-using-figlet">ASCII Art Text Generation Using <code>figlet</code></h1>
+<p>The Linux utility <code>figlet</code> can be used to generate ASCII art text.</p>
+<p>This list of available fonts can be found as follows:</p>
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>ls<span class="w"> </span>/usr/share/figlet/*.flf<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/.*\///; s/\.flf$//&#39;</span>
+</code></pre></div>
+
+<p>Text can be generated as follows:</p>
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Hello World&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>figlet<span class="w"> </span>-f<span class="w"> </span>&lt;font-name&gt;
+</code></pre></div>
+
+<h2 id="font-examples">Font Examples</h2>
+<p>We can run the following script to generate an example of each available font:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>ls<span class="w"> </span>/usr/share/figlet/*.flf<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/.*\///; s/\.flf$//&#39;</span><span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$f</span>:
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Hello World!&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>figlet<span class="w"> </span>-f<span class="w"> </span><span class="nv">$f</span>
+<span class="k">done</span>
+</code></pre></div>
+
+<p>Examples:</p>
+<div class="codehilite"><pre><span></span><code>banner:
+
+<span class="gh">#</span>     #                                #     #                             ###
+<span class="gh">#</span>     # ###### #      #       ####     #  #  #  ####  #####  #      #####  ###
+<span class="gh">#</span>     # #      #      #      #    #    #  #  # #    # #    # #      #    # ###
+<span class="gu">##</span>##### #####  #      #      #    #    #  #  # #    # #    # #      #    #  #
+<span class="gh">#</span>     # #      #      #      #    #    #  #  # #    # #####  #      #    #  
+<span class="gh">#</span>     # #      #      #      #    #    #  #  # #    # #   #  #      #    # ###
+<span class="gh">#</span>     # ###### ###### ######  ####      ## ##   ####  #    # ###### #####  ###
+
+big:
+ <span class="ge">_    _</span>      <span class="ge">_ _</span>        __          __        <span class="ge">_     _</span> _
+| |  | |    | | |       \ \        / /       | |   | | |
+| |__| | ___| | | ___    \ \  /\  / /__  _ __| | __| | |
+|  __  |/ <span class="ge">_ \ | |/ _</span> \    \ \/  \/ / _ \| &#39;__| |/ _` | |
+| |  | |  __/ | | (_) |    \  /\  / (_) | |  | | (_| |_|
+|_|  |_|\___|_|_|\___/      \/  \/ \___/|_|  |_|\__,_(_)
+
+block:
+
+<span class="ge">_|    _</span>|            <span class="ge">_|  _</span>|               <span class="ge">_|          _</span>|                      <span class="ge">_|        _</span>|  <span class="ge">_|</span>
+<span class="ge">_</span>|    <span class="ge">_|    _</span>|_|    <span class="ge">_|  _</span>|    <span class="ge">_|_</span>|       <span class="ge">_|          _</span>|    <span class="ge">_|_</span>|    <span class="ge">_|  _</span>|_|  <span class="ge">_|    _</span>|_|_|  <span class="ge">_|</span>
+<span class="ge">_</span>|_|_|_|  <span class="ge">_|_</span>|_|_|  <span class="ge">_|  _</span>|  <span class="ge">_|    _</span>|     <span class="ge">_|    _</span>|    <span class="ge">_|  _</span>|    <span class="ge">_|  _</span>|_|      <span class="ge">_|  _</span>|    <span class="ge">_|  _</span>|
+<span class="ge">_|    _</span>|  <span class="ge">_|        _</span>|  <span class="ge">_|  _</span>|    <span class="ge">_|       _</span>|  <span class="ge">_|  _</span>|    <span class="ge">_|    _</span>|  <span class="ge">_|        _</span>|  <span class="ge">_|    _</span>|
+<span class="ge">_|    _</span>|    <span class="ge">_|_</span>|_|  <span class="ge">_|  _</span>|    <span class="ge">_|_</span>|           <span class="ge">_|  _</span>|        <span class="ge">_|_</span>|    <span class="ge">_|        _</span>|    <span class="ge">_|_</span>|_|  <span class="ge">_|</span>
+
+<span class="ge">bubble:</span>
+<span class="ge">  _</span>   <span class="ge">_   _</span>   <span class="ge">_   _</span>     <span class="ge">_   _</span>   <span class="ge">_   _</span>   <span class="ge">_   _</span>
+ / \ / \ / \ / \ / \   / \ / \ / \ / \ / \ / \
+( H | e | l | l | o ) ( W | o | r | l | d | ! )
+ \_/ \_/ \_/ \_/ \_/   \_/ \_/ \_/ \_/ \_/ \_/
+
+digital:
+
++-+-+-+-+-+ +-+-+-+-+-+-+
+|H|e|l|l|o| |W|o|r|l|d|!|
++-+-+-+-+-+ +-+-+-+-+-+-+
+
+ivrit:
+ <span class="ge">_     _</span> _        __        __        <span class="ge">_ _</span>      <span class="ge">_   _</span>
+| | __| | |_ __ __\ \      / /   ___ | | | ___| | | |
+| |/ _` | | &#39;__/ <span class="ge">_ \ \ /\ / /   / _</span> \| | |/ <span class="ge">_ \ |_</span>| |
+|_| (_| | | | | (_) \ V  V /   | (_) | | |  __/  <span class="ge">_  |</span>
+<span class="ge">(_</span>)\__,_|_|_|  \___/ \_/\_/     \___/|_|_|\___|_| |_|
+
+lean:
+
+    <span class="ge">_/    _</span>/            <span class="ge">_/  _</span>/               <span class="ge">_/          _</span>/                      <span class="ge">_/        _</span>/  <span class="ge">_/</span>
+<span class="ge">   _</span>/    <span class="ge">_/    _</span>/_/    <span class="ge">_/  _</span>/    <span class="ge">_/_</span>/       <span class="ge">_/          _</span>/    <span class="ge">_/_</span>/    <span class="ge">_/  _</span>/_/  <span class="ge">_/    _</span>/_/_/  <span class="ge">_/</span>
+<span class="ge">  _</span>/_/_/_/  <span class="ge">_/_</span>/_/_/  <span class="ge">_/  _</span>/  <span class="ge">_/    _</span>/     <span class="ge">_/    _</span>/    <span class="ge">_/  _</span>/    <span class="ge">_/  _</span>/_/      <span class="ge">_/  _</span>/    <span class="ge">_/  _</span>/
+ <span class="ge">_/    _</span>/  <span class="ge">_/        _</span>/  <span class="ge">_/  _</span>/    <span class="ge">_/       _</span>/  <span class="ge">_/  _</span>/    <span class="ge">_/    _</span>/  <span class="ge">_/        _</span>/  <span class="ge">_/    _</span>/
+<span class="ge">_/    _</span>/    <span class="ge">_/_</span>/_/  <span class="ge">_/  _</span>/    <span class="ge">_/_</span>/           <span class="ge">_/  _</span>/        <span class="ge">_/_</span>/    <span class="ge">_/        _</span>/    <span class="ge">_/_</span>/_/  <span class="ge">_/</span>
+
+<span class="ge">mini:</span>
+
+<span class="ge">|_</span>| <span class="ge">_ || _</span>  \    /_ ._| <span class="ge">_||</span>
+<span class="ge">| |(/_</span>||(_)  \/\/(_)| |(_|o
+
+script:
+
+ ,          <span class="ge">_   _</span>          <span class="ge">_                     _</span>
+/|   |     | | | |        (_|   |   |_/         | |    |  |
+ |___|  _  | | | |  __      |   |   | __   ,_   | |  __|  |
+ |   |\|/  |/  |/  /  \_    |   |   |/  \_/  |  |/  /  |  |
+ |   |/|__/|__/|__/\__/      \_/ \_/ \__/    |_/|__/\_/|_/o
+
+shadow:
+
+ |   |      | |       \ \        /          |     | |
+ |   |  <span class="ge">_ \ | |  _</span> \   \ \  \   / _ \   __| |  _` | |
+ ___ |  __/ | | (   |   \ \  \ / (   | |    | (   |_|
+<span class="ge">_|  _</span>|\___|_|_|\___/     \_/\_/ \___/ <span class="ge">_|   _</span>|\__,_|_)
+
+slant:
+    __  __     ____         _       __           __    ____
+   / / / /__  / / /___     | |     / /___  _____/ /___/ / /
+  / /_/ / _ \/ / / __ \    | | /| / / __ \/ ___/ / __  / /
+ / __  /  __/ / / /_/ /    | |/ |/ / /_/ / /  / / /_/ /_/
+/_/ /_/\___/_/_/\____/     |__/|__/\____/_/  /_/\__,_(_)
+
+small:
+ <span class="ge">_  _</span>     <span class="ge">_ _</span>      __      __       <span class="ge">_    _</span> _
+| || |___| | |___  \ \    / /__ <span class="ge">_ _</span>| |__| | |
+| __ / -_) | / <span class="ge">_ \  \ \/\/ / _</span> \ &#39;_| / <span class="ge">_` |_</span>|
+|_||_\___|_|_\___/   \_/\_/\___/_| |_\__,_(_)
+
+smscript:
+ ,
+/|  |  <span class="ge">_ |\ |\  _</span>     (|  |  |_/_   ,_  |\  <span class="ge">_|  |</span>
+<span class="ge"> |--| |/ |/ |/ / \_</span>    |  |  | / \_/  | |/ / |  |
+ |  |)|_/|_/|_/\_/      \/ \/  \_/    |/|_/\/|_/o
+
+smshadow:
+
+ |  |      | |      \ \      /       |     | |
+ __ |  -_) | |  <span class="ge">_ \  \ \ \  / _</span> \  <span class="ge">_||  _</span>` |_|
+<span class="ge">_| _</span>|\___|_|_|\___/   \_/\_/\___/_| _|\__,_|_)
+
+smslant:
+   __ __    ____       _      __         __   ____
+  / // /__ / / /__    | | /| / /__  ____/ /__/ / /
+ / <span class="ge">_  / -_</span>) / / <span class="ge">_ \   | |/ |/ / _</span> \/ __/ / <span class="ge">_  /_</span>/
+/_//_/\__/_/_/\___/   |__/|__/\___/_/ /_/\_,_(_)
+
+standard:
+ <span class="ge">_   _</span>      <span class="ge">_ _</span>        __        __         <span class="ge">_     _</span> _
+| | | | ___| | | ___   \ \      / /__  _ __| | __| | |
+| |_| |/ <span class="ge">_ \ | |/ _</span> \   \ \ /\ / / _ \| &#39;__| |/ <span class="ge">_` | |</span>
+<span class="ge">|  _</span>  |  __/ | | (_) |   \ V  V / (_) | |  | | (_| |_|
+|_| |_|\___|_|_|\___/     \_/\_/ \___/|_|  |_|\__,_(_)
+
+term:
+Hello World!
+</code></pre></div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: December 01, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

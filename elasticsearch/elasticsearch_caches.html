@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Elasticsearch Caches" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>Elasticsearch Caches</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>Elasticsearch Caches</h1>
+<div class="table-of-contents">
+<h2>Contents</h2>
+<ul>
+<li><a href="#page-cache">Page Cache</a></li>
+<li><a href="#shard-level-request-cache">Shard-level Request Cache</a></li>
+<li><a href="#query-cache">Query Cache</a></li>
+</ul>
+</div>
+<p>At a high level, Elasticsearch has 3 caches:</p>
+<ul>
+<li>Page cache</li>
+<li>Shard-level request cache</li>
+<li>Query Cache</li>
+</ul>
+<h1 id="page-cache">Page Cache</h1>
+<p>The OS managed disk cache (sometimes called the file cache).  Caches blocks of data read from disk and can give a big increase in performance where there is lots of re-use.</p>
+<h1 id="shard-level-request-cache">Shard-level Request Cache</h1>
+<p>This caches search responses consisting only of aggregations.  For a (Kibana style) query across logs captured in a set on indexes (say one per week), as the query window (time frame) moves forward, any indexes which sit entirely within for the old and new time frames do not need to be queries again, and aggregation values will stay the same.</p>
+<p>This cache is enabled by default and can use up to 1% of the heap space.</p>
+<p>To get stats on the use of the request cache:</p>
+<div class="codehilite"><pre><span></span><code>GET /_nodes/stats/indices/request_cache?human
+</code></pre></div>
+
+<h1 id="query-cache">Query Cache</h1>
+<p>This caches the results of a query but does so in a way which means the cached data can be reused between different queries.</p>
+<p>For example, if we were to query a set of log indexes for a particular error message over a range of dates, a query cache could be used as follows.</p>
+<p>If we assume the query is structured to:</p>
+<ul>
+<li><code>match</code> where <code>"error_msg": "error 01: division by zero"</code></li>
+</ul>
+<p>and then:</p>
+<ul>
+<li><code>filter</code> where <code>"range": {"datetime": {"gte": "22-02-01", "lt": "22-03-01"}}</code></li>
+</ul>
+<p>For the filter operation, elasticsearch might generate a <code>bit set</code> (bit array) which includes a single bit for each document which is set to <code>0</code> if the document doesn't fall in the date range and <code>1</code> if it does.</p>
+<p>This <code>bit set</code> will be cached and will get reused in another query uses the same filter.</p>
+<p>To get stats on the use of the query cache:</p>
+<div class="codehilite"><pre><span></span><code>GET /_nodes/stats/indices/query_cache?human
+</code></pre></div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: December 10, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Slack Shortcut Keys" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>Slack Shortcut Keys</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>Slack Shortcut Keys</h1>
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Operation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CTRL + K</td>
+<td>Open Quick Switcher</td>
+</tr>
+<tr>
+<td>CTRL + SHIFT + K</td>
+<td>Browse DMs</td>
+</tr>
+<tr>
+<td>CTRL + SHIFT + T</td>
+<td>Open Threads view</td>
+</tr>
+<tr>
+<td>CTRL + SHIFT + A</td>
+<td>Open All Unreads view</td>
+</tr>
+<tr>
+<td>CTRL + SHIFT + L</td>
+<td>Browse channel list</td>
+</tr>
+<tr>
+<td>ALT + DownArrow</td>
+<td>Jump to next channel or DM</td>
+</tr>
+<tr>
+<td>ALT + UpArrow</td>
+<td>Jump to previous channel or DM</td>
+</tr>
+<tr>
+<td>ALT + SHIFT + DownArrow</td>
+<td>Jump to next unread channel or DM</td>
+</tr>
+<tr>
+<td>ALT + SHIFT + UpArrow</td>
+<td>Jump to previous unread channel or DM</td>
+</tr>
+<tr>
+<td>CTRL + SHIFT + M</td>
+<td>Open Activity pane</td>
+</tr>
+<tr>
+<td>CTRL + SHIFT + S</td>
+<td>Open Starred Items pane</td>
+</tr>
+<tr>
+<td>CTRL + SHIFT + W</td>
+<td>Open Workspace Directory</td>
+</tr>
+<tr>
+<td>CTRL + SHIFT + I</td>
+<td>Open Channel Details pane</td>
+</tr>
+<tr>
+<td>CTRL + /</td>
+<td>Open Keyboard Shortcuts pane</td>
+</tr>
+<tr>
+<td>CTRL + .</td>
+<td>Toggle right-hand pane</td>
+</tr>
+<tr>
+<td>CTRL + ,</td>
+<td>Open Preferences</td>
+</tr>
+<tr>
+<td>CTRL + SHIFT + [</td>
+<td>Switch to previous workspace</td>
+</tr>
+<tr>
+<td>CTRL + SHIFT + ]</td>
+<td>Switch to next workspace</td>
+</tr>
+<tr>
+<td>CTRL + [Number]</td>
+<td>Switch to specific workspace</td>
+</tr>
+<tr>
+<td>CTRL + ALT</td>
+<td>Show numbers assigned to workspaces in sidebar</td>
+</tr>
+<tr>
+<td>CTRL + F</td>
+<td>Search the current channel or DM</td>
+</tr>
+<tr>
+<td>ESC</td>
+<td>Mark all messages in current channel or DM as read</td>
+</tr>
+<tr>
+<td>SHIFT + ESC</td>
+<td>Mark all messages as read</td>
+</tr>
+<tr>
+<td>ALT + click message</td>
+<td>Mark message as oldest unread message</td>
+</tr>
+<tr>
+<td>CTRL + SHIFT + Y</td>
+<td>Set or edit your Slack status</td>
+</tr>
+<tr>
+<td>CTRL + U</td>
+<td>Upload file to current channel or DM</td>
+</tr>
+<tr>
+<td>CTRL + SHIFT + Enter</td>
+<td>Create snippet in current channel or DM</td>
+</tr>
+<tr>
+<td>UpArrow</td>
+<td>Edit your last message in current channel or DM</td>
+</tr>
+<tr>
+<td>SHIFT + UpArrow</td>
+<td>Select text to beginning of current line in message draft</td>
+</tr>
+<tr>
+<td>SHIFT + DownArrow</td>
+<td>Select text to end of current line in message draft</td>
+</tr>
+<tr>
+<td>SHIFT + Enter</td>
+<td>Insert new line in message draft</td>
+</tr>
+<tr>
+<td>CTRL + B</td>
+<td>Bold selected text</td>
+</tr>
+<tr>
+<td>CTRL + I</td>
+<td>Italicize selected text</td>
+</tr>
+<tr>
+<td>CTRL + SHIFT + X</td>
+<td>Strike through selected text</td>
+</tr>
+<tr>
+<td>CTRL + SHIFT + &gt;</td>
+<td>Indent selected text</td>
+</tr>
+<tr>
+<td>CTRL + SHIFT + C</td>
+<td>Format selected text as inline code</td>
+</tr>
+<tr>
+<td>CTRL + SHIFT + 7</td>
+<td>Format selected text as numbered list</td>
+</tr>
+<tr>
+<td>CTRL + SHIFT + 8</td>
+<td>Format selected text as bulleted list</td>
+</tr>
+<tr>
+<td>@[Character]</td>
+<td>Show autocomplete options for display names</td>
+</tr>
+<tr>
+<td>#[Character]</td>
+<td>Show autocomplete options for channel names</td>
+</tr>
+<tr>
+<td>:[Character]</td>
+<td>Show autocomplete options for emoji</td>
+</tr>
+<tr>
+<td>m</td>
+<td>Toggle mute during call</td>
+</tr>
+<tr>
+<td>v</td>
+<td>Toggle video during call</td>
+</tr>
+<tr>
+<td>+ (Plus) OR A</td>
+<td>Show invite list during call</td>
+</tr>
+<tr>
+<td>e + (1-9)</td>
+<td>View and select emoji during call</td>
+</tr>
+<tr>
+<td>@[username]</td>
+<td>Notify specific person</td>
+</tr>
+<tr>
+<td>@here</td>
+<td>Notify active members of channel</td>
+</tr>
+<tr>
+<td>@channel</td>
+<td>Notify all members of channel, whether they're active or not</td>
+</tr>
+<tr>
+<td>@everyone</td>
+<td>Notify all members of channel #general</td>
+</tr>
+</tbody>
+</table>
+<h2 id="message-formatting-syntax">Message Formatting Syntax</h2>
+<p><em>text</em> | Bold text 
+<em>text</em> | Italicize text 
+~text~ | Strike through text </p>
+<blockquote>
+<p>text | Indent single block of text </p>
+<blockquote>
+<blockquote>
+<p>text | Indent multiple blocks of text 
+<code>text</code> | Format single line of inline code 
+<code>text</code> | Format multiple lines of inline code 
+1. then 2. | Format as numbered list </p>
+</blockquote>
+</blockquote>
+</blockquote>
+<h2 id="search-modifiers">Search Modifiers</h2>
+<p>Add modifiers before or after search keyword(s).</p>
+<table>
+<thead>
+<tr>
+<th>Modifier</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>in:[channel]</td>
+<td>Search specific channel</td>
+</tr>
+<tr>
+<td>in:[@username]</td>
+<td>Search specific DM</td>
+</tr>
+<tr>
+<td>from:username</td>
+<td>Search messages/files shared by specific user</td>
+</tr>
+<tr>
+<td>from:me</td>
+<td>Search messages/files sent by you</td>
+</tr>
+<tr>
+<td>on:[date]</td>
+<td>Search using specific date</td>
+</tr>
+<tr>
+<td>before:[date] OR after:[date] OR during:[date]</td>
+<td>Search using specific date or time frame</td>
+</tr>
+<tr>
+<td>has:[:emoji:]</td>
+<td>Search for items with specific emoji</td>
+</tr>
+<tr>
+<td>has:pin</td>
+<td>Search for pinned items</td>
+</tr>
+<tr>
+<td>has:star</td>
+<td>Search for starred items</td>
+</tr>
+<tr>
+<td>has:link</td>
+<td>Search for items with links</td>
+</tr>
+</tbody>
+</table>
+<hr>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: December 01, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

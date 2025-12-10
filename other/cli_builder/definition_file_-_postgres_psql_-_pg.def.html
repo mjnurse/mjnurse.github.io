@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="pg.def" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>pg.def</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>pg.def</h1>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Postgres PSQL</span>
+
+cmd<span class="w"> </span><span class="o">[</span><span class="w"> </span>-f<span class="w"> </span>./pg_conn_defaults<span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">source</span><span class="w"> </span>./pg_conn_defaults
+
+cmd<span class="w"> </span><span class="nv">PG_HOST</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">PG_HOST</span><span class="k">:-</span><span class="nv">127</span><span class="p">.0.0.1</span><span class="si">}</span><span class="s2">&quot;</span>
+cmd<span class="w"> </span><span class="nv">PG_PORT</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">PG_PORT</span><span class="k">:-</span><span class="nv">5431</span><span class="si">}</span><span class="s2">&quot;</span>
+cmd<span class="w"> </span><span class="nv">PG_DB</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">PG_DB</span><span class="k">:-</span><span class="nv">postgres</span><span class="si">}</span><span class="s2">&quot;</span>
+cmd<span class="w"> </span><span class="nv">PG_USER</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">PG_NAME</span><span class="k">:-</span><span class="nv">postgres</span><span class="si">}</span><span class="s2">&quot;</span>
+cmd<span class="w"> </span><span class="nv">PG_PASSWORD</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">PG_PASSWORD</span><span class="k">:-</span><span class="nv">postgres</span><span class="si">}</span><span class="s2">&quot;</span>
+cmd<span class="w"> </span><span class="nb">export</span><span class="w"> </span><span class="nv">PGPASSWORD</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$PG_PASSWORD</span><span class="s2">&quot;</span>
+cmd<span class="w"> </span><span class="nb">export</span><span class="w"> </span><span class="nv">PAGER</span><span class="o">=</span>cat
+
+<span class="c1"># -------------------------------------------------------------------------------------------------</span>
+<span class="o">=</span><span class="w"> </span>SESSION
+<span class="c1"># -------------------------------------------------------------------------------------------------</span>
+
+connect<span class="w"> </span><span class="o">(</span>c<span class="o">)</span><span class="w"> </span><span class="o">[</span>&lt;db_name&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>psql<span class="w"> </span>--host<span class="w"> </span><span class="nv">$PG_HOST</span><span class="w"> </span>-p<span class="w"> </span><span class="nv">$PG_PORT</span><span class="w"> </span>-d<span class="w"> </span><span class="si">${</span><span class="nv">1</span><span class="k">:-</span><span class="nv">$PG_DB</span><span class="si">}</span><span class="w"> </span>-U<span class="w"> </span><span class="nv">$PG_USER</span>
+
+<span class="nb">set</span><span class="w"> </span>connection<span class="w"> </span>defaults<span class="w"> </span><span class="o">(</span>scd<span class="o">)</span><span class="w"> </span>&lt;host&gt;<span class="w"> </span>&lt;port&gt;<span class="w"> </span>&lt;db_name&gt;<span class="w"> </span>&lt;username&gt;<span class="w"> </span>&lt;password&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;# Created: </span><span class="k">$(</span>date<span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>./pg_conn_defaults<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;export PG_HOST=\&quot;</span><span class="nv">$1</span><span class="s2">\&quot;&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>./pg_conn_defaults<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;export PG_PORT=\&quot;</span><span class="nv">$2</span><span class="s2">\&quot;&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>./pg_conn_defaults<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;export PG_DB=\&quot;</span><span class="nv">$3</span><span class="s2">\&quot;&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>./pg_conn_defaults<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;export PG_USER=\&quot;</span><span class="nv">$4</span><span class="s2">\&quot;&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>./pg_conn_defaults<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;export PG_password=\&quot;</span><span class="nv">$5</span><span class="s2">\&quot;&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>./pg_conn_defaults
+
+<span class="c1"># -------------------------------------------------------------------------------------------------</span>
+<span class="o">=</span><span class="w"> </span>DICTIONARY
+<span class="c1"># -------------------------------------------------------------------------------------------------</span>
+
+describe<span class="w"> </span><span class="o">(</span>d<span class="o">)</span><span class="w"> </span>&lt;db_name&gt;<span class="w"> </span>&lt;schema_name&gt;<span class="w"> </span>&lt;object_name&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>psql<span class="w"> </span>--host<span class="w"> </span><span class="nv">$PG_HOST</span><span class="w"> </span>-p<span class="w"> </span><span class="nv">$PG_PORT</span><span class="w"> </span>-d<span class="w"> </span><span class="nv">$1</span><span class="w"> </span>-U<span class="w"> </span><span class="nv">$PG_USER</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;\d \&quot;</span><span class="nv">$2</span><span class="s2">\&quot;.\&quot;</span><span class="nv">$3</span><span class="s2">\&quot;&quot;</span>
+
+list<span class="w"> </span>databases<span class="w"> </span><span class="o">(</span>ld<span class="o">)</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>psql<span class="w"> </span>--host<span class="w"> </span><span class="nv">$PG_HOST</span><span class="w"> </span>-p<span class="w"> </span><span class="nv">$PG_PORT</span><span class="w"> </span>-d<span class="w"> </span><span class="nv">$PG_DB</span><span class="w"> </span>-U<span class="w"> </span><span class="nv">$PG_USER</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;\l&quot;</span>
+
+cmd<span class="w"> </span><span class="nv">iq</span><span class="o">=</span><span class="s2">&quot; \</span>
+<span class="s2">    SELECT \</span>
+<span class="s2">        n.nspname AS schema_name, \</span>
+<span class="s2">        c.relname AS index_name, \</span>
+<span class="s2">        t.relname AS table_name, \</span>
+<span class="s2">        r.rolname AS owner, \</span>
+<span class="s2">        pg_size_pretty(pg_relation_size(c.oid)) AS index_size \</span>
+<span class="s2">    FROM \</span>
+<span class="s2">        pg_class c \</span>
+<span class="s2">        JOIN pg_index i ON c.oid = i.indexrelid \</span>
+<span class="s2">        JOIN pg_class t ON i.indrelid = t.oid \</span>
+<span class="s2">        JOIN pg_namespace n ON n.oid = c.relnamespace \</span>
+<span class="s2">        JOIN pg_roles r ON r.oid = c.relowner \</span>
+<span class="s2">    WHERE \</span>
+<span class="s2">        c.relkind = &#39;i&#39; \</span>
+<span class="s2">        AND n.nspname NOT IN (&#39;pg_catalog&#39;, &#39;information_schema&#39;, &#39;pg_toast&#39;) \</span>
+<span class="s2">        AND (LOWER(n.nspname) = LOWER(&#39;SCHEMANAME&#39;) OR &#39;SCHEMANAME&#39; = &#39;&#39;) \</span>
+<span class="s2">    ORDER BY \</span>
+<span class="s2">        1, 2&quot;</span>
+
+list<span class="w"> </span>indices<span class="w"> </span><span class="o">(</span>li<span class="o">)</span><span class="w"> </span>&lt;db_name&gt;<span class="w"> </span><span class="o">[</span>&lt;schema_name&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>psql<span class="w"> </span>--host<span class="w"> </span><span class="nv">$PG_HOST</span><span class="w"> </span>-p<span class="w"> </span><span class="nv">$PG_PORT</span><span class="w"> </span>-d<span class="w"> </span><span class="nv">$1</span><span class="w"> </span>-U<span class="w"> </span><span class="nv">$PG_USER</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">iq</span><span class="p">//SCHEMANAME/</span><span class="nv">$2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+
+cmd<span class="w"> </span><span class="nv">sq</span><span class="o">=</span><span class="s2">&quot; \</span>
+<span class="s2">    SELECT \</span>
+<span class="s2">        n.nspname AS schema_name, \</span>
+<span class="s2">        r.rolname AS owner, \</span>
+<span class="s2">        pg_size_pretty(SUM(pg_total_relation_size(c.oid))) AS total_size \</span>
+<span class="s2">    FROM \</span>
+<span class="s2">        pg_namespace n \</span>
+<span class="s2">        JOIN pg_roles r ON r.oid = n.nspowner \</span>
+<span class="s2">        LEFT JOIN pg_class c ON c.relnamespace = n.oid AND c.relkind IN (&#39;r&#39;, &#39;i&#39;, &#39;t&#39;, &#39;m&#39;) \</span>
+<span class="s2">    WHERE \</span>
+<span class="s2">        n.nspname NOT IN (&#39;pg_catalog&#39;, &#39;information_schema&#39;, &#39;pg_toast&#39;) \</span>
+<span class="s2">    GROUP BY \</span>
+<span class="s2">        n.nspname, r.rolname \</span>
+<span class="s2">    ORDER BY \</span>
+<span class="s2">        1, 2&quot;</span>
+
+list<span class="w"> </span>schema<span class="w"> </span><span class="o">(</span>ls<span class="o">)</span><span class="w"> </span><span class="o">[</span>&lt;db_name&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;DATABASE: </span><span class="si">${</span><span class="nv">1</span><span class="k">:-</span><span class="nv">$PG_DB</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>psql<span class="w"> </span>--host<span class="w"> </span><span class="nv">$PG_HOST</span><span class="w"> </span>-p<span class="w"> </span><span class="nv">$PG_PORT</span><span class="w"> </span>-d<span class="w"> </span><span class="si">${</span><span class="nv">1</span><span class="k">:-</span><span class="nv">$PG_DB</span><span class="si">}</span><span class="w"> </span>-U<span class="w"> </span><span class="nv">$PG_USER</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">sq</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span>
+
+cmd<span class="w"> </span><span class="nv">tq</span><span class="o">=</span><span class="s2">&quot; \</span>
+<span class="s2">    SELECT \</span>
+<span class="s2">        n.nspname AS schema_name, \</span>
+<span class="s2">        c.relname AS table_name, \</span>
+<span class="s2">        r.rolname AS owner, \</span>
+<span class="s2">        pg_size_pretty(pg_total_relation_size(c.oid)) AS total_size \</span>
+<span class="s2">    FROM \</span>
+<span class="s2">        pg_class c \</span>
+<span class="s2">        JOIN pg_namespace n ON n.oid = c.relnamespace \</span>
+<span class="s2">        JOIN pg_roles r ON r.oid = c.relowner \</span>
+<span class="s2">    WHERE \</span>
+<span class="s2">        c.relkind = &#39;r&#39; \</span>
+<span class="s2">        AND n.nspname NOT IN (&#39;pg_catalog&#39;, &#39;information_schema&#39;, &#39;pg_toast&#39;) \</span>
+<span class="s2">        AND (LOWER(n.nspname) = LOWER(&#39;SCHEMANAME&#39;) OR &#39;SCHEMANAME&#39; = &#39;&#39;) \</span>
+<span class="s2">    ORDER BY \</span>
+<span class="s2">        1, 2&quot;</span>
+
+list<span class="w"> </span>tables<span class="w"> </span><span class="o">(</span>lt<span class="o">)</span><span class="w"> </span>&lt;db_name&gt;<span class="w"> </span><span class="o">[</span>&lt;schema_name&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>psql<span class="w"> </span>--host<span class="w"> </span><span class="nv">$PG_HOST</span><span class="w"> </span>-p<span class="w"> </span><span class="nv">$PG_PORT</span><span class="w"> </span>-d<span class="w"> </span><span class="nv">$1</span><span class="w"> </span>-U<span class="w"> </span><span class="nv">$PG_USER</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">tq</span><span class="p">//SCHEMANAME/</span><span class="nv">$2</span><span class="si">}</span><span class="s2">&quot;</span>
+
+cmd<span class="w"> </span><span class="nv">sq</span><span class="o">=</span><span class="s2">&quot; \</span>
+<span class="s2">    SELECT \</span>
+<span class="s2">        CASE c.relkind \</span>
+<span class="s2">            WHEN &#39;r&#39; THEN &#39;table&#39; \</span>
+<span class="s2">            WHEN &#39;S&#39; THEN &#39;sequence&#39; \</span>
+<span class="s2">            WHEN &#39;i&#39; THEN &#39;index&#39; \</span>
+<span class="s2">            WHEN &#39;v&#39; THEN &#39;view&#39; \</span>
+<span class="s2">            WHEN &#39;m&#39; THEN &#39;materialised view&#39; \</span>
+<span class="s2">            ELSE c.relkind::TEXT \</span>
+<span class="s2">        END AS object_type, \</span>
+<span class="s2">        n.nspname AS schema, \</span>
+<span class="s2">        c.relname AS name \</span>
+<span class="s2">    FROM \</span>
+<span class="s2">        pg_class c \</span>
+<span class="s2">    JOIN \</span>
+<span class="s2">        pg_namespace n ON n.oid = c.relnamespace \</span>
+<span class="s2">    WHERE \</span>
+<span class="s2">        (    c.relname ILIKE &#39;SEARCHTERM&#39; \</span>
+<span class="s2">          OR n.nspname ILIKE &#39;SEARCHTERM&#39; ) \</span>
+<span class="s2">    AND \</span>
+<span class="s2">        n.nspname NOT IN (&#39;pg_catalog&#39;, &#39;information_schema&#39;, &#39;pg_toast&#39;) \</span>
+<span class="s2">    UNION ALL \</span>
+<span class="s2">    SELECT \</span>
+<span class="s2">        &#39;constraint&#39; AS object_type, \</span>
+<span class="s2">        n.nspname AS schema, \</span>
+<span class="s2">        con.conname AS name \</span>
+<span class="s2">    FROM \</span>
+<span class="s2">        pg_constraint con \</span>
+<span class="s2">    JOIN \</span>
+<span class="s2">        pg_namespace n ON n.oid = con.connamespace \</span>
+<span class="s2">    WHERE \</span>
+<span class="s2">        (    con.conname ILIKE &#39;SEARCHTERM&#39; \</span>
+<span class="s2">          OR n.nspname ILIKE &#39;SEARCHTERM&#39; ) \</span>
+<span class="s2">    AND \</span>
+<span class="s2">        n.nspname NOT IN (&#39;pg_catalog&#39;, &#39;information_schema&#39;, &#39;pg_toast&#39;) \</span>
+<span class="s2">    ORDER BY \</span>
+<span class="s2">        object_type, schema, name&quot;</span>
+
+search<span class="w"> </span>dictionary<span class="w"> </span><span class="o">(</span>sd<span class="o">)</span><span class="w"> </span>&lt;db_name&gt;<span class="w"> </span>&lt;search_term&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>psql<span class="w"> </span>--host<span class="w"> </span><span class="nv">$PG_HOST</span><span class="w"> </span>-p<span class="w"> </span><span class="nv">$PG_PORT</span><span class="w"> </span>-d<span class="w"> </span><span class="nv">$1</span><span class="w"> </span>-U<span class="w"> </span><span class="nv">$PG_USER</span><span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">sq</span><span class="p">//SEARCHTERM/</span><span class="nv">$2</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="c1">## % matches multiple chars (inc. none), _ matches a single char</span>
+</code></pre></div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: November 25, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

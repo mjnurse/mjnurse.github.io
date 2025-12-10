@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="query-es - Elasticsearch Query Utility" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>query-es - Elasticsearch Query Utility</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>query-es - Elasticsearch Query Utility</h1>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
+<span class="s2">NAME</span>
+<span class="s2">   query_es - One line description.</span>
+
+<span class="s2">USAGE</span>
+<span class="s2">   query_es [options] &lt;parameters&gt;</span>
+
+<span class="s2">OPTIONS</span>
+<span class="s2">   -x</span>
+<span class="s2">      Description...</span>
+
+<span class="s2">   -h|--help</span>
+<span class="s2">      Show help text.</span>
+
+<span class="s2">DESCRIPTION</span>
+<span class="s2">   Description description description description.</span>
+
+<span class="s2">AUTHOR</span>
+<span class="s2">  mjnurse.dev - 2020</span>
+<span class="s2">&quot;</span>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;tbc&quot;</span>
+<span class="nv">desc_line</span><span class="o">=</span><span class="s2">&quot;tbc&quot;</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Elasticsearch Query Utility&quot;</span>
+
+<span class="nv">tmpfile</span><span class="o">=</span><span class="s2">&quot;/tmp/es.</span><span class="nv">$RANDOM</span><span class="s2">.</span><span class="nv">$RANDOM</span><span class="s2">.tmp&quot;</span>
+<span class="nv">filter_regex</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="nv">debug_yn</span><span class="o">=</span>n
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Usage: query_es options&quot;</span>
+<span class="w">   </span><span class="nb">echo</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;   -a  api (mandatory)&quot;</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;   -bp base path (default:\$QES_BASE_PATH=</span><span class="nv">$QES_BASE_PATH</span><span class="s2">)&quot;</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;   -d  debug y/n (default:n)&quot;</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;   -f  filter_regex&quot;</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;   -h  host (default:\$QES_HOST=</span><span class="nv">$QES_HOST</span><span class="s2">)&quot;</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;   -j  json&quot;</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;   -o  opn (mandatory)&quot;</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;   -p  port (default:\$QES_PORT=</span><span class="nv">$QES_PORT</span><span class="s2">)&quot;</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;   -pa proxy authentication (default:\$QES_PROXY_AUTH=</span><span class="nv">$QES_PROXY_AUTH</span><span class="s2">)&quot;</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;   -r  header rows (default:0)&quot;</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;   -s  show settings&quot;</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;   -up username:password (default:\$QES_USER_PASS=</span><span class="nv">$QES_USER_PASS</span><span class="s2">)&quot;</span><span class="w"> </span>
+<span class="k">fi</span>
+
+<span class="nv">curlcmd</span><span class="o">=</span><span class="s2">&quot;curl -s&quot;</span>
+<span class="c1"># get curl localhost to work in WSL</span>
+<span class="c1">#if [[ &quot;$WSL_DISTRO_NAME&quot; != &quot;&quot; ]]; then</span>
+<span class="c1">#  curlcmd=&quot;cmd.exe /c curl&quot;</span>
+<span class="c1">#fi</span>
+
+<span class="c1"># Default Values</span>
+<span class="nv">debug_yn</span><span class="o">=</span>y
+<span class="nv">show_settings_yn</span><span class="o">=</span>n
+<span class="nv">host</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$QES_HOST</span><span class="s2">&quot;</span>
+<span class="nv">port</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$QES_PORT</span><span class="s2">&quot;</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$QES_USER_PASS</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nv">userpass</span><span class="o">=</span><span class="s2">&quot;-u </span><span class="nv">$QES_USER_PASS</span><span class="s2">&quot;</span>
+<span class="k">fi</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$QES_PROXY_AUTH</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nv">proxyauth</span><span class="o">=</span><span class="s2">&quot;Proxy-Authorization: </span><span class="nv">$QES_PROXY_AUTH</span><span class="s2">&quot;</span>
+<span class="k">fi</span>
+<span class="nv">basepath</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$QES_BASE_PATH</span><span class="s2">&quot;</span>
+<span class="nv">header_rows</span><span class="o">=</span><span class="m">0</span>
+
+<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span>&gt;<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">   </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
+<span class="w">   </span>-d<span class="o">)</span><span class="w"> </span><span class="nv">debug_yn</span><span class="o">=</span>y<span class="w"> </span><span class="p">;;</span>
+<span class="w">   </span>-a<span class="o">)</span><span class="w"> </span>shift<span class="p">;</span><span class="w"> </span><span class="nv">api</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">   </span>-bp<span class="o">)</span><span class="w"> </span>shift<span class="p">;</span><span class="w"> </span><span class="nv">basepath</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">   </span>-f<span class="o">)</span><span class="w"> </span>shift<span class="p">;</span><span class="w"> </span><span class="nv">filter_regex</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">   </span>-h<span class="o">)</span><span class="w"> </span>shift<span class="p">;</span><span class="w"> </span><span class="nv">host</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">   </span>-j<span class="o">)</span><span class="w"> </span>shift<span class="p">;</span><span class="w"> </span><span class="nv">json</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">   </span>-o<span class="o">)</span><span class="w"> </span>shift<span class="p">;</span><span class="w"> </span><span class="nv">opn</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">   </span>-p<span class="o">)</span><span class="w"> </span>shift<span class="p">;</span><span class="w"> </span><span class="nv">port</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">   </span>-pa<span class="o">)</span><span class="w"> </span>shift:<span class="w"> </span><span class="nv">proxyauth</span><span class="o">=</span><span class="s2">&quot;Proxy-Authorization: </span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">   </span>-r<span class="o">)</span><span class="w"> </span>shift<span class="p">;</span><span class="w"> </span><span class="nv">header_rows</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">   </span>-s<span class="o">)</span><span class="w"> </span><span class="nv">show_settings_yn</span><span class="o">=</span>y<span class="w"> </span><span class="p">;;</span>
+<span class="w">   </span>-up<span class="o">)</span><span class="w"> </span>shift<span class="p">;</span><span class="w"> </span><span class="nv">userpass</span><span class="o">=</span><span class="s2">&quot;-u </span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">   </span>*<span class="o">)</span><span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;ERROR: OTHER VALUE: </span><span class="nv">$1</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">   </span><span class="k">esac</span>
+<span class="w">   </span><span class="nb">shift</span>
+<span class="k">done</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$host</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span>Missing<span class="w"> </span>host<span class="w"> </span>-<span class="w"> </span>Consider<span class="w"> </span>setting<span class="w"> </span>environment<span class="w"> </span>variable<span class="w"> </span>QES_HOST
+<span class="w">  </span><span class="nb">exit</span>
+<span class="k">fi</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$port</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span>Missing<span class="w"> </span>port<span class="w"> </span>-<span class="w"> </span>Consider<span class="w"> </span>setting<span class="w"> </span>environment<span class="w"> </span>variable<span class="w"> </span>QES_PORT
+<span class="w">  </span><span class="nb">exit</span>
+<span class="k">else</span>
+<span class="w">  </span><span class="nv">port</span><span class="o">=</span><span class="s2">&quot;:</span><span class="nv">$port</span><span class="s2">&quot;</span>
+<span class="k">fi</span>
+
+<span class="nv">url</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$host$port</span><span class="s2">/</span><span class="nv">$basepath</span><span class="s2">/</span><span class="nv">$api</span><span class="s2">&quot;</span>
+
+<span class="c1"># Replace any // with a / (this allows us to miss index names from some commands to run on all indexes)</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$QES_HTTPS_YN</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;Y&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$QES_HTTPS_YN</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;y&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nv">url</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">url</span><span class="p">//</span><span class="se">\/\/</span><span class="p">/</span><span class="se">\/</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="nv">url</span><span class="o">=</span><span class="s2">&quot;https://</span><span class="si">${</span><span class="nv">url</span><span class="p">//</span><span class="se">\/\/</span><span class="p">/</span><span class="se">\/</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">else</span>
+<span class="w">  </span><span class="nv">url</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">url</span><span class="p">//</span><span class="se">\/\/</span><span class="p">/</span><span class="se">\/</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="nv">url</span><span class="o">=</span><span class="s2">&quot;http://</span><span class="si">${</span><span class="nv">url</span><span class="p">//</span><span class="se">\/\/</span><span class="p">/</span><span class="se">\/</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">fi</span>
+
+<span class="nv">cmd</span><span class="o">=</span><span class="s2">&quot;Command: </span><span class="nv">$opn</span><span class="s2"> </span><span class="nv">$url</span><span class="s2">&quot;</span>
+<span class="nv">cmddiv</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$cmd</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/./-/g&quot;</span><span class="k">)</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$show_settings_yn</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>y<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span>Settings:
+<span class="w">  </span><span class="nb">echo</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="nv">host</span><span class="o">=</span><span class="s2">&quot;\&quot;</span><span class="nv">$host</span><span class="s2">\&quot;&quot;</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="nv">port</span><span class="o">=</span><span class="s2">&quot;\&quot;</span><span class="nv">$port</span><span class="s2">\&quot;&quot;</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="nv">basepath</span><span class="o">=</span><span class="s2">&quot;\&quot;</span><span class="nv">$basepath</span><span class="s2">\&quot;&quot;</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="nv">userpass</span><span class="o">=</span><span class="s2">&quot;\&quot;</span><span class="nv">$userpass</span><span class="s2">\&quot;&quot;</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="nv">proxyauth</span><span class="o">=</span><span class="s2">&quot;\&quot;</span><span class="nv">$proxyauth</span><span class="s2">\&quot;&quot;</span>
+<span class="w">  </span><span class="nb">echo</span>
+<span class="w">  </span><span class="nb">exit</span>
+<span class="k">fi</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$opn</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;DELETE&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">   </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Are you sure you want to delete index: &quot;</span><span class="s1">&#39;&quot;&#39;</span><span class="nv">$api</span><span class="s1">&#39;&quot;&#39;</span><span class="s2">&quot; [yN]: &quot;</span><span class="w"> </span>yn
+<span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$yn</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;y&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$yn</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;Y&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">      </span><span class="nb">exit</span>
+<span class="w">   </span><span class="k">fi</span>
+<span class="k">fi</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$json</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$debug_yn</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>y<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="o">==================================================</span>
+<span class="w">      </span><span class="nb">echo</span><span class="w"> </span>COMMAND
+<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="o">==================================================</span>
+<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$curlcmd</span><span class="w"> </span><span class="nv">$userpass</span><span class="w"> </span><span class="nv">$proxyauth</span><span class="w"> </span>-X<span class="w"> </span><span class="nv">$opn</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$url</span><span class="s2">&quot;</span><span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;&#39;Content-Type: application/json&#39;&quot;</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;&#39;</span><span class="nv">$json</span><span class="s2">&#39;&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;\n&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/  */ /g&quot;</span>
+<span class="w">      </span><span class="nb">echo</span>
+<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="o">==================================================</span>
+<span class="w">      </span><span class="nb">echo</span><span class="w"> </span>RESULTS
+<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="o">==================================================</span>
+<span class="w">   </span><span class="k">fi</span>
+<span class="w">   </span><span class="nv">$curlcmd</span><span class="w"> </span>-s<span class="w"> </span>-k<span class="w"> </span><span class="nv">$userpass</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$proxyauth</span><span class="s2">&quot;</span><span class="w"> </span>-X<span class="w"> </span><span class="nv">$opn</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$url</span><span class="s2">&quot;</span><span class="w">  </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$json</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$filter_regex</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$tmpfile</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null
+<span class="k">else</span>
+<span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$debug_yn</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>y<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="o">==================================================</span>
+<span class="w">      </span><span class="nb">echo</span><span class="w"> </span>COMMAND
+<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="o">==================================================</span>
+<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$curlcmd</span><span class="w"> </span><span class="nv">$userpass</span><span class="w"> </span><span class="nv">$proxyauth</span><span class="w"> </span>-X<span class="w"> </span><span class="nv">$opn</span><span class="w"> </span><span class="s2">&quot;&#39;</span><span class="nv">$url</span><span class="s2">&#39;&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;\n&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/  */ /g&quot;</span>
+<span class="w">      </span><span class="nb">echo</span>
+<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="o">==================================================</span>
+<span class="w">      </span><span class="nb">echo</span><span class="w"> </span>RESULTS
+<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="o">==================================================</span>
+<span class="w">   </span><span class="k">fi</span>
+<span class="w">   </span><span class="nv">$curlcmd</span><span class="w">  </span>-s<span class="w"> </span>-k<span class="w"> </span><span class="nv">$userpass</span><span class="w"> </span>-H<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$proxyauth</span><span class="s2">&quot;</span><span class="w"> </span>-X<span class="w"> </span><span class="nv">$opn</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$url</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$filter_regex</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$tmpfile</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null
+<span class="k">fi</span>
+
+<span class="nv">reshead</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>head<span class="w"> </span>-1<span class="w"> </span><span class="nv">$tmpfile</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">reshead</span><span class="p">:</span><span class="nv">2</span><span class="p">:</span><span class="nv">5</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;error&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">   </span><span class="nb">echo</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span>ERROR:
+<span class="w">   </span>cat<span class="w"> </span><span class="nv">$tmpfile</span>
+<span class="w">   </span><span class="nb">exit</span>
+<span class="k">fi</span>
+
+<span class="c1">#sed -i &quot;s/-&gt;/\n   -&gt;/g&quot; $tmpfile</span>
+cat<span class="w"> </span><span class="nv">$tmpfile</span>
+
+<span class="nv">num_lines</span><span class="o">=</span><span class="k">$(</span>cat<span class="w"> </span><span class="nv">$tmpfile</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l<span class="k">)</span>
+<span class="nb">let</span><span class="w"> </span><span class="nv">num_lines</span><span class="o">=</span>num_lines-header_rows
+
+<span class="nb">echo</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;(</span><span class="nv">$num_lines</span><span class="s2"> lines)&quot;</span>
+</code></pre></div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: November 25, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

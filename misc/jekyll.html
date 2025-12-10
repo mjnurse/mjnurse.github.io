@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Jekyll Details" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>Jekyll Details</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>Jekyll Details</h1>
+<p>Below is a list of the variables available in jekyll and therefore github pages.</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>site.time</td>
+<td>{{site.time}}</td>
+</tr>
+<tr>
+<td>site.pages</td>
+<td>(Hidden)</td>
+</tr>
+<tr>
+<td>site.posts</td>
+<td>{{site.posts}}</td>
+</tr>
+<tr>
+<td>site.related_posts</td>
+<td>{{site.related_posts}}</td>
+</tr>
+<tr>
+<td>site.static_files</td>
+<td>(Hidden)</td>
+</tr>
+<tr>
+<td>site.html_pages</td>
+<td>(Hidden)</td>
+</tr>
+<tr>
+<td>site.html_files</td>
+<td>(Hidden)</td>
+</tr>
+<tr>
+<td>site.collections</td>
+<td>{{site.collections}}</td>
+</tr>
+<tr>
+<td>site.data</td>
+<td>{{site.data}}</td>
+</tr>
+<tr>
+<td>site.documents</td>
+<td>{{site.documents}}</td>
+</tr>
+<tr>
+<td>site.categories.CATEGORY</td>
+<td>{{site.categories.CATEGORY}}</td>
+</tr>
+<tr>
+<td>site.tags.TAG</td>
+<td>{{site.tags.TAG}}</td>
+</tr>
+<tr>
+<td>site.url</td>
+<td>{{site.url}}</td>
+</tr>
+<tr>
+<td>site.[CONFIGURATION_DATA]</td>
+<td>{{site.[CONFIGURATION_DATA]}}</td>
+</tr>
+<tr>
+<td>page.content</td>
+<td>This pages content</td>
+</tr>
+<tr>
+<td>page.title</td>
+<td>{{page.title}}</td>
+</tr>
+<tr>
+<td>page.excerpt</td>
+<td>{{page.excerpt}}</td>
+</tr>
+<tr>
+<td>page.url</td>
+<td>{{page.url}}</td>
+</tr>
+<tr>
+<td>page.date</td>
+<td>{{page.date}}</td>
+</tr>
+<tr>
+<td>page.id</td>
+<td>{{page.id}}</td>
+</tr>
+<tr>
+<td>page.categories</td>
+<td>{{page.categories}}</td>
+</tr>
+<tr>
+<td>page.collection</td>
+<td>{{page.collection}}</td>
+</tr>
+<tr>
+<td>page.tags</td>
+<td>{{page.tags}}</td>
+</tr>
+<tr>
+<td>page.dir</td>
+<td>{{page.dir}}</td>
+</tr>
+<tr>
+<td>page.name</td>
+<td>{{page.name}}</td>
+</tr>
+<tr>
+<td>page.path</td>
+<td>{{page.path}}</td>
+</tr>
+<tr>
+<td>page.next</td>
+<td>{{page.next}}</td>
+</tr>
+<tr>
+<td>page.previous</td>
+<td>{{page.previous}}</td>
+</tr>
+</tbody>
+</table>
+<hr>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: November 25, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

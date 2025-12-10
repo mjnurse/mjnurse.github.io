@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Kubernetes" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>Kubernetes</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>Kubernetes</h1>
+<div class="table-of-contents">
+<h2>Contents</h2>
+<ul>
+<li class="toc-h2"><a href="#basic-objects">Basic Objects</a></li>
+<li class="toc-h2"><a href="#service-types">Service Types</a></li>
+<li class="toc-h2"><a href="#controllers">Controllers</a></li>
+<li class="toc-h2"><a href="#control-plane">Control Plane</a></li>
+</ul>
+</div>
+<h2 id="basic-objects">Basic Objects</h2>
+<ul>
+<li>
+<p><strong>pod</strong> - container / set of containers + storage resources + unique IP + local options</p>
+</li>
+<li>
+<p><strong>service</strong> - abstraction layer on top of a set of ephemeral pods (think of this as the 'face' of a set of pods)</p>
+</li>
+<li>
+<p><strong>volume</strong> - sometimes-shared, persistent storage</p>
+</li>
+<li>
+<p><strong>namespace</strong> - virtual cluster on top of an underlying physical cluster</p>
+</li>
+</ul>
+<h2 id="service-types">Service Types</h2>
+<ul>
+<li>
+<p><strong>clusterIP</strong> - exposes services only inside the cluster (default)</p>
+</li>
+<li>
+<p><strong>nodePort</strong> - exposes services at the specified port on all nodes (<node-ip>:<nodePort>)</p>
+</li>
+<li>
+<p><strong>loadBalancer</strong> - exposes the service with a cloud-provider's load balancer.</p>
+</li>
+<li>
+<p><strong>externalName</strong> - this maps a service to endpoints completely outside of the cluster</p>
+</li>
+</ul>
+<h2 id="controllers">Controllers</h2>
+<ul>
+<li>
+<p><strong>replicaSet</strong> - ensures a certain number of pods are running</p>
+</li>
+<li>
+<p><strong>deployment</strong> - declaratively manages a replicaSet</p>
+</li>
+<li>
+<p><strong>statefulSet</strong> - like a deployment, but for non-interchangeable (or stateful) underlying pods</p>
+</li>
+<li>
+<p><strong>daemonSet</strong> - manages pods that need to run on all/some nodes</p>
+</li>
+<li>
+<p><strong>job</strong> - manages a set of pods that run to completion and tracks the overall progress</p>
+</li>
+</ul>
+<h2 id="control-plane">Control Plane</h2>
+<ul>
+<li>
+<p><strong>master</strong> - entity responsible for managing cluster state. It consists of 3 major components:</p>
+</li>
+<li>
+<p><strong>kube-apiserver</strong> - exposes cluster control and state</p>
+</li>
+<li>
+<p><strong>kube-controller-manager</strong> - this is where the 'brain' of controllers live</p>
+</li>
+<li>
+<p><strong>kube-scheduler</strong> - matches resources to work</p>
+</li>
+<li>
+<p><strong>node</strong> - individual machines or VMs that make up the cluster. A node consists of:</p>
+</li>
+<li>
+<p><strong>kubelet</strong> - service that communicates with the master</p>
+</li>
+<li>
+<p><strong>kube-proxy</strong> - proxy for connecting to the cluster network</p>
+</li>
+</ul>
+<p><strong>namespace</strong> -&gt; virtual cluster on top of an underlying physical cluster</p>
+<hr>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: December 10, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="csvplot - Generates a HTML page containing a Google Chart plotting the csv data" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>csvplot - Generates a HTML page containing a Google Chart plotting the csv data</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>csvplot - Generates a HTML page containing a Google Chart plotting the csv data</h1>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
+<span class="s2">NAME</span>
+<span class="s2">  csvplot - Generates a HTML page containing a Google Chart plotting the csv data.</span>
+
+<span class="s2">USAGE</span>
+<span class="s2">  csvplot [options] &lt;csv filename&gt;</span>
+
+<span class="s2">OPTIONS</span>
+<span class="s2">  -f|--fontsize</span>
+<span class="s2">    The font size for the chart</span>
+
+<span class="s2">  -h|--help</span>
+<span class="s2">    Show help text.</span>
+
+<span class="s2">  -s|--smooth</span>
+<span class="s2">    Adds smoothing to the plotted line.</span>
+
+<span class="s2">  -x|--xaxis|--haxis &lt;name&gt;</span>
+<span class="s2">    sets the xaxis / haxis.</span>
+
+<span class="s2">  -y|--yaxis|--vaxis &lt;name&gt;</span>
+<span class="s2">    sets the yaxis / vaxis.</span>
+
+<span class="s2">DESCRIPTION</span>
+<span class="s2">  Generates a HTML page containing a Google Chart plotting the csv data.</span>
+
+<span class="s2">AUTHOR</span>
+<span class="s2">  mjnurse.dev - 2020</span>
+<span class="s2">&quot;</span>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Generates a HTML page containing a Google Chart plotting the csv data&quot;</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Generates a HTML page containing a Google Chart plotting the csv data&quot;</span>
+
+<span class="nv">try</span><span class="o">=</span><span class="s2">&quot;Try </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h for more information&quot;</span>
+<span class="nv">tmp</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">help_text</span><span class="p">##*USAGE</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nv">usage</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span>Usage:<span class="w"> </span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%OPTIONS*</span><span class="si">}</span><span class="k">)</span><span class="s2">&quot;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">usage</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">try</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="nv">font_size</span><span class="o">=</span><span class="m">12</span>
+<span class="nv">smooth</span><span class="o">=</span>n
+<span class="nv">haxis</span><span class="o">=</span><span class="s2">&quot;H-Axis&quot;</span>
+<span class="nv">vaxis</span><span class="o">=</span><span class="s2">&quot;V-Axis&quot;</span>
+
+<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">   </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span><span class="w"> </span>
+<span class="w">      </span>-h<span class="p">|</span>--help<span class="p">|</span>?<span class="o">)</span>
+<span class="w">         </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
+<span class="w">         </span><span class="nb">exit</span>
+<span class="w">         </span><span class="p">;;</span>
+<span class="w">      </span>-f<span class="p">|</span>--fontsize<span class="o">)</span>
+<span class="w">         </span><span class="nb">shift</span>
+<span class="w">         </span><span class="nv">font_size</span><span class="o">=</span><span class="nv">$1</span>
+<span class="w">         </span><span class="p">;;</span>
+<span class="w">      </span>-s<span class="p">|</span>--smooth<span class="o">)</span>
+<span class="w">         </span><span class="nv">smooth</span><span class="o">=</span>y
+<span class="w">         </span><span class="p">;;</span>
+<span class="w">      </span>-x<span class="p">|</span>--xaxis<span class="p">|</span>--haxis<span class="o">)</span>
+<span class="w">         </span><span class="nb">shift</span>
+<span class="w">         </span><span class="nv">haxis</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="w">         </span><span class="p">;;</span>
+<span class="w">      </span>-y<span class="p">|</span>--yaxis<span class="p">|</span>--vaxis<span class="o">)</span>
+<span class="w">         </span><span class="nb">shift</span>
+<span class="w">         </span><span class="nv">vaxis</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="w">         </span><span class="p">;;</span>
+<span class="w">      </span>?*<span class="o">)</span>
+<span class="w">         </span><span class="k">break</span>
+<span class="w">         </span><span class="p">;;</span>
+<span class="w">   </span><span class="k">esac</span><span class="w"> </span>
+<span class="w">   </span><span class="nb">shift</span>
+<span class="k">done</span><span class="w"> </span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$smooth</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>y<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nv">smooth_cmd</span><span class="o">=</span><span class="s1">&#39;curveType: &quot;function&quot;,&#39;</span>
+<span class="k">else</span>
+<span class="w">  </span><span class="nv">smooth_cmd</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+<span class="k">fi</span>
+
+<span class="nv">cf</span><span class="o">=</span><span class="nv">$1</span>
+<span class="nv">html_doc</span><span class="o">=</span><span class="si">${</span><span class="nv">cf</span><span class="p">/.csv/</span><span class="si">}</span>.html
+rm<span class="w"> </span>-f<span class="w"> </span><span class="nv">$html_doc</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;&lt;!DOCTYPE html&gt;</span>
+<span class="s1">&lt;html&gt;</span>
+<span class="s1">  &lt;head&gt;</span>
+<span class="s1">  &lt;/head&gt;</span>
+<span class="s1">  &lt;body&gt;</span>
+<span class="s1">    &lt;style&gt;</span>
+<span class="s1">      #gChart {</span>
+<span class="s1">        position: absolute;</span>
+<span class="s1">        top:0;</span>
+<span class="s1">        left:0;</span>
+<span class="s1">        right: 0;</span>
+<span class="s1">        bottom: 0;</span>
+<span class="s1">      }</span>
+<span class="s1">    &lt;/style&gt;</span>
+<span class="s1">    &lt;script type=&quot;text/javascript&quot; src=&quot;https://www.gstatic.com/charts/loader.js&quot;&gt;&lt;/script&gt;</span>
+<span class="s1">    &lt;script type=&quot;text/javascript&quot;&gt;</span>
+<span class="s1">      google.charts.load(&quot;current&quot;, {&quot;packages&quot;: [&quot;corechart&quot;]});</span>
+<span class="s1">      google.charts.setOnLoadCallback(drawCht);</span>
+<span class="s1">      function drawCht() {</span>
+<span class="s1">        const gChtData = google.visualization.arrayToDataTable([&#39;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$html_doc</span>
+
+cat<span class="w"> </span><span class="nv">$cf</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/\&quot;/&#39;/g; s/^/[/; s/</span>$<span class="s2">/],/&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">          </span>sed<span class="w"> </span><span class="s2">&quot;1s/\]/&#39;\]/; 1s/\[/\[&#39;/; 1s/,/&#39;,&#39;/g; 1s/&#39;&#39;/&#39;/g; 1s/&#39;,&#39;</span>$<span class="s2">/,/&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$html_doc</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;    ]);</span>
+<span class="s1">        const chtOptions = {</span>
+<span class="s1">          backgroundColor: &quot;#FFFFFF&quot;,</span>
+<span class="s1">          chartArea: { left: &quot;10%&quot;, top: &quot;6%&quot;, height: &quot;80%&quot;, width: &quot;84%&quot; },</span>
+<span class="s1">          pointsVisible: false,</span>
+<span class="s1">          fontSize: &#39;</span><span class="nv">$font_size</span><span class="s1">&#39;,</span>
+<span class="s1">          height: &quot;100%&quot;,</span>
+<span class="s1">          width: &quot;100%&quot;,</span>
+<span class="s1">          legend: &quot;bottom&quot;,</span>
+<span class="s1">          vAxis: { </span>
+<span class="s1">            viewWindow: {min: 0},</span>
+<span class="s1">            title: &quot;&#39;</span><span class="nv">$vaxis</span><span class="s1">&#39;&quot;,</span>
+<span class="s1">            titleTextStyle: {</span>
+<span class="s1">              // color: &lt;string&gt;,</span>
+<span class="s1">              // fontName: &lt;string&gt;,</span>
+<span class="s1">              fontSize: &#39;</span><span class="nv">$font_size</span><span class="s1">&#39;,</span>
+<span class="s1">              bold: true,</span>
+<span class="s1">              italic: false,</span>
+<span class="s1">            },</span>
+<span class="s1">          },</span>
+<span class="s1">          hAxis: {</span>
+<span class="s1">            title: &quot;&#39;</span><span class="nv">$haxis</span><span class="s1">&#39;&quot;,</span>
+<span class="s1">            titleTextStyle: {</span>
+<span class="s1">              // color: &lt;string&gt;,</span>
+<span class="s1">              // fontName: &lt;string&gt;,</span>
+<span class="s1">              fontSize: &#39;</span><span class="nv">$font_size</span><span class="s1">&#39;,</span>
+<span class="s1">              bold: true,</span>
+<span class="s1">              italic: false,</span>
+<span class="s1">            },</span>
+<span class="s1">          }, &#39;</span><span class="nv">$smooth_cmd</span><span class="s1">&#39;</span>
+<span class="s1">        };</span>
+<span class="s1">        const chart = new google.visualization.LineChart( document.getElementById(&quot;gChart&quot;));</span>
+<span class="s1">        chart.draw(gChtData, chtOptions);</span>
+<span class="s1">      }</span>
+<span class="s1">    &lt;/script&gt;</span>
+<span class="s1">    &lt;div id=&quot;gChartBox&quot;&gt;&lt;div id=&quot;gChart&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;</span>
+<span class="s1">  &lt;/body&gt;</span>
+<span class="s1">&lt;/html&gt;</span>
+<span class="s1">&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$html_doc</span>
+</code></pre></div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: November 25, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

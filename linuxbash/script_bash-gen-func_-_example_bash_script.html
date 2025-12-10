@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="bash-gen-func - Example Bash Script" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>bash-gen-func - Example Bash Script</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>bash-gen-func - Example Bash Script</h1>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
+<span class="s2">NAME</span>
+<span class="s2">  bash-gen-func - Generates code and header of a bash function</span>
+
+<span class="s2">USAGE</span>
+<span class="s2">  bash-gen-func [options] &lt;function_name&gt; &lt;parameters&gt;</span>
+
+<span class="s2">OPTIONS</span>
+
+<span class="s2">  -f|--flag &lt;param_name&gt; &lt;variable_name&gt;</span>
+<span class="s2">    A flag parameter.  If passed then a corresponding variable named &lt;variable_name&gt;_yn is </span>
+<span class="s2">    set to &#39;y&#39;.</span>
+
+<span class="s2">  -fv|--flagvalue &lt;param_name&gt; &lt;variable_name&gt;</span>
+<span class="s2">    A flag plus value parameter.  If passed then a corresponding variable named</span>
+<span class="s2">    &lt;variable_name&gt; is set to the value &lt;value&gt; passed.</span>
+
+<span class="s2">  -h|--help</span>
+<span class="s2">    Show help text.</span>
+
+<span class="s2">  -o|--optional</span>
+<span class="s2">    All flag / flag value parameter declared after this are marked as optional.</span>
+
+<span class="s2">DESCRIPTION</span>
+<span class="s2">  The script generates a function header and function code shell for a specified function</span>
+<span class="s2">  name and a list of parameters.</span>
+
+<span class="s2">AUTHOR</span>
+<span class="s2">  mjnurse.dev - 2023</span>
+<span class="s2">&quot;</span>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;tbc&quot;</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Example Bash Script&quot;</span>
+
+<span class="nv">try</span><span class="o">=</span><span class="s2">&quot;Try </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h for more information&quot;</span>
+<span class="nv">tmp</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">help_text</span><span class="p">##*USAGE</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nv">usage</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%OPTIONS*</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;\n&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/  */ /g&quot;</span><span class="k">)</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">usage</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">try</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
+<span class="w">    </span>-h<span class="p">|</span>--help<span class="o">)</span>
+<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
+<span class="w">      </span><span class="nb">exit</span>
+<span class="w">      </span><span class="p">;;</span>
+<span class="w">    </span>?*<span class="o">)</span>
+<span class="w">      </span><span class="k">break</span>
+<span class="w">      </span><span class="p">;;</span>
+<span class="w">  </span><span class="k">esac</span>
+<span class="w">  </span><span class="nb">shift</span>
+<span class="k">done</span>
+
+<span class="c1">#*</span>
+<span class="c1">#* This function runs through a set of parameters and generates a function description header.</span>
+<span class="c1">#* In other words generate this header.</span>
+<span class="c1">#*</span>
+<span class="c1">#* {flag-value} -o optional_yn - signifies that any further parameters are optional.</span>
+<span class="c1">#* {flag-value} -f &lt;flag_value&gt; - describes a flag_value parameter.</span>
+<span class="c1">#* {opt-param} &lt;parameter_1&gt; - describes parameter in position 1.</span>
+<span class="c1">#* {opt-param} &lt;parameter_2&gt; - describes parameter in position 2.</span>
+<span class="c1">#* etc..</span>
+<span class="c1">#*</span>
+<span class="k">function</span><span class="w"> </span>desc<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">  </span><span class="nv">optional_yn</span><span class="o">=</span>n
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;#*&quot;</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;#* DESC&quot;</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;#*&quot;</span>
+<span class="w">  </span><span class="nb">shift</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
+<span class="w">      </span>-o<span class="p">|</span>--optional<span class="o">)</span>
+<span class="w">        </span><span class="nv">optional_yn</span><span class="o">=</span>y
+<span class="w">        </span><span class="p">;;</span>
+<span class="w">      </span>-f<span class="p">|</span>--flag<span class="o">)</span>
+<span class="w">        </span><span class="nb">shift</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;#* {flag} -</span><span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">2</span><span class="si">}</span><span class="s2">_yn - DESC&quot;</span>
+<span class="w">        </span><span class="nb">shift</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="w">      </span>-fv<span class="p">|</span>--flagvalue<span class="o">)</span>
+<span class="w">        </span><span class="nb">shift</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;#* {flag-value} -</span><span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="s2"> &lt;</span><span class="si">${</span><span class="nv">2</span><span class="si">}</span><span class="s2">&gt; - DESC&quot;</span>
+<span class="w">        </span><span class="nb">shift</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="w">      </span>?*<span class="o">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="si">${</span><span class="nv">optional_yn</span><span class="si">}</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>n<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">          </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;#* {param} &lt;</span><span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="s2">&gt; - DESC&quot;</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">          </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;#* {opt-param} &lt;</span><span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="s2">&gt; - DESC&quot;</span>
+<span class="w">        </span><span class="k">fi</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="w">    </span><span class="k">esac</span>
+<span class="w">    </span><span class="nb">shift</span>
+<span class="w">  </span><span class="k">done</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;#*&quot;</span>
+<span class="o">}</span>
+
+<span class="c1">#*</span>
+<span class="c1">#* Function to print an flag error message.</span>
+<span class="c1">#*</span>
+<span class="k">function</span><span class="w"> </span>flag_error<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">  </span><span class="nb">echo</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;########################################################&quot;</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;ERROR: Flag or flag with value listed after a parameter.&quot;</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;       Flags cannot follow a parameter.&quot;</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;########################################################&quot;</span>
+<span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="o">}</span>
+
+<span class="k">function</span><span class="w"> </span>func<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">  </span><span class="nv">optional_yn</span><span class="o">=</span>n
+<span class="w">  </span><span class="nv">param_pos</span><span class="o">=</span><span class="m">1</span>
+<span class="w">  </span><span class="nv">flags_yn</span><span class="o">=</span>n
+<span class="w">  </span><span class="nv">function_name</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="nv">body</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="w">  </span><span class="nv">paramlist</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="w">  </span><span class="k">function</span><span class="w"> </span>b<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nv">body</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$body$1</span><span class="s2">\n&quot;</span>
+<span class="w">  </span><span class="o">}</span>
+<span class="w">  </span><span class="k">function</span><span class="w"> </span>p<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nv">paramlist</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$paramlist</span><span class="s2">\n</span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="o">}</span>
+<span class="w">  </span><span class="nb">shift</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="o">=</span>~<span class="w"> </span>-.*<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span>b<span class="w"> </span><span class="s2">&quot;  while [[ \&quot;\$1 ]]; do&quot;</span>
+<span class="w">    </span>b<span class="w"> </span><span class="s2">&quot;    case \$1 in&quot;</span>
+<span class="w">    </span><span class="nv">flags_yn</span><span class="o">=</span>y
+<span class="w">  </span><span class="k">fi</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
+<span class="w">      </span>-o<span class="p">|</span>--optional<span class="o">)</span>
+<span class="w">        </span><span class="nv">optional_yn</span><span class="o">=</span>y
+<span class="w">        </span><span class="p">;;</span>
+<span class="w">      </span>-f<span class="p">|</span>--flag<span class="o">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="si">${</span><span class="nv">flags_yn</span><span class="si">}</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>n<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">          </span>flag_error
+<span class="w">        </span><span class="k">fi</span>
+<span class="w">        </span><span class="nb">shift</span>
+<span class="w">        </span>b<span class="w"> </span><span class="s2">&quot;      -</span><span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="s2">)&quot;</span>
+<span class="w">        </span>b<span class="w"> </span><span class="s2">&quot;        </span><span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="s2">_yn=y&quot;</span>
+<span class="w">        </span>b<span class="w"> </span><span class="s2">&quot;        ;;&quot;</span>
+<span class="w">        </span>p<span class="w"> </span><span class="s2">&quot;  </span><span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="s2">_yn=n&quot;</span>
+<span class="w">        </span><span class="nb">shift</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="w">      </span>-fv<span class="p">|</span>--flag-value<span class="o">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="si">${</span><span class="nv">flags_yn</span><span class="si">}</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>n<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">          </span>flag_error
+<span class="w">        </span><span class="k">fi</span>
+<span class="w">        </span><span class="nb">shift</span>
+<span class="w">        </span>b<span class="w"> </span><span class="s2">&quot;      -</span><span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="s2">)&quot;</span>
+<span class="w">        </span>b<span class="w"> </span><span class="s2">&quot;        shift&quot;</span>
+<span class="w">        </span>b<span class="w"> </span><span class="s2">&quot;        </span><span class="si">${</span><span class="nv">2</span><span class="si">}</span><span class="s2">=\&quot;\${1}\&quot;&quot;</span>
+<span class="w">        </span>b<span class="w"> </span><span class="s2">&quot;        ;;&quot;</span>
+<span class="w">        </span><span class="nb">shift</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="w">      </span>?*<span class="o">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="si">${</span><span class="nv">flags_yn</span><span class="si">}</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>y<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">          </span><span class="nv">flags_yn</span><span class="o">=</span>n<span class="p">;</span>
+<span class="w">          </span>b<span class="w"> </span><span class="s2">&quot;    esac&quot;</span>
+<span class="w">          </span>b<span class="w"> </span><span class="s2">&quot;    shift&quot;</span>
+<span class="w">          </span>b<span class="w"> </span><span class="s2">&quot;  done&quot;</span>
+<span class="w">        </span><span class="k">fi</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="si">${</span><span class="nv">optional_yn</span><span class="si">}</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>n<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">          </span>b<span class="w"> </span><span class="s2">&quot;  </span><span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="s2">=\&quot;\${</span><span class="si">${</span><span class="nv">param_pos</span><span class="si">}</span><span class="s2">}\&quot;&quot;</span>
+<span class="w">          </span>b<span class="w"> </span><span class="s2">&quot;  if [[ \&quot;\$</span><span class="nv">$1</span><span class="s2">\&quot; == \&quot;\&quot; ]]; then&quot;</span>
+<span class="w">          </span>b<span class="w"> </span><span class="s2">&quot;    echo \&quot;Error: Function: </span><span class="nv">$function_name</span><span class="s2">.  Mandatory parameter &lt;</span><span class="nv">$1</span><span class="s2">&gt; not set\&quot;&quot;</span>
+<span class="w">          </span>b<span class="w"> </span><span class="s2">&quot;    exit 1&quot;</span>
+<span class="w">          </span>b<span class="w"> </span><span class="s2">&quot;  fi&quot;</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">          </span>b<span class="w"> </span><span class="s2">&quot;  </span><span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="s2">=\&quot;\${</span><span class="si">${</span><span class="nv">param_pos</span><span class="si">}</span><span class="s2">}\&quot; # Optional parameter&quot;</span>
+<span class="w">        </span><span class="k">fi</span>
+<span class="w">        </span><span class="nb">let</span><span class="w"> </span><span class="nv">param_pos</span><span class="o">=</span>param_pos+1
+<span class="w">        </span><span class="p">;;</span>
+<span class="w">    </span><span class="k">esac</span>
+<span class="w">    </span><span class="nb">shift</span>
+<span class="w">  </span><span class="k">done</span>
+<span class="w">  </span>b<span class="w"> </span><span class="s2">&quot;    esac&quot;</span>
+<span class="w">  </span>b<span class="w"> </span><span class="s2">&quot;  done&quot;</span>
+
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;function </span><span class="si">${</span><span class="nv">function_name</span><span class="si">}</span><span class="s2"> () {&quot;</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$paramlist</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$body</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;}&quot;</span>
+<span class="o">}</span>
+
+desc<span class="w"> </span><span class="nv">$*</span>
+func<span class="w"> </span><span class="nv">$*</span>
+</code></pre></div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: November 25, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

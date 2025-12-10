@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="lf - A script to recursively list folders and show folder details" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>lf - A script to recursively list folders and show folder details</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>lf - A script to recursively list folders and show folder details</h1>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
+<span class="s2">NAME</span>
+<span class="s2">  lf - A script to recursively list folders and show folder details.</span>
+
+<span class="s2">USAGE</span>
+<span class="s2">  lf [options] &lt;directory (. for current directory)&gt;</span>
+
+<span class="s2">OPTIONS</span>
+<span class="s2">  -m|maxdepth &lt;number&gt;</span>
+<span class="s2">    Max directory depth.</span>
+
+<span class="s2">  -t|--filetypecount</span>
+<span class="s2">    Show a count of files by file type.</span>
+
+<span class="s2">  -h|--help</span>
+<span class="s2">    Show help text.</span>
+
+<span class="s2">DESCRIPTION</span>
+<span class="s2">  A script to recursively list folders, show folder details (size and number of files) and</span>
+<span class="s2">  optionally a count of files by file size.</span>
+
+<span class="s2">AUTHOR</span>
+<span class="s2">  mjnurse.dev - 2020</span>
+<span class="s2">&quot;</span>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;A script to recursively list folders and show folder details&quot;</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;A script to recursively list folders and show folder details&quot;</span>
+
+<span class="nv">try</span><span class="o">=</span><span class="s2">&quot;Try </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h for more information&quot;</span>
+<span class="nv">tmp</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">help_text</span><span class="p">##*USAGE</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nv">usage</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%OPTIONS*</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="nv">file_type_count_yn</span><span class="o">=</span>n
+<span class="nv">max_depth</span><span class="o">=</span><span class="m">999</span>
+
+<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span><span class="w"> </span>
+<span class="w">    </span>-h<span class="p">|</span>--help<span class="o">)</span>
+<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
+<span class="w">      </span><span class="nb">exit</span>
+<span class="w">      </span><span class="p">;;</span>
+<span class="w">    </span>-m<span class="p">|</span>--maxdepth<span class="o">)</span>
+<span class="w">      </span><span class="nb">shift</span>
+<span class="w">      </span><span class="o">((</span><span class="w"> </span><span class="nv">max_depth</span><span class="o">=</span><span class="si">${</span><span class="nv">1</span><span class="si">}</span>*3<span class="w"> </span><span class="o">))</span>
+<span class="w">      </span><span class="p">;;</span>
+<span class="w">    </span>-t<span class="p">|</span>--filetypecount<span class="o">)</span>
+<span class="w">      </span><span class="nv">file_type_count_yn</span><span class="o">=</span>y
+<span class="w">      </span><span class="p">;;</span>
+<span class="w">    </span>*<span class="o">)</span>
+<span class="w">      </span><span class="k">break</span>
+<span class="w">      </span><span class="p">;;</span>
+<span class="w">  </span><span class="k">esac</span><span class="w"> </span>
+<span class="w">  </span><span class="nb">shift</span>
+<span class="k">done</span><span class="w"> </span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="c1"># xargs strips the whitespace and replaces multiple spaces with one.</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="nv">$usage</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">try</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="nv">green</span><span class="o">=</span><span class="s2">&quot;\e[92m&quot;</span>
+<span class="nv">white</span><span class="o">=</span><span class="s2">&quot;\e[39m&quot;</span>
+<span class="nv">ind</span><span class="o">=</span><span class="s2">&quot;__ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __ __&quot;</span><span class="w"> </span>
+
+<span class="k">function</span><span class="w"> </span>f<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nv">curr_dir</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">1</span><span class="p">:</span><span class="nv">0</span><span class="k">:-</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="k">fi</span>
+<span class="w">  </span><span class="nv">depth</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="nv">file_count</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>find<span class="w"> </span><span class="nv">$curr_dir</span><span class="w"> </span>-maxdepth<span class="w"> </span><span class="m">1</span><span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l<span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="nv">size</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>du<span class="w"> </span><span class="nv">$curr_dir</span><span class="w"> </span>-d<span class="w"> </span><span class="m">0</span><span class="w"> </span>-h<span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="nv">size</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">size</span><span class="p">%%/*</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">ind</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">$depth</span><span class="si">}${</span><span class="nv">curr_dir</span><span class="p">##*/</span><span class="si">}${</span><span class="nv">green</span><span class="si">}</span><span class="s2"> - </span><span class="si">${</span><span class="nv">file_count</span><span class="si">}</span><span class="s2"> files </span><span class="si">${</span><span class="nv">white</span><span class="si">}${</span><span class="nv">size</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$file_type_count_yn</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>y<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">ind</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">$depth</span><span class="si">}</span><span class="s2">__ ( </span><span class="k">$(</span>find<span class="w"> </span><span class="nv">$curr_dir</span><span class="w"> </span>-maxdepth<span class="w"> </span><span class="m">1</span><span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span><span class="se">\</span>
+<span class="w">      </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/^[^\.]*$/other/; s/.*\.//&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">      </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span>uniq<span class="w"> </span>-c<span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;\n&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">      </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/   */, /g; s/^,  *//&#39;</span><span class="k">)</span><span class="s2"> )&quot;</span>
+<span class="w">  </span><span class="k">fi</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$depth</span><span class="w"> </span>-lt<span class="w"> </span><span class="nv">$max_depth</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>d<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>ls<span class="w"> </span>-d<span class="w"> </span><span class="si">${</span><span class="nv">curr_dir</span><span class="si">}</span>/*/<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">      </span><span class="o">((</span><span class="w"> </span><span class="nv">depth</span><span class="o">=</span>depth+3<span class="w"> </span><span class="o">))</span>
+<span class="w">      </span>f<span class="w"> </span><span class="nv">$d</span><span class="w"> </span><span class="nv">$depth</span>
+<span class="w">      </span><span class="o">((</span><span class="w"> </span><span class="nv">depth</span><span class="o">=</span>depth-3<span class="w"> </span><span class="o">))</span>
+<span class="w">    </span><span class="k">done</span>
+<span class="w">  </span><span class="k">fi</span>
+<span class="o">}</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">1</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;/&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nv">dir</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="k">else</span>
+<span class="w">  </span><span class="nv">dir</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">/</span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="k">fi</span>
+
+<span class="nb">cd</span><span class="w"> </span><span class="nv">$dir</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+
+f<span class="w">  </span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">/&quot;</span><span class="w"> </span><span class="m">0</span>
+</code></pre></div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: November 25, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

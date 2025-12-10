@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="What Is Kafka?" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>What Is Kafka?</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>What Is Kafka?</h1>
+<h1 id="overview">Overview</h1>
+<p><em>"A distributed event streaming platform capable of handling trillions of events a day. Initially conceived as a messaging queue, Kafka is based on an abstraction of a distributed commit log. Since being created and open sourced by LinkedIn in 2011, Kafka has quickly evolved from messaging queue to a full-fledged event streaming platform."</em></p>
+<h2 id="topic">Topic</h2>
+<ul>
+<li>A Topic is a collection of related messages / events.</li>
+<li>Reading from a Topic does not remove / delete the message from he Topic.</li>
+<li>Think of a Topic as a log file with pointers;</li>
+<li>One write pointer always pointing to end of log.</li>
+<li>'N' read pointers (one per consumer).</li>
+</ul>
+<h2 id="partition">Partition</h2>
+<ul>
+<li>A Topic is stored in N Partitions.</li>
+<li>Partitions are stored on and managed by Brokers.</li>
+<li>Can be thought of as a log (file) - although see Segments.</li>
+</ul>
+<h2 id="segment">Segment</h2>
+<ul>
+<li>A Partition is stored as Segments (rolling log files) on disks.</li>
+<li>Note: A log is a file which can only be appended to, previous records immutable.</li>
+</ul>
+<h2 id="broker">Broker</h2>
+<ul>
+<li>A Broker is an instance of Kafka running on a server (or VM or Docker etc).</li>
+<li>A Broker manages Partitions (and their Segments - log files).</li>
+</ul>
+<h1 id="kafka-in-operation">Kafka In Operation</h1>
+<h2 id="producers">Producers</h2>
+<ul>
+<li>Producers (1..many) write messages to Kafka.</li>
+<li>Messages are sent to a Topic.</li>
+<li>Producers get and ACK / NACK (negative ACK / error).</li>
+</ul>
+<h2 id="consumers">Consumers</h2>
+<ul>
+<li>Consumers (1..many) read messages from Kafka Topics.</li>
+<li>Reading from a Topic does not delete the message - messages persist based on retention policy.</li>
+<li>Each Consumer tracks its own offset (position) in the Topic.</li>
+<li>Consumers can read from any point in the Topic by setting their offset.</li>
+</ul>
+<h2 id="consumer-groups">Consumer Groups</h2>
+<ul>
+<li>Multiple Consumers can work together as a Consumer Group.</li>
+<li>Each Consumer in a group reads from different Partitions.</li>
+<li>This enables parallel processing and load balancing.</li>
+<li>If a Consumer fails, another Consumer in the group takes over its Partitions.</li>
+<li>Each Consumer Group maintains its own offset per Partition.</li>
+</ul>
+<h2 id="message-ordering">Message Ordering</h2>
+<ul>
+<li>Messages within a single Partition are strictly ordered.</li>
+<li>No ordering guarantee across different Partitions.</li>
+<li>To ensure ordering, send related messages to the same Partition (using a key).</li>
+</ul>
+<h2 id="replication">Replication</h2>
+<ul>
+<li>Partitions can be replicated across multiple Brokers for fault tolerance.</li>
+<li>One Partition replica is the Leader (handles all reads/writes).</li>
+<li>Other replicas are Followers (replicate data from the Leader).</li>
+<li>If the Leader fails, a Follower is promoted to Leader.</li>
+<li>Replication factor determines how many copies exist (e.g., RF=3 means 3 copies).</li>
+</ul>
+<h1 id="key-concepts">Key Concepts</h1>
+<h2 id="offset">Offset</h2>
+<ul>
+<li>An Offset is the sequential ID of a message within a Partition.</li>
+<li>Starts at 0 and increments for each new message.</li>
+<li>Consumers track their current Offset to know which messages they've processed.</li>
+<li>Offsets are committed to Kafka to track progress.</li>
+</ul>
+<h2 id="retention">Retention</h2>
+<ul>
+<li>Messages are retained for a configurable time period (e.g., 7 days) or size limit.</li>
+<li>After retention expires, old messages are deleted.</li>
+<li>Retention is independent of whether messages have been consumed.</li>
+</ul>
+<h2 id="keys-and-partitioning">Keys and Partitioning</h2>
+<ul>
+<li>Messages can have an optional key.</li>
+<li>Messages with the same key always go to the same Partition.</li>
+<li>If no key is provided, messages are distributed round-robin across Partitions.</li>
+<li>This ensures ordering for related messages.</li>
+</ul>
+<h2 id="zookeeper-legacy">ZooKeeper (Legacy)</h2>
+<ul>
+<li>Earlier Kafka versions required ZooKeeper for coordination and metadata management.</li>
+<li>ZooKeeper tracks Brokers, Topics, Partitions, and Consumer Groups.</li>
+<li><strong>KRaft Mode</strong>: Kafka 3.0+ can run without ZooKeeper using built-in consensus.</li>
+</ul>
+<h1 id="common-use-cases">Common Use Cases</h1>
+<h2 id="event-sourcing">Event Sourcing</h2>
+<ul>
+<li>Store all state changes as a sequence of events.</li>
+<li>Rebuild application state by replaying events.</li>
+</ul>
+<h2 id="log-aggregation">Log Aggregation</h2>
+<ul>
+<li>Collect logs from multiple services into centralized Topics.</li>
+<li>Process and analyze logs in real-time.</li>
+</ul>
+<h2 id="stream-processing">Stream Processing</h2>
+<ul>
+<li>Process data in real-time as it flows through Topics.</li>
+<li>Use Kafka Streams or external processors (Spark, Flink).</li>
+</ul>
+<h2 id="messaging-queue">Messaging Queue</h2>
+<ul>
+<li>Decouple producers and consumers.</li>
+<li>Reliable message delivery with persistence.</li>
+</ul>
+<h2 id="metrics-and-monitoring">Metrics and Monitoring</h2>
+<ul>
+<li>Collect application metrics and monitoring data.</li>
+<li>Real-time dashboards and alerting.</li>
+</ul>
+<h1 id="performance-characteristics">Performance Characteristics</h1>
+<h2 id="high-throughput">High Throughput</h2>
+<ul>
+<li>Can handle millions of messages per second.</li>
+<li>Sequential disk I/O for efficiency.</li>
+<li>Zero-copy optimization reduces CPU overhead.</li>
+</ul>
+<h2 id="low-latency">Low Latency</h2>
+<ul>
+<li>Sub-millisecond latency for message delivery.</li>
+<li>Batching and compression for efficiency.</li>
+</ul>
+<h2 id="scalability">Scalability</h2>
+<ul>
+<li>Horizontal scaling by adding more Brokers and Partitions.</li>
+<li>Linear scaling with cluster size.</li>
+</ul>
+<h2 id="durability">Durability</h2>
+<ul>
+<li>Messages are persisted to disk.</li>
+<li>Replication ensures no data loss.</li>
+<li>Configurable acknowledgment levels (acks=0, 1, all).</li>
+</ul>
+<h1 id="basic-commands">Basic Commands</h1>
+<h2 id="create-topic">Create Topic</h2>
+<div class="codehilite"><pre><span></span><code>kafka-topics.sh<span class="w"> </span>--create<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--topic<span class="w"> </span>my-topic<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--partitions<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--replication-factor<span class="w"> </span><span class="m">2</span>
+</code></pre></div>
+
+<h2 id="list-topics">List Topics</h2>
+<div class="codehilite"><pre><span></span><code>kafka-topics.sh<span class="w"> </span>--list<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--bootstrap-server<span class="w"> </span>localhost:9092
+</code></pre></div>
+
+<h2 id="describe-topic">Describe Topic</h2>
+<div class="codehilite"><pre><span></span><code>kafka-topics.sh<span class="w"> </span>--describe<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--topic<span class="w"> </span>my-topic<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--bootstrap-server<span class="w"> </span>localhost:9092
+</code></pre></div>
+
+<h2 id="produce-messages">Produce Messages</h2>
+<div class="codehilite"><pre><span></span><code>kafka-console-producer.sh<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--topic<span class="w"> </span>my-topic<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--bootstrap-server<span class="w"> </span>localhost:9092
+</code></pre></div>
+
+<h2 id="consume-messages">Consume Messages</h2>
+<div class="codehilite"><pre><span></span><code>kafka-console-consumer.sh<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--topic<span class="w"> </span>my-topic<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--from-beginning<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--bootstrap-server<span class="w"> </span>localhost:9092
+</code></pre></div>
+
+<h2 id="consumer-groups_1">Consumer Groups</h2>
+<div class="codehilite"><pre><span></span><code><span class="c1"># List consumer groups</span>
+kafka-consumer-groups.sh<span class="w"> </span>--list<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--bootstrap-server<span class="w"> </span>localhost:9092
+
+<span class="c1"># Describe consumer group</span>
+kafka-consumer-groups.sh<span class="w"> </span>--describe<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--group<span class="w"> </span>my-group<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--bootstrap-server<span class="w"> </span>localhost:9092
+</code></pre></div>
+
+<h2 id="delete-topic">Delete Topic</h2>
+<div class="codehilite"><pre><span></span><code>kafka-topics.sh<span class="w"> </span>--delete<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--topic<span class="w"> </span>my-topic<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--bootstrap-server<span class="w"> </span>localhost:9092
+</code></pre></div>
+
+<h1 id="configuration-examples">Configuration Examples</h1>
+<h2 id="producer-configuration">Producer Configuration</h2>
+<div class="codehilite"><pre><span></span><code><span class="na">bootstrap.servers</span><span class="o">=</span><span class="s">localhost:9092</span>
+<span class="na">key.serializer</span><span class="o">=</span><span class="s">org.apache.kafka.common.serialization.StringSerializer</span>
+<span class="na">value.serializer</span><span class="o">=</span><span class="s">org.apache.kafka.common.serialization.StringSerializer</span>
+<span class="na">acks</span><span class="o">=</span><span class="s">all</span>
+<span class="na">retries</span><span class="o">=</span><span class="s">3</span>
+<span class="na">compression.type</span><span class="o">=</span><span class="s">snappy</span>
+</code></pre></div>
+
+<h2 id="consumer-configuration">Consumer Configuration</h2>
+<div class="codehilite"><pre><span></span><code><span class="na">bootstrap.servers</span><span class="o">=</span><span class="s">localhost:9092</span>
+<span class="na">group.id</span><span class="o">=</span><span class="s">my-consumer-group</span>
+<span class="na">key.deserializer</span><span class="o">=</span><span class="s">org.apache.kafka.common.serialization.StringDeserializer</span>
+<span class="na">value.deserializer</span><span class="o">=</span><span class="s">org.apache.kafka.common.serialization.StringDeserializer</span>
+<span class="na">auto.offset.reset</span><span class="o">=</span><span class="s">earliest</span>
+<span class="na">enable.auto.commit</span><span class="o">=</span><span class="s">false</span>
+</code></pre></div>
+
+<h2 id="broker-configuration">Broker Configuration</h2>
+<div class="codehilite"><pre><span></span><code><span class="na">broker.id</span><span class="o">=</span><span class="s">0</span>
+<span class="na">listeners</span><span class="o">=</span><span class="s">PLAINTEXT://localhost:9092</span>
+<span class="na">log.dirs</span><span class="o">=</span><span class="s">/var/kafka-logs</span>
+<span class="na">num.partitions</span><span class="o">=</span><span class="s">3</span>
+<span class="na">default.replication.factor</span><span class="o">=</span><span class="s">2</span>
+<span class="na">log.retention.hours</span><span class="o">=</span><span class="s">168</span>
+<span class="na">log.segment.bytes</span><span class="o">=</span><span class="s">1073741824</span>
+</code></pre></div>
+
+<h1 id="best-practices">Best Practices</h1>
+<h2 id="topic-design">Topic Design</h2>
+<ul>
+<li>Choose appropriate number of Partitions (more = higher parallelism).</li>
+<li>Consider message ordering requirements.</li>
+<li>Plan retention policies based on use case.</li>
+</ul>
+<h2 id="producer-best-practices">Producer Best Practices</h2>
+<ul>
+<li>Use appropriate <code>acks</code> setting (all for critical data).</li>
+<li>Enable idempotence to prevent duplicates.</li>
+<li>Batch messages for better throughput.</li>
+<li>Use compression (snappy, lz4, gzip).</li>
+</ul>
+<h2 id="consumer-best-practices">Consumer Best Practices</h2>
+<ul>
+<li>Commit offsets after processing, not before.</li>
+<li>Handle rebalancing gracefully.</li>
+<li>Monitor consumer lag.</li>
+<li>Set appropriate <code>max.poll.records</code> and <code>max.poll.interval.ms</code>.</li>
+</ul>
+<h2 id="operational-best-practices">Operational Best Practices</h2>
+<ul>
+<li>Monitor disk space and I/O.</li>
+<li>Set up replication for fault tolerance.</li>
+<li>Use monitoring tools (JMX, Prometheus).</li>
+<li>Plan for capacity (disk, network, CPU).</li>
+<li>Regular backups of critical Topics.</li>
+</ul>
+<h1 id="monitoring-metrics">Monitoring Metrics</h1>
+<h2 id="key-metrics-to-monitor">Key Metrics to Monitor</h2>
+<ul>
+<li><strong>Producer</strong>: request latency, error rate, retry rate</li>
+<li><strong>Consumer</strong>: lag, throughput, error rate, rebalance frequency</li>
+<li><strong>Broker</strong>: request rate, disk usage, network throughput, under-replicated partitions</li>
+<li><strong>Cluster</strong>: active controllers, offline partitions, ISR (In-Sync Replicas) count</li>
+</ul>
+<h1 id="summary">Summary</h1>
+<p>Kafka is a distributed streaming platform that excels at:
+- High-throughput, low-latency message delivery
+- Durable, persistent message storage
+- Scalable, fault-tolerant architecture
+- Real-time stream processing</p>
+<p>Key components work together:
+- <strong>Producers</strong> write to <strong>Topics</strong>
+- <strong>Topics</strong> are divided into <strong>Partitions</strong>
+- <strong>Partitions</strong> are stored as <strong>Segments</strong> on <strong>Brokers</strong>
+- <strong>Consumers</strong> read from <strong>Topics</strong> using <strong>Offsets</strong>
+- <strong>Consumer Groups</strong> enable parallel processing
+- <strong>Replication</strong> ensures fault tolerance</p>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: December 10, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

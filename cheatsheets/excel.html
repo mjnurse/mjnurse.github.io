@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Excel Cheat Sheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>Excel Cheat Sheet</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>Excel Cheat Sheet</h1>
+<div class="table-of-contents">
+<h2>Contents</h2>
+<ul>
+<li><a href="#features">Features</a></li>
+<li class="toc-h2"><a href="#2d-lookup">2d Lookup</a></li>
+<li class="toc-h2"><a href="#tables-and-colname-notation">Tables and =[@ColName] Notation</a></li>
+<li class="toc-h2"><a href="#determine-if-a-column-is-visible">Determine if a Column is Visible</a></li>
+<li class="toc-h2"><a href="#define-new-functions-using-lambda">Define New Functions using LAMBDA</a></li>
+<li><a href="#functions">Functions</a></li>
+<li class="toc-h2"><a href="#compound-growth--interest">Compound Growth / Interest</a></li>
+<li class="toc-h2"><a href="#bytes-size-string-to-number">Bytes Size String to Number</a></li>
+<li class="toc-h2"><a href="#columns-to-sql-insert-statement">Columns To SQL Insert Statement</a></li>
+<li class="toc-h2"><a href="#strip-numbers-from-a-string">Strip Numbers From A String</a></li>
+<li class="toc-h2"><a href="#shortcut-keys">Shortcut Keys</a></li>
+</ul>
+</div>
+<h1 id="features">Features</h1>
+<h2 id="2d-lookup">2d Lookup</h2>
+<p>Using <code>MATCH</code> and <code>INDEX</code>.</p>
+<table>
+  <tr><td> </td><th>A    </th><th>B  </th><th>C  </th><th>D  </th></tr>
+  <tr><th>1</th><td>     </td><td>Cat</td><td>Dog</td><td>Cow</td></tr>
+  <tr><th>2</th><td>White</td><td>30%</td><td>25%</td><td>80%</td></tr>
+  <tr><th>3</th><td>Brown</td><td>30%</td><td>45%</td><td>10%</td></tr>
+  <tr><th>4</th><td>Black</td><td>40%</td><td>30%</td><td>10%</td></tr>
+</table>
+
+<p>To find the percentage of Dogs that are White</p>
+<div class="codehilite"><pre><span></span><code>=INDEX(A1:D4,MATCH(&quot;Dog&quot;,A1:A4,0),MATCH(&quot;White&quot;,A1:D1,0))
+</code></pre></div>
+
+<h2 id="tables-and-colname-notation">Tables and =[@ColName] Notation</h2>
+<p>References a column in a table.  First Insert - Table.</p>
+<p><code>=[@ColName]</code> references the value in a column on the same row in the table.</p>
+<p><code>=[ColName]</code> references all values in a column in a table so you will need an aggregation type function to use this in a table.</p>
+<p><code>=[@[Col Name]]</code> Note the extra brackets required if column name includes spaces.</p>
+<table>
+<thead>
+<tr>
+<th>Min Temp</th>
+<th>Max Temp</th>
+<th>Avg Temp</th>
+<th>Highest Overall Temp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>12</code></td>
+<td><code>34</code></td>
+<td><code>=([@[Min Temp]]+[@[Max Temp]])/2</code></td>
+<td><code>=max([Max Temp])</code></td>
+</tr>
+</tbody>
+</table>
+<p>Function Definitions</p>
+<div class="codehilite"><pre><span></span><code><span class="p">=</span><span class="nx">INDEX</span><span class="p">(</span><span class="nx">array</span><span class="p">,</span><span class="w"> </span><span class="nx">row_num</span><span class="p">,</span><span class="w"> </span><span class="nx">col_num</span><span class="p">)</span>
+<span class="p">=</span><span class="nx">MATCH</span><span class="p">(</span><span class="nx">lookup_value</span><span class="p">,</span><span class="w"> </span><span class="nx">array</span><span class="p">,</span><span class="w"> </span><span class="nx">match_type</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">Note</span><span class="p">:</span><span class="w"> </span><span class="nx">Match</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="nx">means</span><span class="w"> </span><span class="nx">exact</span>
+</code></pre></div>
+
+<h2 id="determine-if-a-column-is-visible">Determine if a Column is Visible</h2>
+<p>Will return 1 if visible, 0 otherwise.</p>
+<div class="codehilite"><pre><span></span><code>=N(CELL(&quot;width&quot;,A1)&gt;0)
+</code></pre></div>
+
+<h2 id="define-new-functions-using-lambda">Define New Functions using LAMBDA</h2>
+<p>You can create a function using LAMBDA, eg:</p>
+<div class="codehilite"><pre><span></span><code>=LAMBDA(amount, interest_perc, amount*(1+interest_perc/100))
+</code></pre></div>
+
+<p>The first n - 1 LAMBDA parameters are parameter names, the final LAMBDA parameter is the function.</p>
+<p>To pass in values, you add these after the LAMBDA function, eg:</p>
+<div class="codehilite"><pre><span></span><code>=LAMBDA(amount, interest_perc, amount*(1+interest_perc/100))(A1, B1)
+</code></pre></div>
+
+<p>To make this function reusable, go to the Formulas menu, Name Manager.  Create <code>New</code>, give the function a name, and add the LAMBDA definition to the <code>Refers To</code> section.  You can then use this function elsewhere, eg:</p>
+<div class="codehilite"><pre><span></span><code>=myFunction(A1, B1)
+</code></pre></div>
+
+<h1 id="functions">Functions</h1>
+<h2 id="compound-growth-interest">Compound Growth / Interest</h2>
+<p>| <img src="/Cheatsheets-C/images/excel-compound-growth.png" width="800"> |</p>
+<h2 id="bytes-size-string-to-number">Bytes Size String to Number</h2>
+<p>A function to convert size in bytes value strings (eg 12gb, 3mb etc) to a number.</p>
+<p>Option 1:</p>
+<div class="codehilite"><pre><span></span><code>=LET(col,A1,
+     IFERROR(SUBSTITUTE(LOWER(col),&quot;b&quot;,&quot;&quot;)/2^30,
+             LEFT(col,LEN(col)-2)*
+             SWITCH(RIGHT(LOWER(col),2),&quot;tb&quot;,2^10,&quot;gb&quot;,1,&quot;mb&quot;,1/2^10,&quot;kb&quot;,1/2^20,-1)))
+</code></pre></div>
+
+<h3 id="function-in-use">Function In Use</h3>
+<p><img alt="" src="/Cheatsheets-C/images/excel_size_string.png" /></p>
+<h2 id="columns-to-sql-insert-statement">Columns To SQL Insert Statement</h2>
+<p>A function to create a SQL create table statement and SQL insert statements for 1 - 10 columns of data.</p>
+<p>Row 1 contains the column names, row 2 the data types (s - string or n - number).  Row 3 onwards is data.</p>
+<p>Two functions, the first goes on row 1 column 11 (k) and creates the create table statement.  The second goes along side every row of data in column 11 (k).</p>
+<h3 id="create-table-create-statement">Create table create statement</h3>
+<div class="codehilite"><pre><span></span><code><span class="o">=</span><span class="s2">&quot;CREATE TABLE tab ( &quot;</span><span class="o">&amp;</span><span class="nv">A1</span><span class="o">&amp;</span><span class="s2">&quot; &quot;</span><span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">A</span><span class="mh">$2</span><span class="o">=</span><span class="s2">&quot;s&quot;</span>,<span class="s2">&quot;VARCHAR2(4000)&quot;</span>,<span class="s2">&quot;NUMBER&quot;</span><span class="ss">)</span>
+<span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">B</span><span class="mh">$1</span><span class="o">&lt;&gt;</span><span class="s2">&quot;&quot;</span>,<span class="s2">&quot;, &quot;</span><span class="o">&amp;</span><span class="nv">B</span><span class="mh">$1</span><span class="o">&amp;</span><span class="s2">&quot; &quot;</span><span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">B</span><span class="mh">$2</span><span class="o">=</span><span class="s2">&quot;s&quot;</span>,<span class="s2">&quot;VARCHAR2(4000)&quot;</span>,<span class="s2">&quot;NUMBER&quot;</span><span class="ss">)</span>,<span class="s2">&quot;&quot;</span><span class="ss">)</span>
+<span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">c</span><span class="mh">$1</span><span class="o">&lt;&gt;</span><span class="s2">&quot;&quot;</span>,<span class="s2">&quot;, &quot;</span><span class="o">&amp;</span><span class="nv">c</span><span class="mh">$1</span><span class="o">&amp;</span><span class="s2">&quot; &quot;</span><span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">c</span><span class="mh">$2</span><span class="o">=</span><span class="s2">&quot;s&quot;</span>,<span class="s2">&quot;VARCHAR2(4000)&quot;</span>,<span class="s2">&quot;NUMBER&quot;</span><span class="ss">)</span>,<span class="s2">&quot;&quot;</span><span class="ss">)</span>
+<span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">d</span><span class="mh">$1</span><span class="o">&lt;&gt;</span><span class="s2">&quot;&quot;</span>,<span class="s2">&quot;, &quot;</span><span class="o">&amp;</span><span class="nv">d</span><span class="mh">$1</span><span class="o">&amp;</span><span class="s2">&quot; &quot;</span><span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">d</span><span class="mh">$2</span><span class="o">=</span><span class="s2">&quot;s&quot;</span>,<span class="s2">&quot;VARCHAR2(4000)&quot;</span>,<span class="s2">&quot;NUMBER&quot;</span><span class="ss">)</span>,<span class="s2">&quot;&quot;</span><span class="ss">)</span>
+<span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">e</span><span class="mh">$1</span><span class="o">&lt;&gt;</span><span class="s2">&quot;&quot;</span>,<span class="s2">&quot;, &quot;</span><span class="o">&amp;</span><span class="nv">e</span><span class="mh">$1</span><span class="o">&amp;</span><span class="s2">&quot; &quot;</span><span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">e</span><span class="mh">$2</span><span class="o">=</span><span class="s2">&quot;s&quot;</span>,<span class="s2">&quot;VARCHAR2(4000)&quot;</span>,<span class="s2">&quot;NUMBER&quot;</span><span class="ss">)</span>,<span class="s2">&quot;&quot;</span><span class="ss">)</span>
+<span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">f</span><span class="mh">$1</span><span class="o">&lt;&gt;</span><span class="s2">&quot;&quot;</span>,<span class="s2">&quot;, &quot;</span><span class="o">&amp;</span><span class="nv">f</span><span class="mh">$1</span><span class="o">&amp;</span><span class="s2">&quot; &quot;</span><span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">f</span><span class="mh">$2</span><span class="o">=</span><span class="s2">&quot;s&quot;</span>,<span class="s2">&quot;VARCHAR2(4000)&quot;</span>,<span class="s2">&quot;NUMBER&quot;</span><span class="ss">)</span>,<span class="s2">&quot;&quot;</span><span class="ss">)</span>
+<span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">g</span><span class="mh">$1</span><span class="o">&lt;&gt;</span><span class="s2">&quot;&quot;</span>,<span class="s2">&quot;, &quot;</span><span class="o">&amp;</span><span class="nv">g</span><span class="mh">$1</span><span class="o">&amp;</span><span class="s2">&quot; &quot;</span><span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">g</span><span class="mh">$2</span><span class="o">=</span><span class="s2">&quot;s&quot;</span>,<span class="s2">&quot;VARCHAR2(4000)&quot;</span>,<span class="s2">&quot;NUMBER&quot;</span><span class="ss">)</span>,<span class="s2">&quot;&quot;</span><span class="ss">)</span>
+<span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">h</span><span class="mh">$1</span><span class="o">&lt;&gt;</span><span class="s2">&quot;&quot;</span>,<span class="s2">&quot;, &quot;</span><span class="o">&amp;</span><span class="nv">h</span><span class="mh">$1</span><span class="o">&amp;</span><span class="s2">&quot; &quot;</span><span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">h</span><span class="mh">$2</span><span class="o">=</span><span class="s2">&quot;s&quot;</span>,<span class="s2">&quot;VARCHAR2(4000)&quot;</span>,<span class="s2">&quot;NUMBER&quot;</span><span class="ss">)</span>,<span class="s2">&quot;&quot;</span><span class="ss">)</span>
+<span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">i</span><span class="mh">$1</span><span class="o">&lt;&gt;</span><span class="s2">&quot;&quot;</span>,<span class="s2">&quot;, &quot;</span><span class="o">&amp;</span><span class="nv">i</span><span class="mh">$1</span><span class="o">&amp;</span><span class="s2">&quot; &quot;</span><span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">i</span><span class="mh">$2</span><span class="o">=</span><span class="s2">&quot;s&quot;</span>,<span class="s2">&quot;VARCHAR2(4000)&quot;</span>,<span class="s2">&quot;NUMBER&quot;</span><span class="ss">)</span>,<span class="s2">&quot;&quot;</span><span class="ss">)</span>
+<span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">j</span><span class="mh">$1</span><span class="o">&lt;&gt;</span><span class="s2">&quot;&quot;</span>,<span class="s2">&quot;, &quot;</span><span class="o">&amp;</span><span class="nv">j</span><span class="mh">$1</span><span class="o">&amp;</span><span class="s2">&quot; &quot;</span><span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">j</span><span class="mh">$2</span><span class="o">=</span><span class="s2">&quot;s&quot;</span>,<span class="s2">&quot;VARCHAR2(4000)&quot;</span>,<span class="s2">&quot;NUMBER&quot;</span><span class="ss">)</span>,<span class="s2">&quot;&quot;</span><span class="ss">)</span><span class="w"> </span>
+<span class="o">&amp;</span><span class="w"> </span><span class="s2">&quot; );&quot;</span>
+</code></pre></div>
+
+<h3 id="create-insert-statement">Create insert statement</h3>
+<div class="codehilite"><pre><span></span><code><span class="o">=</span><span class="s2">&quot;INSERT INTO tab (&quot;</span><span class="o">&amp;</span><span class="nv">A</span><span class="mh">$1</span>
+<span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">B</span><span class="mh">$1</span><span class="o">&lt;&gt;</span><span class="s2">&quot;&quot;</span>,<span class="s2">&quot;, &quot;</span><span class="o">&amp;</span><span class="nv">B</span><span class="mh">$1</span>,<span class="s2">&quot;&quot;</span><span class="ss">)</span>
+<span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">C</span><span class="mh">$1</span><span class="o">&lt;&gt;</span><span class="s2">&quot;&quot;</span>,<span class="s2">&quot;, &quot;</span><span class="o">&amp;</span><span class="nv">C</span><span class="mh">$1</span>,<span class="s2">&quot;&quot;</span><span class="ss">)</span>
+<span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">D</span><span class="mh">$1</span><span class="o">&lt;&gt;</span><span class="s2">&quot;&quot;</span>,<span class="s2">&quot;, &quot;</span><span class="o">&amp;</span><span class="nv">D</span><span class="mh">$1</span>,<span class="s2">&quot;&quot;</span><span class="ss">)</span>
+<span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">E</span><span class="mh">$1</span><span class="o">&lt;&gt;</span><span class="s2">&quot;&quot;</span>,<span class="s2">&quot;, &quot;</span><span class="o">&amp;</span><span class="nv">E</span><span class="mh">$1</span>,<span class="s2">&quot;&quot;</span><span class="ss">)</span>
+<span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">F</span><span class="mh">$1</span><span class="o">&lt;&gt;</span><span class="s2">&quot;&quot;</span>,<span class="s2">&quot;, &quot;</span><span class="o">&amp;</span><span class="nv">F</span><span class="mh">$1</span>,<span class="s2">&quot;&quot;</span><span class="ss">)</span>
+<span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">G</span><span class="mh">$1</span><span class="o">&lt;&gt;</span><span class="s2">&quot;&quot;</span>,<span class="s2">&quot;, &quot;</span><span class="o">&amp;</span><span class="nv">G</span><span class="mh">$1</span>,<span class="s2">&quot;&quot;</span><span class="ss">)</span>
+<span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">H</span><span class="mh">$1</span><span class="o">&lt;&gt;</span><span class="s2">&quot;&quot;</span>,<span class="s2">&quot;, &quot;</span><span class="o">&amp;</span><span class="nv">H</span><span class="mh">$1</span>,<span class="s2">&quot;&quot;</span><span class="ss">)</span>
+<span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">I</span><span class="mh">$1</span><span class="o">&lt;&gt;</span><span class="s2">&quot;&quot;</span>,<span class="s2">&quot;, &quot;</span><span class="o">&amp;</span><span class="nv">I</span><span class="mh">$1</span>,<span class="s2">&quot;&quot;</span><span class="ss">)</span>
+<span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">J</span><span class="mh">$1</span><span class="o">&lt;&gt;</span><span class="s2">&quot;&quot;</span>,<span class="s2">&quot;, &quot;</span><span class="o">&amp;</span><span class="nv">J</span><span class="mh">$1</span>,<span class="s2">&quot;&quot;</span><span class="ss">)</span>
+<span class="o">&amp;</span><span class="s2">&quot; ) VALUES ( &quot;</span>
+<span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">A</span><span class="mh">$2</span><span class="o">=</span><span class="s2">&quot;s&quot;</span>,<span class="s2">&quot;&#39;&quot;</span><span class="o">&amp;</span><span class="nv">A3</span><span class="o">&amp;</span><span class="s2">&quot;&#39;&quot;</span>,<span class="nv">A3</span><span class="ss">)</span>
+<span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">B</span><span class="mh">$1</span><span class="o">&lt;&gt;</span><span class="s2">&quot;&quot;</span>,<span class="s2">&quot;, &quot;</span><span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">B</span><span class="mh">$2</span><span class="o">=</span><span class="s2">&quot;s&quot;</span>,<span class="s2">&quot;&#39;&quot;</span><span class="o">&amp;</span><span class="nv">B3</span><span class="o">&amp;</span><span class="s2">&quot;&#39;&quot;</span>,<span class="nv">B3</span><span class="ss">)</span>,<span class="s2">&quot;&quot;</span><span class="ss">)</span>
+<span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">C</span><span class="mh">$1</span><span class="o">&lt;&gt;</span><span class="s2">&quot;&quot;</span>,<span class="s2">&quot;, &quot;</span><span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">C</span><span class="mh">$2</span><span class="o">=</span><span class="s2">&quot;s&quot;</span>,<span class="s2">&quot;&#39;&quot;</span><span class="o">&amp;</span><span class="nv">C3</span><span class="o">&amp;</span><span class="s2">&quot;&#39;&quot;</span>,<span class="nv">C3</span><span class="ss">)</span>,<span class="s2">&quot;&quot;</span><span class="ss">)</span>
+<span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">D</span><span class="mh">$1</span><span class="o">&lt;&gt;</span><span class="s2">&quot;&quot;</span>,<span class="s2">&quot;, &quot;</span><span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">D</span><span class="mh">$2</span><span class="o">=</span><span class="s2">&quot;s&quot;</span>,<span class="s2">&quot;&#39;&quot;</span><span class="o">&amp;</span><span class="nv">D3</span><span class="o">&amp;</span><span class="s2">&quot;&#39;&quot;</span>,<span class="nv">D3</span><span class="ss">)</span>,<span class="s2">&quot;&quot;</span><span class="ss">)</span>
+<span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">E</span><span class="mh">$1</span><span class="o">&lt;&gt;</span><span class="s2">&quot;&quot;</span>,<span class="s2">&quot;, &quot;</span><span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">E</span><span class="mh">$2</span><span class="o">=</span><span class="s2">&quot;s&quot;</span>,<span class="s2">&quot;&#39;&quot;</span><span class="o">&amp;</span><span class="nv">E3</span><span class="o">&amp;</span><span class="s2">&quot;&#39;&quot;</span>,<span class="nv">E3</span><span class="ss">)</span>,<span class="s2">&quot;&quot;</span><span class="ss">)</span>
+<span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">F</span><span class="mh">$1</span><span class="o">&lt;&gt;</span><span class="s2">&quot;&quot;</span>,<span class="s2">&quot;, &quot;</span><span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">F</span><span class="mh">$2</span><span class="o">=</span><span class="s2">&quot;s&quot;</span>,<span class="s2">&quot;&#39;&quot;</span><span class="o">&amp;</span><span class="nv">F3</span><span class="o">&amp;</span><span class="s2">&quot;&#39;&quot;</span>,<span class="nv">F3</span><span class="ss">)</span>,<span class="s2">&quot;&quot;</span><span class="ss">)</span>
+<span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">G</span><span class="mh">$1</span><span class="o">&lt;&gt;</span><span class="s2">&quot;&quot;</span>,<span class="s2">&quot;, &quot;</span><span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">G</span><span class="mh">$2</span><span class="o">=</span><span class="s2">&quot;s&quot;</span>,<span class="s2">&quot;&#39;&quot;</span><span class="o">&amp;</span><span class="nv">G3</span><span class="o">&amp;</span><span class="s2">&quot;&#39;&quot;</span>,<span class="nv">G3</span><span class="ss">)</span>,<span class="s2">&quot;&quot;</span><span class="ss">)</span>
+<span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">H</span><span class="mh">$1</span><span class="o">&lt;&gt;</span><span class="s2">&quot;&quot;</span>,<span class="s2">&quot;, &quot;</span><span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">H</span><span class="mh">$2</span><span class="o">=</span><span class="s2">&quot;s&quot;</span>,<span class="s2">&quot;&#39;&quot;</span><span class="o">&amp;</span><span class="nv">H3</span><span class="o">&amp;</span><span class="s2">&quot;&#39;&quot;</span>,<span class="nv">H3</span><span class="ss">)</span>,<span class="s2">&quot;&quot;</span><span class="ss">)</span>
+<span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">I</span><span class="mh">$1</span><span class="o">&lt;&gt;</span><span class="s2">&quot;&quot;</span>,<span class="s2">&quot;, &quot;</span><span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">I</span><span class="mh">$2</span><span class="o">=</span><span class="s2">&quot;s&quot;</span>,<span class="s2">&quot;&#39;&quot;</span><span class="o">&amp;</span><span class="nv">I3</span><span class="o">&amp;</span><span class="s2">&quot;&#39;&quot;</span>,<span class="nv">I3</span><span class="ss">)</span>,<span class="s2">&quot;&quot;</span><span class="ss">)</span>
+<span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">J</span><span class="mh">$1</span><span class="o">&lt;&gt;</span><span class="s2">&quot;&quot;</span>,<span class="s2">&quot;, &quot;</span><span class="o">&amp;</span><span class="k">IF</span><span class="ss">(</span><span class="nv">J</span><span class="mh">$2</span><span class="o">=</span><span class="s2">&quot;s&quot;</span>,<span class="s2">&quot;&#39;&quot;</span><span class="o">&amp;</span><span class="nv">J3</span><span class="o">&amp;</span><span class="s2">&quot;&#39;&quot;</span>,<span class="nv">J3</span><span class="ss">)</span>,<span class="s2">&quot;&quot;</span><span class="ss">)</span>
+<span class="o">&amp;</span><span class="s2">&quot; );&quot;</span>
+</code></pre></div>
+
+<h3 id="function-in-use_1">Function In Use</h3>
+<p><img alt="" src="/Cheatsheets-C/images/excel_table_insert.png" /></p>
+<h2 id="strip-numbers-from-a-string">Strip Numbers From A String</h2>
+<div class="codehilite"><pre><span></span><code><span class="o">=</span><span class="nv">TEXTJOIN</span><span class="ss">(</span><span class="s2">&quot;&quot;</span>,<span class="nv">TRUE</span>,<span class="k">IF</span><span class="ss">(</span><span class="nv">ISERR</span><span class="ss">(</span><span class="nv">MID</span><span class="ss">(</span><span class="nv">A1</span>,<span class="nv">ROW</span><span class="ss">(</span><span class="nv">INDIRECT</span><span class="ss">(</span><span class="s2">&quot;1:100&quot;</span><span class="ss">))</span>,<span class="mi">1</span><span class="ss">)</span><span class="o">+</span><span class="mi">0</span><span class="ss">)</span>,<span class="nv">MID</span><span class="ss">(</span><span class="nv">A1</span>,<span class="nv">ROW</span><span class="ss">(</span><span class="nv">INDIRECT</span><span class="ss">(</span><span class="s2">&quot;1:100&quot;</span><span class="ss">))</span>,<span class="mi">1</span><span class="ss">)</span>,<span class="s2">&quot;&quot;</span><span class="ss">))</span>
+</code></pre></div>
+
+<h2 id="shortcut-keys">Shortcut Keys</h2>
+<p>| SHIFT + SPACE | Select entire row |
+| CTRL + SPACE | Select entire column |
+| CTRL +  | Show all formulas |</p>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: December 10, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Worked Example - Kubernetes" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>Worked Example - Kubernetes</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>Worked Example - Kubernetes</h1>
+<h2 id="1">1.</h2>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">http.server</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseHTTPRequestHandler</span><span class="p">,</span> <span class="n">HTTPServer</span>
+
+<span class="n">hostName</span> <span class="o">=</span> <span class="s2">&quot;localhost&quot;</span>
+<span class="n">serverPort</span> <span class="o">=</span> <span class="mi">8080</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MyServer</span><span class="p">(</span><span class="n">BaseHTTPRequestHandler</span><span class="p">):</span>
+  <span class="k">def</span><span class="w"> </span><span class="nf">do_GET</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">send_response</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">send_header</span><span class="p">(</span><span class="s2">&quot;Content-type&quot;</span><span class="p">,</span> <span class="s2">&quot;text/html&quot;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">end_headers</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">wfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="s2">&quot;&lt;html&gt;&lt;head&gt;&lt;title&gt;MJN&lt;/title&gt;&lt;/head&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">wfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="s2">&quot;&lt;body&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">wfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="s2">&quot;&lt;p&gt;Hello from MJN!&lt;/p&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">wfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="s2">&quot;&lt;p&gt;Request: </span><span class="si">%s</span><span class="s2">&lt;/p&gt;&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">wfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="s2">&quot;&lt;/body&gt;&lt;/html&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+  <span class="n">webServer</span> <span class="o">=</span> <span class="n">HTTPServer</span><span class="p">((</span><span class="n">hostName</span><span class="p">,</span> <span class="n">serverPort</span><span class="p">),</span> <span class="n">MyServer</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Server started http://</span><span class="si">%s</span><span class="s2">:</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">hostName</span><span class="p">,</span> <span class="n">serverPort</span><span class="p">))</span>
+
+  <span class="k">try</span><span class="p">:</span>
+    <span class="n">webServer</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">()</span>
+  <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+    <span class="k">pass</span>
+
+  <span class="n">webServer</span><span class="o">.</span><span class="n">server_close</span><span class="p">()</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Server stopped.&quot;</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Create a Dockerfile - <code>dockerfile</code>:</p>
+<div class="codehilite"><pre><span></span><code>FROM python:3
+ADD server.py server.py
+EXPOSE 8080
+ENTRYPOINT [&quot;python3&quot;, &quot;server.py&quot;]
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code>&gt; podman build -f dockerfile  . -t web-server
+</code></pre></div>
+
+<blockquote>
+<p>podman run web-server:latest --expose=8080 &amp;</p>
+</blockquote>
+<p>didn't work....</p>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: November 25, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Home" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>Home</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1 class="text-center">I am <span class="highlight">Martin.</span></h1>
+
+<h3 class="text-center">I wanted a website so I built one...</h3>
+
+<p class="text-center">Some stuff that interests me or made me smile. The scripts I write. 
+Elasticsearch, SQL, Oracle, PostgreSQL, sqlite, bash scripts, Python, GCP, Spark...
+OK, I’m a geek - an Entrprenerd. Only good is good enough. “I’ll format it later” - no you won’t - find a new job.</p><div class="tiles-container">
+  <div class="tile">
+    <a href="/misc/history_of_my_cars.html">
+      <h3 class="tile-title">The History Of My Cars</h3>
+      <div class="tile-content"><p>The oldest page on this site an its predecessors.</p></div>
+    </a>
+  </div>
+  <div class="tile">
+    <a href="/misc/history_of_my_cars.html">
+      <h3 class="tile-title">The History Of My Cars</h3>
+      <div class="tile-content"><p>The oldest page on this site an its predecessors.</p></div>
+    </a>
+  </div>
+  <div class="tile">
+    <a href="/misc/history_of_my_cars.html">
+      <h3 class="tile-title">The History Of My Cars</h3>
+      <div class="tile-content"><p>The oldest page on this site an its predecessors.</p></div>
+    </a>
+  </div>
+</div>
+
+
+<h2>Recently Updated</h2>
+<ul class="page-list">
+  <li><a href="/misc/shortcut_keys.html" data-number="1"><span class="page-number">1</span>Shortcut Keys</a></li>
+  <li><a href="/linuxbash/waiting_on_background_processes.html" data-number="2"><span class="page-number">2</span>Waiting On Background Processes</a></li>
+  <li><a href="/linuxbash/command_line_animation.html" data-number="3"><span class="page-number">3</span>Command Line Animation</a></li>
+  <li><a href="/linuxbash/create_an_encrypted_linux_virtual_disk.html" data-number="4"><span class="page-number">4</span>Create An Encrypted Linux Virtual Disk</a></li>
+  <li><a href="/other/gcp/gcp_training/section_5_-_google_kubernetes_engine_-_gke.html" data-number="5"><span class="page-number">5</span>Section 4 - Google Kubernetes Engine - GKE</a></li>
+  <li><a href="/other/gcp/gcp_training/ref_-_kubernetes_and_containers.html" data-number="6"><span class="page-number">6</span>Kubernetes and Containers</a></li>
+  <li><a href="/other/gcp/gcp_training/section_2_-_gcs_-_instance_groups_and_load_balancing.html" data-number="7"><span class="page-number">7</span>Section 2 - GCE - Instance Groups and Load Balancing</a></li>
+  <li><a href="/other/gcp/gcp_training/section_4_-_app_engine.html" data-number="8"><span class="page-number">8</span>Section 4 - App Engine</a></li>
+  <li><a href="/other/gcp/gcp_training/section_3_-_gcloud.html" data-number="9"><span class="page-number">9</span>Section 3 - gcloud</a></li>
+  <li><a href="/other/gcp/gcp_training/an_introduction_and_overview.html" data-number="10"><span class="page-number">10</span>GCP Training - Introduction and Overview</a></li>
+  <li><a href="/other/python/sqlite3_with_python3.html" data-number="11"><span class="page-number">11</span>Sqlite3 With Python3</a></li>
+  <li><a href="/other/python/faker_-_synthetic_data.html" data-number="12"><span class="page-number">12</span>Faker - Synthetic Data</a></li>
+  <li><a href="/other/spark_and_hadoop_hdfs/install_spark_3.2.x_on_windows_10.html" data-number="13"><span class="page-number">13</span>Install Spark 3.2.x On Windows 10</a></li>
+  <li><a href="/other/kubernetes_and_docker/install_docker_and_minikube_in_wsl.html" data-number="14"><span class="page-number">14</span>Install Docker and Minikube in WSL</a></li>
+  <li><a href="/blog/22-03-22_-_ldap_saml.html" data-number="15"><span class="page-number">15</span>22-03-22 - LDAP / SAML</a></li>
+  <li><a href="/notes/rest_api_response_codes.html" data-number="16"><span class="page-number">16</span>REST API Response Codes</a></li>
+  <li><a href="/shortcutkeys/shortcut_keys.html" data-number="17"><span class="page-number">17</span>Shortcut Keys</a></li>
+  <li><a href="/elasticsearch/elasticsearch_caches.html" data-number="18"><span class="page-number">18</span>Elasticsearch Caches</a></li>
+  <li><a href="/elasticsearch/snapshot_and_restore_to_different_cluster.html" data-number="19"><span class="page-number">19</span>Snapshot and Restore To Different Cluster</a></li>
+  <li><a href="/elasticsearch/elasticsearch_monitor_and_tune_curls.html" data-number="20"><span class="page-number">20</span>Elasticsearch Monitor and Tune cURLS</a></li>
+</ul>
+
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: </p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

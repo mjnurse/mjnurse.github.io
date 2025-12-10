@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="GMail" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>GMail</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>GMail</h1>
+<table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Operator</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Specify the sender</td>
+<td><code>From:</code></td>
+<td><code>from:amy</code></td>
+</tr>
+<tr>
+<td>Specify a recipient</td>
+<td><code>To:</code></td>
+<td><code>to:david</code></td>
+</tr>
+<tr>
+<td>Words in the subject line</td>
+<td><code>Subject:</code></td>
+<td><code>subject:dinner</code></td>
+</tr>
+<tr>
+<td>Messages that match multiple terms</td>
+<td><code>OR or { }</code></td>
+<td><code>from:amy OR from:david {from:amy from:david}</code></td>
+</tr>
+<tr>
+<td>Remove messages from your results</td>
+<td><code>-</code></td>
+<td><code>dinner -movie</code></td>
+</tr>
+<tr>
+<td>Find messages with words near each other. Use the number to say how many words apart the words can be</td>
+<td><code>AROUND #</code></td>
+<td><code>dinner AROUND 5 friday</code></td>
+</tr>
+<tr>
+<td>Messages that have a certain label</td>
+<td><code>Label:</code></td>
+<td><code>label:friends</code></td>
+</tr>
+<tr>
+<td>Messages that have an attachment</td>
+<td><code>Has:attachment</code></td>
+<td><code>has:attachment</code></td>
+</tr>
+<tr>
+<td>Messages from a mailing list</td>
+<td><code>List:</code></td>
+<td><code>list:info@example.com</code></td>
+</tr>
+<tr>
+<td>Attachments with a certain name or file type</td>
+<td><code>Filename:</code></td>
+<td><code>filename:pdf filename: homework.txt</code></td>
+</tr>
+<tr>
+<td>Search for an exact word or phrase</td>
+<td><code>" "</code></td>
+<td><code>"dinner and movie tonight"</code></td>
+</tr>
+<tr>
+<td>Group multiple search terms together</td>
+<td><code>( )</code></td>
+<td><code>subject:(dinner movie)</code></td>
+</tr>
+<tr>
+<td>Messages in any folder, including Spam and Trash</td>
+<td><code>In:anywhere</code></td>
+<td><code>in:anywhere movie</code></td>
+</tr>
+<tr>
+<td>Search for messages that are marked as important</td>
+<td><code>is:important label: important</code></td>
+<td><code>is:important</code></td>
+</tr>
+<tr>
+<td>Starred, unread, or read messages</td>
+<td><code>is:starred is:unread is:read</code></td>
+<td><code>is:read is:starred</code></td>
+</tr>
+<tr>
+<td>Messages that include an icon of a certain color</td>
+<td><code>has:yellow-star has: blue-info</code></td>
+<td><code>has:purple-star</code></td>
+</tr>
+<tr>
+<td>Recipients in the cc or bcc field</td>
+<td><code>cc: bcc:</code></td>
+<td><code>cc:david Note: You can't find messages that you received on bcc.</code></td>
+</tr>
+<tr>
+<td>Search for messages sent during a certain time period</td>
+<td><code>after: before: older: newer:</code></td>
+<td><code>after:2004/04/16 before:2004/04/18</code></td>
+</tr>
+<tr>
+<td>Search for messages older or newer than a time period using d (day), m (month), and y (year)</td>
+<td><code>older_than newer_than</code></td>
+<td><code>newer_than:2d</code></td>
+</tr>
+<tr>
+<td>Chat messages</td>
+<td><code>Is:chat</code></td>
+<td><code>is:chat movie</code></td>
+</tr>
+<tr>
+<td>Messages delivered to a certain email address</td>
+<td><code>Deliveredto:</code></td>
+<td><code>deliveredto:username@gmail.com</code></td>
+</tr>
+<tr>
+<td>Messages in a certain category</td>
+<td><code>Category:</code></td>
+<td><code>category:updates</code></td>
+</tr>
+<tr>
+<td>Messages larger than a certain size in bytes</td>
+<td><code>Size:</code></td>
+<td><code>size:1000000</code></td>
+</tr>
+<tr>
+<td>Messages larger or smaller than a certain size in bytes</td>
+<td><code>larger: smaller:</code></td>
+<td><code>larger:10M</code></td>
+</tr>
+<tr>
+<td>Results that match a word exactly</td>
+<td><code>+</code></td>
+<td><code>+unicorn</code></td>
+</tr>
+<tr>
+<td>Messages with a certain message-id header</td>
+<td><code>Rfc822msgid:</code></td>
+<td><code>rfc822msgid:200503292@example.com</code></td>
+</tr>
+<tr>
+<td>Messages that have or don't have a label</td>
+<td><code>has:userlabels has:nouserlabels</code></td>
+<td><code>has:nouserlabels Note: Labels are only added to a message, and not an entire conversation.</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: November 25, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="22-03-22 - LDAP / SAML" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>22-03-22 - LDAP / SAML</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>22-03-22 - LDAP / SAML</h1>
+<div class="table-of-contents">
+<h2>Contents</h2>
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#ldap-overview">LDAP Overview</a></li>
+<li class="toc-h2"><a href="#ldap-operation-types">LDAP Operation Types</a></li>
+<li class="toc-h2"><a href="#levels-of-ldap-directory">Levels of LDAP Directory</a></li>
+<li class="toc-h2"><a href="#ldap-data-components">LDAP Data Components</a></li>
+<li class="toc-h2"><a href="#is-ldap-secure">Is LDAP secure?</a></li>
+<li><a href="#saml-vs-ldap">SAML vs LDAP</a></li>
+<li><a href="#kerberos-vs-ldap">Kerberos vs LDAP</a></li>
+</ul>
+</div>
+<h1 id="introduction">Introduction</h1>
+<p>What are LDAP and SAML?</p>
+<h1 id="ldap-overview">LDAP Overview</h1>
+<p>Lightweight Directory Access Protocol - a protocol to access a directory service such as MS Active Directory.</p>
+<h2 id="ldap-operation-types">LDAP Operation Types</h2>
+<p>Here are some basic operation types in LDAP:</p>
+<h3 id="bind-authentication">Bind (Authentication)</h3>
+<p>When you create a session by connecting to an LDAP server, the session's default authentication state is anonymous. The LDAP bind feature validates the authentication state and changes it from anonymous. Bind can occur either through the Simple or SASL (Simple Authentication and Security Layer) authentication method.</p>
+<h3 id="unbind">Unbind</h3>
+<p>Unbind aborts outstanding operations and ends their connections. You can accomplish the same thing by closing the connection.  Unbind is preferred because it frees up resources that may remain assigned to the aborted operation.</p>
+<h3 id="add">Add</h3>
+<p>Add new entries to the directory-server database. If the added name already exists, the server won't accept the entry. Instead, it will deliver an "entryAlreadyExists" notification.</p>
+<h3 id="modify">Modify</h3>
+<p>LDAP clients use the modify feature to edit information already stored in a database. Only three types of modifications are permissible: Adding a new value to the data, Replacing or overwriting an existing value, and Deleting an existing value.</p>
+<h3 id="search-and-compare">Search and Compare</h3>
+<p>The operation lets clients search for and read entries. You can search for entries based on their name, size, scope, type, and other attributes. The compare feature makes it easy to verify whether a named entry has specific attributes.</p>
+<h3 id="delete">Delete</h3>
+<p>Clients use this feature to delete entries from the directory. Note that deletion will not occur unless the client sends a perfectly composed delete request to the server. Some of the features the delete request must have are: The name of the entry you want to erase, Attached request controls.</p>
+<h2 id="levels-of-ldap-directory">Levels of LDAP Directory</h2>
+<p>A typical LDAP configuration follows a "tree" hierarchy format. Below are the hierarchy levels from start to end:</p>
+<ul>
+<li>The starting place - a root directory</li>
+<li>Countries</li>
+<li>Organizations or companies</li>
+<li>Divisions, departments, and other organizational units</li>
+<li>People, files, and shared resources (printers, computers, and so on)</li>
+</ul>
+<p>You can distribute an LDAP directory across several servers. Queries from the clients are distributed across the multiple servers with the help of replication. </p>
+<h2 id="ldap-data-components">LDAP Data Components</h2>
+<p>Several components work together for LDAP to complete its myriad of tasks, especially when it comes to how it queries and displays data to users. The most essential of these components are:</p>
+<h3 id="attributes">Attributes</h3>
+<p>The actual data within an LDAP system are stored as attributes. Each attribute is associated with an attribute type that specifies how clients and the directory server should interact with that attribute. Also, attribute values contain most of the data that users store and access in LDAP systems.</p>
+<h3 id="entries">Entries</h3>
+<p>Attributes define the characteristics of a user or item, while an entry describes the user or item by listing all of their attributes under a name. On their own, attributes have limited functions. You have to associate an attribute with an entry before you can fully utilize it.</p>
+<h3 id="data-information-tree-dit">Data Information Tree (DIT)</h3>
+<p>Within an LDAP system, the data defined by attributes represent only a fraction of an object's available information. The remaining information is obtainable from the entry's placement within the LDAP system and the relationships its placement suggests. For example, if you have an entry for "inventoryItems" and another for "people", the data entered under each one will provide a better idea of what each entry represents.</p>
+<p>Every entry in an LDAP system is set up as branches on Data Information Trees (DITs). Since every entry in an LDAP tree can symbolize almost anything, users mostly use entries for keeping things organized.</p>
+<h3 id="schemas">Schemas</h3>
+<p>Schema is a construct where related ObjectClasses and attribute definitions go under the same category. One DIT can have several unrelated schemas for generating the entries and attributes it needs.</p>
+<h2 id="is-ldap-secure">Is LDAP secure?</h2>
+<p>LDAP authentication provides standard security with an built-in layer of access management. Malicious actors may still eavesdrop during data transmission between Active Directory and clients. Optimize security by adding SSL/TLS encryption to the LDAP authentication process, which makes information transmitted during the authentication process less vulnerable by encrypting communications.</p>
+<p>The default LDAP port used for authentication (Port 389) does not have its own security. Create a secure connection by adding security extensions, such as the LDAPv3 TLS extension or StartTLS mode.</p>
+<h1 id="saml-vs-ldap">SAML vs LDAP</h1>
+<p>LDAP and SAML are both authentication protocols that help applications access IT resources. SAML sends user information to your identity provider and other online applications, while LDAP facilitates on-prem authentication and other server processes.</p>
+<p>Most organizations combine the use of SAML, LDAP, and other authentication protocols to access various types of IT resources and achieve their business objectives.</p>
+<h1 id="kerberos-vs-ldap">Kerberos vs LDAP</h1>
+<p>Kerberos is a single sign-on and authentication protocol for managing credentials securely. It lets a process connect to an authentication server and provides signed and encrypted tickets for accessing files, applications, and other resources.</p>
+<p>LDAP, on the other hand, facilitates accessing OpenLDAP, Active Directory, and other directories. It authenticates connections by cross-checking usernames and passwords stored in the LDAP directory. </p>
+<p>Since Kerberos is more secure than LDAP and LDAP has more functions than Kerberos, most organizations use both protocols.</p>
+<hr>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: December 10, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Git CheatSheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>Git CheatSheet</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>Git CheatSheet</h1>
+<h1 id="git-cheat-sheet">Git Cheat Sheet</h1>
+<h3 id="set-user-details">Set user details:</h3>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w">  </span><span class="n">git</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="c1">--local user.name &quot;Martin&quot; </span>
+<span class="o">&gt;</span><span class="w">  </span><span class="n">git</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="c1">--local user.email &quot;martin@test.com&quot; </span>
+</code></pre></div>
+
+<h3 id="store-credentials-locally">Store Credentials Locally</h3>
+<div class="codehilite"><pre><span></span><code>&gt; git config --global credential.helper &#39;store --file ~/.my-credentials&#39;
+</code></pre></div>
+
+<h3 id="remove-local-credentials">Remove Local Credentials</h3>
+<div class="codehilite"><pre><span></span><code>&gt; git config credential.helper store
+</code></pre></div>
+
+<h3 id="initialise-local-repo-add-a-file-and-commit">Initialise (local) repo, add a file and commit:</h3>
+<div class="codehilite"><pre><span></span><code>&gt;  git init 
+&gt;  git add my-file 
+&gt;  git commit -m &quot;Created the file&quot; 
+</code></pre></div>
+
+<p>To add all files in current directory:</p>
+<div class="codehilite"><pre><span></span><code>&gt;  git add -A
+</code></pre></div>
+
+<h3 id="connect-to-remote-github-and-push-the-local-git-repo-up-in-github">Connect to remote GitHub and push the local Git repo up in GitHub:</h3>
+<div class="codehilite"><pre><span></span><code>&gt;  git remote add origin https://github.com/mjnurse/git-test.git 
+&gt;  git push origin master 
+</code></pre></div>
+
+<h3 id="pull-remote-github-to-local-git">Pull remote GitHub to local Git:</h3>
+<div class="codehilite"><pre><span></span><code>&gt;  git pull origin master
+</code></pre></div>
+
+<h3 id="create-a-local-git-repo-as-a-clone-of-a-github-repo">Create a local Git repo as a clone of a GitHub repo:</h3>
+<div class="codehilite"><pre><span></span><code>&gt;  git clone https://github.com/mjnurse/git-test.git . 
+</code></pre></div>
+
+<h3 id="create-a-development-branch-and-switch-to-checkout-the-development-branch-code-to-current-directory">Create a development branch and switch to (checkout) the development branch code to current directory:</h3>
+<div class="codehilite"><pre><span></span><code>&gt;  git branch feature-x 
+&gt;  git checkout feature-x 
+</code></pre></div>
+
+<h3 id="confirm-we-are-now-working-on-the-branch-feature-x">Confirm we are now working on the branch feature-x:</h3>
+<div class="codehilite"><pre><span></span><code>&gt;  git branch 
+</code></pre></div>
+
+<h3 id="refresh-local-git-master-branch-from-github">Refresh local Git (master branch) from GitHub:</h3>
+<div class="codehilite"><pre><span></span><code>&gt;  git checkout master 
+&gt;  git pull origin master 
+</code></pre></div>
+
+<h3 id="merge-master-into-development-branch">Merge Master into development branch:</h3>
+<div class="codehilite"><pre><span></span><code>&gt;  git checkout feature-x 
+&gt;  git merge master 
+</code></pre></div>
+
+<h3 id="push-development-branch-up-into-github-also-creating-branch-in-github">Push development branch up into GitHub (also creating branch in GitHub):</h3>
+<div class="codehilite"><pre><span></span><code>&gt;  git push --set-upstream origin feature-x 
+</code></pre></div>
+
+<hr>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: November 25, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Worked Example - Create Load Balanced Web-Server Managed Instance Group" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>Worked Example - Create Load Balanced Web-Server Managed Instance Group</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>Worked Example - Create Load Balanced Web-Server Managed Instance Group</h1>
+<h2 id="1-create-a-vm">1. Create a VM.</h2>
+<p>Create a VM</p>
+<p>Note:
+- Select Allow HTTP traffic.</p>
+<p>| <img src="/GCP-G/GCP_Training/images/cr_vm1.png" width="800"> |
+| <img src="/GCP-G/GCP_Training/images/cr_vm2.png" width="800"> |</p>
+<h2 id="2-install-apache-create-a-default-web-page">2. Install Apache, create a default web page.</h2>
+<p>SSH to the VM and install config Apache web server.  Create a script to run when the instance boots which sets the default web page to show the machine name.  Use <code>crontab</code> to run this script when the machine boots.</p>
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>sudo<span class="w"> </span>su
+
+&gt;<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>apache2
+
+<span class="c1"># Create a script to set the default webpage to display the hostname on boot.</span>
+
+&gt;<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;echo &quot;Hello!&quot; &gt; /var/www/html/index.html&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>/onboot.sh
+&gt;<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;hostname &gt;&gt; /var/www/html/index.html&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/onboot.sh
+&gt;<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;hostname -I &gt;&gt; /var/www/html/index.html&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/onboot.sh
+
+&gt;<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>/onboot.sh<span class="w"> </span>
+
+<span class="c1"># Update crontab to run the onboot.sh script when the machine boots.</span>
+
+&gt;<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;@reboot /onboot.sh&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>mycron
+
+&gt;<span class="w"> </span>crontab<span class="w"> </span>mycron
+</code></pre></div>
+
+<h2 id="3-create-an-image-of-the-boot-disk">3. Create an image of the boot disk.</h2>
+<p>Stop the VM, then create an image of the boot disk.</p>
+<p>| <img src="/GCP-G/GCP_Training/images/cr_vm_image.png" width="800"> |</p>
+<h2 id="4-create-an-instance-template-and-use-the-boot-disk-image">4. Create an instance template and use the boot disk image.</h2>
+<p>Create an instance template <code>mjn-web-server-instance-template</code> - use the same VM setting as in step 1 but replace the default boot disk - select a <strong>Custom Image</strong> and choose the disk image created in step 3.</p>
+<p>| <img src="/GCP-G/GCP_Training/images/vm_instance_template.png" width="500"> |</p>
+<h2 id="5-create-a-health-check">5. Create a Health Check</h2>
+<p>The load balancer will need a health check to allow it to ignore unhealthy VM's.</p>
+<p>Create a health check - note the criteria are not default.</p>
+<p>| <img src="/GCP-G/GCP_Training/images/vm-health-check.png" width="600"> |</p>
+<h2 id="6-create-an-instance-group-using-the-above-instance-template">6. Create an instance group using the above instance template.</h2>
+<p>Note : The <code>minimum number of instances</code> is set to 2 so that we have 2 instances to load balance across in the next step.</p>
+<p>| <img src="/GCP-G/GCP_Training/images/cr_managed_instance_group_1.png" width="800"> |
+| <img src="/GCP-G/GCP_Training/images/cr_managed_instance_group_2.png" width="800"> |</p>
+<h2 id="7-create-a-load-balancer-with-the-instance-group-as-the-backend">7. Create a load balancer with the instance group as the backend.</h2>
+<p>Select a HTTP(S) load balancer.</p>
+<p>| <img src="/GCP-G/GCP_Training/images/cr-load-balancer-1.png" width="600"> |</p>
+<p>Create a frontend - HTTP, Port 80.</p>
+<p>| <img src="/GCP-G/GCP_Training/images/lb-frontend-config.png" width="500"> |</p>
+<p>Add a backend.  De-select the <code>Cloud CDN</code> - we don't want any caching in our test.</p>
+<p>| <img src="/GCP-G/GCP_Training/images/lb-backend-config-1.png" width="500"> |
+| <img src="/GCP-G/GCP_Training/images/lb-backend-config-2.png" width="500"> |
+| <img src="/GCP-G/GCP_Training/images/lb-backend-config-3.png" width="500"> |</p>
+<p>Set the routing rules - Simple host and path rule.</p>
+<p>| <img src="/GCP-G/GCP_Training/images/lb-routing-rules.png" width="500"> |</p>
+<p>Ensure the router name is populated and click create.</p>
+<p>| <img src="/GCP-G/GCP_Training/images/lb-create-final.png" width="500"> |</p>
+<h2 id="8-test-the-load-balancer">8. Test the load balancer</h2>
+<p>The load balancer will have a public IP address.  If you go to this address in a web browser and refresh a number of times you will see it switch between the two instances of Apache2 web server and display two different IP addresses on the web page.</p>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: November 25, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

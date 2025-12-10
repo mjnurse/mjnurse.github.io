@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Kubernetes and Containers" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>Kubernetes and Containers</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>Kubernetes and Containers</h1>
+<div class="table-of-contents">
+<h2>Contents</h2>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#docker">Docker</a></li>
+<li><a href="#kubernetes">Kubernetes</a></li>
+<li class="toc-h2"><a href="#pods">Pods</a></li>
+<li class="toc-h2"><a href="#kubernetes-adopts-a-declarative-approach">Kubernetes adopts a Declarative Approach</a></li>
+<li><a href="#anthos">Anthos</a></li>
+</ul>
+</div>
+<h1 id="overview">Overview</h1>
+<p><strong>Containers</strong> deliver a solution that sits somewhere between IaaS (GCE) and PaaS (App Engine).</p>
+<p>GCE - VMs - An App runs on an OS running on a Hypervisor running on HW.</p>
+<p>App Engine - An App runs on a service delivering Data, Cache, Storage, DBs, NW etc - very abstracted from the HW.</p>
+<p>Containers - An App runs in a container which provides an OS delivered by the container engines which utilises the HW OS.</p>
+<p><strong>Kubernetes</strong> manages the execution of containers over a cluster of nodes (running on servers).</p>
+<p><strong>Cloud Build</strong> is a GCP container build tool.</p>
+<h1 id="docker">Docker</h1>
+<p>Docker File: (pg_server)</p>
+<div class="codehilite"><pre><span></span><code>FROM ubuntu:18.10
+RUN apt-get update -y &amp;&amp;\
+    apt-get install -y python-pip python3-dev
+COPY requirements.txt /app/requirements.txt
+WORKDIR /app
+RUN pip3 install -r requirements.txt
+COPY . /app
+ENTRYPOINT [&quot;python3&quot;, &quot;app.py&quot;]
+</code></pre></div>
+
+<p><code>&gt; docker build -t pg_server .</code></p>
+<p><code>&gt; docker run -d pg_server</code></p>
+<h1 id="kubernetes">Kubernetes</h1>
+<p><code>&gt; gcloud container clusters create k1</code></p>
+<h2 id="pods">Pods</h2>
+<p><img alt="" src="/images/K8sPod.png" /></p>
+<p>A Pod has a unique IP address.</p>
+<p><code>&gt; kubectl run nginx --image=nginx:1.15.7</code></p>
+<p><code>&gt; kubectl get pods</code></p>
+<p><code>&gt; kubectl expose deployment nginx --port=80 --type=LoadBalancer</code></p>
+<p><img alt="" src="/images/K8sCluster.png" /></p>
+<p>A service groups pods together with a single point of access (a fixed IP).</p>
+<p><code>&gt; kubectl get services</code></p>
+<p>Scaling is easy.</p>
+<p><code>&gt;kubectl scale nginx --replicas=3</code></p>
+<p>Auto scale when CPU hits 80%.</p>
+<p><code>kubectl autoscale nginx --min-10 --max=15 --cpu=80</code></p>
+<h2 id="kubernetes-adopts-a-declarative-approach">Kubernetes adopts a Declarative Approach</h2>
+<p>Uses config files and not commands.</p>
+<p><code>kubectl apply -f nginx-deployment.yaml</code></p>
+<p><code>kubectl get replica</code></p>
+<p><code>kubectl get pod</code></p>
+<p><code>kubectl get deployments</code></p>
+<p><code>kubectl get services</code></p>
+<h1 id="anthos">Anthos</h1>
+<p>Hybrid / Multi Cloud</p>
+<p>Kubernetes with GKE on prem`.</p>
+<p>Both can read containers from the GCP Marketplace.</p>
+<p><img alt="" src="images/Anthos.png" /></p>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: December 10, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

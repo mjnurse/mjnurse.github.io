@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Create An Encrypted Linux Virtual Disk" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>Create An Encrypted Linux Virtual Disk</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>Create An Encrypted Linux Virtual Disk</h1>
+<div class="table-of-contents">
+<h2>Contents</h2>
+<ul>
+<li><a href="#create-an-empty-file-with-space-allocated">Create An Empty File With Space Allocated</a></li>
+<li><a href="#create-a-dm-crypt-luks-container">Create a dm-crypt LUKS Container</a></li>
+<li><a href="#open-the-luks-container-and-mount-as-a-linux-drive">Open the LUKS Container and Mount as a Linux Drive</a></li>
+</ul>
+</div>
+<h1 id="create-an-empty-file-with-space-allocated">Create An Empty File With Space Allocated</h1>
+<p>Create a (64MB) empty file with space allocated.</p>
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>dd<span class="w"> </span><span class="k">if</span><span class="o">=</span>/dev/urandom<span class="w"> </span><span class="nv">iflag</span><span class="o">=</span>fullblock<span class="w"> </span><span class="p">|</span><span class="w"> </span>dd<span class="w"> </span><span class="nv">of</span><span class="o">=</span>./diskfile1<span class="w"> </span><span class="nv">bs</span><span class="o">=</span>1M<span class="w"> </span><span class="nv">count</span><span class="o">=</span><span class="m">64</span><span class="w"> </span><span class="nv">iflag</span><span class="o">=</span>fullblock
+</code></pre></div>
+
+<h1 id="create-a-dm-crypt-luks-container">Create a dm-crypt LUKS Container</h1>
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>sudo<span class="w"> </span>cryptsetup<span class="w"> </span>-y<span class="w"> </span>luksFormat<span class="w"> </span>./diskfile1
+
+WARNING!
+<span class="o">========</span>
+This<span class="w"> </span>will<span class="w"> </span>overwrite<span class="w"> </span>data<span class="w"> </span>on<span class="w"> </span>./diskfile1<span class="w"> </span>irrevocably.
+
+Are<span class="w"> </span>you<span class="w"> </span>sure?<span class="w"> </span><span class="o">(</span>Type<span class="w"> </span>uppercase<span class="w"> </span>yes<span class="o">)</span>:<span class="w"> </span>YES
+Enter<span class="w"> </span>passphrase<span class="w"> </span><span class="k">for</span><span class="w"> </span>./diskfile1:
+Verify<span class="w"> </span>passphrase:
+</code></pre></div>
+
+<p>Check the file.</p>
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>file<span class="w"> </span>diskfile1
+
+diskfile1:<span class="w"> </span>LUKS<span class="w"> </span>encrypted<span class="w"> </span>file,<span class="w"> </span>ver<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">[</span>,<span class="w"> </span>,<span class="w"> </span>sha256<span class="o">]</span><span class="w"> </span>UUID:<span class="w"> </span>ef633564-8376-4a41-9412-6afc00dd056a
+</code></pre></div>
+
+<h1 id="open-the-luks-container-and-mount-as-a-linux-drive">Open the LUKS Container and Mount as a Linux Drive</h1>
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>sudo<span class="w"> </span>cryptsetup<span class="w"> </span>luksOpen<span class="w"> </span>./diskfile1<span class="w"> </span>encryptedVolume1
+Enter<span class="w"> </span>passphrase<span class="w"> </span><span class="k">for</span><span class="w"> </span>./diskfile1:
+</code></pre></div>
+
+<p>Check the device.</p>
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>ll<span class="w"> </span>/dev/mapper
+total<span class="w"> </span><span class="m">0</span>
+drwxr-xr-x<span class="w"> </span><span class="m">2</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">       </span><span class="m">80</span><span class="w"> </span>Oct<span class="w"> </span><span class="m">18</span><span class="w"> </span><span class="m">17</span>:34<span class="w"> </span>./
+drwxr-xr-x<span class="w"> </span><span class="m">8</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">     </span><span class="m">2760</span><span class="w"> </span>Oct<span class="w"> </span><span class="m">18</span><span class="w"> </span><span class="m">17</span>:34<span class="w"> </span>../
+crw-------<span class="w"> </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">  </span><span class="m">10</span>,<span class="w"> </span><span class="m">236</span><span class="w"> </span>Oct<span class="w"> </span><span class="m">13</span><span class="w"> </span><span class="m">16</span>:45<span class="w"> </span>control
+brw-rw----<span class="w"> </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>disk<span class="w"> </span><span class="m">252</span>,<span class="w">   </span><span class="m">0</span><span class="w"> </span>Oct<span class="w"> </span><span class="m">18</span><span class="w"> </span><span class="m">17</span>:34<span class="w"> </span>encryptedVolume1
+
+&gt;<span class="w"> </span>sudo<span class="w"> </span>cryptsetup<span class="w"> </span>-v<span class="w"> </span>status<span class="w"> </span>encryptedVolume1
+/dev/mapper/encryptedVolume1<span class="w"> </span>is<span class="w"> </span>active.
+<span class="w">  </span>type:<span class="w">    </span>LUKS2
+<span class="w">  </span>cipher:<span class="w">  </span>aes-xts-plain64
+<span class="w">  </span>keysize:<span class="w"> </span><span class="m">512</span><span class="w"> </span>bits
+<span class="w">  </span>key<span class="w"> </span>location:<span class="w"> </span>keyring
+<span class="w">  </span>device:<span class="w">  </span>/dev/loop0
+<span class="w">  </span>loop:<span class="w">    </span>/c/MJN/quantexa/dmcrypt/diskfile1
+<span class="w">  </span>sector<span class="w"> </span>size:<span class="w">  </span><span class="m">512</span>
+<span class="w">  </span>offset:<span class="w">  </span><span class="m">32768</span><span class="w"> </span>sectors
+<span class="w">  </span>size:<span class="w">    </span><span class="m">98304</span><span class="w"> </span>sectors
+<span class="w">  </span>mode:<span class="w">    </span>read/write
+Command<span class="w"> </span>successful.
+</code></pre></div>
+
+<p>Create a file system on the device and mount as a drive.</p>
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>sudo<span class="w"> </span>mkfs.ext4<span class="w"> </span>/dev/mapper/encryptedVolume1
+mke2fs<span class="w"> </span><span class="m">1</span>.45.5<span class="w"> </span><span class="o">(</span><span class="m">07</span>-Jan-2020<span class="o">)</span>
+Creating<span class="w"> </span>filesystem<span class="w"> </span>with<span class="w"> </span><span class="m">12288</span><span class="w"> </span>4k<span class="w"> </span>blocks<span class="w"> </span>and<span class="w"> </span><span class="m">12288</span><span class="w"> </span>inodes
+
+Allocating<span class="w"> </span>group<span class="w"> </span>tables:<span class="w"> </span><span class="k">done</span>
+Writing<span class="w"> </span>inode<span class="w"> </span>tables:<span class="w"> </span><span class="k">done</span>
+Creating<span class="w"> </span>journal<span class="w"> </span><span class="o">(</span><span class="m">1024</span><span class="w"> </span>blocks<span class="o">)</span>:<span class="w"> </span><span class="k">done</span>
+Writing<span class="w"> </span>superblocks<span class="w"> </span>and<span class="w"> </span>filesystem<span class="w"> </span>accounting<span class="w"> </span>information:<span class="w"> </span><span class="k">done</span>
+
+&gt;<span class="w"> </span>sudo<span class="w"> </span>mkdir<span class="w"> </span>/mnt/encryptedVolume1
+
+&gt;<span class="w"> </span>sudo<span class="w"> </span>mount<span class="w"> </span>/dev/mapper/encryptedVolume1<span class="w"> </span>/mnt/encryptedVolume1/
+
+&gt;<span class="w"> </span>df<span class="w"> </span>-h
+Filesystem<span class="w">                    </span>Size<span class="w">  </span>Used<span class="w"> </span>Avail<span class="w"> </span>Use%<span class="w"> </span>Mounted<span class="w"> </span>on
+/dev/sdb<span class="w">                      </span>251G<span class="w">  </span><span class="m">3</span>.0G<span class="w">  </span>236G<span class="w">   </span><span class="m">2</span>%<span class="w"> </span>/
+tmpfs<span class="w">                         </span><span class="m">6</span>.2G<span class="w">     </span><span class="m">0</span><span class="w">  </span><span class="m">6</span>.2G<span class="w">   </span><span class="m">0</span>%<span class="w"> </span>/mnt/wsl
+tools<span class="w">                         </span>477G<span class="w">  </span>145G<span class="w">  </span>333G<span class="w">  </span><span class="m">31</span>%<span class="w"> </span>/init
+none<span class="w">                          </span><span class="m">6</span>.2G<span class="w">     </span><span class="m">0</span><span class="w">  </span><span class="m">6</span>.2G<span class="w">   </span><span class="m">0</span>%<span class="w"> </span>/dev
+/dev/mapper/encryptedVolume1<span class="w">   </span>43M<span class="w">   </span>44K<span class="w">   </span>40M<span class="w">   </span><span class="m">1</span>%<span class="w"> </span>/mnt/encryptedVolume1
+</code></pre></div>
+
+<p>Navigate to the open drive.</p>
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/mnt/encryptedVolume1/
+
+&gt;<span class="w"> </span>ll
+total<span class="w"> </span><span class="m">24</span>
+drwxr-xr-x<span class="w"> </span><span class="m">3</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">  </span><span class="m">4096</span><span class="w"> </span>Oct<span class="w"> </span><span class="m">18</span><span class="w"> </span><span class="m">17</span>:36<span class="w"> </span>./
+drwxr-xr-x<span class="w"> </span><span class="m">6</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">  </span><span class="m">4096</span><span class="w"> </span>Oct<span class="w"> </span><span class="m">18</span><span class="w"> </span><span class="m">17</span>:36<span class="w"> </span>../
+drwx------<span class="w"> </span><span class="m">2</span><span class="w"> </span>root<span class="w"> </span>root<span class="w"> </span><span class="m">16384</span><span class="w"> </span>Oct<span class="w"> </span><span class="m">18</span><span class="w"> </span><span class="m">17</span>:36<span class="w"> </span>lost+found/
+</code></pre></div>
+
+<p>Unmount and close the encrypted volume.</p>
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>sudo<span class="w"> </span>umount<span class="w"> </span>/mnt/encryptedVolume1
+
+&gt;<span class="w"> </span>sudo<span class="w"> </span>cryptsetup<span class="w"> </span>luksClose<span class="w"> </span>encryptedVolume1
+</code></pre></div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: December 10, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Statistical Testing" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>Statistical Testing</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>Statistical Testing</h1>
+<p>For a long time I've wanted to explore using statistics to determine how many tests are needed to test for errors.  The question I have is that, for a set of n records, if we want to be say 99.9% sure none contain an error, how many would be need to test at random to reach a point where we can be statistically, say, 99.9% sure there are no errors.</p>
+<h1 id="the-basics">The Basics</h1>
+<h2 id="tests-with-a-fixed-number-of-options-records-to-test">Tests with a fixed number of options / records to test</h2>
+<p>If I have a die and there is a chance the number has not been printed on one side, how many times would I need to roll the die to be 99% sure all sides contain a number?</p>
+<p>Lets assume there <strong>is</strong> a fault on one side of the die (and I can only see the top face of the die each time I roll it) - how many times would I need to roll the die to be 99% sure I'll find it?</p>
+<p>This isn't easy to calculate.  We need to work out all the combinations of die sides on top (after n throws). These will include throws with our bad side on top.</p>
+<hr />
+<p><strong>First Roll</strong></p>
+<ul>
+<li>6 options, 1 is the bad side so chance of finding it is 1/6.</li>
+</ul>
+<p><strong>Calculation</strong> - <code>1/6 = 16.7%</code></p>
+<hr />
+<p><strong>Second Roll</strong></p>
+<ul>
+<li>If role 1 finds a bad side then we stop, there is a 1/6 chance of this.</li>
+<li>If roll one finds a good side (there is a 5/6 chance of this), we roll again.</li>
+<li>The second roll has a 1/6 chance of being bad.</li>
+</ul>
+<p><strong>Calculation</strong> - <code>1/6 + (5/6 x 1/6) = 30.6%</code></p>
+<hr />
+<p><strong>Third Roll</strong></p>
+<ul>
+<li>If role 1 finds a bad side then we stop, there is a 1/6 chance of this.</li>
+<li>If roll 1 finds a good side (there is a 5/6 chance of this), we roll again.</li>
+<li>Roll 2 roll has a 1/6 chance of being bad, if we find bad side we stop.</li>
+<li>If role 2 finds a good side (there is a 5/6 chance of this), we roll again.</li>
+<li>Roll 3 has a 1/6 chance of being bad.</li>
+</ul>
+<p><strong>Calculation</strong> - <code>1/6 + (5/6 x (1/6 + (5/6 x 1/6))) = 42.1%</code></p>
+<hr />
+<p>This gets very complicated very quick.</p>
+<p>However, this question can be reversed and instead we can ask - <em>"What is the chance that each time I roll the die I won't find the bad side?"</em>  For each roll of the die there is a <code>5/6 = 83.3%</code> chance I won't find the bad side and that is true for every roll of the die regardless of the outcome of any earlier rolls.</p>
+<p>However, if we ask the question <strong>up front</strong>, <em>"What is the chance I won't find the bad side within, say, 3 rolls"</em> then the maths is slightly different.</p>
+<p>For 3 planned rolls the chance I won't find the faulty side is <code>5/6 x 5/6 x 5/6 = 125/216 = 57.9%</code>.  This means the chance that I will find the faulty side is <code>100% - 57.9% = 42.1%</code>.  This matches the value calculated above.</p>
+<p>So lets see how many times I would need to plan to roll the die to be 99% sure I'll find the faulty side.</p>
+<table>
+<thead>
+<tr>
+<th>Roll Number</th>
+<th>% Chance Wont Find</th>
+<th>% Chance Will Find</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>5/6 = 83.3%</td>
+<td>16.7%</td>
+</tr>
+<tr>
+<td>2</td>
+<td>5/6 x 5/6 = (5/6)<sup>2</sup> = 69.4%</td>
+<td>30.6%</td>
+</tr>
+<tr>
+<td>3</td>
+<td>(5/6)<sup>3</sup> = 57.9%</td>
+<td>98.5%</td>
+</tr>
+<tr>
+<td>:</td>
+<td>:</td>
+<td>:</td>
+</tr>
+<tr>
+<td>:</td>
+<td>:</td>
+<td>:</td>
+</tr>
+<tr>
+<td>24</td>
+<td>(5/6)<sup>24</sup> = 1.5%</td>
+<td>98.5%</td>
+</tr>
+<tr>
+<td>25</td>
+<td>(5/6)<sup>25</sup> = 1.3%</td>
+<td>98.7%</td>
+</tr>
+<tr>
+<td>26</td>
+<td>(5/6)<sup>26</sup> = 1.0%</td>
+<td>99.0%</td>
+</tr>
+</tbody>
+</table>
+<p>A surprisingly large number...  This number is large because the number of options (sides to land face up) for each roll remains the same.  We can never rule out and remove any side from the next roll.</p>
+<h2 id="tests-with-a-reducing-number-of-options-records-to-test">Tests with a reducing number of options / records to test</h2>
+<p>If we swap the die analogy for a bag containing six balls where, ideally, all the balls in the bag are white but there is a possibility that one of the balls is black, how many balls would I need to take out of the bag to be 99% sure there are no black balls?  The statistics here are slightly different and there is also the obvious upper limit.  Once I have removed all the balls (6 balls / 6 tests), if they are all white, I can be 100% sure there no black balls.  Let's assume one ball is black and do the do the math.  Again we focus on the chance of finding the bad ball which is far more simple in terms of the math.</p>
+<p>Looking at each test in turn:</p>
+<hr />
+<p><strong>Ball 1</strong> </p>
+<ul>
+<li>For ball 1 taken from the bag there is a 1/6 chance it will be black</li>
+</ul>
+<p>Calculation  <code>1/6 = 16.7%</code></p>
+<hr />
+<p><strong>Ball 2</strong>   </p>
+<ul>
+<li>If ball 1 is black then we stop, there is a 1/6 chance of this.</li>
+<li>If ball 1 is white (there is a 5/6 chance of this), we take out ball 2.</li>
+<li>For ball 2 there is a 1/5 chance of it being black.</li>
+</ul>
+<p>Calculation  <code>1/6 + (5/6 x 1/5) = 33.3%</code></p>
+<hr />
+<p><strong>Ball 3</strong>   </p>
+<ul>
+<li>If ball 1 is black then we stop, there is a 1/6 chance of this.</li>
+<li>If ball 1 is white (there is a 5/6 chance of this), we take ball 2.</li>
+<li>Ball 2 has a 1/5 chance of being black, if we find it we stop.</li>
+<li>If ball 2 is white (there is a 4/5 chance of this), we take ball 3.</li>
+<li>Ball 3 has a 1/6 chance of being black.</li>
+</ul>
+<p>Calculation  <code>1/6 + (5/6 x (1/5 + (4/5 x 1/4))) = 55.3%</code></p>
+<hr />
+<p>Again, using the won't find calculation, and asking the question up front, how many balls will I need to remove to be 99% sure there isn't a black ball the math is:</p>
+<table>
+<thead>
+<tr>
+<th>Ball Number</th>
+<th>% Chance Wont Find</th>
+<th>% Chance Will Find</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>83.3% (5/6)</td>
+<td>16.7%</td>
+</tr>
+<tr>
+<td>2</td>
+<td>66.7% (5/6 x 4/5)</td>
+<td>33.3%</td>
+</tr>
+<tr>
+<td>3</td>
+<td>50.0% (5/6 x 4/5 x 3/4)</td>
+<td>50.0%</td>
+</tr>
+<tr>
+<td>4</td>
+<td>33.3% (5/6 x 4/5 x 3/4 x 2/3</td>
+<td>66.7%</td>
+</tr>
+<tr>
+<td>5</td>
+<td>16.7% (5/6 x 4/5 x 3/4 x 2/3 x 1/2)</td>
+<td>83.3%</td>
+</tr>
+<tr>
+<td>6</td>
+<td>0% (5/6 x 4/5 x 3/4 x 2/3 x 1/2 x 0/1)</td>
+<td>100%</td>
+</tr>
+</tbody>
+</table>
+<p>The number of balls is too small to get to 99%, we hit 100% first.</p>
+<h1 id="heres-what-we-know-so-far">Here's What We Know So Far</h1>
+<p>If we choose a percentage <code>p%</code> likelihood of there being a bad side / bad ball / bad record in a set, we can calculate how many records we need to look at to be <code>t%</code> sure we will find it (and if we don't find it we can be <code>100 - t%</code> sure it doesn't exist).  The maths differs depending on whether we can or can't remove each record from the set if we test it and its good.</p>
+<p>The above examples had a set of 6 sides / items / records and the two (records remain or removed) equations gave very different results but, as the set side increases the difference between the 2 should decrease.  Lets write a python program to test this assumption.</p>
+<p>The Python programs is <a href="attatchments/stats_test.py">stats_test.py</a></p>
+<h1 id="the-statistics">The Statistics</h1>
+<p>Running <code>stats_test.py</code>.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">&gt; </span><span class="ge">python3 stats_test.py</span>
+
+Usage:
+
+(1) stats_test.py &lt;bad record perc&gt; &lt;set size&gt; &lt;target certainty perc&gt;
+
+(2) stats_test.py -g &lt;1&gt; &lt;2&gt; &lt;3&gt; &lt;4&gt; &lt;5&gt; &lt;6&gt; &lt;7&gt;
+
+    Where: &lt;1&gt; - number bad record percentage rows in grid
+           &lt;2&gt; - bad record percentage min
+           &lt;3&gt; - bad record percentage max
+           &lt;4&gt; - number target certainty percentage columns in grid
+           &lt;5&gt; - target certainty percentage min
+           &lt;6&gt; - target certainty percentage max
+           &lt;7&gt; - test data set size
+
+(3) stats_test.py -t &lt;num test sets&gt; &lt;bad rec perc&gt; &lt;set size&gt; &lt;num of tests&gt;
+
+Percentages (perc) in range 0 - 100
+</code></pre></div>
+
+<p>Let's calculate the die / balls in a bag scenario above.</p>
+<div class="codehilite"><pre><span></span><code><span class="nv">&gt;</span><span class="c"> python3 stats_test</span><span class="nt">.</span><span class="c">py 16</span><span class="nt">.</span><span class="c">667 6 99</span>
+<span class="nb">--------------------------------------------------------------------------------</span>
+<span class="c">bad record likelihood: 16</span><span class="nt">.</span><span class="c">667 %</span>
+<span class="c">set size:              6</span>
+<span class="c">target certainty:      99</span><span class="nt">.</span><span class="c">0 %</span>
+<span class="nb">--------------------------------------------------------------------------------</span>
+<span class="c">With good recs removed </span><span class="nb">-</span><span class="c">   reached target certainty 99</span><span class="nt">.</span><span class="c">0% after 6 tests</span>
+<span class="c">With good recs remaining </span><span class="nb">-</span><span class="c"> reached target certainty 99</span><span class="nt">.</span><span class="c">0% after 26 tests</span>
+<span class="nb">--------------------------------------------------------------------------------</span>
+</code></pre></div>
+
+<p>Now lets calculate something a little more useful.  Assuming we have 100,000,000 records and we want to be 99.99% sure the risk of an error is less than 0.01%.</p>
+<div class="codehilite"><pre><span></span><code><span class="nv">&gt;</span><span class="c"> python3 stats_test</span><span class="nt">.</span><span class="c">py 0</span><span class="nt">.</span><span class="c">01 100000000 99</span><span class="nt">.</span><span class="c">99</span>
+<span class="nb">--------------------------------------------------------------------------------</span>
+<span class="c">bad record likelihood: 0</span><span class="nt">.</span><span class="c">01 %</span>
+<span class="c">set size:              100000000</span>
+<span class="c">target certainty:      99</span><span class="nt">.</span><span class="c">99 %</span>
+<span class="nb">--------------------------------------------------------------------------------</span>
+<span class="c">With good recs removed </span><span class="nb">-</span><span class="c">   reached target certainty 99</span><span class="nt">.</span><span class="c">99% after 92057 tests</span>
+<span class="c">With good recs remaining </span><span class="nb">-</span><span class="c"> reached target certainty 99</span><span class="nt">.</span><span class="c">99% after 92099 tests</span>
+<span class="nb">--------------------------------------------------------------------------------</span>
+</code></pre></div>
+
+<p>So we need to test a little over 92,000 records chosen at random from 100,000,000 records to be 99.99% sure there is less than 0.01% of records in error.  Also, note that with this large set size the difference between the number of tests required if the good records are left in or removed is negligible.</p>
+<p>Lets try a larger set size, 100,000,000,000.</p>
+<div class="codehilite"><pre><span></span><code><span class="nv">&gt;</span><span class="c"> python3 stats_test</span><span class="nt">.</span><span class="c">py 0</span><span class="nt">.</span><span class="c">01 100000000000 99</span><span class="nt">.</span><span class="c">99</span>
+<span class="nb">--------------------------------------------------------------------------------</span>
+<span class="c">bad record likelihood: 0</span><span class="nt">.</span><span class="c">01 %</span>
+<span class="c">set size:              100000000000</span>
+<span class="c">target certainty:      99</span><span class="nt">.</span><span class="c">99 %</span>
+<span class="nb">--------------------------------------------------------------------------------</span>
+<span class="c">With good recs removed </span><span class="nb">-</span><span class="c">   reached target certainty 99</span><span class="nt">.</span><span class="c">99% after 92099 tests</span>
+<span class="c">With good recs remaining </span><span class="nb">-</span><span class="c"> reached target certainty 99</span><span class="nt">.</span><span class="c">99% after 92099 tests</span>
+<span class="nb">--------------------------------------------------------------------------------</span>
+</code></pre></div>
+
+<p>What's interesting here is that the number if tests (with good records remaining in the data set) is the same even though we have 1,000x more records.  This surprised me at first but the reason is obvious once seen.  As we are stating the max likelihood of there being a bad records as a percentage (of the total data set), as the set size increase so does the number of bad records.</p>
+<p>If we reduce the bad record likelihood percentage value by a factor of 1,000 so that the max number of bad records in the same as was in the 100,000,000 test set then the number of test should go up.</p>
+<div class="codehilite"><pre><span></span><code><span class="nv">&gt;</span><span class="c"> python3 stats_test</span><span class="nt">.</span><span class="c">py 0</span><span class="nt">.</span><span class="c">00001 100000000000 99</span><span class="nt">.</span><span class="c">99</span>
+<span class="nb">--------------------------------------------------------------------------------</span>
+<span class="c">bad record likelihood: 1e</span><span class="nb">-</span><span class="c">05 %</span>
+<span class="c">set size:              100000000000</span>
+<span class="c">target certainty:      99</span><span class="nt">.</span><span class="c">99 %</span>
+<span class="nb">--------------------------------------------------------------------------------</span>
+<span class="c">With good recs removed </span><span class="nb">-</span><span class="c">   reached target certainty 99</span><span class="nt">.</span><span class="c">99% after 92060997 tests</span>
+<span class="c">With good recs remaining </span><span class="nb">-</span><span class="c"> reached target certainty 99</span><span class="nt">.</span><span class="c">99% after 92103400 tests</span>
+<span class="nb">--------------------------------------------------------------------------------</span>
+</code></pre></div>
+
+<p>The number of tests does go up, a lot.</p>
+<h1 id="double-checking-these-results">Double Checking These Results</h1>
+<p>Lets check the math is correct by simulating a real scenario.  I wrote a function in <code>stats_test.py</code> to do this.  Below I calculate the test required for a few different scenarios and then test the values.</p>
+<h2 id="scenario-1">Scenario 1:</h2>
+<h3 id="calculate-number-of-tests">Calculate number of tests</h3>
+<div class="codehilite"><pre><span></span><code><span class="nv">&gt;</span><span class="c"> python3 stats_test</span><span class="nt">.</span><span class="c">py 0</span><span class="nt">.</span><span class="c">01 1000000 99</span><span class="nt">.</span><span class="c">9</span>
+<span class="nb">--------------------------------------------------------------------------------</span>
+<span class="c">bad record likelihood: 0</span><span class="nt">.</span><span class="c">01 %</span>
+<span class="c">set size:              1000000</span>
+<span class="c">target certainty:      99</span><span class="nt">.</span><span class="c">9 %</span>
+<span class="nb">--------------------------------------------------------------------------------</span>
+<span class="c">With good recs removed </span><span class="nb">-</span><span class="c">   reached target certainty 99</span><span class="nt">.</span><span class="c">9% after 66743 tests</span>
+<span class="c">With good recs remaining </span><span class="nb">-</span><span class="c"> reached target certainty 99</span><span class="nt">.</span><span class="c">9% after 69075 tests</span>
+<span class="nb">--------------------------------------------------------------------------------</span>
+</code></pre></div>
+
+<h3 id="check-that-the-suggested-number-of-tests-is-correct">Check that the suggested number of tests is correct</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">&gt; </span><span class="ge">python3 stats_test.py -t 10000 0.01 1000000 69075</span>
+
+num test sets: 10000 , num which found bad record: 9996 , percentage: 99.96%
+</code></pre></div>
+
+<p>Above, I ran 10,000 iterations of a test scenario which tests that I find a bad record by checking up to 69,075 records.  Of the 10,000 iterations, 9,996 found a bad record which is 99.96% of cases.  This confirms the suggested number of tests is good.</p>
+<h2 id="scenario-2">Scenario 2:</h2>
+<h3 id="calculate-number-of-tests_1">Calculate number of tests</h3>
+<div class="codehilite"><pre><span></span><code><span class="nv">&gt;</span><span class="c"> python3 stats_test</span><span class="nt">.</span><span class="c">py 0</span><span class="nt">.</span><span class="c">1 10000 50</span>
+<span class="nb">--------------------------------------------------------------------------------</span>
+<span class="c">bad record likelihood: 0</span><span class="nt">.</span><span class="c">1 %</span>
+<span class="c">set size:              10000</span>
+<span class="c">target certainty:      50</span><span class="nt">.</span><span class="c">0 %</span>
+<span class="nb">--------------------------------------------------------------------------------</span>
+<span class="c">With good recs removed </span><span class="nb">-</span><span class="c">   reached target certainty 50</span><span class="nt">.</span><span class="c">0% after 670 tests</span>
+<span class="c">With good recs remaining </span><span class="nb">-</span><span class="c"> reached target certainty 50</span><span class="nt">.</span><span class="c">0% after 693 tests</span>
+<span class="nb">--------------------------------------------------------------------------------</span>
+</code></pre></div>
+
+<h3 id="check-that-the-suggested-number-of-tests-is-correct_1">Check that the suggested number of tests is correct</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">&gt; </span><span class="ge">python3 stats_test.py -t 100000 0.1 10000 693</span>
+
+num test sets: 100000 , num which found bad record: 51357 , percentage: 51.36%
+</code></pre></div>
+
+<p>Above, I ran 100,000 iterations of a test scenario which tests that I find a bad record by checking up to 693 records.  Of the 100,000 iterations, 51,357 found a bad record which is 51.36% of cases.  This confirms the suggested number of tests is good.</p>
+<h2 id="scenario-3">Scenario 3:</h2>
+<h3 id="calculate-number-of-tests_2">Calculate number of tests</h3>
+<p>Repeating the die test again.</p>
+<div class="codehilite"><pre><span></span><code><span class="nv">&gt;</span><span class="c"> python3 stats_test</span><span class="nt">.</span><span class="c">py 16</span><span class="nt">.</span><span class="c">67 6 99</span>
+<span class="nb">--------------------------------------------------------------------------------</span>
+<span class="c">bad record likelihood: 16</span><span class="nt">.</span><span class="c">67 %</span>
+<span class="c">set size:              6</span>
+<span class="c">target certainty:      99</span><span class="nt">.</span><span class="c">0 %</span>
+<span class="nb">--------------------------------------------------------------------------------</span>
+<span class="c">With good recs removed </span><span class="nb">-</span><span class="c">   reached target certainty 99</span><span class="nt">.</span><span class="c">0% after 6 tests</span>
+<span class="c">With good recs remaining </span><span class="nb">-</span><span class="c"> reached target certainty 99</span><span class="nt">.</span><span class="c">0% after 26 tests</span>
+<span class="nb">--------------------------------------------------------------------------------</span>
+</code></pre></div>
+
+<h3 id="check-that-the-suggested-number-of-tests-is-correct_2">Check that the suggested number of tests is correct</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">&gt; </span><span class="ge">python3 stats_test.py -t 1000000 16.67 6 26</span>
+
+num test sets: 1000000 , num which found bad record: 999843 , percentage: 99.98%
+</code></pre></div>
+
+<p>Above, I ran 1,000,000 iterations of a test scenario which tests that I find a bad record by checking up to 26 records (rolls).  Of the 1,000,000 iterations, 999,843 found a bad record which is 99.98% of cases.  This confirms the suggested number of tests is good.</p>
+<h1 id="some-useful-statistics">Some Useful Statistics</h1>
+<p>I added a procedure to <code>stats_test.py</code> to print a grid of number of tests required to a range of bad record likelihood percentages and target certainty percentages.</p>
+<div class="codehilite"><pre><span></span><code><span class="c">|</span><span class="nb">--------------------------</span><span class="c">|</span><span class="nb">--------------------------------------</span><span class="c">|</span>
+<span class="c">|                          | Level of certainty                   |</span>
+<span class="c">| Number of bad records    |</span><span class="nb">--------------------------------------</span><span class="c">|</span>
+<span class="c">| less than                |      99</span><span class="nt">.</span><span class="c">9% |     99</span><span class="nt">.</span><span class="c">99% |    99</span><span class="nt">.</span><span class="c">999% |</span>
+<span class="c">|</span><span class="nb">--------------------------</span><span class="c">|</span><span class="nb">------------</span><span class="c">|</span><span class="nb">------------</span><span class="c">|</span><span class="nb">------------</span><span class="c">|</span>
+<span class="c">| 1 in 10</span><span class="nt">,</span><span class="c">000    = 0</span><span class="nt">.</span><span class="c">01%   |     69</span><span class="nt">,</span><span class="c">075 |     92</span><span class="nt">,</span><span class="c">099 |    115</span><span class="nt">,</span><span class="c">124 |</span>
+<span class="c">| 1 in 100</span><span class="nt">,</span><span class="c">000   = 0</span><span class="nt">.</span><span class="c">001%  |    690</span><span class="nt">,</span><span class="c">773 |    921</span><span class="nt">,</span><span class="c">030 |  1</span><span class="nt">,</span><span class="c">151</span><span class="nt">,</span><span class="c">287 |</span>
+<span class="c">| 1 in 1</span><span class="nt">,</span><span class="c">000</span><span class="nt">,</span><span class="c">000 = 0</span><span class="nt">.</span><span class="c">0001% |  6</span><span class="nt">,</span><span class="c">907</span><span class="nt">,</span><span class="c">752 |  9</span><span class="nt">,</span><span class="c">210</span><span class="nt">,</span><span class="c">336 | 11</span><span class="nt">,</span><span class="c">512</span><span class="nt">,</span><span class="c">920 |</span>
+<span class="c">|</span><span class="nb">-----------------------------------------------------------------</span><span class="c">|</span>
+</code></pre></div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: November 25, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

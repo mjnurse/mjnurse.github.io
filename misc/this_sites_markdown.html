@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="This Sites Markdown" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>This Sites Markdown</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>This Sites Markdown</h1>
+<h1 id="heading-1">Heading 1</h1>
+<p><code># Heading 1</code></p>
+<h2 id="heading-2">Heading 2</h2>
+<p><code>## Heading 2</code></p>
+<h3 id="heading-3">Heading 3</h3>
+<h4 id="heading-4">Heading 4</h4>
+<h5 id="heading-5">Heading 5</h5>
+<h6 id="heading-6">Heading 6</h6>
+<hr />
+<p>Horizontal Line: <code>---</code></p>
+<p><strong>Bold</strong>: <code>**Bold**</code></p>
+<p><em>Italic</em>: <code>*Italic*</code></p>
+<p><strong><em>Bold Italic</em></strong>: <code>***Bold Italic***</code></p>
+<p><a href="http://github.com">GitHub</a>: <code>[GitHub](http://github.com)</code></p>
+<blockquote>
+<p>Block Quote: <code>&gt; Block Quote</code></p>
+</blockquote>
+<h1 id="links">Links</h1>
+<p><a href="https://www.google.com">I'm an inline-style link</a></p>
+<p><a href="https://www.google.com" title="Google's Homepage">I'm an inline-style link with title</a></p>
+<p>Markdown:</p>
+<div class="codehilite"><pre><span></span><code>[I&#39;m an inline-style link](https://www.google.com)
+
+[I&#39;m an inline-style link with title](https://www.google.com &quot;Google&#39;s Homepage&quot;)
+</code></pre></div>
+
+<h1 id="simple-lists">Simple Lists</h1>
+<p>Single spacing:</p>
+<ul>
+<li>Simple list</li>
+<li>Simple list</li>
+<li>Simple list</li>
+</ul>
+<p>Markdown:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">-</span><span class="w">  </span><span class="nx">Simple</span><span class="w"> </span><span class="nx">list</span>
+<span class="o">-</span><span class="w">  </span><span class="nx">Simple</span><span class="w"> </span><span class="nx">list</span>
+<span class="o">-</span><span class="w">  </span><span class="nx">Simple</span><span class="w"> </span><span class="nx">list</span>
+</code></pre></div>
+
+<p>Double spacing:</p>
+<ul>
+<li>
+<p>Simple list</p>
+</li>
+<li>
+<p>Simple list</p>
+</li>
+<li>
+<p>Simple list</p>
+</li>
+</ul>
+<p>Markdown:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">-</span><span class="w">  </span><span class="nx">Simple</span><span class="w"> </span><span class="nx">list</span>
+
+<span class="o">-</span><span class="w">  </span><span class="nx">Simple</span><span class="w"> </span><span class="nx">list</span>
+
+<span class="o">-</span><span class="w">  </span><span class="nx">Simple</span><span class="w"> </span><span class="nx">list</span>
+</code></pre></div>
+
+<p>Multiple indents:</p>
+<ul>
+<li>Simple list</li>
+<li>Simple list<ul>
+<li>Simple list</li>
+<li>Simple list</li>
+</ul>
+</li>
+<li>Simple list<ul>
+<li>Simple list</li>
+</ul>
+</li>
+<li>Simple list</li>
+</ul>
+<p>Markdown:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">-</span><span class="w">  </span><span class="nx">Simple</span><span class="w"> </span><span class="nx">list</span>
+<span class="w">   </span><span class="o">-</span><span class="w">  </span><span class="nx">Simple</span><span class="w"> </span><span class="nx">list</span>
+<span class="w">      </span><span class="o">-</span><span class="w">  </span><span class="nx">Simple</span><span class="w"> </span><span class="nx">list</span>
+<span class="w">      </span><span class="o">-</span><span class="w">  </span><span class="nx">Simple</span><span class="w"> </span><span class="nx">list</span>
+<span class="w">   </span><span class="o">-</span><span class="w">  </span><span class="nx">Simple</span><span class="w"> </span><span class="nx">list</span>
+<span class="w">      </span><span class="o">-</span><span class="w">  </span><span class="nx">Simple</span><span class="w"> </span><span class="nx">list</span>
+<span class="o">-</span><span class="w">  </span><span class="nx">Simple</span><span class="w"> </span><span class="nx">list</span>
+</code></pre></div>
+
+<h1 id="numbered-lists">Numbered Lists</h1>
+<p>Single spacing:</p>
+<ol>
+<li>Numbered list</li>
+<li>Numbered list</li>
+<li>Numbered list</li>
+</ol>
+<p>Markdown:</p>
+<div class="codehilite"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">Numbered</span><span class="w"> </span><span class="kr">list</span>
+<span class="mf">1.</span><span class="w"> </span><span class="n">Numbered</span><span class="w"> </span><span class="kr">list</span>
+<span class="mf">1.</span><span class="w"> </span><span class="n">Numbered</span><span class="w"> </span><span class="kr">list</span>
+</code></pre></div>
+
+<p>Double spacing:</p>
+<ol>
+<li>
+<p>Numbered list</p>
+</li>
+<li>
+<p>Numbered list</p>
+</li>
+<li>
+<p>Numbered list</p>
+</li>
+</ol>
+<p>Markdown:</p>
+<div class="codehilite"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">Numbered</span><span class="w"> </span><span class="kr">list</span>
+
+<span class="mf">1.</span><span class="w"> </span><span class="n">Numbered</span><span class="w"> </span><span class="kr">list</span>
+
+<span class="mf">1.</span><span class="w"> </span><span class="n">Numbered</span><span class="w"> </span><span class="kr">list</span>
+</code></pre></div>
+
+<ol>
+<li>
+<p>Numbered list</p>
+</li>
+<li>
+<p>Numbered list</p>
+<ol>
+<li>
+<p>Numbered list</p>
+</li>
+<li>
+<p>Numbered list</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Numbered list</p>
+</li>
+</ol>
+<p>Markdown:</p>
+<div class="codehilite"><pre><span></span><code><span class="mf">1.</span><span class="w"> </span><span class="n">Numbered</span><span class="w"> </span><span class="kr">list</span>
+
+<span class="w">   </span><span class="mf">1.</span><span class="w"> </span><span class="n">Numbered</span><span class="w"> </span><span class="kr">list</span>
+
+<span class="w">      </span><span class="mf">1.</span><span class="w"> </span><span class="n">Numbered</span><span class="w"> </span><span class="kr">list</span>
+
+<span class="w">      </span><span class="mf">1.</span><span class="w"> </span><span class="n">Numbered</span><span class="w"> </span><span class="kr">list</span>
+
+<span class="w">   </span><span class="mf">1.</span><span class="w"> </span><span class="n">Numbered</span><span class="w"> </span><span class="kr">list</span>
+</code></pre></div>
+
+<h1 id="tables">Tables</h1>
+<table>
+<thead>
+<tr>
+<th>Heading 1</th>
+<th>Heading 2</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Column 1</td>
+<td>Column 2</td>
+</tr>
+<tr>
+<td>Column 1</td>
+<td>Column 2</td>
+</tr>
+</tbody>
+</table>
+<p>Markdown:</p>
+<div class="codehilite"><pre><span></span><code>Heading 1 | Heading 2
+---|---
+Column 1 | Column 2
+Column 1 | Column 2
+</code></pre></div>
+
+<h1 id="images">Images</h1>
+<p><img alt="" src="images/AudiS5-350x250.jpg" /></p>
+<p>Markdown:</p>
+<div class="codehilite"><pre><span></span><code>![](images/AudiS5-350x250.jpg)
+
+Alternatively:
+
+&lt;img src=&quot;images/AudiS5-350x250.jpg&quot; width=&quot;800&quot;&gt;
+
+To put the image in a table cell:
+
+| &lt;img src=&quot;images/AudiS5-350x250.jpg&quot; width=&quot;800&quot;&gt; |
+</code></pre></div>
+
+<h1 id="draw-io-template">Draw IO Template</h1>
+<p><img alt="" src="images/Draw-IO-Template.png" /></p>
+<h1 id="code-blocks">Code Blocks</h1>
+<div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">fancyAlert</span><span class="p">(</span><span class="nx">arg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="nx">arg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">$</span><span class="p">.</span><span class="nx">facebox</span><span class="p">({</span><span class="nx">div</span><span class="o">:</span><span class="s1">&#39;#foo&#39;</span><span class="p">})</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>Markdown:</p>
+<div class="codehilite"><pre><span></span><code><span class="w">    </span>```<span class="nv">javascript</span>
+<span class="w">    </span><span class="nv">function</span><span class="w"> </span><span class="nv">fancyAlert</span><span class="ss">(</span><span class="nv">arg</span><span class="ss">)</span><span class="w"> </span>{
+<span class="w">       </span><span class="k">if</span><span class="ss">(</span><span class="nv">arg</span><span class="ss">)</span><span class="w"> </span>{
+<span class="w">          </span>$.<span class="nv">facebox</span><span class="ss">(</span>{<span class="nv">div</span>:<span class="s1">&#39;#foo&#39;</span>}<span class="ss">)</span>
+<span class="w">       </span>}
+<span class="w">    </span>}
+<span class="w">    </span>```
+</code></pre></div>
+
+<p>Here a list of common languages that can be used with the backtick (see full list in <a href="https://github.com/github/linguist/blob/master/lib/linguist/languages.yml">Linguist - languages.yml</a> ).</p>
+<ul>
+<li>actionscript3</li>
+<li>apache</li>
+<li>applescript</li>
+<li>asp</li>
+<li>brainfuck</li>
+<li>c</li>
+<li>cfm</li>
+<li>clojure</li>
+<li>cmake</li>
+<li>coffee-script, coffeescript, coffee</li>
+<li>cpp - C++</li>
+<li>cs</li>
+<li>csharp</li>
+<li>css</li>
+<li>csv</li>
+<li>bash</li>
+<li>diff</li>
+<li>elixir</li>
+<li>erb - HTML + Embedded Ruby</li>
+<li>go</li>
+<li>haml</li>
+<li>http</li>
+<li>java</li>
+<li>javascript</li>
+<li>json</li>
+<li>jsx</li>
+<li>less</li>
+<li>lolcode</li>
+<li>make - Makefile</li>
+<li>markdown</li>
+<li>matlab</li>
+<li>nginx</li>
+<li>objectivec</li>
+<li>pascal</li>
+<li>PHP</li>
+<li>Perl</li>
+<li>python</li>
+<li>profile - python profiler output</li>
+<li>rust</li>
+<li>salt, saltstate - Salt</li>
+<li>scala</li>
+<li>shell, sh, zsh, bash - Shell scripting</li>
+<li>sql</li>
+<li>scss</li>
+<li>sql</li>
+<li>svg</li>
+<li>swift</li>
+<li>rb, jruby, ruby - Ruby</li>
+<li>smalltalk</li>
+<li>vim, viml - Vim Script</li>
+<li>volt</li>
+<li>vhdl</li>
+<li>vue</li>
+<li>xml - XML and also used for HTML with inline CSS and Javascript</li>
+<li>yaml</li>
+</ul>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: November 25, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

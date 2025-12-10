@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Quick and Easy Creation of an Oracle Database in Docker" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>Quick and Easy Creation of an Oracle Database in Docker</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>Quick and Easy Creation of an Oracle Database in Docker</h1>
+<p>I needed an Oracle database to demonstrate to someone that Oracle does not lock a table for read.</p>
+<p>A container is an ideal place to do this.  Google led me to a container image <code>alexeiled/docker-oracle-xe-11g</code>.  An old version but, xe is light weight, and does what I need.  For a full set of Oracle containers Oracle has a GitHub repository: <a href="https://github.com/oracle/docker-images">github:oracle</a>.</p>
+<p>I'm running Docker Desktop on Windows 10.</p>
+<h4 id="get-the-image">Get the Image</h4>
+<div class="codehilite"><pre><span></span><code>&gt; docker pull alexeiled/docker-oracle-xe-11g
+</code></pre></div>
+
+<h4 id="create-a-container">Create a Container</h4>
+<p>Open two network ports, one of the oracle client (1521), the other for the oracle web tool (8080).</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="o">--</span><span class="n">shm</span><span class="o">-</span><span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="n">g</span><span class="w"> </span><span class="o">--</span><span class="n">name</span><span class="w"> </span><span class="n">oracle</span><span class="o">-</span><span class="n">xe</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="mi">1521</span><span class="o">:</span><span class="mi">1521</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="mi">8080</span><span class="o">:</span><span class="mi">8080</span><span class="w"> </span><span class="n">alexeiled</span><span class="o">/</span><span class="n">docker</span><span class="o">-</span><span class="n">oracle</span><span class="o">-</span><span class="n">xe</span><span class="o">-</span><span class="mi">11</span><span class="n">g</span>
+<span class="p">...</span>
+
+<span class="o">&gt;</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">container</span><span class="w"> </span><span class="o">-</span><span class="n">ls</span>
+<span class="n">CONTAINER</span><span class="w"> </span><span class="n">ID</span><span class="w">        </span><span class="n">IMAGE</span><span class="w">                            </span><span class="n">COMMAND</span><span class="w">                  </span><span class="n">CREATED</span><span class="w">             </span><span class="n">STATUS</span>
+<span class="n">PORTS</span><span class="w">                                            </span><span class="n">NAMES</span>
+<span class="n">e93f1a668767</span><span class="w">        </span><span class="n">alexeiled</span><span class="o">/</span><span class="n">docker</span><span class="o">-</span><span class="n">oracle</span><span class="o">-</span><span class="n">xe</span><span class="o">-</span><span class="mi">11</span><span class="n">g</span><span class="w">   </span><span class="s">&quot;/bin/sh -c /start.sh&quot;</span><span class="w">   </span><span class="mi">37</span><span class="w"> </span><span class="n">seconds</span><span class="w"> </span><span class="n">ago</span><span class="w">      </span><span class="n">Up</span><span class="w"> </span><span class="mi">35</span><span class="w"> </span><span class="n">seconds</span>
+<span class="mf">0.0.0.0</span><span class="o">:</span><span class="mi">1521</span><span class="o">-&gt;</span><span class="mi">1521</span><span class="o">/</span><span class="n">tcp</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0.0.0</span><span class="o">:</span><span class="mi">8080</span><span class="o">-&gt;</span><span class="mi">8080</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="n">oracle</span><span class="o">-</span><span class="n">xe</span>
+</code></pre></div>
+
+<p>The oracle container is now running and accessible.</p>
+<p><strong>An aside:</strong> I wanted to mount a local file share inside the container for oracle sql scripts etc.  But, docker doesn't play well with Azure Active Directory so I skipped this for now.  The syntax to include a local file share is <code>--volume c:/MJN/oracle/scripts</code>.</p>
+<h4 id="connecting-to-oracle">Connecting to Oracle</h4>
+<p>I have the Oracle client installed locally - see elsewhere if you need to install this.</p>
+<p>I opened the Docker Desktop Settings window and by going to the Network tab established the Internal Virtual Switch Network address is the default 10.0.75.0.  This can also be checked using ipconfig:</p>
+<div class="codehilite"><pre><span></span><code>&gt; ipconfig
+
+Windows IP Configuration
+...
+Ethernet adapter vEthernet (DockerNAT):
+   Connection-specific DNS Suffix  . :
+   Link-local IPv6 Address . . . . . : fe80::e15d:ce41:7ba4:190f%27
+   IPv4 Address. . . . . . . . . . . : 10.0.75.1
+   Subnet Mask . . . . . . . . . . . : 255.255.255.0
+   Default Gateway . . . . . . . . . :
+...
+</code></pre></div>
+
+<p>Run the sqlplus client and connect.</p>
+<div class="codehilite"><pre><span></span><code><span class="nl">c</span><span class="p">:</span><span class="err">\</span><span class="n">MJN</span><span class="err">\</span><span class="n">oracle_client</span><span class="o">&gt;</span><span class="n">sqlplus</span><span class="w"> </span><span class="o">/</span><span class="n">nolog</span>
+
+<span class="k">SQL</span><span class="o">*</span><span class="nl">Plus</span><span class="p">:</span><span class="w"> </span><span class="k">Release</span><span class="w"> </span><span class="mf">18.0.0.0.0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Production</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">Mon</span><span class="w"> </span><span class="n">Feb</span><span class="w"> </span><span class="mi">25</span><span class="w"> </span><span class="mi">12</span><span class="err">:</span><span class="mi">35</span><span class="err">:</span><span class="mi">49</span><span class="w"> </span><span class="mi">2019</span>
+<span class="n">Version</span><span class="w"> </span><span class="mf">18.3.0.0.0</span>
+
+<span class="n">Copyright</span><span class="w"> </span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="mi">1982</span><span class="p">,</span><span class="w"> </span><span class="mi">2018</span><span class="p">,</span><span class="w"> </span><span class="n">Oracle</span><span class="p">.</span><span class="w">  </span><span class="ow">All</span><span class="w"> </span><span class="n">rights</span><span class="w"> </span><span class="n">reserved</span><span class="p">.</span>
+
+<span class="k">SQL</span><span class="o">&gt;</span><span class="w"> </span><span class="n">conn</span><span class="w"> </span><span class="k">system</span><span class="o">/</span><span class="n">oracle</span><span class="err">@</span><span class="o">//</span><span class="mf">10.0.75.1</span><span class="err">:</span><span class="mi">1521</span><span class="o">/</span><span class="n">xe</span>
+
+<span class="n">Connected</span><span class="p">.</span>
+
+<span class="k">system</span><span class="nv">@XE</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span>
+</code></pre></div>
+
+<h4 id="connecting-to-the-oracle-server-os">Connecting to the Oracle Server OS</h4>
+<p>To complete the overview, to connect to the Oracle server OS:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="k">exec</span><span class="w"> </span><span class="o">-</span><span class="n">it</span><span class="w"> </span><span class="n">oracle</span><span class="o">-</span><span class="n">xe</span><span class="w"> </span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">bash</span>
+
+<span class="n">root</span><span class="nv">@e93f1a668767</span><span class="err">:</span><span class="o">/</span><span class="err">#</span>
+</code></pre></div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: November 25, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

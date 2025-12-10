@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Hash Value Clash Probability" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>Hash Value Clash Probability</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>Hash Value Clash Probability</h1>
+<p>I needed to know what the probability of a clash was if I used only the first 16 characters of a 32 hexadecimal character MD5 hash was.</p>
+<p>I found the function for this is <code>1-EXP(-(([Number of Values]^2)/(2*2^[Number of bits])))</code>.</p>
+<p>MD5 is a 128 bit hash. The first 16 hexadecimal characters is effectively a 64 bit hash.</p>
+<p>The table below show the percentage probability of a clash for an increasing number of values.</p>
+<p>The table below that shows the number of values that would need to be hashed to get to the stated percentage of a clash.</p>
+<table>
+<thead>
+<tr>
+<th>Number of Values</th>
+<th>Description</th>
+<th>32 bit</th>
+<th>64 bit</th>
+<th>128 bit</th>
+<th>256 bit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>10,000</td>
+<td>Ten thousand</td>
+<td>1.15740%</td>
+<td>0.00000%</td>
+<td>0.00000%</td>
+<td>0.00000%</td>
+</tr>
+<tr>
+<td>100,000</td>
+<td>One hundred thousand</td>
+<td>68.78131%</td>
+<td>0.00000%</td>
+<td>0.00000%</td>
+<td>0.00000%</td>
+</tr>
+<tr>
+<td>1,000,000</td>
+<td>One million</td>
+<td>100.00000%</td>
+<td>0.00000%</td>
+<td>0.00000%</td>
+<td>0.00000%</td>
+</tr>
+<tr>
+<td>10,000,000</td>
+<td>Ten million</td>
+<td>100.00000%</td>
+<td>0.00027%</td>
+<td>0.00000%</td>
+<td>0.00000%</td>
+</tr>
+<tr>
+<td>100,000,000</td>
+<td>One hundred million</td>
+<td>100.00000%</td>
+<td>0.02710%</td>
+<td>0.00000%</td>
+<td>0.00000%</td>
+</tr>
+<tr>
+<td>1,000,000,000</td>
+<td>One billion</td>
+<td>100.00000%</td>
+<td>2.67410%</td>
+<td>0.00000%</td>
+<td>0.00000%</td>
+</tr>
+<tr>
+<td>10,000,000,000</td>
+<td>Ten billion</td>
+<td>100.00000%</td>
+<td>93.34968%</td>
+<td>0.00000%</td>
+<td>0.00000%</td>
+</tr>
+<tr>
+<td>100,000,000,000</td>
+<td>One hundred billion</td>
+<td>100.00000%</td>
+<td>100.00000%</td>
+<td>0.00000%</td>
+<td>0.00000%</td>
+</tr>
+<tr>
+<td>1,000,000,000,000</td>
+<td>One trillion</td>
+<td>100.00000%</td>
+<td>100.00000%</td>
+<td>0.00000%</td>
+<td>0.00000%</td>
+</tr>
+<tr>
+<td>10,000,000,000,000</td>
+<td>Ten trillion</td>
+<td>100.00000%</td>
+<td>100.00000%</td>
+<td>0.00000%</td>
+<td>0.00000%</td>
+</tr>
+<tr>
+<td>100,000,000,000,000</td>
+<td>One hundred trillion</td>
+<td>100.00000%</td>
+<td>100.00000%</td>
+<td>0.00000%</td>
+<td>0.00000%</td>
+</tr>
+<tr>
+<td>1,000,000,000,000,000</td>
+<td>One quadrillion</td>
+<td>100.00000%</td>
+<td>100.00000%</td>
+<td>0.00000%</td>
+<td>0.00000%</td>
+</tr>
+<tr>
+<td>10,000,000,000,000,000</td>
+<td>Ten quadrillion</td>
+<td>100.00000%</td>
+<td>100.00000%</td>
+<td>0.00001%</td>
+<td>0.00000%</td>
+</tr>
+<tr>
+<td>100,000,000,000,000,000</td>
+<td>One hundred quadrillion</td>
+<td>100.00000%</td>
+<td>100.00000%</td>
+<td>0.00147%</td>
+<td>0.00000%</td>
+</tr>
+<tr>
+<td>1,000,000,000,000,000,000</td>
+<td>One quintillion</td>
+<td>100.00000%</td>
+<td>100.00000%</td>
+<td>0.14683%</td>
+<td>0.00000%</td>
+</tr>
+<tr>
+<td>10,000,000,000,000,000,000</td>
+<td>Ten quintillion</td>
+<td>100.00000%</td>
+<td>100.00000%</td>
+<td>13.66515%</td>
+<td>0.00000%</td>
+</tr>
+<tr>
+<td>100,000,000,000,000,000,000</td>
+<td>One hundred quintillion</td>
+<td>100.00000%</td>
+<td>100.00000%</td>
+<td>99.99996%</td>
+<td>0.00000%</td>
+</tr>
+<tr>
+<td>1,000,000,000,000,000,000,000</td>
+<td>One sextillion</td>
+<td>100.00000%</td>
+<td>100.00000%</td>
+<td>100.00000%</td>
+<td>0.00000%</td>
+</tr>
+<tr>
+<td>10,000,000,000,000,000,000,000</td>
+<td>Ten sextillion</td>
+<td>100.00000%</td>
+<td>100.00000%</td>
+<td>100.00000%</td>
+<td>0.00000%</td>
+</tr>
+<tr>
+<td>100,000,000,000,000,000,000,000</td>
+<td>One hundred sextillion</td>
+<td>100.00000%</td>
+<td>100.00000%</td>
+<td>100.00000%</td>
+<td>0.00000%</td>
+</tr>
+<tr>
+<td>1,000,000,000,000,000,000,000,000</td>
+<td>One septillion</td>
+<td>100.00000%</td>
+<td>100.00000%</td>
+<td>100.00000%</td>
+<td>0.00000%</td>
+</tr>
+<tr>
+<td>10,000,000,000,000,000,000,000,000</td>
+<td>Ten septillion</td>
+<td>100.00000%</td>
+<td>100.00000%</td>
+<td>100.00000%</td>
+<td>0.00000%</td>
+</tr>
+<tr>
+<td>100,000,000,000,000,000,000,000,000</td>
+<td>One hundred septillion</td>
+<td>100.00000%</td>
+<td>100.00000%</td>
+<td>100.00000%</td>
+<td>0.00000%</td>
+</tr>
+</tbody>
+</table>
+<p>The table below shows the number of values that would need to be hashed to get to the stated percentage of a clash.</p>
+<table>
+<thead>
+<tr>
+<th>percentage</th>
+<th>32 bit</th>
+<th>64 bit</th>
+<th>128 bit</th>
+<th>256 bit</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0.0000001%</td>
+<td>2</td>
+<td>140,000</td>
+<td>580,000,000,000,000</td>
+<td>11,000,000,000,000,000,000,000,000,000,000,000</td>
+</tr>
+<tr>
+<td>0.000001%</td>
+<td>7</td>
+<td>430,000</td>
+<td>1,800,000,000,000,000</td>
+<td>34,000,000,000,000,000,000,000,000,000,000,000</td>
+</tr>
+<tr>
+<td>0.00001%</td>
+<td>21</td>
+<td>1,400,000</td>
+<td>5,800,000,000,000,000</td>
+<td>110,000,000,000,000,000,000,000,000,000,000,000</td>
+</tr>
+<tr>
+<td>0.0001%</td>
+<td>66</td>
+<td>4,300,000</td>
+<td>18,000,000,000,000,000</td>
+<td>340,000,000,000,000,000,000,000,000,000,000,000</td>
+</tr>
+<tr>
+<td>0.001%</td>
+<td>210</td>
+<td>14,000,000</td>
+<td>58,000,000,000,000,000</td>
+<td>1,100,000,000,000,000,000,000,000,000,000,000,000</td>
+</tr>
+<tr>
+<td>0.1%</td>
+<td>2,100</td>
+<td>140,000,000</td>
+<td>580,000,000,000,000,000</td>
+<td>11,000,000,000,000,000,000,000,000,000,000,000,000</td>
+</tr>
+<tr>
+<td>0.5%</td>
+<td>4,600</td>
+<td>300,000,000</td>
+<td>1,300,000,000,000,000,000</td>
+<td>24,000,000,000,000,000,000,000,000,000,000,000,000</td>
+</tr>
+<tr>
+<td>1%</td>
+<td>6,600</td>
+<td>430,000,000</td>
+<td>1,800,000,000,000,000,000</td>
+<td>34,000,000,000,000,000,000,000,000,000,000,000,000</td>
+</tr>
+<tr>
+<td>5%</td>
+<td>15,000</td>
+<td>970,000,000</td>
+<td>4,200,000,000,000,000,000</td>
+<td>77,000,000,000,000,000,000,000,000,000,000,000,000</td>
+</tr>
+<tr>
+<td>10%</td>
+<td>21,000</td>
+<td>1,400,000,000</td>
+<td>6,000,000,000,000,000,000</td>
+<td>110,000,000,000,000,000,000,000,000,000,000,000,000</td>
+</tr>
+<tr>
+<td>25%</td>
+<td>35,000</td>
+<td>2,300,000,000</td>
+<td>9,900,000,000,000,000,000</td>
+<td>180,000,000,000,000,000,000,000,000,000,000,000,000</td>
+</tr>
+<tr>
+<td>50%</td>
+<td>55,000</td>
+<td>3,600,000,000</td>
+<td>15,000,000,000,000,000,000</td>
+<td>280,000,000,000,000,000,000,000,000,000,000,000,000</td>
+</tr>
+<tr>
+<td>75%</td>
+<td>77,000</td>
+<td>5,100,000,000</td>
+<td>22,000,000,000,000,000,000</td>
+<td>400,000,000,000,000,000,000,000,000,000,000,000,000</td>
+</tr>
+<tr>
+<td>95%</td>
+<td>110,000</td>
+<td>7,400,000,000</td>
+<td>32,000,000,000,000,000,000</td>
+<td>590,000,000,000,000,000,000,000,000,000,000,000,000</td>
+</tr>
+<tr>
+<td>99%</td>
+<td>140,000</td>
+<td>9,200,000,000</td>
+<td>40,000,000,000,000,000,000</td>
+<td>730,000,000,000,000,000,000,000,000,000,000,000,000</td>
+</tr>
+<tr>
+<td>100%</td>
+<td>390,000</td>
+<td>25,000,000,000</td>
+<td>110,000,000,000,000,000,000</td>
+<td>2,000,000,000,000,000,000,000,000,000,000,000,000,000</td>
+</tr>
+</tbody>
+</table>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: December 01, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

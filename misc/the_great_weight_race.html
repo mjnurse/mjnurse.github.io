@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="The Great Weight Race" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>The Great Weight Race</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>The Great Weight Race</h1>
+<style>
+#gChartBox {
+  position: relative;
+  width: 100%;
+  padding-top: 50%;
+}
+#gChart {
+  position: absolute;
+  top:0;
+  left:0;
+  right: 0;
+  bottom: 0;
+}
+</style>
+
+<div id="dataTable"></div>
+
+<hr>
+
+<div id="gChartBox"><div id="gChart"></div></div>
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+
+  let data = [
+    ['Date','Martin','Phil'],
+    ['06/01/22',91.6,122.2],
+    ['11/01/22',90.9,121.0],
+    ['14/01/22',88.1,121.1],
+    ['18/01/22',88.0,119.8],
+    ['21/01/22',88.6,118.5],
+    ['25/01/22',88.9,119.9],
+    ['28/01/22',88.6,117.9],
+    ['01/02/22',88.6,117.9],
+    ['04/02/22',88.6,117.5],
+    ['08/02/22',88.6,117.3],
+    ['11/02/22',88.6,116.8],
+    ['15/02/22',88.6,116.3],
+    ['18/02/22',88.6,116.6],
+    ['22/02/22',88.6,117.2],
+  ];
+
+  google.charts.load("current", {"packages": ["corechart"]});
+  google.charts.setOnLoadCallback(drawCht);
+  function drawCht() {
+
+    const tabDiv = document.getElementById("dataTable");
+    const mnTgWgt = 79.4;
+    const pmTgWgt = 100.0;
+
+    let tabHTML = '<table>';
+    tabHTML += '<tr style="font-size: 0.9em">' +
+        '<th></th>' +
+        '<th colspan="6">Martin (Target Weight: ' + mnTgWgt+ 'Kg)</th>' +
+        '<th colspan="6">Phil (Target Weight: ' + pmTgWgt + 'Kg)</th>' +
+        '</tr>';
+    tabHTML += '<tr style="font-size: 0.9em">' +
+        '<th>Date</th>' +
+        '<th>Weight</th>' +
+        '<th>Delta</th>' +
+        '<th>Loss</th>' +
+        '<th>% Target</th>' +
+        '<th>% Lost</th>' +
+        '<th>BMI</th>' +
+        '<th>Weight</th>' +
+        '<th>Delta</th>' +
+        '<th>Loss</th>' +
+        '<th>% Target</th>' +
+        '<th>% Lost</th>' +
+        '<th>BMI</th>' +
+        '</tr>';
+
+    let chtData = [['Date','Martin','Phil']]
+
+    let mnStWgt = parseFloat(data[1][1]);
+    let pmStWgt = parseFloat(data[1][2]);
+    let mnPrevWgt = mnStWgt;
+    let pmPrevWgt = pmStWgt;
+    for (let i=1; i<data.length; i++) {
+      dateStr = data[i][0];
+      mnWgt = parseFloat(data[i][1]);
+      pmWgt = parseFloat(data[i][2]);
+      tabHTML += '<tr style="font-size: 0.9em">' +
+          '<td>' + dateStr + '</td>' +
+          '<td>' + mnWgt.toFixed(1) + '</td>' +
+          '<td>' + (mnWgt-mnPrevWgt).toFixed(1) + '</td>' +
+          '<td>' + (mnStWgt-mnWgt).toFixed(1) + '</td>' +
+          '<td>' + ((mnStWgt-mnWgt)/(mnStWgt-mnTgWgt)*100).toFixed(1) + '%</td>' +
+          '<td>' + (((mnStWgt-mnWgt)/mnStWgt)*100).toFixed(1) + '%</td>' +
+          '<td>' + (mnWgt/3.0625).toFixed(1) + '</td>' +
+          '<td>' + pmWgt.toFixed(1) + '</td>' +
+          '<td>' + (pmWgt-pmPrevWgt).toFixed(1) + '</td>' +
+          '<td>' + (pmStWgt-pmWgt).toFixed(1) + '</td>' +
+          '<td>' + ((pmStWgt-pmWgt)/(pmStWgt-pmTgWgt)*100).toFixed(1) + '%</td>' +
+          '<td>' + (((pmStWgt-pmWgt)/pmStWgt)*100).toFixed(1) + '%</td>' +
+          '<td>' + (pmWgt/3.4225).toFixed(1) + '</td>' +
+          '</tr>';
+
+      dte = new Date('20'+dateStr.substr(6,2), (dateStr.substr(3,2)-1), dateStr.substr(0,2));
+      chtData.push([ dte, 
+          ((mnWgt-mnStWgt)/(mnTgWgt-mnStWgt)*100), 
+          ((pmWgt-pmStWgt)/(pmTgWgt-pmStWgt)*100)]);
+
+      mnPrevWgt = mnWgt;
+      pmPrevWgt = pmWgt;
+    }
+
+    tabHTML += '</table>';
+
+    tabDiv.innerHTML = tabHTML;
+
+    const gChtData = google.visualization.arrayToDataTable(chtData);
+    const chtOptions = {
+      backgroundColor: "#FFFFFF",
+      chartArea: { left: "6%", top: "2%", height: "80%", width: "88%" },
+      pointsVisible: false,
+      fontSize: 12,
+      height: "100%",
+      width: "100%",
+      legend: "bottom",
+      vAxis: { 
+        viewWindow: {min: 0, max: 100},
+        title: "% Target",
+        titleTextStyle: {
+          // color: <string>,
+          // fontName: <string>,
+          fontSize: 12,
+          bold: true,
+          italic: false,
+        },
+      },
+      hAxis: {
+        title: "Week",
+        titleTextStyle: {
+          // color: <string>,
+          // fontName: <string>,
+          fontSize: 12,
+          bold: true,
+          italic: false,
+        },
+      }, 
+    };
+    const chart = new google.visualization.LineChart( document.getElementById("gChart"));
+    chart.draw(gChtData, chtOptions);
+  }
+</script>
+
+<hr>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: November 25, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

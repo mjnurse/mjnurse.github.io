@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="cheatsheets" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>cheatsheets</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>cheatsheets</h1>
+
+<ul class="page-list">
+  <li><a href="/cheatsheets/bash_linux.html" data-number="1"><span class="page-number">1</span>Bash / Linux Cheatsheet</a></li>
+  <li><a href="/cheatsheets/dos_cmd.html" data-number="2"><span class="page-number">2</span>DOS - Cmd Cheat Sheet</a></li>
+  <li><a href="/cheatsheets/docker.html" data-number="3"><span class="page-number">3</span>Docker CheatSheet</a></li>
+  <li><a href="/cheatsheets/draw_io.html" data-number="4"><span class="page-number">4</span>Draw IO</a></li>
+  <li><a href="/cheatsheets/elasticsearch.html" data-number="5"><span class="page-number">5</span>Elasticsearch Cheat Sheet</a></li>
+  <li><a href="/cheatsheets/english.html" data-number="6"><span class="page-number">6</span>English / Punctuation Cheat Sheet</a></li>
+  <li><a href="/cheatsheets/excel.html" data-number="7"><span class="page-number">7</span>Excel Cheat Sheet</a></li>
+  <li><a href="/cheatsheets/git.html" data-number="8"><span class="page-number">8</span>Git CheatSheet</a></li>
+  <li><a href="/cheatsheets/gmail.html" data-number="9"><span class="page-number">9</span>GMail</a></li>
+  <li><a href="/cheatsheets/javascript.html" data-number="10"><span class="page-number">10</span>Javascript Cheat Sheet</a></li>
+  <li><a href="/cheatsheets/kubernetes.html" data-number="11"><span class="page-number">11</span>Kubernetes</a></li>
+  <li><a href="/cheatsheets/microsoft_word.html" data-number="12"><span class="page-number">12</span>Microsoft Word Cheatsheet</a></li>
+  <li><a href="/cheatsheets/python.html" data-number="13"><span class="page-number">13</span>Python Cheatsheet</a></li>
+  <li><a href="/cheatsheets/sql.html" data-number="14"><span class="page-number">14</span>SQL Cheat Sheet</a></li>
+  <li><a href="/cheatsheets/sqlite.html" data-number="15"><span class="page-number">15</span>SQLite</a></li>
+  <li><a href="/cheatsheets/scala.html" data-number="16"><span class="page-number">16</span>Scala Cheatsheet</a></li>
+  <li><a href="/cheatsheets/spark.html" data-number="17"><span class="page-number">17</span>Spark Cheatsheet</a></li>
+  <li><a href="/cheatsheets/vs_code.html" data-number="18"><span class="page-number">18</span>VS Code CheatSheet</a></li>
+  <li><a href="/cheatsheets/vim.html" data-number="19"><span class="page-number">19</span>ViM CheatSheet</a></li>
+  <li><a href="/cheatsheets/jq.html" data-number="20"><span class="page-number">20</span>jq</a></li>
+  <li><a href="/cheatsheets/sed.html" data-number="21"><span class="page-number">21</span>sed Cheatsheet</a></li>
+</ul>
+
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: </p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

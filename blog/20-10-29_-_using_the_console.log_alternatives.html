@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="20-10-29 Using the console.log Alternatives" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>20-10-29 Using the console.log Alternatives</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>20-10-29 Using the console.log Alternatives</h1>
+<h2 id="consolelog">console.log()</h2>
+<p>This is the method we all use...</p>
+<h2 id="consoleerror">console.error()</h2>
+<p>This method is useful while testing code. It is used to log errors to the browser console. By default, the error message will be highlighted with red color.</p>
+<h2 id="consolewarn">console.warn()</h2>
+<p>This method is also used to test code. Usually, it helps in throwing warnings to the console. By default, the warning message will be highlighted with yellow color.</p>
+<h2 id="consoleclear">console.clear()</h2>
+<p>This method is used to clear the console.</p>
+<h2 id="consoletime-and-consoletimeend">console.time() and console.timeEnd()</h2>
+<p>Both these methods are used in conjunction with each other. Whenever we want to know the amount of time spent by a block or a function, we can make use of the time() and timeEnd() methods. Both these functions take a string as a parameter. Make sure you use the same string for both these functions to measure the time.</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">console</span><span class="p">.</span><span class="nx">time</span><span class="p">(</span><span class="s1">&#39;timer&#39;</span><span class="p">);</span><span class="w"> </span>
+<span class="o">&lt;</span><span class="nx">code</span><span class="o">&gt;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">timeEnd</span><span class="p">(</span><span class="s1">&#39;timer&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+<h2 id="consoletable">console.table()</h2>
+<p>This method generates a table inside a console, for better readability. A table will be automatically generated for an array or an object.</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">console</span><span class="p">.</span><span class="nx">table</span><span class="p">({</span><span class="nx">a</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="o">:</span><span class="w"> </span><span class="mf">3</span><span class="p">});</span><span class="w"> </span>
+</code></pre></div>
+
+<h2 id="consolecount">console.count()</h2>
+<p>This method is used to count the number that the function hit by this counting method. This can be used inside a loop to check how many times a particular value has been executed.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">i</span><span class="o">=</span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">&lt;</span><span class="mf">3</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">count</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h2 id="consolegroup-and-consolegroupend">console.group() and console.groupEnd()</h2>
+<p>These methods group() and groupEnd() allows us to group contents in a separate block, which will be indented. Just like the time() and the timeEnd() they also accept a label, of the same value. You can expand and collapse the group.</p>
+<hr>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: November 25, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

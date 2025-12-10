@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Shortcut Keys" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>Shortcut Keys</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>Shortcut Keys</h1>
+<div class="table-of-contents">
+<h2>Contents</h2>
+<ul>
+<li><a href="#bash">Bash</a></li>
+<li class="toc-h2"><a href="#">!</a></li>
+<li class="toc-h2"><a href="#command-control">Command Control</a></li>
+<li class="toc-h2"><a href="#command-editing">Command Editing</a></li>
+<li class="toc-h2"><a href="#command-recall">command Recall</a></li>
+<li><a href="#confluence">Confluence</a></li>
+<li><a href="#draw-io">Draw IO</a></li>
+<li class="toc-h2"><a href="#canvas">Canvas</a></li>
+<li class="toc-h2"><a href="#cursorpage-keys">Cursor/Page Keys</a></li>
+<li class="toc-h2"><a href="#documents">Documents</a></li>
+<li class="toc-h2"><a href="#labels">Labels</a></li>
+<li class="toc-h2"><a href="#other">Other</a></li>
+<li class="toc-h2"><a href="#selection">Selection</a></li>
+<li class="toc-h2"><a href="#sidebarconnect">Sidebar/Connect</a></li>
+<li class="toc-h2"><a href="#styles">Styles</a></li>
+<li class="toc-h2"><a href="#tools">Tools</a></li>
+<li class="toc-h2"><a href="#view">View</a></li>
+<li><a href="#drive">Drive</a></li>
+<li><a href="#outlook">Outlook</a></li>
+<li class="toc-h2"><a href="#basic-navigation">Basic Navigation</a></li>
+<li class="toc-h2"><a href="#calendar-date-navigator">Calendar Date Navigator</a></li>
+<li class="toc-h2"><a href="#calendar-dayweekmonth">Calendar Day/Week/Month</a></li>
+<li class="toc-h2"><a href="#calendar-month-view">Calendar Month View</a></li>
+<li class="toc-h2"><a href="#calendar-single-day-view">Calendar Single Day View</a></li>
+<li class="toc-h2"><a href="#calendar-week-view">Calendar Week View</a></li>
+<li class="toc-h2"><a href="#calendar">Calendar</a></li>
+<li class="toc-h2"><a href="#create-an-item-or-file">Create an Item or File</a></li>
+<li class="toc-h2"><a href="#format-text">Format Text</a></li>
+<li class="toc-h2"><a href="#frequently-used">Frequently Used</a></li>
+<li class="toc-h2"><a href="#mail---folder-pane">Mail - Folder Pane</a></li>
+<li class="toc-h2"><a href="#mail-folder-pane">Mail Folder Pane</a></li>
+<li class="toc-h2"><a href="#mail-message-list">Mail Message List</a></li>
+<li class="toc-h2"><a href="#mail-reading-pane">Mail Reading Pane</a></li>
+<li class="toc-h2"><a href="#mail">Mail</a></li>
+<li class="toc-h2"><a href="#search">Search</a></li>
+<li class="toc-h2"><a href="#tasks">Tasks</a></li>
+<li class="toc-h2"><a href="#use-flags">Use Flags</a></li>
+<li><a href="#slack">Slack</a></li>
+<li><a href="#vs-code">VS Code</a></li>
+<li><a href="#windows">Windows</a></li>
+<li><a href="#bash-bang-shortcuts">Bash Bang Shortcuts</a></li>
+<li class="toc-h2"><a href="#command-control-shortcuts">Command Control Shortcuts</a></li>
+</ul>
+</div>
+<p><strong>Note</strong>: This page is automatically generated using <code>sck</code></p>
+<h1 id="bash">Bash</h1>
+<h2 id="_1">!</h2>
+<p>| <code>!!</code> | Run last command |
+| <code>!$</code> | The last word of the previous command (same as ALT+.) |
+| <code>!$:p</code> | Print out the word that !$ would substitute |
+| <code>!*</code> | The previous command except for the first word (e.g., if you type find some_file.txt /, then !<em> would give you some_file.txt /) |
+| <code>!*:p</code> | Print out what !</em> would substitute |
+| <code>!blah</code> | Run the most recent command that starts with blah |
+| <code>!blah:p</code> | Print out the command that !blah would run (also adds it as the latest command in the command history |</p>
+<h2 id="command-control">Command Control</h2>
+<p>| <code>CTRL+C</code> | Terminate the command |
+| <code>CTRL+L</code> | Clear the screen |
+| <code>CTRL+Q</code> | Allow output to the screen (if previously stopped using command above) |
+| <code>CTRL+S</code> | Stops the output to the screen (for long running verbose command) |
+| <code>CTRL+Z</code> | Suspend/stop the command |</p>
+<h2 id="command-editing">Command Editing</h2>
+<p>| <code>ALT+B ALT+F</code> | Move backward/forward one word (or go to start of word the cursor is currently on) |
+| <code>ALT+C</code> | Capitalize to end of word starting at cursor (whole word if cursor is at the beginning of word) |
+| <code>ALT+L</code> | Make lowercase from cursor to end of word |
+| <code>ALT+T</code> | Swap current word with previous |
+| <code>ALT+U</code> | Make uppercase from cursor to end of word |
+| <code>CTRL+A CTRL+E</code> | Go to the start/end of the command line |
+| <code>CTRL+D CTRL+H</code> | Delete character after/before under cursor |
+| <code>CTRL+F CTRL+B</code> | Move forward/backward one character |
+| <code>CTRL+T</code> | Swap character under cursor with the previous one |
+| <code>CTRL+U CTRL+K</code> | Delete from cursor to the start/end of the command line |
+| <code>CTRL+W ALT+D</code> | Delete from cursor to start/end of word (whole word if at the boundary) |
+| <code>CTRL+XX</code> | Move between start of command line and current cursor position (and back again) |
+| <code>CTRL+Y</code> | Paste word or text that was cut using one of the deletion shortcuts (such as the one above) after the cursor |</p>
+<h2 id="command-recall">command Recall</h2>
+<p>| <code>ALT+.</code> | Use the last word of the previous command |
+| <code>CTRL+G</code> | Escape from history searching mode |
+| <code>CTRL+J</code> | End the search at current history entry |
+| <code>CTRL+N</code> | Next command in history (i.e., walk forward through the command history) |
+| <code>CTRL+P</code> | Previous command in history (i.e., walk back through the command history) |
+| <code>CTRL+R</code> | Search the history backwards |
+| <code>CTRL+_</code> | Undo last command |</p>
+<h1 id="confluence">Confluence</h1>
+<p>| <code>//</code> | Opens the date picker |
+| <code>Alt +SHIFT+DOWN</code> | Insert table row after |
+| <code>Alt +SHIFT+UP</code> | Insert table row before |
+| <code>CTRL+0</code> | Set paragraph style |
+| <code>CTRL+1-6</code> | Set as heading 1-6 |
+| <code>CTRL+7</code> | Preformatted |
+| <code>CTRL+8</code> | Quote |
+| <code>CTRL+ENTER</code> | Publish page |
+| <code>CTRL+ENTER</code> | Publish |
+| <code>CTRL+SHIFT+I</code> | Insert table |
+| <code>CTRL+SHIFT+a</code> | Insert macro |
+| <code>CTRL+SHIFT+b</code> | Bulleted list |
+| <code>CTRL+SHIFT+d</code> | Insert markup |
+| <code>CTRL+SHIFT+e</code> | Preview |
+| <code>CTRL+SHIFT+n</code> | Numbered list |
+| <code>CTRL+SHIFT+s</code> | Strikethrough |
+| <code>CTRL+h</code> | Find / Replace |
+| <code>CTRL+k</code> | Insert link |
+| <code>CTRL+m</code> | Insert files &amp; images |
+| <code>CTRL+y</code> | Redo |
+| <code>SHIFT+ENTER</code> | Insert a hard break |
+| <code>SHIFT+TAB</code> | Outdent item when in a list / Move cursor to previous cell in the table |
+| <code>TAB</code> | Indent item when in a list / Move cursor to next cell in the table |
+| <code>e</code> | Open the editor |</p>
+<h1 id="draw-io">Draw IO</h1>
+<h2 id="canvas">Canvas</h2>
+<p>| <code>ALT+Connect</code> | Connect to a Fixed Point |
+| <code>ALT+Shift+C/T</code> | Clear Waypoints / Edit Tooltip |
+| <code>Backspace or Delete</code> | Delete Selected Cells |
+| <code>CTRL / Meta+Resize</code> | Centered / Group Resize |
+| <code>CTRL / Shift+Drag</code> | Clone cell/Disconnect edge |
+| <code>CTRL+Delete</code> | Delete with Connections |
+| <code>CTRL+End</code> | Expand Container |
+| <code>CTRL+Enter / D</code> | Duplicate |
+| <code>CTRL+G</code> | Group |
+| <code>CTRL+Home</code> | Collapse Container |
+| <code>CTRL+L / ALT+Shift+L</code> | Lock/Unlock / Edit Link |
+| <code>CTRL+R</code> | Turn / Rotate 90 Clockwise |
+| <code>CTRL+Shift+B</code> | Send to Back |
+| <code>CTRL+Shift+End</code> | Enter Group |
+| <code>CTRL+Shift+F</code> | Bring to Front |
+| <code>CTRL+Shift+Home</code> | Exit Group |
+| <code>CTRL+Shift+U</code> | Ungroup |
+| <code>CTRL+Shift+Y</code> | Autosize |
+| <code>Shift+Resize</code> | Maintain Proportions |</p>
+<h2 id="cursorpage-keys">Cursor/Page Keys</h2>
+<p>| <code>ALT+Cursor</code> | Scroll Page |
+| <code>ALT+Shift+Cursor</code> | Clone and connect |
+| <code>CTRL+Cursor</code> | Resize cell (pt, +Option on Mac) |
+| <code>CTRL+Shift+Cursor</code> | Resize cell (grid size) |
+| <code>CTRL+Shift+Pg Down</code> | Next Page |
+| <code>CTRL+Shift+Pg Up</code> | Previous Page |
+| <code>Cursor</code> | Scroll / Move cell (pt) |
+| <code>Shift+Cursor</code> | Move cell (grid size) |</p>
+<h2 id="documents">Documents</h2>
+<p>| <code>ALT+Drag / Drop</code> | Force Rubberband / Ignore Group |
+| <code>ALT+Shift+A</code> | Connection Arrows |
+| <code>CTRL+K</code> | Insert Rectangle |
+| <code>CTRL+P</code> | Print |
+| <code>CTRL+S</code> | Save |
+| <code>CTRL+Shift+G</code> | Toggle grid |
+| <code>CTRL+Shift+K</code> | Insert Ellipse |
+| <code>CTRL+Shift+S</code> | Save as |
+| <code>CTRL+Shift+X</code> | Insert Text |
+| <code>CTRL+Shift+Z</code> | Redo (Linux/Mac) |
+| <code>CTRL+Y</code> | Redo (Windows) |
+| <code>CTRL+Z</code> | Undo |
+| <code>Esc</code> | Cancel Action |
+| <code>Hold ALT</code> | Ignores handles under the mouse |</p>
+<h2 id="labels">Labels</h2>
+<p>| <code>CTRL+. / ,</code> | Superscript/Subscript on Selected Text |
+| <code>CTRL+B / I</code> | Toggle Bold/Italic on Selected Text |
+| <code>CTRL+U</code> | Toggle Underline on Selected Text |
+| <code>Enter</code> | New Paragraph in Formatted Labels |
+| <code>F2 / Enter</code> | Start Editing Label of Selected Cell |
+| <code>F2 / Tab / Esc</code> | Stop Editing and Apply Value |
+| <code>Shift+Enter</code> | New Line in Formatted Labels |</p>
+<h2 id="other">Other</h2>
+<p>| <code>ALT+Shift+P</code> | Connection Points |
+| <code>CTRL / Shift+Esc</code> | Cancel Editing |
+| <code>CTRL+Meta+Resize</code> | Centered group resize |
+| <code>CTRL+Resize</code> | Non-recursive group resize |</p>
+<h2 id="selection">Selection</h2>
+<p>| <code>(Shift+)Tab</code> | Select Next / Previous |
+| <code>ALT+(Shift+)Tab</code> | Select Child / Parent |
+| <code>ALT+Click</code> | Select Cell Below |
+| <code>ALT+Shift+Drag</code> | Remove from Selection |
+| <code>CTRL / Shift+Click</code> | Toggle Selection State |
+| <code>CTRL+(Shift+)A</code> | Select All / None |
+| <code>CTRL+Shift+I / E</code> | Select Vertices / Edges |
+| <code>Shift+Drag</code> | Add to Selection |</p>
+<h2 id="sidebarconnect">Sidebar/Connect</h2>
+<p>| <code>ALT+(Shift / CTRL)+Click on a sidebar item</code> | Inserts and connects the selected item (Shift ignores current style) |
+| <code>ALT+(Shift+)Drag from sidebar</code> | Disable replace, connect on drop (drop targets), Shift ignores current style |
+| <code>Click on a sidebar item</code> | Connects unconnected side of selected edge |
+| <code>Shift+Click on a sidebar item</code> | Replaces the selected item with the clicked one |
+| <code>Shift+Connect</code> | Connect to shape outline (ignore connection points) |</p>
+<h2 id="styles">Styles</h2>
+<p>| <code>CTRL+E</code> | Edit Style |
+| <code>CTRL+Shift+C</code> | Copy Style |
+| <code>CTRL+Shift+D</code> | Set as Default Style |
+| <code>CTRL+Shift+R</code> | Clear Default Style |
+| <code>CTRL+Shift+V</code> | Paste Style |
+| <code>Draw IO Styles :: ALT+Shift+V</code> | Paste Size |
+| <code>Draw IO Styles :: ALT+Shift+X</code> | Copy Size |</p>
+<h2 id="tools">Tools</h2>
+<p>| <code>CTRL+M</code> | Edit Metadata |
+| <code>CTRL+Shift+L</code> | Toggle Layers Window |
+| <code>CTRL+Shift+M</code> | Edit Vertex Geometry |
+| <code>CTRL+Shift+O</code> | Toggle Outline Window |
+| <code>CTRL+Shift+P</code> | Toggle Format Panel |</p>
+<h2 id="view">View</h2>
+<p>| <code>ALT+Mouse wheel</code> | Canvas Zoom In/Out |
+| <code>CTRL + (Numpad)</code> | Zoom In |
+| <code>CTRL - (Numpad)</code> | Zoom Out |
+| <code>CTRL 0</code> | Custom Zoom |
+| <code>CTRL+H</code> | Reset View |
+| <code>CTRL+J</code> | Fit Page |
+| <code>CTRL+Shift+Connect</code> | Disable Connections |
+| <code>CTRL+Shift+Drag</code> | Create / Remove Space |
+| <code>CTRL+Shift+H</code> | Fit Window |
+| <code>CTRL+Shift+J</code> | Fit Two Pages |
+| <code>End</code> | Refresh |
+| <code>Home</code> | Home |
+| <code>Mouse wheel</code> | Canvas Vertical Scroll |
+| <code>Shift+Mouse wheel</code> | Canvas Horizontal Scroll |
+| <code>Space / Right mouse Drag</code> | Pan Canvas |</p>
+<h1 id="drive">Drive</h1>
+<p>| <code>n</code> | Rename selected item. |
+| <code>z</code> | Move selected items to new folder. |</p>
+<h1 id="outlook">Outlook</h1>
+<h2 id="basic-navigation">Basic Navigation</h2>
+<p>| <code>Alt or F6</code> | Show the access keys in the ribbon |
+| <code>Alt+B or Alt+Left</code> | Go back to previous view in the main Outlook window |
+| <code>Alt+B or Alt+Left</code> | Go back to previous view |
+| <code>Alt+Down</code> | Open split buttons |
+| <code>Alt+F</code> | Open the File menu |
+| <code>Alt+H</code> | Open the Home tab |
+| <code>Alt+J,S</code> | Open the Send/Receive tab |
+| <code>Alt+O</code> | Open the Folder tab |
+| <code>Alt+Q</code> | Go to the Tell Me search field |
+| <code>Alt+Right</code> | Go forward to next view in the main Outlook window |
+| <code>Alt+Right</code> | Go forward to next view |
+| <code>Alt+Up or Ctrl+Comma (,), or Alt+Page Up</code> | In the Reading pane, go to the previous message |
+| <code>Alt+V</code> | Open the View tab |
+| <code>Alt+V, B, and then C for Calendar, P for People, T for Tasks, or O for Off</code> | Show the To-Do bar (peek) |
+| <code>Arrow keys</code> | Move around within the Folder pane |
+| <code>Ctrl+1</code> | Switch to the Mail view |
+| <code>Ctrl+2</code> | Switch to the Calendar view |
+| <code>Ctrl+3</code> | Switch to the Contacts view |
+| <code>Ctrl+4</code> | Switch to the Tasks view |
+| <code>Ctrl+5</code> | Switch to the Notes |
+| <code>Ctrl+6</code> | Switch to the Folder list in the Folder pane |
+| <code>Ctrl+7</code> | Switch to Shortcuts |
+| <code>Ctrl+8</code> | Open Journal |
+| <code>Ctrl+Comma (,)</code> | Switch to previous open message |
+| <code>Ctrl+E</code> | Open the Search tab |
+| <code>Ctrl+Period (.)</code> | Switch to next open message |
+| <code>Ctrl+Shift+B</code> | Open the Address Book |
+| <code>Ctrl+Shift+F10</code> | Show the tooltip for the ribbon element currently in focus |
+| <code>Ctrl+Shift+Tab key or Shift+Tab key</code> | Move between the Folder pane, the main Outlook window, the Reading pane, and the To-Do bar |
+| <code>Ctrl+Shift+W</code> | Select the InfoBar and, if available, show the menu of commands |
+| <code>Ctrl+Tab</code> | Move around message header lines in the Folder pane or an open message |
+| <code>Ctrl+Tab</code> | Move between the Navigation pane and the calendar |
+| <code>Ctrl+Y</code> | Go to a different folder |
+| <code>F3 or Ctrl+E</code> | Go to the Search box |
+| <code>F6</code> | Move between the ribbon and the calendar |
+| <code>Left or Right, respectively</code> | Collapse or expand a group in the email message list |
+| <code>Shift+Spacebar</code> | In the Reading pane, page up through the text |
+| <code>Spacebar</code> | In the Reading pane, page down through the text |
+| <code>Tab key or F6</code> | Move between the Outlook window, the smaller panes in the Folder pane, the Reading pane, and the sections in the To-Do bar |</p>
+<h2 id="calendar-date-navigator">Calendar Date Navigator</h2>
+<p>| <code>Alt+Down</code> | Go to the same day in the next week |
+| <code>Alt+End</code> | Go to the last day of the current week |
+| <code>Alt+Home</code> | Go to the first day of the current week |
+| <code>Alt+Up</code> | Go to the same day in the previous week |</p>
+<h2 id="calendar-dayweekmonth">Calendar Day/Week/Month</h2>
+<p>| <code>Alt+-</code> | Switch to the Week view |
+| <code>Alt+0</code> | View 10 days |
+| <code>Alt+=</code> | Switch to the Month view |
+| <code>Alt+Down</code> | Go to the same day in the next week |
+| <code>Alt+Up</code> | Go to the same day in the previous week |
+| <code>Alt+key for number of days</code> | View from one through nine days |
+| <code>Ctrl+Tab or F6</code> | Move between the Calendar view, TaskPad, and Folder list |
+| <code>Left</code> | Go to the previous day |
+| <code>Right</code> | Go to the next day |
+| <code>Shift+Tab</code> | Select the previous appointment |</p>
+<h2 id="calendar-month-view">Calendar Month View</h2>
+<p>| <code>Home</code> | Go to the first day of the week |
+| <code>Page down</code> | Go to the same day of the week in the next page |
+| <code>Page up</code> | Go to the same day of the week in the previous page |</p>
+<h2 id="calendar-single-day-view">Calendar Single Day View</h2>
+<p>| <code>Alt+Down</code> | Go to the same day in the next week |
+| <code>Alt+Up</code> | Go to the same day in the previous week |
+| <code>Down</code> | Select the next block of time |
+| <code>End</code> | Select the time that ends your work day |
+| <code>Home</code> | Select the time that begins your work day |
+| <code>Page down</code> | Select the block of time at the bottom of the screen |
+| <code>Page up</code> | Select the block of time at the top of the screen |
+| <code>Shift+Up or Shift+Down</code> | Extend or reduce the selected time |
+| <code>Up</code> | Select the previous block of time |</p>
+<h2 id="calendar-week-view">Calendar Week View</h2>
+<p>| <code>End</code> | Go to the end of work hours for the selected day |
+| <code>Home</code> | Go to the start of work hours for the selected day |
+| <code>Page down</code> | Go down one page view in the selected day |
+| <code>Page up</code> | Go up one page view in the selected day |
+| <code>Shift+Left, Shift+Right, Shift+Up, Shift+Down, Shift+Home, or Shift+End</code> | Change the duration of the selected block of time |</p>
+<h2 id="calendar">Calendar</h2>
+<p>| <code>Alt+- or Ctrl+Alt+3</code> | Switch to the Full Week view |
+| <code>Alt+0</code> | Show ten days in the calendar |
+| <code>Alt+1</code> | Show one day in the calendar |
+| <code>Alt+2</code> | Show two days in the calendar |
+| <code>Alt+3</code> | Show three days in the calendar |
+| <code>Alt+4</code> | Show four days in the calendar |
+| <code>Alt+5</code> | Show five days in the calendar |
+| <code>Alt+6</code> | Show six days in the calendar |
+| <code>Alt+7</code> | Show seven days in the calendar |
+| <code>Alt+8</code> | Show eight days in the calendar |
+| <code>Alt+9</code> | Show nine days in the calendar |
+| <code>Alt+= or Ctrl+Alt+4</code> | Switch to Month view |
+| <code>Alt+D</code> | Dismiss the reminder |
+| <code>Alt+Down</code> | Go to the next week |
+| <code>Alt+End</code> | Go to the end of the week |
+| <code>Alt+H+I</code> | Open the New Items menu to select which item you'd like to create |
+| <code>Alt+H+R or Ctrl+Alt+1</code> | Show the daily view |
+| <code>Alt+H,A,B</code> | Open the address book |
+| <code>Alt+H,C,G</code> | Create a new calendar group or add a department calendar |
+| <code>Alt+H,C,O</code> | Open the Outlook Options dialog box for calendars |
+| <code>Alt+H,E</code> | Email a selected calendar to a contact |
+| <code>Alt+H,F,C</code> | Search for contacts |
+| <code>Alt+H,F,P</code> | View and edit the sharing permissions for a folder |
+| <code>Alt+H,F,W or Ctrl+F</code> | Forward an appointment or meeting |
+| <code>Alt+H,O,C</code> | Add shared calendars from your contacts, or create a new calendar |
+| <code>Alt+H,O,D</code> | Show today in the calendar |
+| <code>Alt+H,P,O</code> | Publish a calendar online |
+| <code>Alt+H,S,C</code> | Share a calendar with others |
+| <code>Alt+H,S,V or Ctrl+Alt+5</code> | Show the selected schedule in a horizontal layout if you want to compare calendars to schedule meetings |
+| <code>Alt+H,X</code> | Show the next seven days |
+| <code>Alt+Home</code> | Go to the start of the week |
+| <code>Alt+O</code> | Open an appointment when the reminder appears |
+| <code>Alt+Page down</code> | Go to the next month |
+| <code>Alt+Page up</code> | Go to the previous month |
+| <code>Alt+S</code> | Snooze the reminder |
+| <code>Alt+Up</code> | Go to the previous week |
+| <code>Alt+V,M</code> | Open the reminder window |
+| <code>Alt+X</code> | Open the calendar scheduling assistant from the meeting window |
+| <code>Ctrl+Alt+2</code> | Switch to the Work Week view |
+| <code>Ctrl+Comma (,) or Ctrl+Shift+Comma (,)</code> | Go to the previous appointment |
+| <code>Ctrl+E</code> | Jump to Search |
+| <code>Ctrl+G or Alt+H+L</code> | Go to a date |
+| <code>Ctrl+G</code> | Set up recurrence for an open appointment or meeting |
+| <code>Ctrl+Left</code> | Go to the previous day |
+| <code>Ctrl+N</code> | Create an appointment (when in the Calendar view) |
+| <code>Ctrl+Period (.) or Ctrl+Shift+Period (.)</code> | Go to the next appointment |
+| <code>Ctrl+R</code> | Reply to a meeting request with a message |
+| <code>Ctrl+Right</code> | Go to the next day |
+| <code>Ctrl+Shift+A</code> | Create an appointment (in any Outlook view) |
+| <code>Ctrl+Shift+Q or Alt+H,M,R</code> | Create a meeting request |
+| <code>Ctrl+Shift+R</code> | Select the Reply All option |</p>
+<h2 id="create-an-item-or-file">Create an Item or File</h2>
+<p>| <code>Ctrl+Shift+A</code> | Create an appointment |
+| <code>Ctrl+Shift+C</code> | Create a contact |
+| <code>Ctrl+Shift+E</code> | Create a folder |
+| <code>Ctrl+Shift+H</code> | Create a Microsoft Office document |
+| <code>Ctrl+Shift+K</code> | Create a task |
+| <code>Ctrl+Shift+L</code> | Create a contact group |
+| <code>Ctrl+Shift+M</code> | Create a message |
+| <code>Ctrl+Shift+N</code> | Create a note |
+| <code>Ctrl+Shift+P</code> | Create a Search folder |
+| <code>Ctrl+Shift+Q</code> | Create a meeting request |
+| <code>Ctrl+Shift+S</code> | Post to the selected folder |
+| <code>Ctrl+Shift+X</code> | Create a fax |
+| <code>Ctrl+T</code> | Post a reply in the selected folder |</p>
+<h2 id="format-text">Format Text</h2>
+<p>| <code>Alt+O</code> | Display the Format Text tab on the ribbon |
+| <code>Ctrl+B</code> | Apply bold formatting |
+| <code>Ctrl+C or Ctrl+Insert</code> | Copy a selection |
+| <code>Ctrl+E</code> | Center text |
+| <code>Ctrl+I</code> | Apply italic formatting |
+| <code>Ctrl+K</code> | Insert a hyperlink |
+| <code>Ctrl+L</code> | Left-align a paragraph |
+| <code>Ctrl+Left bracket ([) or Ctrl+Shift+Less-than sign (&lt;)</code> | Decrease the font size |
+| <code>Ctrl+Q</code> | Remove paragraph formatting |
+| <code>Ctrl+R</code> | Right-align a paragraph |
+| <code>Ctrl+Right bracket (]) or Ctrl+Shift+Greater-than sign (&gt;)</code> | Increase the font size |
+| <code>Ctrl+Shift+H</code> | Delete the next word |
+| <code>Ctrl+Shift+J</code> | Justify text (Stretch a paragraph to fit between the margins} |
+| <code>Ctrl+Shift+K</code> | Toggle the case of the selected text between small caps and all caps |
+| <code>Ctrl+Shift+L</code> | Add a bulleted list |
+| <code>Ctrl+Shift+P</code> | Display the Font dialog box |
+| <code>Ctrl+Shift+S</code> | Apply styles |
+| <code>Ctrl+Shift+T</code> | Decrease indent |
+| <code>Ctrl+Shift+T</code> | Reduce a hanging indent |
+| <code>Ctrl+Shift+Z or Ctrl+Spacebar</code> | Clear the formatting |
+| <code>Ctrl+T</code> | Create a hanging indent |
+| <code>Ctrl+T</code> | Increase indent |
+| <code>Ctrl+U</code> | Underline text |
+| <code>Ctrl+V or Shift+Insert</code> | Paste the copied or cut selection |
+| <code>Ctrl+X or Shift+Delete</code> | Cut a selection |
+| <code>Shift+F3</code> | Switch the case of the first letter in a selected word or line |</p>
+<h2 id="frequently-used">Frequently Used</h2>
+<p>| <code>Alt+H</code> | Go to the Home tab |
+| <code>Alt+H,F,W</code> | Forward a message |
+| <code>Alt+H,M,V, and select a folder from the list</code> | Move an item to a folder |
+| <code>Alt+H,R,A</code> | Select the Reply All option |
+| <code>Alt+H,R,P</code> | Reply to a message |
+| <code>Alt+J,A,2,A,V</code> | Open the Save As dialog box on the Attachment tab |
+| <code>Alt+J,S</code> | Go to the Send/Receive tab |
+| <code>Alt+N,A,F</code> | Insert a file |
+| <code>Alt+S</code> | Send a message |
+| <code>Ctrl+2</code> | Go to Calendar |
+| <code>Ctrl+C or Ctrl+Insert</code> | Copy an item |
+| <code>Ctrl+E or F3</code> | Search for an item |
+| <code>Ctrl+M or F9</code> | Check for new messages |
+| <code>Ctrl+Shift+A</code> | Create an appointment |
+| <code>Ctrl+Shift+K</code> | New task |
+| <code>Ctrl+Shift+M</code> | Create a new message |
+| <code>Delete</code> | Delete an item (when a message, task, or meeting is selected) |</p>
+<h2 id="mail-folder-pane">Mail - Folder Pane</h2>
+<p>| <code>Shift+F10,D</code> | Delete a selected folder in the list (default folders, such as Inbox, Outbox, Drafts, and Sent cannot be deleted) |</p>
+<h2 id="mail-folder-pane_1">Mail Folder Pane</h2>
+<p>| <code>F2</code> | Rename a selected folder in the list of folders |
+| <code>Left</code> | Collapse a selected group or folder with subfolders |
+| <code>Right</code> | Expand a selected group or folder with subfolders |
+| <code>Shift+F10,N</code> | Create a new folder |
+| <code>Spacebar or Enter</code> | Move to the Message list from the Folder pane |
+| <code>Spacebar or Enter</code> | Open a selected item in the Folder pane |
+| <code>Up and Down</code> | Move around within the Folder pane |</p>
+<h2 id="mail-message-list">Mail Message List</h2>
+<p>| <code>Alt+Enter</code> | Show email properties |
+| <code>Alt+H+D</code> | Delete a message |
+| <code>Alt+H,F,W</code> | Forward a message |
+| <code>Alt+H,J,O</code> | Set the junk mail options |
+| <code>Alt+H,R,A</code> | Select the Reply All option |
+| <code>Alt+H,R,P</code> | Reply to a message |
+| <code>Alt+H,X</code> | Ignore a message |
+| <code>Alt+J,S,M,C</code> | Mark an item to download a copy |
+| <code>Alt+J,S,M,T</code> | Mark an item to download |
+| <code>Alt+J,S,U,K</code> | Unmark all items to download |
+| <code>Alt+J,S,U,U</code> | Unmark an item to download |
+| <code>Ctrl+Alt+S</code> | Set how often Outlook checks for new messages |
+| <code>Ctrl+P</code> | Print a message |
+| <code>Ctrl+Q</code> | Mark a message as read |
+| <code>Ctrl+Shift+G</code> | Add Custom Flag to message |
+| <code>Ctrl+Shift+S</code> | Post to a folder |
+| <code>Ctrl+Shift+V</code> | Move message to folder |
+| <code>Ctrl+Shift+W</code> | Display a blocked content menu |
+| <code>Ctrl+Shift+W,P</code> | Download blocked pictures or images |
+| <code>Ctrl+Shift+Y</code> | Copy item to a folder |
+| <code>Ctrl+Spacebar</code> | Select or cancel selection of the active item |
+| <code>Ctrl+U</code> | Mark a message as unread |
+| <code>Ctrl+Up or Ctrl+Down</code> | Go to the next or previous item without extending the selection |
+| <code>Ctrl+Up or Down, and then, to select each message, press Spacebar</code> | Select multiple non-adjacent messages |
+| <code>Down and Up</code> | Move down and up in the message list |
+| <code>Enter</code> | Open a message |
+| <code>Left</code> | Collapse groups of messages (for example, Last Week) |
+| <code>Page down</code> | Go to the item at the bottom of the screen |
+| <code>Page up</code> | Go to the item at the top of the screen |
+| <code>Right</code> | Expand groups of messages (for example, Last Week) |
+| <code>Shift+Down or Up</code> | Select multiple adjacent messages |
+| <code>Shift+F10,J,then the Up or Down, and then Enter</code> | Mark message as junk or not junk |
+| <code>Shift+F10,U,T (in Narrator, Insert)</code> | Add Follow Up or Quick Flag to message |
+| <code>Shift+Up or Shift+Down</code> | Extend or reduce the selected items by one item |</p>
+<h2 id="mail-reading-pane">Mail Reading Pane</h2>
+<p>| <code>Alt+R</code> | Jump to the Reply button |
+| <code>Alt+Up or Ctrl+Comma (,), or Alt+Page up</code> | Go to the previous message |
+| <code>Ctrl+Shift+W</code> | In an email message, select the InfoBar and, if available, show the options menu |
+| <code>Esc</code> | Close the InfoBar menu |
+| <code>Shift+Spacebar</code> | Page up through text |
+| <code>Shift+Tab</code> | Move to previous field |
+| <code>Spacebar</code> | Page down through text |
+| <code>Tab key or Shift+Tab</code> | Move to the next or previous link |
+| <code>Tab key</code> | Move to the next field |</p>
+<h2 id="mail">Mail</h2>
+<p>| <code>Alt+Enter</code> | Show the properties for the selected item |
+| <code>Alt+J,S,M,T</code> | Check the Mark for download status |
+| <code>Alt+J,S,P (when a Send/Receive is in progress)</code> | Display the Send/Receive progress |
+| <code>Alt+J,S,S</code> | Start a send/receive action |
+| <code>Alt+S</code> | Send a message |
+| <code>Ctrl+Alt+F</code> | Forward a message as an attachment |
+| <code>Ctrl+Alt+J</code> | Mark a message as not junk |
+| <code>Ctrl+Alt+M</code> | Mark an item for download |
+| <code>Ctrl+Alt+P</code> | Open the MailTip in the composed message |
+| <code>Ctrl+Alt+R</code> | Reply with a meeting request |
+| <code>Ctrl+Alt+S</code> | Define Send/Receive groups |
+| <code>Ctrl+Enter</code> | Send a message |
+| <code>Ctrl+F</code> | Forward a message |
+| <code>Ctrl+K</code> | Check names |
+| <code>Ctrl+M or F9</code> | Check for new messages |
+| <code>Ctrl+N</code> | Create a message (when in Mail view) |
+| <code>Ctrl+O</code> | Open a received message |
+| <code>Ctrl+P</code> | Print an item |
+| <code>Ctrl+Q</code> | Mark a message as read |
+| <code>Ctrl+R</code> | Reply to a message |
+| <code>Ctrl+S</code> | Save an item |
+| <code>Ctrl+Shift+B</code> | Open the Address Book |
+| <code>Ctrl+Shift+D</code> | Delete and ignore a conversation |
+| <code>Ctrl+Shift+G</code> | Display the Flag for follow up dialog box |
+| <code>Ctrl+Shift+I</code> | Display blocked external content (in a message) |
+| <code>Ctrl+Shift+I</code> | Switch to Inbox |
+| <code>Ctrl+Shift+M</code> | Create a message (from any Outlook view) |
+| <code>Ctrl+Shift+N</code> | Apply Normal style |
+| <code>Ctrl+Shift+O</code> | Switch to Outbox |
+| <code>Ctrl+Shift+R</code> | Select the Reply to All option |
+| <code>Ctrl+Shift+S</code> | Post to a folder |
+| <code>Ctrl+U</code> | Mark a message as unread |
+| <code>Down</code> | Go to the next message |
+| <code>F12</code> | Open the Save as dialog box |
+| <code>F4</code> | Find or replace text |
+| <code>Insert</code> | Add a Quick flag to an unopened message |
+| <code>Shift+F4</code> | Find the next item |
+| <code>Shift+F9</code> | Start a send/receive action for the current folder, retrieving full items (header, item, and any attachments) |
+| <code>Up</code> | Go to the previous message |</p>
+<h2 id="search">Search</h2>
+<p>| <code>Ctrl+Alt+A</code> | Expand the search to include All Mail Items, All Calendar Items, or All Contact Items, depending on the module you are in |
+| <code>Ctrl+Alt+K</code> | Expand search to include items from the current folder |
+| <code>Ctrl+Alt+Z</code> | Expand search to include subfolders |
+| <code>Ctrl+E or F3</code> | Go to the Search field to find a message or another item |
+| <code>Ctrl+H</code> | Find and replace text, symbols, or some formatting commands when in the Reading pane or in an open item |
+| <code>Ctrl+Shift+F</code> | Use Advanced Find |
+| <code>Ctrl+Shift+P</code> | Create a Search folder |
+| <code>Esc</code> | Clear the search results |
+| <code>F4</code> | Search for text within an open item |</p>
+<h2 id="tasks">Tasks</h2>
+<p>| <code>Ctrl+A</code> | Select all items |
+| <code>Ctrl+C</code> | Accept a task request |
+| <code>Ctrl+D</code> | Decline a task request |
+| <code>Ctrl+D</code> | Delete selected item |
+| <code>Ctrl+E</code> | Find a task or other item |
+| <code>Ctrl+F</code> | Forward a task as an attachment |
+| <code>Ctrl+N</code> | Create a task when in Tasks view |
+| <code>Ctrl+O</code> | Open the selected item |
+| <code>Ctrl+P</code> | Print the selected item |
+| <code>Ctrl+Shift+Alt+U</code> | Create a task request |
+| <code>Ctrl+Shift+K</code> | Create a task from any Outlook view |
+| <code>Ctrl+Y</code> | Open the Go to Folder dialog box |
+| <code>Ctrl+Z</code> | Undo the last action |
+| <code>F6</code> | Switch between the Folder pane, Tasks list, and To-Do bar |
+| <code>Insert</code> | Flag an item or mark complete |</p>
+<h2 id="use-flags">Use Flags</h2>
+<p>| <code>Ctrl+Shift+G</code> | Open the Flag for Follow Up dialog box to assign a flag |</p>
+<h1 id="slack">Slack</h1>
+<p>| <code>+ (Plus) OR A</code> | Show invite list during call |
+| <code>:[Character]</code> | Show autocomplete options for emoji |
+| <code>@[Character]</code> | Show autocomplete options for display names |
+| <code>@[username]</code> | Notify specific person |
+| <code>@channel</code> | Notify all members of channel, whether they're active or not |
+| <code>@everyone</code> | Notify all members of channel #general |
+| <code>@here</code> | Notify active members of channel |
+| <code>ALT+DownArrow</code> | Jump to next channel or DM |
+| <code>ALT+SHIFT+DownArrow</code> | Jump to next unread channel or DM |
+| <code>ALT+SHIFT+UpArrow</code> | Jump to previous unread channel or DM |
+| <code>ALT+UpArrow</code> | Jump to previous channel or DM |
+| <code>ALT+click message</code> | Mark message as oldest unread message |
+| <code>CTRL+,</code> | Open Preferences |
+| <code>CTRL+.</code> | Toggle right-hand pane |
+| <code>CTRL+/</code> | Open Keyboard Shortcuts pane |
+| <code>CTRL+ALT</code> | Show numbers assigned to workspaces in sidebar |
+| <code>CTRL+B</code> | Bold selected text |
+| <code>CTRL+F</code> | Search the current channel or DM |
+| <code>CTRL+I</code> | Italicize selected text |
+| <code>CTRL+K</code> | Open Quick Switcher |
+| <code>CTRL+SHIFT+7</code> | Format selected text as numbered list |
+| <code>CTRL+SHIFT+8</code> | Format selected text as bulleted list |
+| <code>CTRL+SHIFT+&gt;</code> | Indent selected text |
+| <code>CTRL+SHIFT+A</code> | Open All Unreads view |
+| <code>CTRL+SHIFT+C</code> | Format selected text as inline code |
+| <code>CTRL+SHIFT+Enter</code> | Create snippet in current channel or DM |
+| <code>CTRL+SHIFT+I</code> | Open Channel Details pane |
+| <code>CTRL+SHIFT+K</code> | Browse DMs |
+| <code>CTRL+SHIFT+L</code> | Browse channel list |
+| <code>CTRL+SHIFT+M</code> | Open Activity pane |
+| <code>CTRL+SHIFT+S</code> | Open Starred Items pane |
+| <code>CTRL+SHIFT+T</code> | Open Threads view |
+| <code>CTRL+SHIFT+W</code> | Open Workspace Directory |
+| <code>CTRL+SHIFT+X</code> | Strike through selected text |
+| <code>CTRL+SHIFT+Y</code> | Set or edit your Slack status |
+| <code>CTRL+SHIFT+[</code> | Switch to previous workspace |
+| <code>CTRL+SHIFT+]</code> | Switch to next workspace |
+| <code>CTRL+U</code> | Upload file to current channel or DM |
+| <code>CTRL+[Number]</code> | Switch to specific workspace |
+| <code>ESC</code> | Mark all messages in current channel or DM as read |
+| <code>SHIFT+DownArrow</code> | Select text to end of current line in message draft |
+| <code>SHIFT+ESC</code> | Mark all messages as read |
+| <code>SHIFT+Enter</code> | Insert new line in message draft |
+| <code>SHIFT+UpArrow</code> | Select text to beginning of current line in message draft |
+| <code>UpArrow</code> | Edit your last message in current channel or DM |
+| <code>#[Character]</code> | Show autocomplete options for channel names |
+| <code>e+(1-9)</code> | View and select emoji during call |
+| <code>m</code> | Toggle mute during call |
+| <code>v</code> | Toggle video during call |</p>
+<h1 id="vs-code">VS Code</h1>
+<p>| <code>CTRL+K V</code> | Markdown editing - Show text and preview side-by-side. |
+| <code>SHIFT+CTRL+K</code> | Markdown editing - Switch between text and preview. |</p>
+<h1 id="windows">Windows</h1>
+<p>| <code>CTRL-SHIFT-ESCAPE</code> | Task Manager |
+| <code>WIN-X</code> | Quick Link Menu |</p>
+<h1 id="bash-bang-shortcuts">Bash Bang Shortcuts</h1>
+<h2 id="command-control-shortcuts">Command Control Shortcuts</h2>
+<p>Command Recall Shortcuts</p>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: December 10, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

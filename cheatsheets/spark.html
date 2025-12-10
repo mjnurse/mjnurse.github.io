@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Spark Cheatsheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>Spark Cheatsheet</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>Spark Cheatsheet</h1>
+<h1 id="client-cluster-mode">Client / Cluster Mode</h1>
+<p>Cluster mode create an Application Monitor container in the cluster.  Client mode run the application locally.</p>
+<h1 id="data-frame-api-categories">Data Frame API Categories</h1>
+<h2 id="transformations">Transformations</h2>
+<h3 id="narrow-dependency">Narrow Dependency</h3>
+<p>Performed in parallel on partitions eg. <code>select()</code>, <code>filter()</code>, <code>drop()</code>, <code>withColumn()</code></p>
+<h3 id="wide-dependency">Wide Dependency</h3>
+<p>Performed after grouping data from multiple partitions eg. <code>groupBy()</code>, <code>join()</code>, <code>cube()</code>, <code>rollup()</code>, <code>agg()</code>, <code>repartition()</code></p>
+<h2 id="actions">Actions</h2>
+<p>Trigger a job eg. <code>read()</code>, <code>write()</code>, <code>collect()</code>, <code>take()</code>, <code>count()</code></p>
+<h2 id="job-execution-plans">Job Execution Plans</h2>
+<p>Logical execution plans are broken by wide dependencies -&gt; stages - these are separated by shuffle/sorts.</p>
+<p>If an executor has multiple cores then we call these multiple slots.  Each slot can process a partition.</p>
+<h1 id="memory-allocation">Memory Allocation</h1>
+<h2 id="spark-driver">Spark Driver</h2>
+<p><code>spark.driver.memory</code> - this is the memory allocated to the Spark driver.</p>
+<p><code>spark.driver.memoryOverhead</code> - Container process or other none JVM processes in the container.  This is a percentage and the minimum allocated is <code>max(spark.driver.memoryOverhead * spark.driver.memory, 384MB)</code>.</p>
+<h1 id="pyspark">PySpark</h1>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Dataframe to JSON (string)</span>
+<span class="n">jsonStrings</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">toJSON</span><span class="p">()</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+
+<span class="c1"># Dataframe to list</span>
+<span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="o">.</span><span class="n">asDict</span><span class="p">()</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">collect</span><span class="p">()]</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">:</span>
+      <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+
+<span class="c1"># Create dataframe from list - need to define schema</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
+
+<span class="c1"># Get the schema definition for a dataframe</span>
+<span class="n">schema</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">schema</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">schema</span><span class="p">)</span>
+</code></pre></div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: November 25, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

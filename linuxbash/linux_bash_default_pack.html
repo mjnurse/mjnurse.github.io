@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Linux bash default Pack" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>Linux bash default Pack</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>Linux bash default Pack</h1>
+<p>Packs contain bash scripts which have been compressed and converted to a
+base64 string.  This is a convenient wat to copy a set of bash scripts
+into a linux environment using only a command line terminal.</p>
+<script>
+  let packText=`# --------------------------------------------------------------------------------------------------
+# CONTENTS: calc, cls, file-watch-do
+# --------------------------------------------------------------------------------------------------
+# FILE: calc 
+# --------------------------------------------------------------------------------------------------
+echo 'H4sIAAAAAAACA41TXVPiMBR9z6+4xjoIIwbYfVq2zojrKOP6MYJP6jL9CDZrmzJJirjIf9+blhZxFH3INLk959x7T262t5
+gvJPM9HZGIx5OR4TPjUnJxeH5MAAIvDqAJR2mSeDKEWEiex7LYM6ki5GZweFLhbtOJEanU9/CzxODxgJDLq2H/8mKAuGb00mzaPL
+gHGETpE9gT2Kz7xAIEAoQ0XHmBEVOe4357mQwi8CS8+gO7flB/VUxB10jX4h/XOfEolVOuDMgs8bkCk8JZbw/OcZ3gGuK66iHv1/
+Hg6LqfF4m0vgQTrdrEFiDTUJvVYJwqSLLYiEn8vIdBDjVVRC1hovhUpAhVXCMIdQ9vhqeX1yiZ/JWZ0nw/5FN0s9PqtAgt7LaOuv
+QDfyl54v4o5Dr4DDfxgsdRwm2XLg352MMCKCFGPbt0qJ7Bmbe2txtsgRdQdJEqjmbiNsk7pMQkE5c682oGEJ5f7oKSTHsP3HV2eR
+ClQG/s6QcqImNnZ3m1jQWFFzAKmiHQO2kPmuNWM4AGA/ZA64SIMdzeAnXaFFwXKIX7+651TqJDhbYzz3NhzlUEeyjOM2GgTcaCEO
+v0CF3GgncDzwDDUpi1o06rJCXmnVwVvZWrPUUi5lVlWxU6TPPBxlt22uhVPlDV/NbzY1VlZRst41jtctvtFtQ3k10q+PjA4jfQao
+rX0/QAfe/QtdhZD2PLq9HoAXc7XQSxdqvz3V5DLl9f55xv4GwknnxG3Mgefom9UeLq6xIf6PiKe4/rdjdKl+1zwBdlxypP4TRWcz
+xjdw320AWcaFZ8FXPm5Sgt7ISXKYr3v1JZyi61apr9YUXt37oMau93WpFccAq99YErYhQOVsP/UYNce/afjsTYkDCVnJD/1Oy/0P
+YFAAA=
+' | base64 -d | gunzip > calc; chmod u+x calc
+# --------------------------------------------------------------------------------------------------
+# FILE: cls 
+# --------------------------------------------------------------------------------------------------
+echo 'H4sIAAAAAAACA5WQvU7DMBRG9/sUF3fIAmkhE0OGqFRQJFrUnwmkyHGuVVPbiewbQt8eI5CYkMp6pO/o6JtcTBvjp42MBz
+iQ7WumDy4FrKqnBSAqG/EK55ZkQKbgjJcWpW+xH5hPv6gZtKYAsN9W9z87gLvFdr5ZPu+W61VC50pygGq/e1hv0sa9+SFEylt6Tx
+k3s+tbEN+Z1ngqxblOASM1dUtR/XvYS3WsHbmGQinSTUbFy5a0HCwLgAm2HUWfMUo7ylPEsQtH1CZERjaOMHRDcscOeTSKcuiD8a
+wxe50VxUvxmIH6KvkLfwKk3vGFngEAAA==
+' | base64 -d | gunzip > cls; chmod u+x cls
+# --------------------------------------------------------------------------------------------------
+# FILE: file-watch-do 
+# --------------------------------------------------------------------------------------------------
+echo 'H4sIAAAAAAACA61UXW/aMBR996+4M6lokUJK39Y1TKhDXR9aKj60B0AoJM7iLXEix5RWK/99104IkHZapZIXO+ece33uvU
+4an5wlF87SyyMSsThbKPakXErue3d9AhDymNlrT/mRHaRgww+9Bc/gcJpKCLhkvkrl8xl4IgDmIa14woAr4DkkacBDzgKQK4Fhfp
+okKGsTMhn1bl4fcGXyCi9hXbgqxV2YbreQeRI5xWTenRPyrT+6Ht4+jG8H95jp/dZUxAoVikr9mquIC8NUYdo/5v1nCb3J+PtgqB
+W/xErmrB2wR2zRxXnnM6FFM2MumEsPnL2/S5Ss2XIRsNz/aJ7M838vEpYsmXRpwEJvFStKiO6za/05d2btmbMhSj67dIx1Ny3NgB
+01IcQWJanEAwRuE0/xVGBkA26YglXu/cROyjSB6uq0iUExbQU1Gi0z7U1FmfXkZGBGN2q9Ih56Q7x+4/7wDW5v6HXScaZWcyZmsj
+mvMWgBALYgnejlEkpygwXxEKZToFaHgusCtW3tnsLLyx4WHb5/pTCff9FXRuAdAOZHKZJV1dSAT1yRkO/yXxSxb4YaM3QPwIEcZt
+GDXxRT65A84qEimWSPC4MHnkL8VC9gSwyv1PSMmIzWoZjshdWYdaSv2BQ6gDaDVJsooek2sdYVxdSCi9qKIHzymLEMOuXb/52iKE
+gF02u9tp2/ske7XtkfeHYtr1WCHzMMV+ISHbboEc+yWsc2TtEmXKdJFuPPkR45OzHzIH8BkfhVnSoGAAA=
+' | base64 -d | gunzip > file-watch-do; chmod u+x file-watch-do
+`;
+</script>
+
+<h2 id="contents">Contents</h2>
+<div class="codehilite"><pre><span></span><code><span class="nv">c</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">calc</span>:<span class="w">                </span><span class="nv">Command</span><span class="w"> </span><span class="nv">line</span><span class="w"> </span><span class="nv">calculator</span><span class="w"> </span>
+<span class="w">    </span><span class="nv">cls</span>:<span class="w">                 </span><span class="nv">Clear</span><span class="w"> </span><span class="nv">terminal</span><span class="w"> </span><span class="nv">and</span><span class="w"> </span><span class="nv">putty</span><span class="w"> </span><span class="nv">terminal</span><span class="w"> </span><span class="nv">buffer</span><span class="w"> </span>
+<span class="nv">f</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">file</span><span class="o">-</span><span class="nv">watch</span><span class="o">-</span><span class="k">do</span>:<span class="w">       </span><span class="nv">Watch</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nv">file</span><span class="w"> </span><span class="nv">and</span><span class="w"> </span><span class="nv">each</span><span class="w"> </span><span class="nv">time</span><span class="w"> </span><span class="nv">it</span><span class="w"> </span><span class="nv">is</span><span class="w"> </span><span class="nv">modified</span><span class="w"> </span><span class="nv">run</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nv">command</span><span class="w"> </span>
+</code></pre></div>
+
+<p><button onCLick='copyToClipboard(packText)'>Copy To Clipboard</button></p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># --------------------------------------------------------------------------------------------------</span>
+<span class="c1"># CONTENTS: calc, cls, file-watch-do</span>
+<span class="c1"># --------------------------------------------------------------------------------------------------</span>
+<span class="c1"># FILE: calc </span>
+<span class="c1"># --------------------------------------------------------------------------------------------------</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;H4sIAAAAAAACA41TXVPiMBR9z6+4xjoIIwbYfVq2zojrKOP6MYJP6jL9CDZrmzJJirjIf9+blhZxFH3INLk959x7T262t5</span>
+<span class="s1">gvJPM9HZGIx5OR4TPjUnJxeH5MAAIvDqAJR2mSeDKEWEiex7LYM6ki5GZweFLhbtOJEanU9/CzxODxgJDLq2H/8mKAuGb00mzaPL</span>
+<span class="s1">gHGETpE9gT2Kz7xAIEAoQ0XHmBEVOe4357mQwi8CS8+gO7flB/VUxB10jX4h/XOfEolVOuDMgs8bkCk8JZbw/OcZ3gGuK66iHv1/</span>
+<span class="s1">Hg6LqfF4m0vgQTrdrEFiDTUJvVYJwqSLLYiEn8vIdBDjVVRC1hovhUpAhVXCMIdQ9vhqeX1yiZ/JWZ0nw/5FN0s9PqtAgt7LaOuv</span>
+<span class="s1">QDfyl54v4o5Dr4DDfxgsdRwm2XLg352MMCKCFGPbt0qJ7Bmbe2txtsgRdQdJEqjmbiNsk7pMQkE5c682oGEJ5f7oKSTHsP3HV2eR</span>
+<span class="s1">ClQG/s6QcqImNnZ3m1jQWFFzAKmiHQO2kPmuNWM4AGA/ZA64SIMdzeAnXaFFwXKIX7+651TqJDhbYzz3NhzlUEeyjOM2GgTcaCEO</span>
+<span class="s1">v0CF3GgncDzwDDUpi1o06rJCXmnVwVvZWrPUUi5lVlWxU6TPPBxlt22uhVPlDV/NbzY1VlZRst41jtctvtFtQ3k10q+PjA4jfQao</span>
+<span class="s1">rX0/QAfe/QtdhZD2PLq9HoAXc7XQSxdqvz3V5DLl9f55xv4GwknnxG3Mgefom9UeLq6xIf6PiKe4/rdjdKl+1zwBdlxypP4TRWcz</span>
+<span class="s1">xjdw320AWcaFZ8FXPm5Sgt7ISXKYr3v1JZyi61apr9YUXt37oMau93WpFccAq99YErYhQOVsP/UYNce/afjsTYkDCVnJD/1Oy/0P</span>
+<span class="s1">YFAAA=</span>
+<span class="s1">&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-d<span class="w"> </span><span class="p">|</span><span class="w"> </span>gunzip<span class="w"> </span>&gt;<span class="w"> </span>calc<span class="p">;</span><span class="w"> </span>chmod<span class="w"> </span>u+x<span class="w"> </span>calc
+<span class="c1"># --------------------------------------------------------------------------------------------------</span>
+<span class="c1"># FILE: cls </span>
+<span class="c1"># --------------------------------------------------------------------------------------------------</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;H4sIAAAAAAACA5WQvU7DMBRG9/sUF3fIAmkhE0OGqFRQJFrUnwmkyHGuVVPbiewbQt8eI5CYkMp6pO/o6JtcTBvjp42MBz</span>
+<span class="s1">iQ7WumDy4FrKqnBSAqG/EK55ZkQKbgjJcWpW+xH5hPv6gZtKYAsN9W9z87gLvFdr5ZPu+W61VC50pygGq/e1hv0sa9+SFEylt6Tx</span>
+<span class="s1">k3s+tbEN+Z1ngqxblOASM1dUtR/XvYS3WsHbmGQinSTUbFy5a0HCwLgAm2HUWfMUo7ylPEsQtH1CZERjaOMHRDcscOeTSKcuiD8a</span>
+<span class="s1">wxe50VxUvxmIH6KvkLfwKk3vGFngEAAA==</span>
+<span class="s1">&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-d<span class="w"> </span><span class="p">|</span><span class="w"> </span>gunzip<span class="w"> </span>&gt;<span class="w"> </span>cls<span class="p">;</span><span class="w"> </span>chmod<span class="w"> </span>u+x<span class="w"> </span>cls
+<span class="c1"># --------------------------------------------------------------------------------------------------</span>
+<span class="c1"># FILE: file-watch-do </span>
+<span class="c1"># --------------------------------------------------------------------------------------------------</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;H4sIAAAAAAACA61UXW/aMBR996+4M6lokUJK39Y1TKhDXR9aKj60B0AoJM7iLXEix5RWK/99104IkHZapZIXO+ece33uvU</span>
+<span class="s1">4an5wlF87SyyMSsThbKPakXErue3d9AhDymNlrT/mRHaRgww+9Bc/gcJpKCLhkvkrl8xl4IgDmIa14woAr4DkkacBDzgKQK4Fhfp</span>
+<span class="s1">okKGsTMhn1bl4fcGXyCi9hXbgqxV2YbreQeRI5xWTenRPyrT+6Ht4+jG8H95jp/dZUxAoVikr9mquIC8NUYdo/5v1nCb3J+PtgqB</span>
+<span class="s1">W/xErmrB2wR2zRxXnnM6FFM2MumEsPnL2/S5Ss2XIRsNz/aJ7M838vEpYsmXRpwEJvFStKiO6za/05d2btmbMhSj67dIx1Ny3NgB</span>
+<span class="s1">01IcQWJanEAwRuE0/xVGBkA26YglXu/cROyjSB6uq0iUExbQU1Gi0z7U1FmfXkZGBGN2q9Ih56Q7x+4/7wDW5v6HXScaZWcyZmsj</span>
+<span class="s1">mvMWgBALYgnejlEkpygwXxEKZToFaHgusCtW3tnsLLyx4WHb5/pTCff9FXRuAdAOZHKZJV1dSAT1yRkO/yXxSxb4YaM3QPwIEcZt</span>
+<span class="s1">GDXxRT65A84qEimWSPC4MHnkL8VC9gSwyv1PSMmIzWoZjshdWYdaSv2BQ6gDaDVJsooek2sdYVxdSCi9qKIHzymLEMOuXb/52iKE</span>
+<span class="s1">gF02u9tp2/ske7XtkfeHYtr1WCHzMMV+ISHbboEc+yWsc2TtEmXKdJFuPPkR45OzHzIH8BkfhVnSoGAAA=</span>
+<span class="s1">&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-d<span class="w"> </span><span class="p">|</span><span class="w"> </span>gunzip<span class="w"> </span>&gt;<span class="w"> </span>file-watch-do<span class="p">;</span><span class="w"> </span>chmod<span class="w"> </span>u+x<span class="w"> </span>file-watch-do
+</code></pre></div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: November 25, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

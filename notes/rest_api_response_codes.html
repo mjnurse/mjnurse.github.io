@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="REST API Response Codes" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>REST API Response Codes</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>REST API Response Codes</h1>
+<p>Here is a list of the most common response codes:</p>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Meaning</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>200</strong></td>
+<td>OK</td>
+<td>The request was successful and the response contains the requested data.</td>
+</tr>
+<tr>
+<td><strong>201</strong></td>
+<td>Created</td>
+<td>The request was successful, and a new resource was created.</td>
+</tr>
+<tr>
+<td><strong>202</strong></td>
+<td>Accepted</td>
+<td>The request was accepted for processing but not completed yet.</td>
+</tr>
+<tr>
+<td><strong>204</strong></td>
+<td>No Content</td>
+<td>The request was successful, but there is no response body.</td>
+</tr>
+<tr>
+<td><strong>205</strong></td>
+<td>Reset Content</td>
+<td>The request was successful; the client should reset the document view.</td>
+</tr>
+<tr>
+<td><strong>400</strong></td>
+<td>Bad Request</td>
+<td>The request is malformed or invalid (e.g., incorrect JSON, missing fields).</td>
+</tr>
+<tr>
+<td><strong>401</strong></td>
+<td>Unauthorized</td>
+<td>Authentication is required but missing or invalid.</td>
+</tr>
+<tr>
+<td><strong>403</strong></td>
+<td>Forbidden</td>
+<td>The request is understood, but the client is not allowed to access the resource.</td>
+</tr>
+<tr>
+<td><strong>404</strong></td>
+<td>Not Found</td>
+<td>The requested resource does not exist.</td>
+</tr>
+<tr>
+<td><strong>405</strong></td>
+<td>Method Not Allowed</td>
+<td>The HTTP method is not supported for this resource.</td>
+</tr>
+<tr>
+<td><strong>408</strong></td>
+<td>Request Timeout</td>
+<td>The server timed out waiting for the client’s request.</td>
+</tr>
+<tr>
+<td><strong>409</strong></td>
+<td>Conflict</td>
+<td>The request conflicts with the current state of the resource (e.g., duplicate record).</td>
+</tr>
+<tr>
+<td><strong>415</strong></td>
+<td>Unsupported Media Type</td>
+<td>The request body format is unsupported (e.g., sending XML when JSON is required).</td>
+</tr>
+<tr>
+<td><strong>429</strong></td>
+<td>Too Many Requests</td>
+<td>The client has sent too many requests in a short time (rate limiting).</td>
+</tr>
+<tr>
+<td><strong>500</strong></td>
+<td>Internal Server Error</td>
+<td>A generic server-side error.</td>
+</tr>
+</tbody>
+</table>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: December 10, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

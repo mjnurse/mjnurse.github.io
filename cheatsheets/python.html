@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Python Cheatsheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>Python Cheatsheet</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>Python Cheatsheet</h1>
+<div class="table-of-contents">
+<h2>Contents</h2>
+<ul>
+<li class="toc-h2"><a href="#strings">Strings</a></li>
+<li class="toc-h2"><a href="#lists">Lists</a></li>
+<li class="toc-h2"><a href="#tuples">Tuples</a></li>
+<li class="toc-h2"><a href="#dictionaries">Dictionaries</a></li>
+<li class="toc-h2"><a href="#loops">Loops</a></li>
+<li class="toc-h2"><a href="#file-handling">File Handling</a></li>
+<li class="toc-h2"><a href="#command-line-parameters">Command Line Parameters</a></li>
+<li class="toc-h2"><a href="#in-line-if">In-line if</a></li>
+<li class="toc-h2"><a href="#useful">Useful</a></li>
+<li class="toc-h2"><a href="#__main__">`__main__`</a></li>
+<li class="toc-h2"><a href="#pretty-print-json">Pretty Print JSON</a></li>
+<li class="toc-h2"><a href="#clear-the-screen">Clear the screen</a></li>
+<li class="toc-h2"><a href="#os-operations">OS Operations</a></li>
+<li class="toc-h2"><a href="#variable-set-of-arguments">Variable Set of Arguments</a></li>
+<li class="toc-h2"><a href="#colours-in-command-line-output">Colours In Command Line Output</a></li>
+</ul>
+</div>
+<h2 id="strings">Strings</h2>
+<div class="codehilite"><pre><span></span><code><span class="n">my_string</span> <span class="o">*</span> <span class="n">n</span> <span class="c1"># Repeat my_string n times</span>
+<span class="n">my_string</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+<span class="n">my_string</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+
+<span class="n">str_pos</span> <span class="o">=</span> <span class="n">my_string</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">str_to_find</span><span class="p">,</span> <span class="n">start_pos</span><span class="p">,</span> <span class="n">end_pos</span><span class="p">)</span> <span class="c1"># default start=0, end=string_length</span>
+
+<span class="s2">&quot;&quot;&quot; - triple quote or triple double quote enclose a multi line string</span>
+</code></pre></div>
+
+<h3 id="string-format-function">String format function</h3>
+<div class="codehilite"><pre><span></span><code><span class="s1">&#39;Hello </span><span class="si">{}</span><span class="s1"> aged </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;Martin&#39;</span><span class="p">,</span> <span class="s1">&#39;21&#39;</span><span class="p">)</span>       <span class="c1"># yields Hello Martin aged 21</span>
+<span class="s1">&#39;Hello </span><span class="si">{1}</span><span class="s1"> aged </span><span class="si">{0}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;21&#39;</span><span class="p">,</span> <span class="s1">&#39;Martin&#39;</span><span class="p">)</span>     <span class="c1"># yields Hello Martin aged 21</span>
+<span class="c1"># float format (use d for integer)</span>
+<span class="s1">&#39;</span><span class="si">{0}</span><span class="s1"> is </span><span class="si">{1:.2f}</span><span class="s1"> tall&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;Martin&#39;</span><span class="p">,</span> <span class="mf">1.849</span><span class="p">)</span>   <span class="c1"># yields Martin is 1.85 tall</span>
+<span class="s1">&#39;</span><span class="si">{0}</span><span class="s1"> is </span><span class="si">{1:.0f}</span><span class="s1"> tall&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;Martin&#39;</span><span class="p">,</span> <span class="mf">1.849</span><span class="p">)</span>   <span class="c1"># yields Martin is 2 tall</span>
+<span class="s1">&#39;</span><span class="si">{0}</span><span class="s1"> is </span><span class="si">{1:10.1f}</span><span class="s1"> tall&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;Martin&#39;</span><span class="p">,</span> <span class="mf">1.849</span><span class="p">)</span> <span class="c1"># yields Martin is      1.9 tall</span>
+<span class="c1"># comma number format</span>
+<span class="s1">&#39;</span><span class="si">{:,}</span><span class="s1"> | </span><span class="si">{:&gt;7,}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="mi">12345</span><span class="p">,</span> <span class="mi">4321</span><span class="p">)</span> <span class="c1"># yields 12,345 |   4,321</span>
+<span class="c1"># padding</span>
+<span class="s1">&#39;|</span><span class="si">{0:10}</span><span class="s1">|</span><span class="si">{1:&gt;10}</span><span class="s1">|</span><span class="si">{2:^10}</span><span class="s1">|&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;lpad&#39;</span><span class="p">,</span><span class="s1">&#39;rpad&#39;</span><span class="p">,</span><span class="s1">&#39;midpad&#39;</span><span class="p">)</span> <span class="c1"># yields |lpad      |      rpad|  midpad  |</span>
+<span class="s1">&#39;</span><span class="si">{0:.^20}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;middle of dots&#39;</span><span class="p">)</span>                       <span class="c1"># yields ...middle of dots...</span>
+<span class="c1"># truncate a string</span>
+<span class="s1">&#39;|</span><span class="si">{0:3.3}</span><span class="s1">|</span><span class="si">{1:6.3}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="s1">&#39;Martin&#39;</span><span class="p">,</span> <span class="s1">&#39;Martin&#39;</span><span class="p">)</span> <span class="c1"># yields |Mar|Mar   |</span>
+</code></pre></div>
+
+<h3 id="regexp">Regexp</h3>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<span class="n">my_name</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">my_str</span><span class="p">,</span> <span class="s1">&#39;.*: ([^ ]*) .*&#39;</span><span class="p">,</span> <span class="s1">&#39;Name: Martin, Age: 18&#39;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">my_name</span> <span class="o">+</span> <span class="s1">&#39;.*&#39;</span><span class="p">,</span> <span class="n">my_str</span><span class="p">):</span>
+<span class="n">new_str</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^[^-]*- &#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="lists">Lists</h2>
+<div class="codehilite"><pre><span></span><code><span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;martin&quot;</span><span class="p">}]</span> <span class="c1"># many types, single list</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="n">my_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">my_list</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;red&#39;</span><span class="p">)</span>    <span class="c1"># insert at position 2</span>
+<span class="k">del</span> <span class="n">my_list</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>              <span class="c1"># remove index 2</span>
+<span class="n">my_list</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>       <span class="c1"># remove the first instance of the value red</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">my_list</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>           <span class="c1"># remove and use last item in the list</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">my_list</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>          <span class="c1"># remove and use first item in the list</span>
+<span class="n">my_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">11</span><span class="p">))</span> <span class="c1"># list of numbers 1 to 10</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="k">if</span> <span class="s1">&#39;martin&#39;</span> <span class="ow">in</span> <span class="n">vips</span><span class="p">:</span>        <span class="c1"># check if item in list</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="n">my_list_2</span> <span class="o">=</span> <span class="n">my_list</span>         <span class="c1"># my_list_2 points to the SAME LIST as my_list</span>
+<span class="n">new_list</span> <span class="o">=</span> <span class="n">my_list</span><span class="p">[:]</span>       <span class="c1"># new list copy of my_list</span>
+<span class="n">new_list</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>  <span class="c1"># can add parameter reverse=True</span>
+<span class="n">my_list</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>              <span class="c1"># can add parameter reverse=True</span>
+<span class="n">my_list</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>           <span class="c1"># reverse items in list</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="nb">sum</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>                <span class="c1"># avg = sum(my_list) / len(my_list)</span>
+<span class="nb">min</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+<span class="nb">max</span><span class="p">(</span><span class="n">my_list</span><span class="p">)</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="c1"># Note the list slices are new list objects. slice [:] is all elements</span>
+<span class="n">my_list</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="s1">&#39;c&#39;</span><span class="p">,</span><span class="s1">&#39;d&#39;</span><span class="p">,</span><span class="s1">&#39;e&#39;</span><span class="p">]</span>
+<span class="n">my_list</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>                 <span class="c1"># yields: [&#39;a&#39;,&#39;b&#39;,&#39;c&#39;] - same a [0:3]</span>
+<span class="n">my_list</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span>                 <span class="c1"># yields: [&#39;d&#39;,&#39;e&#39;] = from pos to end of list</span>
+<span class="n">my_list</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span>                <span class="c1"># yields: [&#39;c&#39;,&#39;d&#39;,&#39;e&#39;]</span>
+<span class="n">my_list</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>                <span class="c1"># yields: [&#39;c&#39;]</span>
+<span class="n">my_list</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>                <span class="c1"># yields: []</span>
+<span class="p">[</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)]</span> <span class="c1"># yields: [1,4,9]</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">:</span> 
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="s1">&#39;orange&#39;</span><span class="p">:</span>          <span class="c1"># loop through characters in string</span>
+</code></pre></div>
+
+<div class="codehilite"><pre><span></span><code><span class="c1"># Sorting dict&#39;s in a list</span>
+<span class="n">my_list</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;name&quot;</span><span class="p">,</span><span class="s2">&quot;tom&quot;</span><span class="p">},{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;bill&quot;</span><span class="p">}]</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">my_key</span><span class="p">(</span><span class="n">a_dict</span><span class="p">):</span> <span class="k">return</span> <span class="n">a_dict</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+<span class="n">my_list</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span> <span class="o">=</span> <span class="n">my_key</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="tuples">Tuples</h2>
+<div class="codehilite"><pre><span></span><code><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">6</span><span class="p">,)</span> <span class="c1"># yields (1,2,3,4,5,6)</span>
+<span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">);</span> <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>    <span class="c1"># yields (1,2)</span>
+</code></pre></div>
+
+<h2 id="dictionaries">Dictionaries</h2>
+<div class="codehilite"><pre><span></span><code><span class="n">d1</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;key&#39;</span><span class="p">,</span><span class="s1">&#39;value&#39;</span><span class="p">}</span>
+<span class="n">d2</span> <span class="o">=</span> <span class="n">d1</span>       <span class="c1"># d2 and d2 both &#39;point&#39; to the same dictionary</span>
+<span class="n">d3</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">d1</span><span class="p">)</span> <span class="c1"># Creates a copy of d1</span>
+</code></pre></div>
+
+<p>Sorting by Key  or Value</p>
+<div class="codehilite"><pre><span></span><code><span class="n">d</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;b&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span>
+<span class="nb">sorted</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>                             <span class="c1"># yields [&#39;a&#39;,&#39;b&#39;]</span>
+<span class="nb">sorted</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span> <span class="c1"># yields [(&#39;b&#39;, 0), (&#39;a&#39;, 1)]</span>
+</code></pre></div>
+
+<h2 id="loops">Loops</h2>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
+</code></pre></div>
+
+<h2 id="file-handling">File Handling</h2>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Read:</span>
+<span class="n">fh</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;hello.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<span class="n">whole_file_str</span> <span class="o">=</span> <span class="n">fh</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">single_line</span> <span class="o">=</span> <span class="n">fh</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+<span class="n">list_of__lines</span> <span class="o">=</span> <span class="n">fh</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+
+<span class="c1"># Write:</span>
+<span class="n">fh</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;hello.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span>
+<span class="n">fh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="n">lines_of_text</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;a line of text&quot;</span><span class="p">,</span> <span class="s2">&quot;another line of text&quot;</span><span class="p">,</span> <span class="s2">&quot;a third line&quot;</span><span class="p">]</span>
+<span class="n">fh</span><span class="o">.</span><span class="n">writelines</span><span class="p">(</span><span class="n">lines_of_text</span><span class="p">)</span>
+
+<span class="c1"># Append:</span>
+<span class="n">fh</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;Hello.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span>
+<span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+
+<span class="c1"># Close:</span>
+<span class="n">fh</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div>
+
+<h2 id="command-line-parameters">Command Line Parameters</h2>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<span class="nb">print</span><span class="p">(</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span> <span class="c1"># The script/program name</span>
+<span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="in-line-if">In-line if</h2>
+<div class="codehilite"><pre><span></span><code><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;lower&#39;</span> <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">b</span> <span class="k">else</span> <span class="s1">&#39;not lower&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="useful">Useful</h2>
+<h2 id="__main__"><code>__main__</code></h2>
+<p>The method main() is only run if this file is being executed rather than imported.  Good for running unit test in a library.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+   <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+
+<h2 id="pretty-print-json">Pretty Print JSON</h2>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">json_var</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="clear-the-screen">Clear the screen</h2>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">os</span><span class="w"> </span><span class="kn">import</span> <span class="n">system</span><span class="p">,</span> <span class="n">name</span> 
+<span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;nt&#39;</span><span class="p">:</span> <span class="c1"># windows </span>
+   <span class="n">_</span> <span class="o">=</span> <span class="n">system</span><span class="p">(</span><span class="s1">&#39;cls&#39;</span><span class="p">)</span> 
+<span class="k">else</span><span class="p">:</span> <span class="c1"># linux etc</span>
+   <span class="n">_</span> <span class="o">=</span> <span class="n">system</span><span class="p">(</span><span class="s1">&#39;clear&#39;</span><span class="p">)</span> 
+</code></pre></div>
+
+<h2 id="os-operations">OS Operations</h2>
+<p>Using the Windows Linux (Ubuntu) sub-system.</p>
+<div class="codehilite"><pre><span></span><code><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="s2">&quot;/mnt/c/...&quot;</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;/mnt/c/MJN/tmp/dme&#39;</span><span class="p">)</span>
+</code></pre></div>
+
+<h2 id="variable-set-of-arguments">Variable Set of Arguments</h2>
+<p>args(*) - delivers a tuple containing a set of (unnamed) values</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">multiply_all</span><span class="p">(</span><span class="o">*</span><span class="n">values</span><span class="p">):</span> 
+   <span class="n">mul</span> <span class="o">=</span> <span class="mi">1</span> 
+   <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">values</span><span class="p">:</span> 
+      <span class="n">mul</span> <span class="o">=</span> <span class="n">mul</span> <span class="o">*</span> <span class="n">i</span> 
+
+   <span class="k">return</span> <span class="n">mul</span> 
+</code></pre></div>
+
+<p>kwargs(*) - delivers a dict containing keywords and values</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">print_details</span><span class="p">(</span><span class="o">**</span><span class="n">details</span><span class="p">):</span> 
+   <span class="nb">print</span> <span class="s2">&quot;First Name = &quot;</span><span class="p">,</span> <span class="n">details</span><span class="p">[</span><span class="s1">&#39;first_name&#39;</span><span class="p">]</span> 
+   <span class="nb">print</span> <span class="s2">&quot;Department = &quot;</span><span class="p">,</span> <span class="n">details</span><span class="p">[</span><span class="s1">&#39;department&#39;</span><span class="p">]</span> 
+
+<span class="n">print_details</span><span class="p">(</span><span class="n">first_name</span> <span class="o">=</span> <span class="s2">&quot;Martin&quot;</span><span class="p">,</span> <span class="n">agent</span> <span class="o">=</span> <span class="s2">&quot;007&quot;</span><span class="p">,</span> <span class="n">department</span> <span class="o">=</span> <span class="s2">&quot;MI6&quot;</span><span class="p">)</span> 
+<span class="n">print_details</span><span class="p">(</span><span class="n">first_name</span> <span class="o">=</span> <span class="s2">&quot;Q&quot;</span><span class="p">,</span> <span class="n">department</span> <span class="o">=</span> <span class="s2">&quot;Research&quot;</span><span class="p">)</span> 
+</code></pre></div>
+
+<h2 id="colours-in-command-line-output">Colours In Command Line Output</h2>
+<div class="codehilite"><pre><span></span><code><span class="c1"># This command required to get colours working in windows cmd wrapped bash shells.</span>
+<span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span> 
+
+<span class="c1"># Colours</span>
+
+<span class="n">RESET</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\x1b</span><span class="s1">[0m&#39;</span>
+<span class="n">BRIGHT</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\x1b</span><span class="s1">[1m&#39;</span>
+<span class="n">DIM</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\x1b</span><span class="s1">[2m&#39;</span>
+<span class="n">UNDERSCORE</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\x1b</span><span class="s1">[4m&#39;</span>
+
+<span class="n">FGBLACK</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\x1b</span><span class="s1">[30m&#39;</span>
+<span class="n">FGRED</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\x1b</span><span class="s1">[31m&#39;</span>
+<span class="n">FGGREEN</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\x1b</span><span class="s1">[32m&#39;</span>
+<span class="n">FGYELLOW</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\x1b</span><span class="s1">[33m&#39;</span>
+<span class="n">FGBLUE</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\x1b</span><span class="s1">[34m&#39;</span>
+<span class="n">FGMAGENTA</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\x1b</span><span class="s1">[35m&#39;</span>
+<span class="n">FGCYAN</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\x1b</span><span class="s1">[36m&#39;</span>
+<span class="n">FGWHITE</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\x1b</span><span class="s1">[37m&#39;</span>
+
+<span class="n">BGBLACK</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\x1b</span><span class="s1">[40m&#39;</span>
+<span class="n">BGRED</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\x1b</span><span class="s1">[41m&#39;</span>
+<span class="n">BGGREEN</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\x1b</span><span class="s1">[42m&#39;</span>
+<span class="n">BGYELLOW</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\x1b</span><span class="s1">[43m&#39;</span>
+<span class="n">BGBLUE</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\x1b</span><span class="s1">[44m&#39;</span>
+<span class="n">BGMAGENTA</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\x1b</span><span class="s1">[45m&#39;</span>
+<span class="n">BGCYAN</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\x1b</span><span class="s1">[46m&#39;</span>
+<span class="n">BGWHITE</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\x1b</span><span class="s1">[47m&#39;</span>
+</code></pre></div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: December 10, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

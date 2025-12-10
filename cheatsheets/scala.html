@@ -1,0 +1,887 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Scala Cheatsheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>Scala Cheatsheet</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>Scala Cheatsheet</h1>
+<div class="table-of-contents">
+<h2>Contents</h2>
+<ul>
+<li><a href="#utilities">Utilities</a></li>
+<li class="toc-h2"><a href="#repl---ammonite">REPL - Ammonite</a></li>
+<li><a href="#hello-world">Hello World</a></li>
+<li class="toc-h2"><a href="#scala-script">Scala Script</a></li>
+<li class="toc-h2"><a href="#scala-app">Scala App</a></li>
+<li><a href="#data-types">Data Types</a></li>
+<li class="toc-h2"><a href="#hierarchy">Hierarchy</a></li>
+<li class="toc-h2"><a href="#type-casting">Type Casting</a></li>
+<li><a href="#values-and-variables">Values And Variables</a></li>
+<li class="toc-h2"><a href="#string--char-literals">String / Char Literals</a></li>
+<li><a href="#operators">Operators</a></li>
+<li><a href="#strings">Strings</a></li>
+<li class="toc-h2"><a href="#3-string-types">3 String Types</a></li>
+<li class="toc-h2"><a href="#string-functions">String Functions</a></li>
+<li><a href="#regexp">Regexp</a></li>
+<li><a href="#collections">Collections</a></li>
+<li class="toc-h2"><a href="#seq">Seq</a></li>
+<li class="toc-h2"><a href="#set">Set</a></li>
+<li class="toc-h2"><a href="#map-hash-table">Map (hash table)</a></li>
+<li class="toc-h2"><a href="#tuple">Tuple</a></li>
+<li><a href="#conditional-control">Conditional Control</a></li>
+<li><a href="#conditional-expressions">Conditional Expressions</a></li>
+<li><a href="#block-expressions">Block Expressions</a></li>
+<li><a href="#loops">Loops</a></li>
+<li><a href="#exception-handling">Exception Handling</a></li>
+<li><a href="#functions">Functions</a></li>
+<li class="toc-h2"><a href="#call-by-value--call-by-name">Call by Value / Call by Name</a></li>
+<li class="toc-h2"><a href="#recursive-functions">Recursive Functions</a></li>
+<li class="toc-h2"><a href="#tail-recursive-function">Tail Recursive Function</a></li>
+<li class="toc-h2"><a href="#higher-order-functions">Higher Order Functions</a></li>
+<li class="toc-h2"><a href="#anonymous-functions">Anonymous Functions</a></li>
+<li class="toc-h2"><a href="#functions-returning-functions">Functions Returning Functions</a></li>
+<li class="toc-h2"><a href="#currying">Currying</a></li>
+<li><a href="#mathematical-functions">Mathematical Functions</a></li>
+<li class="toc-h2"><a href="#classes-note-classes-can-be-nested">Classes (Note Classes can be nested)</a></li>
+<li class="toc-h2"><a href="#objects">Objects</a></li>
+<li class="toc-h2"><a href="#packages">Packages</a></li>
+<li class="toc-h2"><a href="#inheritance">Inheritance</a></li>
+<li class="toc-h2"><a href="#files">Files</a></li>
+<li class="toc-h2"><a href="#sys-process">sys Process</a></li>
+</ul>
+</div>
+<style>code {font-size: 1.2em !important} </style>
+
+<h1 id="utilities">Utilities</h1>
+<h2 id="repl-ammonite">REPL - Ammonite</h2>
+<div class="codehilite"><pre><span></span><code>&gt; amm
+</code></pre></div>
+
+<h1 id="hello-world">Hello World</h1>
+<h2 id="scala-script">Scala Script</h2>
+<p>File: <code>helloWorld.sc</code></p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">helloWorld</span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="s">&quot;hello world! &quot;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p>To run the script in Ammonite:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="n">amm</span><span class="w"> </span><span class="o">--</span><span class="n">predef</span><span class="w"> </span><span class="n">helloWorld</span><span class="p">.</span><span class="n">sc</span>
+<span class="nc">Loading</span><span class="p">...</span>
+<span class="nc">Welcome</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="nc">Ammonite</span><span class="w"> </span><span class="nc">Repl</span><span class="w"> </span><span class="mf">2.2.0</span><span class="w"> </span><span class="p">(</span><span class="nc">Scala</span><span class="w"> </span><span class="mf">2.13.3</span><span class="w"> </span><span class="nc">Java</span><span class="w"> </span><span class="mf">1.8.0_292</span><span class="p">)</span>
+
+<span class="o">@</span><span class="w"> </span><span class="n">helloWorld</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">res1</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;hello world! hello world! hello world! &quot;</span>
+
+<span class="o">@</span><span class="w"> </span><span class="nc">Bye</span><span class="o">!</span>
+</code></pre></div>
+
+<h2 id="scala-app">Scala App</h2>
+<div class="codehilite"><pre><span></span><code><span class="k">object</span><span class="w"> </span><span class="nc">Main</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">App</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;hello world!&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h1 id="data-types">Data Types</h1>
+<h2 id="hierarchy">Hierarchy</h2>
+<div class="codehilite"><pre><span></span><code><span class="nc">Any</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">AnyVal</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">Double</span><span class="p">,</span><span class="w"> </span><span class="nc">Float</span><span class="p">,</span><span class="w"> </span><span class="nc">Long</span><span class="p">,</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="nc">Short</span><span class="p">,</span><span class="w"> </span><span class="nc">Byte</span><span class="p">,</span><span class="w"> </span><span class="nc">Char</span><span class="p">,</span><span class="w"> </span><span class="nc">Unit</span><span class="p">,</span><span class="w"> </span><span class="nc">Boolean</span>
+<span class="w">    </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">AnyRef</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">List</span><span class="p">,</span><span class="w"> </span><span class="nc">Iterable</span><span class="p">,</span><span class="w"> </span><span class="nc">Seq</span><span class="p">,</span><span class="w"> </span><span class="nc">Strings</span><span class="p">,</span><span class="w"> </span><span class="nc">Other</span><span class="w"> </span><span class="nc">Scala</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nc">Java</span><span class="w"> </span><span class="nc">Classes</span>
+</code></pre></div>
+
+<h2 id="type-casting">Type Casting</h2>
+<div class="codehilite"><pre><span></span><code><span class="nc">Byte</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">Short</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">Long</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">Float</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">Double</span>
+<span class="w">                     </span><span class="o">&lt;-</span><span class="w"> </span><span class="nc">Char</span><span class="w">  </span><span class="p">(</span><span class="nc">Char</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="n">gives</span><span class="w"> </span><span class="nc">ASCII</span><span class="w"> </span><span class="n">code</span><span class="p">)</span>
+</code></pre></div>
+
+<h1 id="values-and-variables">Values And Variables</h1>
+<div class="codehilite"><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">     </span><span class="c1">// Eval when set. Constant. Both set to 2</span>
+<span class="k">lazy</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">c</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">   </span><span class="c1">// Eval FIRST time used</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">x</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;22&quot;</span><span class="w">  </span><span class="c1">// Eval EVERY time used. Constant</span>
+<span class="kd">var</span><span class="w"> </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="nc">Char</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;2&#39;</span><span class="w">     </span><span class="c1">// Eval when set, can be updated, avoid</span>
+<span class="kd">var</span><span class="w"> </span><span class="n">z</span><span class="p">:</span><span class="w"> </span><span class="nc">Any</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="w">       </span><span class="c1">// Can store any value</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="n">i</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0FF</span><span class="w">    </span><span class="c1">// i = 255.  Assigning a Hex literal</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">l</span><span class="p">:</span><span class="w"> </span><span class="nc">Long</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0FF</span><span class="nc">L</span><span class="w">  </span><span class="c1">// l = 255.  &#39;L&#39; signifies a Long literal</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">f</span><span class="p">:</span><span class="w"> </span><span class="nc">Float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.5e2F</span><span class="w"> </span><span class="c1">// f = 150.  &#39;F&#39; signifies a Float literal</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">d</span><span class="p">:</span><span class="w"> </span><span class="nc">Double</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.5e3</span><span class="w"> </span><span class="c1">// d = 1500</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">b</span><span class="p">:</span><span class="w"> </span><span class="nc">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;hi&quot;</span>
+<span class="n">println</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">getClass</span><span class="p">())</span><span class="w">         </span><span class="c1">// class java.lang.String</span>
+<span class="n">println</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="k">isInstanceOf</span><span class="p">[</span><span class="nc">Int</span><span class="p">])</span><span class="w">  </span><span class="c1">// false</span>
+</code></pre></div>
+
+<h2 id="string-char-literals">String / Char Literals</h2>
+<table>
+<thead>
+<tr>
+<th>Char</th>
+<th>Description</th>
+<th></th>
+<th>Char</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>\n</code></td>
+<td>linefeed</td>
+<td></td>
+<td><code>\b</code></td>
+<td>backspace</td>
+</tr>
+<tr>
+<td><code>\t</code></td>
+<td>tab</td>
+<td></td>
+<td><code>\f</code></td>
+<td>form feed</td>
+</tr>
+<tr>
+<td><code>\r</code></td>
+<td>carriage return</td>
+<td></td>
+<td><code>\"</code></td>
+<td>double quote</td>
+</tr>
+<tr>
+<td><code>\’</code></td>
+<td>single quote</td>
+<td></td>
+<td><code>\\</code></td>
+<td>backslash</td>
+</tr>
+</tbody>
+</table>
+<h1 id="operators">Operators</h1>
+<div class="codehilite"><pre><span></span><code><span class="mi">1</span><span class="p">.</span><span class="o">+</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="w">  </span><span class="c1">// 4.  1 + 3</span>
+<span class="mi">10</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">7</span><span class="w">  </span><span class="c1">// Yields: Int = 1 </span>
+<span class="mf">10F</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="c1">// Yields: Float 1.42..</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="n">t</span><span class="p">:</span><span class="w"> </span><span class="nc">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">f</span><span class="p">:</span><span class="w"> </span><span class="nc">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
+<span class="n">println</span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="n">f</span><span class="p">)</span><span class="w">  </span><span class="c1">// Yields: (true, false, true)</span>
+
+<span class="n">a</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">c</span><span class="o">*=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">%=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="c1">// Yields: 2</span>
+</code></pre></div>
+
+<p><strong>Note</strong>: Scala uses short-circuit (lazy) evaluation so with  <code>(false || val)</code>, <code>val</code> will not be evaluated.</p>
+<h1 id="strings">Strings</h1>
+<p><code>"""</code> - triple double quotes - multiline string.</p>
+<h2 id="3-string-types">3 String Types</h2>
+<h3 id="sstring">s"String"</h3>
+<div class="codehilite"><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Yo&quot;</span><span class="p">;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">v</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; Martin&quot;</span><span class="p">)</span><span class="w">     </span><span class="c1">// Yields: &quot;Yo Martin&quot;</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Yo&quot;</span><span class="p">;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">s&quot;</span><span class="si">$</span><span class="n">v</span><span class="s"> </span><span class="si">${</span><span class="n">v</span><span class="si">}</span><span class="s"> Martin&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: &quot;Yo Yo Martin&quot;</span>
+<span class="n">println</span><span class="p">(</span><span class="s">s&quot;</span><span class="si">${</span><span class="mi">3</span><span class="o">+</span><span class="mi">4</span><span class="si">}</span><span class="s">&quot;</span><span class="p">)</span><span class="w">                       </span><span class="c1">// Yields: &quot;7&quot;</span>
+</code></pre></div>
+
+<h3 id="fstring">f"String"</h3>
+<p><code>$[var]%[flag][Width].[Precision][Type]</code></p>
+<p><strong>Flag</strong>: <code>-</code>: Left align, <code>+</code>: show +, <code>0</code>: leading 0's, <code>,</code>: comma numbers</p>
+<p><strong>Type</strong>: <code>s</code>: strings, <code>d</code>: decimal integers, <code>f</code>: floating-point numbers, <code>t</code>: date/time values</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.14159F</span>
+<span class="n">println</span><span class="p">(</span><span class="s">f&quot;</span><span class="si">$</span><span class="n">pi</span><span class="s">%6.2f&quot;</span><span class="p">)</span><span class="w">   </span><span class="c1">// Yields: &quot;  3.14&quot;</span>
+<span class="n">println</span><span class="p">(</span><span class="s">f&quot;</span><span class="si">$</span><span class="n">pi</span><span class="s">%-6.2f&quot;</span><span class="p">)</span><span class="w">  </span><span class="c1">// Yields: &quot;3.14  &quot;</span>
+<span class="n">println</span><span class="p">(</span><span class="s">f&quot;</span><span class="si">$</span><span class="n">pi</span><span class="s">%+6.2f&quot;</span><span class="p">)</span><span class="w">  </span><span class="c1">// Yields: &quot;+3.14 &quot;</span>
+<span class="n">println</span><span class="p">(</span><span class="s">f&quot;</span><span class="si">$</span><span class="n">pi</span><span class="s">%06.2f&quot;</span><span class="p">)</span><span class="w">  </span><span class="c1">// Yields: &quot;003.14&quot;</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100000000</span>
+<span class="n">println</span><span class="p">(</span><span class="s">f&quot;</span><span class="si">$</span><span class="n">d</span><span class="s">%,d&quot;</span><span class="p">)</span><span class="w">      </span><span class="c1">// Yields: &quot;100,000,000&quot;</span>
+</code></pre></div>
+
+<h3 id="rawstring">raw"String"</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">println</span><span class="p">(</span><span class="s">raw&quot;one\ntwo&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: &quot;one\ntwo&quot;</span>
+</code></pre></div>
+
+<h2 id="string-functions">String Functions</h2>
+<div class="codehilite"><pre><span></span><code><span class="c1">// compareTo</span>
+<span class="nc">String1</span><span class="p">.</span><span class="n">compareTo</span><span class="p">(</span><span class="n">string2</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">greater</span><span class="o">/</span><span class="n">less</span><span class="o">/</span><span class="n">equal</span>
+<span class="s">&quot;A&quot;</span><span class="p">.</span><span class="n">compareTo</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: 0</span>
+<span class="s">&quot;A&quot;</span><span class="p">.</span><span class="n">compareTo</span><span class="p">(</span><span class="s">&quot;B&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: -1</span>
+<span class="s">&quot;C&quot;</span><span class="p">.</span><span class="n">compareTo</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: 2</span>
+
+<span class="c1">// equals / equalsIgnoreCase</span>
+<span class="nc">String1</span><span class="p">.</span><span class="n">equals</span><span class="p">(</span><span class="nc">String2</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">Boolean</span>
+<span class="s">&quot;martin&quot;</span><span class="p">.</span><span class="n">equals</span><span class="p">(</span><span class="s">&quot;fred&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: false</span>
+
+<span class="c1">// findAllIn</span>
+<span class="nc">Regex</span><span class="p">.</span><span class="n">findAllIn</span><span class="p">(</span><span class="nc">String</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">Iterator</span>
+<span class="s">&quot;t.* &quot;</span><span class="p">.</span><span class="n">r</span><span class="p">.</span><span class="n">findAllIn</span><span class="p">(</span><span class="s">&quot;there&#39;s the dog&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: scala.util.matching.Regex.MatchIterator</span>
+<span class="s">&quot;t.* &quot;</span><span class="p">.</span><span class="n">r</span><span class="p">.</span><span class="n">findAllIn</span><span class="p">(</span><span class="s">&quot;there&#39;s the dog&quot;</span><span class="p">).</span><span class="n">foreach</span><span class="p">(</span><span class="n">println</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: there&#39;s the</span>
+
+<span class="c1">// findFirstIn</span>
+<span class="nc">Regex</span><span class="p">.</span><span class="n">findFirstIn</span><span class="p">(</span><span class="nc">String</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">String</span>
+<span class="s">&quot;th. &quot;</span><span class="p">.</span><span class="n">r</span><span class="p">.</span><span class="n">findFirstIn</span><span class="p">(</span><span class="s">&quot;there&#39;s the dog&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: Option[String] = Some(&quot;the &quot;)</span>
+
+<span class="c1">// intersect</span>
+<span class="nc">String1</span><span class="p">.</span><span class="n">intersect</span><span class="p">(</span><span class="nc">String2</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">String</span>
+<span class="s">&quot;Martin&quot;</span><span class="p">.</span><span class="n">intersect</span><span class="p">(</span><span class="s">&quot;tank&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: &quot;atn&quot;</span>
+
+<span class="c1">// matches</span>
+<span class="nc">String1</span><span class="p">.</span><span class="n">matches</span><span class="p">(</span><span class="nc">String2</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">Boolean</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">String2</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="nc">Regex</span><span class="w"> </span><span class="nc">Expression</span>
+<span class="s">&quot;martin&quot;</span><span class="p">.</span><span class="n">matches</span><span class="p">(</span><span class="s">&quot;m.{4}n&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: true </span>
+
+<span class="c1">// split</span>
+<span class="nc">String</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="nc">Char</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">Array</span><span class="p">(</span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="p">..)</span>
+<span class="s">&quot;a b c&quot;</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="sc">&#39; &#39;</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: Array(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;)</span>
+
+<span class="c1">// toLowerCase</span>
+<span class="s">&quot;HI&quot;</span><span class="p">.</span><span class="n">toLowerCase</span><span class="w"> </span><span class="c1">// As toLowerCase has no parameters the () are omitted.</span>
+
+<span class="c1">// toString</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123</span><span class="p">;</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">toString</span><span class="w"> </span><span class="c1">// As toString has no parameters the () are omitted.</span>
+
+<span class="c1">// toUpperCase</span>
+<span class="s">&quot;hello&quot;</span><span class="p">.</span><span class="n">toUpperCase</span><span class="w"> </span><span class="c1">// As toUpperCase has no parameters the () are omitted.</span>
+</code></pre></div>
+
+<h1 id="regexp">Regexp</h1>
+<div class="codehilite"><pre><span></span><code><span class="s">&quot;[a-z].*&quot;</span><span class="p">.</span><span class="n">r</span><span class="w"> </span><span class="c1">// Yields: scala.util.matching.Regex = [a-z].*</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="n">numPattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;[0-9]+&quot;</span><span class="p">.</span><span class="n">r</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">numPattern</span><span class="p">.</span><span class="n">findAllIn</span><span class="p">(</span><span class="s">&quot;a11b12c13&quot;</span><span class="p">))</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: 11 12 13</span>
+<span class="n">numPattern</span><span class="p">.</span><span class="n">findAllIn</span><span class="p">(</span><span class="s">&quot;a 2 3&quot;</span><span class="p">).</span><span class="n">toArray</span><span class="w">                   </span><span class="c1">// Yields: Array(2,3)</span>
+<span class="n">numPattern</span><span class="p">.</span><span class="n">replaceAllIn</span><span class="p">(</span><span class="s">&quot;a 2 3&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;x&quot;</span><span class="p">).</span><span class="n">toArray</span><span class="w">           </span><span class="c1">// Yields: Array(a,x,x)</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="n">spacePattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;&quot;\s+&quot;&quot;&quot;</span><span class="p">.</span><span class="n">r</span><span class="w">                                   </span><span class="c1">// &quot;&quot;&quot; - Instead of &quot;\\s+&quot;</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">spacePattern</span><span class="p">.</span><span class="n">findAllIn</span><span class="p">(</span><span class="s">&quot;abc 12 def&quot;</span><span class="p">))</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;found&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: found found</span>
+
+<span class="c1">// Regexp Groups</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">numItemPttn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;([0-9]+) ([a-z]+)&quot;</span><span class="p">.</span><span class="n">r</span><span class="p">()</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">numItemPttn</span><span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="w"> </span><span class="n">item</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;99 bottles&quot;</span><span class="w"> </span><span class="c1">// Yields: num=99, item=bottles</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">numItemPttn</span><span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="w"> </span><span class="n">item</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">numItemPttn</span><span class="p">.</span><span class="n">findAllIn</span><span class="p">(</span><span class="s">&quot;5 cats, 3 dogs&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">println</span><span class="p">(</span><span class="n">item</span><span class="p">,</span><span class="w"> </span><span class="n">num</span><span class="p">)</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// Yields: (cats,5)(dogs,3)</span>
+</code></pre></div>
+
+<h1 id="collections">Collections</h1>
+<h2 id="seq">Seq</h2>
+<h3 id="hierarchy_1">Hierarchy</h3>
+<div class="codehilite"><pre><span></span><code><span class="nc">Seq</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">IndexedSeq</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">Vector</span><span class="p">,</span><span class="w"> </span><span class="nc">Array</span><span class="p">,</span><span class="w"> </span><span class="nc">ArrayBuffer</span><span class="p">,</span><span class="w"> </span><span class="nc">Range</span><span class="w"> </span>
+<span class="w">    </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">LinearSeq</span><span class="w">  </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">List</span><span class="p">,</span><span class="w"> </span><span class="nc">Stream</span><span class="w"> </span><span class="p">(</span><span class="n">now</span><span class="w"> </span><span class="n">called</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="nc">LazyList</span><span class="p">)</span>
+</code></pre></div>
+
+<p><strong>LinearSeq</strong> collections have efficient head and tail operations. 
+<strong>IndexedSeq</strong> collections have efficient apply and length operations.</p>
+<h3 id="examples">Examples</h3>
+<div class="codehilite"><pre><span></span><code><span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Seq</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;two&quot;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;3&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c1">// s: Seq[Any] = List(1, &quot;two&quot;, &#39;3&#39;, 1)</span>
+<span class="o">@</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c1">// res1: Any = &quot;two&quot;</span>
+<span class="o">@</span><span class="w"> </span><span class="n">s</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w">       </span><span class="c1">// res2: Any = &#39;3&#39;</span>
+<span class="o">@</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">foreach</span><span class="p">(</span><span class="n">println</span><span class="p">)</span><span class="w"> </span><span class="c1">// Prints all elements</span>
+<span class="o">@</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">filter</span><span class="p">(</span><span class="n">_</span><span class="p">.</span><span class="k">isInstanceOf</span><span class="p">[</span><span class="nc">Int</span><span class="p">])</span><span class="w"> </span><span class="c1">//res3: Seq[Any] = List(1, 1)</span>
+</code></pre></div>
+
+<h3 id="arrays-an-indexedseq-fixed-length">Arrays (an IndexedSeq) Fixed Length</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">// filter(), map(), sorted, reverse, length</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Array</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w">  </span><span class="c1">// a: Array[Int] = Array(5, 2, 3, 4, 1)</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">filter</span><span class="p">(</span><span class="n">_</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w">  </span><span class="c1">// e: Array[Int] = Array(2, 4)</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="n">_</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w">          </span><span class="c1">// d: Array[Int] = Array(10, 4, 6, 8, 2)</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">sorted</span><span class="p">.</span><span class="n">reverse</span><span class="w">      </span><span class="c1">// r: Array[Int] = Array(10, 8, 6, 4, 2)</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">length</span><span class="w">              </span><span class="c1">// l: Int = 5</span>
+
+<span class="c1">// mkString(separator: String) or mkString(start: String, sep: String, end: String)</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">mkString</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="w">            </span><span class="c1">// s: String = &quot;52341&quot;</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">mkString</span><span class="p">(</span><span class="s">&quot;[&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;,&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;]&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// s: String = &quot;[5,2,3,4,1]&quot;</span>
+
+<span class="c1">// range(start, end, [interval])</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Array</span><span class="p">.</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="c1">// a: Array[Int] = Array(0, 3, 6, 9)</span>
+
+<span class="c1">// fill(number of entries)(value)</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Array</span><span class="p">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">2</span><span class="p">)(</span><span class="s">&quot;a&quot;</span><span class="p">)</span><span class="w">    </span><span class="c1">// a: Array[String] = Array(&quot;a&quot;, &quot;a&quot;)</span>
+
+<span class="c1">// Create a fixed size &#39;empty&#39; array</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Array</span><span class="p">[</span><span class="nc">Int</span><span class="p">](</span><span class="mi">4</span><span class="p">)</span><span class="w">     </span><span class="c1">// a: Array[Int] = Array(0, 0, 0, 0)</span>
+
+<span class="c1">// Update array element</span>
+<span class="o">@</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">a</span><span class="w">                   </span><span class="c1">// a: Array[Int] = Array(0, 0, 2, 0)</span>
+
+<span class="c1">// toArray</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span><span class="p">.</span><span class="n">toArray</span><span class="w">       </span><span class="c1">// a: Array[Char] = Array(&#39;H&#39;, &#39;e&#39;, &#39;l&#39;, &#39;l&#39;, &#39;o&#39;) </span>
+
+<span class="c1">// Multi dimensional Array - An Array or Array&#39;s</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Array</span><span class="p">.</span><span class="n">ofDim</span><span class="p">[</span><span class="nc">Int</span><span class="p">](</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="c1">// a: Array[Array[Int]] = Array(Array(0, 0, 0), Array(0, 0, 0))</span>
+
+<span class="c1">// Traverse Array.</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</code></pre></div>
+
+<h3 id="list">List</h3>
+<p><strong>Lists</strong> are Immutable.  <strong>ListBuffer</strong> is the Mutable counterpart.</p>
+<p>Lists are linear.  This means is that if you want to access a central element in a List, the compiler has to start from the beginning and linearly progress through the List until it finds the element you are trying to access.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// ::, Nil - element::list is know as cons, Nil is a list terminator</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="n">::</span><span class="p">(</span><span class="mi">2</span><span class="n">::</span><span class="p">(</span><span class="mi">3</span><span class="n">::</span><span class="nc">Nil</span><span class="p">))</span><span class="w"> </span><span class="c1">// l: List[Int] = List(1, 2, 3)</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="n">::</span><span class="mi">2</span><span class="n">::</span><span class="mi">3</span><span class="n">::</span><span class="nc">Nil</span><span class="w">     </span><span class="c1">// l: List[Int] = List(1, 2, 3) - can avoid brackets</span>
+
+<span class="c1">// Append: use :+, Prepend: use ::, Concat two lists: use :::</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">l2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">l</span><span class="p">:</span><span class="o">+</span><span class="mi">0</span><span class="w">    </span><span class="c1">// l2: List[Int] = List(1, 2, 3, 0)</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">l3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">9</span><span class="n">::l</span><span class="w">    </span><span class="c1">// l3: List[Int] = List(9, 1, 2, 3)</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">l4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">l2:::l3</span><span class="w"> </span><span class="c1">// l4: List[Int] = List(1, 2, 3, 0, 9, 1, 2, 3)</span>
+
+<span class="c1">// head, tail, value at position </span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">l4</span><span class="p">.</span><span class="n">head</span><span class="w"> </span><span class="c1">// h: Int = 1</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">l4</span><span class="p">.</span><span class="n">tail</span><span class="w"> </span><span class="c1">// t: List[Int] = List(2, 3, 0, 9, 1, 2, 3)</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">l4</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w">   </span><span class="c1">// i: Int = 2</span>
+</code></pre></div>
+
+<h3 id="vector">Vector</h3>
+<p>Vectors are indexed, when you want to access a central element in a Vector, the compiler can directly go to that index and access the element in constant time.</p>
+<div class="codehilite"><pre><span></span><code><span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Vector</span><span class="p">.</span><span class="n">empty</span><span class="w">       </span><span class="c1">// v: Vector[Nothing] = Vector()</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Vector</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="c1">// v: Vector[Int] = Vector(1, 2, 3, 0)</span>
+
+<span class="c1">// Prepend / Append: use +:,  Concatenation: use ++</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">v2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="o">+</span><span class="p">:</span><span class="n">v</span><span class="w">   </span><span class="c1">// v2: Vector[Int] = Vector(8, 1, 2, 3, 0)</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">v2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v::v2</span><span class="w">  </span><span class="c1">// v3: Vector[Int] = Vector(1, 2, 3, 0, 8, 1, 2, 3, 0)</span>
+</code></pre></div>
+
+<h3 id="range">Range</h3>
+<div class="codehilite"><pre><span></span><code><span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">6</span><span class="w">       </span><span class="c1">// r: Range.Inclusive = Range(1, 2, 3, 4, 5, 6)</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="mi">3</span><span class="w">  </span><span class="c1">// r: Range = Range(1, 4)</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">until</span><span class="w"> </span><span class="mi">6</span><span class="w">    </span><span class="c1">// r: Range = Range(1, 2, 3, 4, 5)</span>
+</code></pre></div>
+
+<h3 id="variable-length-arrays-array-buffers">Variable Length Arrays - Array Buffers</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">collection</span><span class="p">.</span><span class="nn">mutable</span><span class="p">.</span><span class="nc">ArrayBuffer</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ArrayBuffer</span><span class="p">[</span><span class="nc">Any</span><span class="p">]()</span><span class="w"> </span><span class="c1">// a: ArrayBuffer[Any] = ArrayBuffer()</span>
+
+<span class="c1">// +=, -=, remove(position, [num elements]), insert(after position, value), trimEnd(num elements)</span>
+<span class="o">@</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="sc">&#39;a&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;hi&quot;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;a&#39;</span><span class="p">)</span><span class="w">   </span><span class="c1">// res1: ArrayBuffer[Any] = ArrayBuffer(&#39;a&#39;, 1, &quot;hi&quot;, &#39;a&#39;)</span>
+<span class="o">@</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="sc">&#39;a&#39;</span><span class="w">                   </span><span class="c1">// res2: ArrayBuffer[Any] = ArrayBuffer(1, &quot;hi&quot;, &#39;a&#39;)</span>
+<span class="o">@</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w">                </span><span class="c1">// res3: Any = &quot;hi&quot;</span>
+<span class="o">@</span><span class="w"> </span><span class="n">a</span><span class="w">                          </span><span class="c1">// res4: ArrayBuffer[Any] = ArrayBuffer(1, &#39;a&#39;)</span>
+<span class="o">@</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;hi&quot;</span><span class="p">);</span><span class="w"> </span><span class="n">a</span><span class="w">       </span><span class="c1">// res5: ArrayBuffer[Any] = ArrayBuffer(1, &quot;hi&quot;, &#39;a&#39;)</span>
+<span class="o">@</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">trimEnd</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w"> </span><span class="n">a</span><span class="w">            </span><span class="c1">// res6: ArrayBuffer[Any] = ArrayBuffer(1)</span>
+
+<span class="c1">// toArray, toBuffer</span>
+<span class="o">@</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">toArray</span><span class="w">  </span><span class="c1">// Creates a fixed size Array from Array Buffer.</span>
+<span class="o">@</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">toBuffer</span><span class="w"> </span><span class="c1">// Creates an Array Buffer from a fixed size Array.</span>
+</code></pre></div>
+
+<h2 id="set">Set</h2>
+<p>Duplicates values removed.</p>
+<div class="codehilite"><pre><span></span><code><span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Set</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;two&quot;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;3&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c1">// s: Set[Any] = Set(1, &quot;two&quot;, &#39;3&#39;) - no dupes</span>
+<span class="o">@</span><span class="w"> </span><span class="n">s</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w">                          </span><span class="c1">// res1: Boolean = false - Int: 2 not in set</span>
+<span class="o">@</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="s">&quot;two&quot;</span><span class="p">)</span><span class="w">                </span><span class="c1">// res2: Boolean = true - String: &quot;two&quot; in set</span>
+</code></pre></div>
+
+<h2 id="map-hash-table">Map (hash table)</h2>
+<div class="codehilite"><pre><span></span><code><span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Map</span><span class="p">((</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="mi">25</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="sc">&#39;b&#39;</span><span class="p">,</span><span class="mi">50</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="sc">&#39;a&#39;</span><span class="p">))</span><span class="w"> </span><span class="c1">// m: Map[Any, AnyVal] = Map(&quot;a&quot;-&gt;25, &#39;b&#39;-&gt;50, 3-&gt;&#39;a&#39;)</span>
+<span class="o">@</span><span class="w"> </span><span class="n">m</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">)</span><span class="w">     </span><span class="c1">// res1: AnyVal = 25 - Same as m.get(&quot;a&quot;)</span>
+<span class="o">@</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="c1">// res2: AnyVal = &#39;a&#39;</span>
+<span class="o">@</span><span class="w"> </span><span class="n">m</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w">       </span><span class="c1">// java.util.NoSuchElementException: key not found: 1</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">getOrElse</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;none&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// v: Any = &quot;none&quot;</span>
+
+<span class="c1">// Mutable Map</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">collection</span><span class="p">.</span><span class="n">mutable</span><span class="p">.</span><span class="nc">Map</span><span class="p">(</span><span class="s">&quot;MN&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;FB&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mi">44</span><span class="p">)</span>
+<span class="o">@</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;XX&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;YY&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mi">34</span><span class="p">)</span><span class="w"> </span><span class="c1">// res1: collection.mutable.Map[String, Int] = </span>
+<span class="w">                               </span><span class="c1">// HashMap(&quot;XX&quot; -&gt; 2, &quot;YY&quot; -&gt; 34, &quot;MN&quot; -&gt; 21, &quot;FB&quot; -&gt; 44)</span>
+<span class="o">@</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="s">&quot;XX&quot;</span><span class="w">                    </span><span class="c1">// res2: collection.mutable.Map[String, Int] = </span>
+<span class="w">                               </span><span class="c1">// HashMap(&quot;YY&quot; -&gt; 34, &quot;MN&quot; -&gt; 21, &quot;FB&quot; -&gt; 44)</span>
+
+<span class="c1">// Sorted Map - Stores sorted on key</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">agesOrd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">collection</span><span class="p">.</span><span class="n">immutable</span><span class="p">.</span><span class="nc">SortedMap</span><span class="p">(</span><span class="s">&quot;MN&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;FB&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mi">26</span><span class="p">)</span><span class="w"> </span>
+
+<span class="c1">// &#39;Zipping&#39; Array to create a Map</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">names3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Array</span><span class="p">(</span><span class="s">&quot;MN&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;FB&quot;</span><span class="p">);</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">ages3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Array</span><span class="p">(</span><span class="mi">21</span><span class="p">,</span><span class="w"> </span><span class="mi">34</span><span class="p">)</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">people</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">names3</span><span class="p">.</span><span class="n">zip</span><span class="p">(</span><span class="n">ages3</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: Array((MN,21), (FB,34)).</span>
+</code></pre></div>
+
+<h2 id="tuple">Tuple</h2>
+<div class="codehilite"><pre><span></span><code><span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;MN&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w"> </span><span class="mf">1.84</span><span class="p">)</span><span class="w">  </span><span class="c1">// person: (String, Int, Double) = (&quot;MN&quot;, 21, 1.84)</span>
+<span class="o">@</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Age:&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">person</span><span class="p">.</span><span class="n">_2</span><span class="p">)</span><span class="w">    </span><span class="c1">// Age: 21 - In a Tuple, position starts with 1.</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">age</span><span class="p">,</span><span class="n">height</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="c1">// name: String = &quot;MN&quot; age: Int = 21 height: Double = 1.84</span>
+</code></pre></div>
+
+<h1 id="conditional-control">Conditional Control</h1>
+<div class="codehilite"><pre><span></span><code><span class="c1">// if</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="o">@</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;match&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;no match&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="c1">// match</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="o">@</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;one&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;other&quot;</span><span class="w"> </span><span class="p">}</span><span class="w">  </span><span class="c1">// Yields: &quot;one&quot;</span>
+
+<span class="c1">// match - Seq</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
+<span class="o">@</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="nc">Array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;match&quot;</span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;other&quot;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="c1">// Yields: &quot;match&quot;</span>
+
+<span class="c1">// match - Tuple</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">t</span><span class="p">:</span><span class="w"> </span><span class="nc">Any</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;hi&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
+<span class="o">@</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;match&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;other&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// Yields &quot;match&quot;</span>
+
+<span class="c1">// match - Types</span>
+<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">v</span><span class="p">:</span><span class="w"> </span><span class="nc">Any</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;hi&quot;</span>
+<span class="o">@</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;a string&quot;</span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;an int&quot;</span>
+<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Boolean</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;a boolean&quot;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="c1">// Yields: &quot;a string&quot;</span>
+</code></pre></div>
+
+<h1 id="conditional-expressions">Conditional Expressions</h1>
+<div class="codehilite"><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="o">-</span><span class="mi">2</span><span class="w"> </span><span class="c1">// if(a &gt;= 1) x = 1 else x = -1.  Needs x to be a var.</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="c1">// () is a Class called Unit - it represents &quot;no value&quot;.</span>
+</code></pre></div>
+
+<h1 id="block-expressions">Block Expressions</h1>
+<div class="codehilite"><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="kd">val</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">g</span><span class="p">}</span><span class="w"> </span><span class="c1">// e == 4, takes last value of block.</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="kd">val</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">}</span><span class="w"> </span><span class="c1">// h == (), the Unit value. i == 2.</span>
+</code></pre></div>
+
+<h1 id="loops">Loops</h1>
+<p>Loops are not expressions - they have a return type of unit which is a <em>void</em> value.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// while loop</span>
+<span class="kd">var</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span>
+
+<span class="c1">// do-while loop</span>
+<span class="k">do</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;here&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: here (always executes ay least once)</span>
+
+<span class="c1">// for loop: for (variable &lt;- generator expression) { block of code }</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w">                                </span><span class="c1">// Yields: 1 2 3</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">bi</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w">                          </span><span class="c1">// Yields: 3 2 1</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">until</span><span class="w"> </span><span class="s">&quot;dog&quot;</span><span class="p">.</span><span class="n">length</span><span class="p">)</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;:&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;dog&quot;</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="w"> </span><span class="c1">// Yields: 0:d 1:o 2:g</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span><span class="w">                             </span><span class="c1">// Yields: H e l l o</span>
+
+<span class="c1">// Complex for loops with other vars</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">11</span><span class="p">))</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span><span class="w">   </span><span class="c1">// Yields: (0,10)(0,12)(1,10)(1,12)</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: (0,10)(0,11)(1,11)(1,12)</span>
+
+<span class="c1">// Yield creates a return expression - called a comprehension.</span>
+<span class="o">@</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;Hi&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">yield</span><span class="w"> </span><span class="nc">BigInt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="c1">// res1: IndexedSeq[BigInt] = ArraySeq(72, 105)</span>
+
+<span class="c1">// Note: can use {} in place of the outer () in a for loop. {} can span multiple lines.</span>
+</code></pre></div>
+
+<h1 id="exception-handling">Exception Handling</h1>
+<div class="codehilite"><pre><span></span><code><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">quotient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="o">/</span><span class="mi">0</span>
+<span class="w">  </span><span class="n">println</span><span class="p">(</span><span class="n">quotient</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="k">catch</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">ex</span><span class="p">:</span><span class="w"> </span><span class="nc">ArithmeticException</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Dividing by zero is not allowed&quot;</span><span class="p">)</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">ex</span><span class="p">:</span><span class="w"> </span><span class="p">...</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h1 id="functions">Functions</h1>
+<p><code>def functionName(parameters): returnType = {function body}</code></p>
+<h2 id="call-by-value-call-by-name">Call by Value / Call by Name</h2>
+<div class="codehilite"><pre><span></span><code><span class="c1">// </span>
+<span class="o">@</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">endless</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endless</span><span class="w"> </span><span class="c1">// an endless recursive function</span>
+
+<span class="c1">// Call by Name: all =&gt; to parameter definition</span>
+<span class="c1">// In this case a parameter y isn&#39;t used its not evaluated.</span>
+<span class="c1">// Function endless name is passed and as it not used it not run.</span>
+<span class="o">@</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">accessFirst</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="c1">// function only use parameter x</span>
+<span class="o">@</span><span class="w"> </span><span class="n">accessFirst</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">endless</span><span class="p">)</span><span class="w"> </span><span class="c1">// res1: Int = 1</span>
+
+<span class="c1">// Call by Value</span>
+<span class="c1">// In this case, endless is evaluated (run) to produce a value to pass in.</span>
+<span class="c1">// accessFirst never returns.</span>
+<span class="o">@</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">accessFirst</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span>
+<span class="o">@</span><span class="w"> </span><span class="n">accessFirst</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">endless</span><span class="p">)</span><span class="w"> </span><span class="c1">// Never returns - actually is never run.</span>
+</code></pre></div>
+
+<h2 id="recursive-functions">Recursive Functions</h2>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">sumList</span><span class="p">(</span><span class="n">numberList</span><span class="p">:</span><span class="w"> </span><span class="nc">List</span><span class="p">[</span><span class="nc">Int</span><span class="p">]):</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numberList</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nc">Nil</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">tail</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">tail</span><span class="p">)</span>
+<span class="p">}</span><span class="w"> </span><span class="c1">// sumList(List(1,2,3,4,5)) - Yields 15</span>
+</code></pre></div>
+
+<h2 id="tail-recursive-function">Tail Recursive Function</h2>
+<p><strong>These reuse the functions stack frame</strong>.  If the last action in the function is the recursive call, then the function is typically tail recursive.  This is only true if the final call has no other manipulation - eg. <code>x + fn(x)</code> is not tail recursive, but <code>fn(x - 1)</code> is.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// Greatest Common Factor</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">gcd</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">):</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">y</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="n">x</span>
+<span class="w">  </span><span class="k">else</span><span class="w"> </span><span class="n">gcd</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="o">%</span><span class="n">y</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="o">@</span><span class="w"> </span><span class="n">gcd</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">24</span><span class="p">)</span><span class="w"> </span><span class="c1">// res1: Int = 6</span>
+</code></pre></div>
+
+<h2 id="higher-order-functions">Higher Order Functions</h2>
+<p>Functions that take functions as parameters are called higher order functions - For Example:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">):</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span>
+
+<span class="c1">// A higher order function</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">functionPrinter</span><span class="p">(</span><span class="n">f</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">println</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">))</span>
+<span class="p">}</span>
+<span class="o">@</span><span class="w"> </span><span class="n">functionPrinter</span><span class="p">(</span><span class="n">add</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="c1">// Prints: 3</span>
+</code></pre></div>
+
+<h2 id="anonymous-functions">Anonymous Functions</h2>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">functionPrinter</span><span class="p">(</span><span class="n">f</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">println</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">))</span>
+<span class="p">}</span>
+<span class="c1">// (a, b) =&gt; a * b is an anonymous function</span>
+<span class="o">@</span><span class="w"> </span><span class="n">functionPrinter</span><span class="p">((</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="c1">// Prints: 2</span>
+</code></pre></div>
+
+<h2 id="functions-returning-functions">Functions Returning Functions</h2>
+<p>The following function takes a function as a parameter and returns a function which runs the parameter function on all values between two parameters, summing the results.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">f</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Int</span><span class="p">):</span><span class="w"> </span><span class="p">(</span><span class="nc">Int</span><span class="p">,</span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="p">{</span>
+<span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">sumHelper</span><span class="p">(</span><span class="n">a</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">):</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="o">&gt;</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sumHelper</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span>
+<span class="w">  </span><span class="n">sumHelper</span>
+<span class="p">}</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">sumOfInts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
+<span class="n">println</span><span class="p">(</span><span class="n">sumOfInts</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span><span class="w"> </span><span class="c1">// Prints: 15</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">sumOfCubes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+<span class="n">println</span><span class="p">(</span><span class="n">sumOfCubes</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="w"> </span><span class="c1">// Prints: 8 (1*1*1 + 2*2*2) </span>
+</code></pre></div>
+
+<h2 id="currying">Currying</h2>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">sumRange</span><span class="p">(</span><span class="n">f</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Int</span><span class="p">)(</span><span class="n">from</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">too</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">):</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">too</span><span class="p">)</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">   </span><span class="k">else</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">from</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">f</span><span class="p">)(</span><span class="n">from</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">too</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">cube</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">):</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">sumCubes1to3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sumRange</span><span class="p">(</span><span class="n">cube</span><span class="p">)(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="c1">// sumCubes1to3: Int = 36</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">sumSquares1to3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sumRange</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="p">)(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="c1">// sumSquares1to3: Int = 14</span>
+</code></pre></div>
+
+<p>def first(x: Int) = (y: Int) =&gt; x+y</p>
+<p>def second = first(3)</p>
+<p>val result = second(2)</p>
+<p>print(result)</p>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">func</span><span class="p">(</span><span class="w"> </span><span class="n">p1</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">p2</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">p3</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">p1</span><span class="p">,</span><span class="w"> </span><span class="n">p2</span><span class="p">,</span><span class="w"> </span><span class="n">p3</span><span class="p">)</span><span class="w"> </span><span class="c1">// p2 defaults to 0.  Yields: a Tuple.</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">func</span><span class="p">(</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">p3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: 2,0,3.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fac</span><span class="p">(</span><span class="n">v</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="kd">var</span><span class="w"> </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rv</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"> </span><span class="n">rv</span><span class="p">}</span><span class="w"> </span><span class="c1">// Returns Int.</span>
+
+<span class="c1">// Recursive functions need a return type specifying.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fac2</span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">):</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">fac2</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1">// Variable argument sets.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">tot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="n">tot</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"> </span><span class="n">tot</span><span class="w"> </span><span class="p">}</span>
+<span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">5</span><span class="p">:</span><span class="w"> </span><span class="n">_*</span><span class="p">)</span><span class="w"> </span><span class="c1">// _* syntax is specific to parameters.</span>
+
+<span class="c1">// Procedures - no &quot;=&quot; between (param) and {code...}</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">proc</span><span class="p">(</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;Hello &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name</span><span class="p">}</span><span class="w"> </span><span class="c1">// Returns Unit ie. ().  Can declare as proc(...): Unit = {...}.</span>
+</code></pre></div>
+
+<h1 id="mathematical-functions">Mathematical Functions</h1>
+<div class="codehilite"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">math</span><span class="p">.</span><span class="n">_</span><span class="w">  </span><span class="c1">// same as import scala.math._ (scala can be omitted).</span>
+<span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="c1">// Obv. many many more functions.</span>
+</code></pre></div>
+
+<h2 id="classes-note-classes-can-be-nested">Classes (Note Classes can be nested)</h2>
+<div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Per</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">}</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">per</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Per</span><span class="p">()</span><span class="w"> </span><span class="c1">// Brackets not mandatory</span>
+
+<span class="c1">// Getter/Setter methods are created for all fields (inc private but they are also private).</span>
+<span class="c1">// With a val field only a getter is created. This allows:</span>
+<span class="n">per</span><span class="p">.</span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">21</span><span class="p">;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">per</span><span class="p">.</span><span class="n">age</span><span class="p">)</span><span class="w"> </span><span class="c1">// Also per.age=_(21)</span>
+
+<span class="c1">// Can replace/create getters and setters:</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Per2</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="k">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">privAge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">   </span><span class="k">def</span><span class="w"> </span><span class="nf">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">privAge</span><span class="w"> </span><span class="c1">// getter</span>
+<span class="w">   </span><span class="k">def</span><span class="w"> </span><span class="nf">age_=</span><span class="p">(</span><span class="n">newVal</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">newVal</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">privAge</span><span class="p">)</span><span class="w"> </span><span class="n">privAge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newVa</span><span class="w"> </span><span class="n">l</span><span class="p">}</span><span class="w"> </span><span class="c1">// Can&#39;t get younger</span>
+<span class="p">}</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">per2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Per2</span>
+<span class="n">per2</span><span class="p">.</span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span><span class="w"> </span><span class="n">per2</span><span class="p">.</span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">per2</span><span class="p">.</span><span class="n">age</span><span class="p">)</span><span class="w"> </span><span class="c1">// Prints 12</span>
+
+<span class="c1">// Bean Properties (to match JavaBeans specification).  This will generate a getName():Unit</span>
+<span class="c1">// method and a setName(newValue: String): Unit method.</span>
+<span class="c1">// import scala.reflect.BeanProperty</span>
+<span class="c1">// class Per3 { @BeanProperty var name: String = _ }</span>
+
+<span class="c1">// Auxiliary Constructors (all aux&#39; constructors must call previously defined constructor).</span>
+<span class="c1">// They are all called this.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Per4</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="k">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<span class="w">   </span><span class="k">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">   </span><span class="k">def</span><span class="w"> </span><span class="nf">this</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="bp">this</span><span class="p">();</span><span class="w"> </span><span class="bp">this</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">}</span>
+<span class="w">   </span><span class="k">def</span><span class="w"> </span><span class="nf">this</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="bp">this</span><span class="p">(</span><span class="n">name</span><span class="p">);</span><span class="w"> </span><span class="bp">this</span><span class="p">.</span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">p4a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Per4</span><span class="p">;</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">p4b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Per4</span><span class="p">(</span><span class="s">&quot;MN&quot;</span><span class="p">);</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">p4c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Per4</span><span class="p">(</span><span class="s">&quot;MN&quot;</span><span class="p">,</span><span class="mi">21</span><span class="p">)</span>
+
+<span class="c1">// Primary Constructor.  Is the code straight after definition.  With or without parameters.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Per5</span><span class="w"> </span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;no name&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="k">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">whoMsg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;This is &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="c1">// This is the constructor code.</span>
+<span class="w">   </span><span class="k">def</span><span class="w"> </span><span class="nf">who</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">whoMsg</span>
+<span class="p">}</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">per5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Per5</span><span class="p">(</span><span class="s">&quot;MN&quot;</span><span class="p">);</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">per5</span><span class="p">.</span><span class="n">who</span><span class="p">)</span><span class="w"> </span><span class="c1">// Prints This is MN.</span>
+</code></pre></div>
+
+<h2 id="objects">Objects</h2>
+<div class="codehilite"><pre><span></span><code><span class="c1">// Singletons - Constructor run on first use.</span>
+<span class="k">object</span><span class="w"> </span><span class="nc">Accs</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">accNum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">newAccNum</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">accNum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">accNum</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+<span class="n">println</span><span class="p">(</span><span class="nc">Accs</span><span class="p">.</span><span class="n">newAccNum</span><span class="p">,</span><span class="w"> </span><span class="nc">Accs</span><span class="p">.</span><span class="n">newAccNum</span><span class="p">)</span>
+
+<span class="c1">// Companion Objects.  Must be in same source file.  (In REPL use :paste mode to define).</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Accs2</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kd">val</span><span class="w"> </span><span class="n">accNum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Accs2</span><span class="p">.</span><span class="n">newAccNum</span><span class="p">()</span><span class="w"> </span><span class="c1">// As Class/Object share name, class can see object.</span>
+<span class="w">   </span><span class="k">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">bal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
+<span class="w">   </span><span class="k">def</span><span class="w"> </span><span class="nf">payIn</span><span class="p">(</span><span class="n">amt</span><span class="p">:</span><span class="w"> </span><span class="nc">Double</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="n">bal</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">amt</span><span class="p">}</span>
+<span class="p">}</span>
+<span class="k">object</span><span class="w"> </span><span class="nc">Accs2</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">accNum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">newAccNum</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">accNum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">accNum</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+
+<span class="c1">// Objects extending a Class or a Trait - TBC...</span>
+
+<span class="c1">// The apply method.  eg. Array has an apply method so we can create an Array without</span>
+<span class="c1">// specifying new.  Useful for declarations such as Array(Array(2,3), Array(3,4))</span>
+<span class="c1">// Note: Array(100) calls apply and create an array of one Int value 100. new Array(100)</span>
+<span class="c1">// creates an Array os 100 Int values of 0.</span>
+
+<span class="c1">// Application Objects.</span>
+<span class="k">object</span><span class="w"> </span><span class="nc">HelloWorld</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="nc">Array</span><span class="p">[</span><span class="nc">String</span><span class="p">])</span><span class="w"> </span><span class="p">{</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="p">)}}</span>
+<span class="k">object</span><span class="w"> </span><span class="nc">HelloWorld2</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">App</span><span class="w"> </span><span class="p">{</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello world!&quot;</span><span class="p">)}</span>
+
+<span class="c1">// Enumerations</span>
+<span class="k">object</span><span class="w"> </span><span class="nc">TrafficLightColor</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Enumeration</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="k">type</span><span class="w"> </span><span class="nc">TrafficLightColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Value</span>
+<span class="w">   </span><span class="kd">val</span><span class="w"> </span><span class="nc">Red</span><span class="p">,</span><span class="w"> </span><span class="nc">Yellow</span><span class="p">,</span><span class="w"> </span><span class="nc">Green</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Value</span>
+<span class="p">}</span>
+<span class="k">import</span><span class="w"> </span><span class="nc">TrafficLightColor</span><span class="p">.</span><span class="n">_</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">TrafficLightColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Red</span><span class="p">;</span>
+<span class="n">println</span><span class="p">(</span><span class="nc">TrafficLightColor</span><span class="p">.</span><span class="n">values</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: a set of all the values.</span>
+</code></pre></div>
+
+<h2 id="packages">Packages</h2>
+<div class="codehilite"><pre><span></span><code><span class="c1">// Every package can have a single package object.  it shares the same name as the package</span>
+<span class="c1">// and is declared at the same level (within the same parent package) as the package.</span>
+
+<span class="c1">// Top of package notation - no braces required.  Chained definitions.</span>
+<span class="c1">// -------------------------------</span>
+<span class="c1">// package com.horstmann.impatient</span>
+<span class="c1">// package people</span>
+<span class="c1">// class Person ...</span>
+<span class="c1">// -------------------------------</span>
+
+<span class="c1">//package animal {</span>
+<span class="c1">//   package object people {</span>
+<span class="c1">//      val defaultName = &quot;John Q. Public&quot;</span>
+<span class="c1">//   }</span>
+<span class="c1">//   package people {</span>
+<span class="c1">//      class Person {</span>
+<span class="c1">//         var name = defaultName // A constant from the package</span>
+<span class="c1">//      }</span>
+<span class="c1">//   }</span>
+<span class="c1">//}</span>
+
+<span class="c1">// Can import all members of a package using import com.abc._</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">java</span><span class="p">.</span><span class="nn">awt</span><span class="p">.</span><span class="nc">Color</span><span class="p">.</span><span class="n">_</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">colour1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">RED</span><span class="w"> </span><span class="c1">//Color.RED</span>
+
+<span class="c1">// Once imported can access package members using shorter name.  Imports can be included</span>
+<span class="c1">// anywhere in the code.  They follow usual scope rules which is useful when using them to</span>
+<span class="c1">// deliver shorter names.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">dummy</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="k">import</span><span class="w"> </span><span class="nn">java</span><span class="p">.</span><span class="nn">awt</span><span class="p">.</span><span class="n">_</span>
+<span class="w">   </span><span class="kd">val</span><span class="w"> </span><span class="n">af</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event</span><span class="p">.</span><span class="nc">ActionEvent</span><span class="p">.</span><span class="nc">ACTION_FIRST</span><span class="w"> </span><span class="c1">// java.awt.event.ActionEvent.ACTION_FIRST</span>
+<span class="p">}</span>
+
+<span class="k">import</span><span class="w"> </span><span class="nn">java</span><span class="p">.</span><span class="nn">awt</span><span class="p">.{</span><span class="nc">Color</span><span class="p">,</span><span class="w"> </span><span class="nc">Font</span><span class="p">}</span><span class="w"> </span><span class="c1">// Import only a few members</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">java</span><span class="p">.</span><span class="nn">awt</span><span class="p">.{</span><span class="nc">Color</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">AwtColor</span><span class="p">}</span><span class="w"> </span><span class="c1">// Rename members</span>
+</code></pre></div>
+
+<h2 id="inheritance">Inheritance</h2>
+<div class="codehilite"><pre><span></span><code><span class="c1">// Notes: Only a primary subclass constructor can call super class constructor.</span>
+
+<span class="c1">// Extending a Class</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Person3</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="k">protected</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">sex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;unknown&quot;</span>
+<span class="w">   </span><span class="kd">var</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;unknown&quot;</span>
+<span class="w">   </span><span class="kd">var</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">   </span><span class="k">def</span><span class="w"> </span><span class="nf">getName</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;Name:&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">}</span>
+<span class="w">   </span><span class="k">def</span><span class="w"> </span><span class="nf">getAge</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;age:&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Worker</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Person3</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="kd">var</span><span class="w"> </span><span class="n">salary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span>
+<span class="w">   </span><span class="n">sex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;hidden&quot;</span><span class="w"> </span><span class="c1">// sex is visible within subclass even though protected.</span>
+<span class="w">   </span><span class="k">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">getAge</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;hidden&quot;</span><span class="w"> </span><span class="c1">// override def with a String val</span>
+<span class="w">   </span><span class="k">override</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">getName</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s">&quot;Worker:&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="bp">super</span><span class="p">.</span><span class="n">getName</span><span class="w"> </span><span class="c1">// Call the superclass method.</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">per</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Person3</span><span class="p">;</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">wkr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Worker</span><span class="p">;</span><span class="w"> </span><span class="n">wkr</span><span class="p">.</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;Fred&quot;</span><span class="p">;</span><span class="w"> </span><span class="n">wkr</span><span class="p">.</span><span class="n">getName</span><span class="w">  </span><span class="c1">// Yields: Worker:Name:Fred</span>
+<span class="c1">// Note wkr.age and per.age not visible.</span>
+<span class="p">(</span><span class="n">wkr</span><span class="p">.</span><span class="k">isInstanceOf</span><span class="p">[</span><span class="nc">Person3</span><span class="p">],</span><span class="w"> </span><span class="n">wkr</span><span class="p">.</span><span class="k">isInstanceOf</span><span class="p">[</span><span class="nc">Worker</span><span class="p">])</span><span class="w">  </span><span class="c1">// True, True</span>
+<span class="p">(</span><span class="n">wkr</span><span class="p">.</span><span class="n">getClass</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">classOf</span><span class="p">[</span><span class="nc">Person3</span><span class="p">],</span><span class="w"> </span><span class="n">wkr</span><span class="p">.</span><span class="n">getClass</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">classOf</span><span class="p">[</span><span class="nc">Worker</span><span class="p">])</span><span class="w"> </span><span class="c1">// False, True</span>
+
+<span class="c1">// per2 has type Person{def greeting: String}.  This could be used a a parameter:</span>
+<span class="c1">// def meet( p: Person{def greeting: String}) { println(p.name + p.greeting) }</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">per2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Person3</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="k">def</span><span class="w"> </span><span class="nf">greeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;Hello!&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name</span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// Abstract Class cannot be instantiated - forms the basis of other classes.</span>
+<span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Person4</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">id</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// abstract method - we don&#39;t know how to calc.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Worker4</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Person4</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">id</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1231</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// Override keyword not required.</span>
+</code></pre></div>
+
+<h2 id="files">Files</h2>
+<div class="codehilite"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">com</span><span class="p">.</span><span class="nn">sun</span><span class="p">.</span><span class="nn">org</span><span class="p">.</span><span class="nn">apache</span><span class="p">.</span><span class="nn">bcel</span><span class="p">.</span><span class="nn">internal</span><span class="p">.</span><span class="nn">classfile</span><span class="p">.</span><span class="nc">SourceFile</span>
+<span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">io</span><span class="p">.</span><span class="nc">Source</span>
+
+<span class="c1">// Text Files, URLS</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">srcFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Source</span><span class="p">.</span><span class="n">fromFile</span><span class="p">(</span><span class="s">&quot;c:/MJN/dummy.txt&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;UTF-8&quot;</span><span class="p">)</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">lineIterator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">srcFile</span><span class="p">.</span><span class="n">getLines</span><span class="p">;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">l</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lineIterator</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="n">println</span><span class="p">(</span><span class="n">l</span><span class="p">)}</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">srcFile</span><span class="p">.</span><span class="n">getLines</span><span class="p">.</span><span class="n">toArray</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">contents</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">srcFile</span><span class="p">.</span><span class="n">mkString</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">c</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">srcFile</span><span class="p">)</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="c1">// Read characters.</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">words</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">srcFile</span><span class="p">.</span><span class="n">mkString</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;\\s+&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// Array of words sep by whitespace.</span>
+<span class="n">srcFile</span><span class="p">.</span><span class="n">close</span><span class="p">()</span><span class="w"> </span><span class="c1">// Close when finished.</span>
+
+<span class="kd">val</span><span class="w"> </span><span class="n">srcFile2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Source</span><span class="p">.</span><span class="n">fromURL</span><span class="p">(</span><span class="s">&quot;http://www.mjnurse.uk&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;UTF-8&quot;</span><span class="p">);</span><span class="w"> </span><span class="n">srcFile2</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
+<span class="kd">val</span><span class="w"> </span><span class="n">srcFile3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Source</span><span class="p">.</span><span class="n">fromString</span><span class="p">(</span><span class="s">&quot;one two three&quot;</span><span class="p">);</span><span class="w"> </span><span class="n">srcFile3</span><span class="p">.</span><span class="n">close</span><span class="p">()</span><span class="w"> </span><span class="c1">// Useful for debug.</span>
+
+<span class="c1">// Write Test Files - Scala has no built in support so use java.io.PrintWriter</span>
+<span class="c1">// val out = new PrintWriter(&quot;numbers.txt&quot;); for (i &lt;- 1 to 5) out.println(i); out.close()</span>
+
+<span class="c1">// Binary Files - scala has no provision for binary files so use Java</span>
+<span class="c1">// val file = new File(filename); val in = new FileInputStream(file)</span>
+<span class="c1">// val bytes = new Array[Byte](file.length.toInt)</span>
+<span class="c1">// in.read(bytes); in.close()</span>
+
+<span class="c1">// Serialization</span>
+<span class="c1">// class Person6 extends Serializable { val name = &quot;unknown&quot; }</span>
+<span class="c1">// val fred = new Person6</span>
+<span class="c1">//  import java.io._</span>
+<span class="c1">// Serialize</span>
+<span class="c1">// val out = new ObjectOutputStream(new FileOutputStream(&quot;/tmp/test.obj&quot;))</span>
+<span class="c1">// out.writeObject(fred); out.close()</span>
+<span class="c1">// Deserialize</span>
+<span class="c1">// val in = new ObjectInputStream(new FileInputStream(&quot;/tmp/test.obj&quot;))</span>
+<span class="c1">// val savedFred = in.readObject().asInstanceOf[Person6]</span>
+</code></pre></div>
+
+<h2 id="sys-process">sys Process</h2>
+<div class="codehilite"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">sys</span><span class="p">.</span><span class="nn">process</span><span class="p">.</span><span class="n">_</span>
+<span class="s">&quot;c:/MJN/hello.bat&quot;</span><span class="w"> </span><span class="o">!</span><span class="w">  </span><span class="c1">// Runs cmd</span>
+
+<span class="s">&quot;c:/MJN/hello.bat&quot;</span><span class="w"> </span><span class="o">!!</span><span class="w"> </span><span class="c1">// Runs cmd returns String</span>
+
+<span class="c1">// #| is pipe, #&gt; and #&lt; are redirect.</span>
+<span class="c1">// &quot;ls&quot; #| &quot;grep xxx&quot; !</span>
+<span class="c1">// &quot;ls&quot; #&gt; new File(&quot;x&quot;) !</span>
+</code></pre></div>
+
+<hr>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: December 10, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Javascript ASYNC AWAIT By Example" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <title>Javascript ASYNC AWAIT By Example</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>Javascript ASYNC AWAIT By Example</h1>
+<p>At first sight the Javascript ASYNC / AWAIT commands can look quite confusing when in use.  But, once I wrote a worked example, it was actually quite clear.</p>
+<p>In the example below, the function <code>fetchData</code> is declared ASYNC so that it can wrap an AWAIT on a call to <code>axios.get</code>.  I use <code>axios.get</code> to fetch a web page to introduce an unpredictable delay.  This isn't the ASYNC / AWAIT example as such.</p>
+<p>In the main body of the example, I invoke the function <code>fetchData</code> 3 times and these run in parallel.  Due to the unpredictable nature of the web content fetch inside <code>fetchData</code> these are not expected to finish in the order they were invoked.</p>
+<p>Having said that, I AWAIT on <code>fetchData</code> in the order I invoke them however ,the order doesn't really matter.  If, say, invocation 2 finishes before invocation 1 then as soon a invocation 1 finishes and we then move to AWAIT invocation 2, invocation 2 will return immediately.</p>
+<p>To allow the main body of the code to AWAIT on <code>fetchData</code> I use an anonymous function declared as ASYNC to wrap the AWAIT calls.</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">axios</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;axios&#39;</span><span class="p">);</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">clog</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">args</span><span class="p">);}</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">timeMS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">prevTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">prevTime</span><span class="p">;}</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">STARTTIME</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">timeMS</span><span class="p">();</span>
+
+<span class="c1">// Function defined ASYNC so that functions inside can be invoked with an AWAIT.</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">fetchData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">(</span><span class="nx">label</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">clog</span><span class="p">(</span><span class="nx">timeMS</span><span class="p">(</span><span class="nx">STARTTIME</span><span class="p">),</span><span class="w"> </span><span class="s1">&#39;fetchData&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">label</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;begin&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">axios</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;https://www.bbc.co.uk/news&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">clog</span><span class="p">(</span><span class="nx">timeMS</span><span class="p">(</span><span class="nx">STARTTIME</span><span class="p">),</span><span class="w"> </span><span class="s1">&#39;fetchData&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">label</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;end&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="nx">result</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="nx">clog</span><span class="p">(</span><span class="nx">timeMS</span><span class="p">(</span><span class="nx">STARTTIME</span><span class="p">),</span><span class="w"> </span><span class="s1">&#39;main&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;begin&#39;</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">res1</span><span class="o">=</span><span class="nx">fetchData</span><span class="p">(</span><span class="mf">1</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">res2</span><span class="o">=</span><span class="nx">fetchData</span><span class="p">(</span><span class="mf">2</span><span class="p">);</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">res3</span><span class="o">=</span><span class="nx">fetchData</span><span class="p">(</span><span class="mf">3</span><span class="p">);</span>
+<span class="nx">clog</span><span class="p">(</span><span class="nx">timeMS</span><span class="p">(</span><span class="nx">STARTTIME</span><span class="p">),</span><span class="w"> </span><span class="s1">&#39;main&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;fetchData 1,2,3 invoked&#39;</span><span class="p">);</span>
+
+<span class="c1">// Declare anonymous ASYNC function to wrap AWAIT function calls.</span>
+<span class="p">(</span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// I don&#39;t expect these to finish in the order I invoked them but it doesn&#39;t</span>
+<span class="w">  </span><span class="c1">// actually matter.  If, say, res2 finishes before res1 then as soon a res1</span>
+<span class="w">  </span><span class="c1">// finishes and we then move to AWAIT res2, res2 will return immediately.</span>
+<span class="w">  </span><span class="k">await</span><span class="w"> </span><span class="nx">res1</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">clog</span><span class="p">(</span><span class="nx">timeMS</span><span class="p">(</span><span class="nx">STARTTIME</span><span class="p">),</span><span class="w"> </span><span class="s1">&#39;main&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;fetchData 1 finished&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="k">await</span><span class="w"> </span><span class="nx">res2</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">clog</span><span class="p">(</span><span class="nx">timeMS</span><span class="p">(</span><span class="nx">STARTTIME</span><span class="p">),</span><span class="w"> </span><span class="s1">&#39;main&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;fetchData 2 finished&#39;</span><span class="p">);</span>
+<span class="w">  </span><span class="k">await</span><span class="w"> </span><span class="nx">res3</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">clog</span><span class="p">(</span><span class="nx">timeMS</span><span class="p">(</span><span class="nx">STARTTIME</span><span class="p">),</span><span class="w"> </span><span class="s1">&#39;main&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;fetchData 3 finished&#39;</span><span class="p">);</span>
+<span class="p">})();</span><span class="w"> </span><span class="c1">// The () after the definition executes the anonymous function.</span>
+
+<span class="nx">clog</span><span class="p">(</span><span class="nx">timeMS</span><span class="p">(</span><span class="nx">STARTTIME</span><span class="p">),</span><span class="w"> </span><span class="s1">&#39;main&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;end (outside await)&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+<p>The output when running the above Javascript is as follows.  Note field 1 in the output is ms since since execution of the main body began.</p>
+<div class="codehilite"><pre><span></span><code>$&gt;<span class="w"> </span>node<span class="w"> </span>await-example.js
+
+<span class="o">[</span><span class="w"> </span><span class="m">0</span>,<span class="w"> </span><span class="s1">&#39;main&#39;</span>,<span class="w"> </span><span class="s1">&#39;begin&#39;</span><span class="w"> </span><span class="o">]</span>
+
+<span class="o">[</span><span class="w"> </span><span class="m">3</span>,<span class="w"> </span><span class="s1">&#39;fetchData&#39;</span>,<span class="w"> </span><span class="m">1</span>,<span class="w"> </span><span class="s1">&#39;begin&#39;</span><span class="w"> </span><span class="o">]</span><span class="w">  </span><span class="c1"># A message from within fetchData function which</span>
+<span class="o">[</span><span class="w"> </span><span class="m">4</span>,<span class="w"> </span><span class="s1">&#39;fetchData&#39;</span>,<span class="w"> </span><span class="m">2</span>,<span class="w"> </span><span class="s1">&#39;begin&#39;</span><span class="w"> </span><span class="o">]</span><span class="w">  </span><span class="c1"># shows the function is running.  3 parallel</span>
+<span class="o">[</span><span class="w"> </span><span class="m">5</span>,<span class="w"> </span><span class="s1">&#39;fetchData&#39;</span>,<span class="w"> </span><span class="m">3</span>,<span class="w"> </span><span class="s1">&#39;begin&#39;</span><span class="w"> </span><span class="o">]</span><span class="w">  </span><span class="c1"># instances running.</span>
+
+<span class="o">[</span><span class="w"> </span><span class="m">6</span>,<span class="w"> </span><span class="s1">&#39;main&#39;</span>,<span class="w"> </span><span class="s1">&#39;fetchData 1,2,3 invoked&#39;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="c1"># The main body has finished invoking fetchData</span>
+
+<span class="o">[</span><span class="w"> </span><span class="m">7</span>,<span class="w"> </span><span class="s1">&#39;main&#39;</span>,<span class="w"> </span><span class="s1">&#39;end (outside await)&#39;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="c1"># The main body, outside the AWAIT on fetchData</span>
+<span class="w">                                     </span><span class="c1"># finishes running</span>
+
+<span class="o">[</span><span class="w"> </span><span class="m">326</span>,<span class="w"> </span><span class="s1">&#39;fetchData&#39;</span>,<span class="w"> </span><span class="m">2</span>,<span class="w"> </span><span class="s1">&#39;end&#39;</span><span class="w"> </span><span class="o">]</span><span class="w">  </span><span class="c1"># A message from inside fetchData function which </span>
+<span class="o">[</span><span class="w"> </span><span class="m">363</span>,<span class="w"> </span><span class="s1">&#39;fetchData&#39;</span>,<span class="w"> </span><span class="m">3</span>,<span class="w"> </span><span class="s1">&#39;end&#39;</span><span class="w"> </span><span class="o">]</span><span class="w">  </span><span class="c1"># shows each of the 3 instances finish running.</span>
+<span class="o">[</span><span class="w"> </span><span class="m">606</span>,<span class="w"> </span><span class="s1">&#39;fetchData&#39;</span>,<span class="w"> </span><span class="m">1</span>,<span class="w"> </span><span class="s1">&#39;end&#39;</span><span class="w"> </span><span class="o">]</span><span class="w">  </span><span class="c1"># Note they finsih in a different order than which</span>
+<span class="w">                                </span><span class="c1"># they were invoked.</span>
+
+<span class="o">[</span><span class="w"> </span><span class="m">607</span>,<span class="w"> </span><span class="s1">&#39;main&#39;</span>,<span class="w"> </span><span class="s1">&#39;fetchData 1 finished&#39;</span><span class="w"> </span><span class="o">]</span><span class="w">  </span><span class="c1"># The AWAIT on fetchData statements finish.</span>
+<span class="o">[</span><span class="w"> </span><span class="m">608</span>,<span class="w"> </span><span class="s1">&#39;main&#39;</span>,<span class="w"> </span><span class="s1">&#39;fetchData 2 finished&#39;</span><span class="w"> </span><span class="o">]</span><span class="w">  </span><span class="c1"># Note that as invocation 2 and 3 complete</span>
+<span class="o">[</span><span class="w"> </span><span class="m">609</span>,<span class="w"> </span><span class="s1">&#39;main&#39;</span>,<span class="w"> </span><span class="s1">&#39;fetchData 3 finished&#39;</span><span class="w"> </span><span class="o">]</span><span class="w">  </span><span class="c1"># before invocation 1, as soon as 1 finishes</span>
+<span class="w">                                         </span><span class="c1"># the other 2 have no waiting left to do so</span>
+<span class="w">                                         </span><span class="c1"># finish immediatly.</span>
+</code></pre></div>
+
+<hr>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: November 25, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>
