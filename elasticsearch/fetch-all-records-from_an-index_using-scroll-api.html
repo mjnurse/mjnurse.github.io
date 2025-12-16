@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -90,89 +90,89 @@
         <div class="article-body">
           <h1>Fetch All Records From an Index using Scroll API</h1>
 <p>A bash script to fetch all records from an Elasticsearch index.</p>
-<pre class="codehilite"><code class="language-bash">#!/bin/bash
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 
-# Scroll through all records in index 'mjn-tiny', reading 5 records at a time.
-index=mjn-tiny
-query_size=5
+<span class="c1"># Scroll through all records in index &#39;mjn-tiny&#39;, reading 5 records at a time.</span>
+<span class="nv">index</span><span class="o">=</span>mjn-tiny
+<span class="nv">query_size</span><span class="o">=</span><span class="m">5</span>
 
-tmp1=$0.tmp1
-tmp2=$0.tmp2
+<span class="nv">tmp1</span><span class="o">=</span><span class="nv">$0</span>.tmp1
+<span class="nv">tmp2</span><span class="o">=</span><span class="nv">$0</span>.tmp2
 
-# Run initial search/fetch (no search criteria).  &quot;sort&quot;: [&quot;_doc&quot;] is an Elasticsearch
-# recommended performance setting.  Request a scroll key, set lifespan to 1 minute.
-curl -s -X GET http://localhost:9200/$index/_search?scroll=1m \
-     -H 'Content-Type: application/json' -d '
-{
-  &quot;size&quot;:'$query_size',
-  &quot;sort&quot;: [&quot;_doc&quot;]
-}
-' &gt; $tmp1
+<span class="c1"># Run initial search/fetch (no search criteria).  &quot;sort&quot;: [&quot;_doc&quot;] is an Elasticsearch</span>
+<span class="c1"># recommended performance setting.  Request a scroll key, set lifespan to 1 minute.</span>
+curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>http://localhost:9200/<span class="nv">$index</span>/_search?scroll<span class="o">=</span>1m<span class="w"> </span><span class="se">\</span>
+<span class="w">     </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;</span>
+<span class="s1">{</span>
+<span class="s1">  &quot;size&quot;:&#39;</span><span class="nv">$query_size</span><span class="s1">&#39;,</span>
+<span class="s1">  &quot;sort&quot;: [&quot;_doc&quot;]</span>
+<span class="s1">}</span>
+<span class="s1">&#39;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$tmp1</span>
 
-# Show the hits (index records).
-cat $tmp1 | jq -c '.hits | .hits'
-echo &quot;--------------------&quot;
+<span class="c1"># Show the hits (index records).</span>
+cat<span class="w"> </span><span class="nv">$tmp1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;.hits | .hits&#39;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;--------------------&quot;</span>
 
-# Extract the scroll id.
-scroll_id=&quot;$(cat $tmp1 | jq '._scroll_id')&quot;
+<span class="c1"># Extract the scroll id.</span>
+<span class="nv">scroll_id</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>cat<span class="w"> </span><span class="nv">$tmp1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;._scroll_id&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
 
-# An endless loop.
-while [ 1 ]; do
+<span class="c1"># An endless loop.</span>
+<span class="k">while</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
 
-  # Run a scroll query using the scroll id.
-  curl -s -X POST http://localhost:9200/_search/scroll \
-       -H 'Content-Type: application/json' -d '
-  {
-    &quot;scroll&quot; : &quot;1m&quot;,                                                                 
-    &quot;scroll_id&quot; : '$scroll_id'
-  }
-  ' &gt; $tmp1
+<span class="w">  </span><span class="c1"># Run a scroll query using the scroll id.</span>
+<span class="w">  </span>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://localhost:9200/_search/scroll<span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;</span>
+<span class="s1">  {</span>
+<span class="s1">    &quot;scroll&quot; : &quot;1m&quot;,                                                                 </span>
+<span class="s1">    &quot;scroll_id&quot; : &#39;</span><span class="nv">$scroll_id</span><span class="s1">&#39;</span>
+<span class="s1">  }</span>
+<span class="s1">  &#39;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$tmp1</span>
 
-  # Extract the hits (index records).
-  cat $tmp1 | jq -c '.hits | .hits' &gt; $tmp2
+<span class="w">  </span><span class="c1"># Extract the hits (index records).</span>
+<span class="w">  </span>cat<span class="w"> </span><span class="nv">$tmp1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;.hits | .hits&#39;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$tmp2</span>
 
-  # If the hits (JSON array) is empty then we have reached the end of the records, so exit.
-  if [[ &quot;$(cat $tmp2)&quot; == &quot;[]&quot; ]]; then
-    echo &quot;Done!&quot;
-    exit
-  fi
-  cat $tmp2
-  echo &quot;--------------------&quot;
-done
+<span class="w">  </span><span class="c1"># If the hits (JSON array) is empty then we have reached the end of the records, so exit.</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>cat<span class="w"> </span><span class="nv">$tmp2</span><span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;[]&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Done!&quot;</span>
+<span class="w">    </span><span class="nb">exit</span>
+<span class="w">  </span><span class="k">fi</span>
+<span class="w">  </span>cat<span class="w"> </span><span class="nv">$tmp2</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;--------------------&quot;</span>
+<span class="k">done</span>
 
-rm -f $tmp1 $tmp2
-</code></pre>
+rm<span class="w"> </span>-f<span class="w"> </span><span class="nv">$tmp1</span><span class="w"> </span><span class="nv">$tmp2</span>
+</code></pre></div>
 
 <p>Running the script.</p>
-<pre class="codehilite"><code class="language-bash">&gt; fetch_all
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>fetch_all
 
-[{&quot;_index&quot;:&quot;mjn-tiny&quot;,&quot;_type&quot;:&quot;_doc&quot;,&quot;_id&quot;:&quot;CZIpgYsBOIyX700AWp8p&quot;,&quot;_score&quot;:null,&quot;_source&quot;:{&quot;set&quot;:0,&quot;
-num&quot;:0},&quot;sort&quot;:[0]},{&quot;_index&quot;:&quot;mjn-tiny&quot;,&quot;_type&quot;:&quot;_doc&quot;,&quot;_id&quot;:&quot;CpIpgYsBOIyX700AWp8p&quot;,&quot;_score&quot;:null,&quot;
-_source&quot;:{&quot;set&quot;:0,&quot;num&quot;:1},&quot;sort&quot;:[1]},{&quot;_index&quot;:&quot;mjn-tiny&quot;,&quot;_type&quot;:&quot;_doc&quot;,&quot;_id&quot;:&quot;C5IpgYsBOIyX700AWp
-8p&quot;,&quot;_score&quot;:null,&quot;_source&quot;:{&quot;set&quot;:0,&quot;num&quot;:2},&quot;sort&quot;:[2]},{&quot;_index&quot;:&quot;mjn-tiny&quot;,&quot;_type&quot;:&quot;_doc&quot;,&quot;_id&quot;:
-&quot;DJIpgYsBOIyX700AWp8p&quot;,&quot;_score&quot;:null,&quot;_source&quot;:{&quot;set&quot;:0,&quot;num&quot;:3},&quot;sort&quot;:[3]},{&quot;_index&quot;:&quot;mjn-tiny&quot;,&quot;_
-type&quot;:&quot;_doc&quot;,&quot;_id&quot;:&quot;DZIpgYsBOIyX700AW58o&quot;,&quot;_score&quot;:null,&quot;_source&quot;:{&quot;set&quot;:1,&quot;num&quot;:0},&quot;sort&quot;:[4]}]
+<span class="o">[{</span><span class="s2">&quot;_index&quot;</span>:<span class="s2">&quot;mjn-tiny&quot;</span>,<span class="s2">&quot;_type&quot;</span>:<span class="s2">&quot;_doc&quot;</span>,<span class="s2">&quot;_id&quot;</span>:<span class="s2">&quot;CZIpgYsBOIyX700AWp8p&quot;</span>,<span class="s2">&quot;_score&quot;</span>:null,<span class="s2">&quot;_source&quot;</span>:<span class="o">{</span><span class="s2">&quot;set&quot;</span>:0,<span class="s2">&quot;</span>
+<span class="s2">num&quot;</span>:0<span class="o">}</span>,<span class="s2">&quot;sort&quot;</span>:<span class="o">[</span><span class="m">0</span><span class="o">]}</span>,<span class="o">{</span><span class="s2">&quot;_index&quot;</span>:<span class="s2">&quot;mjn-tiny&quot;</span>,<span class="s2">&quot;_type&quot;</span>:<span class="s2">&quot;_doc&quot;</span>,<span class="s2">&quot;_id&quot;</span>:<span class="s2">&quot;CpIpgYsBOIyX700AWp8p&quot;</span>,<span class="s2">&quot;_score&quot;</span>:null,<span class="s2">&quot;</span>
+<span class="s2">_source&quot;</span>:<span class="o">{</span><span class="s2">&quot;set&quot;</span>:0,<span class="s2">&quot;num&quot;</span>:1<span class="o">}</span>,<span class="s2">&quot;sort&quot;</span>:<span class="o">[</span><span class="m">1</span><span class="o">]}</span>,<span class="o">{</span><span class="s2">&quot;_index&quot;</span>:<span class="s2">&quot;mjn-tiny&quot;</span>,<span class="s2">&quot;_type&quot;</span>:<span class="s2">&quot;_doc&quot;</span>,<span class="s2">&quot;_id&quot;</span>:<span class="s2">&quot;C5IpgYsBOIyX700AWp</span>
+<span class="s2">8p&quot;</span>,<span class="s2">&quot;_score&quot;</span>:null,<span class="s2">&quot;_source&quot;</span>:<span class="o">{</span><span class="s2">&quot;set&quot;</span>:0,<span class="s2">&quot;num&quot;</span>:2<span class="o">}</span>,<span class="s2">&quot;sort&quot;</span>:<span class="o">[</span><span class="m">2</span><span class="o">]}</span>,<span class="o">{</span><span class="s2">&quot;_index&quot;</span>:<span class="s2">&quot;mjn-tiny&quot;</span>,<span class="s2">&quot;_type&quot;</span>:<span class="s2">&quot;_doc&quot;</span>,<span class="s2">&quot;_id&quot;</span>:
+<span class="s2">&quot;DJIpgYsBOIyX700AWp8p&quot;</span>,<span class="s2">&quot;_score&quot;</span>:null,<span class="s2">&quot;_source&quot;</span>:<span class="o">{</span><span class="s2">&quot;set&quot;</span>:0,<span class="s2">&quot;num&quot;</span>:3<span class="o">}</span>,<span class="s2">&quot;sort&quot;</span>:<span class="o">[</span><span class="m">3</span><span class="o">]}</span>,<span class="o">{</span><span class="s2">&quot;_index&quot;</span>:<span class="s2">&quot;mjn-tiny&quot;</span>,<span class="s2">&quot;_</span>
+<span class="s2">type&quot;</span>:<span class="s2">&quot;_doc&quot;</span>,<span class="s2">&quot;_id&quot;</span>:<span class="s2">&quot;DZIpgYsBOIyX700AW58o&quot;</span>,<span class="s2">&quot;_score&quot;</span>:null,<span class="s2">&quot;_source&quot;</span>:<span class="o">{</span><span class="s2">&quot;set&quot;</span>:1,<span class="s2">&quot;num&quot;</span>:0<span class="o">}</span>,<span class="s2">&quot;sort&quot;</span>:<span class="o">[</span><span class="m">4</span><span class="o">]}]</span>
 --------------------
-[{&quot;_index&quot;:&quot;mjn-tiny&quot;,&quot;_type&quot;:&quot;_doc&quot;,&quot;_id&quot;:&quot;DpIpgYsBOIyX700AW58o&quot;,&quot;_score&quot;:null,&quot;_source&quot;:{&quot;set&quot;:1,&quot;
-num&quot;:1},&quot;sort&quot;:[5]},{&quot;_index&quot;:&quot;mjn-tiny&quot;,&quot;_type&quot;:&quot;_doc&quot;,&quot;_id&quot;:&quot;D5IpgYsBOIyX700AW58o&quot;,&quot;_score&quot;:null,&quot;
-_source&quot;:{&quot;set&quot;:1,&quot;num&quot;:2},&quot;sort&quot;:[6]},{&quot;_index&quot;:&quot;mjn-tiny&quot;,&quot;_type&quot;:&quot;_doc&quot;,&quot;_id&quot;:&quot;EJIpgYsBOIyX700AW5
-8o&quot;,&quot;_score&quot;:null,&quot;_source&quot;:{&quot;set&quot;:1,&quot;num&quot;:3},&quot;sort&quot;:[7]},{&quot;_index&quot;:&quot;mjn-tiny&quot;,&quot;_type&quot;:&quot;_doc&quot;,&quot;_id&quot;:
-&quot;EZIpgYsBOIyX700AW5-M&quot;,&quot;_score&quot;:null,&quot;_source&quot;:{&quot;set&quot;:2,&quot;num&quot;:0},&quot;sort&quot;:[8]},{&quot;_index&quot;:&quot;mjn-tiny&quot;,&quot;_
-type&quot;:&quot;_doc&quot;,&quot;_id&quot;:&quot;EpIpgYsBOIyX700AW5-M&quot;,&quot;_score&quot;:null,&quot;_source&quot;:{&quot;set&quot;:2,&quot;num&quot;:1},&quot;sort&quot;:[9]}]
+<span class="o">[{</span><span class="s2">&quot;_index&quot;</span>:<span class="s2">&quot;mjn-tiny&quot;</span>,<span class="s2">&quot;_type&quot;</span>:<span class="s2">&quot;_doc&quot;</span>,<span class="s2">&quot;_id&quot;</span>:<span class="s2">&quot;DpIpgYsBOIyX700AW58o&quot;</span>,<span class="s2">&quot;_score&quot;</span>:null,<span class="s2">&quot;_source&quot;</span>:<span class="o">{</span><span class="s2">&quot;set&quot;</span>:1,<span class="s2">&quot;</span>
+<span class="s2">num&quot;</span>:1<span class="o">}</span>,<span class="s2">&quot;sort&quot;</span>:<span class="o">[</span><span class="m">5</span><span class="o">]}</span>,<span class="o">{</span><span class="s2">&quot;_index&quot;</span>:<span class="s2">&quot;mjn-tiny&quot;</span>,<span class="s2">&quot;_type&quot;</span>:<span class="s2">&quot;_doc&quot;</span>,<span class="s2">&quot;_id&quot;</span>:<span class="s2">&quot;D5IpgYsBOIyX700AW58o&quot;</span>,<span class="s2">&quot;_score&quot;</span>:null,<span class="s2">&quot;</span>
+<span class="s2">_source&quot;</span>:<span class="o">{</span><span class="s2">&quot;set&quot;</span>:1,<span class="s2">&quot;num&quot;</span>:2<span class="o">}</span>,<span class="s2">&quot;sort&quot;</span>:<span class="o">[</span><span class="m">6</span><span class="o">]}</span>,<span class="o">{</span><span class="s2">&quot;_index&quot;</span>:<span class="s2">&quot;mjn-tiny&quot;</span>,<span class="s2">&quot;_type&quot;</span>:<span class="s2">&quot;_doc&quot;</span>,<span class="s2">&quot;_id&quot;</span>:<span class="s2">&quot;EJIpgYsBOIyX700AW5</span>
+<span class="s2">8o&quot;</span>,<span class="s2">&quot;_score&quot;</span>:null,<span class="s2">&quot;_source&quot;</span>:<span class="o">{</span><span class="s2">&quot;set&quot;</span>:1,<span class="s2">&quot;num&quot;</span>:3<span class="o">}</span>,<span class="s2">&quot;sort&quot;</span>:<span class="o">[</span><span class="m">7</span><span class="o">]}</span>,<span class="o">{</span><span class="s2">&quot;_index&quot;</span>:<span class="s2">&quot;mjn-tiny&quot;</span>,<span class="s2">&quot;_type&quot;</span>:<span class="s2">&quot;_doc&quot;</span>,<span class="s2">&quot;_id&quot;</span>:
+<span class="s2">&quot;EZIpgYsBOIyX700AW5-M&quot;</span>,<span class="s2">&quot;_score&quot;</span>:null,<span class="s2">&quot;_source&quot;</span>:<span class="o">{</span><span class="s2">&quot;set&quot;</span>:2,<span class="s2">&quot;num&quot;</span>:0<span class="o">}</span>,<span class="s2">&quot;sort&quot;</span>:<span class="o">[</span><span class="m">8</span><span class="o">]}</span>,<span class="o">{</span><span class="s2">&quot;_index&quot;</span>:<span class="s2">&quot;mjn-tiny&quot;</span>,<span class="s2">&quot;_</span>
+<span class="s2">type&quot;</span>:<span class="s2">&quot;_doc&quot;</span>,<span class="s2">&quot;_id&quot;</span>:<span class="s2">&quot;EpIpgYsBOIyX700AW5-M&quot;</span>,<span class="s2">&quot;_score&quot;</span>:null,<span class="s2">&quot;_source&quot;</span>:<span class="o">{</span><span class="s2">&quot;set&quot;</span>:2,<span class="s2">&quot;num&quot;</span>:1<span class="o">}</span>,<span class="s2">&quot;sort&quot;</span>:<span class="o">[</span><span class="m">9</span><span class="o">]}]</span>
 --------------------
-[{&quot;_index&quot;:&quot;mjn-tiny&quot;,&quot;_type&quot;:&quot;_doc&quot;,&quot;_id&quot;:&quot;E5IpgYsBOIyX700AW5-M&quot;,&quot;_score&quot;:null,&quot;_source&quot;:{&quot;set&quot;:2,&quot;
-num&quot;:2},&quot;sort&quot;:[10]},{&quot;_index&quot;:&quot;mjn-tiny&quot;,&quot;_type&quot;:&quot;_doc&quot;,&quot;_id&quot;:&quot;FJIpgYsBOIyX700AW5-M&quot;,&quot;_score&quot;:null,
-&quot;_source&quot;:{&quot;set&quot;:2,&quot;num&quot;:3},&quot;sort&quot;:[11]},{&quot;_index&quot;:&quot;mjn-tiny&quot;,&quot;_type&quot;:&quot;_doc&quot;,&quot;_id&quot;:&quot;FZIpgYsBOIyX700A
-XJ8A&quot;,&quot;_score&quot;:null,&quot;_source&quot;:{&quot;set&quot;:3,&quot;num&quot;:0},&quot;sort&quot;:[12]},{&quot;_index&quot;:&quot;mjn-tiny&quot;,&quot;_type&quot;:&quot;_doc&quot;,&quot;_i
-d&quot;:&quot;FpIpgYsBOIyX700AXJ8A&quot;,&quot;_score&quot;:null,&quot;_source&quot;:{&quot;set&quot;:3,&quot;num&quot;:1},&quot;sort&quot;:[13]},{&quot;_index&quot;:&quot;mjn-tiny
-&quot;,&quot;_type&quot;:&quot;_doc&quot;,&quot;_id&quot;:&quot;F5IpgYsBOIyX700AXJ8A&quot;,&quot;_score&quot;:null,&quot;_source&quot;:{&quot;set&quot;:3,&quot;num&quot;:2},&quot;sort&quot;:[14]}
-]
+<span class="o">[{</span><span class="s2">&quot;_index&quot;</span>:<span class="s2">&quot;mjn-tiny&quot;</span>,<span class="s2">&quot;_type&quot;</span>:<span class="s2">&quot;_doc&quot;</span>,<span class="s2">&quot;_id&quot;</span>:<span class="s2">&quot;E5IpgYsBOIyX700AW5-M&quot;</span>,<span class="s2">&quot;_score&quot;</span>:null,<span class="s2">&quot;_source&quot;</span>:<span class="o">{</span><span class="s2">&quot;set&quot;</span>:2,<span class="s2">&quot;</span>
+<span class="s2">num&quot;</span>:2<span class="o">}</span>,<span class="s2">&quot;sort&quot;</span>:<span class="o">[</span><span class="m">10</span><span class="o">]}</span>,<span class="o">{</span><span class="s2">&quot;_index&quot;</span>:<span class="s2">&quot;mjn-tiny&quot;</span>,<span class="s2">&quot;_type&quot;</span>:<span class="s2">&quot;_doc&quot;</span>,<span class="s2">&quot;_id&quot;</span>:<span class="s2">&quot;FJIpgYsBOIyX700AW5-M&quot;</span>,<span class="s2">&quot;_score&quot;</span>:null,
+<span class="s2">&quot;_source&quot;</span>:<span class="o">{</span><span class="s2">&quot;set&quot;</span>:2,<span class="s2">&quot;num&quot;</span>:3<span class="o">}</span>,<span class="s2">&quot;sort&quot;</span>:<span class="o">[</span><span class="m">11</span><span class="o">]}</span>,<span class="o">{</span><span class="s2">&quot;_index&quot;</span>:<span class="s2">&quot;mjn-tiny&quot;</span>,<span class="s2">&quot;_type&quot;</span>:<span class="s2">&quot;_doc&quot;</span>,<span class="s2">&quot;_id&quot;</span>:<span class="s2">&quot;FZIpgYsBOIyX700A</span>
+<span class="s2">XJ8A&quot;</span>,<span class="s2">&quot;_score&quot;</span>:null,<span class="s2">&quot;_source&quot;</span>:<span class="o">{</span><span class="s2">&quot;set&quot;</span>:3,<span class="s2">&quot;num&quot;</span>:0<span class="o">}</span>,<span class="s2">&quot;sort&quot;</span>:<span class="o">[</span><span class="m">12</span><span class="o">]}</span>,<span class="o">{</span><span class="s2">&quot;_index&quot;</span>:<span class="s2">&quot;mjn-tiny&quot;</span>,<span class="s2">&quot;_type&quot;</span>:<span class="s2">&quot;_doc&quot;</span>,<span class="s2">&quot;_i</span>
+<span class="s2">d&quot;</span>:<span class="s2">&quot;FpIpgYsBOIyX700AXJ8A&quot;</span>,<span class="s2">&quot;_score&quot;</span>:null,<span class="s2">&quot;_source&quot;</span>:<span class="o">{</span><span class="s2">&quot;set&quot;</span>:3,<span class="s2">&quot;num&quot;</span>:1<span class="o">}</span>,<span class="s2">&quot;sort&quot;</span>:<span class="o">[</span><span class="m">13</span><span class="o">]}</span>,<span class="o">{</span><span class="s2">&quot;_index&quot;</span>:<span class="s2">&quot;mjn-tiny</span>
+<span class="s2">&quot;</span>,<span class="s2">&quot;_type&quot;</span>:<span class="s2">&quot;_doc&quot;</span>,<span class="s2">&quot;_id&quot;</span>:<span class="s2">&quot;F5IpgYsBOIyX700AXJ8A&quot;</span>,<span class="s2">&quot;_score&quot;</span>:null,<span class="s2">&quot;_source&quot;</span>:<span class="o">{</span><span class="s2">&quot;set&quot;</span>:3,<span class="s2">&quot;num&quot;</span>:2<span class="o">}</span>,<span class="s2">&quot;sort&quot;</span>:<span class="o">[</span><span class="m">14</span><span class="o">]}</span>
+<span class="o">]</span>
 --------------------
-[{&quot;_index&quot;:&quot;mjn-tiny&quot;,&quot;_type&quot;:&quot;_doc&quot;,&quot;_id&quot;:&quot;GJIpgYsBOIyX700AXJ8A&quot;,&quot;_score&quot;:null,&quot;_source&quot;:{&quot;set&quot;:3,&quot;
-num&quot;:3},&quot;sort&quot;:[15]}]
+<span class="o">[{</span><span class="s2">&quot;_index&quot;</span>:<span class="s2">&quot;mjn-tiny&quot;</span>,<span class="s2">&quot;_type&quot;</span>:<span class="s2">&quot;_doc&quot;</span>,<span class="s2">&quot;_id&quot;</span>:<span class="s2">&quot;GJIpgYsBOIyX700AXJ8A&quot;</span>,<span class="s2">&quot;_score&quot;</span>:null,<span class="s2">&quot;_source&quot;</span>:<span class="o">{</span><span class="s2">&quot;set&quot;</span>:3,<span class="s2">&quot;</span>
+<span class="s2">num&quot;</span>:3<span class="o">}</span>,<span class="s2">&quot;sort&quot;</span>:<span class="o">[</span><span class="m">15</span><span class="o">]}]</span>
 --------------------
 Done!
-</code></pre>
+</code></pre></div>
         </div>
       </article>
     </main>

@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -92,15 +92,15 @@
 <p>I'm working on 2 computers right now.  One automatically locks after 5 minutes.  Really great for security but maddening for me.</p>
 <p>It's a policy setting which I can't override.</p>
 <p>I keep knocking the mouse to keep it unlocked.  I then dawned on me that AHK could do that for me.</p>
-<pre class="codehilite"><code>; Script to stop the screen locking in Windows by generating some mouse activity.
+<div class="codehilite"><pre><span></span><code><span class="c">; Script to stop the screen locking in Windows by generating some mouse activity.</span>
 
-#Persistent
-#SingleInstance Force
+<span class="gh">#</span>Persistent
+<span class="gh">#</span>SingleInstance Force
 
 SetTimer, MoveMouse
 
-; Check the time that has passed since the last key press or mouse move, if its greater than 60 seconds
-; move the mouse 1 pixel and then back.
+<span class="c">; Check the time that has passed since the last key press or mouse move, if its greater than 60 seconds</span>
+<span class="c">; move the mouse 1 pixel and then back.</span>
 
 MoveMouse:
 If ( A_TimeIdle &gt; 60000 ) {
@@ -108,7 +108,7 @@ If ( A_TimeIdle &gt; 60000 ) {
   MouseMove, -1,-1,, R
 }
 Return
-</code></pre>
+</code></pre></div>
 
 <hr>
         </div>

@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -97,24 +97,24 @@
 | <img src="/GCP-G/GCP_Training/images/cr_vm2.png" width="800"> |</p>
 <h2 id="2-install-apache-create-a-default-web-page">2. Install Apache, create a default web page.</h2>
 <p>SSH to the VM and install config Apache web server.  Create a script to run when the instance boots which sets the default web page to show the machine name.  Use <code>crontab</code> to run this script when the machine boots.</p>
-<pre class="codehilite"><code class="language-bash">&gt; sudo su
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>sudo<span class="w"> </span>su
 
-&gt; apt install apache2
+&gt;<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>apache2
 
-# Create a script to set the default webpage to display the hostname on boot.
+<span class="c1"># Create a script to set the default webpage to display the hostname on boot.</span>
 
-&gt; echo 'echo &quot;Hello!&quot; &gt; /var/www/html/index.html' &gt; /onboot.sh
-&gt; echo 'hostname &gt;&gt; /var/www/html/index.html' &gt;&gt; /onboot.sh
-&gt; echo 'hostname -I &gt;&gt; /var/www/html/index.html' &gt;&gt; /onboot.sh
+&gt;<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;echo &quot;Hello!&quot; &gt; /var/www/html/index.html&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>/onboot.sh
+&gt;<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;hostname &gt;&gt; /var/www/html/index.html&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/onboot.sh
+&gt;<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;hostname -I &gt;&gt; /var/www/html/index.html&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/onboot.sh
 
-&gt; chmod +x /onboot.sh 
+&gt;<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span>/onboot.sh<span class="w"> </span>
 
-# Update crontab to run the onboot.sh script when the machine boots.
+<span class="c1"># Update crontab to run the onboot.sh script when the machine boots.</span>
 
-&gt; echo &quot;@reboot /onboot.sh&quot; &gt; mycron
+&gt;<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;@reboot /onboot.sh&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>mycron
 
-&gt; crontab mycron
-</code></pre>
+&gt;<span class="w"> </span>crontab<span class="w"> </span>mycron
+</code></pre></div>
 
 <h2 id="3-create-an-image-of-the-boot-disk">3. Create an image of the boot disk.</h2>
 <p>Stop the VM, then create an image of the boot disk.</p>

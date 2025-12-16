@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -90,26 +90,26 @@
         <div class="article-body">
           <h1>Azure AD - Find My AD Group Memberships</h1>
 <p>First authenticate - this command will pop up a window to sign in.</p>
-<pre class="codehilite"><code class="language-shell">&gt; Connect-AzureAD
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>Connect-AzureAD
 
-Account              Environment TenantId           TenantDomain AccountType
--------              ----------- --------           ------------ -----------
-martinnurse@demo.com AzureCloud  c780234d-ed5b-4ccd demo.com     User
-</code></pre>
+Account<span class="w">              </span>Environment<span class="w"> </span>TenantId<span class="w">           </span>TenantDomain<span class="w"> </span>AccountType
+-------<span class="w">              </span>-----------<span class="w"> </span>--------<span class="w">           </span>------------<span class="w"> </span>-----------
+martinnurse@demo.com<span class="w"> </span>AzureCloud<span class="w">  </span>c780234d-ed5b-4ccd<span class="w"> </span>demo.com<span class="w">     </span>User
+</code></pre></div>
 
 <p>Get my AD group memberships.</p>
-<pre class="codehilite"><code class="language-shell">&gt; Get-AzureADUser -SearchString martinnurse@demo.com `
-  | Get-AzureADUserMembership `
-  | % {Get-AzureADObjectByObjectId -ObjectId $_.ObjectId `
-  | select DisplayName,ObjectType,MailEnabled,SecurityEnabled,ObjectId} `
-  | ft
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>Get-AzureADUser<span class="w"> </span>-SearchString<span class="w"> </span>martinnurse@demo.com<span class="w"> </span><span class="sb">`</span>
+<span class="w">  </span><span class="p">|</span><span class="w"> </span>Get-AzureADUserMembership<span class="w"> </span><span class="sb">`</span>
+<span class="w">  </span><span class="p">|</span><span class="w"> </span>%<span class="w"> </span><span class="o">{</span>Get-AzureADObjectByObjectId<span class="w"> </span>-ObjectId<span class="w"> </span><span class="nv">$_</span>.ObjectId<span class="w"> </span><span class="sb">`</span>
+<span class="w">  </span><span class="p">|</span><span class="w"> </span><span class="k">select</span><span class="w"> </span>DisplayName,ObjectType,MailEnabled,SecurityEnabled,ObjectId<span class="o">}</span><span class="w"> </span><span class="sb">`</span>
+<span class="w">  </span><span class="p">|</span><span class="w"> </span>ft
 
-DisplayName      ObjectType MailEnabled SecurityEnabled ObjectId
------------      ---------- ----------- --------------- --------
-Sport And Social Group             True           False a3c234fe-82ba-4223-9e87
-AllStaff         Group             True            True 7869b234-1f75-433d-b9d5
+DisplayName<span class="w">      </span>ObjectType<span class="w"> </span>MailEnabled<span class="w"> </span>SecurityEnabled<span class="w"> </span>ObjectId
+-----------<span class="w">      </span>----------<span class="w"> </span>-----------<span class="w"> </span>---------------<span class="w"> </span>--------
+Sport<span class="w"> </span>And<span class="w"> </span>Social<span class="w"> </span>Group<span class="w">             </span>True<span class="w">           </span>False<span class="w"> </span>a3c234fe-82ba-4223-9e87
+AllStaff<span class="w">         </span>Group<span class="w">             </span>True<span class="w">            </span>True<span class="w"> </span>7869b234-1f75-433d-b9d5
 ...
-</code></pre>
+</code></pre></div>
         </div>
       </article>
     </main>

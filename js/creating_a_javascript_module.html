@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -93,22 +93,22 @@
 <p><strong>myModule.js</strong></p>
 <p>This contains one private function <code>rndInt</code> and one public (exported) function <code>rndColor</code>.</p>
 <p>I have also included a check with code which will run when <code>myModule.js</code> is run directly.  This might be useful for unit tests in the module (not sure).</p>
-<pre class="codehilite"><code class="language-javascript">const rndInt = (max) =&gt; Math.floor(Math.random() * max) + 1;
+<div class="codehilite"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">rndInt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">max</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">max</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span>
 
-exports.rndColor = () =&gt; '#' + (rndInt(256)-1).toString(16) +
-    (rndInt(256)-1).toString(16) + (rndInt(256)-1).toString(16);
+<span class="nx">exports</span><span class="p">.</span><span class="nx">rndColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s1">&#39;#&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="nx">rndInt</span><span class="p">(</span><span class="mf">256</span><span class="p">)</span><span class="o">-</span><span class="mf">1</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="mf">16</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
+<span class="w">    </span><span class="p">(</span><span class="nx">rndInt</span><span class="p">(</span><span class="mf">256</span><span class="p">)</span><span class="o">-</span><span class="mf">1</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="mf">16</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="nx">rndInt</span><span class="p">(</span><span class="mf">256</span><span class="p">)</span><span class="o">-</span><span class="mf">1</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="mf">16</span><span class="p">);</span>
 
-if (process.argv[1].match(/myModule.js$/g)) {
-  console.log('myModule run directly');
-}
-</code></pre>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">argv</span><span class="p">[</span><span class="mf">1</span><span class="p">].</span><span class="nx">match</span><span class="p">(</span><span class="sr">/myModule.js$/g</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;myModule run directly&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <h2 id="second-we-use-the-module">Second We Use the Module</h2>
 <p><strong>myProgram.js</strong></p>
-<pre class="codehilite"><code class="language-javascript">const m = require('./myModule');
+<div class="codehilite"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./myModule&#39;</span><span class="p">);</span>
 
-console.log(m.rndColor());
-</code></pre>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">m</span><span class="p">.</span><span class="nx">rndColor</span><span class="p">());</span>
+</code></pre></div>
 
 <hr>
         </div>

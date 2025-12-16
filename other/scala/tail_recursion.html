@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -92,35 +92,35 @@
 <p>A tail recursive function can reuse the stack frame - ie reuse the same area of memory to hold its current state for each recursive call.  A non tail recursive function needs to use additional memory for each recursive call.  A non tail recursive function applies logic to the result returned from each recursive iteration.  This means that the state of every iteration need to be maintained.</p>
 <p>A non tail recursive function should be avoided where the number of recursive iterations is large.</p>
 <h2 id="not-tail-recursive">Not Tail Recursive</h2>
-<pre class="codehilite"><code class="language-scala">def f(...): Int = if (...) x else x + f(...)
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(...):</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(...)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">f</span><span class="p">(...)</span>
+</code></pre></div>
 
 <p>This requires additional stack space each iteration.</p>
 <h2 id="tail-recursive">Tail Recursive</h2>
-<pre class="codehilite"><code class="language-scala">def f(...): Int = if (...) x else f(x)
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">f</span><span class="p">(...):</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(...)</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div>
 
 <p>This is called tail recursive, the stack frame can be reused.</p>
 <h2 id="example">Example</h2>
-<pre class="codehilite"><code class="language-scala">// Not tail recursive.
-//
-// Note that the function multiplies the value return by the child iteration.
+<div class="codehilite"><pre><span></span><code><span class="c1">// Not tail recursive.</span>
+<span class="c1">//</span>
+<span class="c1">// Note that the function multiplies the value return by the child iteration.</span>
 
-def fac(v: Int): Int = {
-   if (v == 1) v else v * f(v - 1)
-}
+<span class="k">def</span><span class="w"> </span><span class="nf">fac</span><span class="p">(</span><span class="n">v</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">):</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">v</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">v</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="p">}</span>
 
-// Tail recursive
-//
-// Note that Int value returned from each iteration is not used by the parent iteration.
+<span class="c1">// Tail recursive</span>
+<span class="c1">//</span>
+<span class="c1">// Note that Int value returned from each iteration is not used by the parent iteration.</span>
 
-def fac2(v: Int): Int = { 
-   def loop(a: Int, b: Int): Int = {
-      if (b == 0) a else loop(a * b, b - 1)
-      loop(1, v) 
-   }
-}
-</code></pre>
+<span class="k">def</span><span class="w"> </span><span class="nf">fac2</span><span class="p">(</span><span class="n">v</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">):</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
+<span class="w">   </span><span class="k">def</span><span class="w"> </span><span class="nf">loop</span><span class="p">(</span><span class="n">a</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">):</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">b</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="n">loop</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="w">      </span><span class="n">loop</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="p">)</span><span class="w"> </span>
+<span class="w">   </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <hr>
         </div>

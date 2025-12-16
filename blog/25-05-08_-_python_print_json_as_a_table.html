@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -90,22 +90,22 @@
         <div class="article-body">
           <h1>25-05-08 - Python Print JSON as a Table</h1>
 <p>I often want to look at an array/set of JSON objects in a tabular format.  I wrote the following.  Posting here as I'll want it again...</p>
-<pre class="codehilite"><code class="language-python">def jsontable(jsn, keys=[]):
-    # Get all the keys (columns)
-    columns = [key for key in jsn[0].keys() if key in keys or keys == []] if jsn else []
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">jsontable</span><span class="p">(</span><span class="n">jsn</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="p">[]):</span>
+    <span class="c1"># Get all the keys (columns)</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">key</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">jsn</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span> <span class="ow">or</span> <span class="n">keys</span> <span class="o">==</span> <span class="p">[]]</span> <span class="k">if</span> <span class="n">jsn</span> <span class="k">else</span> <span class="p">[]</span>
 
-    # Determine max width for each column, including the column name and the longest value in that column
-    column_widths = {col: max(len(col), max(len(str(row.get(col, ''))) for row in jsn)) for col in columns}
+    <span class="c1"># Determine max width for each column, including the column name and the longest value in that column</span>
+    <span class="n">column_widths</span> <span class="o">=</span> <span class="p">{</span><span class="n">col</span><span class="p">:</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">col</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)))</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">jsn</span><span class="p">))</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">}</span>
 
-    # Print the header
-    header = &quot; | &quot;.join(f&quot;{col:&lt;{column_widths[col]}}&quot; for col in columns)
-    print(header)
-    print(&quot;-&quot; * (len(header)))
+    <span class="c1"># Print the header</span>
+    <span class="n">header</span> <span class="o">=</span> <span class="s2">&quot; | &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">col</span><span class="si">:</span><span class="s2">&lt;</span><span class="si">{</span><span class="n">column_widths</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="si">}}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">header</span><span class="p">)))</span>
 
-    # Print each row
-    for row in jsn:
-        print(&quot; | &quot;.join(f&quot;{str(row.get(col, '')):&lt;{column_widths[col]}}&quot; for col in columns))
-</code></pre>
+    <span class="c1"># Print each row</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">jsn</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; | &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">col</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">))</span><span class="si">:</span><span class="s2">&lt;</span><span class="si">{</span><span class="n">column_widths</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="si">}}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">))</span>
+</code></pre></div>
         </div>
       </article>
     </main>

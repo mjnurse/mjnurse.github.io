@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -90,40 +90,40 @@
         <div class="article-body">
           <h1>Text To Speech - Clipboard</h1>
 <p>I've been using the Microsoft Word text-to-speech function for a while to proof read text.  Works great but the text needs to be a Word document or I need to copy and paste it there first.  I've been looking online for an application to read aloud the clipboard.  It's surprisingly difficult to find an application.  I then thought about AHK and (convinced it would be far to complex for AHK) I ran a search.  I was wrong, a very simple AHK script now means I can read aloud the contents of the clipboard in any application. </p>
-<pre class="codehilite"><code>; Read aloud the clipboard (text-to-speech).
-^F9::
-clipboard := &quot;&quot;
-Send ^c
-ClipWait, 0.5
-textToRead := clipboard
-voice:=ComObjCreate(&quot;SAPI.SpVoice&quot;)
-voice.Rate := 0
-voice.Speak(textToRead, 1)
-return
+<div class="codehilite"><pre><span></span><code><span class="p">;</span><span class="w"> </span><span class="n">Read</span><span class="w"> </span><span class="n">aloud</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">clipboard</span><span class="w"> </span><span class="p">(</span><span class="n">text</span><span class="o">-</span><span class="k">to</span><span class="o">-</span><span class="n">speech</span><span class="p">)</span><span class="o">.</span>
+<span class="o">^</span><span class="n">F9</span><span class="o">::</span>
+<span class="n">clipboard</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;&quot;</span>
+<span class="n">Send</span><span class="w"> </span><span class="o">^</span><span class="n">c</span>
+<span class="n">ClipWait</span><span class="o">,</span><span class="w"> </span><span class="mf">0.5</span>
+<span class="n">textToRead</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">clipboard</span>
+<span class="n">voice</span><span class="o">:=</span><span class="n">ComObjCreate</span><span class="p">(</span><span class="s">&quot;SAPI.SpVoice&quot;</span><span class="p">)</span>
+<span class="n">voice</span><span class="o">.</span><span class="n">Rate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span>
+<span class="n">voice</span><span class="o">.</span><span class="n">Speak</span><span class="p">(</span><span class="n">textToRead</span><span class="o">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<span class="k">return</span>
 
-; Stop reading aloud.
-^F10::
-voice.Speak(&quot;&quot;,0x1|0x2)
-Return
+<span class="p">;</span><span class="w"> </span><span class="n">Stop</span><span class="w"> </span><span class="n">reading</span><span class="w"> </span><span class="n">aloud</span><span class="o">.</span>
+<span class="o">^</span><span class="n">F10</span><span class="o">::</span>
+<span class="n">voice</span><span class="o">.</span><span class="n">Speak</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="o">,</span><span class="mi">0</span><span class="n">x1</span><span class="p">|</span><span class="mi">0</span><span class="n">x2</span><span class="p">)</span>
+<span class="n">Return</span>
 
-; Pause/resume reading aloud.
-^F11::
-status := voice.Status.RunningState
-If status = 0 ; paused
-    voice.Resume
-Else If status = 2 ; reading
-    voice.Pause
-Return
+<span class="p">;</span><span class="w"> </span><span class="n">Pause</span><span class="o">/</span><span class="n">resume</span><span class="w"> </span><span class="n">reading</span><span class="w"> </span><span class="n">aloud</span><span class="o">.</span>
+<span class="o">^</span><span class="n">F11</span><span class="o">::</span>
+<span class="n">status</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">voice</span><span class="o">.</span><span class="n">Status</span><span class="o">.</span><span class="n">RunningState</span>
+<span class="n">If</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">paused</span>
+<span class="w">    </span><span class="n">voice</span><span class="o">.</span><span class="n">Resume</span>
+<span class="n">Else</span><span class="w"> </span><span class="n">If</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="n">reading</span>
+<span class="w">    </span><span class="n">voice</span><span class="o">.</span><span class="n">Pause</span>
+<span class="n">Return</span>
 
-; Toggle read speed.
-^F12::
-readRate := voice.Rate
-If readRate &lt; 4
-   voice.Rate := readRate + 2
-Else
-   voice.Rate := 0
-Return
-</code></pre>
+<span class="p">;</span><span class="w"> </span><span class="n">Toggle</span><span class="w"> </span><span class="k">read</span><span class="w"> </span><span class="n">speed</span><span class="o">.</span>
+<span class="o">^</span><span class="n">F12</span><span class="o">::</span>
+<span class="n">readRate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">voice</span><span class="o">.</span><span class="n">Rate</span>
+<span class="n">If</span><span class="w"> </span><span class="n">readRate</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">4</span>
+<span class="w">   </span><span class="n">voice</span><span class="o">.</span><span class="n">Rate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="n">readRate</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">2</span>
+<span class="n">Else</span>
+<span class="w">   </span><span class="n">voice</span><span class="o">.</span><span class="n">Rate</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="mi">0</span>
+<span class="n">Return</span>
+</code></pre></div>
         </div>
       </article>
     </main>

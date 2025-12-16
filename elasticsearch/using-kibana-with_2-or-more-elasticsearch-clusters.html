@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -92,151 +92,151 @@
 <h1 id="using-kibana-with-2-or-more-elasticsearch-clusters">Using Kibana With 2 Or More Elasticsearch Clusters</h1>
 <h2 id="create-2-elasticsearch-clusters-and-a-kibana-instance">Create 2 Elasticsearch Clusters and a Kibana Instance</h2>
 <p>Using docker containers, I created 2 ES clusters, each with 2 nodes - 4 containers in total.  I created a 5th container for Kibana.</p>
-<pre class="codehilite"><code>&gt; docker ps -a
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">ps</span><span class="w"> </span><span class="o">-</span><span class="n">a</span>
 
-CONTAINER ID IMAGE               COMMAND               PORTS                                          NAMES
-0cd08909c412 elasticsearch:6.8.7 &quot;/usr/local/bin/dock&quot; 0.0.0.0:9200-&gt;9200/tcp, 0.0.0.0:9300-&gt;9300/tcp esc1n1
-b30174d5bd04 elasticsearch:6.8.7 &quot;/usr/local/bin/dock&quot; 0.0.0.0:9201-&gt;9201/tcp, 0.0.0.0:9301-&gt;9301/tcp esc1n2
-5fce5511c9b8 elasticsearch:6.8.7 &quot;/usr/local/bin/dock&quot; 0.0.0.0:9250-&gt;9250/tcp, 0.0.0.0:9350-&gt;9350/tcp esc2n1
-e9384eda5c56 elasticsearch:6.8.7 &quot;/usr/local/bin/dock&quot; 0.0.0.0:9251-&gt;9251/tcp, 0.0.0.0:9351-&gt;9351/tcp esc2n2
-2fb6e89d9dfb kibana:6.8.7        &quot;/usr/local/bin/kiba&quot; 0.0.0.0:5601-&gt;5601/tcp                         kibana
-</code></pre>
+<span class="n">CONTAINER</span><span class="w"> </span><span class="n">ID</span><span class="w"> </span><span class="n">IMAGE</span><span class="w">               </span><span class="n">COMMAND</span><span class="w">               </span><span class="n">PORTS</span><span class="w">                                          </span><span class="n">NAMES</span>
+<span class="mi">0</span><span class="n">cd08909c412</span><span class="w"> </span><span class="n">elasticsearch</span><span class="o">:</span><span class="mf">6.8.7</span><span class="w"> </span><span class="s">&quot;/usr/local/bin/dock&quot;</span><span class="w"> </span><span class="mf">0.0.0.0</span><span class="o">:</span><span class="mi">9200</span><span class="o">-&gt;</span><span class="mi">9200</span><span class="o">/</span><span class="n">tcp</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0.0.0</span><span class="o">:</span><span class="mi">9300</span><span class="o">-&gt;</span><span class="mi">9300</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="n">esc1n1</span>
+<span class="n">b30174d5bd04</span><span class="w"> </span><span class="n">elasticsearch</span><span class="o">:</span><span class="mf">6.8.7</span><span class="w"> </span><span class="s">&quot;/usr/local/bin/dock&quot;</span><span class="w"> </span><span class="mf">0.0.0.0</span><span class="o">:</span><span class="mi">9201</span><span class="o">-&gt;</span><span class="mi">9201</span><span class="o">/</span><span class="n">tcp</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0.0.0</span><span class="o">:</span><span class="mi">9301</span><span class="o">-&gt;</span><span class="mi">9301</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="n">esc1n2</span>
+<span class="mf">5f</span><span class="n">ce5511c9b8</span><span class="w"> </span><span class="n">elasticsearch</span><span class="o">:</span><span class="mf">6.8.7</span><span class="w"> </span><span class="s">&quot;/usr/local/bin/dock&quot;</span><span class="w"> </span><span class="mf">0.0.0.0</span><span class="o">:</span><span class="mi">9250</span><span class="o">-&gt;</span><span class="mi">9250</span><span class="o">/</span><span class="n">tcp</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0.0.0</span><span class="o">:</span><span class="mi">9350</span><span class="o">-&gt;</span><span class="mi">9350</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="n">esc2n1</span>
+<span class="n">e9384eda5c56</span><span class="w"> </span><span class="n">elasticsearch</span><span class="o">:</span><span class="mf">6.8.7</span><span class="w"> </span><span class="s">&quot;/usr/local/bin/dock&quot;</span><span class="w"> </span><span class="mf">0.0.0.0</span><span class="o">:</span><span class="mi">9251</span><span class="o">-&gt;</span><span class="mi">9251</span><span class="o">/</span><span class="n">tcp</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0.0.0</span><span class="o">:</span><span class="mi">9351</span><span class="o">-&gt;</span><span class="mi">9351</span><span class="o">/</span><span class="n">tcp</span><span class="w"> </span><span class="n">esc2n2</span>
+<span class="mf">2f</span><span class="n">b6e89d9dfb</span><span class="w"> </span><span class="n">kibana</span><span class="o">:</span><span class="mf">6.8.7</span><span class="w">        </span><span class="s">&quot;/usr/local/bin/kiba&quot;</span><span class="w"> </span><span class="mf">0.0.0.0</span><span class="o">:</span><span class="mi">5601</span><span class="o">-&gt;</span><span class="mi">5601</span><span class="o">/</span><span class="n">tcp</span><span class="w">                         </span><span class="n">kibana</span>
+</code></pre></div>
 
 <p><code>esc1n1 = elasticsearch, cluster 1, node 1.</code></p>
 <p>See below for the Docker Compose script for creating these containers.</p>
 <h2 id="adding-some-data">Adding Some Data</h2>
 <p>I created an index in each cluster and added some accurate data.  (I have a utility script <code>es</code> - the operations are fairly clear).</p>
 <h3 id="cluster-1">Cluster 1</h3>
-<pre class="codehilite"><code>&gt; es createindex c1ind 2 0
+<div class="codehilite"><pre><span></span><code><span class="k">&gt; </span><span class="ge">es createindex c1ind 2 0</span>
 (done)
-&gt; es addentry c1ind '{&quot;name&quot;:&quot;martin&quot;,&quot;age&quot;:&quot;21&quot;}'
+<span class="k">&gt; </span><span class="ge">es addentry c1ind &#39;{&quot;name&quot;:&quot;martin&quot;,&quot;age&quot;:&quot;21&quot;}&#39;</span>
 (done)
-&gt; es addentry c1ind '{&quot;name&quot;:&quot;stelios&quot;,&quot;age&quot;:&quot;51&quot;}'
+<span class="k">&gt; </span><span class="ge">es addentry c1ind &#39;{&quot;name&quot;:&quot;stelios&quot;,&quot;age&quot;:&quot;51&quot;}&#39;</span>
 (done)
-&gt; es listindexes
+<span class="k">&gt; </span><span class="ge">es listindexes</span>
 health status index                pri rep docs.count docs.deleted store.size pri.store.size
 green  open   .kibana_1              1   0          4            0     14.4kb         14.4kb
 green  open   .kibana_task_manager   1   0          2            0     12.5kb         12.5kb
 green  open   c1ind                  2   0          4            0       12kb           12kb
 (3 lines)
-</code></pre>
+</code></pre></div>
 
 <h3 id="cluster-2">Cluster 2</h3>
-<pre class="codehilite"><code>&gt; es createindex c2ind 2 0
+<div class="codehilite"><pre><span></span><code>&gt; es createindex c2ind 2 0
 (done)
-&gt; es addentry c2ind '{&quot;name&quot;:&quot;leo&quot;,&quot;age&quot;:&quot;18&quot;}'
+&gt; es addentry c2ind &#39;{&quot;name&quot;:&quot;leo&quot;,&quot;age&quot;:&quot;18&quot;}&#39;
 (done)
-&gt; es addentry c2ind '{&quot;name&quot;:&quot;ryan&quot;,&quot;age&quot;:&quot;500&quot;}'
+&gt; es addentry c2ind &#39;{&quot;name&quot;:&quot;ryan&quot;,&quot;age&quot;:&quot;500&quot;}&#39;
 (done)
 &gt; es listindexes
 health status index pri rep docs.count docs.deleted store.size pri.store.size
 green  open   c2ind   2   0          2            0        8kb            8kb
 (1 lines)
-</code></pre>
+</code></pre></div>
 
 <h2 id="configure-cross-cluster-search">Configure Cross Cluster Search</h2>
 <p>Next I configure cross cluster search.  Kibana connects to cluster 1 so I add cluster 2 as a remote cluster to cluster 1.</p>
 <h3 id="cluster-1_1">Cluster 1</h3>
 <p>The remote cluster is given the label <strong>c2</strong>.</p>
-<pre class="codehilite"><code>&gt; es generic '_cluster/settings { &quot;persistent&quot;:{&quot;cluster&quot;:{&quot;remote&quot;:{&quot;c2&quot;:{ &quot;seeds&quot;:[&quot;esc2n1:9350&quot;]}}}}}'
+<div class="codehilite"><pre><span></span><code><span class="k">&gt; </span><span class="ge">es generic &#39;_cluster/settings { &quot;persistent&quot;:{&quot;cluster&quot;:{&quot;remote&quot;:{&quot;c2&quot;:{ &quot;seeds&quot;:[&quot;esc2n1:9350&quot;]}}}}}&#39;</span>
 (done)
-</code></pre>
+</code></pre></div>
 
 <h2 id="run-a-cross-cluster-search-from-kibana">Run a Cross Cluster Search From Kibana</h2>
 <p>Next I switch to Kibana and run a cross cluster query.  To query an index on the remote cluster we prefix it with the cluster label <code>c2</code>.  To query the index <code>c2ind</code> I use <code>c2:c2ind</code>.  </p>
 <p><img alt="" src="images/TwoESOneKibana.png" /></p>
 <h2 id="docker-compose-elasticsearch-and-kibana-creation-script">Docker Compose - Elasticsearch and Kibana Creation Script</h2>
-<pre class="codehilite"><code>version: '2.2'
+<div class="codehilite"><pre><span></span><code>version: &#39;2.2&#39;
 services:
   esc1n1:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.8.7
     container_name: esc1n1
     environment:
-      - cluster.name=esc1
-      - bootstrap.memory_lock=true
-      - &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;
-      - http.port=9200
-      - transport.tcp.port=9300
+      <span class="k">-</span> cluster.name=esc1
+      <span class="k">-</span> bootstrap.memory_lock=true
+      <span class="k">-</span> &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;
+      <span class="k">-</span> http.port=9200
+      <span class="k">-</span> transport.tcp.port=9300
     ulimits:
       memlock:
         soft: -1
         hard: -1
     ports:
-      - 9200:9200
-      - 9300:9300
+      <span class="k">-</span> 9200:9200
+      <span class="k">-</span> 9300:9300
     networks:
-      - esnet
+      <span class="k">-</span> esnet
   esc1n2:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.8.7
     container_name: esc1n2
     environment:
-      - cluster.name=esc1
-      - bootstrap.memory_lock=true
-      - &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;
-      - &quot;discovery.zen.ping.unicast.hosts=esc1n1&quot;
-      - http.port=9201
-      - transport.tcp.port=9301
+      <span class="k">-</span> cluster.name=esc1
+      <span class="k">-</span> bootstrap.memory_lock=true
+      <span class="k">-</span> &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;
+      <span class="k">-</span> &quot;discovery.zen.ping.unicast.hosts=esc1n1&quot;
+      <span class="k">-</span> http.port=9201
+      <span class="k">-</span> transport.tcp.port=9301
     ulimits:
       memlock:
         soft: -1
         hard: -1
     ports:
-      - 9201:9201
-      - 9301:9301
+      <span class="k">-</span> 9201:9201
+      <span class="k">-</span> 9301:9301
     networks:
-      - esnet
+      <span class="k">-</span> esnet
 
   esc2n1:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.8.7
     container_name: esc2n1
     environment:
-      - cluster.name=esc2
-      - bootstrap.memory_lock=true
-      - &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;
-      - http.port=9250
-      - transport.tcp.port=9350
+      <span class="k">-</span> cluster.name=esc2
+      <span class="k">-</span> bootstrap.memory_lock=true
+      <span class="k">-</span> &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;
+      <span class="k">-</span> http.port=9250
+      <span class="k">-</span> transport.tcp.port=9350
     ulimits:
       memlock:
         soft: -1
         hard: -1
     ports:
-      - 9250:9250
-      - 9350:9350
+      <span class="k">-</span> 9250:9250
+      <span class="k">-</span> 9350:9350
     networks:
-      - esnet
+      <span class="k">-</span> esnet
   esc2n2:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.8.7
     container_name: esc2n2
     environment:
-      - cluster.name=esc2
-      - bootstrap.memory_lock=true
-      - &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;
-      - &quot;discovery.zen.ping.unicast.hosts=esc2n1&quot;
-      - http.port=9251
-      - transport.tcp.port=9351
+      <span class="k">-</span> cluster.name=esc2
+      <span class="k">-</span> bootstrap.memory_lock=true
+      <span class="k">-</span> &quot;ES_JAVA_OPTS=-Xms512m -Xmx512m&quot;
+      <span class="k">-</span> &quot;discovery.zen.ping.unicast.hosts=esc2n1&quot;
+      <span class="k">-</span> http.port=9251
+      <span class="k">-</span> transport.tcp.port=9351
     ulimits:
       memlock:
         soft: -1
         hard: -1
     ports:
-      - 9251:9251
-      - 9351:9351
+      <span class="k">-</span> 9251:9251
+      <span class="k">-</span> 9351:9351
     networks:
-      - esnet
+      <span class="k">-</span> esnet
 
   kibana:
     image: docker.elastic.co/kibana/kibana:6.8.7
     container_name: kibana
     environment:
-      - ELASTICSEARCH_URL=http://esc1n1:9200
+      <span class="k">-</span> ELASTICSEARCH_URL=http://esc1n1:9200
     ports:
-      - &quot;5601:5601&quot;
+      <span class="k">-</span> &quot;5601:5601&quot;
     networks:
-      - esnet
+      <span class="k">-</span> esnet
 
 networks:
   esnet:
-</code></pre>
+</code></pre></div>
 
 <hr>
         </div>

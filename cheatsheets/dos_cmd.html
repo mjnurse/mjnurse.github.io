@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -113,29 +113,29 @@
 </ul>
 </div>
 <h1 id="variables">Variables</h1>
-<pre class="codehilite"><code class="language-bat">SET b=%a:x=y%   # Replace 'x' with 'y'.
-SET b=%a:xy=%   # Delete the string 'xy'.
-SET b=%a:*xy=%  # Delete the string 'xy' and everything before it.
-SET b=%a: =%    # Remove spaces from a string.
+<div class="codehilite"><pre><span></span><code><span class="k">SET</span> <span class="nv">b</span><span class="p">=</span><span class="nv">%a:x=y%</span>   # Replace &#39;x&#39; with &#39;y&#39;.
+<span class="k">SET</span> <span class="nv">b</span><span class="p">=</span><span class="nv">%a:xy=%</span>   # Delete the string &#39;xy&#39;.
+<span class="k">SET</span> <span class="nv">b</span><span class="p">=</span><span class="nv">%a:*xy=%</span>  # Delete the string &#39;xy&#39; and everything before it.
+<span class="k">SET</span> <span class="nv">b</span><span class="p">=</span><span class="nv">%a: =%</span>    # Remove spaces from a string.
 
-SET s=martin
-ECHO %s:~1%     # Yeilds: artin
-ECHO %s:~,-2%   # Yields: mart
-ECHO %s:~1,-1%  # Yields: arti
-ECHO %s:~1,2%   # Yields: ar
-</code></pre>
+<span class="k">SET</span> <span class="nv">s</span><span class="p">=</span>martin
+<span class="k">ECHO</span> <span class="nv">%s:~1%</span>     # Yeilds: artin
+<span class="k">ECHO</span> <span class="nv">%s:~,-2%</span>   # Yields: mart
+<span class="k">ECHO</span> <span class="nv">%s:~1,-1%</span>  # Yields: arti
+<span class="k">ECHO</span> <span class="nv">%s:~1,2%</span>   # Yields: ar
+</code></pre></div>
 
 <p>To remove characters from the right hand side of a string is a two step process - To delete everything after the string 't':</p>
-<pre class="codehilite"><code class="language-bat">SET a=Martin
-SET tmp=%a:*t=%          # Create tmp string removing 't' and everything before it.
-CALL SET b=%%a:%tmp%=%%  # Remove tmp from original string.  Use CALL to expand tmp before replace.
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="k">SET</span> <span class="nv">a</span><span class="p">=</span>Martin
+<span class="k">SET</span> <span class="nv">tmp</span><span class="p">=</span><span class="nv">%a:*t=%</span>          # Create tmp string removing &#39;t&#39; and everything before it.
+<span class="k">CALL</span> <span class="k">SET</span> <span class="nv">b</span><span class="p">=</span><span class="se">%%</span>a:<span class="nv">%tmp%</span>=<span class="se">%%</span>  # Remove tmp from original string.  Use CALL to expand tmp before replace.
+</code></pre></div>
 
 <p>Boolean Test "does string exist ?" - To test for string 'Three':</p>
-<pre class="codehilite"><code class="language-bat">SET a=&quot;One, Two, Three&quot;
-SET tmp=%a:Three=%      # Create tmp string removing 'Three' if it exists, then compare or original.
-IF NOT %tmp% == %a% (ECHO found.) ELSE (ECHO Not found.)
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="k">SET</span> <span class="nv">a</span><span class="p">=</span><span class="s2">&quot;One, Two, Three&quot;</span>
+<span class="k">SET</span> <span class="nv">tmp</span><span class="p">=</span><span class="nv">%a:Three=%</span>      # Create tmp string removing &#39;Three&#39; if it exists, then compare or original.
+<span class="k">IF</span> <span class="k">NOT</span> <span class="nv">%tmp%</span> <span class="o">==</span> <span class="nv">%a%</span> <span class="p">(</span><span class="k">ECHO</span> found.<span class="p">)</span> <span class="k">ELSE</span> <span class="p">(</span><span class="k">ECHO</span> Not found.<span class="p">)</span>
+</code></pre></div>
 
 <h2 id="variable-substitution">Variable Substitution</h2>
 <p>| <code>%~V</code> | expands %V removing any surrounding quotes (") |
@@ -149,67 +149,67 @@ IF NOT %tmp% == %a% (ECHO found.) ELSE (ECHO Not found.)
 | <code>%~tV</code> | expands %V to date/time of file |
 | <code>%~zV</code> | expands %V to size of file |</p>
 <h2 id="environment-variables">Environment Variables</h2>
-<pre class="codehilite"><code class="language-bat">setx &lt;var_name&gt; &lt;var_value&gt; [/M]
-</code></pre>
+<div class="codehilite"><pre><span></span><code>setx <span class="p">&lt;</span>var_name<span class="p">&gt;</span> &lt;var_value<span class="p">&gt;</span> [/M]
+</code></pre></div>
 
 <p><code>/M</code> makes this a System variable rather than User variable.  <code>/M</code> requires administrator privileges.</p>
 <h1 id="read-user-input">Read user Input</h1>
-<pre class="codehilite"><code>set /p &quot;value=Enter value: &quot;
+<div class="codehilite"><pre><span></span><code>set /p &quot;value=Enter value: &quot;
 echo %value%
-</code></pre>
+</code></pre></div>
 
 <h1 id="if-condition">IF Condition</h1>
 <h2 id="file-syntax">File syntax</h2>
-<pre class="codehilite"><code class="language-bat">IF [NOT] EXIST filename command 
-IF [NOT] EXIST filename (command) ELSE (command)
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="k">IF</span> [NOT]<span class="err"> EXIST filename command </span>
+<span class="k">IF</span> [NOT]<span class="err"> EXIST filename (command) ELSE (command)</span>
+</code></pre></div>
 
 <h2 id="string-syntax">String syntax</h2>
-<pre class="codehilite"><code class="language-bat">IF [/I] [NOT] item1==item2 command   # /I - case insensitive.
-IF [/I] item1 compare-op item2 command
-IF [/I] item1 compare-op item2 (command) ELSE (command)
+<div class="codehilite"><pre><span></span><code><span class="k">IF</span> [/I]<span class="err"> [NOT] item1</span><span class="o">==</span>item2 command   # /I - case insensitive.
+<span class="k">IF</span> [/I]<span class="err"> item1 compare-op item2 command</span>
+<span class="k">IF</span> [/I]<span class="err"> item1 compare-op item2 (command) ELSE (command)</span>
 
-IF [%1]==[] ECHO Value Missing  # Check for missing command line parameter.  (can use EQU in place of ==)
+<span class="k">IF</span> [<span class="nv">%1</span>]<span class="o">==</span>[] <span class="k">ECHO</span> Value Missing  # Check for missing command line parameter.  (can use EQU in place of ==)
 
-# Compare-op can be: EQU (==), NEQ (!=), LSS (&lt;), LEQ (&lt;=), GTR (?), GEQ (&gt;=).
-# (This syntax is necessary because the &gt; and &lt; symbols are redirection operators)
+# Compare-op can be: EQU (==), NEQ (!=), LSS (<span class="p">&lt;</span>), LEQ (<span class="p">&lt;</span>=), GTR (?), GEQ (<span class="p">&gt;</span>=).
+# (This syntax is necessary because the <span class="p">&gt;</span> and <span class="p">&lt;</span> symbols are redirection operators)
 
 # The == comparison operator always results in a string comparison.  EQU will compare numbers.
 
-# Filenames/Paths - Always surround them with quotes: if %_myvar% contains &quot;C:\Some Path&quot; then 
-# comparison becomes IF [&quot;C:\Some Path&quot;] EQU []
-</code></pre>
+# Filenames/Paths - Always surround them with quotes: if <span class="nv">%_myvar%</span> contains <span class="s2">&quot;C:\Some Path&quot;</span> then 
+# comparison becomes IF [<span class="s2">&quot;C:\Some Path&quot;</span>] EQU []
+</code></pre></div>
 
 <h2 id="error-check-syntax">Error Check Syntax</h2>
-<pre class="codehilite"><code class="language-bat">IF [NOT] DEFINED variable command  # Note: DEFINED will return true for a space character.
-IF [NOT] ERRORLEVEL number command 
-IF CMDEXTVERSION number command
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="k">IF</span> [NOT]<span class="err"> DEFINED variable command  # Note: DEFINED will return true for a space character.</span>
+<span class="k">IF</span> [NOT]<span class="err"> ERRORLEVEL number command </span>
+<span class="k">IF</span> CMDEXTVERSION<span class="err"> number command</span>
+</code></pre></div>
 
 <h2 id="parenthesis">Parenthesis</h2>
 <p>Parenthesis can be used to split commands across multiple lines.</p>
-<pre class="codehilite"><code class="language-bat">IF EXIST filename.txt (
-    ECHO Deleting filename.txt
-    DEL filename.txt
- ) ELSE (             # Note: Always put the parenthesis on the same line as ELSE.
-    ECHO The file was not found.
- )
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="k">IF</span> <span class="k">EXIST</span> filename.txt <span class="p">(</span>
+    <span class="k">ECHO</span> Deleting filename.txt
+    <span class="k">DEL</span> filename.txt
+ <span class="p">)</span> <span class="k">ELSE</span> <span class="p">(</span>             # Note: Always put the parenthesis on the same line as ELSE.
+    <span class="k">ECHO</span> The file was not found.
+ <span class="p">)</span>
+</code></pre></div>
 
 <h2 id="an-and-test">An AND test:</h2>
-<pre class="codehilite"><code class="language-bat">IF SomeCondition (
-   IF SomeOtherCondition (
+<div class="codehilite"><pre><span></span><code><span class="k">IF</span> SomeCondition<span class="err"> (</span>
+   <span class="k">IF</span> SomeOtherCondition<span class="err"> (</span>
      Command_if_both_are_true
-   )
-)
-</code></pre>
+   <span class="c1">)</span>
+<span class="c1">)</span>
+</code></pre></div>
 
 <h2 id="an-or-test">An OR test:</h2>
-<pre class="codehilite"><code class="language-bat">SET &quot;tmp=&quot;
-IF SomeCondition SET tmp=1
-IF SomeOtherCondition SET tmp=1
-IF %tmp% EQU 1 Command_to_run_if_either_is_true
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="k">SET</span> <span class="s2">&quot;tmp=&quot;</span>
+<span class="k">IF</span> SomeCondition<span class="err"> SET tmp=1</span>
+<span class="k">IF</span> SomeOtherCondition<span class="err"> SET tmp=1</span>
+<span class="k">IF</span> <span class="nv">%tmp%</span> <span class="ow">EQU</span> 1 Command_to_run_if_either_is_true
+</code></pre></div>
 
 <h3 id="notes">Notes:</h3>
 <ul>
@@ -217,17 +217,17 @@ IF %tmp% EQU 1 Command_to_run_if_either_is_true
 <li>Wildcards - Wildcards are not supported by IF.  Use variable string transforms instead.</li>
 </ul>
 <h1 id="loops">Loops</h1>
-<pre class="codehilite"><code class="language-bat">FOR %%f IN (file1.txt file2.txt) DO ECHO %%f
-FOR /L %%i IN (0,2,10) DO ECHO %%i # Yields 0 2 4 6 8 10
-FOR /F %%l IN (file.txt) DO ECHO %%l
+<div class="codehilite"><pre><span></span><code><span class="k">FOR</span> <span class="se">%%</span>f <span class="k">IN</span> <span class="p">(</span>file1.txt file2.txt<span class="p">)</span> <span class="k">DO</span> <span class="k">ECHO</span> <span class="se">%%</span>f
+<span class="k">FOR</span> <span class="k">/L</span> <span class="se">%%</span>i <span class="k">IN</span> <span class="p">(</span><span class="mi">0</span>,<span class="mi">2</span>,<span class="mi">10</span><span class="p">)</span> <span class="k">DO</span> <span class="k">ECHO</span> <span class="se">%%</span>i # Yields 0 2 4 6 8 10
+<span class="k">FOR</span> <span class="k">/F</span> <span class="se">%%</span>l <span class="k">IN</span> <span class="p">(</span>file.txt<span class="p">)</span> <span class="k">DO</span> <span class="k">ECHO</span> <span class="se">%%</span>l
 
 # delims= overrides default space delimiter so whole line is a single token
-FOR /F &quot;delims=&quot; %%line IN (file.txt) DO ECHO %%line
+<span class="k">FOR</span> <span class="k">/F</span> <span class="s2">&quot;delims=&quot;</span> <span class="se">%%</span>line <span class="k">IN</span> <span class="p">(</span>file.txt<span class="p">)</span> <span class="k">DO</span> <span class="k">ECHO</span> <span class="se">%%</span>line
 # tokens=* overrides default token=1 to return all tokens using the default space delimiter
-FOR /F &quot;tokens=*&quot; %%line IN (file.txt) DO ECHO %%line
-FOR /F &quot;tokens=*&quot; %%character IN (&quot;I am cool&quot;) DO ECHO %%character
-FOR /F &quot;tokens=*&quot; %%l IN ('DIR /B') DO ECHO %%l
-</code></pre>
+<span class="k">FOR</span> <span class="k">/F</span> <span class="s2">&quot;tokens=*&quot;</span> <span class="se">%%</span>line <span class="k">IN</span> <span class="p">(</span>file.txt<span class="p">)</span> <span class="k">DO</span> <span class="k">ECHO</span> <span class="se">%%</span>line
+<span class="k">FOR</span> <span class="k">/F</span> <span class="s2">&quot;tokens=*&quot;</span> <span class="se">%%</span>character <span class="k">IN</span> <span class="p">(</span><span class="s2">&quot;I am cool&quot;</span><span class="p">)</span> <span class="k">DO</span> <span class="k">ECHO</span> <span class="se">%%</span>character
+<span class="k">FOR</span> <span class="k">/F</span> <span class="s2">&quot;tokens=*&quot;</span> <span class="se">%%</span>l <span class="k">IN</span> <span class="p">(</span><span class="s1">&#39;DIR /B&#39;</span><span class="p">)</span> <span class="k">DO</span> <span class="k">ECHO</span> <span class="se">%%</span>l
+</code></pre></div>
 
 <h1 id="other">Other</h1>
 <ul>
@@ -240,83 +240,83 @@ FOR /F &quot;tokens=*&quot; %%l IN ('DIR /B') DO ECHO %%l
 <li><code>attrib -r &lt;filename&gt;</code> - removes readonly</li>
 </ul>
 <h1 id="working-with-tasks-processes">Working with tasks (processes):</h1>
-<pre class="codehilite"><code class="language-bat">:: List tasks
-&gt; tasklist
+<div class="codehilite"><pre><span></span><code><span class="p">:</span><span class="c1">: List tasks</span>
+<span class="p">&gt;</span> tasklist
 
-:: Kill task
-taskkill /F /PID &lt;pid_number&gt;
-taskkill /IM &lt;&quot;process name&quot;&gt; /F
-</code></pre>
+<span class="p">:</span><span class="c1">: Kill task</span>
+taskkill /F /PID <span class="p">&lt;</span>pid_number&gt;
+taskkill /IM <span class="p">&lt;</span><span class="s2">&quot;process name&quot;</span><span class="p">&gt;</span> /F
+</code></pre></div>
 
 <h1 id="an-example-script-to-process-command-line-parameters">An example script to process command line parameters</h1>
-<pre class="codehilite"><code class="language-bat">@ECHO OFF
-SETLOCAL EnableDelayedExpansion
-(SET n=^
-%doNotDeleteThisLine%
-)
-GOTO :START
+<div class="codehilite"><pre><span></span><code><span class="p">@</span><span class="k">ECHO</span> OFF
+<span class="k">SETLOCAL</span> EnableDelayedExpansion
+<span class="p">(</span><span class="k">SET</span> <span class="nv">n</span><span class="p">=</span><span class="se">^</span>
+<span class="se">%</span>doNotDeleteThisLine%
+<span class="p">)</span>
+<span class="k">GOTO</span> <span class="p">:</span><span class="nl">START</span>
 
-:HELP
-ECHO !n!^
-A sample script to parse command line parameters. !n!^
-                                                  !n!^
-process-params [/D] [/H] [/V value]               !n!^
-                                                  !n!^
-  /D   Enable Debug.                              !n!^
-  /H   Displays this help.                        !n!^
-  /V   Sets variable value.                       !n!
+<span class="p">:</span><span class="nl">HELP</span>
+<span class="k">ECHO</span> <span class="nv">!n!</span><span class="se">^</span>
+<span class="se">A</span> sample script to parse command line parameters. <span class="nv">!n!</span><span class="se">^</span>
+<span class="se"> </span>                                                 <span class="nv">!n!</span><span class="se">^</span>
+<span class="se">p</span>rocess-params [/D] [/H] [/V value]               <span class="nv">!n!</span><span class="se">^</span>
+<span class="se"> </span>                                                 <span class="nv">!n!</span><span class="se">^</span>
+<span class="se"> </span> /D   Enable Debug.                              <span class="nv">!n!</span><span class="se">^</span>
+<span class="se"> </span> /H   Displays this help.                        <span class="nv">!n!</span><span class="se">^</span>
+<span class="se"> </span> /V   Sets variable value.                       <span class="nv">!n!</span>
 
-EXIT /B
-:START
+<span class="k">EXIT</span> /B
+<span class="p">:</span><span class="nl">START</span>
 
-SET debugYN=N
-SET val=
+<span class="k">SET</span> <span class="nv">debugYN</span><span class="p">=</span>N
+<span class="k">SET</span> <span class="nv">val</span><span class="p">=</span>
 
-:LOOP
-  IF [%1]==[] GOTO :END_LOOP
-  SET par=%1
-  SHIFT
+<span class="p">:</span><span class="nl">LOOP</span>
+  <span class="k">IF</span> [<span class="nv">%1</span>]<span class="o">==</span>[] <span class="k">GOTO</span> <span class="p">:</span><span class="nl">END_LOOP</span>
+  <span class="k">SET</span> <span class="nv">par</span><span class="p">=</span><span class="nv">%1</span>
+  <span class="k">SHIFT</span>
 
-  IF [%par%]==[/H] (
-    GOTO :HELP
-  )
+  <span class="k">IF</span> [<span class="nv">%par%</span>]<span class="o">==</span>[/H] <span class="p">(</span>
+    <span class="k">GOTO</span> <span class="p">:</span><span class="nl">HELP</span>
+  <span class="p">)</span>
 
-  IF [%par%]==[-d] (
-    SET debugYN=Y
-    GOTO :LOOP
-  )
+  <span class="k">IF</span> [<span class="nv">%par%</span>]<span class="o">==</span>[-d] <span class="p">(</span>
+    <span class="k">SET</span> <span class="nv">debugYN</span><span class="p">=</span>Y
+    <span class="k">GOTO</span> <span class="p">:</span><span class="nl">LOOP</span>
+  <span class="p">)</span>
 
-  IF [%par%]==[-v] (
-    SET val=%1
-    SHIFT
-    GOTO :LOOP
-  )
+  <span class="k">IF</span> [<span class="nv">%par%</span>]<span class="o">==</span>[-v] <span class="p">(</span>
+    <span class="k">SET</span> <span class="nv">val</span><span class="p">=</span><span class="nv">%1</span>
+    <span class="k">SHIFT</span>
+    <span class="k">GOTO</span> <span class="p">:</span><span class="nl">LOOP</span>
+  <span class="p">)</span>
 
-  ECHO NOT PROCESSED %par%
-  GOTO :LOOP
-:END_LOOP
+  <span class="k">ECHO</span> NOT PROCESSED <span class="nv">%par%</span>
+  <span class="k">GOTO</span> <span class="p">:</span><span class="nl">LOOP</span>
+<span class="p">:</span><span class="nl">END_LOOP</span>
 
-ECHO debugYN: %debugYN%
-ECHO value:   %val%
-</code></pre>
+<span class="k">ECHO</span> debugYN: <span class="nv">%debugYN%</span>
+<span class="k">ECHO</span> value:   <span class="nv">%val%</span>
+</code></pre></div>
 
 <h1 id="a-script-to-emulate-the-linux-sudo-command">A script to emulate the linux sudo command:</h1>
 <p>Create a script <code>sudo.bat</code>:</p>
-<pre class="codehilite"><code class="language-bat">@echo Set objShell = CreateObject(&quot;Shell.Application&quot;) &gt; %temp%\sudo.tmp.vbs
-@echo args = Right(&quot;%*&quot;, (Len(&quot;%*&quot;) - Len(&quot;%1&quot;))) &gt;&gt; %temp%\sudo.tmp.vbs
-@echo objShell.ShellExecute &quot;%1&quot;, args, &quot;&quot;, &quot;runas&quot; &gt;&gt; %temp%\sudo.tmp.vbs
-@cscript %temp%\sudo.tmp.vbs
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="p">@</span><span class="k">echo</span> Set objShell = CreateObject(<span class="s2">&quot;Shell.Application&quot;</span>) <span class="p">&gt;</span> <span class="nv">%temp%</span>\sudo.tmp.vbs
+<span class="p">@</span><span class="k">echo</span> args = Right(<span class="s2">&quot;</span><span class="nv">%*</span><span class="s2">&quot;</span>, (Len(<span class="s2">&quot;</span><span class="nv">%*</span><span class="s2">&quot;</span>) - Len(<span class="s2">&quot;</span><span class="nv">%1</span><span class="s2">&quot;</span>))) <span class="p">&gt;&gt;</span> <span class="nv">%temp%</span>\sudo.tmp.vbs
+<span class="p">@</span><span class="k">echo</span> objShell.ShellExecute <span class="s2">&quot;</span><span class="nv">%1</span><span class="s2">&quot;</span>, args, <span class="s2">&quot;&quot;</span>, <span class="s2">&quot;runas&quot;</span> <span class="p">&gt;&gt;</span> <span class="nv">%temp%</span>\sudo.tmp.vbs
+<span class="p">@</span>cscript <span class="nv">%temp%</span>\sudo.tmp.vbs
+</code></pre></div>
 
 <p>To open a new cmd window running as administrator:</p>
-<pre class="codehilite"><code class="language-bat">&gt; sudo cmd
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="p">&gt;</span> sudo cmd
+</code></pre></div>
 
 <p>I did have some issues if I pass in multiple parameters to sudo, but I'll leave that for another day.</p>
 <h1 id="other_1">Other</h1>
-<pre class="codehilite"><code class="language-bat">:: Get current directory
-SET curr_dir=%cd%
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="p">:</span><span class="c1">: Get current directory</span>
+<span class="k">SET</span> <span class="nv">curr_dir</span><span class="p">=</span><span class="nv">%cd%</span>
+</code></pre></div>
 
 <hr>
         </div>

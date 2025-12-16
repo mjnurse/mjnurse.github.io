@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -90,15 +90,15 @@
         <div class="article-body">
           <h1>WSL Allow chmod On Windows Folders</h1>
 <p>Create or edit a file named <code>/etc/wsl.conf</code> and edit it to contain the following.  Note I also move the mount point of the windows C drive from <code>/mnt/c</code> to <code>/c</code>.</p>
-<pre class="codehilite"><code class="language-bash">[automount]
-enabled = true
-root = /
-options = &quot;metadata,umask=22,fmask=11&quot;
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="o">[</span>automount<span class="o">]</span>
+<span class="nv">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span>
+<span class="nv">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>/
+<span class="nv">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;metadata,umask=22,fmask=11&quot;</span>
+</code></pre></div>
 
 <p>Reboot WSL</p>
-<pre class="codehilite"><code class="language-cmd">wsl.exe --shutdown
-</code></pre>
+<div class="codehilite"><pre><span></span><code>wsl.exe --shutdown
+</code></pre></div>
 
 <hr>
         </div>

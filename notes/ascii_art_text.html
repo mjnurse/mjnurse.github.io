@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -92,50 +92,50 @@
 <h1 id="ascii-art-text-generation-using-figlet">ASCII Art Text Generation Using <code>figlet</code></h1>
 <p>The Linux utility <code>figlet</code> can be used to generate ASCII art text.</p>
 <p>This list of available fonts can be found as follows:</p>
-<pre class="codehilite"><code class="language-bash">&gt; ls /usr/share/figlet/*.flf | sed 's/.*\///; s/\.flf$//'
-</code></pre>
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>ls<span class="w"> </span>/usr/share/figlet/*.flf<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/.*\///; s/\.flf$//&#39;</span>
+</code></pre></div>
 
 <p>Text can be generated as follows:</p>
-<pre class="codehilite"><code class="language-bash">&gt; echo &quot;Hello World&quot; | figlet -f &lt;font-name&gt;
-</code></pre>
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Hello World&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>figlet<span class="w"> </span>-f<span class="w"> </span>&lt;font-name&gt;
+</code></pre></div>
 
 <h2 id="font-examples">Font Examples</h2>
 <p>We can run the following script to generate an example of each available font:</p>
-<pre class="codehilite"><code class="language-bash">for f in $(ls /usr/share/figlet/*.flf | sed 's/.*\///; s/\.flf$//'); do 
-    echo $f:
-    echo &quot;Hello World!&quot; | figlet -f $f
-done
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>ls<span class="w"> </span>/usr/share/figlet/*.flf<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/.*\///; s/\.flf$//&#39;</span><span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$f</span>:
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Hello World!&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>figlet<span class="w"> </span>-f<span class="w"> </span><span class="nv">$f</span>
+<span class="k">done</span>
+</code></pre></div>
 
 <p>Examples:</p>
-<pre class="codehilite"><code>banner:
+<div class="codehilite"><pre><span></span><code>banner:
 
-#     #                                #     #                             ###
-#     # ###### #      #       ####     #  #  #  ####  #####  #      #####  ###
-#     # #      #      #      #    #    #  #  # #    # #    # #      #    # ###
-####### #####  #      #      #    #    #  #  # #    # #    # #      #    #  #
-#     # #      #      #      #    #    #  #  # #    # #####  #      #    #  
-#     # #      #      #      #    #    #  #  # #    # #   #  #      #    # ###
-#     # ###### ###### ######  ####      ## ##   ####  #    # ###### #####  ###
+<span class="gh">#</span>     #                                #     #                             ###
+<span class="gh">#</span>     # ###### #      #       ####     #  #  #  ####  #####  #      #####  ###
+<span class="gh">#</span>     # #      #      #      #    #    #  #  # #    # #    # #      #    # ###
+<span class="gu">##</span>##### #####  #      #      #    #    #  #  # #    # #    # #      #    #  #
+<span class="gh">#</span>     # #      #      #      #    #    #  #  # #    # #####  #      #    #  
+<span class="gh">#</span>     # #      #      #      #    #    #  #  # #    # #   #  #      #    # ###
+<span class="gh">#</span>     # ###### ###### ######  ####      ## ##   ####  #    # ###### #####  ###
 
 big:
- _    _      _ _        __          __        _     _ _
+ <span class="ge">_    _</span>      <span class="ge">_ _</span>        __          __        <span class="ge">_     _</span> _
 | |  | |    | | |       \ \        / /       | |   | | |
 | |__| | ___| | | ___    \ \  /\  / /__  _ __| | __| | |
-|  __  |/ _ \ | |/ _ \    \ \/  \/ / _ \| '__| |/ _` | |
+|  __  |/ <span class="ge">_ \ | |/ _</span> \    \ \/  \/ / _ \| &#39;__| |/ _` | |
 | |  | |  __/ | | (_) |    \  /\  / (_) | |  | | (_| |_|
 |_|  |_|\___|_|_|\___/      \/  \/ \___/|_|  |_|\__,_(_)
 
 block:
 
-_|    _|            _|  _|               _|          _|                      _|        _|  _|
-_|    _|    _|_|    _|  _|    _|_|       _|          _|    _|_|    _|  _|_|  _|    _|_|_|  _|
-_|_|_|_|  _|_|_|_|  _|  _|  _|    _|     _|    _|    _|  _|    _|  _|_|      _|  _|    _|  _|
-_|    _|  _|        _|  _|  _|    _|       _|  _|  _|    _|    _|  _|        _|  _|    _|
-_|    _|    _|_|_|  _|  _|    _|_|           _|  _|        _|_|    _|        _|    _|_|_|  _|
+<span class="ge">_|    _</span>|            <span class="ge">_|  _</span>|               <span class="ge">_|          _</span>|                      <span class="ge">_|        _</span>|  <span class="ge">_|</span>
+<span class="ge">_</span>|    <span class="ge">_|    _</span>|_|    <span class="ge">_|  _</span>|    <span class="ge">_|_</span>|       <span class="ge">_|          _</span>|    <span class="ge">_|_</span>|    <span class="ge">_|  _</span>|_|  <span class="ge">_|    _</span>|_|_|  <span class="ge">_|</span>
+<span class="ge">_</span>|_|_|_|  <span class="ge">_|_</span>|_|_|  <span class="ge">_|  _</span>|  <span class="ge">_|    _</span>|     <span class="ge">_|    _</span>|    <span class="ge">_|  _</span>|    <span class="ge">_|  _</span>|_|      <span class="ge">_|  _</span>|    <span class="ge">_|  _</span>|
+<span class="ge">_|    _</span>|  <span class="ge">_|        _</span>|  <span class="ge">_|  _</span>|    <span class="ge">_|       _</span>|  <span class="ge">_|  _</span>|    <span class="ge">_|    _</span>|  <span class="ge">_|        _</span>|  <span class="ge">_|    _</span>|
+<span class="ge">_|    _</span>|    <span class="ge">_|_</span>|_|  <span class="ge">_|  _</span>|    <span class="ge">_|_</span>|           <span class="ge">_|  _</span>|        <span class="ge">_|_</span>|    <span class="ge">_|        _</span>|    <span class="ge">_|_</span>|_|  <span class="ge">_|</span>
 
-bubble:
-  _   _   _   _   _     _   _   _   _   _   _
+<span class="ge">bubble:</span>
+<span class="ge">  _</span>   <span class="ge">_   _</span>   <span class="ge">_   _</span>     <span class="ge">_   _</span>   <span class="ge">_   _</span>   <span class="ge">_   _</span>
  / \ / \ / \ / \ / \   / \ / \ / \ / \ / \ / \
 ( H | e | l | l | o ) ( W | o | r | l | d | ! )
  \_/ \_/ \_/ \_/ \_/   \_/ \_/ \_/ \_/ \_/ \_/
@@ -147,28 +147,28 @@ digital:
 +-+-+-+-+-+ +-+-+-+-+-+-+
 
 ivrit:
- _     _ _        __        __        _ _      _   _
+ <span class="ge">_     _</span> _        __        __        <span class="ge">_ _</span>      <span class="ge">_   _</span>
 | | __| | |_ __ __\ \      / /   ___ | | | ___| | | |
-| |/ _` | | '__/ _ \ \ /\ / /   / _ \| | |/ _ \ |_| |
-|_| (_| | | | | (_) \ V  V /   | (_) | | |  __/  _  |
-(_)\__,_|_|_|  \___/ \_/\_/     \___/|_|_|\___|_| |_|
+| |/ _` | | &#39;__/ <span class="ge">_ \ \ /\ / /   / _</span> \| | |/ <span class="ge">_ \ |_</span>| |
+|_| (_| | | | | (_) \ V  V /   | (_) | | |  __/  <span class="ge">_  |</span>
+<span class="ge">(_</span>)\__,_|_|_|  \___/ \_/\_/     \___/|_|_|\___|_| |_|
 
 lean:
 
-    _/    _/            _/  _/               _/          _/                      _/        _/  _/
-   _/    _/    _/_/    _/  _/    _/_/       _/          _/    _/_/    _/  _/_/  _/    _/_/_/  _/
-  _/_/_/_/  _/_/_/_/  _/  _/  _/    _/     _/    _/    _/  _/    _/  _/_/      _/  _/    _/  _/
- _/    _/  _/        _/  _/  _/    _/       _/  _/  _/    _/    _/  _/        _/  _/    _/
-_/    _/    _/_/_/  _/  _/    _/_/           _/  _/        _/_/    _/        _/    _/_/_/  _/
+    <span class="ge">_/    _</span>/            <span class="ge">_/  _</span>/               <span class="ge">_/          _</span>/                      <span class="ge">_/        _</span>/  <span class="ge">_/</span>
+<span class="ge">   _</span>/    <span class="ge">_/    _</span>/_/    <span class="ge">_/  _</span>/    <span class="ge">_/_</span>/       <span class="ge">_/          _</span>/    <span class="ge">_/_</span>/    <span class="ge">_/  _</span>/_/  <span class="ge">_/    _</span>/_/_/  <span class="ge">_/</span>
+<span class="ge">  _</span>/_/_/_/  <span class="ge">_/_</span>/_/_/  <span class="ge">_/  _</span>/  <span class="ge">_/    _</span>/     <span class="ge">_/    _</span>/    <span class="ge">_/  _</span>/    <span class="ge">_/  _</span>/_/      <span class="ge">_/  _</span>/    <span class="ge">_/  _</span>/
+ <span class="ge">_/    _</span>/  <span class="ge">_/        _</span>/  <span class="ge">_/  _</span>/    <span class="ge">_/       _</span>/  <span class="ge">_/  _</span>/    <span class="ge">_/    _</span>/  <span class="ge">_/        _</span>/  <span class="ge">_/    _</span>/
+<span class="ge">_/    _</span>/    <span class="ge">_/_</span>/_/  <span class="ge">_/  _</span>/    <span class="ge">_/_</span>/           <span class="ge">_/  _</span>/        <span class="ge">_/_</span>/    <span class="ge">_/        _</span>/    <span class="ge">_/_</span>/_/  <span class="ge">_/</span>
 
-mini:
+<span class="ge">mini:</span>
 
-|_| _ || _  \    /_ ._| _||
-| |(/_||(_)  \/\/(_)| |(_|o
+<span class="ge">|_</span>| <span class="ge">_ || _</span>  \    /_ ._| <span class="ge">_||</span>
+<span class="ge">| |(/_</span>||(_)  \/\/(_)| |(_|o
 
 script:
 
- ,          _   _          _                     _
+ ,          <span class="ge">_   _</span>          <span class="ge">_                     _</span>
 /|   |     | | | |        (_|   |   |_/         | |    |  |
  |___|  _  | | | |  __      |   |   | __   ,_   | |  __|  |
  |   |\|/  |/  |/  /  \_    |   |   |/  \_/  |  |/  /  |  |
@@ -177,9 +177,9 @@ script:
 shadow:
 
  |   |      | |       \ \        /          |     | |
- |   |  _ \ | |  _ \   \ \  \   / _ \   __| |  _` | |
+ |   |  <span class="ge">_ \ | |  _</span> \   \ \  \   / _ \   __| |  _` | |
  ___ |  __/ | | (   |   \ \  \ / (   | |    | (   |_|
-_|  _|\___|_|_|\___/     \_/\_/ \___/ _|   _|\__,_|_)
+<span class="ge">_|  _</span>|\___|_|_|\___/     \_/\_/ \___/ <span class="ge">_|   _</span>|\__,_|_)
 
 slant:
     __  __     ____         _       __           __    ____
@@ -189,39 +189,39 @@ slant:
 /_/ /_/\___/_/_/\____/     |__/|__/\____/_/  /_/\__,_(_)
 
 small:
- _  _     _ _      __      __       _    _ _
-| || |___| | |___  \ \    / /__ _ _| |__| | |
-| __ / -_) | / _ \  \ \/\/ / _ \ '_| / _` |_|
+ <span class="ge">_  _</span>     <span class="ge">_ _</span>      __      __       <span class="ge">_    _</span> _
+| || |___| | |___  \ \    / /__ <span class="ge">_ _</span>| |__| | |
+| __ / -_) | / <span class="ge">_ \  \ \/\/ / _</span> \ &#39;_| / <span class="ge">_` |_</span>|
 |_||_\___|_|_\___/   \_/\_/\___/_| |_\__,_(_)
 
 smscript:
  ,
-/|  |  _ |\ |\  _     (|  |  |_/_   ,_  |\  _|  |
- |--| |/ |/ |/ / \_    |  |  | / \_/  | |/ / |  |
+/|  |  <span class="ge">_ |\ |\  _</span>     (|  |  |_/_   ,_  |\  <span class="ge">_|  |</span>
+<span class="ge"> |--| |/ |/ |/ / \_</span>    |  |  | / \_/  | |/ / |  |
  |  |)|_/|_/|_/\_/      \/ \/  \_/    |/|_/\/|_/o
 
 smshadow:
 
  |  |      | |      \ \      /       |     | |
- __ |  -_) | |  _ \  \ \ \  / _ \  _||  _` |_|
-_| _|\___|_|_|\___/   \_/\_/\___/_| _|\__,_|_)
+ __ |  -_) | |  <span class="ge">_ \  \ \ \  / _</span> \  <span class="ge">_||  _</span>` |_|
+<span class="ge">_| _</span>|\___|_|_|\___/   \_/\_/\___/_| _|\__,_|_)
 
 smslant:
    __ __    ____       _      __         __   ____
   / // /__ / / /__    | | /| / /__  ____/ /__/ / /
- / _  / -_) / / _ \   | |/ |/ / _ \/ __/ / _  /_/
+ / <span class="ge">_  / -_</span>) / / <span class="ge">_ \   | |/ |/ / _</span> \/ __/ / <span class="ge">_  /_</span>/
 /_//_/\__/_/_/\___/   |__/|__/\___/_/ /_/\_,_(_)
 
 standard:
- _   _      _ _        __        __         _     _ _
+ <span class="ge">_   _</span>      <span class="ge">_ _</span>        __        __         <span class="ge">_     _</span> _
 | | | | ___| | | ___   \ \      / /__  _ __| | __| | |
-| |_| |/ _ \ | |/ _ \   \ \ /\ / / _ \| '__| |/ _` | |
-|  _  |  __/ | | (_) |   \ V  V / (_) | |  | | (_| |_|
+| |_| |/ <span class="ge">_ \ | |/ _</span> \   \ \ /\ / / _ \| &#39;__| |/ <span class="ge">_` | |</span>
+<span class="ge">|  _</span>  |  __/ | | (_) |   \ V  V / (_) | |  | | (_| |_|
 |_| |_|\___|_|_|\___/     \_/\_/ \___/|_|  |_|\__,_(_)
 
 term:
 Hello World!
-</code></pre>
+</code></pre></div>
         </div>
       </article>
     </main>

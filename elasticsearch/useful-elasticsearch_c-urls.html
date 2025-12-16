@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -107,187 +107,187 @@
 <h1 id="cluster">Cluster</h1>
 <h2 id="clear-cache">Clear Cache</h2>
 <p>Elasticsearch caches query results which can be use if the same query is run again.  This will clear results from the cache for a single named index or, if no index is specified, all indexes.</p>
-<pre class="codehilite"><code class="language-bash">curl -X POST http://${HOSTNAME}:${PORT}/[&lt;index_name&gt;]/_cache/clear
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/<span class="o">[</span>&lt;index_name&gt;<span class="o">]</span>/_cache/clear
+</code></pre></div>
 
 <h2 id="cluster-stats">Cluster Stats</h2>
 <p>Basic Cluster Stats:</p>
-<pre class="codehilite"><code class="language-bash">curl -X GET http://${HOSTNAME}:${PORT}/_cluster/stats?human
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/_cluster/stats?human
+</code></pre></div>
 
 <p>Comprehensive Cluster Stats:</p>
-<pre class="codehilite"><code class="language-bash">curl -X GET http://${HOSTNAME}:${PORT}/_cluster/stats?pretty
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/_cluster/stats?pretty
+</code></pre></div>
 
 <h1 id="index-manipulation">Index Manipulation</h1>
 <h2 id="create-index">Create Index</h2>
-<pre class="codehilite"><code class="language-bash">curl -X PUT http://${HOSTNAME}:${PORT}/&lt;index_name&gt; -H Content-Type: application/json -d '
-{ 
-  &quot;settings&quot;: { 
-    &quot;index&quot;: { 
-      &quot;number_of_shards&quot;: &lt;number_of_shards&gt;,
-      &quot;number_of_replicas&quot;: &lt;number_of_replicas&gt;
-    }
-  }
-}'
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/&lt;index_name&gt;<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;</span>
+<span class="s1">{ </span>
+<span class="s1">  &quot;settings&quot;: { </span>
+<span class="s1">    &quot;index&quot;: { </span>
+<span class="s1">      &quot;number_of_shards&quot;: &lt;number_of_shards&gt;,</span>
+<span class="s1">      &quot;number_of_replicas&quot;: &lt;number_of_replicas&gt;</span>
+<span class="s1">    }</span>
+<span class="s1">  }</span>
+<span class="s1">}&#39;</span>
+</code></pre></div>
 
 <h2 id="delete-index">Delete Index</h2>
-<pre class="codehilite"><code class="language-bash">curl -X DELETE http://${HOSTNAME}:${PORT}/&lt;index_name&gt;
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>DELETE<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/&lt;index_name&gt;
+</code></pre></div>
 
 <h2 id="open-index">Open Index</h2>
-<pre class="codehilite"><code class="language-bash">curl -X POST http://${HOSTNAME}:${PORT}/&lt;index_name&gt;/_open
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/&lt;index_name&gt;/_open
+</code></pre></div>
 
 <h2 id="close-index">Close Index</h2>
-<pre class="codehilite"><code class="language-bash">curl -X POST http://${HOSTNAME}:${PORT}/&lt;index_name&gt;/_close
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/&lt;index_name&gt;/_close
+</code></pre></div>
 
 <h2 id="enable-read-write">Enable Read Write</h2>
-<pre class="codehilite"><code class="language-bash">curl -X PUT http://${HOSTNAME}:${PORT}/&lt;index_name&gt;/_settings -H Content-Type: application/json -d '
-{ 
-  &quot;index.blocks.read_only_allow_delete&quot;: null
-}'
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/&lt;index_name&gt;/_settings<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;</span>
+<span class="s1">{ </span>
+<span class="s1">  &quot;index.blocks.read_only_allow_delete&quot;: null</span>
+<span class="s1">}&#39;</span>
+</code></pre></div>
 
 <h2 id="reindex-index">Reindex Index</h2>
-<pre class="codehilite"><code class="language-bash">curl -X POST http://${HOSTNAME}:${PORT}/_reindex -H Content-Type: application/json -d '
-{
-  &quot;source&quot;: {
-    &quot;index&quot;: &quot;&lt;source_index_name&gt;&quot;
-  },
-  &quot;dest&quot;: {
-    &quot;index&quot;: &quot;&lt;dest_index_name&gt;&quot;
-  }
-}'
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/_reindex<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;</span>
+<span class="s1">{</span>
+<span class="s1">  &quot;source&quot;: {</span>
+<span class="s1">    &quot;index&quot;: &quot;&lt;source_index_name&gt;&quot;</span>
+<span class="s1">  },</span>
+<span class="s1">  &quot;dest&quot;: {</span>
+<span class="s1">    &quot;index&quot;: &quot;&lt;dest_index_name&gt;&quot;</span>
+<span class="s1">  }</span>
+<span class="s1">}&#39;</span>
+</code></pre></div>
 
 <h2 id="forcemerge">Forcemerge</h2>
-<pre class="codehilite"><code class="language-bash">curl -X POST http://${HOSTNAME}:${PORT}/&lt;index_name&gt;/_forcemerge?max_num_segments=&lt;max_num_segments&gt;
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/&lt;index_name&gt;/_forcemerge?max_num_segments<span class="o">=</span>&lt;max_num_segments&gt;
+</code></pre></div>
 
 <h2 id="move-shard">Move Shard</h2>
-<pre class="codehilite"><code class="language-bash">curl -X POST http://${HOSTNAME}:${PORT}/_cluster/reroute -H Content-Type: application/json -d '
-{ 
-  &quot;commands&quot;: [ {
-    &quot;move&quot;: {
-      &quot;index&quot;: &quot;&lt;index_name&gt;&quot;,
-      &quot;shard&quot;: &lt;shard_num&gt;,
-      &quot;from_node&quot;: &quot;&lt;from_node_name&gt;&quot;,
-      &quot;to_node&quot;: &quot;&lt;to_node_name&gt;&quot;
-    } 
-  } ]
-}'
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/_cluster/reroute<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;</span>
+<span class="s1">{ </span>
+<span class="s1">  &quot;commands&quot;: [ {</span>
+<span class="s1">    &quot;move&quot;: {</span>
+<span class="s1">      &quot;index&quot;: &quot;&lt;index_name&gt;&quot;,</span>
+<span class="s1">      &quot;shard&quot;: &lt;shard_num&gt;,</span>
+<span class="s1">      &quot;from_node&quot;: &quot;&lt;from_node_name&gt;&quot;,</span>
+<span class="s1">      &quot;to_node&quot;: &quot;&lt;to_node_name&gt;&quot;</span>
+<span class="s1">    } </span>
+<span class="s1">  } ]</span>
+<span class="s1">}&#39;</span>
+</code></pre></div>
 
 <h2 id="alter-number-replicas">Alter Number Replicas</h2>
-<pre class="codehilite"><code class="language-bash">curl -X PUT http://${HOSTNAME}:${PORT}/&lt;index_name&gt;/_settings -H Content-Type: application/json -d '
-{
-  &quot;index&quot;: {
-    &quot;number_of_replicas&quot;: &lt;number_of_replicas&gt;
-  }
-}'
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/&lt;index_name&gt;/_settings<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;</span>
+<span class="s1">{</span>
+<span class="s1">  &quot;index&quot;: {</span>
+<span class="s1">    &quot;number_of_replicas&quot;: &lt;number_of_replicas&gt;</span>
+<span class="s1">  }</span>
+<span class="s1">}&#39;</span>
+</code></pre></div>
 
 <h2 id="disable-shard-allocation">Disable Shard Allocation</h2>
-<pre class="codehilite"><code class="language-bash">curl -X PUT http://${HOSTNAME}:${PORT}/_cluster/settings -H Content-Type: application/json -d '
-{
-  &quot;persistent&quot;: {
-    &quot;cluster.routing.allocation.enable&quot;: &quot;primaries&quot;
-  }
-}'
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/_cluster/settings<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;</span>
+<span class="s1">{</span>
+<span class="s1">  &quot;persistent&quot;: {</span>
+<span class="s1">    &quot;cluster.routing.allocation.enable&quot;: &quot;primaries&quot;</span>
+<span class="s1">  }</span>
+<span class="s1">}&#39;</span>
+</code></pre></div>
 
 <h2 id="re-enable-shard-allocation">Re-enable Shard Allocation</h2>
-<pre class="codehilite"><code class="language-bash">curl -X PUT http://${HOSTNAME}:${PORT}/_cluster/settings -H Content-Type: application/json -d '
-{ 
-  &quot;persistent&quot;: { 
-    &quot;cluster.routing.allocation.enable&quot;: null
-  }
-}'
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/_cluster/settings<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;</span>
+<span class="s1">{ </span>
+<span class="s1">  &quot;persistent&quot;: { </span>
+<span class="s1">    &quot;cluster.routing.allocation.enable&quot;: null</span>
+<span class="s1">  }</span>
+<span class="s1">}&#39;</span>
+</code></pre></div>
 
 <h1 id="index-interrogation">Index Interrogation</h1>
 <h2 id="list-aliases">List Aliases</h2>
-<pre class="codehilite"><code class="language-bash">curl -X GET http://${HOSTNAME}:${PORT}/_cat/aliases?v&amp;s=[&lt;order_by_field_name&gt;]
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/_cat/aliases?v<span class="p">&amp;</span><span class="nv">s</span><span class="o">=[</span>&lt;order_by_field_name&gt;<span class="o">]</span>
+</code></pre></div>
 
 <h2 id="list-indices">List Indices</h2>
-<pre class="codehilite"><code class="language-bash">curl -X GET http://${HOSTNAME}:${PORT}/_cat/indices/[&lt;index_name&gt;]?v&amp;h=health,status,index,pri,rep,docs.count,docs.deleted,store.size,pri.store.size&amp;s=index
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/_cat/indices/<span class="o">[</span>&lt;index_name&gt;<span class="o">]</span>?v<span class="p">&amp;</span><span class="nv">h</span><span class="o">=</span>health,status,index,pri,rep,docs.count,docs.deleted,store.size,pri.store.size<span class="p">&amp;</span><span class="nv">s</span><span class="o">=</span>index
+</code></pre></div>
 
 <h2 id="list-shards">List Shards</h2>
-<pre class="codehilite"><code class="language-bash">curl -X GET http://${HOSTNAME}:${PORT}/_cat/shards/[&lt;index_name&gt;]?v&amp;h=index,shard,prirep,state,docs,store,node&amp;s=index,shard,prirep
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/_cat/shards/<span class="o">[</span>&lt;index_name&gt;<span class="o">]</span>?v<span class="p">&amp;</span><span class="nv">h</span><span class="o">=</span>index,shard,prirep,state,docs,store,node<span class="p">&amp;</span><span class="nv">s</span><span class="o">=</span>index,shard,prirep
+</code></pre></div>
 
 <h2 id="list-shard-details">List Shard Details</h2>
-<pre class="codehilite"><code class="language-bash">curl -X GET http://${HOSTNAME}:${PORT}/_cat/shards/[&lt;index_name&gt;]?v&amp;h=index,shard,prirep,state,docs,store,ip,segments.count,unassigned.reason,unassigned.for,node&amp;s=[&lt;order_by_field_name&gt;]
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/_cat/shards/<span class="o">[</span>&lt;index_name&gt;<span class="o">]</span>?v<span class="p">&amp;</span><span class="nv">h</span><span class="o">=</span>index,shard,prirep,state,docs,store,ip,segments.count,unassigned.reason,unassigned.for,node<span class="p">&amp;</span><span class="nv">s</span><span class="o">=[</span>&lt;order_by_field_name&gt;<span class="o">]</span>
+</code></pre></div>
 
 <h2 id="list-segments">List Segments</h2>
-<pre class="codehilite"><code class="language-bash">curl -X GET http://${HOSTNAME}:${PORT}/_cat/segments/[&lt;index_name&gt;]?v&amp;s=index,shard,prirep
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/_cat/segments/<span class="o">[</span>&lt;index_name&gt;<span class="o">]</span>?v<span class="p">&amp;</span><span class="nv">s</span><span class="o">=</span>index,shard,prirep
+</code></pre></div>
 
 <h2 id="list-segmented-shards">List Segmented Shards</h2>
-<pre class="codehilite"><code class="language-bash">curl -X GET http://${HOSTNAME}:${PORT}/_cat/shards/[&lt;index_name&gt;]?v&amp;h=index,shard,prirep,state,docs,node,segments.count&amp;s=index,shard,prirep,node
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/_cat/shards/<span class="o">[</span>&lt;index_name&gt;<span class="o">]</span>?v<span class="p">&amp;</span><span class="nv">h</span><span class="o">=</span>index,shard,prirep,state,docs,node,segments.count<span class="p">&amp;</span><span class="nv">s</span><span class="o">=</span>index,shard,prirep,node
+</code></pre></div>
 
 <h2 id="get-index-mapping">Get Index Mapping</h2>
-<pre class="codehilite"><code class="language-bash">curl -X GET http://${HOSTNAME}:${PORT}/&lt;index_name&gt;/_mapping?pretty
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/&lt;index_name&gt;/_mapping?pretty
+</code></pre></div>
 
 <h2 id="list-unassigned-shards">List Unassigned Shards</h2>
-<pre class="codehilite"><code class="language-bash">curl -X GET http://${HOSTNAME}:${PORT}/_cat/shards?v&amp;h=index,shard,prirep,state,docs,segments.count&amp;s=index,shard,prirep
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/_cat/shards?v<span class="p">&amp;</span><span class="nv">h</span><span class="o">=</span>index,shard,prirep,state,docs,segments.count<span class="p">&amp;</span><span class="nv">s</span><span class="o">=</span>index,shard,prirep
+</code></pre></div>
 
 <h2 id="forcemerge-progress">Forcemerge Progress</h2>
-<pre class="codehilite"><code class="language-bash">curl -X GET http://${HOSTNAME}:${PORT}/_cat/nodes?v&amp;h=name,cpu,load_1m,merges.current,merges.current_docs,merges.total,merges.total_docs&amp;s=name
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/_cat/nodes?v<span class="p">&amp;</span><span class="nv">h</span><span class="o">=</span>name,cpu,load_1m,merges.current,merges.current_docs,merges.total,merges.total_docs<span class="p">&amp;</span><span class="nv">s</span><span class="o">=</span>name
+</code></pre></div>
 
 <h1 id="index-entry-manipulation">Index Entry Manipulation</h1>
 <h2 id="add-entry">Add Entry</h2>
-<pre class="codehilite"><code class="language-bash">curl -X POST http://${HOSTNAME}:${PORT}/&lt;index_name&gt;/_doc -H Content-Type: application/json -d &lt;entry_json&gt;
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/&lt;index_name&gt;/_doc<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span>&lt;entry_json&gt;
+</code></pre></div>
 
 <h1 id="nodes">Nodes</h1>
 <h2 id="list-nodes">List Nodes</h2>
-<pre class="codehilite"><code class="language-bash">curl -X GET http://${HOSTNAME}:${PORT}/_cat/nodes?v&amp;h=name,ip,nodeRole,m,heapPercent,ramPercent,cpu,load_1m,load_5m,load_15m,disk.total,disk.used_percent&amp;s=name
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/_cat/nodes?v<span class="p">&amp;</span><span class="nv">h</span><span class="o">=</span>name,ip,nodeRole,m,heapPercent,ramPercent,cpu,load_1m,load_5m,load_15m,disk.total,disk.used_percent<span class="p">&amp;</span><span class="nv">s</span><span class="o">=</span>name
+</code></pre></div>
 
 <h2 id="list-nodes-queries">List Nodes Queries</h2>
-<pre class="codehilite"><code class="language-bash">curl -X GET http://${HOSTNAME}:${PORT}/_cat/nodes?v&amp;h=name,ip,nodeRole,m,heapPercent,ramPercent,cpu,load_1m,load_5m,load_15m,disk.total,disk.used_percent&amp;s=name
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/_cat/nodes?v<span class="p">&amp;</span><span class="nv">h</span><span class="o">=</span>name,ip,nodeRole,m,heapPercent,ramPercent,cpu,load_1m,load_5m,load_15m,disk.total,disk.used_percent<span class="p">&amp;</span><span class="nv">s</span><span class="o">=</span>name
+</code></pre></div>
 
 <h2 id="search-nodes">Search Nodes</h2>
-<pre class="codehilite"><code class="language-bash">curl -X GET http://${HOSTNAME}:${PORT}/_nodes
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/_nodes
+</code></pre></div>
 
 <h2 id="node-active-threads">Node Active Threads</h2>
-<pre class="codehilite"><code class="language-bash">curl -X GET http://${HOSTNAME}:${PORT}/_cat/thread_pool?v&amp;s=node_name,name
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/_cat/thread_pool?v<span class="p">&amp;</span><span class="nv">s</span><span class="o">=</span>node_name,name
+</code></pre></div>
 
 <h1 id="search">Search</h1>
 <h2 id="search_1">Search</h2>
-<pre class="codehilite"><code class="language-bash">curl -X GET http://${HOSTNAME}:${PORT}/&lt;index_name&gt;/_search?q=&lt;search_term&gt;&amp;pretty
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/&lt;index_name&gt;/_search?q<span class="o">=</span>&lt;search_term&gt;<span class="p">&amp;</span>pretty
+</code></pre></div>
 
 <h2 id="search-json">Search Json</h2>
-<pre class="codehilite"><code class="language-bash">curl -X GET http://${HOSTNAME}:${PORT}/json/_search?q=&lt;index_name&gt;&amp;pretty
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/json/_search?q<span class="o">=</span>&lt;index_name&gt;<span class="p">&amp;</span>pretty
+</code></pre></div>
 
 <h2 id="search-summary">Search Summary</h2>
-<pre class="codehilite"><code class="language-bash">curl -X GET http://${HOSTNAME}:${PORT}/summary/_search?q=&lt;index_name&gt;&amp;pretty
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/summary/_search?q<span class="o">=</span>&lt;index_name&gt;<span class="p">&amp;</span>pretty
+</code></pre></div>
 
 <h1 id="tasks">Tasks</h1>
 <h2 id="list-tasks">List Tasks</h2>
-<pre class="codehilite"><code class="language-bash">curl -X GET http://${HOSTNAME}:${PORT}/_cat/tasks?v&amp;h=action,type,start_time,timestamp,running_time,node&amp;s=[&lt;sort_field&gt;]
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/_cat/tasks?v<span class="p">&amp;</span><span class="nv">h</span><span class="o">=</span>action,type,start_time,timestamp,running_time,node<span class="p">&amp;</span><span class="nv">s</span><span class="o">=[</span>&lt;sort_field&gt;<span class="o">]</span>
+</code></pre></div>
 
 <h2 id="list-tasks-detail">List Tasks Detail</h2>
-<pre class="codehilite"><code class="language-bash">curl -X GET http://${HOSTNAME}:${PORT}/_cat/tasks?v&amp;h=action,type,start_time,timestamp,running_time,node&amp;s=detail
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/_cat/tasks?v<span class="p">&amp;</span><span class="nv">h</span><span class="o">=</span>action,type,start_time,timestamp,running_time,node<span class="p">&amp;</span><span class="nv">s</span><span class="o">=</span>detail
+</code></pre></div>
         </div>
       </article>
     </main>

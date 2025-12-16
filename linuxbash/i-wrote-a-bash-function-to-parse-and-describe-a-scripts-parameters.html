@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -93,85 +93,85 @@
 <p>I am always skipping up and down in a bash script as I add script parameters and need to add a description for the parameter in the <code>help_text</code> / header.</p>
 <p>I decided to write a function to generate the PARAMETER description from the parameter parsing case statement in the script.  It uses the parameter case elements and comments within the case statement.</p>
 <h2 id="the-function">The Function</h2>
-<pre class="codehilite"><code class="language-bash"># Parses and prints script parameter details between two comments: 
-# &quot;# Start Parse Script Parameters&quot; and &quot;# End Parse Script Parameters&quot;.
-# Within the parameter parse case statement, parameters should be commented
-# as follows:
-#
-# case $1 in
-#   -p|--param # &lt;list&gt; &lt;parameters&gt; &lt;as a comment&gt;
-#     # Desc: Describe the parameter in a comment starting &quot;# Desc:&quot;
-#     # Desc: For multiple lines, all mist start with &quot;# Desc:&quot;
-#     ...
-# esac
-function print_parameters() {
+<div class="codehilite"><pre><span></span><code><span class="c1"># Parses and prints script parameter details between two comments: </span>
+<span class="c1"># &quot;# Start Parse Script Parameters&quot; and &quot;# End Parse Script Parameters&quot;.</span>
+<span class="c1"># Within the parameter parse case statement, parameters should be commented</span>
+<span class="c1"># as follows:</span>
+<span class="c1">#</span>
+<span class="c1"># case $1 in</span>
+<span class="c1">#   -p|--param # &lt;list&gt; &lt;parameters&gt; &lt;as a comment&gt;</span>
+<span class="c1">#     # Desc: Describe the parameter in a comment starting &quot;# Desc:&quot;</span>
+<span class="c1">#     # Desc: For multiple lines, all mist start with &quot;# Desc:&quot;</span>
+<span class="c1">#     ...</span>
+<span class="c1"># esac</span>
+<span class="k">function</span><span class="w"> </span>print_parameters<span class="o">()</span><span class="w"> </span><span class="o">{</span>
 
-  echo &quot;PARAMETERS&quot;
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;PARAMETERS&quot;</span>
 
-  echo -e &quot;$(cat $0 | sed -n '/^ *# Start Parse Script Parameters/,$p' \
-                    | sed -n '/^ *# End Parse Script Parameters/q;p' \
-                    | sed -n '/^ *-.*).*$/p; /^ *# Desc:/p' \
-                    | sed 's/^ */    /; s/# Desc: */    /; s/\(^  *-.*\)) *$/\1/' \
-                    | sed 's/\(^  *-.*\)) *# *\(.*\)/\n\\e[1m\1 \2\\e[0m/' \
-                    | sed 's/\(^ *-.*\)/\n\\e[1m\1\\e[0m/') &quot;
-}
-</code></pre>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>cat<span class="w"> </span><span class="nv">$0</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;/^ *# Start Parse Script Parameters/,$p&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">                    </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;/^ *# End Parse Script Parameters/q;p&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">                    </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;/^ *-.*).*$/p; /^ *# Desc:/p&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">                    </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/^ */    /; s/# Desc: */    /; s/\(^  *-.*\)) *$/\1/&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">                    </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/\(^  *-.*\)) *# *\(.*\)/\n\\e[1m\1 \2\\e[0m/&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">                    </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/\(^ *-.*\)/\n\\e[1m\1\\e[0m/&#39;</span><span class="k">)</span><span class="s2"> &quot;</span>
+<span class="o">}</span>
+</code></pre></div>
 
 <h2 id="the-parameter-parsing-case-statement">The Parameter Parsing case Statement</h2>
 <p>Note: The function parses the case statement between the two comments: <code># Start Parse Script Parameters</code> and <code># End Parse Script Parameters</code>.A</p>
 <p>An example parameter parsing case statement.</p>
-<pre class="codehilite"><code class="language-bash"># Start Parse Script Parameters
+<div class="codehilite"><pre><span></span><code><span class="c1"># Start Parse Script Parameters</span>
 
-while [[ &quot;$1&quot; ]]; do
-  case $1 in
-    -h|--help)
-      # Desc: To show this help message.
-      echo &quot;$help_text&quot;
-      print_parameters
-      exit
-      ;;
-    -e|--example) # &lt;example-value&gt;
-      # Desc: An example parameter.
-      # Desc: With a multi line description.
-      shift
-      username=&quot;$1&quot;
-      ;;
-    *)
-      echo &quot;Error: Incorrect Parameter: $1&quot;
-      errorYN=y
-      ;;
-  esac
-  shift
-done
+<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
+<span class="w">    </span>-h<span class="p">|</span>--help<span class="o">)</span>
+<span class="w">      </span><span class="c1"># Desc: To show this help message.</span>
+<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
+<span class="w">      </span>print_parameters
+<span class="w">      </span><span class="nb">exit</span>
+<span class="w">      </span><span class="p">;;</span>
+<span class="w">    </span>-e<span class="p">|</span>--example<span class="o">)</span><span class="w"> </span><span class="c1"># &lt;example-value&gt;</span>
+<span class="w">      </span><span class="c1"># Desc: An example parameter.</span>
+<span class="w">      </span><span class="c1"># Desc: With a multi line description.</span>
+<span class="w">      </span><span class="nb">shift</span>
+<span class="w">      </span><span class="nv">username</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="w">      </span><span class="p">;;</span>
+<span class="w">    </span>*<span class="o">)</span>
+<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Error: Incorrect Parameter: </span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="w">      </span><span class="nv">errorYN</span><span class="o">=</span>y
+<span class="w">      </span><span class="p">;;</span>
+<span class="w">  </span><span class="k">esac</span>
+<span class="w">  </span><span class="nb">shift</span>
+<span class="k">done</span>
 
-# End Parse Script Parameters
-</code></pre>
+<span class="c1"># End Parse Script Parameters</span>
+</code></pre></div>
 
 <h2 id="the-output">The Output</h2>
 <p>Calling a script which contains the above function and the above parameter parsing case statement.</p>
-<pre class="codehilite"><code class="language-bash">&gt; example-script -h
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>example-script<span class="w"> </span>-h
 
 NAME
-  example-script
+<span class="w">  </span>example-script
 
 USAGE
-  example-script
+<span class="w">  </span>example-script
 
 DESCRIPTION
-  An example script.
+<span class="w">  </span>An<span class="w"> </span>example<span class="w"> </span>script.
 
 AUTHOR
-  mjnurse.dev - 2022
+<span class="w">  </span>mjnurse.dev<span class="w"> </span>-<span class="w"> </span><span class="m">2022</span>
 
 PARAMETERS
 
-    -h|--help
-        To show this help message.
+<span class="w">    </span>-h<span class="p">|</span>--help
+<span class="w">        </span>To<span class="w"> </span>show<span class="w"> </span>this<span class="w"> </span><span class="nb">help</span><span class="w"> </span>message.
 
-    -e|--example &lt;example-value&gt;
-        An example parameter.
-        With a multi line description.
-</code></pre>
+<span class="w">    </span>-e<span class="p">|</span>--example<span class="w"> </span>&lt;example-value&gt;
+<span class="w">        </span>An<span class="w"> </span>example<span class="w"> </span>parameter.
+<span class="w">        </span>With<span class="w"> </span>a<span class="w"> </span>multi<span class="w"> </span>line<span class="w"> </span>description.
+</code></pre></div>
         </div>
       </article>
     </main>

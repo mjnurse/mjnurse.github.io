@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -124,20 +124,20 @@
 <p><code>&gt; docker run --name mjn-postgres -e POSTGRES_PASSWORD=postgres -d -p 5432:5432 postgres</code></p>
 <p><code>&gt; sudo apt-get install postgresql-client-12</code></p>
 <p>(Note may need to add extra repos to apt-get)</p>
-<pre class="codehilite"><code class="language-bash">#!/bin/bash
-export PGPASSWORD=postgres
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">PGPASSWORD</span><span class="o">=</span>postgres
 
-if [[ &quot;$1&quot; == &quot;&quot; ]]; then
-   psql --host=localhost -U postgres $*
-else
-   psql --host=localhost -U postgres -f $1
-fi
-</code></pre>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">   </span>psql<span class="w"> </span>--host<span class="o">=</span>localhost<span class="w"> </span>-U<span class="w"> </span>postgres<span class="w"> </span><span class="nv">$*</span>
+<span class="k">else</span>
+<span class="w">   </span>psql<span class="w"> </span>--host<span class="o">=</span>localhost<span class="w"> </span>-U<span class="w"> </span>postgres<span class="w"> </span>-f<span class="w"> </span><span class="nv">$1</span>
+<span class="k">fi</span>
+</code></pre></div>
 
 <h1 id="oracle-in-a-container">Oracle in a Container</h1>
 <p>Note:  Ideally the data would be stored in a folder on the client but Docker on windows using Azure Active Directory will not mount external folders...</p>
-<pre class="codehilite"><code class="language-bash">&gt; docker run -d --name oracle --privileged -p 8080:8080 -p 1521:1521 absolutapps/oracle-12c-ee 
-</code></pre>
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>oracle<span class="w"> </span>--privileged<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>:8080<span class="w"> </span>-p<span class="w"> </span><span class="m">1521</span>:1521<span class="w"> </span>absolutapps/oracle-12c-ee<span class="w"> </span>
+</code></pre></div>
 
 <hr>
         </div>

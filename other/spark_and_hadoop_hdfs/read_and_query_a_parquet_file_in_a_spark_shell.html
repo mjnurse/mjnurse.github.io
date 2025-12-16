@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -90,38 +90,38 @@
         <div class="article-body">
           <h1>Read and Query a Parquet File in a Spark Shell</h1>
 <h2 id="basic-read-and-query">Basic Read and Query</h2>
-<pre class="codehilite"><code class="language-scala">// Read in file to a data frame.
-&gt; val df = spark.read.parquet(&quot;filename.parquet&quot;)
+<div class="codehilite"><pre><span></span><code><span class="c1">// Read in file to a data frame.</span>
+<span class="o">&gt;</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">spark</span><span class="p">.</span><span class="n">read</span><span class="p">.</span><span class="n">parquet</span><span class="p">(</span><span class="s">&quot;filename.parquet&quot;</span><span class="p">)</span>
 
-// Print the data frame schema.
-&gt; df.printSchema()
+<span class="c1">// Print the data frame schema.</span>
+<span class="o">&gt;</span><span class="w"> </span><span class="n">df</span><span class="p">.</span><span class="n">printSchema</span><span class="p">()</span>
 
-// Show the data.
-&gt; df.show()
+<span class="c1">// Show the data.</span>
+<span class="o">&gt;</span><span class="w"> </span><span class="n">df</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
 
-// Number of records.
-&gt; df.count()
-</code></pre>
+<span class="c1">// Number of records.</span>
+<span class="o">&gt;</span><span class="w"> </span><span class="n">df</span><span class="p">.</span><span class="n">count</span><span class="p">()</span>
+</code></pre></div>
 
 <h2 id="spark-sql">Spark SQL</h2>
-<pre class="codehilite"><code class="language-scala">// Read in file to a data frame.
-&gt; val df = spark.read.parquet(&quot;filename.parquet&quot;)
+<div class="codehilite"><pre><span></span><code><span class="c1">// Read in file to a data frame.</span>
+<span class="o">&gt;</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">spark</span><span class="p">.</span><span class="n">read</span><span class="p">.</span><span class="n">parquet</span><span class="p">(</span><span class="s">&quot;filename.parquet&quot;</span><span class="p">)</span>
 
-// Create a temporary view over the dataframe
-&gt; df.createOrReplaceTempView(&quot;dfv&quot;) // dfv - data frame view
+<span class="c1">// Create a temporary view over the dataframe</span>
+<span class="o">&gt;</span><span class="w"> </span><span class="n">df</span><span class="p">.</span><span class="n">createOrReplaceTempView</span><span class="p">(</span><span class="s">&quot;dfv&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// dfv - data frame view</span>
 
-// Run SQL Select query
-&gt; val res=spark.sql(&quot;SELECT * FROM dfv&quot;)
-&gt; res.show()
-</code></pre>
+<span class="c1">// Run SQL Select query</span>
+<span class="o">&gt;</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">res</span><span class="o">=</span><span class="n">spark</span><span class="p">.</span><span class="n">sql</span><span class="p">(</span><span class="s">&quot;SELECT * FROM dfv&quot;</span><span class="p">)</span>
+<span class="o">&gt;</span><span class="w"> </span><span class="n">res</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></div>
 
 <p>Show more data:</p>
-<pre class="codehilite"><code class="language-scala">df.show() // Show 20 rows &amp; 20 characters for columns
-df.show(50) // Show 50 rows
-df.show(false) // Show 20 rows with full column value
-df.show(50,false) // Show 50 rows &amp; full column value
-df.show(20,20,true) // Show 20 rows, column length 20 &amp; displays data in vertical
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="n">df</span><span class="p">.</span><span class="n">show</span><span class="p">()</span><span class="w"> </span><span class="c1">// Show 20 rows &amp; 20 characters for columns</span>
+<span class="n">df</span><span class="p">.</span><span class="n">show</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span><span class="w"> </span><span class="c1">// Show 50 rows</span>
+<span class="n">df</span><span class="p">.</span><span class="n">show</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span><span class="w"> </span><span class="c1">// Show 20 rows with full column value</span>
+<span class="n">df</span><span class="p">.</span><span class="n">show</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span><span class="kc">false</span><span class="p">)</span><span class="w"> </span><span class="c1">// Show 50 rows &amp; full column value</span>
+<span class="n">df</span><span class="p">.</span><span class="n">show</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="c1">// Show 20 rows, column length 20 &amp; displays data in vertical</span>
+</code></pre></div>
         </div>
       </article>
     </main>

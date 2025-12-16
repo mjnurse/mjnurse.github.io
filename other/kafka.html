@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -229,82 +229,82 @@
 </ul>
 <h1 id="basic-commands">Basic Commands</h1>
 <h2 id="create-topic">Create Topic</h2>
-<pre class="codehilite"><code class="language-bash">kafka-topics.sh --create \
-  --topic my-topic \
-  --bootstrap-server localhost:9092 \
-  --partitions 3 \
-  --replication-factor 2
-</code></pre>
+<div class="codehilite"><pre><span></span><code>kafka-topics.sh<span class="w"> </span>--create<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--topic<span class="w"> </span>my-topic<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--bootstrap-server<span class="w"> </span>localhost:9092<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--partitions<span class="w"> </span><span class="m">3</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--replication-factor<span class="w"> </span><span class="m">2</span>
+</code></pre></div>
 
 <h2 id="list-topics">List Topics</h2>
-<pre class="codehilite"><code class="language-bash">kafka-topics.sh --list \
-  --bootstrap-server localhost:9092
-</code></pre>
+<div class="codehilite"><pre><span></span><code>kafka-topics.sh<span class="w"> </span>--list<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--bootstrap-server<span class="w"> </span>localhost:9092
+</code></pre></div>
 
 <h2 id="describe-topic">Describe Topic</h2>
-<pre class="codehilite"><code class="language-bash">kafka-topics.sh --describe \
-  --topic my-topic \
-  --bootstrap-server localhost:9092
-</code></pre>
+<div class="codehilite"><pre><span></span><code>kafka-topics.sh<span class="w"> </span>--describe<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--topic<span class="w"> </span>my-topic<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--bootstrap-server<span class="w"> </span>localhost:9092
+</code></pre></div>
 
 <h2 id="produce-messages">Produce Messages</h2>
-<pre class="codehilite"><code class="language-bash">kafka-console-producer.sh \
-  --topic my-topic \
-  --bootstrap-server localhost:9092
-</code></pre>
+<div class="codehilite"><pre><span></span><code>kafka-console-producer.sh<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--topic<span class="w"> </span>my-topic<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--bootstrap-server<span class="w"> </span>localhost:9092
+</code></pre></div>
 
 <h2 id="consume-messages">Consume Messages</h2>
-<pre class="codehilite"><code class="language-bash">kafka-console-consumer.sh \
-  --topic my-topic \
-  --from-beginning \
-  --bootstrap-server localhost:9092
-</code></pre>
+<div class="codehilite"><pre><span></span><code>kafka-console-consumer.sh<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--topic<span class="w"> </span>my-topic<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--from-beginning<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--bootstrap-server<span class="w"> </span>localhost:9092
+</code></pre></div>
 
 <h2 id="consumer-groups_1">Consumer Groups</h2>
-<pre class="codehilite"><code class="language-bash"># List consumer groups
-kafka-consumer-groups.sh --list \
-  --bootstrap-server localhost:9092
+<div class="codehilite"><pre><span></span><code><span class="c1"># List consumer groups</span>
+kafka-consumer-groups.sh<span class="w"> </span>--list<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--bootstrap-server<span class="w"> </span>localhost:9092
 
-# Describe consumer group
-kafka-consumer-groups.sh --describe \
-  --group my-group \
-  --bootstrap-server localhost:9092
-</code></pre>
+<span class="c1"># Describe consumer group</span>
+kafka-consumer-groups.sh<span class="w"> </span>--describe<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--group<span class="w"> </span>my-group<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--bootstrap-server<span class="w"> </span>localhost:9092
+</code></pre></div>
 
 <h2 id="delete-topic">Delete Topic</h2>
-<pre class="codehilite"><code class="language-bash">kafka-topics.sh --delete \
-  --topic my-topic \
-  --bootstrap-server localhost:9092
-</code></pre>
+<div class="codehilite"><pre><span></span><code>kafka-topics.sh<span class="w"> </span>--delete<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--topic<span class="w"> </span>my-topic<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--bootstrap-server<span class="w"> </span>localhost:9092
+</code></pre></div>
 
 <h1 id="configuration-examples">Configuration Examples</h1>
 <h2 id="producer-configuration">Producer Configuration</h2>
-<pre class="codehilite"><code class="language-properties">bootstrap.servers=localhost:9092
-key.serializer=org.apache.kafka.common.serialization.StringSerializer
-value.serializer=org.apache.kafka.common.serialization.StringSerializer
-acks=all
-retries=3
-compression.type=snappy
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="na">bootstrap.servers</span><span class="o">=</span><span class="s">localhost:9092</span>
+<span class="na">key.serializer</span><span class="o">=</span><span class="s">org.apache.kafka.common.serialization.StringSerializer</span>
+<span class="na">value.serializer</span><span class="o">=</span><span class="s">org.apache.kafka.common.serialization.StringSerializer</span>
+<span class="na">acks</span><span class="o">=</span><span class="s">all</span>
+<span class="na">retries</span><span class="o">=</span><span class="s">3</span>
+<span class="na">compression.type</span><span class="o">=</span><span class="s">snappy</span>
+</code></pre></div>
 
 <h2 id="consumer-configuration">Consumer Configuration</h2>
-<pre class="codehilite"><code class="language-properties">bootstrap.servers=localhost:9092
-group.id=my-consumer-group
-key.deserializer=org.apache.kafka.common.serialization.StringDeserializer
-value.deserializer=org.apache.kafka.common.serialization.StringDeserializer
-auto.offset.reset=earliest
-enable.auto.commit=false
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="na">bootstrap.servers</span><span class="o">=</span><span class="s">localhost:9092</span>
+<span class="na">group.id</span><span class="o">=</span><span class="s">my-consumer-group</span>
+<span class="na">key.deserializer</span><span class="o">=</span><span class="s">org.apache.kafka.common.serialization.StringDeserializer</span>
+<span class="na">value.deserializer</span><span class="o">=</span><span class="s">org.apache.kafka.common.serialization.StringDeserializer</span>
+<span class="na">auto.offset.reset</span><span class="o">=</span><span class="s">earliest</span>
+<span class="na">enable.auto.commit</span><span class="o">=</span><span class="s">false</span>
+</code></pre></div>
 
 <h2 id="broker-configuration">Broker Configuration</h2>
-<pre class="codehilite"><code class="language-properties">broker.id=0
-listeners=PLAINTEXT://localhost:9092
-log.dirs=/var/kafka-logs
-num.partitions=3
-default.replication.factor=2
-log.retention.hours=168
-log.segment.bytes=1073741824
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="na">broker.id</span><span class="o">=</span><span class="s">0</span>
+<span class="na">listeners</span><span class="o">=</span><span class="s">PLAINTEXT://localhost:9092</span>
+<span class="na">log.dirs</span><span class="o">=</span><span class="s">/var/kafka-logs</span>
+<span class="na">num.partitions</span><span class="o">=</span><span class="s">3</span>
+<span class="na">default.replication.factor</span><span class="o">=</span><span class="s">2</span>
+<span class="na">log.retention.hours</span><span class="o">=</span><span class="s">168</span>
+<span class="na">log.segment.bytes</span><span class="o">=</span><span class="s">1073741824</span>
+</code></pre></div>
 
 <h1 id="best-practices">Best Practices</h1>
 <h2 id="topic-design">Topic Design</h2>

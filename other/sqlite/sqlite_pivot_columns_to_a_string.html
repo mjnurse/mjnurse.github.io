@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -90,29 +90,29 @@
         <div class="article-body">
           <h1>sqlite Pivot Columns to a String</h1>
 <p>An example of the sqlite GROUP_CONCAT function to pivot column values to a string.</p>
-<pre class="codehilite"><code class="language-sql">.headers on
-.mode columns
+<div class="codehilite"><pre><span></span><code><span class="p">.</span><span class="n">headers</span><span class="w"> </span><span class="k">on</span>
+<span class="p">.</span><span class="k">mode</span><span class="w"> </span><span class="n">columns</span>
 
-CREATE TABLE t (c1 INT, c2 INT);
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">(</span><span class="n">c1</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span><span class="w"> </span><span class="n">c2</span><span class="w"> </span><span class="nb">INT</span><span class="p">);</span>
 
-INSERT INTO t VALUES (1, 'a');
-INSERT INTO t VALUES (1, 'b');
-INSERT INTO t VALUES (2, 'a');
-INSERT INTO t VALUES (2, 'b');
-INSERT INTO t VALUES (2, 'c');
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;a&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;b&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;a&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;b&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;c&#39;</span><span class="p">);</span>
 
-SELECT    c1
-        , GROUP_CONCAT(c2) AS str
-FROM      t
-GROUP BY  c1;
+<span class="k">SELECT</span><span class="w">    </span><span class="n">c1</span>
+<span class="w">        </span><span class="p">,</span><span class="w"> </span><span class="n">GROUP_CONCAT</span><span class="p">(</span><span class="n">c2</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">str</span>
+<span class="k">FROM</span><span class="w">      </span><span class="n">t</span>
+<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w">  </span><span class="n">c1</span><span class="p">;</span>
 
-results
-=======
-c1          str
-----------  ----------
-1           a,b
-2           a,b,c
-</code></pre>
+<span class="n">results</span>
+<span class="o">=======</span>
+<span class="n">c1</span><span class="w">          </span><span class="n">str</span>
+<span class="c1">----------  ----------</span>
+<span class="mi">1</span><span class="w">           </span><span class="n">a</span><span class="p">,</span><span class="n">b</span>
+<span class="mi">2</span><span class="w">           </span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="k">c</span>
+</code></pre></div>
 
 <p>Note: This is the same as the Oracle LISTAGG function.</p>
 <hr>

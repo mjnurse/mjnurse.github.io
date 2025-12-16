@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -90,29 +90,29 @@
         <div class="article-body">
           <h1>PySpark Create a DataFrame</h1>
 <p>File: <code>test.json</code>.</p>
-<pre class="codehilite"><code>&gt; echo '{&quot;name&quot;:&quot;martin&quot;, &quot;status&quot;:&quot;cool&quot;}' &gt; test.json
-&gt; echo '{&quot;name&quot;:&quot;phil&quot;, &quot;status&quot;:&quot;dull&quot;}' &gt;&gt; test.json
-</code></pre>
+<div class="codehilite"><pre><span></span><code>&gt; echo &#39;{&quot;name&quot;:&quot;martin&quot;, &quot;status&quot;:&quot;cool&quot;}&#39; &gt; test.json
+&gt; echo &#39;{&quot;name&quot;:&quot;phil&quot;, &quot;status&quot;:&quot;dull&quot;}&#39; &gt;&gt; test.json
+</code></pre></div>
 
 <p>Copy file into hdfs.</p>
-<pre class="codehilite"><code>&gt; hdfs dfs -mkdir hdfs://localhost:9000/user/martin/
+<div class="codehilite"><pre><span></span><code>&gt; hdfs dfs -mkdir hdfs://localhost:9000/user/martin/
 &gt; hdfs dfs -put test.json hdfs://localhost:9000/user/martin/test.json
-</code></pre>
+</code></pre></div>
 
 <p>Start PySpark</p>
-<pre class="codehilite"><code>&gt; PySpark
-</code></pre>
+<div class="codehilite"><pre><span></span><code>&gt; PySpark
+</code></pre></div>
 
 <p>Load file into dataframe.</p>
-<pre class="codehilite"><code class="language-python">&gt;&gt;&gt; df = spark.read.json(&quot;test.json&quot;)
-&gt;&gt;&gt; df.show()
-+------+------+
-|  name|status|
-+------+------+
-|martin|  cool|
-|  phil|  dull|
-+------+------+
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">json</span><span class="p">(</span><span class="s2">&quot;test.json&quot;</span><span class="p">)</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">df</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="o">+------+------+</span>
+<span class="o">|</span>  <span class="n">name</span><span class="o">|</span><span class="n">status</span><span class="o">|</span>
+<span class="o">+------+------+</span>
+<span class="o">|</span><span class="n">martin</span><span class="o">|</span>  <span class="n">cool</span><span class="o">|</span>
+<span class="o">|</span>  <span class="n">phil</span><span class="o">|</span>  <span class="n">dull</span><span class="o">|</span>
+<span class="o">+------+------+</span>
+</code></pre></div>
         </div>
       </article>
     </main>

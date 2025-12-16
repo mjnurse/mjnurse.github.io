@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -90,49 +90,49 @@
         <div class="article-body">
           <h1>Anonymous Functions - Functions as a Parameter</h1>
 <h2 id="anonymous-functions">Anonymous Functions</h2>
-<pre class="codehilite"><code class="language-scala">def sum(f: Int =&gt; Int, a: Int, b: Int): Int = if (a == b) f(a) else f(a) + sum(f, a+1, b)
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">f</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">):</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span>
+</code></pre></div>
 
 <p>Currying is defining a function piecewise one parameter section after another.</p>
-<pre class="codehilite"><code class="language-scala">def sum(f: Int =&gt; Int)(a: Int, b: Int): Int = if (a &gt; b) 0 else f(a) + sum(f)(a+1, b)
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">f</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Int</span><span class="p">)(</span><span class="n">a</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">):</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">f</span><span class="p">)(</span><span class="n">a</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span>
+</code></pre></div>
 
 <h2 id="passing-a-function-into-a-function">Passing a function into a function</h2>
-<pre class="codehilite"><code class="language-scala">scala&gt; def head(word: String, length: Int): String = {word.substring(0, length)}
-head: (word: String, length: Int)String
+<div class="codehilite"><pre><span></span><code><span class="n">scala</span><span class="o">&gt;</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">head</span><span class="p">(</span><span class="n">word</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">):</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="n">word</span><span class="p">.</span><span class="n">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="p">)}</span>
+<span class="n">head</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">word</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="nc">String</span>
 
-scala&gt; // Define a function which returns a function which inturn takes a trim function and applies the trim
-scala&gt; // twice separating the values with a separator string.
+<span class="n">scala</span><span class="o">&gt;</span><span class="w"> </span><span class="c1">// Define a function which returns a function which inturn takes a trim function and applies the trim</span>
+<span class="n">scala</span><span class="o">&gt;</span><span class="w"> </span><span class="c1">// twice separating the values with a separator string.</span>
 
-scala&gt; def repeater(separator: String) =
-     | (word: String, length: Int, trimFunc:(String, Int) =&gt; String) =&gt;
-     | {trimFunc(word, length)+separator+trimFunc(word, length)}
-repeater: (separator: String)(String, Int, (String, Int) =&gt; String) =&gt; String
+<span class="n">scala</span><span class="o">&gt;</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">repeater</span><span class="p">(</span><span class="n">separator</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">)</span><span class="w"> </span><span class="o">=</span>
+<span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="n">word</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">trimFunc</span><span class="p">:(</span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">String</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span>
+<span class="w">     </span><span class="o">|</span><span class="w"> </span><span class="p">{</span><span class="n">trimFunc</span><span class="p">(</span><span class="n">word</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="p">)</span><span class="o">+</span><span class="n">separator</span><span class="o">+</span><span class="n">trimFunc</span><span class="p">(</span><span class="n">word</span><span class="p">,</span><span class="w"> </span><span class="n">length</span><span class="p">)}</span>
+<span class="n">repeater</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">separator</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">)(</span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">String</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">String</span>
 
-scala&gt; // Run repeater which returns a function.
+<span class="n">scala</span><span class="o">&gt;</span><span class="w"> </span><span class="c1">// Run repeater which returns a function.</span>
 
-scala&gt; val repeat = repeater(&quot;--&quot;)
-repeat: (String, Int, (String, Int) =&gt; String) =&gt; String = $$Lambda$3382/2122078060@17d38c41
+<span class="n">scala</span><span class="o">&gt;</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">repeat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">repeater</span><span class="p">(</span><span class="s">&quot;--&quot;</span><span class="p">)</span>
+<span class="n">repeat</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">String</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">$$Lambda$3382</span><span class="o">/</span><span class="mi">2122078060</span><span class="o">@</span><span class="mf">17d</span><span class="mi">38</span><span class="n">c41</span>
 
-scala&gt; // Run the function repeat passing in the head function as the trimFunc.
+<span class="n">scala</span><span class="o">&gt;</span><span class="w"> </span><span class="c1">// Run the function repeat passing in the head function as the trimFunc.</span>
 
-scala&gt; val str = repeat(&quot;Martin&quot;, 4, head)
-str: String = Mart--Mart
-</code></pre>
+<span class="n">scala</span><span class="o">&gt;</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">repeat</span><span class="p">(</span><span class="s">&quot;Martin&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">head</span><span class="p">)</span>
+<span class="n">str</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Mart</span><span class="o">--</span><span class="nc">Mart</span>
+</code></pre></div>
 
 <h2 id="returning-a-function-from-a-function">Returning a function from a function</h2>
-<pre class="codehilite"><code class="language-scala">// Create a function which is passed a separator string and then returns a function which can be called
-// with a word string and which returns the word twice separated by the separator string.
+<div class="codehilite"><pre><span></span><code><span class="c1">// Create a function which is passed a separator string and then returns a function which can be called</span>
+<span class="c1">// with a word string and which returns the word twice separated by the separator string.</span>
 
-scala&gt; def repeater(separator: String) = (word: String) =&gt; {word + separator + word}
-repeater: (separator: String)String =&gt; String
+<span class="n">scala</span><span class="o">&gt;</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">repeater</span><span class="p">(</span><span class="n">separator</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">word</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="n">word</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">separator</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">word</span><span class="p">}</span>
+<span class="n">repeater</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="n">separator</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">)</span><span class="nc">String</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">String</span>
 
-scala&gt; val repeat = repeater(&quot;,&quot;)
-repeat: String =&gt; String = $$Lambda$3302/820261397@33db1faa
+<span class="n">scala</span><span class="o">&gt;</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">repeat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">repeater</span><span class="p">(</span><span class="s">&quot;,&quot;</span><span class="p">)</span>
+<span class="n">repeat</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">$$Lambda$3302</span><span class="o">/</span><span class="mi">820261397</span><span class="o">@</span><span class="mf">33d</span><span class="n">b1faa</span>
 
-scala&gt; repeat(&quot;hi&quot;)
-res1: String = hi,hi
-</code></pre>
+<span class="n">scala</span><span class="o">&gt;</span><span class="w"> </span><span class="n">repeat</span><span class="p">(</span><span class="s">&quot;hi&quot;</span><span class="p">)</span>
+<span class="n">res1</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hi</span><span class="p">,</span><span class="n">hi</span>
+</code></pre></div>
 
 <hr>
         </div>

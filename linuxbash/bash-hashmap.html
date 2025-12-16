@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -90,45 +90,45 @@
         <div class="article-body">
           <h1>Bash Hashmap</h1>
 <p>Bash supports associative arrays / hashmaps!</p>
-<pre class="codehilite"><code class="language-bash"># Declare COUNTRIES hashmap which maps city names to Countries, and add some values.
-#
-# -A means associative array (hashmap)
-# -r means read-only
-$ declare -A COUNTRIES=(
-  [&quot;London&quot;]=&quot;UK&quot;
-  [&quot;Paris&quot;]=&quot;France&quot;
-  [&quot;Birmingham&quot;]=&quot;UK&quot;
-)
+<div class="codehilite"><pre><span></span><code><span class="c1"># Declare COUNTRIES hashmap which maps city names to Countries, and add some values.</span>
+<span class="c1">#</span>
+<span class="c1"># -A means associative array (hashmap)</span>
+<span class="c1"># -r means read-only</span>
+$<span class="w"> </span><span class="nb">declare</span><span class="w"> </span>-A<span class="w"> </span><span class="nv">COUNTRIES</span><span class="o">=(</span>
+<span class="w">  </span><span class="o">[</span><span class="s2">&quot;London&quot;</span><span class="o">]=</span><span class="s2">&quot;UK&quot;</span>
+<span class="w">  </span><span class="o">[</span><span class="s2">&quot;Paris&quot;</span><span class="o">]=</span><span class="s2">&quot;France&quot;</span>
+<span class="w">  </span><span class="o">[</span><span class="s2">&quot;Birmingham&quot;</span><span class="o">]=</span><span class="s2">&quot;UK&quot;</span>
+<span class="o">)</span>
 
-# Add additional value
-$ COUNTRIES[&quot;New York&quot;]=&quot;US&quot;
+<span class="c1"># Add additional value</span>
+$<span class="w"> </span>COUNTRIES<span class="o">[</span><span class="s2">&quot;New York&quot;</span><span class="o">]=</span><span class="s2">&quot;US&quot;</span>
 
-# Echo the hashamp - returns nothing
-$ echo $COUNTRIES
+<span class="c1"># Echo the hashamp - returns nothing</span>
+$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$COUNTRIES</span>
 
-# Echo below returns nothing for $COUNTRIES and then prints [&quot;Paris&quot;]
-$ echo $COUNTRIES[&quot;Paris&quot;]
-[Paris]
+<span class="c1"># Echo below returns nothing for $COUNTRIES and then prints [&quot;Paris&quot;]</span>
+$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$COUNTRIES</span><span class="o">[</span><span class="s2">&quot;Paris&quot;</span><span class="o">]</span>
+<span class="o">[</span>Paris<span class="o">]</span>
 
-# Get the country for Paris
-$ echo ${COUNTRIES[&quot;Paris&quot;]}
+<span class="c1"># Get the country for Paris</span>
+$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="si">${</span><span class="nv">COUNTRIES</span><span class="p">[</span><span class="s2">&quot;Paris&quot;</span><span class="p">]</span><span class="si">}</span>
 France
 
-# Get all country entries
-$ echo ${COUNTRIES[@]}
-France US UK UK
+<span class="c1"># Get all country entries</span>
+$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="si">${</span><span class="nv">COUNTRIES</span><span class="p">[@]</span><span class="si">}</span>
+France<span class="w"> </span>US<span class="w"> </span>UK<span class="w"> </span>UK
 
-# Get all the city names
-$ echo ${!COUNTRIES[@]}
-Paris New York London Birmingham
+<span class="c1"># Get all the city names</span>
+$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="si">${</span><span class="p">!COUNTRIES[@]</span><span class="si">}</span>
+Paris<span class="w"> </span>New<span class="w"> </span>York<span class="w"> </span>London<span class="w"> </span>Birmingham
 
-# Loop through all entries and display city and country
-$ for city in &quot;${!COUNTRIES[@]}&quot;; do echo $city - ${COUNTRIES[$city]}; done
-Paris - France
-New York - US
-London - UK
-Birmingham - UK
-</code></pre>
+<span class="c1"># Loop through all entries and display city and country</span>
+$<span class="w"> </span><span class="k">for</span><span class="w"> </span>city<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="p">!COUNTRIES[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$city</span><span class="w"> </span>-<span class="w"> </span><span class="si">${</span><span class="nv">COUNTRIES</span><span class="p">[</span><span class="nv">$city</span><span class="p">]</span><span class="si">}</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
+Paris<span class="w"> </span>-<span class="w"> </span>France
+New<span class="w"> </span>York<span class="w"> </span>-<span class="w"> </span>US
+London<span class="w"> </span>-<span class="w"> </span>UK
+Birmingham<span class="w"> </span>-<span class="w"> </span>UK
+</code></pre></div>
         </div>
       </article>
     </main>

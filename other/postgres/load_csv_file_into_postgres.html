@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -91,7 +91,7 @@
           <h1>PostgreSQL</h1>
 <h1 id="load-csv-file-into-postgres">Load CSV File Into Postgres</h1>
 <h3 id="create-your-table">Create your table</h3>
-<pre class="codehilite"><code>CREATE TABLE zip_codes 
+<div class="codehilite"><pre><span></span><code>CREATE TABLE zip_codes 
 ( zip CHAR(5)
 , latitude DOUBLE PRECISION
 , longitude DOUBLE PRECISION
@@ -99,15 +99,15 @@
 , state CHAR(2)
 , county VARCHAR
 , zip_class VARCHAR );
-</code></pre>
+</code></pre></div>
 
 <h3 id="copy-data-from-your-csv-file-to-the-table">Copy data from your CSV file to the table:</h3>
-<pre class="codehilite"><code>\copy zip_codes FROM '/path/to/csv/ZIP_CODES.txt' DELIMITER ',' CSV
-</code></pre>
+<div class="codehilite"><pre><span></span><code>\copy zip_codes FROM &#39;/path/to/csv/ZIP_CODES.txt&#39; DELIMITER &#39;,&#39; CSV
+</code></pre></div>
 
 <h3 id="you-can-also-specify-the-columns-to-read">You can also specify the columns to read:</h3>
-<pre class="codehilite"><code>\copy zip_codes(ZIP,CITY,STATE) FROM '/path/to/csv/ZIP_CODES.txt' DELIMITER ',' CSV
-</code></pre>
+<div class="codehilite"><pre><span></span><code>\copy zip_codes(ZIP,CITY,STATE) FROM &#39;/path/to/csv/ZIP_CODES.txt&#39; DELIMITER &#39;,&#39; CSV
+</code></pre></div>
 
 <hr>
         </div>

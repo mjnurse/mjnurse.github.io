@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -91,63 +91,63 @@
           <h1>Git CheatSheet</h1>
 <h1 id="git-cheat-sheet">Git Cheat Sheet</h1>
 <h3 id="set-user-details">Set user details:</h3>
-<pre class="codehilite"><code>&gt;  git config --local user.name &quot;Martin&quot; 
-&gt;  git config --local user.email &quot;martin@test.com&quot; 
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w">  </span><span class="n">git</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="c1">--local user.name &quot;Martin&quot; </span>
+<span class="o">&gt;</span><span class="w">  </span><span class="n">git</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="c1">--local user.email &quot;martin@test.com&quot; </span>
+</code></pre></div>
 
 <h3 id="store-credentials-locally">Store Credentials Locally</h3>
-<pre class="codehilite"><code>&gt; git config --global credential.helper 'store --file ~/.my-credentials'
-</code></pre>
+<div class="codehilite"><pre><span></span><code>&gt; git config --global credential.helper &#39;store --file ~/.my-credentials&#39;
+</code></pre></div>
 
 <h3 id="remove-local-credentials">Remove Local Credentials</h3>
-<pre class="codehilite"><code>&gt; git config credential.helper store
-</code></pre>
+<div class="codehilite"><pre><span></span><code>&gt; git config credential.helper store
+</code></pre></div>
 
 <h3 id="initialise-local-repo-add-a-file-and-commit">Initialise (local) repo, add a file and commit:</h3>
-<pre class="codehilite"><code>&gt;  git init 
+<div class="codehilite"><pre><span></span><code>&gt;  git init 
 &gt;  git add my-file 
 &gt;  git commit -m &quot;Created the file&quot; 
-</code></pre>
+</code></pre></div>
 
 <p>To add all files in current directory:</p>
-<pre class="codehilite"><code>&gt;  git add -A
-</code></pre>
+<div class="codehilite"><pre><span></span><code>&gt;  git add -A
+</code></pre></div>
 
 <h3 id="connect-to-remote-github-and-push-the-local-git-repo-up-in-github">Connect to remote GitHub and push the local Git repo up in GitHub:</h3>
-<pre class="codehilite"><code>&gt;  git remote add origin https://github.com/mjnurse/git-test.git 
+<div class="codehilite"><pre><span></span><code>&gt;  git remote add origin https://github.com/mjnurse/git-test.git 
 &gt;  git push origin master 
-</code></pre>
+</code></pre></div>
 
 <h3 id="pull-remote-github-to-local-git">Pull remote GitHub to local Git:</h3>
-<pre class="codehilite"><code>&gt;  git pull origin master
-</code></pre>
+<div class="codehilite"><pre><span></span><code>&gt;  git pull origin master
+</code></pre></div>
 
 <h3 id="create-a-local-git-repo-as-a-clone-of-a-github-repo">Create a local Git repo as a clone of a GitHub repo:</h3>
-<pre class="codehilite"><code>&gt;  git clone https://github.com/mjnurse/git-test.git . 
-</code></pre>
+<div class="codehilite"><pre><span></span><code>&gt;  git clone https://github.com/mjnurse/git-test.git . 
+</code></pre></div>
 
 <h3 id="create-a-development-branch-and-switch-to-checkout-the-development-branch-code-to-current-directory">Create a development branch and switch to (checkout) the development branch code to current directory:</h3>
-<pre class="codehilite"><code>&gt;  git branch feature-x 
+<div class="codehilite"><pre><span></span><code>&gt;  git branch feature-x 
 &gt;  git checkout feature-x 
-</code></pre>
+</code></pre></div>
 
 <h3 id="confirm-we-are-now-working-on-the-branch-feature-x">Confirm we are now working on the branch feature-x:</h3>
-<pre class="codehilite"><code>&gt;  git branch 
-</code></pre>
+<div class="codehilite"><pre><span></span><code>&gt;  git branch 
+</code></pre></div>
 
 <h3 id="refresh-local-git-master-branch-from-github">Refresh local Git (master branch) from GitHub:</h3>
-<pre class="codehilite"><code>&gt;  git checkout master 
+<div class="codehilite"><pre><span></span><code>&gt;  git checkout master 
 &gt;  git pull origin master 
-</code></pre>
+</code></pre></div>
 
 <h3 id="merge-master-into-development-branch">Merge Master into development branch:</h3>
-<pre class="codehilite"><code>&gt;  git checkout feature-x 
+<div class="codehilite"><pre><span></span><code>&gt;  git checkout feature-x 
 &gt;  git merge master 
-</code></pre>
+</code></pre></div>
 
 <h3 id="push-development-branch-up-into-github-also-creating-branch-in-github">Push development branch up into GitHub (also creating branch in GitHub):</h3>
-<pre class="codehilite"><code>&gt;  git push --set-upstream origin feature-x 
-</code></pre>
+<div class="codehilite"><pre><span></span><code>&gt;  git push --set-upstream origin feature-x 
+</code></pre></div>
 
 <hr>
         </div>

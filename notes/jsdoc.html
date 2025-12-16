@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -90,254 +90,254 @@
         <div class="article-body">
           <h1>JSDoc - Documenting Javascript</h1>
 <h3 id="basic-format">Basic Format</h3>
-<pre class="codehilite"><code>/** A class that does something. */
-class SomeClass extends SomeBaseClass {
-  /**
-   * Operates on an instance of MyClass and returns something.
-   * @param {!MyClass} obj An object that for some reason needs detailed
-   *     explanation that spans multiple lines.
-   * @param {!OtherClass} obviousOtherClass
-   * @return {boolean} Whether something occurred.
-   */
-  someMethod(obj, obviousOtherClass) { ... }
+<div class="codehilite"><pre><span></span><code><span class="o">/**</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">does</span><span class="w"> </span><span class="n">something</span><span class="o">.</span><span class="w"> </span><span class="o">*/</span>
+<span class="k">class</span><span class="w"> </span><span class="n">SomeClass</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="n">SomeBaseClass</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="o">/**</span>
+<span class="w">   </span><span class="o">*</span><span class="w"> </span><span class="n">Operates</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">instance</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">MyClass</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">returns</span><span class="w"> </span><span class="n">something</span><span class="o">.</span>
+<span class="w">   </span><span class="o">*</span><span class="w"> </span><span class="err">@</span><span class="n">param</span><span class="w"> </span><span class="p">{</span><span class="o">!</span><span class="n">MyClass</span><span class="p">}</span><span class="w"> </span><span class="n">obj</span><span class="w"> </span><span class="n">An</span><span class="w"> </span><span class="n">object</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">reason</span><span class="w"> </span><span class="n">needs</span><span class="w"> </span><span class="n">detailed</span>
+<span class="w">   </span><span class="o">*</span><span class="w">     </span><span class="n">explanation</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">spans</span><span class="w"> </span><span class="n">multiple</span><span class="w"> </span><span class="n">lines</span><span class="o">.</span>
+<span class="w">   </span><span class="o">*</span><span class="w"> </span><span class="err">@</span><span class="n">param</span><span class="w"> </span><span class="p">{</span><span class="o">!</span><span class="n">OtherClass</span><span class="p">}</span><span class="w"> </span><span class="n">obviousOtherClass</span>
+<span class="w">   </span><span class="o">*</span><span class="w"> </span><span class="err">@</span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="n">boolean</span><span class="p">}</span><span class="w"> </span><span class="n">Whether</span><span class="w"> </span><span class="n">something</span><span class="w"> </span><span class="n">occurred</span><span class="o">.</span>
+<span class="w">   </span><span class="o">*/</span>
+<span class="w">  </span><span class="n">someMethod</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span><span class="w"> </span><span class="n">obviousOtherClass</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="o">...</span><span class="w"> </span><span class="p">}</span>
 
-  /** @override */
-  overriddenMethod(param) { ... }
-}
+<span class="w">  </span><span class="o">/**</span><span class="w"> </span><span class="err">@</span><span class="n">override</span><span class="w"> </span><span class="o">*/</span>
+<span class="w">  </span><span class="n">overriddenMethod</span><span class="p">(</span><span class="n">param</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="o">...</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
 
-/**
- * Demonstrates how top-level functions follow the same rules.  This one
- * makes an array.
- * @param {TYPE} arg
- * @return {!Array&lt;TYPE&gt;}
- * @template TYPE
- */
-function makeArray(arg) { ... }
+<span class="o">/**</span>
+<span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Demonstrates</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">top</span><span class="o">-</span><span class="n">level</span><span class="w"> </span><span class="n">functions</span><span class="w"> </span><span class="n">follow</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">same</span><span class="w"> </span><span class="n">rules</span><span class="o">.</span><span class="w">  </span><span class="n">This</span><span class="w"> </span><span class="n">one</span>
+<span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">makes</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">array</span><span class="o">.</span>
+<span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="err">@</span><span class="n">param</span><span class="w"> </span><span class="p">{</span><span class="n">TYPE</span><span class="p">}</span><span class="w"> </span><span class="n">arg</span>
+<span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="err">@</span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="o">!</span><span class="nb nb-Type">Array</span><span class="o">&lt;</span><span class="n">TYPE</span><span class="o">&gt;</span><span class="p">}</span>
+<span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="err">@</span><span class="n">template</span><span class="w"> </span><span class="n">TYPE</span>
+<span class="w"> </span><span class="o">*/</span>
+<span class="n">function</span><span class="w"> </span><span class="n">makeArray</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="o">...</span><span class="w"> </span><span class="p">}</span>
 
-/** @const @private {!Foo} A short bit of JSDoc. */
-this.foo_ = foo;
-</code></pre>
+<span class="o">/**</span><span class="w"> </span><span class="err">@</span><span class="k">const</span><span class="w"> </span><span class="err">@</span><span class="n">private</span><span class="w"> </span><span class="p">{</span><span class="o">!</span><span class="n">Foo</span><span class="p">}</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="n">short</span><span class="w"> </span><span class="n">bit</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">JSDoc</span><span class="o">.</span><span class="w"> </span><span class="o">*/</span>
+<span class="n">this</span><span class="o">.</span><span class="n">foo_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">foo</span><span class="p">;</span>
+</code></pre></div>
 
 <h3 id="some-more-complex-examples">Some More Complex Examples</h3>
-<pre class="codehilite"><code>/**
- * A fancier event target that does cool things.
- * @implements {Iterable&lt;string&gt;}
- */
-class MyFancyTarget extends EventTarget {
-  /**
-   * @param {string} arg1 An argument that makes this more interesting.
-   * @param {!Array&lt;number&gt;} arg2 List of numbers to be processed.
-   */
-  constructor(arg1, arg2) {
-    // ...
-  }
-};
+<div class="codehilite"><pre><span></span><code><span class="o">/**</span>
+<span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="n">fancier</span><span class="w"> </span><span class="n">event</span><span class="w"> </span><span class="n">target</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">does</span><span class="w"> </span><span class="n">cool</span><span class="w"> </span><span class="n">things</span><span class="o">.</span>
+<span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="err">@</span><span class="n">implements</span><span class="w"> </span><span class="p">{</span><span class="n">Iterable</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">}</span>
+<span class="w"> </span><span class="o">*/</span>
+<span class="k">class</span><span class="w"> </span><span class="n">MyFancyTarget</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="n">EventTarget</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="o">/**</span>
+<span class="w">   </span><span class="o">*</span><span class="w"> </span><span class="err">@</span><span class="n">param</span><span class="w"> </span><span class="p">{</span><span class="n">string</span><span class="p">}</span><span class="w"> </span><span class="n">arg1</span><span class="w"> </span><span class="n">An</span><span class="w"> </span><span class="n">argument</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">makes</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">more</span><span class="w"> </span><span class="n">interesting</span><span class="o">.</span>
+<span class="w">   </span><span class="o">*</span><span class="w"> </span><span class="err">@</span><span class="n">param</span><span class="w"> </span><span class="p">{</span><span class="o">!</span><span class="nb nb-Type">Array</span><span class="o">&lt;</span><span class="n">number</span><span class="o">&gt;</span><span class="p">}</span><span class="w"> </span><span class="n">arg2</span><span class="w"> </span><span class="n">List</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">numbers</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">processed</span><span class="o">.</span>
+<span class="w">   </span><span class="o">*/</span>
+<span class="w">  </span><span class="n">constructor</span><span class="p">(</span><span class="n">arg1</span><span class="p">,</span><span class="w"> </span><span class="n">arg2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="o">...</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">};</span>
 
-/**
- * Records are also helpful.
- * @extends {Iterator&lt;TYPE&gt;}
- * @record
- * @template TYPE
- */
-class Listable {
-  /** @return {TYPE} The next item in line to be returned. */
-  next() {}
-}
-</code></pre>
+<span class="o">/**</span>
+<span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Records</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">also</span><span class="w"> </span><span class="n">helpful</span><span class="o">.</span>
+<span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="err">@</span><span class="k">extends</span><span class="w"> </span><span class="p">{</span><span class="n">Iterator</span><span class="o">&lt;</span><span class="n">TYPE</span><span class="o">&gt;</span><span class="p">}</span>
+<span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="err">@</span><span class="n">record</span>
+<span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="err">@</span><span class="n">template</span><span class="w"> </span><span class="n">TYPE</span>
+<span class="w"> </span><span class="o">*/</span>
+<span class="k">class</span><span class="w"> </span><span class="n">Listable</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="o">/**</span><span class="w"> </span><span class="err">@</span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="n">TYPE</span><span class="p">}</span><span class="w"> </span><span class="n">The</span><span class="w"> </span><span class="n">next</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">returned</span><span class="o">.</span><span class="w"> </span><span class="o">*/</span>
+<span class="w">  </span><span class="n">next</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <h3 id="enums-typedefs">Enums / typedefs</h3>
 <p>All enums and typedefs must be documented with appropriate JSDoc tags (@typedef or @enum) on the preceding line. Public enums and typedefs must also have a description. Individual enum items may be documented with a JSDoc comment on the preceding line.</p>
-<pre class="codehilite"><code>/**
- * A useful type union, which is reused often.
- * @typedef {!Bandersnatch|!BandersnatchType}
- */
-let CoolUnionType;
+<div class="codehilite"><pre><span></span><code><span class="o">/**</span>
+<span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="n">useful</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="n">union</span><span class="p">,</span><span class="w"> </span><span class="n">which</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">reused</span><span class="w"> </span><span class="n">often</span><span class="o">.</span>
+<span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="err">@</span><span class="n">typedef</span><span class="w"> </span><span class="p">{</span><span class="o">!</span><span class="n">Bandersnatch</span><span class="o">|!</span><span class="n">BandersnatchType</span><span class="p">}</span>
+<span class="w"> </span><span class="o">*/</span>
+<span class="n">let</span><span class="w"> </span><span class="n">CoolUnionType</span><span class="p">;</span>
 
-/**
- * Types of bandersnatches.
- * @enum {string}
- */
-const BandersnatchType = {
-  /** This kind is really frumious. */
-  FRUMIOUS: 'frumious',
-  /** The less-frumious kind. */
-  MANXOME: 'manxome',
-};
-</code></pre>
+<span class="o">/**</span>
+<span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Types</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">bandersnatches</span><span class="o">.</span>
+<span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="err">@</span><span class="k">enum</span><span class="w"> </span><span class="p">{</span><span class="n">string</span><span class="p">}</span>
+<span class="w"> </span><span class="o">*/</span>
+<span class="k">const</span><span class="w"> </span><span class="n">BandersnatchType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="o">/**</span><span class="w"> </span><span class="n">This</span><span class="w"> </span><span class="n">kind</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">really</span><span class="w"> </span><span class="n">frumious</span><span class="o">.</span><span class="w"> </span><span class="o">*/</span>
+<span class="w">  </span><span class="n">FRUMIOUS</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;frumious&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="o">/**</span><span class="w"> </span><span class="n">The</span><span class="w"> </span><span class="n">less</span><span class="o">-</span><span class="n">frumious</span><span class="w"> </span><span class="n">kind</span><span class="o">.</span><span class="w"> </span><span class="o">*/</span>
+<span class="w">  </span><span class="n">MANXOME</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;manxome&#39;</span><span class="p">,</span>
+<span class="p">};</span>
+</code></pre></div>
 
 <p>Typedefs are useful for defining short record types, or aliases for unions, complex functions, or generic types. Typedefs should be avoided for record types with many fields, since they do not allow documenting individual fields, nor using templates or recursive references. For large record types, prefer @record.</p>
 <h3 id="method-and-function-comments">Method and Function Comments</h3>
 <p>Method descriptions begin with a verb phrase that describes what the method does. This phrase is not an imperative sentence, but instead is written in the third person, as if there is an implied This method ... before it.</p>
-<pre class="codehilite"><code>/** A class that does something. */
-class SomeClass extends SomeBaseClass {
-  /**
-   * Operates on an instance of MyClass and returns something.
-   * @param {!MyClass} obj An object that for some reason needs detailed
-   *     explanation that spans multiple lines.
-   * @param {!OtherClass} obviousOtherClass
-   * @return {boolean} Whether something occurred.
-   */
-  someMethod(obj, obviousOtherClass) { ... }
+<div class="codehilite"><pre><span></span><code><span class="o">/**</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">does</span><span class="w"> </span><span class="n">something</span><span class="o">.</span><span class="w"> </span><span class="o">*/</span>
+<span class="k">class</span><span class="w"> </span><span class="n">SomeClass</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="n">SomeBaseClass</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="o">/**</span>
+<span class="w">   </span><span class="o">*</span><span class="w"> </span><span class="n">Operates</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">instance</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">MyClass</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">returns</span><span class="w"> </span><span class="n">something</span><span class="o">.</span>
+<span class="w">   </span><span class="o">*</span><span class="w"> </span><span class="err">@</span><span class="n">param</span><span class="w"> </span><span class="p">{</span><span class="o">!</span><span class="n">MyClass</span><span class="p">}</span><span class="w"> </span><span class="n">obj</span><span class="w"> </span><span class="n">An</span><span class="w"> </span><span class="n">object</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">reason</span><span class="w"> </span><span class="n">needs</span><span class="w"> </span><span class="n">detailed</span>
+<span class="w">   </span><span class="o">*</span><span class="w">     </span><span class="n">explanation</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">spans</span><span class="w"> </span><span class="n">multiple</span><span class="w"> </span><span class="n">lines</span><span class="o">.</span>
+<span class="w">   </span><span class="o">*</span><span class="w"> </span><span class="err">@</span><span class="n">param</span><span class="w"> </span><span class="p">{</span><span class="o">!</span><span class="n">OtherClass</span><span class="p">}</span><span class="w"> </span><span class="n">obviousOtherClass</span>
+<span class="w">   </span><span class="o">*</span><span class="w"> </span><span class="err">@</span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="n">boolean</span><span class="p">}</span><span class="w"> </span><span class="n">Whether</span><span class="w"> </span><span class="n">something</span><span class="w"> </span><span class="n">occurred</span><span class="o">.</span>
+<span class="w">   </span><span class="o">*/</span>
+<span class="w">  </span><span class="n">someMethod</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span><span class="w"> </span><span class="n">obviousOtherClass</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="o">...</span><span class="w"> </span><span class="p">}</span>
 
-  /** @override */
-  overriddenMethod(param) { ... }
-}
+<span class="w">  </span><span class="o">/**</span><span class="w"> </span><span class="err">@</span><span class="n">override</span><span class="w"> </span><span class="o">*/</span>
+<span class="w">  </span><span class="n">overriddenMethod</span><span class="p">(</span><span class="n">param</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="o">...</span><span class="w"> </span><span class="p">}</span>
+<span class="p">}</span>
 
-/**
- * Demonstrates how top-level functions follow the same rules.  This one
- * makes an array.
- * @param {TYPE} arg
- * @return {!Array&lt;TYPE&gt;}
- * @template TYPE
- */
-function makeArray(arg) { ... }
-</code></pre>
+<span class="o">/**</span>
+<span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">Demonstrates</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">top</span><span class="o">-</span><span class="n">level</span><span class="w"> </span><span class="n">functions</span><span class="w"> </span><span class="n">follow</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">same</span><span class="w"> </span><span class="n">rules</span><span class="o">.</span><span class="w">  </span><span class="n">This</span><span class="w"> </span><span class="n">one</span>
+<span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">makes</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">array</span><span class="o">.</span>
+<span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="err">@</span><span class="n">param</span><span class="w"> </span><span class="p">{</span><span class="n">TYPE</span><span class="p">}</span><span class="w"> </span><span class="n">arg</span>
+<span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="err">@</span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="o">!</span><span class="nb nb-Type">Array</span><span class="o">&lt;</span><span class="n">TYPE</span><span class="o">&gt;</span><span class="p">}</span>
+<span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="err">@</span><span class="n">template</span><span class="w"> </span><span class="n">TYPE</span>
+<span class="w"> </span><span class="o">*/</span>
+<span class="n">function</span><span class="w"> </span><span class="n">makeArray</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="o">...</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
 
 <p>In anonymous functions annotations are generally optional. If the automatic type inference is insufficient or explicit annotation improves readability, then annotate param and return types like this:</p>
-<pre class="codehilite"><code>promise.then(
-    /** @return {string} */
-    (/** !Array&lt;string&gt; */ items) =&gt; {
-      doSomethingWith(items);
-      return items[0];
-    });
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="n">promise</span><span class="p">.</span><span class="k">then</span><span class="p">(</span>
+<span class="w">    </span><span class="cm">/** @return {string} */</span>
+<span class="w">    </span><span class="p">(</span><span class="cm">/** !Array&lt;string&gt; */</span><span class="w"> </span><span class="n">items</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="err">{</span>
+<span class="w">      </span><span class="n">doSomethingWith</span><span class="p">(</span><span class="n">items</span><span class="p">);</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">items</span><span class="o">[</span><span class="n">0</span><span class="o">]</span><span class="p">;</span>
+<span class="w">    </span><span class="err">}</span><span class="p">);</span>
+</code></pre></div>
 
 <h3 id="property-comments">Property Comments</h3>
 <p>Property types must be documented. The description may be omitted for private properties, if name and type provide enough documentation for understanding the code.</p>
 <p>Publicly exported constants are commented the same way as properties.</p>
-<pre class="codehilite"><code>/** My class. */
-class MyClass {
-  /** @param {string=} someString */
-  constructor(someString = 'default string') {
-    /** @private @const {string} */
-    this.someString_ = someString;
+<div class="codehilite"><pre><span></span><code><span class="cm">/** My class. */</span>
+<span class="kd">class</span><span class="w"> </span><span class="nx">MyClass</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="cm">/** @param {string=} someString */</span>
+<span class="w">  </span><span class="nx">constructor</span><span class="p">(</span><span class="nx">someString</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="err">&#39;</span><span class="k">default</span><span class="w"> </span><span class="kt">string</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/** @private @const {string} */</span>
+<span class="w">    </span><span class="nx">this</span><span class="p">.</span><span class="nx">someString_</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">someString</span><span class="p">;</span>
 
-    /** @private @const {!OtherType} */
-    this.someOtherThing_ = functionThatReturnsAThing();
+<span class="w">    </span><span class="cm">/** @private @const {!OtherType} */</span>
+<span class="w">    </span><span class="nx">this</span><span class="p">.</span><span class="nx">someOtherThing_</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">functionThatReturnsAThing</span><span class="p">();</span>
 
-    /**
-     * Maximum number of things per pane.
-     * @type {number}
-     */
-    this.someProperty = 4;
-  }
-}
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Maximum number of things per pane.</span>
+<span class="cm">     * @type {number}</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">this</span><span class="p">.</span><span class="nx">someProperty</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">4</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
 
-/**
- * The number of times we'll try before giving up.
- * @const {number}
- */
-MyClass.RETRY_COUNT = 33;
-7.10 Type annotations
-Type annotations are found on @param, @return, @this, and @type tags, and optionally on @const, @export, and any visibility tags. Type annotations attached to JSDoc tags must always be enclosed in braces.
+<span class="cm">/**</span>
+<span class="cm"> * The number of times we&#39;ll try before giving up.</span>
+<span class="cm"> * @const {number}</span>
+<span class="cm"> */</span>
+<span class="nx">MyClass</span><span class="p">.</span><span class="nx">RETRY_COUNT</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">33</span><span class="p">;</span>
+<span class="m m-Double">7.10</span><span class="w"> </span><span class="nx">Type</span><span class="w"> </span><span class="nx">annotations</span>
+<span class="nx">Type</span><span class="w"> </span><span class="nx">annotations</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="nx">found</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="err">@</span><span class="nx">param</span><span class="p">,</span><span class="w"> </span><span class="err">@</span><span class="k">return</span><span class="p">,</span><span class="w"> </span><span class="err">@</span><span class="nx">this</span><span class="p">,</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="err">@</span><span class="k">type</span><span class="w"> </span><span class="nx">tags</span><span class="p">,</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">optionally</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="err">@</span><span class="nx">const</span><span class="p">,</span><span class="w"> </span><span class="err">@</span><span class="nx">export</span><span class="p">,</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">any</span><span class="w"> </span><span class="nx">visibility</span><span class="w"> </span><span class="nx">tags</span><span class="p">.</span><span class="w"> </span><span class="nx">Type</span><span class="w"> </span><span class="nx">annotations</span><span class="w"> </span><span class="nx">attached</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">JSDoc</span><span class="w"> </span><span class="nx">tags</span><span class="w"> </span><span class="nx">must</span><span class="w"> </span><span class="nx">always</span><span class="w"> </span><span class="nx">be</span><span class="w"> </span><span class="nx">enclosed</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">braces</span><span class="p">.</span>
 
-7.10.1 Nullability
-The type system defines modifiers ! and ? for non-null and nullable, respectively. These modifiers must precede the type.
+<span class="m m-Double">7.10.1</span><span class="w"> </span><span class="nx">Nullability</span>
+<span class="nx">The</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="nx">system</span><span class="w"> </span><span class="nx">defines</span><span class="w"> </span><span class="nx">modifiers</span><span class="w"> </span><span class="p">!</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="p">?</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">non</span><span class="o">-</span><span class="nx">null</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">nullable</span><span class="p">,</span><span class="w"> </span><span class="nx">respectively</span><span class="p">.</span><span class="w"> </span><span class="nx">These</span><span class="w"> </span><span class="nx">modifiers</span><span class="w"> </span><span class="nx">must</span><span class="w"> </span><span class="nx">precede</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="k">type</span><span class="p">.</span>
 
-Nullability modifiers have different requirements for different types, which fall into two broad categories:
+<span class="nx">Nullability</span><span class="w"> </span><span class="nx">modifiers</span><span class="w"> </span><span class="nx">have</span><span class="w"> </span><span class="nx">different</span><span class="w"> </span><span class="nx">requirements</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">different</span><span class="w"> </span><span class="nx">types</span><span class="p">,</span><span class="w"> </span><span class="nx">which</span><span class="w"> </span><span class="nx">fall</span><span class="w"> </span><span class="nx">into</span><span class="w"> </span><span class="nx">two</span><span class="w"> </span><span class="nx">broad</span><span class="w"> </span><span class="nx">categories</span><span class="p">:</span>
 
-Type annotations for primitives (string, number, boolean, symbol, undefined, null) and literals ({function(...): ...} and {{foo: string...}}) are always non-nullable by default. Use the ? modifier to make it nullable, but omit the redundant !.
-Reference types (generally, anything in UpperCamelCase, including some.namespace.ReferenceType) refer to a class, enum, record, or typedef defined elsewhere. Since these types may or may not be nullable, it is impossible to tell from the name alone whether it is nullable or not. Always use explicit ? and ! modifiers for these types to prevent ambiguity at use sites.
-Bad:
+<span class="nx">Type</span><span class="w"> </span><span class="nx">annotations</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">primitives</span><span class="w"> </span><span class="p">(</span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">number</span><span class="p">,</span><span class="w"> </span><span class="nx">boolean</span><span class="p">,</span><span class="w"> </span><span class="nx">symbol</span><span class="p">,</span><span class="w"> </span><span class="nx">undefined</span><span class="p">,</span><span class="w"> </span><span class="nx">null</span><span class="p">)</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">literals</span><span class="w"> </span><span class="p">({</span><span class="nx">function</span><span class="p">(</span><span class="o">...</span><span class="p">):</span><span class="w"> </span><span class="o">...</span><span class="p">}</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="p">{{</span><span class="nx">foo</span><span class="p">:</span><span class="w"> </span><span class="kt">string</span><span class="o">...</span><span class="p">}})</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="nx">always</span><span class="w"> </span><span class="nx">non</span><span class="o">-</span><span class="nx">nullable</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="k">default</span><span class="p">.</span><span class="w"> </span><span class="nx">Use</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="p">?</span><span class="w"> </span><span class="nx">modifier</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">make</span><span class="w"> </span><span class="nx">it</span><span class="w"> </span><span class="nx">nullable</span><span class="p">,</span><span class="w"> </span><span class="nx">but</span><span class="w"> </span><span class="nx">omit</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">redundant</span><span class="w"> </span><span class="p">!.</span>
+<span class="nx">Reference</span><span class="w"> </span><span class="nx">types</span><span class="w"> </span><span class="p">(</span><span class="nx">generally</span><span class="p">,</span><span class="w"> </span><span class="nx">anything</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">UpperCamelCase</span><span class="p">,</span><span class="w"> </span><span class="nx">including</span><span class="w"> </span><span class="nx">some</span><span class="p">.</span><span class="kn">namespace</span><span class="p">.</span><span class="nx">ReferenceType</span><span class="p">)</span><span class="w"> </span><span class="nx">refer</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="kd">class</span><span class="p">,</span><span class="w"> </span><span class="nx">enum</span><span class="p">,</span><span class="w"> </span><span class="nx">record</span><span class="p">,</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">typedef</span><span class="w"> </span><span class="nx">defined</span><span class="w"> </span><span class="nx">elsewhere</span><span class="p">.</span><span class="w"> </span><span class="nx">Since</span><span class="w"> </span><span class="nx">these</span><span class="w"> </span><span class="nx">types</span><span class="w"> </span><span class="nx">may</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">may</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="nx">be</span><span class="w"> </span><span class="nx">nullable</span><span class="p">,</span><span class="w"> </span><span class="nx">it</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">impossible</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">tell</span><span class="w"> </span><span class="nx">from</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">name</span><span class="w"> </span><span class="nx">alone</span><span class="w"> </span><span class="nx">whether</span><span class="w"> </span><span class="nx">it</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">nullable</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">not</span><span class="p">.</span><span class="w"> </span><span class="nx">Always</span><span class="w"> </span><span class="nx">use</span><span class="w"> </span><span class="nx">explicit</span><span class="w"> </span><span class="p">?</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="p">!</span><span class="w"> </span><span class="nx">modifiers</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">these</span><span class="w"> </span><span class="nx">types</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">prevent</span><span class="w"> </span><span class="nx">ambiguity</span><span class="w"> </span><span class="nx">at</span><span class="w"> </span><span class="nx">use</span><span class="w"> </span><span class="nx">sites</span><span class="p">.</span>
+<span class="nx">Bad</span><span class="p">:</span>
 
-const /** MyObject */ myObject = null; // Non-primitive types must be annotated.
-const /** !number */ someNum = 5; // Primitives are non-nullable by default.
-const /** number? */ someNullableNum = null; // ? should precede the type.
-const /** !{foo: string, bar: number} */ record = ...; // Already non-nullable.
-const /** MyTypeDef */ def = ...; // Not sure if MyTypeDef is nullable.
+<span class="nx">const</span><span class="w"> </span><span class="cm">/** MyObject */</span><span class="w"> </span><span class="nx">myObject</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">null</span><span class="p">;</span><span class="w"> </span><span class="c1">// Non-primitive types must be annotated.</span>
+<span class="nx">const</span><span class="w"> </span><span class="cm">/** !number */</span><span class="w"> </span><span class="nx">someNum</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="c1">// Primitives are non-nullable by default.</span>
+<span class="nx">const</span><span class="w"> </span><span class="cm">/** number? */</span><span class="w"> </span><span class="nx">someNullableNum</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">null</span><span class="p">;</span><span class="w"> </span><span class="c1">// ? should precede the type.</span>
+<span class="nx">const</span><span class="w"> </span><span class="cm">/** !{foo: string, bar: number} */</span><span class="w"> </span><span class="nx">record</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">...</span><span class="p">;</span><span class="w"> </span><span class="c1">// Already non-nullable.</span>
+<span class="nx">const</span><span class="w"> </span><span class="cm">/** MyTypeDef */</span><span class="w"> </span><span class="nx">def</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">...</span><span class="p">;</span><span class="w"> </span><span class="c1">// Not sure if MyTypeDef is nullable.</span>
 
-// Not sure if object (nullable), enum (non-nullable, unless otherwise
-// specified), or typedef (depends on definition).
-const /** SomeCamelCaseName */ n = ...;
-Good:
+<span class="c1">// Not sure if object (nullable), enum (non-nullable, unless otherwise</span>
+<span class="c1">// specified), or typedef (depends on definition).</span>
+<span class="nx">const</span><span class="w"> </span><span class="cm">/** SomeCamelCaseName */</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">...</span><span class="p">;</span>
+<span class="nx">Good</span><span class="p">:</span>
 
-const /** ?MyObject */ myObject = null;
-const /** number */ someNum = 5;
-const /** ?number */ someNullableNum = null;
-const /** {foo: string, bar: number} */ record = ...;
-const /** !MyTypeDef */ def = ...;
-const /** ?SomeCamelCaseName */ n = ...;
-7.10.2 Type Casts
-In cases where the compiler doesn't accurately infer the type of an expression, and the assertion functions in goog.asserts cannot remedy it , it is possible to tighten the type by adding a type annotation comment and enclosing the expression in parentheses. Note that the parentheses are required.
+<span class="nx">const</span><span class="w"> </span><span class="cm">/** ?MyObject */</span><span class="w"> </span><span class="nx">myObject</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">null</span><span class="p">;</span>
+<span class="nx">const</span><span class="w"> </span><span class="cm">/** number */</span><span class="w"> </span><span class="nx">someNum</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span>
+<span class="nx">const</span><span class="w"> </span><span class="cm">/** ?number */</span><span class="w"> </span><span class="nx">someNullableNum</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">null</span><span class="p">;</span>
+<span class="nx">const</span><span class="w"> </span><span class="cm">/** {foo: string, bar: number} */</span><span class="w"> </span><span class="nx">record</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">...</span><span class="p">;</span>
+<span class="nx">const</span><span class="w"> </span><span class="cm">/** !MyTypeDef */</span><span class="w"> </span><span class="nx">def</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">...</span><span class="p">;</span>
+<span class="nx">const</span><span class="w"> </span><span class="cm">/** ?SomeCamelCaseName */</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">...</span><span class="p">;</span>
+<span class="m m-Double">7.10.2</span><span class="w"> </span><span class="nx">Type</span><span class="w"> </span><span class="nx">Casts</span>
+<span class="nx">In</span><span class="w"> </span><span class="nx">cases</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">compiler</span><span class="w"> </span><span class="nx">doesn</span><span class="err">&#39;</span><span class="nx">t</span><span class="w"> </span><span class="nx">accurately</span><span class="w"> </span><span class="nx">infer</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">expression</span><span class="p">,</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">assertion</span><span class="w"> </span><span class="nx">functions</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">goog</span><span class="p">.</span><span class="nx">asserts</span><span class="w"> </span><span class="nx">cannot</span><span class="w"> </span><span class="nx">remedy</span><span class="w"> </span><span class="nx">it</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="nx">it</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">possible</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">tighten</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="nx">adding</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="nx">annotation</span><span class="w"> </span><span class="nx">comment</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">enclosing</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">expression</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">parentheses</span><span class="p">.</span><span class="w"> </span><span class="nx">Note</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">parentheses</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="nx">required</span><span class="p">.</span>
 
-/** @type {number} */ (x)
-7.10.3 Template Parameter Types
-Always specify template parameters. This way compiler can do a better job and it makes it easier for readers to understand what code does.
+<span class="cm">/** @type {number} */</span><span class="w"> </span><span class="p">(</span><span class="nx">x</span><span class="p">)</span>
+<span class="m m-Double">7.10.3</span><span class="w"> </span><span class="nx">Template</span><span class="w"> </span><span class="nx">Parameter</span><span class="w"> </span><span class="nx">Types</span>
+<span class="nx">Always</span><span class="w"> </span><span class="nx">specify</span><span class="w"> </span><span class="nx">template</span><span class="w"> </span><span class="nx">parameters</span><span class="p">.</span><span class="w"> </span><span class="nx">This</span><span class="w"> </span><span class="nx">way</span><span class="w"> </span><span class="nx">compiler</span><span class="w"> </span><span class="nx">can</span><span class="w"> </span><span class="nx">do</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">better</span><span class="w"> </span><span class="nx">job</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">it</span><span class="w"> </span><span class="nx">makes</span><span class="w"> </span><span class="nx">it</span><span class="w"> </span><span class="nx">easier</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">readers</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">understand</span><span class="w"> </span><span class="nx">what</span><span class="w"> </span><span class="nx">code</span><span class="w"> </span><span class="nx">does</span><span class="p">.</span>
 
-Bad:
+<span class="nx">Bad</span><span class="p">:</span>
 
-const /** !Object */ users = {};
-const /** !Array */ books = [];
-const /** !Promise */ response = ...;
-Good:
+<span class="nx">const</span><span class="w"> </span><span class="cm">/** !Object */</span><span class="w"> </span><span class="nx">users</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{};</span>
+<span class="nx">const</span><span class="w"> </span><span class="cm">/** !Array */</span><span class="w"> </span><span class="nx">books</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[];</span>
+<span class="nx">const</span><span class="w"> </span><span class="cm">/** !Promise */</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">...</span><span class="p">;</span>
+<span class="nx">Good</span><span class="p">:</span>
 
-const /** !Object&lt;string, !User&gt; */ users = {};
-const /** !Array&lt;string&gt; */ books = [];
-const /** !Promise&lt;!Response&gt; */ response = ...;
+<span class="nx">const</span><span class="w"> </span><span class="cm">/** !Object&lt;string, !User&gt; */</span><span class="w"> </span><span class="nx">users</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{};</span>
+<span class="nx">const</span><span class="w"> </span><span class="cm">/** !Array&lt;string&gt; */</span><span class="w"> </span><span class="nx">books</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[];</span>
+<span class="nx">const</span><span class="w"> </span><span class="cm">/** !Promise&lt;!Response&gt; */</span><span class="w"> </span><span class="nx">response</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">...</span><span class="p">;</span>
 
-const /** !Promise&lt;undefined&gt; */ thisPromiseReturnsNothingButParameterIsStillUseful = ...;
-const /** !Object&lt;string, *&gt; */ mapOfEverything = {};
-Cases when template parameters should not be used:
+<span class="nx">const</span><span class="w"> </span><span class="cm">/** !Promise&lt;undefined&gt; */</span><span class="w"> </span><span class="nx">thisPromiseReturnsNothingButParameterIsStillUseful</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">...</span><span class="p">;</span>
+<span class="nx">const</span><span class="w"> </span><span class="cm">/** !Object&lt;string, *&gt; */</span><span class="w"> </span><span class="nx">mapOfEverything</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{};</span>
+<span class="nx">Cases</span><span class="w"> </span><span class="nx">when</span><span class="w"> </span><span class="nx">template</span><span class="w"> </span><span class="nx">parameters</span><span class="w"> </span><span class="nx">should</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="nx">be</span><span class="w"> </span><span class="nx">used</span><span class="p">:</span>
 
-Object is used for type hierarchy and not as map-like structure.
-7.10.4 Function type expressions
-Terminology Note: function type expression refers to a type annotation for function types with the keyword function in the annotation (see examples below).
+<span class="nx">Object</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">used</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="nx">hierarchy</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nx">map</span><span class="o">-</span><span class="k">like</span><span class="w"> </span><span class="nx">structure</span><span class="p">.</span>
+<span class="m m-Double">7.10.4</span><span class="w"> </span><span class="nx">Function</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="nx">expressions</span>
+<span class="nx">Terminology</span><span class="w"> </span><span class="nx">Note</span><span class="p">:</span><span class="w"> </span><span class="nx">function</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="nx">expression</span><span class="w"> </span><span class="nx">refers</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="nx">annotation</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">function</span><span class="w"> </span><span class="nx">types</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">keyword</span><span class="w"> </span><span class="nx">function</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">annotation</span><span class="w"> </span><span class="p">(</span><span class="nx">see</span><span class="w"> </span><span class="nx">examples</span><span class="w"> </span><span class="nx">below</span><span class="p">).</span>
 
-Where the function definition is given, do not use a function type expression. Specify parameter and return types with @param and @return, or with inline annotations (see 7.8 Method and function comments). This includes anonymous functions and functions defined and assigned to a const (where the function jsdoc appears above the whole assignment expression).
+<span class="nx">Where</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">function</span><span class="w"> </span><span class="nx">definition</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">given</span><span class="p">,</span><span class="w"> </span><span class="nx">do</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="nx">use</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">function</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="nx">expression</span><span class="p">.</span><span class="w"> </span><span class="nx">Specify</span><span class="w"> </span><span class="nx">parameter</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="nx">types</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="err">@</span><span class="nx">param</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="err">@</span><span class="k">return</span><span class="p">,</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="nx">inline</span><span class="w"> </span><span class="nx">annotations</span><span class="w"> </span><span class="p">(</span><span class="nx">see</span><span class="w"> </span><span class="m m-Double">7.8</span><span class="w"> </span><span class="nx">Method</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">function</span><span class="w"> </span><span class="nx">comments</span><span class="p">).</span><span class="w"> </span><span class="nx">This</span><span class="w"> </span><span class="nx">includes</span><span class="w"> </span><span class="nx">anonymous</span><span class="w"> </span><span class="nx">functions</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">functions</span><span class="w"> </span><span class="nx">defined</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">assigned</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">const</span><span class="w"> </span><span class="p">(</span><span class="k">where</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">function</span><span class="w"> </span><span class="nx">jsdoc</span><span class="w"> </span><span class="nx">appears</span><span class="w"> </span><span class="nx">above</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">whole</span><span class="w"> </span><span class="nx">assignment</span><span class="w"> </span><span class="nx">expression</span><span class="p">).</span>
 
-Function type expressions are needed, for example, inside @typedef, @param or @return. Use it also for variables or properties of function type, if they are not immediately initialized with the function definition.
+<span class="nx">Function</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="nx">expressions</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="nx">needed</span><span class="p">,</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">example</span><span class="p">,</span><span class="w"> </span><span class="nx">inside</span><span class="w"> </span><span class="err">@</span><span class="nx">typedef</span><span class="p">,</span><span class="w"> </span><span class="err">@</span><span class="nx">param</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="err">@</span><span class="k">return</span><span class="p">.</span><span class="w"> </span><span class="nx">Use</span><span class="w"> </span><span class="nx">it</span><span class="w"> </span><span class="nx">also</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">variables</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">properties</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">function</span><span class="w"> </span><span class="k">type</span><span class="p">,</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="nx">they</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="nx">immediately</span><span class="w"> </span><span class="nx">initialized</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">function</span><span class="w"> </span><span class="nx">definition</span><span class="p">.</span>
 
-  /** @private {function(string): string} */
-  this.idGenerator_ = googFunctions.identity;
-When using a function type expression, always specify the return type explicitly. Otherwise the default return type is unknown (?), which leads to strange and unexpected behavior, and is rarely what is actually desired.
+<span class="w">  </span><span class="cm">/** @private {function(string): string} */</span>
+<span class="w">  </span><span class="nx">this</span><span class="p">.</span><span class="nx">idGenerator_</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">googFunctions</span><span class="p">.</span><span class="nx">identity</span><span class="p">;</span>
+<span class="nx">When</span><span class="w"> </span><span class="nx">using</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">function</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="nx">expression</span><span class="p">,</span><span class="w"> </span><span class="nx">always</span><span class="w"> </span><span class="nx">specify</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="nx">explicitly</span><span class="p">.</span><span class="w"> </span><span class="nx">Otherwise</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">unknown</span><span class="w"> </span><span class="p">(?),</span><span class="w"> </span><span class="nx">which</span><span class="w"> </span><span class="nx">leads</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">strange</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">unexpected</span><span class="w"> </span><span class="nx">behavior</span><span class="p">,</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">rarely</span><span class="w"> </span><span class="nx">what</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">actually</span><span class="w"> </span><span class="nx">desired</span><span class="p">.</span>
 
-/**
- * @param {function(): *} inputFunction1 Can return any type.
- * @param {function(): undefined} inputFunction2 Definitely doesn't return
- *      anything.
- * NOTE: the return type of 'foo' itself is safely implied to be {undefined}.
- */
-function foo(inputFunction1, inputFunction2) {...}
-7.10.5 Whitespace
-Within a type annotation, a single space or line break is required after each comma or colon. Additional line breaks may be inserted to improve readability or avoid exceeding the column limit. These breaks should be chosen and indented following the applicable guidelines (e.g. 4.5 Line-wrapping and 4.2 Block indentation: +2 spaces). No other whitespace is allowed in type annotations.
+<span class="cm">/**</span>
+<span class="cm"> * @param {function(): *} inputFunction1 Can return any type.</span>
+<span class="cm"> * @param {function(): undefined} inputFunction2 Definitely doesn&#39;t return</span>
+<span class="cm"> *      anything.</span>
+<span class="cm"> * NOTE: the return type of &#39;foo&#39; itself is safely implied to be {undefined}.</span>
+<span class="cm"> */</span>
+<span class="nx">function</span><span class="w"> </span><span class="nx">foo</span><span class="p">(</span><span class="nx">inputFunction1</span><span class="p">,</span><span class="w"> </span><span class="nx">inputFunction2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="o">...</span><span class="p">}</span>
+<span class="m m-Double">7.10.5</span><span class="w"> </span><span class="nx">Whitespace</span>
+<span class="nx">Within</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="nx">annotation</span><span class="p">,</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">single</span><span class="w"> </span><span class="nx">space</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">line</span><span class="w"> </span><span class="k">break</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">required</span><span class="w"> </span><span class="nx">after</span><span class="w"> </span><span class="nx">each</span><span class="w"> </span><span class="nx">comma</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">colon</span><span class="p">.</span><span class="w"> </span><span class="nx">Additional</span><span class="w"> </span><span class="nx">line</span><span class="w"> </span><span class="nx">breaks</span><span class="w"> </span><span class="nx">may</span><span class="w"> </span><span class="nx">be</span><span class="w"> </span><span class="nx">inserted</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">improve</span><span class="w"> </span><span class="nx">readability</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">avoid</span><span class="w"> </span><span class="nx">exceeding</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">column</span><span class="w"> </span><span class="nx">limit</span><span class="p">.</span><span class="w"> </span><span class="nx">These</span><span class="w"> </span><span class="nx">breaks</span><span class="w"> </span><span class="nx">should</span><span class="w"> </span><span class="nx">be</span><span class="w"> </span><span class="nx">chosen</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">indented</span><span class="w"> </span><span class="nx">following</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">applicable</span><span class="w"> </span><span class="nx">guidelines</span><span class="w"> </span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">g</span><span class="p">.</span><span class="w"> </span><span class="m m-Double">4.5</span><span class="w"> </span><span class="nx">Line</span><span class="o">-</span><span class="nx">wrapping</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="m m-Double">4.2</span><span class="w"> </span><span class="nx">Block</span><span class="w"> </span><span class="nx">indentation</span><span class="p">:</span><span class="w"> </span><span class="o">+</span><span class="mi">2</span><span class="w"> </span><span class="nx">spaces</span><span class="p">).</span><span class="w"> </span><span class="nx">No</span><span class="w"> </span><span class="nx">other</span><span class="w"> </span><span class="nx">whitespace</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">allowed</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="nx">annotations</span><span class="p">.</span>
 
-Good:
+<span class="nx">Good</span><span class="p">:</span>
 
-/** @type {function(string): number} */
-/** @type {{foo: number, bar: number}} */
-/** @type {number|string} */
-/** @type {!Object&lt;string, string&gt;} */
-/** @type {function(this: Object&lt;string, string&gt;, number): string} */
+<span class="cm">/** @type {function(string): number} */</span>
+<span class="cm">/** @type {{foo: number, bar: number}} */</span>
+<span class="cm">/** @type {number|string} */</span>
+<span class="cm">/** @type {!Object&lt;string, string&gt;} */</span>
+<span class="cm">/** @type {function(this: Object&lt;string, string&gt;, number): string} */</span>
 
-/**
- * @type {function(
- *     !SuperDuperReallyReallyLongTypedefThatForcesTheLineBreak,
- *     !OtherVeryLongTypedef): string}
- */
+<span class="cm">/**</span>
+<span class="cm"> * @type {function(</span>
+<span class="cm"> *     !SuperDuperReallyReallyLongTypedefThatForcesTheLineBreak,</span>
+<span class="cm"> *     !OtherVeryLongTypedef): string}</span>
+<span class="cm"> */</span>
 
-/**
- * @type {!SuperDuperReallyReallyLongTypedefThatForcesTheLineBreak|
- *     !OtherVeryLongTypedef}
- */
-Bad:
+<span class="cm">/**</span>
+<span class="cm"> * @type {!SuperDuperReallyReallyLongTypedefThatForcesTheLineBreak|</span>
+<span class="cm"> *     !OtherVeryLongTypedef}</span>
+<span class="cm"> */</span>
+<span class="nx">Bad</span><span class="p">:</span>
 
-// Only put a space after the colon
-/** @type {function(string) : number} */
+<span class="c1">// Only put a space after the colon</span>
+<span class="cm">/** @type {function(string) : number} */</span>
 
-// Put spaces after colons and commas
-/** @type {{foo:number,bar:number}} */
+<span class="c1">// Put spaces after colons and commas</span>
+<span class="cm">/** @type {{foo:number,bar:number}} */</span>
 
-// No space in union types
-/** @type {number | string} */
-7.11 Visibility annotations
-Visibility annotations (@private, @package, @protected) may be specified in a @fileoverview block, or on any exported symbol or property. Do not specify visibility for local variables, whether within a function or at the top level of a module. All @private names must end with an underscore.
-
-
+<span class="c1">// No space in union types</span>
+<span class="cm">/** @type {number | string} */</span>
+<span class="m m-Double">7.11</span><span class="w"> </span><span class="nx">Visibility</span><span class="w"> </span><span class="nx">annotations</span>
+<span class="nx">Visibility</span><span class="w"> </span><span class="nx">annotations</span><span class="w"> </span><span class="p">(</span><span class="err">@</span><span class="k">private</span><span class="p">,</span><span class="w"> </span><span class="err">@</span><span class="kn">package</span><span class="p">,</span><span class="w"> </span><span class="err">@</span><span class="k">protected</span><span class="p">)</span><span class="w"> </span><span class="nx">may</span><span class="w"> </span><span class="nx">be</span><span class="w"> </span><span class="nx">specified</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="err">@</span><span class="nx">fileoverview</span><span class="w"> </span><span class="nx">block</span><span class="p">,</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">on</span><span class="w"> </span><span class="nx">any</span><span class="w"> </span><span class="nx">exported</span><span class="w"> </span><span class="nx">symbol</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">property</span><span class="p">.</span><span class="w"> </span><span class="nx">Do</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="nx">specify</span><span class="w"> </span><span class="nx">visibility</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nx">local</span><span class="w"> </span><span class="nx">variables</span><span class="p">,</span><span class="w"> </span><span class="nx">whether</span><span class="w"> </span><span class="nx">within</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">function</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="nx">at</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">top</span><span class="w"> </span><span class="nx">level</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">module</span><span class="p">.</span><span class="w"> </span><span class="nx">All</span><span class="w"> </span><span class="err">@</span><span class="k">private</span><span class="w"> </span><span class="nx">names</span><span class="w"> </span><span class="nx">must</span><span class="w"> </span><span class="nx">end</span><span class="w"> </span><span class="nx">with</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">underscore</span><span class="p">.</span>
 
 
 
-Some document generation tool will ignore plain test formatting to use Markdown lists etc.
-</code></pre>
+
+
+<span class="nx">Some</span><span class="w"> </span><span class="nx">document</span><span class="w"> </span><span class="nx">generation</span><span class="w"> </span><span class="nx">tool</span><span class="w"> </span><span class="nx">will</span><span class="w"> </span><span class="nx">ignore</span><span class="w"> </span><span class="nx">plain</span><span class="w"> </span><span class="nx">test</span><span class="w"> </span><span class="nx">formatting</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">use</span><span class="w"> </span><span class="nx">Markdown</span><span class="w"> </span><span class="nx">lists</span><span class="w"> </span><span class="nx">etc</span><span class="p">.</span>
+</code></pre></div>
 
 <p>/*<em>
  * Computes weight based on three factors:

@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -91,15 +91,15 @@
           <h1>19-01-22 - Emulating sudo in dos cmd</h1>
 <p>I found a useful method for running a dos command as Administrator.</p>
 <p>Create a script <code>sudo.bat</code>:</p>
-<pre class="codehilite"><code>@echo Set objShell = CreateObject(&quot;Shell.Application&quot;) &gt; %temp%\sudo.tmp.vbs
-@echo args = Right(&quot;%*&quot;, (Len(&quot;%*&quot;) - Len(&quot;%1&quot;))) &gt;&gt; %temp%\sudo.tmp.vbs
-@echo objShell.ShellExecute &quot;%1&quot;, args, &quot;&quot;, &quot;runas&quot; &gt;&gt; %temp%\sudo.tmp.vbs
-@cscript %temp%\sudo.tmp.vbs
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="nv">@echo</span><span class="w"> </span><span class="k">Set</span><span class="w"> </span><span class="n">objShell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CreateObject</span><span class="p">(</span><span class="ss">&quot;Shell.Application&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">%</span><span class="n">temp</span><span class="o">%</span><span class="err">\</span><span class="n">sudo</span><span class="p">.</span><span class="n">tmp</span><span class="p">.</span><span class="n">vbs</span>
+<span class="nv">@echo</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Right</span><span class="p">(</span><span class="ss">&quot;%*&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nf">Len</span><span class="p">(</span><span class="ss">&quot;%*&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nf">Len</span><span class="p">(</span><span class="ss">&quot;%1&quot;</span><span class="p">)))</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="o">%</span><span class="n">temp</span><span class="o">%</span><span class="err">\</span><span class="n">sudo</span><span class="p">.</span><span class="n">tmp</span><span class="p">.</span><span class="n">vbs</span>
+<span class="nv">@echo</span><span class="w"> </span><span class="n">objShell</span><span class="p">.</span><span class="n">ShellExecute</span><span class="w"> </span><span class="ss">&quot;%1&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;runas&quot;</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="o">%</span><span class="n">temp</span><span class="o">%</span><span class="err">\</span><span class="n">sudo</span><span class="p">.</span><span class="n">tmp</span><span class="p">.</span><span class="n">vbs</span>
+<span class="nv">@cscript</span><span class="w"> </span><span class="o">%</span><span class="n">temp</span><span class="o">%</span><span class="err">\</span><span class="n">sudo</span><span class="p">.</span><span class="n">tmp</span><span class="p">.</span><span class="n">vbs</span>
+</code></pre></div>
 
 <p>To open a new cmd window running as administrator:</p>
-<pre class="codehilite"><code>&gt; sudo cmd
-</code></pre>
+<div class="codehilite"><pre><span></span><code>&gt; sudo cmd
+</code></pre></div>
 
 <hr>
         </div>

@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -89,323 +89,323 @@
       <article class="article">
         <div class="article-body">
           <h1>es.def</h1>
-<pre class="codehilite"><code class="language-bash"># ES
+<div class="codehilite"><pre><span></span><code><span class="c1"># ES</span>
 
-cmd ES_AUTH=&quot;&quot;
-cmd ES_HOST=&quot;${ES_HOST:-localhost}&quot;
-cmd ES_PORT=&quot;${ES_PORT:-9200}&quot;
+cmd<span class="w"> </span><span class="nv">ES_AUTH</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+cmd<span class="w"> </span><span class="nv">ES_HOST</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">ES_HOST</span><span class="k">:-</span><span class="nv">localhost</span><span class="si">}</span><span class="s2">&quot;</span>
+cmd<span class="w"> </span><span class="nv">ES_PORT</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">ES_PORT</span><span class="k">:-</span><span class="nv">9200</span><span class="si">}</span><span class="s2">&quot;</span>
 
-# ----------------------------------------------------------------------------------------------------------------------------------
-= CLUSTER
-# ----------------------------------------------------------------------------------------------------------------------------------
+<span class="c1"># ----------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="o">=</span><span class="w"> </span>CLUSTER
+<span class="c1"># ----------------------------------------------------------------------------------------------------------------------------------</span>
 
-clear cache (cc) [&lt;index_name&gt;] :: \
-   curl -X POST &quot;http://$ES_HOST:$ES_PORT/$1/_cache/clear&quot;
+clear<span class="w"> </span>cache<span class="w"> </span><span class="o">(</span>cc<span class="o">)</span><span class="w"> </span><span class="o">[</span>&lt;index_name&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/</span><span class="nv">$1</span><span class="s2">/_cache/clear&quot;</span>
 
-cluster overview (co) :: \
-   curl -X GET &quot;http://$ES_HOST:$ES_PORT/&quot;
+cluster<span class="w"> </span>overview<span class="w"> </span><span class="o">(</span>co<span class="o">)</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/&quot;</span>
 
-cluster health (ch) :: \
-   curl -X GET &quot;http://$ES_HOST:$ES_PORT/_cluster/health?human&amp;pretty&quot;
+cluster<span class="w"> </span>health<span class="w"> </span><span class="o">(</span>ch<span class="o">)</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/_cluster/health?human&amp;pretty&quot;</span>
 
-cluster stats (cs) :: \
-   curl -X GET &quot;http://$ES_HOST:$ES_PORT/_cluster/stats?human&amp;pretty&quot;
+cluster<span class="w"> </span>stats<span class="w"> </span><span class="o">(</span>cs<span class="o">)</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/_cluster/stats?human&amp;pretty&quot;</span>
 
-# ----------------------------------------------------------------------------------------------------------------------------------
-= INDEX INTERROGATION
-# ----------------------------------------------------------------------------------------------------------------------------------
+<span class="c1"># ----------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="o">=</span><span class="w"> </span>INDEX<span class="w"> </span>INTERROGATION
+<span class="c1"># ----------------------------------------------------------------------------------------------------------------------------------</span>
 
-count (c) &lt;index_name&gt; :: \
-   curl -X GET &quot;http://$ES_HOST:$ES_PORT/$1/_count?pretty&quot;
+count<span class="w"> </span><span class="o">(</span>c<span class="o">)</span><span class="w"> </span>&lt;index_name&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/</span><span class="nv">$1</span><span class="s2">/_count?pretty&quot;</span>
 
-list aliases (la) [&lt;filter&gt;] [&lt;order_by_field_name&gt;] :: \
-   curl -X GET &quot;http://$ES_HOST:$ES_PORT/_cat/aliases/$1?v&amp;s=$2&quot;
+list<span class="w"> </span>aliases<span class="w"> </span><span class="o">(</span>la<span class="o">)</span><span class="w"> </span><span class="o">[</span>&lt;filter&gt;<span class="o">]</span><span class="w"> </span><span class="o">[</span>&lt;order_by_field_name&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/_cat/aliases/</span><span class="nv">$1</span><span class="s2">?v&amp;s=</span><span class="nv">$2</span><span class="s2">&quot;</span>
 
-list indices (li) [&lt;index_name&gt;] :: \
-   curl -X GET &quot;http://$ES_HOST:$ES_PORT/_cat/indices/$1?v&amp;h=health,status,index,pri,rep,sc,docs.count,docs.deleted,store.size,pri.store.size&amp;s=index&quot;
+list<span class="w"> </span>indices<span class="w"> </span><span class="o">(</span>li<span class="o">)</span><span class="w"> </span><span class="o">[</span>&lt;index_name&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/_cat/indices/</span><span class="nv">$1</span><span class="s2">?v&amp;h=health,status,index,pri,rep,sc,docs.count,docs.deleted,store.size,pri.store.size&amp;s=index&quot;</span>
 
-list shards (ls) [&lt;index_name&gt;] [&lt;order_by_field_name&gt;] :: \
-   curl -X GET &quot;http://$ES_HOST:$ES_PORT/_cat/shards/$1?v&amp;h=index,shard,prirep,sc,state,docs,store,node&amp;s=index,shard,prirep&amp;s=$2&quot;
+list<span class="w"> </span>shards<span class="w"> </span><span class="o">(</span>ls<span class="o">)</span><span class="w"> </span><span class="o">[</span>&lt;index_name&gt;<span class="o">]</span><span class="w"> </span><span class="o">[</span>&lt;order_by_field_name&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/_cat/shards/</span><span class="nv">$1</span><span class="s2">?v&amp;h=index,shard,prirep,sc,state,docs,store,node&amp;s=index,shard,prirep&amp;s=</span><span class="nv">$2</span><span class="s2">&quot;</span>
 
-list shard details (lsd) [&lt;index_name&gt;] [&lt;order_by_field_name&gt;] :: \
-   curl -X GET &quot;http://$ES_HOST:$ES_PORT/_cat/shards/$1?v&amp;h=index,shard,prirep,state,docs,store,ip,segments.count,unassigned.reason,unassigned.for,node&amp;s=$2&quot;
+list<span class="w"> </span>shard<span class="w"> </span>details<span class="w"> </span><span class="o">(</span>lsd<span class="o">)</span><span class="w"> </span><span class="o">[</span>&lt;index_name&gt;<span class="o">]</span><span class="w"> </span><span class="o">[</span>&lt;order_by_field_name&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/_cat/shards/</span><span class="nv">$1</span><span class="s2">?v&amp;h=index,shard,prirep,state,docs,store,ip,segments.count,unassigned.reason,unassigned.for,node&amp;s=</span><span class="nv">$2</span><span class="s2">&quot;</span>
 
-list segments (le) [&lt;index_name&gt;] :: \
-   curl -X GET &quot;http://$ES_HOST:$ES_PORT/_cat/segments/$1?v&amp;s=index,shard,prirep&quot;
+list<span class="w"> </span>segments<span class="w"> </span><span class="o">(</span>le<span class="o">)</span><span class="w"> </span><span class="o">[</span>&lt;index_name&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/_cat/segments/</span><span class="nv">$1</span><span class="s2">?v&amp;s=index,shard,prirep&quot;</span>
 
-list segmented shards (lss) [&lt;index_name&gt;] :: \
-   curl -X GET &quot;http://$ES_HOST:$ES_PORT/_cat/shards/$1?v&amp;h=index,shard,prirep,state,docs,node,segments.count&amp;s=index,shard,prirep,node&quot;
+list<span class="w"> </span>segmented<span class="w"> </span>shards<span class="w"> </span><span class="o">(</span>lss<span class="o">)</span><span class="w"> </span><span class="o">[</span>&lt;index_name&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/_cat/shards/</span><span class="nv">$1</span><span class="s2">?v&amp;h=index,shard,prirep,state,docs,node,segments.count&amp;s=index,shard,prirep,node&quot;</span>
 
-get index mapping (gim) &lt;index_name&gt; :: \
-   curl -X GET &quot;http://$ES_HOST:$ES_PORT/$1/_mapping?pretty&quot;
+get<span class="w"> </span>index<span class="w"> </span>mapping<span class="w"> </span><span class="o">(</span>gim<span class="o">)</span><span class="w"> </span>&lt;index_name&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/</span><span class="nv">$1</span><span class="s2">/_mapping?pretty&quot;</span>
 
-list unassigned shards (lus) :: curl -X GET &quot;http://$ES_HOST:$ES_PORT/_cat/shards?v&amp;h=index,shard,prirep,state,docs,segments.count&amp;s=index,shard,prirep&quot; 
+list<span class="w"> </span>unassigned<span class="w"> </span>shards<span class="w"> </span><span class="o">(</span>lus<span class="o">)</span><span class="w"> </span>::<span class="w"> </span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/_cat/shards?v&amp;h=index,shard,prirep,state,docs,segments.count&amp;s=index,shard,prirep&quot;</span><span class="w"> </span>
 
-forcemerge progress (fmp) :: \
-   curl -X GET &quot;http://$ES_HOST:$ES_PORT/_cat/nodes?v&amp;h=name,cpu,load_1m,merges.current,merges.current_docs,merges.total,merges.total_docs&amp;s=name&quot;
+forcemerge<span class="w"> </span>progress<span class="w"> </span><span class="o">(</span>fmp<span class="o">)</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/_cat/nodes?v&amp;h=name,cpu,load_1m,merges.current,merges.current_docs,merges.total,merges.total_docs&amp;s=name&quot;</span>
 
-# ----------------------------------------------------------------------------------------------------------------------------------
-= INDEX MANIPULATION
-# ----------------------------------------------------------------------------------------------------------------------------------
+<span class="c1"># ----------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="o">=</span><span class="w"> </span>INDEX<span class="w"> </span>MANIPULATION
+<span class="c1"># ----------------------------------------------------------------------------------------------------------------------------------</span>
 
-add index to alias (aita) &lt;index_name&gt; &lt;alias_name&gt; :: \
-   curl -X POST &quot;http://$ES_HOST:$ES_PORT/_aliases&quot; -H 'Content-Type: application/json' -d '{&quot;actions&quot;:[{&quot;add&quot;:{&quot;index&quot;:&quot;'$1'&quot;,&quot;alias&quot;:&quot;'$2'&quot;}}]}'
+add<span class="w"> </span>index<span class="w"> </span>to<span class="w"> </span><span class="nb">alias</span><span class="w"> </span><span class="o">(</span>aita<span class="o">)</span><span class="w"> </span>&lt;index_name&gt;<span class="w"> </span>&lt;alias_name&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/_aliases&quot;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;actions&quot;:[{&quot;add&quot;:{&quot;index&quot;:&quot;&#39;</span><span class="nv">$1</span><span class="s1">&#39;&quot;,&quot;alias&quot;:&quot;&#39;</span><span class="nv">$2</span><span class="s1">&#39;&quot;}}]}&#39;</span>
 
-remove index from alias (rifa) &lt;index_name&gt; &lt;alias_name&gt; :: \
-   read -p &quot;Are you sure [yN]? &quot; yn; \
-   if [[ ${yn^} == Y ]]; then \
-      curl -X DELETE &quot;http://$ES_HOST:$ES_PORT/$1/_aliases/$2&quot;; \
-   fi
+remove<span class="w"> </span>index<span class="w"> </span>from<span class="w"> </span><span class="nb">alias</span><span class="w"> </span><span class="o">(</span>rifa<span class="o">)</span><span class="w"> </span>&lt;index_name&gt;<span class="w"> </span>&lt;alias_name&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Are you sure [yN]? &quot;</span><span class="w"> </span>yn<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="si">${</span><span class="nv">yn</span><span class="p">^</span><span class="si">}</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>Y<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>curl<span class="w"> </span>-X<span class="w"> </span>DELETE<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/</span><span class="nv">$1</span><span class="s2">/_aliases/</span><span class="nv">$2</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">   </span><span class="k">fi</span>
 
-create index (ci) &lt;index_name&gt; &lt;number_of_shards&gt; &lt;number_of_replicas&gt; :: \
-   curl -X PUT &quot;http://$ES_HOST:$ES_PORT/$1&quot; -H 'Content-Type: application/json' -d '{&quot;settings&quot;:{&quot;index&quot;:{&quot;number_of_shards&quot;:'$2',&quot;number_of_replicas&quot;:'$3'}}}'
+create<span class="w"> </span>index<span class="w"> </span><span class="o">(</span>ci<span class="o">)</span><span class="w"> </span>&lt;index_name&gt;<span class="w"> </span>&lt;number_of_shards&gt;<span class="w"> </span>&lt;number_of_replicas&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;settings&quot;:{&quot;index&quot;:{&quot;number_of_shards&quot;:&#39;</span><span class="nv">$2</span><span class="s1">&#39;,&quot;number_of_replicas&quot;:&#39;</span><span class="nv">$3</span><span class="s1">&#39;}}}&#39;</span>
 
-create index from mapping (cifm) &lt;index_name&gt; &lt;number_of_shards&gt; &lt;number_of_replicas&gt; &lt;mapping-json&gt; :: \
-   curl -X PUT &quot;http://$ES_HOST:$ES_PORT/$1&quot; -H 'Content-Type: application/json' -d '{&quot;settings&quot;:{&quot;index&quot;:{&quot;number_of_shards&quot;:'$2',&quot;number_of_replicas&quot;:'$3'}},&quot;mappings&quot;:'$4'}'
+create<span class="w"> </span>index<span class="w"> </span>from<span class="w"> </span>mapping<span class="w"> </span><span class="o">(</span>cifm<span class="o">)</span><span class="w"> </span>&lt;index_name&gt;<span class="w"> </span>&lt;number_of_shards&gt;<span class="w"> </span>&lt;number_of_replicas&gt;<span class="w"> </span>&lt;mapping-json&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;settings&quot;:{&quot;index&quot;:{&quot;number_of_shards&quot;:&#39;</span><span class="nv">$2</span><span class="s1">&#39;,&quot;number_of_replicas&quot;:&#39;</span><span class="nv">$3</span><span class="s1">&#39;}},&quot;mappings&quot;:&#39;</span><span class="nv">$4</span><span class="s1">&#39;}&#39;</span>
 
-clone index (clni) &lt;index_name&gt; &lt;new_index_name&gt; :: \
-   curl -X POST &quot;http://$ES_HOST:$ES_PORT/$1/_clone/$2&quot;
+clone<span class="w"> </span>index<span class="w"> </span><span class="o">(</span>clni<span class="o">)</span><span class="w"> </span>&lt;index_name&gt;<span class="w"> </span>&lt;new_index_name&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/</span><span class="nv">$1</span><span class="s2">/_clone/</span><span class="nv">$2</span><span class="s2">&quot;</span>
 
-delete index (di) &lt;index_name&gt; :: \
-   read -p &quot;Are you sure [yN]? &quot; yn; \
-   if [[ ${yn^} == Y ]]; then \
-      curl -X DELETE &quot;http://$ES_HOST:$ES_PORT/$1&quot;; \
-   fi
+delete<span class="w"> </span>index<span class="w"> </span><span class="o">(</span>di<span class="o">)</span><span class="w"> </span>&lt;index_name&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Are you sure [yN]? &quot;</span><span class="w"> </span>yn<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="si">${</span><span class="nv">yn</span><span class="p">^</span><span class="si">}</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>Y<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>curl<span class="w"> </span>-X<span class="w"> </span>DELETE<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">   </span><span class="k">fi</span>
 
-open index (opi) &lt;index_name&gt; :: \
-   curl -X POST &quot;http://$ES_HOST:$ES_PORT/$1/_open&quot;
+open<span class="w"> </span>index<span class="w"> </span><span class="o">(</span>opi<span class="o">)</span><span class="w"> </span>&lt;index_name&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/</span><span class="nv">$1</span><span class="s2">/_open&quot;</span>
 
-close index (cli) &lt;index_name&gt; :: \
-   curl -X POST &quot;http://$ES_HOST:$ES_PORT/$1/_close&quot;
+close<span class="w"> </span>index<span class="w"> </span><span class="o">(</span>cli<span class="o">)</span><span class="w"> </span>&lt;index_name&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/</span><span class="nv">$1</span><span class="s2">/_close&quot;</span>
 
-enable read only (ero) &lt;index_name&gt; :: \
-   curl -X PUT &quot;http://$ES_HOST:$ES_PORT/$1/_settings&quot; -H 'Content-Type: application/json' -d '{&quot;index.blocks.write&quot;: true}'
+<span class="nb">enable</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>only<span class="w"> </span><span class="o">(</span>ero<span class="o">)</span><span class="w"> </span>&lt;index_name&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/</span><span class="nv">$1</span><span class="s2">/_settings&quot;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;index.blocks.write&quot;: true}&#39;</span>
 
-enable read write (erw) &lt;index_name&gt; :: \
-   curl -X PUT &quot;http://$ES_HOST:$ES_PORT/$1/_settings&quot; -H 'Content-Type: application/json' -d '{&quot;index.blocks.write&quot;: false}'
+<span class="nb">enable</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>write<span class="w"> </span><span class="o">(</span>erw<span class="o">)</span><span class="w"> </span>&lt;index_name&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/</span><span class="nv">$1</span><span class="s2">/_settings&quot;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;index.blocks.write&quot;: false}&#39;</span>
 
-reindex index (ri) &lt;source_index_name&gt; &lt;dest_index_name&gt; :: \
-   curl -X POST &quot;http://$ES_HOST:$ES_PORT/_reindex&quot; -H 'Content-Type: application/json' -d '{&quot;source&quot;:{&quot;index&quot;:&quot;'$1'&quot;},&quot;dest&quot;:{&quot;index&quot;:&quot;'$2'&quot;}}'
+reindex<span class="w"> </span>index<span class="w"> </span><span class="o">(</span>ri<span class="o">)</span><span class="w"> </span>&lt;source_index_name&gt;<span class="w"> </span>&lt;dest_index_name&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/_reindex&quot;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;source&quot;:{&quot;index&quot;:&quot;&#39;</span><span class="nv">$1</span><span class="s1">&#39;&quot;},&quot;dest&quot;:{&quot;index&quot;:&quot;&#39;</span><span class="nv">$2</span><span class="s1">&#39;&quot;}}&#39;</span>
 
-move shard (ms) &lt;index_name&gt; &lt;shard_num&gt; &lt;from_node_name&gt; &lt;to_node_name&gt; :: \
-   curl -X POST &quot;http://$ES_HOST:$ES_PORT/_cluster/reroute&quot; -H 'Content-Type: application/json' -d '{&quot;commands&quot;:[{&quot;move&quot;:{&quot;index&quot;:&quot;'$1'&quot;,&quot;shard&quot;:'$2',&quot;from_node&quot;:&quot;'$3'&quot;,&quot;to_node&quot;:&quot;'$4'&quot;}}]}'
+move<span class="w"> </span>shard<span class="w"> </span><span class="o">(</span>ms<span class="o">)</span><span class="w"> </span>&lt;index_name&gt;<span class="w"> </span>&lt;shard_num&gt;<span class="w"> </span>&lt;from_node_name&gt;<span class="w"> </span>&lt;to_node_name&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/_cluster/reroute&quot;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;commands&quot;:[{&quot;move&quot;:{&quot;index&quot;:&quot;&#39;</span><span class="nv">$1</span><span class="s1">&#39;&quot;,&quot;shard&quot;:&#39;</span><span class="nv">$2</span><span class="s1">&#39;,&quot;from_node&quot;:&quot;&#39;</span><span class="nv">$3</span><span class="s1">&#39;&quot;,&quot;to_node&quot;:&quot;&#39;</span><span class="nv">$4</span><span class="s1">&#39;&quot;}}]}&#39;</span>
 
-alter number replicas (anr) &lt;index_name&gt; &lt;number_of_replicas&gt; :: \
-   curl -X PUT &quot;http://$ES_HOST:$ES_PORT/$1/_settings&quot; -H 'Content-Type: application/json' -d '{&quot;index&quot;:{&quot;number_of_replicas&quot;:'$2'}}'
+alter<span class="w"> </span>number<span class="w"> </span>replicas<span class="w"> </span><span class="o">(</span>anr<span class="o">)</span><span class="w"> </span>&lt;index_name&gt;<span class="w"> </span>&lt;number_of_replicas&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/</span><span class="nv">$1</span><span class="s2">/_settings&quot;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;index&quot;:{&quot;number_of_replicas&quot;:&#39;</span><span class="nv">$2</span><span class="s1">&#39;}}&#39;</span>
 
-disable shard allocation (dsa) :: \
-   curl -X PUT &quot;http://$ES_HOST:$ES_PORT/_cluster/settings&quot; -H 'Content-Type: application/json' -d '{&quot;persistent&quot;:{&quot;cluster.routing.allocation.enable&quot;:&quot;primaries&quot;}}'
+disable<span class="w"> </span>shard<span class="w"> </span>allocation<span class="w"> </span><span class="o">(</span>dsa<span class="o">)</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/_cluster/settings&quot;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;persistent&quot;:{&quot;cluster.routing.allocation.enable&quot;:&quot;primaries&quot;}}&#39;</span>
 
-reenable shard allocation (rsa) :: \
-   curl -X PUT &quot;http://$ES_HOST:$ES_PORT/_cluster/settings&quot; -H 'Content-Type: application/json' -d '{&quot;persistent&quot;:{&quot;cluster.routing.allocation.enable&quot;:null}}'
+reenable<span class="w"> </span>shard<span class="w"> </span>allocation<span class="w"> </span><span class="o">(</span>rsa<span class="o">)</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/_cluster/settings&quot;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;persistent&quot;:{&quot;cluster.routing.allocation.enable&quot;:null}}&#39;</span>
 
-forcemerge (fm) &lt;index_name&gt; &lt;max_num_segments&gt; :: \
-   curl -X POST &quot;http://$ES_HOST:$ES_PORT/$1/_forcemerge?max_num_segments=$2&quot;
+forcemerge<span class="w"> </span><span class="o">(</span>fm<span class="o">)</span><span class="w"> </span>&lt;index_name&gt;<span class="w"> </span>&lt;max_num_segments&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/</span><span class="nv">$1</span><span class="s2">/_forcemerge?max_num_segments=</span><span class="nv">$2</span><span class="s2">&quot;</span>
 
-refresh (r) &lt;index_name&gt; :: \
-   curl -X POST &quot;http://$ES_HOST:$ES_PORT/$1/_refresh&quot;
+refresh<span class="w"> </span><span class="o">(</span>r<span class="o">)</span><span class="w"> </span>&lt;index_name&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/</span><span class="nv">$1</span><span class="s2">/_refresh&quot;</span>
 
-# ----------------------------------------------------------------------------------------------------------------------------------
-= INDEX ENTRY MANIPULATION
-# ----------------------------------------------------------------------------------------------------------------------------------
+<span class="c1"># ----------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="o">=</span><span class="w"> </span>INDEX<span class="w"> </span>ENTRY<span class="w"> </span>MANIPULATION
+<span class="c1"># ----------------------------------------------------------------------------------------------------------------------------------</span>
 
-add entry (ae) &lt;index_name&gt; &lt;entry_json&gt; :: curl -X POST &quot;http://$ES_HOST:$ES_PORT/$1/_doc&quot; -H 'Content-Type: application/json' -d &quot;$2&quot;
+add<span class="w"> </span>entry<span class="w"> </span><span class="o">(</span>ae<span class="o">)</span><span class="w"> </span>&lt;index_name&gt;<span class="w"> </span>&lt;entry_json&gt;<span class="w"> </span>::<span class="w"> </span>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/</span><span class="nv">$1</span><span class="s2">/_doc&quot;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span>
 
-# ----------------------------------------------------------------------------------------------------------------------------------
-= NODES
-# ----------------------------------------------------------------------------------------------------------------------------------
+<span class="c1"># ----------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="o">=</span><span class="w"> </span>NODES
+<span class="c1"># ----------------------------------------------------------------------------------------------------------------------------------</span>
 
-list nodes (ln) :: \
-   curl -X GET &quot;http://$ES_HOST:$ES_PORT/_cat/nodes?v&amp;h=name,ip,nodeRole,m,heapPercent,ramPercent,cpu,load_1m,load_5m,load_15m,disk.total,disk.used_percent&amp;s=name&quot;
+list<span class="w"> </span>nodes<span class="w"> </span><span class="o">(</span>ln<span class="o">)</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/_cat/nodes?v&amp;h=name,ip,nodeRole,m,heapPercent,ramPercent,cpu,load_1m,load_5m,load_15m,disk.total,disk.used_percent&amp;s=name&quot;</span>
 
-list nodes queries (lnq) :: \
-   curl -X GET &quot;http://$ES_HOST:$ES_PORT/_cat/nodes?v&amp;h=name,nodeRole,search,queryTotal,searchFetchTotal,requestCacheHitCount&amp;s=name&quot;
+list<span class="w"> </span>nodes<span class="w"> </span>queries<span class="w"> </span><span class="o">(</span>lnq<span class="o">)</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/_cat/nodes?v&amp;h=name,nodeRole,search,queryTotal,searchFetchTotal,requestCacheHitCount&amp;s=name&quot;</span>
 
-search nodes (sn) :: \
-   curl -X GET &quot;http://$ES_HOST:$ES_PORT/_nodes&quot;
+search<span class="w"> </span>nodes<span class="w"> </span><span class="o">(</span>sn<span class="o">)</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/_nodes&quot;</span>
 
-node active threads (at) :: \
-   curl -X GET &quot;http://$ES_HOST:$ES_PORT/_cat/thread_pool?v&amp;s=node_name,name&quot;
+node<span class="w"> </span>active<span class="w"> </span>threads<span class="w"> </span><span class="o">(</span>at<span class="o">)</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/_cat/thread_pool?v&amp;s=node_name,name&quot;</span>
 
-# ----------------------------------------------------------------------------------------------------------------------------------
-= SEARCH
-# ----------------------------------------------------------------------------------------------------------------------------------
+<span class="c1"># ----------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="o">=</span><span class="w"> </span>SEARCH
+<span class="c1"># ----------------------------------------------------------------------------------------------------------------------------------</span>
 
-search (s) &lt;index_name&gt; &lt;search_term&gt; :: \
-   curl -X GET &quot;http://$ES_HOST:$ES_PORT/$1/_search?q=$2&amp;pretty&quot;
+search<span class="w"> </span><span class="o">(</span>s<span class="o">)</span><span class="w"> </span>&lt;index_name&gt;<span class="w"> </span>&lt;search_term&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/</span><span class="nv">$1</span><span class="s2">/_search?q=</span><span class="nv">$2</span><span class="s2">&amp;pretty&quot;</span>
 
-search json (sj) &lt;index_name&gt; &lt;search_json&gt; :: \
-   curl -X GET &quot;http://$ES_HOST:$ES_PORT/$1/_search?pretty&quot; -H 'Content-Type: application/json' -d &quot;$2&quot;
+search<span class="w"> </span>json<span class="w"> </span><span class="o">(</span>sj<span class="o">)</span><span class="w"> </span>&lt;index_name&gt;<span class="w"> </span>&lt;search_json&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/</span><span class="nv">$1</span><span class="s2">/_search?pretty&quot;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span>
 
-search match (sm) &lt;index_name&gt; &lt;field_name&gt; &lt;value&gt; :: \
-   curl -X GET &quot;http://$ES_HOST:$ES_PORT/$1/_search?pretty&quot; -H 'Content-Type: application/json' -d '{&quot;query&quot;: { &quot;match&quot;: { &quot;'$2'&quot;: &quot;'$3'&quot; } } }'
+search<span class="w"> </span>match<span class="w"> </span><span class="o">(</span>sm<span class="o">)</span><span class="w"> </span>&lt;index_name&gt;<span class="w"> </span>&lt;field_name&gt;<span class="w"> </span>&lt;value&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/</span><span class="nv">$1</span><span class="s2">/_search?pretty&quot;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;query&quot;: { &quot;match&quot;: { &quot;&#39;</span><span class="nv">$2</span><span class="s1">&#39;&quot;: &quot;&#39;</span><span class="nv">$3</span><span class="s1">&#39;&quot; } } }&#39;</span>
 
-search term (st) &lt;index_name&gt; &lt;field_name&gt; &lt;value&gt; :: \
-   curl -X GET &quot;http://$ES_HOST:$ES_PORT/$1/_search?pretty&quot; -H 'Content-Type: application/json' -d '{&quot;query&quot;: { &quot;term&quot;: { &quot;'$2'&quot;: &quot;'$3'&quot; } } }'
+search<span class="w"> </span>term<span class="w"> </span><span class="o">(</span>st<span class="o">)</span><span class="w"> </span>&lt;index_name&gt;<span class="w"> </span>&lt;field_name&gt;<span class="w"> </span>&lt;value&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/</span><span class="nv">$1</span><span class="s2">/_search?pretty&quot;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;query&quot;: { &quot;term&quot;: { &quot;&#39;</span><span class="nv">$2</span><span class="s1">&#39;&quot;: &quot;&#39;</span><span class="nv">$3</span><span class="s1">&#39;&quot; } } }&#39;</span>
 
-search summary (ss) &lt;index_name&gt; &lt;search_term&gt; :: \
-   curl -X GET &quot;http://$ES_HOST:$ES_PORT/$1/_search?size=0&amp;pretty&quot; -H 'Content-Type: application/json' -d '{&quot;aggs&quot;: {&quot;count&quot;: {&quot;terms&quot;: { &quot;field&quot; : &quot;'$2'&quot;, &quot;size&quot; : 100 } } } }'
+search<span class="w"> </span>summary<span class="w"> </span><span class="o">(</span>ss<span class="o">)</span><span class="w"> </span>&lt;index_name&gt;<span class="w"> </span>&lt;search_term&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/</span><span class="nv">$1</span><span class="s2">/_search?size=0&amp;pretty&quot;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{&quot;aggs&quot;: {&quot;count&quot;: {&quot;terms&quot;: { &quot;field&quot; : &quot;&#39;</span><span class="nv">$2</span><span class="s1">&#39;&quot;, &quot;size&quot; : 100 } } } }&#39;</span>
 
-# ----------------------------------------------------------------------------------------------------------------------------------
-= TASKS
-# ----------------------------------------------------------------------------------------------------------------------------------
+<span class="c1"># ----------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="o">=</span><span class="w"> </span>TASKS
+<span class="c1"># ----------------------------------------------------------------------------------------------------------------------------------</span>
 
-list tasks (lt) [&lt;sort_field&gt;] :: \
-   curl -X GET &quot;http://$ES_HOST:$ES_PORT/_cat/tasks?v&amp;h=action,type,start_time,timestamp,running_time,node&amp;s=$1&quot;
+list<span class="w"> </span>tasks<span class="w"> </span><span class="o">(</span>lt<span class="o">)</span><span class="w"> </span><span class="o">[</span>&lt;sort_field&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/_cat/tasks?v&amp;h=action,type,start_time,timestamp,running_time,node&amp;s=</span><span class="nv">$1</span><span class="s2">&quot;</span>
 
-list tasks detail (ltd) [&lt;sort_field&gt;] :: \
-   curl -X GET &quot;http://$ES_HOST:$ES_PORT/_cat/tasks?v&amp;s=$1&quot;
+list<span class="w"> </span>tasks<span class="w"> </span>detail<span class="w"> </span><span class="o">(</span>ltd<span class="o">)</span><span class="w"> </span><span class="o">[</span>&lt;sort_field&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/_cat/tasks?v&amp;s=</span><span class="nv">$1</span><span class="s2">&quot;</span>
 
-# ----------------------------------------------------------------------------------------------------------------------------------
-= REPOS / SNAPSHOTS
-# ----------------------------------------------------------------------------------------------------------------------------------
+<span class="c1"># ----------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="o">=</span><span class="w"> </span>REPOS<span class="w"> </span>/<span class="w"> </span>SNAPSHOTS
+<span class="c1"># ----------------------------------------------------------------------------------------------------------------------------------</span>
 
-add repo (are) &lt;repo_name&gt; :: \
-   curl -X PUT &quot;http://$ES_HOST:$ES_PORT/_snapshot/$1?pretty&quot; -H 'Content-Type: application/json' -d '{ &quot;type&quot;: &quot;fs&quot;, &quot;settings&quot;: { &quot;location&quot;: &quot;'$1'&quot; } } '
+add<span class="w"> </span>repo<span class="w"> </span><span class="o">(</span>are<span class="o">)</span><span class="w"> </span>&lt;repo_name&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/_snapshot/</span><span class="nv">$1</span><span class="s2">?pretty&quot;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{ &quot;type&quot;: &quot;fs&quot;, &quot;settings&quot;: { &quot;location&quot;: &quot;&#39;</span><span class="nv">$1</span><span class="s1">&#39;&quot; } } &#39;</span>
 
-delete repo (dre) &lt;repo_name&gt; :: \
-   read -p &quot;Are you sure [yN]? &quot; yn; \
-   if [[ ${yn^} == Y ]]; then \
-      curl -X DELETE &quot;http://$ES_HOST:$ES_PORT/_snapshot/$1?pretty&quot;; \
-   fi
+delete<span class="w"> </span>repo<span class="w"> </span><span class="o">(</span>dre<span class="o">)</span><span class="w"> </span>&lt;repo_name&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Are you sure [yN]? &quot;</span><span class="w"> </span>yn<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="si">${</span><span class="nv">yn</span><span class="p">^</span><span class="si">}</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>Y<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>curl<span class="w"> </span>-X<span class="w"> </span>DELETE<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/_snapshot/</span><span class="nv">$1</span><span class="s2">?pretty&quot;</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">   </span><span class="k">fi</span>
 
-list repos (lre) :: \
-   curl -X GET &quot;http://$ES_HOST:$ES_PORT/_cat/repositories?v&quot;
+list<span class="w"> </span>repos<span class="w"> </span><span class="o">(</span>lre<span class="o">)</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/_cat/repositories?v&quot;</span>
 
-create snapshot (csn) &lt;repo_name&gt; &lt;snapshot_name&gt; :: \
-   curl -X PUT &quot;http://$ES_HOST:$ES_PORT/_snapshot/$1/$2?pretty&quot;
-
-delete snapshot (dsn) &lt;repo_name&gt; &lt;snapshot_name&gt; :: \
-   read -p &quot;Are you sure [yN]? &quot; yn; \
-   if [[ ${yn^} == Y ]]; then \
-      curl -X DELETE &quot;http://$ES_HOST:$ES_PORT/_snapshot/$1/$2?pretty&quot;; \
-   fi
+create<span class="w"> </span>snapshot<span class="w"> </span><span class="o">(</span>csn<span class="o">)</span><span class="w"> </span>&lt;repo_name&gt;<span class="w"> </span>&lt;snapshot_name&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/_snapshot/</span><span class="nv">$1</span><span class="s2">/</span><span class="nv">$2</span><span class="s2">?pretty&quot;</span>
+
+delete<span class="w"> </span>snapshot<span class="w"> </span><span class="o">(</span>dsn<span class="o">)</span><span class="w"> </span>&lt;repo_name&gt;<span class="w"> </span>&lt;snapshot_name&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Are you sure [yN]? &quot;</span><span class="w"> </span>yn<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="si">${</span><span class="nv">yn</span><span class="p">^</span><span class="si">}</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>Y<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="se">\</span>
+<span class="w">      </span>curl<span class="w"> </span>-X<span class="w"> </span>DELETE<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/_snapshot/</span><span class="nv">$1</span><span class="s2">/</span><span class="nv">$2</span><span class="s2">?pretty&quot;</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">   </span><span class="k">fi</span>
 
-list snapshots (lsn) :: \
-   curl -X GET &quot;http://$ES_HOST:$ES_PORT/_cat/snapshots?v&quot;
-
-snapshot details (snd) &lt;repo_name&gt; &lt;snapshot_name&gt; :: \
-   curl -X GET &quot;http://$ES_HOST:$ES_PORT/_snapshot/$1/$2?pretty&quot;
-
-restore snaphot (rsn) &lt;repo_name&gt; &lt;snapshot_name&gt; :: \
-   curl -X POST &quot;http://$ES_HOST:$ES_PORT/_snapshot/$1/$2/_restore?pretty&quot;
+list<span class="w"> </span>snapshots<span class="w"> </span><span class="o">(</span>lsn<span class="o">)</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/_cat/snapshots?v&quot;</span>
+
+snapshot<span class="w"> </span>details<span class="w"> </span><span class="o">(</span>snd<span class="o">)</span><span class="w"> </span>&lt;repo_name&gt;<span class="w"> </span>&lt;snapshot_name&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/_snapshot/</span><span class="nv">$1</span><span class="s2">/</span><span class="nv">$2</span><span class="s2">?pretty&quot;</span>
+
+restore<span class="w"> </span>snaphot<span class="w"> </span><span class="o">(</span>rsn<span class="o">)</span><span class="w"> </span>&lt;repo_name&gt;<span class="w"> </span>&lt;snapshot_name&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">   </span>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/_snapshot/</span><span class="nv">$1</span><span class="s2">/</span><span class="nv">$2</span><span class="s2">/_restore?pretty&quot;</span>
 
-# ----------------------------------------------------------------------------------------------------------------------------------
-= GENERIC
-# ----------------------------------------------------------------------------------------------------------------------------------
+<span class="c1"># ----------------------------------------------------------------------------------------------------------------------------------</span>
+<span class="o">=</span><span class="w"> </span>GENERIC
+<span class="c1"># ----------------------------------------------------------------------------------------------------------------------------------</span>
 
-generic (g) &lt;type-GET/POST/PUT&gt; &lt;api_call&gt; :: curl -X $1 &quot;http://$ES_HOST:$ES_PORT/$2&quot;
-
-query-es settings (qes) :: query-es -s
+generic<span class="w"> </span><span class="o">(</span>g<span class="o">)</span><span class="w"> </span>&lt;type-GET/POST/PUT&gt;<span class="w"> </span>&lt;api_call&gt;<span class="w"> </span>::<span class="w"> </span>curl<span class="w"> </span>-X<span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="s2">&quot;http://</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/</span><span class="nv">$2</span><span class="s2">&quot;</span>
+
+query-es<span class="w"> </span>settings<span class="w"> </span><span class="o">(</span>qes<span class="o">)</span><span class="w"> </span>::<span class="w"> </span>query-es<span class="w"> </span>-s
 
-
-
-### overview perf:
-###
-### curl -s -u $CRED -XGET $EHOST'/_cat/nodes?v&amp;h=ip,port,role,master,cpu,ft,ftt,iic,iif,mt,mtt,d,mcs' | sort
-
-### disk space:
-###
-### curl -s -u $CRED -XGET $EHOST'/_cat/allocation?v'
-
-### list node attributes:
-###
-### curl -s -u $CRED -XGET $EHOST'/_cat/nodeattrs?v&amp;s=node'
-
-### get cluster settings - shows what has been set through api, does not show config file settings:
-###
-### curl -s -u $CRED - XGET $EHOST'/_cluster/settings?pretty'
-
-### debug
-### enable debug for every node:
-###
-### curl -s -u $CRED -XPUT $EHOST'/_cluster/settings?pretty' -d'{&quot;transient&quot;: {&quot;logger.discovery.zen&quot;:&quot;TRACE&quot;}}'
-
-### debug security logger:
-###
-### &quot;logger.org.elasticsearch.xpack.security&quot; : &quot;TRACE&quot;
-### debug ldap logger:
-###
-### &quot;logger.org.elasticsearch.xpack.security.authc.ldap&quot; : &quot;TRACE&quot;
-### dump of all cluster state: nodes, indexes, shards and placements - BIG:
-###
-### curl -s -u $CRED -XPUT $EHOST'/_cluster/state'
-
-### overview:
-###
-### get _cat/nodes?v&amp;s=name&amp;h=name,fielddataMemory,fielddataEvictions
-### detailed stats on a per field/node basis:
-###
-### GET /_nodes/stats/indices/fielddata?fields=*
-### performance: request cache
-### This cache is hit first on the coordinating node and caches a result in its entirety
-###
-### full request cache stats on a per cluster and per index basis:
-###
-### GET /_stats/request_cache?human
-### TODO: more
-###
-### performance: shard cache
-### This cache is hit second on the participating nodes and caches the shard contents
-###
-### https://www.elastic.co/guide/en/elasticsearch/reference/master/shard-request-cache.html
-###
-### TODO: more
-###
-### threads
-### whats running:
-###
-### curl -s -u $CRED -XGET $EHOST'/_cat/thread_pool'
-
-### thread pool sizes:
-###
-### curl -s -u $CRED -XGET $EHOST'/_cat/thread_pool?v&amp;h=node_name,name,size,active,queue,queue_size,largest,min,max&amp;s=node_name,name'
-
-### aliases
-### list aliases:
-###
-### curl -s -u $CRED -XGET $EHOST'/_cat/aliases?v'
-
-### change security/kibana index:
-###
-### curl -s -u $CRED -XPUT $EHOST'/.kibana/_settings?pretty' -d' {&quot;index&quot; : {&quot;number_of_replicas&quot; : 9, &quot;auto_expand_replicas&quot; : false} }'
-
-### templates
-### list templates:
-###
-### curl -s -u $CRED -XGET $EHOST'/_cat/templates?v'
-
-### get security templates:
-###
-### curl -s -u $CRED -XGET $EHOST'/_template/security-index-template?pretty'
-
-### shards, replicas &amp; recovery
-### view the shard states for an index:
-###
-### curl -k -s -u $CRED -XGET $EHOST'/_cat/shards/ams-txn-061918_jaro?v&amp;s=index,node,sh&amp;h=index,node,sh,pr,state,docs,store,recoverysource.type,unassigned.reason,unassigned.for'
-
-### explain allocation - explain why we have unallocated shards:
-###
-### curl -s -u $CRED -XGET $EHOST'/_cluster/allocation/explain?pretty'
-
-### list . indices repl:
-###
-### curl -s -u $CRED -XGET $EHOST'/_cat/indices/.*?v'
-
-### recovery status:
-###
-### curl -s -u $CRED -XGET $EHOST'/_cat/recovery?v'
-
-# PUT _cluster/settings
-# {
-#   &quot;transient&quot;: {
-#     &quot;cluster.routing.allocation.disk.watermark.low&quot;: &quot;100gb&quot;,
-#     &quot;cluster.routing.allocation.disk.watermark.high&quot;: &quot;50gb&quot;,
-#     &quot;cluster.routing.allocation.disk.watermark.flood_stage&quot;: &quot;10gb&quot;,
-#     &quot;cluster.info.update.interval&quot;: &quot;1m&quot;
-#   }
-# }
-</code></pre>
+
+
+<span class="c1">### overview perf:</span>
+<span class="c1">###</span>
+<span class="c1">### curl -s -u $CRED -XGET $EHOST&#39;/_cat/nodes?v&amp;h=ip,port,role,master,cpu,ft,ftt,iic,iif,mt,mtt,d,mcs&#39; | sort</span>
+
+<span class="c1">### disk space:</span>
+<span class="c1">###</span>
+<span class="c1">### curl -s -u $CRED -XGET $EHOST&#39;/_cat/allocation?v&#39;</span>
+
+<span class="c1">### list node attributes:</span>
+<span class="c1">###</span>
+<span class="c1">### curl -s -u $CRED -XGET $EHOST&#39;/_cat/nodeattrs?v&amp;s=node&#39;</span>
+
+<span class="c1">### get cluster settings - shows what has been set through api, does not show config file settings:</span>
+<span class="c1">###</span>
+<span class="c1">### curl -s -u $CRED - XGET $EHOST&#39;/_cluster/settings?pretty&#39;</span>
+
+<span class="c1">### debug</span>
+<span class="c1">### enable debug for every node:</span>
+<span class="c1">###</span>
+<span class="c1">### curl -s -u $CRED -XPUT $EHOST&#39;/_cluster/settings?pretty&#39; -d&#39;{&quot;transient&quot;: {&quot;logger.discovery.zen&quot;:&quot;TRACE&quot;}}&#39;</span>
+
+<span class="c1">### debug security logger:</span>
+<span class="c1">###</span>
+<span class="c1">### &quot;logger.org.elasticsearch.xpack.security&quot; : &quot;TRACE&quot;</span>
+<span class="c1">### debug ldap logger:</span>
+<span class="c1">###</span>
+<span class="c1">### &quot;logger.org.elasticsearch.xpack.security.authc.ldap&quot; : &quot;TRACE&quot;</span>
+<span class="c1">### dump of all cluster state: nodes, indexes, shards and placements - BIG:</span>
+<span class="c1">###</span>
+<span class="c1">### curl -s -u $CRED -XPUT $EHOST&#39;/_cluster/state&#39;</span>
+
+<span class="c1">### overview:</span>
+<span class="c1">###</span>
+<span class="c1">### get _cat/nodes?v&amp;s=name&amp;h=name,fielddataMemory,fielddataEvictions</span>
+<span class="c1">### detailed stats on a per field/node basis:</span>
+<span class="c1">###</span>
+<span class="c1">### GET /_nodes/stats/indices/fielddata?fields=*</span>
+<span class="c1">### performance: request cache</span>
+<span class="c1">### This cache is hit first on the coordinating node and caches a result in its entirety</span>
+<span class="c1">###</span>
+<span class="c1">### full request cache stats on a per cluster and per index basis:</span>
+<span class="c1">###</span>
+<span class="c1">### GET /_stats/request_cache?human</span>
+<span class="c1">### TODO: more</span>
+<span class="c1">###</span>
+<span class="c1">### performance: shard cache</span>
+<span class="c1">### This cache is hit second on the participating nodes and caches the shard contents</span>
+<span class="c1">###</span>
+<span class="c1">### https://www.elastic.co/guide/en/elasticsearch/reference/master/shard-request-cache.html</span>
+<span class="c1">###</span>
+<span class="c1">### TODO: more</span>
+<span class="c1">###</span>
+<span class="c1">### threads</span>
+<span class="c1">### whats running:</span>
+<span class="c1">###</span>
+<span class="c1">### curl -s -u $CRED -XGET $EHOST&#39;/_cat/thread_pool&#39;</span>
+
+<span class="c1">### thread pool sizes:</span>
+<span class="c1">###</span>
+<span class="c1">### curl -s -u $CRED -XGET $EHOST&#39;/_cat/thread_pool?v&amp;h=node_name,name,size,active,queue,queue_size,largest,min,max&amp;s=node_name,name&#39;</span>
+
+<span class="c1">### aliases</span>
+<span class="c1">### list aliases:</span>
+<span class="c1">###</span>
+<span class="c1">### curl -s -u $CRED -XGET $EHOST&#39;/_cat/aliases?v&#39;</span>
+
+<span class="c1">### change security/kibana index:</span>
+<span class="c1">###</span>
+<span class="c1">### curl -s -u $CRED -XPUT $EHOST&#39;/.kibana/_settings?pretty&#39; -d&#39; {&quot;index&quot; : {&quot;number_of_replicas&quot; : 9, &quot;auto_expand_replicas&quot; : false} }&#39;</span>
+
+<span class="c1">### templates</span>
+<span class="c1">### list templates:</span>
+<span class="c1">###</span>
+<span class="c1">### curl -s -u $CRED -XGET $EHOST&#39;/_cat/templates?v&#39;</span>
+
+<span class="c1">### get security templates:</span>
+<span class="c1">###</span>
+<span class="c1">### curl -s -u $CRED -XGET $EHOST&#39;/_template/security-index-template?pretty&#39;</span>
+
+<span class="c1">### shards, replicas &amp; recovery</span>
+<span class="c1">### view the shard states for an index:</span>
+<span class="c1">###</span>
+<span class="c1">### curl -k -s -u $CRED -XGET $EHOST&#39;/_cat/shards/ams-txn-061918_jaro?v&amp;s=index,node,sh&amp;h=index,node,sh,pr,state,docs,store,recoverysource.type,unassigned.reason,unassigned.for&#39;</span>
+
+<span class="c1">### explain allocation - explain why we have unallocated shards:</span>
+<span class="c1">###</span>
+<span class="c1">### curl -s -u $CRED -XGET $EHOST&#39;/_cluster/allocation/explain?pretty&#39;</span>
+
+<span class="c1">### list . indices repl:</span>
+<span class="c1">###</span>
+<span class="c1">### curl -s -u $CRED -XGET $EHOST&#39;/_cat/indices/.*?v&#39;</span>
+
+<span class="c1">### recovery status:</span>
+<span class="c1">###</span>
+<span class="c1">### curl -s -u $CRED -XGET $EHOST&#39;/_cat/recovery?v&#39;</span>
+
+<span class="c1"># PUT _cluster/settings</span>
+<span class="c1"># {</span>
+<span class="c1">#   &quot;transient&quot;: {</span>
+<span class="c1">#     &quot;cluster.routing.allocation.disk.watermark.low&quot;: &quot;100gb&quot;,</span>
+<span class="c1">#     &quot;cluster.routing.allocation.disk.watermark.high&quot;: &quot;50gb&quot;,</span>
+<span class="c1">#     &quot;cluster.routing.allocation.disk.watermark.flood_stage&quot;: &quot;10gb&quot;,</span>
+<span class="c1">#     &quot;cluster.info.update.interval&quot;: &quot;1m&quot;</span>
+<span class="c1">#   }</span>
+<span class="c1"># }</span>
+</code></pre></div>
         </div>
       </article>
     </main>

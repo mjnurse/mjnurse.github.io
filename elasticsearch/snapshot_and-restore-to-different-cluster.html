@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -107,82 +107,82 @@
 <h1 id="steps">Steps</h1>
 <h2 id="configure-both-instances-ready-for-snapshots">Configure Both Instances Ready For Snapshots</h2>
 <p>We need to specify the location on disk for the snapshot repositories and make sure these locations are accessible to Elasticsearch.  On Both Elasticsearch instances.</p>
-<pre class="codehilite"><code class="language-bash">&gt; echo 'path.repo: [&quot;/mnt/es_snapshot_repos&quot;]' &gt;&gt; /etc/elasticsearch/elasticsearch.yml
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;path.repo: [&quot;/mnt/es_snapshot_repos&quot;]&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/etc/elasticsearch/elasticsearch.yml
 
-&gt; chown -R elasticsearch: /mnt/es_snapshot_repos
+&gt;<span class="w"> </span>chown<span class="w"> </span>-R<span class="w"> </span>elasticsearch:<span class="w"> </span>/mnt/es_snapshot_repos
 
-&gt; chgrp -R elasticsearch: /mnt/es_snapshot_repos
-</code></pre>
+&gt;<span class="w"> </span>chgrp<span class="w"> </span>-R<span class="w"> </span>elasticsearch:<span class="w"> </span>/mnt/es_snapshot_repos
+</code></pre></div>
 
 <p>Restart elasticsearch.</p>
-<pre class="codehilite"><code class="language-bash">&gt; systemctl restart elasticsearch
-</code></pre>
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>elasticsearch
+</code></pre></div>
 
 <p>We now need to register a repository for snapshots on both instances.</p>
-<pre class="codehilite"><code class="language-bash">&gt; curl -X PUT &quot;hosta:9200/_snapshot/mjn-repo?pretty&quot; -H 'Content-Type: application/json' -d'
-{
-  &quot;type&quot;: &quot;fs&quot;,
-  &quot;settings&quot;: {
-    &quot;location&quot;: &quot;/mnt/es_snapshot_repos&quot;
-  }
-}
-'
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">&quot;hosta:9200/_snapshot/mjn-repo?pretty&quot;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="s1">&#39;</span>
+<span class="s1">{</span>
+<span class="s1">  &quot;type&quot;: &quot;fs&quot;,</span>
+<span class="s1">  &quot;settings&quot;: {</span>
+<span class="s1">    &quot;location&quot;: &quot;/mnt/es_snapshot_repos&quot;</span>
+<span class="s1">  }</span>
+<span class="s1">}</span>
+<span class="s1">&#39;</span>
 
-{
-  &quot;acknowledged&quot; : true
-}
-</code></pre>
+<span class="o">{</span>
+<span class="w">  </span><span class="s2">&quot;acknowledged&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="nb">true</span>
+<span class="o">}</span>
+</code></pre></div>
 
 <h2 id="create-snapshot-on-elasticsearch-instance-a">Create Snapshot on Elasticsearch Instance A</h2>
 <p>Create a snapshot with the same name as the other snapshot on NodeA;</p>
-<pre class="codehilite"><code class="language-bash">&gt; curl -X PUT &quot;192.168.59.12:9200/_snapshot/mjn-repo/mjn_backup_20220612?pretty&quot;
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">&quot;192.168.59.12:9200/_snapshot/mjn-repo/mjn_backup_20220612?pretty&quot;</span>
 
-{
-  &quot;accepted&quot; : true
-}
-</code></pre>
+<span class="o">{</span>
+<span class="w">  </span><span class="s2">&quot;accepted&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="nb">true</span>
+<span class="o">}</span>
+</code></pre></div>
 
 <p>Listing the contents of the repository directory;</p>
-<pre class="codehilite"><code class="language-bash">ls -1 /mnt/mjn-repo/
+<div class="codehilite"><pre><span></span><code>ls<span class="w"> </span>-1<span class="w"> </span>/mnt/mjn-repo/
 
--rwxr--r-- 1 elasticsearch elasticsearch 14272 Jun 10 15:00 index-0
--rwxr--r-- 1 elasticsearch elasticsearch     8 Jun 10 15:00 index.latest
-drwxr-xr-x 1 elasticsearch elasticsearch   512 Jun 10 15:00 indices
--rwxr--r-- 1 elasticsearch elasticsearch   256 Jun 10 15:00 meta-GaiBfdzRQdi41xAedveMLQ.dat
--rwxr--r-- 1 elasticsearch elasticsearch  4543 Jun 10 15:00 snap-GaiBfdzRQdi41xAedveMLQ.dat
-</code></pre>
+-rwxr--r--<span class="w"> </span><span class="m">1</span><span class="w"> </span>elasticsearch<span class="w"> </span>elasticsearch<span class="w"> </span><span class="m">14272</span><span class="w"> </span>Jun<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">15</span>:00<span class="w"> </span>index-0
+-rwxr--r--<span class="w"> </span><span class="m">1</span><span class="w"> </span>elasticsearch<span class="w"> </span>elasticsearch<span class="w">     </span><span class="m">8</span><span class="w"> </span>Jun<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">15</span>:00<span class="w"> </span>index.latest
+drwxr-xr-x<span class="w"> </span><span class="m">1</span><span class="w"> </span>elasticsearch<span class="w"> </span>elasticsearch<span class="w">   </span><span class="m">512</span><span class="w"> </span>Jun<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">15</span>:00<span class="w"> </span>indices
+-rwxr--r--<span class="w"> </span><span class="m">1</span><span class="w"> </span>elasticsearch<span class="w"> </span>elasticsearch<span class="w">   </span><span class="m">256</span><span class="w"> </span>Jun<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">15</span>:00<span class="w"> </span>meta-GaiBfdzRQdi41xAedveMLQ.dat
+-rwxr--r--<span class="w"> </span><span class="m">1</span><span class="w"> </span>elasticsearch<span class="w"> </span>elasticsearch<span class="w">  </span><span class="m">4543</span><span class="w"> </span>Jun<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="m">15</span>:00<span class="w"> </span>snap-GaiBfdzRQdi41xAedveMLQ.dat
+</code></pre></div>
 
 <h2 id="copy-snapshot-data-from-host-a-repository-to-host-b-repository">Copy Snapshot Data from Host A Repository to Host B Repository</h2>
 <p><code>scp</code> or whatever...</p>
 <h2 id="restart-elasticsearch-on-nodeb">Restart Elasticsearch on NodeB</h2>
 <p>We now need to restart elasticsearch on host B.</p>
-<pre class="codehilite"><code class="language-bash">&gt; systemctl restart elasticsearch
-</code></pre>
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>elasticsearch
+</code></pre></div>
 
 <h2 id="view-snapshot-information">View Snapshot Information</h2>
 <p>Check the details about the snapshot;</p>
-<pre class="codehilite"><code class="language-bash">&gt; curl -X GET &quot;hostb:9200/_snapshot/mjn-repo/mjn_backup_20220612?pretty&quot;
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;hostb:9200/_snapshot/mjn-repo/mjn_backup_20220612?pretty&quot;</span>
 
-{
-  &quot;snapshots&quot; : [
-    {
-      &quot;snapshot&quot; : &quot;emjn_backup_20220612&quot;,
-      &quot;uuid&quot; : &quot;33qzhT82QTmvH4GkWn-vhw&quot;,
-      &quot;version_id&quot; : 7100099,
-      &quot;version&quot; : &quot;7.10.0&quot;,
-      &quot;indices&quot; : [
-  ...
-}
-</code></pre>
+<span class="o">{</span>
+<span class="w">  </span><span class="s2">&quot;snapshots&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">    </span><span class="o">{</span>
+<span class="w">      </span><span class="s2">&quot;snapshot&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="s2">&quot;emjn_backup_20220612&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;uuid&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="s2">&quot;33qzhT82QTmvH4GkWn-vhw&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;version_id&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="m">7100099</span>,
+<span class="w">      </span><span class="s2">&quot;version&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="s2">&quot;7.10.0&quot;</span>,
+<span class="w">      </span><span class="s2">&quot;indices&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">  </span>...
+<span class="o">}</span>
+</code></pre></div>
 
 <p>The details should match those of the snapshot in the original node.</p>
 <h2 id="restore-elasticsearch-snapshot-instance-b">Restore Elasticsearch Snapshot Instance B</h2>
 <p>We can now restore Elasticsearch snapshot data.</p>
-<pre class="codehilite"><code class="language-bash">curl -X POST &quot;hostb:9200/_snapshot/mjn_backup_20220612/_restore?pretty&quot;
-{
-  &quot;accepted&quot; : true
-}
-</code></pre>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;hostb:9200/_snapshot/mjn_backup_20220612/_restore?pretty&quot;</span>
+<span class="o">{</span>
+<span class="w">  </span><span class="s2">&quot;accepted&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="nb">true</span>
+<span class="o">}</span>
+</code></pre></div>
 
 <hr>
         </div>

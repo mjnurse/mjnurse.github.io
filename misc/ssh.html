@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -92,7 +92,7 @@
 <h2 id="storing-ssh-connection-config-details">Storing SSH Connection / Config details</h2>
 <p>Store SSH connection details in a config file in the .ssh directory.  File <code>~/.ssh/config</code></p>
 <p>Contents</p>
-<pre class="codehilite"><code>Host dev
+<div class="codehilite"><pre><span></span><code>Host dev
     HostName dev.example.com
     Port 22
     User martin
@@ -100,17 +100,17 @@ Host test
     HostName test.example.com
     Port 22
     User martin
-</code></pre>
+</code></pre></div>
 
 <h2 id="ssh-login-without-password">SSH Login Without Password</h2>
 <p>1)  Generate a public/private RSA key pair.  Save this to default location <code>/home/&lt;username&gt;/.ssh/id_rsa</code></p>
-<pre class="codehilite"><code>$ ssh-keygen
-</code></pre>
+<div class="codehilite"><pre><span></span><code>$<span class="w"> </span>ssh-keygen
+</code></pre></div>
 
 <p>Your public key will be saved in <code>/home/user/.ssh/id_rsa.pub</code></p>
 <p>2)  Copy the SSH Public Key to the Remote Host</p>
-<pre class="codehilite"><code>$ ssh-copy-id &lt;username&gt;@remoteserver
-</code></pre>
+<div class="codehilite"><pre><span></span><code>$<span class="w"> </span>ssh-copy-id<span class="w"> </span>&lt;username&gt;@remoteserver
+</code></pre></div>
 
 <hr>
         </div>

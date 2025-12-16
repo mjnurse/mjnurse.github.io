@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -198,7 +198,7 @@
 </ul>
 <h1 id="slow-queries">Slow Queries</h1>
 <p>A good way to know which queries take the more time is by using Elasticsearch slow queries logs.</p>
-<pre class="codehilite"><code>PUT /index/_settings 
+<div class="codehilite"><pre><span></span><code>PUT /index/_settings 
 {
     &quot;index.search.slowlog.threshold.query.warn: 1s&quot;,
     &quot;index.search.slowlog.threshold.query.info: 500ms&quot;,
@@ -209,7 +209,7 @@
     &quot;index.search.slowlog.threshold.fetch.debug: 300ms&quot;,
     &quot;index.search.slowlog.threshold.fetch.trace: 200ms&quot;
 }
-</code></pre>
+</code></pre></div>
 
 <hr>
         </div>

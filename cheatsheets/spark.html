@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -107,21 +107,21 @@
 <p><code>spark.driver.memory</code> - this is the memory allocated to the Spark driver.</p>
 <p><code>spark.driver.memoryOverhead</code> - Container process or other none JVM processes in the container.  This is a percentage and the minimum allocated is <code>max(spark.driver.memoryOverhead * spark.driver.memory, 384MB)</code>.</p>
 <h1 id="pyspark">PySpark</h1>
-<pre class="codehilite"><code class="language-python"># Dataframe to JSON (string)
-jsonStrings = df.toJSON().collect()
+<div class="codehilite"><pre><span></span><code><span class="c1"># Dataframe to JSON (string)</span>
+<span class="n">jsonStrings</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">toJSON</span><span class="p">()</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
 
-# Dataframe to list
-list = [row.asDict() for row in df.collect()]
-for row in list:
-      print(row)
+<span class="c1"># Dataframe to list</span>
+<span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="o">.</span><span class="n">asDict</span><span class="p">()</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">collect</span><span class="p">()]</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">:</span>
+      <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
 
-# Create dataframe from list - need to define schema
-df = spark.createDataFrame(list, schema)
+<span class="c1"># Create dataframe from list - need to define schema</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
 
-# Get the schema definition for a dataframe
-schema = df.schema
-print(schema)
-</code></pre>
+<span class="c1"># Get the schema definition for a dataframe</span>
+<span class="n">schema</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">schema</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">schema</span><span class="p">)</span>
+</code></pre></div>
         </div>
       </article>
     </main>

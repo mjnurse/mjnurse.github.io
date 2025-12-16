@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -91,30 +91,30 @@
           <h1>Waiting On Background Processes</h1>
 <p>The <code>wait</code> command waits for all background processes start in the current session to end.</p>
 <p>Example:</p>
-<pre class="codehilite"><code class="language-bash">#!/bin/bash
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 
-function f1() {
-  echo &quot;process 1, sleeping 3s&quot;
-  sleep 3
-  echo &quot;process 1 complete&quot;
-}
+<span class="k">function</span><span class="w"> </span>f1<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;process 1, sleeping 3s&quot;</span>
+<span class="w">  </span>sleep<span class="w"> </span><span class="m">3</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;process 1 complete&quot;</span>
+<span class="o">}</span>
 
-function f2() {
-  echo &quot;process 2, sleeping 2s&quot;
-  sleep 2 
-  echo &quot;process 2 complete&quot;
-}
+<span class="k">function</span><span class="w"> </span>f2<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;process 2, sleeping 2s&quot;</span>
+<span class="w">  </span>sleep<span class="w"> </span><span class="m">2</span><span class="w"> </span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;process 2 complete&quot;</span>
+<span class="o">}</span>
 
-f1 &amp;
-f2 &amp;
+f1<span class="w"> </span><span class="p">&amp;</span>
+f2<span class="w"> </span><span class="p">&amp;</span>
 
-wait
+<span class="nb">wait</span>
 
-echo &quot;all done&quot;
-</code></pre>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;all done&quot;</span>
+</code></pre></div>
 
 <p>Output:</p>
-<pre class="codehilite"><code class="language-text">$ xxx
+<div class="codehilite"><pre><span></span><code>$ xxx
 process 1, sleeping 3s
 process 2, sleeping 2s
 process 2 complete
@@ -122,7 +122,7 @@ process 1 complete
 all done
 
 $
-</code></pre>
+</code></pre></div>
 
 <hr>
         </div>

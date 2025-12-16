@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -89,114 +89,114 @@
       <article class="article">
         <div class="article-body">
           <h1>dc.def</h1>
-<pre class="codehilite"><code class="language-bash"># Docker
+<div class="codehilite"><pre><span></span><code><span class="c1"># Docker</span>
 
-# -------------------------------------------------------------------------------------------------
-= CONTAINERS
-# -------------------------------------------------------------------------------------------------
+<span class="c1"># -------------------------------------------------------------------------------------------------</span>
+<span class="o">=</span><span class="w"> </span>CONTAINERS
+<span class="c1"># -------------------------------------------------------------------------------------------------</span>
 
-delete container (rm) &lt;container_name&gt; :: \
-    read -p &quot;Are you sure [yN]? &quot; yn; \
-    if [[ ${yn^} == Y ]]; then \
-        docker rm $1; \
-    fi
+delete<span class="w"> </span>container<span class="w"> </span><span class="o">(</span>rm<span class="o">)</span><span class="w"> </span>&lt;container_name&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Are you sure [yN]? &quot;</span><span class="w"> </span>yn<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="si">${</span><span class="nv">yn</span><span class="p">^</span><span class="si">}</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>Y<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>docker<span class="w"> </span>rm<span class="w"> </span><span class="nv">$1</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">fi</span>
 
-list containers (ps) [-d] :: \
-    if [[ $1 == -d ]]; then docker ps --all; \ 
-    else \
-        tmp=&quot;$(docker ps --all --format 'table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Size}}')&quot;; \
-        echo &quot;$tmp&quot; | head -n1; \
-        echo &quot;$tmp&quot; | tail -n+2 | grep 'Up [0-9]* min' | sort -k2,2; \
-        echo &quot;$tmp&quot; | tail -n+2 | grep -v 'Up [0-9]* min' | sort -k 2,2; \
-    fi \
-    ## -d: show details
+list<span class="w"> </span>containers<span class="w"> </span><span class="o">(</span>ps<span class="o">)</span><span class="w"> </span><span class="o">[</span>-d<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>-d<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span>docker<span class="w"> </span>ps<span class="w"> </span>--all<span class="p">;</span><span class="w"> </span><span class="se">\ </span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="nv">tmp</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>docker<span class="w"> </span>ps<span class="w"> </span>--all<span class="w"> </span>--format<span class="w"> </span><span class="s1">&#39;table {{.ID}}\t{{.Names}}\t{{.Status}}\t{{.Size}}&#39;</span><span class="k">)</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmp</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n1<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmp</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-n+2<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s1">&#39;Up [0-9]* min&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-k2,2<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmp</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-n+2<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span><span class="s1">&#39;Up [0-9]* min&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-k<span class="w"> </span><span class="m">2</span>,2<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">fi</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="c1">## -d: show details</span>
 
-logs (lo) [-f] &lt;container-name&gt; :: \
-    if [[ $1 == -f ]]; then docker logs -f $2; else docker logs $1; fi \
-    ## -f: follow log
+logs<span class="w"> </span><span class="o">(</span>lo<span class="o">)</span><span class="w"> </span><span class="o">[</span>-f<span class="o">]</span><span class="w"> </span>&lt;container-name&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>-f<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span>docker<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span><span class="nv">$2</span><span class="p">;</span><span class="w"> </span><span class="k">else</span><span class="w"> </span>docker<span class="w"> </span>logs<span class="w"> </span><span class="nv">$1</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="c1">## -f: follow log</span>
 
-pull container (pu) &lt;container_name&gt; :: \
-    docker pull $1
+pull<span class="w"> </span>container<span class="w"> </span><span class="o">(</span>pu<span class="o">)</span><span class="w"> </span>&lt;container_name&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>docker<span class="w"> </span>pull<span class="w"> </span><span class="nv">$1</span>
 
-rename container (mv) &lt;current_name&gt; &lt;new_name&gt; :: \
-    docker rename $1 $2
+rename<span class="w"> </span>container<span class="w"> </span><span class="o">(</span>mv<span class="o">)</span><span class="w"> </span>&lt;current_name&gt;<span class="w"> </span>&lt;new_name&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>docker<span class="w"> </span>rename<span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="nv">$2</span>
 
-restart container (re) &lt;container_name&gt; :: \
-    docker restart $1
+restart<span class="w"> </span>container<span class="w"> </span><span class="o">(</span>re<span class="o">)</span><span class="w"> </span>&lt;container_name&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>docker<span class="w"> </span>restart<span class="w"> </span><span class="nv">$1</span>
 
-run container (ru) &lt;source-container-name&gt; &lt;deployed-container-name&gt; [-p &lt;host-port&gt;:&lt;container-port&gt;] :: \
-    if [[ $3 == -p ]]; then \
-        docker run -d $3 $4 $5 $6 --name $2 $1; \
-    else \
-        docker -d --name $2 $1; \
-    fi
+run<span class="w"> </span>container<span class="w"> </span><span class="o">(</span>ru<span class="o">)</span><span class="w"> </span>&lt;source-container-name&gt;<span class="w"> </span>&lt;deployed-container-name&gt;<span class="w"> </span><span class="o">[</span>-p<span class="w"> </span>&lt;host-port&gt;:&lt;container-port&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$3</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>-p<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span><span class="nv">$3</span><span class="w"> </span><span class="nv">$4</span><span class="w"> </span><span class="nv">$5</span><span class="w"> </span><span class="nv">$6</span><span class="w"> </span>--name<span class="w"> </span><span class="nv">$2</span><span class="w"> </span><span class="nv">$1</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>docker<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span><span class="nv">$2</span><span class="w"> </span><span class="nv">$1</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">fi</span>
 
-shell (sh) [-s] [-r] &lt;container_name&gt; :: \
-    tmp_shell=bash; tmp_user=&quot;&quot;; \
-    while [[ &quot;$1&quot; != &quot;&quot; ]]; do \
-        case $1 in \
-            -s) tmp_shell=sh;; \
-            -r) tmp_user=&quot;--user root&quot;;; \
-            *) break;; \
-        esac; \
-        echo $1; shift; \ 
-    done; \
-    docker exec -it $tmp_user $1 $tmp_shell \
-    ## bash shell. -s: sh, -r: user root
+shell<span class="w"> </span><span class="o">(</span>sh<span class="o">)</span><span class="w"> </span><span class="o">[</span>-s<span class="o">]</span><span class="w"> </span><span class="o">[</span>-r<span class="o">]</span><span class="w"> </span>&lt;container_name&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">tmp_shell</span><span class="o">=</span>bash<span class="p">;</span><span class="w"> </span><span class="nv">tmp_user</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>-s<span class="o">)</span><span class="w"> </span><span class="nv">tmp_shell</span><span class="o">=</span>sh<span class="p">;;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>-r<span class="o">)</span><span class="w"> </span><span class="nv">tmp_user</span><span class="o">=</span><span class="s2">&quot;--user root&quot;</span><span class="p">;;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>*<span class="o">)</span><span class="w"> </span><span class="k">break</span><span class="p">;;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="k">esac</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$1</span><span class="p">;</span><span class="w"> </span>shift<span class="p">;</span><span class="w"> </span><span class="se">\ </span>
+<span class="w">    </span><span class="k">done</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span><span class="nv">$tmp_user</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="nv">$tmp_shell</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="c1">## bash shell. -s: sh, -r: user root</span>
 
-start container (st) [-a] &lt;container_name&gt; :: docker start $1
+start<span class="w"> </span>container<span class="w"> </span><span class="o">(</span>st<span class="o">)</span><span class="w"> </span><span class="o">[</span>-a<span class="o">]</span><span class="w"> </span>&lt;container_name&gt;<span class="w"> </span>::<span class="w"> </span>docker<span class="w"> </span>start<span class="w"> </span><span class="nv">$1</span>
 
-stats (s) :: docker stats
+stats<span class="w"> </span><span class="o">(</span>s<span class="o">)</span><span class="w"> </span>::<span class="w"> </span>docker<span class="w"> </span>stats
 
-stop container (so) [-a] &lt;container_name&gt; :: \
-    if [[ $1 == -a ]]; then \
-        conts=&quot;$(docker ps -q)&quot;; \
-        if [[ &quot;$conts&quot; != &quot;&quot; ]]; then \
-            docker stop $conts; \
-        fi; \
-    else \
-        docker stop $1; \
-    fi \
-    ## -a: Stop all containers
+stop<span class="w"> </span>container<span class="w"> </span><span class="o">(</span>so<span class="o">)</span><span class="w"> </span><span class="o">[</span>-a<span class="o">]</span><span class="w"> </span>&lt;container_name&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>-a<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="nv">conts</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>docker<span class="w"> </span>ps<span class="w"> </span>-q<span class="k">)</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$conts</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>docker<span class="w"> </span>stop<span class="w"> </span><span class="nv">$conts</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="k">fi</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>docker<span class="w"> </span>stop<span class="w"> </span><span class="nv">$1</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">fi</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="c1">## -a: Stop all containers</span>
 
-# -------------------------------------------------------------------------------------------------
-= COMPOSE
-# -------------------------------------------------------------------------------------------------
+<span class="c1"># -------------------------------------------------------------------------------------------------</span>
+<span class="o">=</span><span class="w"> </span>COMPOSE
+<span class="c1"># -------------------------------------------------------------------------------------------------</span>
 
-compose down (cdo) [&lt;service&gt;] :: \
-    if [[ &quot;$1&quot; == &quot;&quot; ]]; then \
-        docker compose down; \
-    else \
-        docker compose -f $1 down; \
-    fi; \
-    ## Stop and remove containers, networks
+compose<span class="w"> </span>down<span class="w"> </span><span class="o">(</span>cdo<span class="o">)</span><span class="w"> </span><span class="o">[</span>&lt;service&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>docker<span class="w"> </span>compose<span class="w"> </span>down<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span><span class="nv">$1</span><span class="w"> </span>down<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">fi</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="c1">## Stop and remove containers, networks</span>
 
-compose restart (cre) [&lt;service&gt;] :: \
-    if [[ &quot;$1&quot; == &quot;&quot; ]]; then \
-        docker compose restart; \
-    else \
-        docker compose -f $1 restart; \
-    fi; \
-    ## Restart all containers
+compose<span class="w"> </span>restart<span class="w"> </span><span class="o">(</span>cre<span class="o">)</span><span class="w"> </span><span class="o">[</span>&lt;service&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>docker<span class="w"> </span>compose<span class="w"> </span>restart<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span><span class="nv">$1</span><span class="w"> </span>restart<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">fi</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="c1">## Restart all containers</span>
 
-compose up (cup) [&lt;service&gt;] :: \
-    if [[ &quot;$1&quot; == &quot;&quot; ]]; then \
-        docker compose up -d; \
-    else \
-        docker compose -f $1 up -d; \
-    fi; \
-    ## Deploy and run containers, networks
+compose<span class="w"> </span>up<span class="w"> </span><span class="o">(</span>cup<span class="o">)</span><span class="w"> </span><span class="o">[</span>&lt;service&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span><span class="nv">$1</span><span class="w"> </span>up<span class="w"> </span>-d<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">fi</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="c1">## Deploy and run containers, networks</span>
 
-# -------------------------------------------------------------------------------------------------
-= NETWORKS
-# -------------------------------------------------------------------------------------------------
+<span class="c1"># -------------------------------------------------------------------------------------------------</span>
+<span class="o">=</span><span class="w"> </span>NETWORKS
+<span class="c1"># -------------------------------------------------------------------------------------------------</span>
 
-list networks (ln) :: docker network ls
+list<span class="w"> </span>networks<span class="w"> </span><span class="o">(</span>ln<span class="o">)</span><span class="w"> </span>::<span class="w"> </span>docker<span class="w"> </span>network<span class="w"> </span>ls
 
-prune networks (pn) :: docker network prune ## Remove all unusaed custom networks
+prune<span class="w"> </span>networks<span class="w"> </span><span class="o">(</span>pn<span class="o">)</span><span class="w"> </span>::<span class="w"> </span>docker<span class="w"> </span>network<span class="w"> </span>prune<span class="w"> </span><span class="c1">## Remove all unusaed custom networks</span>
 
-remove network (rn) &lt;network-name&gt; :: docker network rm $1
-</code></pre>
+remove<span class="w"> </span>network<span class="w"> </span><span class="o">(</span>rn<span class="o">)</span><span class="w"> </span>&lt;network-name&gt;<span class="w"> </span>::<span class="w"> </span>docker<span class="w"> </span>network<span class="w"> </span>rm<span class="w"> </span><span class="nv">$1</span>
+</code></pre></div>
         </div>
       </article>
     </main>

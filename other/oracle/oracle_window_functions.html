@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -89,41 +89,41 @@
       <article class="article">
         <div class="article-body">
           <h1>Oracle Window Function</h1>
-<pre class="codehilite"><code class="language-sql">CREATE TABLE mjn (g NUMBER, n NUMBER, v VARCHAR2(8));
+<div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">mjn</span><span class="w"> </span><span class="p">(</span><span class="k">g</span><span class="w"> </span><span class="nb">NUMBER</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="nb">NUMBER</span><span class="p">,</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">8</span><span class="p">));</span>
 
-INSERT INTO mjn VALUES (1, 1, 'a');
-INSERT INTO mjn VALUES (1, 2, 'b');
-INSERT INTO mjn VALUES (1, 6, 'c');
-INSERT INTO mjn VALUES (1, 7, 'd');
-INSERT INTO mjn VALUES (1, 9, 'e');
-INSERT INTO mjn VALUES (2, 3, 'a');
-INSERT INTO mjn VALUES (2, 4, 'b');
-INSERT INTO mjn VALUES (2, 8, 'c');
-INSERT INTO mjn VALUES (2, 8, 'd');
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">mjn</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;a&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">mjn</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;b&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">mjn</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;c&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">mjn</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;d&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">mjn</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;e&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">mjn</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;a&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">mjn</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;b&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">mjn</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;c&#39;</span><span class="p">);</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">mjn</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;d&#39;</span><span class="p">);</span>
 
-SELECT N
-     , LAG(N,1,NULL) OVER (PARTITION BY g ORDER BY N) prev_n
-     , LEAD(N,1,NULL) OVER (PARTITION BY G ORDER BY N) next_n
-     , FIRST_VALUE(N) OVER (PARTITION BY G ORDER BY N) first_n
-     , LAST_VALUE(N) OVER (PARTITION BY G ORDER BY N) last_n
-     , LAST_VALUE(N) OVER (PARTITION BY G ORDER BY N ROWS BETWEEN 
-          UNBOUNDED PRECEDING AND UNBOUNDED FOLLOWING) last_n_unbounded
-     , V
-     , LAG(V,1,NULL) OVER (PARTITION BY g ORDER BY N) prev_v 
-FROM mjn;
+<span class="k">SELECT</span><span class="w"> </span><span class="n">N</span>
+<span class="w">     </span><span class="p">,</span><span class="w"> </span><span class="n">LAG</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="k">NULL</span><span class="p">)</span><span class="w"> </span><span class="n">OVER</span><span class="w"> </span><span class="p">(</span><span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">g</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="n">prev_n</span>
+<span class="w">     </span><span class="p">,</span><span class="w"> </span><span class="n">LEAD</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="k">NULL</span><span class="p">)</span><span class="w"> </span><span class="n">OVER</span><span class="w"> </span><span class="p">(</span><span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">G</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="n">next_n</span>
+<span class="w">     </span><span class="p">,</span><span class="w"> </span><span class="n">FIRST_VALUE</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="n">OVER</span><span class="w"> </span><span class="p">(</span><span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">G</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="n">first_n</span>
+<span class="w">     </span><span class="p">,</span><span class="w"> </span><span class="n">LAST_VALUE</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="n">OVER</span><span class="w"> </span><span class="p">(</span><span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">G</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="n">last_n</span>
+<span class="w">     </span><span class="p">,</span><span class="w"> </span><span class="n">LAST_VALUE</span><span class="p">(</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="n">OVER</span><span class="w"> </span><span class="p">(</span><span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">G</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">N</span><span class="w"> </span><span class="k">ROWS</span><span class="w"> </span><span class="k">BETWEEN</span><span class="w"> </span>
+<span class="w">          </span><span class="n">UNBOUNDED</span><span class="w"> </span><span class="n">PRECEDING</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">UNBOUNDED</span><span class="w"> </span><span class="n">FOLLOWING</span><span class="p">)</span><span class="w"> </span><span class="n">last_n_unbounded</span>
+<span class="w">     </span><span class="p">,</span><span class="w"> </span><span class="n">V</span>
+<span class="w">     </span><span class="p">,</span><span class="w"> </span><span class="n">LAG</span><span class="p">(</span><span class="n">V</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="k">NULL</span><span class="p">)</span><span class="w"> </span><span class="n">OVER</span><span class="w"> </span><span class="p">(</span><span class="n">PARTITION</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">g</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="n">prev_v</span><span class="w"> </span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">mjn</span><span class="p">;</span>
 
-         N     PREV_N     NEXT_N    FIRST_N     LAST_N LAST_N_UNBOUNDED V        PREV_V  
----------- ---------- ---------- ---------- ---------- ---------------- -------- --------
-         1                     2          1          1                9 a                
-         2          1          6          1          2                9 b        a       
-         6          2          7          1          6                9 c        b       
-         7          6          9          1          7                9 d        c       
-         9          7                     1          9                9 e        d       
-         3                     4          3          3                8 a                
-         4          3          8          3          4                8 b        a       
-         8          4          8          3          8                8 c        b       
-         8          8                     3          8                8 d        c       
-</code></pre>
+<span class="w">         </span><span class="n">N</span><span class="w">     </span><span class="n">PREV_N</span><span class="w">     </span><span class="n">NEXT_N</span><span class="w">    </span><span class="n">FIRST_N</span><span class="w">     </span><span class="n">LAST_N</span><span class="w"> </span><span class="n">LAST_N_UNBOUNDED</span><span class="w"> </span><span class="n">V</span><span class="w">        </span><span class="n">PREV_V</span><span class="w">  </span>
+<span class="c1">---------- ---------- ---------- ---------- ---------- ---------------- -------- --------</span>
+<span class="w">         </span><span class="mi">1</span><span class="w">                     </span><span class="mi">2</span><span class="w">          </span><span class="mi">1</span><span class="w">          </span><span class="mi">1</span><span class="w">                </span><span class="mi">9</span><span class="w"> </span><span class="n">a</span><span class="w">                </span>
+<span class="w">         </span><span class="mi">2</span><span class="w">          </span><span class="mi">1</span><span class="w">          </span><span class="mi">6</span><span class="w">          </span><span class="mi">1</span><span class="w">          </span><span class="mi">2</span><span class="w">                </span><span class="mi">9</span><span class="w"> </span><span class="n">b</span><span class="w">        </span><span class="n">a</span><span class="w">       </span>
+<span class="w">         </span><span class="mi">6</span><span class="w">          </span><span class="mi">2</span><span class="w">          </span><span class="mi">7</span><span class="w">          </span><span class="mi">1</span><span class="w">          </span><span class="mi">6</span><span class="w">                </span><span class="mi">9</span><span class="w"> </span><span class="k">c</span><span class="w">        </span><span class="n">b</span><span class="w">       </span>
+<span class="w">         </span><span class="mi">7</span><span class="w">          </span><span class="mi">6</span><span class="w">          </span><span class="mi">9</span><span class="w">          </span><span class="mi">1</span><span class="w">          </span><span class="mi">7</span><span class="w">                </span><span class="mi">9</span><span class="w"> </span><span class="n">d</span><span class="w">        </span><span class="k">c</span><span class="w">       </span>
+<span class="w">         </span><span class="mi">9</span><span class="w">          </span><span class="mi">7</span><span class="w">                     </span><span class="mi">1</span><span class="w">          </span><span class="mi">9</span><span class="w">                </span><span class="mi">9</span><span class="w"> </span><span class="n">e</span><span class="w">        </span><span class="n">d</span><span class="w">       </span>
+<span class="w">         </span><span class="mi">3</span><span class="w">                     </span><span class="mi">4</span><span class="w">          </span><span class="mi">3</span><span class="w">          </span><span class="mi">3</span><span class="w">                </span><span class="mi">8</span><span class="w"> </span><span class="n">a</span><span class="w">                </span>
+<span class="w">         </span><span class="mi">4</span><span class="w">          </span><span class="mi">3</span><span class="w">          </span><span class="mi">8</span><span class="w">          </span><span class="mi">3</span><span class="w">          </span><span class="mi">4</span><span class="w">                </span><span class="mi">8</span><span class="w"> </span><span class="n">b</span><span class="w">        </span><span class="n">a</span><span class="w">       </span>
+<span class="w">         </span><span class="mi">8</span><span class="w">          </span><span class="mi">4</span><span class="w">          </span><span class="mi">8</span><span class="w">          </span><span class="mi">3</span><span class="w">          </span><span class="mi">8</span><span class="w">                </span><span class="mi">8</span><span class="w"> </span><span class="k">c</span><span class="w">        </span><span class="n">b</span><span class="w">       </span>
+<span class="w">         </span><span class="mi">8</span><span class="w">          </span><span class="mi">8</span><span class="w">                     </span><span class="mi">3</span><span class="w">          </span><span class="mi">8</span><span class="w">                </span><span class="mi">8</span><span class="w"> </span><span class="n">d</span><span class="w">        </span><span class="k">c</span><span class="w">       </span>
+</code></pre></div>
 
 <hr>
         </div>

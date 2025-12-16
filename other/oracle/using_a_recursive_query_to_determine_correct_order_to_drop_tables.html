@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -91,19 +91,19 @@
           <h1>Oracle</h1>
 <h1 id="using-a-recursive-query-to-determine-correct-order-to-drop-tables">Using A Recursive Query To Determine Correct Order To Drop Tables</h1>
 <p>Also relevant for creating tables (but reverse the order).</p>
-<pre class="codehilite"><code>SELECT     child_table
-         , MAX(level) as lowest_depth
-FROM (
-   SELECT    child.table_name AS child_table
-           , parent.table_name AS parent_table
-   FROM      user_constraints child
-   LEFT JOIN user_constraints parent
-   ON      ( parent.r_constraint_name = child.constraint_name )
-   )
-CONNECT BY PRIOR child_table = parent_table
-GROUP BY   child_table
-ORDER BY   lowest_depth;
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="n">SELECT</span><span class="w">     </span><span class="n">child_table</span>
+<span class="w">         </span><span class="p">,</span><span class="w"> </span><span class="n">MAX</span><span class="p">(</span><span class="n">level</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">lowest_depth</span>
+<span class="n">FROM</span><span class="w"> </span><span class="p">(</span>
+<span class="w">   </span><span class="n">SELECT</span><span class="w">    </span><span class="n">child</span><span class="o">.</span><span class="n">table_name</span><span class="w"> </span><span class="n">AS</span><span class="w"> </span><span class="n">child_table</span>
+<span class="w">           </span><span class="p">,</span><span class="w"> </span><span class="n">parent</span><span class="o">.</span><span class="n">table_name</span><span class="w"> </span><span class="n">AS</span><span class="w"> </span><span class="n">parent_table</span>
+<span class="w">   </span><span class="n">FROM</span><span class="w">      </span><span class="n">user_constraints</span><span class="w"> </span><span class="n">child</span>
+<span class="w">   </span><span class="n">LEFT</span><span class="w"> </span><span class="n">JOIN</span><span class="w"> </span><span class="n">user_constraints</span><span class="w"> </span><span class="n">parent</span>
+<span class="w">   </span><span class="n">ON</span><span class="w">      </span><span class="p">(</span><span class="w"> </span><span class="n">parent</span><span class="o">.</span><span class="n">r_constraint_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">child</span><span class="o">.</span><span class="n">constraint_name</span><span class="w"> </span><span class="p">)</span>
+<span class="w">   </span><span class="p">)</span>
+<span class="n">CONNECT</span><span class="w"> </span><span class="n">BY</span><span class="w"> </span><span class="n">PRIOR</span><span class="w"> </span><span class="n">child_table</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">parent_table</span>
+<span class="n">GROUP</span><span class="w"> </span><span class="n">BY</span><span class="w">   </span><span class="n">child_table</span>
+<span class="n">ORDER</span><span class="w"> </span><span class="n">BY</span><span class="w">   </span><span class="n">lowest_depth</span><span class="p">;</span>
+</code></pre></div>
 
 <hr>
         </div>

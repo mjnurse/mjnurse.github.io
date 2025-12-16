@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -109,7 +109,7 @@
 <p><strong>Cloud Build</strong> is a GCP container build tool.</p>
 <h1 id="docker">Docker</h1>
 <p>Docker File: (pg_server)</p>
-<pre class="codehilite"><code>FROM ubuntu:18.10
+<div class="codehilite"><pre><span></span><code>FROM ubuntu:18.10
 RUN apt-get update -y &amp;&amp;\
     apt-get install -y python-pip python3-dev
 COPY requirements.txt /app/requirements.txt
@@ -117,7 +117,7 @@ WORKDIR /app
 RUN pip3 install -r requirements.txt
 COPY . /app
 ENTRYPOINT [&quot;python3&quot;, &quot;app.py&quot;]
-</code></pre>
+</code></pre></div>
 
 <p><code>&gt; docker build -t pg_server .</code></p>
 <p><code>&gt; docker run -d pg_server</code></p>

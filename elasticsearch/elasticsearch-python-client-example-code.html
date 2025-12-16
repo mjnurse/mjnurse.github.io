@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -89,46 +89,46 @@
       <article class="article">
         <div class="article-body">
           <h1>Elasticsearch Python Client Example Code</h1>
-<pre class="codehilite"><code class="language-python">from elasticsearch import Elasticsearch
-import warnings
-from elasticsearch.exceptions import ElasticsearchWarning
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">elasticsearch</span><span class="w"> </span><span class="kn">import</span> <span class="n">Elasticsearch</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">elasticsearch.exceptions</span><span class="w"> </span><span class="kn">import</span> <span class="n">ElasticsearchWarning</span>
 
-# Disable the elasticsearch security warnings.
-warnings.simplefilter('ignore', ElasticsearchWarning)
+<span class="c1"># Disable the elasticsearch security warnings.</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="n">ElasticsearchWarning</span><span class="p">)</span>
 
-es = Elasticsearch('http://localhost:9200')
+<span class="n">es</span> <span class="o">=</span> <span class="n">Elasticsearch</span><span class="p">(</span><span class="s1">&#39;http://localhost:9200&#39;</span><span class="p">)</span>
 
-# Create index.
-es.indices.create(index=&quot;test-index&quot;)
+<span class="c1"># Create index.</span>
+<span class="n">es</span><span class="o">.</span><span class="n">indices</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;test-index&quot;</span><span class="p">)</span>
 
-# Insert records.
-for i in range(1,5):
-    # Note: id parameter optional.
-    resp = es.index(index=&quot;test-index&quot;, id=i, document={&quot;a&quot;:1, &quot;b&quot;: i})
-    print(&quot;Responce:&quot;, resp)
+<span class="c1"># Insert records.</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">):</span>
+    <span class="c1"># Note: id parameter optional.</span>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;test-index&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">document</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;a&quot;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="n">i</span><span class="p">})</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Responce:&quot;</span><span class="p">,</span> <span class="n">resp</span><span class="p">)</span>
 
-# Get record by id.
-resp = es.get(index=&quot;test-index&quot;, id=1)
-print(&quot;Responce:&quot;, resp)
+<span class="c1"># Get record by id.</span>
+<span class="n">resp</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;test-index&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Responce:&quot;</span><span class="p">,</span> <span class="n">resp</span><span class="p">)</span>
 
-# refresh index.
-resp = es.indices.refresh(index=&quot;test-index&quot;)
-print(&quot;Responce:&quot;, resp)
+<span class="c1"># refresh index.</span>
+<span class="n">resp</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">indices</span><span class="o">.</span><span class="n">refresh</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;test-index&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Responce:&quot;</span><span class="p">,</span> <span class="n">resp</span><span class="p">)</span>
 
-# Search index.
-resp = es.search(index=&quot;test-index&quot;, query={&quot;match&quot;: {&quot;b&quot;: 2}})
-print(&quot;Got %d Hits:&quot; % resp['hits']['total']['value'])
-for hit in resp['hits']['hits']:
-    print(&quot;Hit:&quot;, hit)
+<span class="c1"># Search index.</span>
+<span class="n">resp</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;test-index&quot;</span><span class="p">,</span> <span class="n">query</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;match&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;b&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}})</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Got </span><span class="si">%d</span><span class="s2"> Hits:&quot;</span> <span class="o">%</span> <span class="n">resp</span><span class="p">[</span><span class="s1">&#39;hits&#39;</span><span class="p">][</span><span class="s1">&#39;total&#39;</span><span class="p">][</span><span class="s1">&#39;value&#39;</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">hit</span> <span class="ow">in</span> <span class="n">resp</span><span class="p">[</span><span class="s1">&#39;hits&#39;</span><span class="p">][</span><span class="s1">&#39;hits&#39;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Hit:&quot;</span><span class="p">,</span> <span class="n">hit</span><span class="p">)</span>
 
-# Delete record.
-resp = es.delete(index=&quot;test-index&quot;, id=1)
-print(&quot;Responce:&quot;, resp)
+<span class="c1"># Delete record.</span>
+<span class="n">resp</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;test-index&quot;</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Responce:&quot;</span><span class="p">,</span> <span class="n">resp</span><span class="p">)</span>
 
-# Delete index.
-resp = es.indices.delete(index=&quot;test-index&quot;)
-print(&quot;Responce:&quot;, resp)
-</code></pre>
+<span class="c1"># Delete index.</span>
+<span class="n">resp</span> <span class="o">=</span> <span class="n">es</span><span class="o">.</span><span class="n">indices</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s2">&quot;test-index&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Responce:&quot;</span><span class="p">,</span> <span class="n">resp</span><span class="p">)</span>
+</code></pre></div>
         </div>
       </article>
     </main>

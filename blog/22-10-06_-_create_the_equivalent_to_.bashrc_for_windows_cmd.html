@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -91,27 +91,27 @@
           <h1>22-10-06 - Create The Equivalent To .bashrc For Windows CMD</h1>
 <p><strong>WARNING</strong>: This did break an application which ran (in the background) in (I assume) some CMD shell... Took me an age to work this out.</p>
 <p>Create a <code>cmdrc.bat</code> file, for example:</p>
-<pre class="codehilite"><code>@echo off
-set GITHUB_TOKEN=[here is my github token]
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="nv">@echo</span><span class="w"> </span><span class="k">off</span>
+<span class="k">set</span><span class="w"> </span><span class="n">GITHUB_TOKEN</span><span class="o">=[</span><span class="n">here is my github token</span><span class="o">]</span>
+</code></pre></div>
 
 <p>Get this executed each time a <code>CMD</code> session starts by adding a registry key specifying the path of the <code>cmdrc.bat</code> file.  The following script should be run as Admin:</p>
-<pre class="codehilite"><code>:: ##################################################################################
-@echo off
-color 04
-title Add cmd rc to registry
+<div class="codehilite"><pre><span></span><code><span class="o">::</span><span class="w"> </span><span class="err">##################################################################################</span>
+<span class="nv">@echo</span><span class="w"> </span><span class="k">off</span>
+<span class="n">color</span><span class="w"> </span><span class="mi">04</span>
+<span class="n">title</span><span class="w"> </span><span class="k">Add</span><span class="w"> </span><span class="n">cmd</span><span class="w"> </span><span class="n">rc</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">registry</span>
 
-:: ##################################################################################
-set &quot;OpenCurrentFolderKey=HKLM\SOFTWARE\Microsoft\Command Processor&quot;
-set &quot;cmdRcPath=C:\scripts\cmdrc.bat&quot;
-REG ADD &quot;%OpenCurrentFolderKey%&quot; /v &quot;AutoRun&quot; /t REG_EXPAND_SZ /d &quot;\&quot;%cmdRcPath%\&quot;&quot;
+<span class="o">::</span><span class="w"> </span><span class="err">##################################################################################</span>
+<span class="k">set</span><span class="w"> </span><span class="ss">&quot;OpenCurrentFolderKey=HKLM\SOFTWARE\Microsoft\Command Processor&quot;</span>
+<span class="k">set</span><span class="w"> </span><span class="ss">&quot;cmdRcPath=C:\scripts\cmdrc.bat&quot;</span>
+<span class="n">REG</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="ss">&quot;%OpenCurrentFolderKey%&quot;</span><span class="w"> </span><span class="o">/</span><span class="n">v</span><span class="w"> </span><span class="ss">&quot;AutoRun&quot;</span><span class="w"> </span><span class="o">/</span><span class="n">t</span><span class="w"> </span><span class="n">REG_EXPAND_SZ</span><span class="w"> </span><span class="o">/</span><span class="n">d</span><span class="w"> </span><span class="ss">&quot;\&quot;</span><span class="o">%</span><span class="n">cmdRcPath</span><span class="o">%</span><span class="err">\</span><span class="ss">&quot;&quot;</span>
 
-:: ##################################################################################
-pause&gt;nul
-exit /b
+<span class="o">::</span><span class="w"> </span><span class="err">##################################################################################</span>
+<span class="n">pause</span><span class="o">&gt;</span><span class="n">nul</span>
+<span class="k">exit</span><span class="w"> </span><span class="o">/</span><span class="n">b</span>
 
-:: ##################################################################################
-</code></pre>
+<span class="o">::</span><span class="w"> </span><span class="err">##################################################################################</span>
+</code></pre></div>
         </div>
       </article>
     </main>

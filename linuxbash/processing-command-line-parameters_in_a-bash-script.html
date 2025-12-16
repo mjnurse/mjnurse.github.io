@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -91,34 +91,34 @@
           <h1>Processing Command Line Parameters in a Bash Script</h1>
 <h1 id="option-1">Option 1:</h1>
 <p>Process a single string of parameters which start with a <code>-</code>.</p>
-<pre class="codehilite"><code class="language-bash">param=$1
+<div class="codehilite"><pre><span></span><code><span class="nv">param</span><span class="o">=</span><span class="nv">$1</span>
 
-# Only if parameters start with a '-'
+<span class="c1"># Only if parameters start with a &#39;-&#39;</span>
 
-while [[ &quot;${param:0:1}&quot; == &quot;-&quot; &amp;&amp; &quot;$param&quot; != &quot;&quot; ]]; do
-  case $param in
-    -h|--help)
-      echo &quot;$help_text&quot;
-      exit
-      ;;
-    *a*)
-      echo a
-      param=&quot;${param//a/}&quot;
-      ;;
-    *b*)
-      echo b 
-      param=&quot;${param//b/}&quot;
-      ;;
-    *)
-      param=&quot;&quot;
-      ;;
-  esac
-done
-</code></pre>
+<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">param</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;-&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$param</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nv">$param</span><span class="w"> </span><span class="k">in</span>
+<span class="w">    </span>-h<span class="p">|</span>--help<span class="o">)</span>
+<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
+<span class="w">      </span><span class="nb">exit</span>
+<span class="w">      </span><span class="p">;;</span>
+<span class="w">    </span>*a*<span class="o">)</span>
+<span class="w">      </span><span class="nb">echo</span><span class="w"> </span>a
+<span class="w">      </span><span class="nv">param</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">param</span><span class="p">//a/</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">      </span><span class="p">;;</span>
+<span class="w">    </span>*b*<span class="o">)</span>
+<span class="w">      </span><span class="nb">echo</span><span class="w"> </span>b<span class="w"> </span>
+<span class="w">      </span><span class="nv">param</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">param</span><span class="p">//b/</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">      </span><span class="p">;;</span>
+<span class="w">    </span>*<span class="o">)</span>
+<span class="w">      </span><span class="nv">param</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="w">      </span><span class="p">;;</span>
+<span class="w">  </span><span class="k">esac</span>
+<span class="k">done</span>
+</code></pre></div>
 
 <h1 id="option-2">Option 2:</h1>
 <p>Process a set of separate parameters (optionally with associated values).</p>
-<pre class="codehilite"><code>while [[ &quot;$1&quot; != &quot;&quot; ]]; do
+<div class="codehilite"><pre><span></span><code>while [[ &quot;$1&quot; != &quot;&quot; ]]; do
   case $1 in
     -h|--help)
       echo &quot;$help_text&quot;
@@ -137,7 +137,7 @@ done
   esac
   shift
 done
-</code></pre>
+</code></pre></div>
         </div>
       </article>
     </main>

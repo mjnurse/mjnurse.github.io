@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -101,24 +101,24 @@
 </div>
 <h1 id="docker">Docker</h1>
 <p>Works for Ubuntu and Debian based distros.</p>
-<pre class="codehilite"><code class="language-bash"># Install Docker, you can ignore the warning from Docker about using WSL.
+<div class="codehilite"><pre><span></span><code><span class="c1"># Install Docker, you can ignore the warning from Docker about using WSL.</span>
 
-&gt; curl -fsSL https://get.docker.com -o get-docker.sh
-&gt; sudo sh get-docker.sh
+&gt;<span class="w"> </span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://get.docker.com<span class="w"> </span>-o<span class="w"> </span>get-docker.sh
+&gt;<span class="w"> </span>sudo<span class="w"> </span>sh<span class="w"> </span>get-docker.sh
 
-# Add your user to the Docker group.
+<span class="c1"># Add your user to the Docker group.</span>
 
-&gt; sudo usermod -aG docker $USER &amp;&amp; newgrp docker
+&gt;<span class="w"> </span>sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>docker<span class="w"> </span><span class="nv">$USER</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>newgrp<span class="w"> </span>docker
 
-# Check it's installed successfully.
+<span class="c1"># Check it&#39;s installed successfully.</span>
 
-&gt; docker --version
+&gt;<span class="w"> </span>docker<span class="w"> </span>--version
 
-# Using Ubuntu 22.04 or Debian 10 / 11? You need to do 1 extra step for iptables
-# compatibility, you'll want to choose option (1) from the prompt to use iptables-legacy.
+<span class="c1"># Using Ubuntu 22.04 or Debian 10 / 11? You need to do 1 extra step for iptables</span>
+<span class="c1"># compatibility, you&#39;ll want to choose option (1) from the prompt to use iptables-legacy.</span>
 
-&gt; sudo update-alternatives --config iptables
-</code></pre>
+&gt;<span class="w"> </span>sudo<span class="w"> </span>update-alternatives<span class="w"> </span>--config<span class="w"> </span>iptables
+</code></pre></div>
 
 <h1 id="minikube">Minikube</h1>
 <p>Install systemctl

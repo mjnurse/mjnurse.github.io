@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -93,13 +93,13 @@
 <p>I name this script <code>g</code>.</p>
 <p>It contains an alias <code>ge</code> which edits the script and an alias <code>g</code> which lists all the go to aliases.</p>
 <p>The script needs to be <code>sourced</code> to set the aliases - eg: <code>source g</code> (or <code>. g</code>).  I add this to my <code>.bashrc</code>.  I also make sure the location of <code>g</code> is in my path so I can re-source it after any changes using <code>. g</code> (with no path).</p>
-<pre class="codehilite"><code>alias ge=&quot;gvim /c/MJN/github/bash/g; echo; echo REMEMBER . g; echo&quot;
-alias g=&quot;alias | egrep 'alias g.*=' | sed 's/alias //; s/=/              = /; s/\(..........\)[^=]*\(.*\)/\1\2/; /^g /d'&quot;
+<div class="codehilite"><pre><span></span><code>alias ge=&quot;gvim /c/MJN/github/bash/g; echo; echo REMEMBER . g; echo&quot;
+alias g=&quot;alias | egrep &#39;alias g.*=&#39; | sed &#39;s/alias //; s/=/              = /; s/\(..........\)[^=]*\(.*\)/\1\2/; /^g /d&#39;&quot;
 
 alias gbash=&quot;cd /c/MJN/github/bash; ls&quot;
 alias gbin=&quot;cd /c/MJN/gdrive/bin; ls&quot;
 alias gcli=&quot;cd /c/MJN/github/cli-builder; ls&quot;
-</code></pre>
+</code></pre></div>
 
 <hr>
         </div>

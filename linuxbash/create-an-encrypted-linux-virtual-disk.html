@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -99,93 +99,93 @@
 </div>
 <h1 id="create-an-empty-file-with-space-allocated">Create An Empty File With Space Allocated</h1>
 <p>Create a (64MB) empty file with space allocated.</p>
-<pre class="codehilite"><code class="language-bash">&gt; dd if=/dev/urandom iflag=fullblock | dd of=./diskfile1 bs=1M count=64 iflag=fullblock
-</code></pre>
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>dd<span class="w"> </span><span class="k">if</span><span class="o">=</span>/dev/urandom<span class="w"> </span><span class="nv">iflag</span><span class="o">=</span>fullblock<span class="w"> </span><span class="p">|</span><span class="w"> </span>dd<span class="w"> </span><span class="nv">of</span><span class="o">=</span>./diskfile1<span class="w"> </span><span class="nv">bs</span><span class="o">=</span>1M<span class="w"> </span><span class="nv">count</span><span class="o">=</span><span class="m">64</span><span class="w"> </span><span class="nv">iflag</span><span class="o">=</span>fullblock
+</code></pre></div>
 
 <h1 id="create-a-dm-crypt-luks-container">Create a dm-crypt LUKS Container</h1>
-<pre class="codehilite"><code class="language-bash">&gt; sudo cryptsetup -y luksFormat ./diskfile1
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>sudo<span class="w"> </span>cryptsetup<span class="w"> </span>-y<span class="w"> </span>luksFormat<span class="w"> </span>./diskfile1
 
 WARNING!
-========
-This will overwrite data on ./diskfile1 irrevocably.
+<span class="o">========</span>
+This<span class="w"> </span>will<span class="w"> </span>overwrite<span class="w"> </span>data<span class="w"> </span>on<span class="w"> </span>./diskfile1<span class="w"> </span>irrevocably.
 
-Are you sure? (Type uppercase yes): YES
-Enter passphrase for ./diskfile1:
-Verify passphrase:
-</code></pre>
+Are<span class="w"> </span>you<span class="w"> </span>sure?<span class="w"> </span><span class="o">(</span>Type<span class="w"> </span>uppercase<span class="w"> </span>yes<span class="o">)</span>:<span class="w"> </span>YES
+Enter<span class="w"> </span>passphrase<span class="w"> </span><span class="k">for</span><span class="w"> </span>./diskfile1:
+Verify<span class="w"> </span>passphrase:
+</code></pre></div>
 
 <p>Check the file.</p>
-<pre class="codehilite"><code class="language-bash">&gt; file diskfile1
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>file<span class="w"> </span>diskfile1
 
-diskfile1: LUKS encrypted file, ver 2 [, , sha256] UUID: ef633564-8376-4a41-9412-6afc00dd056a
-</code></pre>
+diskfile1:<span class="w"> </span>LUKS<span class="w"> </span>encrypted<span class="w"> </span>file,<span class="w"> </span>ver<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">[</span>,<span class="w"> </span>,<span class="w"> </span>sha256<span class="o">]</span><span class="w"> </span>UUID:<span class="w"> </span>ef633564-8376-4a41-9412-6afc00dd056a
+</code></pre></div>
 
 <h1 id="open-the-luks-container-and-mount-as-a-linux-drive">Open the LUKS Container and Mount as a Linux Drive</h1>
-<pre class="codehilite"><code class="language-bash">&gt; sudo cryptsetup luksOpen ./diskfile1 encryptedVolume1
-Enter passphrase for ./diskfile1:
-</code></pre>
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>sudo<span class="w"> </span>cryptsetup<span class="w"> </span>luksOpen<span class="w"> </span>./diskfile1<span class="w"> </span>encryptedVolume1
+Enter<span class="w"> </span>passphrase<span class="w"> </span><span class="k">for</span><span class="w"> </span>./diskfile1:
+</code></pre></div>
 
 <p>Check the device.</p>
-<pre class="codehilite"><code class="language-bash">&gt; ll /dev/mapper
-total 0
-drwxr-xr-x 2 root root       80 Oct 18 17:34 ./
-drwxr-xr-x 8 root root     2760 Oct 18 17:34 ../
-crw------- 1 root root  10, 236 Oct 13 16:45 control
-brw-rw---- 1 root disk 252,   0 Oct 18 17:34 encryptedVolume1
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>ll<span class="w"> </span>/dev/mapper
+total<span class="w"> </span><span class="m">0</span>
+drwxr-xr-x<span class="w"> </span><span class="m">2</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">       </span><span class="m">80</span><span class="w"> </span>Oct<span class="w"> </span><span class="m">18</span><span class="w"> </span><span class="m">17</span>:34<span class="w"> </span>./
+drwxr-xr-x<span class="w"> </span><span class="m">8</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">     </span><span class="m">2760</span><span class="w"> </span>Oct<span class="w"> </span><span class="m">18</span><span class="w"> </span><span class="m">17</span>:34<span class="w"> </span>../
+crw-------<span class="w"> </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">  </span><span class="m">10</span>,<span class="w"> </span><span class="m">236</span><span class="w"> </span>Oct<span class="w"> </span><span class="m">13</span><span class="w"> </span><span class="m">16</span>:45<span class="w"> </span>control
+brw-rw----<span class="w"> </span><span class="m">1</span><span class="w"> </span>root<span class="w"> </span>disk<span class="w"> </span><span class="m">252</span>,<span class="w">   </span><span class="m">0</span><span class="w"> </span>Oct<span class="w"> </span><span class="m">18</span><span class="w"> </span><span class="m">17</span>:34<span class="w"> </span>encryptedVolume1
 
-&gt; sudo cryptsetup -v status encryptedVolume1
-/dev/mapper/encryptedVolume1 is active.
-  type:    LUKS2
-  cipher:  aes-xts-plain64
-  keysize: 512 bits
-  key location: keyring
-  device:  /dev/loop0
-  loop:    /c/MJN/quantexa/dmcrypt/diskfile1
-  sector size:  512
-  offset:  32768 sectors
-  size:    98304 sectors
-  mode:    read/write
-Command successful.
-</code></pre>
+&gt;<span class="w"> </span>sudo<span class="w"> </span>cryptsetup<span class="w"> </span>-v<span class="w"> </span>status<span class="w"> </span>encryptedVolume1
+/dev/mapper/encryptedVolume1<span class="w"> </span>is<span class="w"> </span>active.
+<span class="w">  </span>type:<span class="w">    </span>LUKS2
+<span class="w">  </span>cipher:<span class="w">  </span>aes-xts-plain64
+<span class="w">  </span>keysize:<span class="w"> </span><span class="m">512</span><span class="w"> </span>bits
+<span class="w">  </span>key<span class="w"> </span>location:<span class="w"> </span>keyring
+<span class="w">  </span>device:<span class="w">  </span>/dev/loop0
+<span class="w">  </span>loop:<span class="w">    </span>/c/MJN/quantexa/dmcrypt/diskfile1
+<span class="w">  </span>sector<span class="w"> </span>size:<span class="w">  </span><span class="m">512</span>
+<span class="w">  </span>offset:<span class="w">  </span><span class="m">32768</span><span class="w"> </span>sectors
+<span class="w">  </span>size:<span class="w">    </span><span class="m">98304</span><span class="w"> </span>sectors
+<span class="w">  </span>mode:<span class="w">    </span>read/write
+Command<span class="w"> </span>successful.
+</code></pre></div>
 
 <p>Create a file system on the device and mount as a drive.</p>
-<pre class="codehilite"><code class="language-bash">&gt; sudo mkfs.ext4 /dev/mapper/encryptedVolume1
-mke2fs 1.45.5 (07-Jan-2020)
-Creating filesystem with 12288 4k blocks and 12288 inodes
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>sudo<span class="w"> </span>mkfs.ext4<span class="w"> </span>/dev/mapper/encryptedVolume1
+mke2fs<span class="w"> </span><span class="m">1</span>.45.5<span class="w"> </span><span class="o">(</span><span class="m">07</span>-Jan-2020<span class="o">)</span>
+Creating<span class="w"> </span>filesystem<span class="w"> </span>with<span class="w"> </span><span class="m">12288</span><span class="w"> </span>4k<span class="w"> </span>blocks<span class="w"> </span>and<span class="w"> </span><span class="m">12288</span><span class="w"> </span>inodes
 
-Allocating group tables: done
-Writing inode tables: done
-Creating journal (1024 blocks): done
-Writing superblocks and filesystem accounting information: done
+Allocating<span class="w"> </span>group<span class="w"> </span>tables:<span class="w"> </span><span class="k">done</span>
+Writing<span class="w"> </span>inode<span class="w"> </span>tables:<span class="w"> </span><span class="k">done</span>
+Creating<span class="w"> </span>journal<span class="w"> </span><span class="o">(</span><span class="m">1024</span><span class="w"> </span>blocks<span class="o">)</span>:<span class="w"> </span><span class="k">done</span>
+Writing<span class="w"> </span>superblocks<span class="w"> </span>and<span class="w"> </span>filesystem<span class="w"> </span>accounting<span class="w"> </span>information:<span class="w"> </span><span class="k">done</span>
 
-&gt; sudo mkdir /mnt/encryptedVolume1
+&gt;<span class="w"> </span>sudo<span class="w"> </span>mkdir<span class="w"> </span>/mnt/encryptedVolume1
 
-&gt; sudo mount /dev/mapper/encryptedVolume1 /mnt/encryptedVolume1/
+&gt;<span class="w"> </span>sudo<span class="w"> </span>mount<span class="w"> </span>/dev/mapper/encryptedVolume1<span class="w"> </span>/mnt/encryptedVolume1/
 
-&gt; df -h
-Filesystem                    Size  Used Avail Use% Mounted on
-/dev/sdb                      251G  3.0G  236G   2% /
-tmpfs                         6.2G     0  6.2G   0% /mnt/wsl
-tools                         477G  145G  333G  31% /init
-none                          6.2G     0  6.2G   0% /dev
-/dev/mapper/encryptedVolume1   43M   44K   40M   1% /mnt/encryptedVolume1
-</code></pre>
+&gt;<span class="w"> </span>df<span class="w"> </span>-h
+Filesystem<span class="w">                    </span>Size<span class="w">  </span>Used<span class="w"> </span>Avail<span class="w"> </span>Use%<span class="w"> </span>Mounted<span class="w"> </span>on
+/dev/sdb<span class="w">                      </span>251G<span class="w">  </span><span class="m">3</span>.0G<span class="w">  </span>236G<span class="w">   </span><span class="m">2</span>%<span class="w"> </span>/
+tmpfs<span class="w">                         </span><span class="m">6</span>.2G<span class="w">     </span><span class="m">0</span><span class="w">  </span><span class="m">6</span>.2G<span class="w">   </span><span class="m">0</span>%<span class="w"> </span>/mnt/wsl
+tools<span class="w">                         </span>477G<span class="w">  </span>145G<span class="w">  </span>333G<span class="w">  </span><span class="m">31</span>%<span class="w"> </span>/init
+none<span class="w">                          </span><span class="m">6</span>.2G<span class="w">     </span><span class="m">0</span><span class="w">  </span><span class="m">6</span>.2G<span class="w">   </span><span class="m">0</span>%<span class="w"> </span>/dev
+/dev/mapper/encryptedVolume1<span class="w">   </span>43M<span class="w">   </span>44K<span class="w">   </span>40M<span class="w">   </span><span class="m">1</span>%<span class="w"> </span>/mnt/encryptedVolume1
+</code></pre></div>
 
 <p>Navigate to the open drive.</p>
-<pre class="codehilite"><code class="language-bash">&gt; cd /mnt/encryptedVolume1/
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/mnt/encryptedVolume1/
 
-&gt; ll
-total 24
-drwxr-xr-x 3 root root  4096 Oct 18 17:36 ./
-drwxr-xr-x 6 root root  4096 Oct 18 17:36 ../
-drwx------ 2 root root 16384 Oct 18 17:36 lost+found/
-</code></pre>
+&gt;<span class="w"> </span>ll
+total<span class="w"> </span><span class="m">24</span>
+drwxr-xr-x<span class="w"> </span><span class="m">3</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">  </span><span class="m">4096</span><span class="w"> </span>Oct<span class="w"> </span><span class="m">18</span><span class="w"> </span><span class="m">17</span>:36<span class="w"> </span>./
+drwxr-xr-x<span class="w"> </span><span class="m">6</span><span class="w"> </span>root<span class="w"> </span>root<span class="w">  </span><span class="m">4096</span><span class="w"> </span>Oct<span class="w"> </span><span class="m">18</span><span class="w"> </span><span class="m">17</span>:36<span class="w"> </span>../
+drwx------<span class="w"> </span><span class="m">2</span><span class="w"> </span>root<span class="w"> </span>root<span class="w"> </span><span class="m">16384</span><span class="w"> </span>Oct<span class="w"> </span><span class="m">18</span><span class="w"> </span><span class="m">17</span>:36<span class="w"> </span>lost+found/
+</code></pre></div>
 
 <p>Unmount and close the encrypted volume.</p>
-<pre class="codehilite"><code class="language-bash">&gt; sudo umount /mnt/encryptedVolume1
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>sudo<span class="w"> </span>umount<span class="w"> </span>/mnt/encryptedVolume1
 
-&gt; sudo cryptsetup luksClose encryptedVolume1
-</code></pre>
+&gt;<span class="w"> </span>sudo<span class="w"> </span>cryptsetup<span class="w"> </span>luksClose<span class="w"> </span>encryptedVolume1
+</code></pre></div>
         </div>
       </article>
     </main>

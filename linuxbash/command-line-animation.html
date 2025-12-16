@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -90,24 +90,24 @@
         <div class="article-body">
           <h1>Command Line Animation</h1>
 <p>An example of command line animation.</p>
-<pre class="codehilite"><code class="language-bash">#!/bin/bash
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 
-frames=&quot;/ | \\ -&quot;
+<span class="nv">frames</span><span class="o">=</span><span class="s2">&quot;/ | \\ -&quot;</span>
 
-# Run a 5 second sleep command in the background
-sleep 5 &amp; pid=$!
+<span class="c1"># Run a 5 second sleep command in the background</span>
+sleep<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="p">&amp;</span><span class="w"> </span><span class="nv">pid</span><span class="o">=</span><span class="nv">$!</span>
 
-# Check that the sleep process (above) still exists, and if so draw some animation
-while kill -0 $pid 2&amp;&gt;1 &gt; /dev/null;
-do
-    for frame in $frames;
-    do
-        printf &quot;\r$frame Waiting...&quot; 
-        sleep 0.5
-    done
-done
-printf &quot;\n&quot;
-</code></pre>
+<span class="c1"># Check that the sleep process (above) still exists, and if so draw some animation</span>
+<span class="k">while</span><span class="w"> </span><span class="nb">kill</span><span class="w"> </span>-0<span class="w"> </span><span class="nv">$pid</span><span class="w"> </span><span class="m">2</span><span class="p">&amp;</span>&gt;1<span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="p">;</span>
+<span class="k">do</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>frame<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nv">$frames</span><span class="p">;</span>
+<span class="w">    </span><span class="k">do</span>
+<span class="w">        </span><span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;\r</span><span class="nv">$frame</span><span class="s2"> Waiting...&quot;</span><span class="w"> </span>
+<span class="w">        </span>sleep<span class="w"> </span><span class="m">0</span>.5
+<span class="w">    </span><span class="k">done</span>
+<span class="k">done</span>
+<span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;\n&quot;</span>
+</code></pre></div>
 
 <hr>
         </div>

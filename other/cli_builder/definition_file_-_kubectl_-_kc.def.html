@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -89,93 +89,93 @@
       <article class="article">
         <div class="article-body">
           <h1>kc.def</h1>
-<pre class="codehilite"><code class="language-bash"># Kubectl
+<div class="codehilite"><pre><span></span><code><span class="c1"># Kubectl</span>
 
-# -------------------------------------------------------------------------------------------------
-= ALL
-# -------------------------------------------------------------------------------------------------
+<span class="c1"># -------------------------------------------------------------------------------------------------</span>
+<span class="o">=</span><span class="w"> </span>ALL
+<span class="c1"># -------------------------------------------------------------------------------------------------</span>
 
-get all (ga) [&lt;namespace&gt;] :: \
-    if [[ &quot;$1&quot; == &quot;&quot; ]]; then kubectl get all -A; else kubectl get all -n $1; fi
+get<span class="w"> </span>all<span class="w"> </span><span class="o">(</span>ga<span class="o">)</span><span class="w"> </span><span class="o">[</span>&lt;namespace&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>all<span class="w"> </span>-A<span class="p">;</span><span class="w"> </span><span class="k">else</span><span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>all<span class="w"> </span>-n<span class="w"> </span><span class="nv">$1</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
 
-get (g) &lt;item&gt; :: kubectl get $1
+get<span class="w"> </span><span class="o">(</span>g<span class="o">)</span><span class="w"> </span>&lt;item&gt;<span class="w"> </span>::<span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span><span class="nv">$1</span>
 
-# -------------------------------------------------------------------------------------------------
-= LOGS
-# -------------------------------------------------------------------------------------------------
+<span class="c1"># -------------------------------------------------------------------------------------------------</span>
+<span class="o">=</span><span class="w"> </span>LOGS
+<span class="c1"># -------------------------------------------------------------------------------------------------</span>
 
-logs (l) &lt;pod_name&gt; [&lt;namespace&gt;] :: \
-    if [[ &quot;$2&quot; == &quot;&quot; ]]; then kubectl logs $1; else kubectl logs $1 -n $2; fi
+logs<span class="w"> </span><span class="o">(</span>l<span class="o">)</span><span class="w"> </span>&lt;pod_name&gt;<span class="w"> </span><span class="o">[</span>&lt;namespace&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span>kubectl<span class="w"> </span>logs<span class="w"> </span><span class="nv">$1</span><span class="p">;</span><span class="w"> </span><span class="k">else</span><span class="w"> </span>kubectl<span class="w"> </span>logs<span class="w"> </span><span class="nv">$1</span><span class="w"> </span>-n<span class="w"> </span><span class="nv">$2</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
 
-# -------------------------------------------------------------------------------------------------
-= NODES
-# -------------------------------------------------------------------------------------------------
+<span class="c1"># -------------------------------------------------------------------------------------------------</span>
+<span class="o">=</span><span class="w"> </span>NODES
+<span class="c1"># -------------------------------------------------------------------------------------------------</span>
 
-get node (gn) :: kubectl get nodes
+get<span class="w"> </span>node<span class="w"> </span><span class="o">(</span>gn<span class="o">)</span><span class="w"> </span>::<span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>nodes
 
-# -------------------------------------------------------------------------------------------------
-= PODS
-# -------------------------------------------------------------------------------------------------
+<span class="c1"># -------------------------------------------------------------------------------------------------</span>
+<span class="o">=</span><span class="w"> </span>PODS
+<span class="c1"># -------------------------------------------------------------------------------------------------</span>
 
-get pods (gp) [&lt;namespace&gt;] :: \
-    if [[ &quot;$1&quot; == &quot;&quot; ]]; then kubectl get pods -A; else kubectl get pods -n $1; fi
+get<span class="w"> </span>pods<span class="w"> </span><span class="o">(</span>gp<span class="o">)</span><span class="w"> </span><span class="o">[</span>&lt;namespace&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-A<span class="p">;</span><span class="w"> </span><span class="k">else</span><span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span><span class="nv">$1</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
 
-delete pod (dp) &lt;pod_name&gt; [&lt;namespace&gt;] :: \
-    if [[ &quot;$2&quot; != &quot;&quot; ]]; then kubectl delete pod $1 -n $2; else kubectl delete pod $1; fi
+delete<span class="w"> </span>pod<span class="w"> </span><span class="o">(</span>dp<span class="o">)</span><span class="w"> </span>&lt;pod_name&gt;<span class="w"> </span><span class="o">[</span>&lt;namespace&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span>kubectl<span class="w"> </span>delete<span class="w"> </span>pod<span class="w"> </span><span class="nv">$1</span><span class="w"> </span>-n<span class="w"> </span><span class="nv">$2</span><span class="p">;</span><span class="w"> </span><span class="k">else</span><span class="w"> </span>kubectl<span class="w"> </span>delete<span class="w"> </span>pod<span class="w"> </span><span class="nv">$1</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
 
-# -------------------------------------------------------------------------------------------------
-= PERSISTENT VOLUMES
-# -------------------------------------------------------------------------------------------------
+<span class="c1"># -------------------------------------------------------------------------------------------------</span>
+<span class="o">=</span><span class="w"> </span>PERSISTENT<span class="w"> </span>VOLUMES
+<span class="c1"># -------------------------------------------------------------------------------------------------</span>
 
-get persistent volumes (gpv) [&lt;namespace&gt;] :: \
-    if [[ &quot;$1&quot; == &quot;&quot; ]]; then kubectl get pv -A; \
-    else kubectl get pv -n $1; fi
+get<span class="w"> </span>persistent<span class="w"> </span>volumes<span class="w"> </span><span class="o">(</span>gpv<span class="o">)</span><span class="w"> </span><span class="o">[</span>&lt;namespace&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>pv<span class="w"> </span>-A<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>pv<span class="w"> </span>-n<span class="w"> </span><span class="nv">$1</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
 
-# -------------------------------------------------------------------------------------------------
-= PERSISTENT VOLUME CLAIMS
-# -------------------------------------------------------------------------------------------------
+<span class="c1"># -------------------------------------------------------------------------------------------------</span>
+<span class="o">=</span><span class="w"> </span>PERSISTENT<span class="w"> </span>VOLUME<span class="w"> </span>CLAIMS
+<span class="c1"># -------------------------------------------------------------------------------------------------</span>
 
-get persistent volume claims (gpvc) [&lt;namespace&gt;] :: \
-    if [[ &quot;$1&quot; == &quot;&quot; ]]; then kubectl get pvc -A; \
-    else kubectl get pvc -n $1; fi
+get<span class="w"> </span>persistent<span class="w"> </span>volume<span class="w"> </span>claims<span class="w"> </span><span class="o">(</span>gpvc<span class="o">)</span><span class="w"> </span><span class="o">[</span>&lt;namespace&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>pvc<span class="w"> </span>-A<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>pvc<span class="w"> </span>-n<span class="w"> </span><span class="nv">$1</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
 
-# -------------------------------------------------------------------------------------------------
-= SECRETS
-# -------------------------------------------------------------------------------------------------
+<span class="c1"># -------------------------------------------------------------------------------------------------</span>
+<span class="o">=</span><span class="w"> </span>SECRETS
+<span class="c1"># -------------------------------------------------------------------------------------------------</span>
 
-get secrets (gse) [&lt;namespace&gt;] :: \
-    if [[ &quot;$1&quot; == &quot;&quot; ]]; then kubectl get secrets -A; \
-    else kubectl get secrets -n $1; fi
+get<span class="w"> </span>secrets<span class="w"> </span><span class="o">(</span>gse<span class="o">)</span><span class="w"> </span><span class="o">[</span>&lt;namespace&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>secrets<span class="w"> </span>-A<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>secrets<span class="w"> </span>-n<span class="w"> </span><span class="nv">$1</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
 
-delete service (dse) &lt;secret_name&gt; [&lt;namespace&gt;] :: \
-    if [[ &quot;$2&quot; != &quot;&quot; ]]; then kubectl delete secret $1 -n $2; \
-    else kubectl delete secret $1; fi
+delete<span class="w"> </span>service<span class="w"> </span><span class="o">(</span>dse<span class="o">)</span><span class="w"> </span>&lt;secret_name&gt;<span class="w"> </span><span class="o">[</span>&lt;namespace&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span>kubectl<span class="w"> </span>delete<span class="w"> </span>secret<span class="w"> </span><span class="nv">$1</span><span class="w"> </span>-n<span class="w"> </span><span class="nv">$2</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span>kubectl<span class="w"> </span>delete<span class="w"> </span>secret<span class="w"> </span><span class="nv">$1</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
 
-# kubectl get secret mdm-elasticsearch-es-elastic-user -n elastic -o jsonpath='{.data.elastic}' | base64 --decode
+<span class="c1"># kubectl get secret mdm-elasticsearch-es-elastic-user -n elastic -o jsonpath=&#39;{.data.elastic}&#39; | base64 --decode</span>
 
-# -------------------------------------------------------------------------------------------------
-= SERVICES
-# -------------------------------------------------------------------------------------------------
+<span class="c1"># -------------------------------------------------------------------------------------------------</span>
+<span class="o">=</span><span class="w"> </span>SERVICES
+<span class="c1"># -------------------------------------------------------------------------------------------------</span>
 
-get services (gs) [&lt;namespace&gt;] :: \
-    if [[ &quot;$1&quot; == &quot;&quot; ]]; then kubectl get svc -A; \
-    else kubectl get svc -n $1; fi
+get<span class="w"> </span>services<span class="w"> </span><span class="o">(</span>gs<span class="o">)</span><span class="w"> </span><span class="o">[</span>&lt;namespace&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>-A<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w"> </span>-n<span class="w"> </span><span class="nv">$1</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
 
-delete service (ds) &lt;service_name&gt; [&lt;namespace&gt;] :: \
-    if [[ &quot;$2&quot; != &quot;&quot; ]]; then kubectl delete svc $1 -n $2; \
-    else kubectl delete svc $1; fi
+delete<span class="w"> </span>service<span class="w"> </span><span class="o">(</span>ds<span class="o">)</span><span class="w"> </span>&lt;service_name&gt;<span class="w"> </span><span class="o">[</span>&lt;namespace&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span>kubectl<span class="w"> </span>delete<span class="w"> </span>svc<span class="w"> </span><span class="nv">$1</span><span class="w"> </span>-n<span class="w"> </span><span class="nv">$2</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span>kubectl<span class="w"> </span>delete<span class="w"> </span>svc<span class="w"> </span><span class="nv">$1</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
 
-# -------------------------------------------------------------------------------------------------
-= STATEFULSETS
-# -------------------------------------------------------------------------------------------------
+<span class="c1"># -------------------------------------------------------------------------------------------------</span>
+<span class="o">=</span><span class="w"> </span>STATEFULSETS
+<span class="c1"># -------------------------------------------------------------------------------------------------</span>
 
-get statefulset (gss) [&lt;namespace&gt;] :: \
-    if [[ &quot;$1&quot; == &quot;&quot; ]]; then kubectl get statefulset -A; else kubectl get statefulset -n $1; fi
+get<span class="w"> </span>statefulset<span class="w"> </span><span class="o">(</span>gss<span class="o">)</span><span class="w"> </span><span class="o">[</span>&lt;namespace&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>statefulset<span class="w"> </span>-A<span class="p">;</span><span class="w"> </span><span class="k">else</span><span class="w"> </span>kubectl<span class="w"> </span>get<span class="w"> </span>statefulset<span class="w"> </span>-n<span class="w"> </span><span class="nv">$1</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
 
-delete statefulset (dss) &lt;statefulset_name&gt; [&lt;namespace&gt;] :: \
-    if [[ &quot;$2&quot; != &quot;&quot; ]]; then kubectl delete statefulset $1 -n $2; \
-    else kubectl delete statefulset $1; fi
-</code></pre>
+delete<span class="w"> </span>statefulset<span class="w"> </span><span class="o">(</span>dss<span class="o">)</span><span class="w"> </span>&lt;statefulset_name&gt;<span class="w"> </span><span class="o">[</span>&lt;namespace&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span>kubectl<span class="w"> </span>delete<span class="w"> </span>statefulset<span class="w"> </span><span class="nv">$1</span><span class="w"> </span>-n<span class="w"> </span><span class="nv">$2</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">else</span><span class="w"> </span>kubectl<span class="w"> </span>delete<span class="w"> </span>statefulset<span class="w"> </span><span class="nv">$1</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
+</code></pre></div>
         </div>
       </article>
     </main>

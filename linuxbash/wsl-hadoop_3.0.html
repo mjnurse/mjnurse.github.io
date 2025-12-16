@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -92,33 +92,33 @@
 <h2 id="hdfs-config">HDFS Config</h2>
 <p>Datanode and Namenode directories default to <code>/tmp</code> - these didn't work for me (and not really a ideal location...).</p>
 <p><code>/c/MJN/wsl-hadoop-3.3.0/etc/hadoop/hdfs-site.xml</code></p>
-<pre class="codehilite"><code class="language-xml">&lt;configuration&gt;
-        &lt;property&gt;
-                &lt;name&gt;dfs.replication&lt;/name&gt;
-                &lt;value&gt;1&lt;/value&gt;
-        &lt;/property&gt;
-        &lt;property&gt;
-                &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;
-                &lt;value&gt;/c/MJN/hdfs-data/datanode&lt;/value&gt;
-        &lt;/property&gt;
-        &lt;property&gt;
-                &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;
-                &lt;value&gt;/c/MJN/hdfs-data/namenode&lt;/value&gt;
-        &lt;/property&gt;
-&lt;/configuration&gt;
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="nt">&lt;configuration&gt;</span>
+<span class="w">        </span><span class="nt">&lt;property&gt;</span>
+<span class="w">                </span><span class="nt">&lt;name&gt;</span>dfs.replication<span class="nt">&lt;/name&gt;</span>
+<span class="w">                </span><span class="nt">&lt;value&gt;</span>1<span class="nt">&lt;/value&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/property&gt;</span>
+<span class="w">        </span><span class="nt">&lt;property&gt;</span>
+<span class="w">                </span><span class="nt">&lt;name&gt;</span>dfs.datanode.data.dir<span class="nt">&lt;/name&gt;</span>
+<span class="w">                </span><span class="nt">&lt;value&gt;</span>/c/MJN/hdfs-data/datanode<span class="nt">&lt;/value&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/property&gt;</span>
+<span class="w">        </span><span class="nt">&lt;property&gt;</span>
+<span class="w">                </span><span class="nt">&lt;name&gt;</span>dfs.namenode.name.dir<span class="nt">&lt;/name&gt;</span>
+<span class="w">                </span><span class="nt">&lt;value&gt;</span>/c/MJN/hdfs-data/namenode<span class="nt">&lt;/value&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/property&gt;</span>
+<span class="nt">&lt;/configuration&gt;</span>
+</code></pre></div>
 
 <h2 id="start-stop-hdfs-yarn">Start / Stop HDFS / Yarn</h2>
 <p><code>start-hadoop</code></p>
-<pre class="codehilite"><code class="language-bash">sudo service ssh restart
+<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>service<span class="w"> </span>ssh<span class="w"> </span>restart
 /c/MJN/wsl-hadoop-3.3.0/sbin/start-dfs.sh
 /c/MJN/wsl-hadoop-3.3.0/sbin/start-yarn.sh
-</code></pre>
+</code></pre></div>
 
 <p><code>stop-hadoop</code></p>
-<pre class="codehilite"><code class="language-bash">/c/MJN/wsl-hadoop-3.3.0/sbin/stop-dfs.sh
+<div class="codehilite"><pre><span></span><code>/c/MJN/wsl-hadoop-3.3.0/sbin/stop-dfs.sh
 /c/MJN/wsl-hadoop-3.3.0/sbin/stop-yarn.sh
-</code></pre>
+</code></pre></div>
 
 <h2 id="web-pages">Web Pages</h2>
 <p>dfs health: <a href="http://localhost:9870/dfshealth.html">http://localhost:9870/dfshealth.html</a></p>

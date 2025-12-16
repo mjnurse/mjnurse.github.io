@@ -62,7 +62,7 @@
           </li>
           
           <li class="nav__list-item">
-            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
           </li>
           
         </ul>
@@ -102,44 +102,44 @@
 <p>Some tips on how to improve / ensure good Elasticsearch performance.</p>
 <h1 id="customize-field-mappings">Customize Field Mappings</h1>
 <p>If you don't need to search a field, don't index it:</p>
-<pre class="codehilite"><code class="language-json">{
-    &quot;field_name&quot;: {
-        &quot;type&quot;:     &quot;string&quot;,
-        &quot;index&quot;:    &quot;no&quot;
-    }
-}
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;field_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w">     </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w">    </span><span class="s2">&quot;no&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <p>For fields you want to index, use the simplest analyzer, or maybe don't analyze at all.  By default, <code>string</code> fields are <code>analyzed</code> as are the strings in any queries on this fields.  The other option is <code>not_analyzed</code> - the field is indexed so it is searchable, but the value is indexed, as a single string, exactly as specified.</p>
-<pre class="codehilite"><code class="language-json">{
-    &quot;field_name&quot;: {
-        &quot;type&quot;:     &quot;string&quot;,
-        &quot;index&quot;:    &quot;not_analyzed&quot;
-    }
-}
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;field_name&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w">     </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;index&quot;</span><span class="p">:</span><span class="w">    </span><span class="s2">&quot;not_analyzed&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <p>The other simple types (long, double, date, etc.) also accept the index parameter, but the only relevant values are <code>no</code> and <code>not_analyzed</code> because their values are never <code>analyzed</code>.</p>
 <p>Alternately specify <code>analyzer</code>: For analyzed string fields specify which analyzer to apply both at search time and index time. By default, Elasticsearch uses the <code>standard</code> analyzer, but you can change this by specifying one of the built-in analyzers, such as <code>whitespace</code>, <code>simple</code>, or <code>english</code>.</p>
-<pre class="codehilite"><code class="language-json">{
-    &quot;tweet&quot;: {
-        &quot;type&quot;:     &quot;string&quot;,
-        &quot;analyzer&quot;: &quot;english&quot;
-    }
-}
-</code></pre>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;tweet&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w">     </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">&quot;analyzer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;english&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
 
 <h1 id="disable-the-_source-field">Disable The _source Field</h1>
 <p><code>_source</code> contains the original JSON document alongside the indexed fields.  This can be removed when creating the index:</p>
-<pre class="codehilite"><code class="language-bash">PUT index_name -d '
-{
-    &quot;mappings&quot;: {
-        &quot;_source&quot;: {
-            &quot;enabled&quot;: false
-        }
-    }
-}
-</code></pre>
+<div class="codehilite"><pre><span></span><code>PUT<span class="w"> </span>index_name<span class="w"> </span>-d<span class="w"> </span><span class="err">&#39;</span>
+<span class="o">{</span>
+<span class="w">    </span><span class="s2">&quot;mappings&quot;</span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">        </span><span class="s2">&quot;_source&quot;</span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">            </span><span class="s2">&quot;enabled&quot;</span>:<span class="w"> </span><span class="nb">false</span>
+<span class="w">        </span><span class="o">}</span>
+<span class="w">    </span><span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
 
 <p>However, without <code>_source</code> we cannot:</p>
 <ul>
