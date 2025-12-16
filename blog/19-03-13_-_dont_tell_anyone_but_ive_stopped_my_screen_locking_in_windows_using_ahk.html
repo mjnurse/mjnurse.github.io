@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>19-03-13 - Dont Tell Anyone But Ive Stopped My Screen Locking In Windows Using AHK</title>
   </head>
   <body class="light" id="top">
@@ -91,15 +92,15 @@
 <p>I'm working on 2 computers right now.  One automatically locks after 5 minutes.  Really great for security but maddening for me.</p>
 <p>It's a policy setting which I can't override.</p>
 <p>I keep knocking the mouse to keep it unlocked.  I then dawned on me that AHK could do that for me.</p>
-<div class="codehilite"><pre><span></span><code><span class="c">; Script to stop the screen locking in Windows by generating some mouse activity.</span>
+<pre class="codehilite"><code>; Script to stop the screen locking in Windows by generating some mouse activity.
 
-<span class="gh">#</span>Persistent
-<span class="gh">#</span>SingleInstance Force
+#Persistent
+#SingleInstance Force
 
 SetTimer, MoveMouse
 
-<span class="c">; Check the time that has passed since the last key press or mouse move, if its greater than 60 seconds</span>
-<span class="c">; move the mouse 1 pixel and then back.</span>
+; Check the time that has passed since the last key press or mouse move, if its greater than 60 seconds
+; move the mouse 1 pixel and then back.
 
 MoveMouse:
 If ( A_TimeIdle &gt; 60000 ) {
@@ -107,7 +108,7 @@ If ( A_TimeIdle &gt; 60000 ) {
   MouseMove, -1,-1,, R
 }
 Return
-</code></pre></div>
+</code></pre>
 
 <hr>
         </div>
@@ -127,7 +128,7 @@ Return
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: November 25, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

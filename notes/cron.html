@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>CRON</title>
   </head>
   <body class="light" id="top">
@@ -90,13 +91,13 @@
           <h1>CRON</h1>
 <h2 id="format-of-crontab">Format of crontab:</h2>
 <p>First five fields are: </p>
-<div class="codehilite"><pre><span></span><code>&lt;minutes:0-59&gt; &lt;hours:0-23&gt; &lt;day-of-month:1-31&gt; &lt;month:1-12&gt; &lt;day-of-week:0-6:0=Sunday&gt;
-</code></pre></div>
+<pre class="codehilite"><code>&lt;minutes:0-59&gt; &lt;hours:0-23&gt; &lt;day-of-month:1-31&gt; &lt;month:1-12&gt; &lt;day-of-week:0-6:0=Sunday&gt;
+</code></pre>
 
 <p>Command: <code>sudo crontab -e</code></p>
 <p>Alternatively:</p>
-<div class="codehilite"><pre><span></span><code><span class="n">echo</span><span class="w"> </span><span class="s2">&quot;* 12 * * * /usr/local/bin/script&quot;</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">spool</span><span class="o">/</span><span class="n">cron</span><span class="o">/</span><span class="n">root</span>
-</code></pre></div>
+<pre class="codehilite"><code>echo &quot;* 12 * * * /usr/local/bin/script&quot; &gt;&gt; /var/spool/cron/root
+</code></pre>
 
 <hr>
         </div>
@@ -116,7 +117,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: December 01, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

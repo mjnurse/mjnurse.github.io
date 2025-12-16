@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>Faker - Synthetic Data</title>
   </head>
   <body class="light" id="top">
@@ -98,396 +99,396 @@
 </div>
 <p>See <a href="https://faker.readthedocs.io/en/master/index.html">Faker</a>.</p>
 <h1 id="locales-and-initialization">Locales and Initialization</h1>
-<div class="codehilite"><pre><span></span><code><span class="c1"># Locale: ar_AA, ar_AE, ar_BH, ar_EG, ar_JO, ar_PS, ar_SA, az_AZ, bg_BG, bn_BD, bs_BA,</span>
-<span class="c1">#         cs_CZ, da_DK, de_AT, de_CH, de_DE, dk_DK, el_CY, el_GR, en_AU, en_BD, en_CA,</span>
-<span class="c1">#         en_GB, en_IE, en_IN, en_NZ, en_PH, en_TH, en_US, es_AR, es_CA, es_CL, es_CO,</span>
-<span class="c1">#         es_ES, es_MX, et_EE, fa_IR, fi_FI, fil_PH, fr_BE, fr_CA, fr_CH, fr_FR, fr_QC,</span>
-<span class="c1">#         ga_IE, he_IL, hi_IN, hr_HR, hu_HU, hy_AM, id_ID, it_CH, it_IT, ja_JP, ka_GE,</span>
-<span class="c1">#         ko_KR, lb_LU, lt_LT, lv_LV, mt_MT, ne_NP, nl_BE, nl_NL, no_NO, or_IN, pl_PL,</span>
-<span class="c1">#         pt_BR, pt_PT, ro_RO, ru_RU, sk_SK, sl_SI, sq_AL, sv_SE, ta_IN, th_TH, tl_PH,</span>
-<span class="c1">#         tr_TR, tw_GH, uk_UA, vi_VN, zh_CN, zh_TW, zu_ZA</span>
+<pre class="codehilite"><code class="language-python"># Locale: ar_AA, ar_AE, ar_BH, ar_EG, ar_JO, ar_PS, ar_SA, az_AZ, bg_BG, bn_BD, bs_BA,
+#         cs_CZ, da_DK, de_AT, de_CH, de_DE, dk_DK, el_CY, el_GR, en_AU, en_BD, en_CA,
+#         en_GB, en_IE, en_IN, en_NZ, en_PH, en_TH, en_US, es_AR, es_CA, es_CL, es_CO,
+#         es_ES, es_MX, et_EE, fa_IR, fi_FI, fil_PH, fr_BE, fr_CA, fr_CH, fr_FR, fr_QC,
+#         ga_IE, he_IL, hi_IN, hr_HR, hu_HU, hy_AM, id_ID, it_CH, it_IT, ja_JP, ka_GE,
+#         ko_KR, lb_LU, lt_LT, lv_LV, mt_MT, ne_NP, nl_BE, nl_NL, no_NO, or_IN, pl_PL,
+#         pt_BR, pt_PT, ro_RO, ru_RU, sk_SK, sl_SI, sq_AL, sv_SE, ta_IN, th_TH, tl_PH,
+#         tr_TR, tw_GH, uk_UA, vi_VN, zh_CN, zh_TW, zu_ZA
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">faker</span><span class="w"> </span><span class="kn">import</span> <span class="n">Faker</span>
+from faker import Faker
 
-<span class="c1"># Instantiate with multiple locales.</span>
-<span class="n">f</span> <span class="o">=</span> <span class="n">Faker</span><span class="p">([</span><span class="s1">&#39;en_GB&#39;</span><span class="p">,</span> <span class="s1">&#39;es_ES&#39;</span><span class="p">])</span>
+# Instantiate with multiple locales.
+f = Faker(['en_GB', 'es_ES'])
 
-<span class="c1"># Seed to get same &quot;random&quot; value each run.</span>
-<span class="n">Faker</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-</code></pre></div>
+# Seed to get same &quot;random&quot; value each run.
+Faker.seed(1)
+</code></pre>
 
 <h1 id="standard-generators">Standard Generators</h1>
-<div class="codehilite"><pre><span></span><code><span class="c1"># [unique.]address() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;address:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">address</span><span class="p">())</span>
+<pre class="codehilite"><code class="language-python"># [unique.]address() -&gt; str
+print(&quot;address:&quot;, f.unique.address())
 
-<span class="c1"># [unique.]administrative_unit() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;administrative_unit:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">administrative_unit</span><span class="p">())</span>
+# [unique.]administrative_unit() -&gt; str
+print(&quot;administrative_unit:&quot;, f.unique.administrative_unit())
 
-<span class="c1"># [unique.]building_number() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;building_number:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">building_number</span><span class="p">())</span>
+# [unique.]building_number() -&gt; str
+print(&quot;building_number:&quot;, f.unique.building_number())
 
-<span class="c1"># [unique.]city() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;city:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">city</span><span class="p">())</span>
+# [unique.]city() -&gt; str
+print(&quot;city:&quot;, f.unique.city())
 
-<span class="c1"># [unique.]city_prefix() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;city_prefix:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">city_prefix</span><span class="p">())</span>
+# [unique.]city_prefix() -&gt; str
+print(&quot;city_prefix:&quot;, f.unique.city_prefix())
 
-<span class="c1"># [unique.]city_suffix() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;city_suffix:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">city_suffix</span><span class="p">())</span>
+# [unique.]city_suffix() -&gt; str
+print(&quot;city_suffix:&quot;, f.unique.city_suffix())
 
-<span class="c1"># [unique.]country() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;country:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">country</span><span class="p">())</span>
+# [unique.]country() -&gt; str
+print(&quot;country:&quot;, f.unique.country())
 
-<span class="c1"># [unique.]country_code(representation: str = &#39;alpha-2&#39;) -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;country_code:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">country_code</span><span class="p">())</span>
+# [unique.]country_code(representation: str = 'alpha-2') -&gt; str
+print(&quot;country_code:&quot;, f.unique.country_code())
 
-<span class="c1"># [unique.]county() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;county:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">county</span><span class="p">())</span>
+# [unique.]county() -&gt; str
+print(&quot;county:&quot;, f.unique.county())
 
-<span class="c1"># [unique.]current_country() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;current_country:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">current_country</span><span class="p">())</span>
+# [unique.]current_country() -&gt; str
+print(&quot;current_country:&quot;, f.unique.current_country())
 
-<span class="c1"># [unique.]current_country_code() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;current_country_code:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">current_country_code</span><span class="p">())</span>
+# [unique.]current_country_code() -&gt; str
+print(&quot;current_country_code:&quot;, f.unique.current_country_code())
 
-<span class="c1"># [unique.]postcode() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;postcode:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">postcode</span><span class="p">())</span>
+# [unique.]postcode() -&gt; str
+print(&quot;postcode:&quot;, f.unique.postcode())
 
-<span class="c1"># [unique.]secondary_address() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;secondary_address:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">secondary_address</span><span class="p">())</span>
+# [unique.]secondary_address() -&gt; str
+print(&quot;secondary_address:&quot;, f.unique.secondary_address())
 
-<span class="c1"># [unique.]street_address() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;street_address:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">street_address</span><span class="p">())</span>
+# [unique.]street_address() -&gt; str
+print(&quot;street_address:&quot;, f.unique.street_address())
 
-<span class="c1"># [unique.]street_name() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;street_name:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">street_name</span><span class="p">())</span>
+# [unique.]street_name() -&gt; str
+print(&quot;street_name:&quot;, f.unique.street_name())
 
-<span class="c1"># [unique.]street_suffix() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;street_suffix:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">street_suffix</span><span class="p">())</span>
+# [unique.]street_suffix() -&gt; str
+print(&quot;street_suffix:&quot;, f.unique.street_suffix())
 
-<span class="c1"># [unique.]license_plate() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;license_plate:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">license_plate</span><span class="p">())</span>
+# [unique.]license_plate() -&gt; str
+print(&quot;license_plate:&quot;, f.unique.license_plate())
 
-<span class="c1"># [unique.]vin() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;vin:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">vin</span><span class="p">())</span>
+# [unique.]vin() -&gt; str
+print(&quot;vin:&quot;, f.unique.vin())
 
-<span class="c1"># [unique.]aba() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;aba:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">aba</span><span class="p">())</span>
+# [unique.]aba() -&gt; str
+print(&quot;aba:&quot;, f.unique.aba())
 
-<span class="c1"># [unique.]bank_country() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;bank_country:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">bank_country</span><span class="p">())</span>
+# [unique.]bank_country() -&gt; str
+print(&quot;bank_country:&quot;, f.unique.bank_country())
 
-<span class="c1"># [unique.]bban() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;bban:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">bban</span><span class="p">())</span>
+# [unique.]bban() -&gt; str
+print(&quot;bban:&quot;, f.unique.bban())
 
-<span class="c1"># [unique.]iban() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;iban:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">iban</span><span class="p">())</span>
+# [unique.]iban() -&gt; str
+print(&quot;iban:&quot;, f.unique.iban())
 
-<span class="c1"># [unique.]swift(length: int | None = None, primary: bool = False, use_dataset: bool = False) -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;swift:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">swift</span><span class="p">())</span>
+# [unique.]swift(length: int | None = None, primary: bool = False, use_dataset: bool = False) -&gt; str
+print(&quot;swift:&quot;, f.unique.swift())
 
-<span class="c1"># [unique.]swift11(primary: bool = False, use_dataset: bool = False) -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;swift11:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">swift11</span><span class="p">())</span>
+# [unique.]swift11(primary: bool = False, use_dataset: bool = False) -&gt; str
+print(&quot;swift11:&quot;, f.unique.swift11())
 
-<span class="c1"># [unique.]swift8(use_dataset: bool = False) -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;swift8:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">swift8</span><span class="p">())</span>
+# [unique.]swift8(use_dataset: bool = False) -&gt; str
+print(&quot;swift8:&quot;, f.unique.swift8())
 
-<span class="c1"># [unique.]ascii_company_email() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ascii_company_email:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">ascii_company_email</span><span class="p">())</span>
+# [unique.]ascii_company_email() -&gt; str
+print(&quot;ascii_company_email:&quot;, f.unique.ascii_company_email())
 
-<span class="c1"># [unique.]ascii_email() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ascii_email:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">ascii_email</span><span class="p">())</span>
+# [unique.]ascii_email() -&gt; str
+print(&quot;ascii_email:&quot;, f.unique.ascii_email())
 
-<span class="c1"># [unique.]ascii_free_email() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ascii_free_email:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">ascii_free_email</span><span class="p">())</span>
+# [unique.]ascii_free_email() -&gt; str
+print(&quot;ascii_free_email:&quot;, f.unique.ascii_free_email())
 
-<span class="c1"># [unique.]ascii_safe_email() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ascii_safe_email:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">ascii_safe_email</span><span class="p">())</span>
+# [unique.]ascii_safe_email() -&gt; str
+print(&quot;ascii_safe_email:&quot;, f.unique.ascii_safe_email())
 
-<span class="c1"># [unique.]company_email() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;company_email:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">company_email</span><span class="p">())</span>
+# [unique.]company_email() -&gt; str
+print(&quot;company_email:&quot;, f.unique.company_email())
 
-<span class="c1"># [unique.]dga(year: int | None = None, month: int | None = None, day: int | None = None, tld: str | None = None, length: int | None = None) -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;dga:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">dga</span><span class="p">())</span>
+# [unique.]dga(year: int | None = None, month: int | None = None, day: int | None = None, tld: str | None = None, length: int | None = None) -&gt; str
+print(&quot;dga:&quot;, f.unique.dga())
 
-<span class="c1"># [unique.]domain_name(levels: int = 1) -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;domain_name:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">domain_name</span><span class="p">())</span>
+# [unique.]domain_name(levels: int = 1) -&gt; str
+print(&quot;domain_name:&quot;, f.unique.domain_name())
 
-<span class="c1"># [unique.]domain_word() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;domain_word:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">domain_word</span><span class="p">())</span>
+# [unique.]domain_word() -&gt; str
+print(&quot;domain_word:&quot;, f.unique.domain_word())
 
-<span class="c1"># [unique.]email(safe: bool = True, domain: str | None = None) -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;email:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">email</span><span class="p">())</span>
+# [unique.]email(safe: bool = True, domain: str | None = None) -&gt; str
+print(&quot;email:&quot;, f.unique.email())
 
-<span class="c1"># [unique.]free_email() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;free_email:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">free_email</span><span class="p">())</span>
+# [unique.]free_email() -&gt; str
+print(&quot;free_email:&quot;, f.unique.free_email())
 
-<span class="c1"># [unique.]free_email_domain() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;free_email_domain:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">free_email_domain</span><span class="p">())</span>
+# [unique.]free_email_domain() -&gt; str
+print(&quot;free_email_domain:&quot;, f.unique.free_email_domain())
 
-<span class="c1"># [unique.]hostname(levels: int = 1) -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;hostname:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">hostname</span><span class="p">())</span>
+# [unique.]hostname(levels: int = 1) -&gt; str
+print(&quot;hostname:&quot;, f.unique.hostname())
 
-<span class="c1"># [unique.]http_method() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;http_method:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">http_method</span><span class="p">())</span>
+# [unique.]http_method() -&gt; str
+print(&quot;http_method:&quot;, f.unique.http_method())
 
-<span class="c1"># [unique.]http_status_code(include_unassigned: bool = True) -&gt; int</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;http_status_code:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">http_status_code</span><span class="p">())</span>
+# [unique.]http_status_code(include_unassigned: bool = True) -&gt; int
+print(&quot;http_status_code:&quot;, f.unique.http_status_code())
 
-<span class="c1"># [unique.]iana_id() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;iana_id:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">iana_id</span><span class="p">())</span>
+# [unique.]iana_id() -&gt; str
+print(&quot;iana_id:&quot;, f.unique.iana_id())
 
-<span class="c1"># [unique.]image_url(width: int | None = None, height: int | None = None, placeholder_url: str | None = None) -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;image_url:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">image_url</span><span class="p">())</span>
+# [unique.]image_url(width: int | None = None, height: int | None = None, placeholder_url: str | None = None) -&gt; str
+print(&quot;image_url:&quot;, f.unique.image_url())
 
-<span class="c1"># [unique.]ipv4(network: bool = False, address_class: str | None = None, private: str | None = None) -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ipv4:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">ipv4</span><span class="p">())</span>
+# [unique.]ipv4(network: bool = False, address_class: str | None = None, private: str | None = None) -&gt; str
+print(&quot;ipv4:&quot;, f.unique.ipv4())
 
-<span class="c1"># [unique.]ipv4_network_class() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ipv4_network_class:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">ipv4_network_class</span><span class="p">())</span>
+# [unique.]ipv4_network_class() -&gt; str
+print(&quot;ipv4_network_class:&quot;, f.unique.ipv4_network_class())
 
-<span class="c1"># [unique.]ipv4_private(network: bool = False, address_class: str | None = None) -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ipv4_private:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">ipv4_private</span><span class="p">())</span>
+# [unique.]ipv4_private(network: bool = False, address_class: str | None = None) -&gt; str
+print(&quot;ipv4_private:&quot;, f.unique.ipv4_private())
 
-<span class="c1"># [unique.]ipv4_public(network: bool = False, address_class: str | None = None) -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ipv4_public:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">ipv4_public</span><span class="p">())</span>
+# [unique.]ipv4_public(network: bool = False, address_class: str | None = None) -&gt; str
+print(&quot;ipv4_public:&quot;, f.unique.ipv4_public())
 
-<span class="c1"># [unique.]ipv6(network: bool = False) -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ipv6:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">ipv6</span><span class="p">())</span>
+# [unique.]ipv6(network: bool = False) -&gt; str
+print(&quot;ipv6:&quot;, f.unique.ipv6())
 
-<span class="c1"># [unique.]mac_address(multicast: bool = False) -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;mac_address:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">mac_address</span><span class="p">())</span>
+# [unique.]mac_address(multicast: bool = False) -&gt; str
+print(&quot;mac_address:&quot;, f.unique.mac_address())
 
-<span class="c1"># [unique.]nic_handle(suffix: str = &#39;FAKE&#39;) -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;nic_handle:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">nic_handle</span><span class="p">())</span>
+# [unique.]nic_handle(suffix: str = 'FAKE') -&gt; str
+print(&quot;nic_handle:&quot;, f.unique.nic_handle())
 
-<span class="c1"># [unique.]nic_handles(count: int = 1, suffix: str = &#39;????&#39;) -&gt; List[str]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;nic_handles:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">nic_handles</span><span class="p">())</span>
+# [unique.]nic_handles(count: int = 1, suffix: str = '????') -&gt; List[str]
+print(&quot;nic_handles:&quot;, f.nic_handles())
 
-<span class="c1"># [unique.]port_number(is_system: bool = False, is_user: bool = False, is_dynamic: bool = False) -&gt; int</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;port_number:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">port_number</span><span class="p">())</span>
+# [unique.]port_number(is_system: bool = False, is_user: bool = False, is_dynamic: bool = False) -&gt; int
+print(&quot;port_number:&quot;, f.unique.port_number())
 
-<span class="c1"># [unique.]ripe_id() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ripe_id:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">ripe_id</span><span class="p">())</span>
+# [unique.]ripe_id() -&gt; str
+print(&quot;ripe_id:&quot;, f.unique.ripe_id())
 
-<span class="c1"># [unique.]safe_domain_name() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;safe_domain_name:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">safe_domain_name</span><span class="p">())</span>
+# [unique.]safe_domain_name() -&gt; str
+print(&quot;safe_domain_name:&quot;, f.unique.safe_domain_name())
 
-<span class="c1"># [unique.]safe_email() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;safe_email:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">safe_email</span><span class="p">())</span>
+# [unique.]safe_email() -&gt; str
+print(&quot;safe_email:&quot;, f.unique.safe_email())
 
-<span class="c1"># [unique.]slug(value: str | None = None) -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;slug:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">slug</span><span class="p">())</span>
+# [unique.]slug(value: str | None = None) -&gt; str
+print(&quot;slug:&quot;, f.unique.slug())
 
-<span class="c1"># [unique.]tld() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;tld:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">tld</span><span class="p">())</span>
+# [unique.]tld() -&gt; str
+print(&quot;tld:&quot;, f.unique.tld())
 
-<span class="c1"># [unique.]uri(schemes: List[str] | None = None, deep: int | None = None) -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;uri:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">uri</span><span class="p">())</span>
+# [unique.]uri(schemes: List[str] | None = None, deep: int | None = None) -&gt; str
+print(&quot;uri:&quot;, f.unique.uri())
 
-<span class="c1"># [unique.]uri_extension() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;uri_extension:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">uri_extension</span><span class="p">())</span>
+# [unique.]uri_extension() -&gt; str
+print(&quot;uri_extension:&quot;, f.unique.uri_extension())
 
-<span class="c1"># [unique.]uri_page() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;uri_page:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">uri_page</span><span class="p">())</span>
+# [unique.]uri_page() -&gt; str
+print(&quot;uri_page:&quot;, f.unique.uri_page())
 
-<span class="c1"># [unique.]uri_path(deep: int | None = None) -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;uri_path:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">uri_path</span><span class="p">())</span>
+# [unique.]uri_path(deep: int | None = None) -&gt; str
+print(&quot;uri_path:&quot;, f.unique.uri_path())
 
-<span class="c1"># [unique.]url(schemes: List[str] | None = None) -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;url:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">url</span><span class="p">())</span>
+# [unique.]url(schemes: List[str] | None = None) -&gt; str
+print(&quot;url:&quot;, f.unique.url())
 
-<span class="c1"># [unique.]user_name() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;user_name:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">user_name</span><span class="p">())</span>
+# [unique.]user_name() -&gt; str
+print(&quot;user_name:&quot;, f.unique.user_name())
 
-<span class="c1"># [unique.]first_name() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;first_name:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">first_name</span><span class="p">())</span>
+# [unique.]first_name() -&gt; str
+print(&quot;first_name:&quot;, f.unique.first_name())
 
-<span class="c1"># [unique.]first_name_female() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;first_name_female:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">first_name_female</span><span class="p">())</span>
+# [unique.]first_name_female() -&gt; str
+print(&quot;first_name_female:&quot;, f.unique.first_name_female())
 
-<span class="c1"># [unique.]first_name_male() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;first_name_male:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">first_name_male</span><span class="p">())</span>
+# [unique.]first_name_male() -&gt; str
+print(&quot;first_name_male:&quot;, f.unique.first_name_male())
 
-<span class="c1"># [unique.]first_name_nonbinary() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;first_name_nonbinary:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">first_name_nonbinary</span><span class="p">())</span>
+# [unique.]first_name_nonbinary() -&gt; str
+print(&quot;first_name_nonbinary:&quot;, f.unique.first_name_nonbinary())
 
-<span class="c1"># [unique.]language_name() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;language_name:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">language_name</span><span class="p">())</span>
+# [unique.]language_name() -&gt; str
+print(&quot;language_name:&quot;, f.unique.language_name())
 
-<span class="c1"># [unique.]last_name() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;last_name:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">last_name</span><span class="p">())</span>
+# [unique.]last_name() -&gt; str
+print(&quot;last_name:&quot;, f.unique.last_name())
 
-<span class="c1"># [unique.]last_name_female() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;last_name_female:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">last_name_female</span><span class="p">())</span>
+# [unique.]last_name_female() -&gt; str
+print(&quot;last_name_female:&quot;, f.unique.last_name_female())
 
-<span class="c1"># [unique.]last_name_male() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;last_name_male:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">last_name_male</span><span class="p">())</span>
+# [unique.]last_name_male() -&gt; str
+print(&quot;last_name_male:&quot;, f.unique.last_name_male())
 
-<span class="c1"># [unique.]last_name_nonbinary() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;last_name_nonbinary:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">last_name_nonbinary</span><span class="p">())</span>
+# [unique.]last_name_nonbinary() -&gt; str
+print(&quot;last_name_nonbinary:&quot;, f.unique.last_name_nonbinary())
 
-<span class="c1"># [unique.]name() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;name:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">name</span><span class="p">())</span>
+# [unique.]name() -&gt; str
+print(&quot;name:&quot;, f.unique.name())
 
-<span class="c1"># [unique.]name_female() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;name_female:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">name_female</span><span class="p">())</span>
+# [unique.]name_female() -&gt; str
+print(&quot;name_female:&quot;, f.unique.name_female())
 
-<span class="c1"># [unique.]name_male() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;name_male:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">name_male</span><span class="p">())</span>
+# [unique.]name_male() -&gt; str
+print(&quot;name_male:&quot;, f.unique.name_male())
 
-<span class="c1"># [unique.]name_nonbinary() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;name_nonbinary:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">name_nonbinary</span><span class="p">())</span>
+# [unique.]name_nonbinary() -&gt; str
+print(&quot;name_nonbinary:&quot;, f.unique.name_nonbinary())
 
-<span class="c1"># [unique.]prefix() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;prefix:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">prefix</span><span class="p">())</span>
+# [unique.]prefix() -&gt; str
+print(&quot;prefix:&quot;, f.unique.prefix())
 
-<span class="c1"># [unique.]prefix_female() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;prefix_female:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">prefix_female</span><span class="p">())</span>
+# [unique.]prefix_female() -&gt; str
+print(&quot;prefix_female:&quot;, f.unique.prefix_female())
 
-<span class="c1"># [unique.]prefix_male() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;prefix_male:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">prefix_male</span><span class="p">())</span>
+# [unique.]prefix_male() -&gt; str
+print(&quot;prefix_male:&quot;, f.unique.prefix_male())
 
-<span class="c1"># [unique.]prefix_nonbinary() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;prefix_nonbinary:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">prefix_nonbinary</span><span class="p">())</span>
+# [unique.]prefix_nonbinary() -&gt; str
+print(&quot;prefix_nonbinary:&quot;, f.unique.prefix_nonbinary())
 
-<span class="c1"># [unique.]suffix() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;suffix:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">suffix</span><span class="p">())</span>
+# [unique.]suffix() -&gt; str
+print(&quot;suffix:&quot;, f.unique.suffix())
 
-<span class="c1"># [unique.]suffix_female() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;suffix_female:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">suffix_female</span><span class="p">())</span>
+# [unique.]suffix_female() -&gt; str
+print(&quot;suffix_female:&quot;, f.unique.suffix_female())
 
-<span class="c1"># [unique.]suffix_male() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;suffix_male:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">suffix_male</span><span class="p">())</span>
+# [unique.]suffix_male() -&gt; str
+print(&quot;suffix_male:&quot;, f.unique.suffix_male())
 
-<span class="c1"># [unique.]suffix_nonbinary() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;suffix_nonbinary:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">suffix_nonbinary</span><span class="p">())</span>
+# [unique.]suffix_nonbinary() -&gt; str
+print(&quot;suffix_nonbinary:&quot;, f.unique.suffix_nonbinary())
 
-<span class="c1"># [unique.]cellphone_number() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;cellphone_number:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">cellphone_number</span><span class="p">())</span>
+# [unique.]cellphone_number() -&gt; str
+print(&quot;cellphone_number:&quot;, f.unique.cellphone_number())
 
-<span class="c1"># [unique.]country_calling_code() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;country_calling_code:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">country_calling_code</span><span class="p">())</span>
+# [unique.]country_calling_code() -&gt; str
+print(&quot;country_calling_code:&quot;, f.unique.country_calling_code())
 
-<span class="c1"># [unique.]msisdn() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;msisdn:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">msisdn</span><span class="p">())</span>
+# [unique.]msisdn() -&gt; str
+print(&quot;msisdn:&quot;, f.unique.msisdn())
 
-<span class="c1"># [unique.]phone_number() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;phone_number:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">phone_number</span><span class="p">())</span>
+# [unique.]phone_number() -&gt; str
+print(&quot;phone_number:&quot;, f.unique.phone_number())
 
-<span class="c1"># [unique.]ssn() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;ssn:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">ssn</span><span class="p">())</span>
+# [unique.]ssn() -&gt; str
+print(&quot;ssn:&quot;, f.unique.ssn())
 
-<span class="c1"># [unique.]vat_id() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;vat_id:&quot;</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">unique</span><span class="o">.</span><span class="n">vat_id</span><span class="p">())</span>
-</code></pre></div>
+# [unique.]vat_id() -&gt; str
+print(&quot;vat_id:&quot;, f.unique.vat_id())
+</code></pre>
 
 <h1 id="date-generators">Date Generators</h1>
-<div class="codehilite"><pre><span></span><code><span class="c1"># [unique.]century() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;century:&quot;</span><span class="p">,</span> <span class="n">century</span><span class="p">())</span>
+<pre class="codehilite"><code class="language-python"># [unique.]century() -&gt; str
+print(&quot;century:&quot;, century())
 
-<span class="c1"># [unique.]date(pattern: str = &#39;%Y-%m-%d&#39;, end_datetime: date | datetime | timedelta | str | int | None = None) -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;date:&quot;</span><span class="p">,</span> <span class="n">date</span><span class="p">())</span>
+# [unique.]date(pattern: str = '%Y-%m-%d', end_datetime: date | datetime | timedelta | str | int | None = None) -&gt; str
+print(&quot;date:&quot;, date())
 
-<span class="c1"># [unique.]date_between(start_date: date | datetime | timedelta | str | int = &#39;-30y&#39;, end_date: date | datetime | timedelta | str | int = &#39;today&#39;) -&gt; date</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;date_between:&quot;</span><span class="p">,</span> <span class="n">date_between</span><span class="p">())</span>
+# [unique.]date_between(start_date: date | datetime | timedelta | str | int = '-30y', end_date: date | datetime | timedelta | str | int = 'today') -&gt; date
+print(&quot;date_between:&quot;, date_between())
 
-<span class="c1"># [unique.]date_between_dates(date_start: date | datetime | timedelta | str | int | None = None, date_end: date | datetime | timedelta | str | int | None = None) -&gt; date</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;date_between_dates:&quot;</span><span class="p">,</span> <span class="n">date_between_dates</span><span class="p">())</span>
+# [unique.]date_between_dates(date_start: date | datetime | timedelta | str | int | None = None, date_end: date | datetime | timedelta | str | int | None = None) -&gt; date
+print(&quot;date_between_dates:&quot;, date_between_dates())
 
-<span class="c1"># [unique.]date_object(end_datetime: datetime | None = None) -&gt; date</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;date_object:&quot;</span><span class="p">,</span> <span class="n">date_object</span><span class="p">())</span>
+# [unique.]date_object(end_datetime: datetime | None = None) -&gt; date
+print(&quot;date_object:&quot;, date_object())
 
-<span class="c1"># [unique.]date_of_birth(tzinfo: tzinfo | None = None, minimum_age: int = 0, maximum_age: int = 115) -&gt; date</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;date_of_birth:&quot;</span><span class="p">,</span> <span class="n">date_of_birth</span><span class="p">())</span>
+# [unique.]date_of_birth(tzinfo: tzinfo | None = None, minimum_age: int = 0, maximum_age: int = 115) -&gt; date
+print(&quot;date_of_birth:&quot;, date_of_birth())
 
-<span class="c1"># [unique.]date_this_century(before_today: bool = True, after_today: bool = False) -&gt; date</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;date_this_century:&quot;</span><span class="p">,</span> <span class="n">date_this_century</span><span class="p">())</span>
+# [unique.]date_this_century(before_today: bool = True, after_today: bool = False) -&gt; date
+print(&quot;date_this_century:&quot;, date_this_century())
 
-<span class="c1"># [unique.]date_this_decade(before_today: bool = True, after_today: bool = False) -&gt; date</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;date_this_decade:&quot;</span><span class="p">,</span> <span class="n">date_this_decade</span><span class="p">())</span>
+# [unique.]date_this_decade(before_today: bool = True, after_today: bool = False) -&gt; date
+print(&quot;date_this_decade:&quot;, date_this_decade())
 
-<span class="c1"># [unique.]date_this_month(before_today: bool = True, after_today: bool = False) -&gt; date</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;date_this_month:&quot;</span><span class="p">,</span> <span class="n">date_this_month</span><span class="p">())</span>
+# [unique.]date_this_month(before_today: bool = True, after_today: bool = False) -&gt; date
+print(&quot;date_this_month:&quot;, date_this_month())
 
-<span class="c1"># [unique.]date_this_year(before_today: bool = True, after_today: bool = False) -&gt; date</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;date_this_year:&quot;</span><span class="p">,</span> <span class="n">date_this_year</span><span class="p">())</span>
+# [unique.]date_this_year(before_today: bool = True, after_today: bool = False) -&gt; date
+print(&quot;date_this_year:&quot;, date_this_year())
 
-<span class="c1"># [unique.]date_time(tzinfo: tzinfo | None = None, end_datetime: date | datetime | timedelta | str | int | None = None) -&gt; datetime</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;date_time:&quot;</span><span class="p">,</span> <span class="n">date_time</span><span class="p">())</span>
+# [unique.]date_time(tzinfo: tzinfo | None = None, end_datetime: date | datetime | timedelta | str | int | None = None) -&gt; datetime
+print(&quot;date_time:&quot;, date_time())
 
-<span class="c1"># [unique.]date_time_ad(tzinfo: tzinfo | None = None, end_datetime: date | datetime | timedelta | str | int | None = None, start_datetime: date | datetime | timedelta | str | int | None = None) -&gt; datetime</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;date_time_ad:&quot;</span><span class="p">,</span> <span class="n">date_time_ad</span><span class="p">())</span>
+# [unique.]date_time_ad(tzinfo: tzinfo | None = None, end_datetime: date | datetime | timedelta | str | int | None = None, start_datetime: date | datetime | timedelta | str | int | None = None) -&gt; datetime
+print(&quot;date_time_ad:&quot;, date_time_ad())
 
-<span class="c1"># [unique.]date_time_between(start_date: date | datetime | timedelta | str | int = &#39;-30y&#39;, end_date: date | datetime | timedelta | str | int = &#39;now&#39;, tzinfo: tzinfo | None = None) -&gt; datetime</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;date_time_between:&quot;</span><span class="p">,</span> <span class="n">date_time_between</span><span class="p">())</span>
+# [unique.]date_time_between(start_date: date | datetime | timedelta | str | int = '-30y', end_date: date | datetime | timedelta | str | int = 'now', tzinfo: tzinfo | None = None) -&gt; datetime
+print(&quot;date_time_between:&quot;, date_time_between())
 
-<span class="c1"># [unique.]date_time_between_dates(datetime_start: date | datetime | timedelta | str | int | None = None, datetime_end: date | datetime | timedelta | str | int | None = None, tzinfo: tzinfo | None = None) -&gt; datetime</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;date_time_between_dates:&quot;</span><span class="p">,</span> <span class="n">date_time_between_dates</span><span class="p">())</span>
+# [unique.]date_time_between_dates(datetime_start: date | datetime | timedelta | str | int | None = None, datetime_end: date | datetime | timedelta | str | int | None = None, tzinfo: tzinfo | None = None) -&gt; datetime
+print(&quot;date_time_between_dates:&quot;, date_time_between_dates())
 
-<span class="c1"># [unique.]date_time_this_century(before_now: bool = True, after_now: bool = False, tzinfo: tzinfo | None = None) -&gt; datetime</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;date_time_this_century:&quot;</span><span class="p">,</span> <span class="n">date_time_this_century</span><span class="p">())</span>
+# [unique.]date_time_this_century(before_now: bool = True, after_now: bool = False, tzinfo: tzinfo | None = None) -&gt; datetime
+print(&quot;date_time_this_century:&quot;, date_time_this_century())
 
-<span class="c1"># [unique.]date_time_this_decade(before_now: bool = True, after_now: bool = False, tzinfo: tzinfo | None = None) -&gt; datetime</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;date_time_this_decade:&quot;</span><span class="p">,</span> <span class="n">date_time_this_decade</span><span class="p">())</span>
+# [unique.]date_time_this_decade(before_now: bool = True, after_now: bool = False, tzinfo: tzinfo | None = None) -&gt; datetime
+print(&quot;date_time_this_decade:&quot;, date_time_this_decade())
 
-<span class="c1"># [unique.]date_time_this_month(before_now: bool = True, after_now: bool = False, tzinfo: tzinfo | None = None) -&gt; datetime</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;date_time_this_month:&quot;</span><span class="p">,</span> <span class="n">date_time_this_month</span><span class="p">())</span>
+# [unique.]date_time_this_month(before_now: bool = True, after_now: bool = False, tzinfo: tzinfo | None = None) -&gt; datetime
+print(&quot;date_time_this_month:&quot;, date_time_this_month())
 
-<span class="c1"># [unique.]date_time_this_year(before_now: bool = True, after_now: bool = False, tzinfo: tzinfo | None = None) -&gt; datetime</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;date_time_this_year:&quot;</span><span class="p">,</span> <span class="n">date_time_this_year</span><span class="p">())</span>
+# [unique.]date_time_this_year(before_now: bool = True, after_now: bool = False, tzinfo: tzinfo | None = None) -&gt; datetime
+print(&quot;date_time_this_year:&quot;, date_time_this_year())
 
-<span class="c1"># [unique.]day_of_month() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;day_of_month:&quot;</span><span class="p">,</span> <span class="n">day_of_month</span><span class="p">())</span>
+# [unique.]day_of_month() -&gt; str
+print(&quot;day_of_month:&quot;, day_of_month())
 
-<span class="c1"># [unique.]day_of_week() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;day_of_week:&quot;</span><span class="p">,</span> <span class="n">day_of_week</span><span class="p">())</span>
+# [unique.]day_of_week() -&gt; str
+print(&quot;day_of_week:&quot;, day_of_week())
 
-<span class="c1"># [unique.]future_date(end_date: date | datetime | timedelta | str | int = &#39;+30d&#39;, tzinfo: tzinfo | None = None) -&gt; date</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;future_date:&quot;</span><span class="p">,</span> <span class="n">future_date</span><span class="p">())</span>
+# [unique.]future_date(end_date: date | datetime | timedelta | str | int = '+30d', tzinfo: tzinfo | None = None) -&gt; date
+print(&quot;future_date:&quot;, future_date())
 
-<span class="c1"># [unique.]future_datetime(end_date: date | datetime | timedelta | str | int = &#39;+30d&#39;, tzinfo: tzinfo | None = None) -&gt; datetime</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;future_datetime:&quot;</span><span class="p">,</span> <span class="n">future_datetime</span><span class="p">())</span>
+# [unique.]future_datetime(end_date: date | datetime | timedelta | str | int = '+30d', tzinfo: tzinfo | None = None) -&gt; datetime
+print(&quot;future_datetime:&quot;, future_datetime())
 
-<span class="c1"># [unique.]iso8601(tzinfo: tzinfo | None = None, end_datetime: date | datetime | timedelta | str | int | None = None, sep: str = &#39;T&#39;, timespec: str = &#39;auto&#39;) -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;iso8601:&quot;</span><span class="p">,</span> <span class="n">iso8601</span><span class="p">())</span>
+# [unique.]iso8601(tzinfo: tzinfo | None = None, end_datetime: date | datetime | timedelta | str | int | None = None, sep: str = 'T', timespec: str = 'auto') -&gt; str
+print(&quot;iso8601:&quot;, iso8601())
 
-<span class="c1"># [unique.]month() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;month:&quot;</span><span class="p">,</span> <span class="n">month</span><span class="p">())</span>
+# [unique.]month() -&gt; str
+print(&quot;month:&quot;, month())
 
-<span class="c1"># [unique.]month_name() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;month_name:&quot;</span><span class="p">,</span> <span class="n">month_name</span><span class="p">())</span>
+# [unique.]month_name() -&gt; str
+print(&quot;month_name:&quot;, month_name())
 
-<span class="c1"># [unique.]past_date(start_date: date | datetime | timedelta | str | int = &#39;-30d&#39;, tzinfo: tzinfo | None = None) -&gt; date</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;past_date:&quot;</span><span class="p">,</span> <span class="n">past_date</span><span class="p">())</span>
+# [unique.]past_date(start_date: date | datetime | timedelta | str | int = '-30d', tzinfo: tzinfo | None = None) -&gt; date
+print(&quot;past_date:&quot;, past_date())
 
-<span class="c1"># [unique.]past_datetime(start_date: date | datetime | timedelta | str | int = &#39;-30d&#39;, tzinfo: tzinfo | None = None) -&gt; datetime</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;past_datetime:&quot;</span><span class="p">,</span> <span class="n">past_datetime</span><span class="p">())</span>
+# [unique.]past_datetime(start_date: date | datetime | timedelta | str | int = '-30d', tzinfo: tzinfo | None = None) -&gt; datetime
+print(&quot;past_datetime:&quot;, past_datetime())
 
-<span class="c1"># [unique.]pytimezone(*args: Any, **kwargs: Any) -&gt; tzinfo | None</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pytimezone:&quot;</span><span class="p">,</span> <span class="n">pytimezone</span><span class="p">())</span>
+# [unique.]pytimezone(*args: Any, **kwargs: Any) -&gt; tzinfo | None
+print(&quot;pytimezone:&quot;, pytimezone())
 
-<span class="c1"># [unique.]time(pattern: str = &#39;%H:%M:%S&#39;, end_datetime: date | datetime | timedelta | str | int | None = None) -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;time:&quot;</span><span class="p">,</span> <span class="n">time</span><span class="p">())</span>
+# [unique.]time(pattern: str = '%H:%M:%S', end_datetime: date | datetime | timedelta | str | int | None = None) -&gt; str
+print(&quot;time:&quot;, time())
 
-<span class="c1"># [unique.]time_delta(end_datetime: date | datetime | timedelta | str | int | None = None) -&gt; timedelta</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;time_delta:&quot;</span><span class="p">,</span> <span class="n">time_delta</span><span class="p">())</span>
+# [unique.]time_delta(end_datetime: date | datetime | timedelta | str | int | None = None) -&gt; timedelta
+print(&quot;time_delta:&quot;, time_delta())
 
-<span class="c1"># [unique.]time_object(end_datetime: date | datetime | timedelta | str | int | None = None) -&gt; time</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;time_object:&quot;</span><span class="p">,</span> <span class="n">time_object</span><span class="p">())</span>
+# [unique.]time_object(end_datetime: date | datetime | timedelta | str | int | None = None) -&gt; time
+print(&quot;time_object:&quot;, time_object())
 
-<span class="c1"># [unique.]time_series(start_date: date | datetime | timedelta | str | int = &#39;-30d&#39;, end_date: date | datetime | timedelta | str | int = &#39;now&#39;, precision: float | None = None, distrib: Callable[[datetime], float] | None = None, tzinfo: tzinfo | None = None) -&gt; Iterator[Tuple[datetime, Any]]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;time_series:&quot;</span><span class="p">,</span> <span class="n">time_series</span><span class="p">())</span>
+# [unique.]time_series(start_date: date | datetime | timedelta | str | int = '-30d', end_date: date | datetime | timedelta | str | int = 'now', precision: float | None = None, distrib: Callable[[datetime], float] | None = None, tzinfo: tzinfo | None = None) -&gt; Iterator[Tuple[datetime, Any]]
+print(&quot;time_series:&quot;, time_series())
 
-<span class="c1"># [unique.]timezone() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;timezone:&quot;</span><span class="p">,</span> <span class="n">timezone</span><span class="p">())</span>
+# [unique.]timezone() -&gt; str
+print(&quot;timezone:&quot;, timezone())
 
-<span class="c1"># [unique.]unix_time(end_datetime: date | datetime | timedelta | str | int | None = None, start_datetime: date | datetime | timedelta | str | int | None = None) -&gt; float</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;unix_time:&quot;</span><span class="p">,</span> <span class="n">unix_time</span><span class="p">())</span>
+# [unique.]unix_time(end_datetime: date | datetime | timedelta | str | int | None = None, start_datetime: date | datetime | timedelta | str | int | None = None) -&gt; float
+print(&quot;unix_time:&quot;, unix_time())
 
-<span class="c1"># [unique.]year() -&gt; str</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;year:&quot;</span><span class="p">,</span> <span class="n">year</span><span class="p">())</span>
-</code></pre></div>
+# [unique.]year() -&gt; str
+print(&quot;year:&quot;, year())
+</code></pre>
         </div>
       </article>
     </main>
@@ -505,7 +506,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: December 10, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

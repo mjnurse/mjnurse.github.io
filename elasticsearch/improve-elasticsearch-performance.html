@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Improve Elasticsearch Performance" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>Improve Elasticsearch Performance</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>Improve Elasticsearch Performance</h1>
+<div class="table-of-contents">
+<h2>Contents</h2>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#customize-field-mappings">Customize Field Mappings</a></li>
+<li><a href="#disable-the-_source-field">Disable The _source Field</a></li>
+<li><a href="#disable-the-_all-field">Disable the _all Field</a></li>
+</ul>
+</div>
+<h1 id="overview">Overview</h1>
+<p>Some tips on how to improve / ensure good Elasticsearch performance.</p>
+<h1 id="customize-field-mappings">Customize Field Mappings</h1>
+<p>If you don't need to search a field, don't index it:</p>
+<pre class="codehilite"><code class="language-json">{
+    &quot;field_name&quot;: {
+        &quot;type&quot;:     &quot;string&quot;,
+        &quot;index&quot;:    &quot;no&quot;
+    }
+}
+</code></pre>
+
+<p>For fields you want to index, use the simplest analyzer, or maybe don't analyze at all.  By default, <code>string</code> fields are <code>analyzed</code> as are the strings in any queries on this fields.  The other option is <code>not_analyzed</code> - the field is indexed so it is searchable, but the value is indexed, as a single string, exactly as specified.</p>
+<pre class="codehilite"><code class="language-json">{
+    &quot;field_name&quot;: {
+        &quot;type&quot;:     &quot;string&quot;,
+        &quot;index&quot;:    &quot;not_analyzed&quot;
+    }
+}
+</code></pre>
+
+<p>The other simple types (long, double, date, etc.) also accept the index parameter, but the only relevant values are <code>no</code> and <code>not_analyzed</code> because their values are never <code>analyzed</code>.</p>
+<p>Alternately specify <code>analyzer</code>: For analyzed string fields specify which analyzer to apply both at search time and index time. By default, Elasticsearch uses the <code>standard</code> analyzer, but you can change this by specifying one of the built-in analyzers, such as <code>whitespace</code>, <code>simple</code>, or <code>english</code>.</p>
+<pre class="codehilite"><code class="language-json">{
+    &quot;tweet&quot;: {
+        &quot;type&quot;:     &quot;string&quot;,
+        &quot;analyzer&quot;: &quot;english&quot;
+    }
+}
+</code></pre>
+
+<h1 id="disable-the-_source-field">Disable The _source Field</h1>
+<p><code>_source</code> contains the original JSON document alongside the indexed fields.  This can be removed when creating the index:</p>
+<pre class="codehilite"><code class="language-bash">PUT index_name -d '
+{
+    &quot;mappings&quot;: {
+        &quot;_source&quot;: {
+            &quot;enabled&quot;: false
+        }
+    }
+}
+</code></pre>
+
+<p>However, without <code>_source</code> we cannot:</p>
+<ul>
+<li>
+<p>View the source field (string) which matched a query, we can only identify the doc <code>_id</code> for the match.</p>
+</li>
+<li>
+<p>Do on the fly highlighting.</p>
+</li>
+<li>
+<p>Use the <code>update</code>, <code>update_by_query</code> and <code>reindex</code> APIs.</p>
+</li>
+<li>
+<p>Upgrade an index to a new major version or repair index corruption automatically.</p>
+</li>
+</ul>
+<p>An expert-only feature is the ability to prune the contents of the <code>_source</code> field after the document has been indexed, but before the <code>_source</code> field is stored. Removing fields from the <code>_source</code> has similar downsides to disabling <code>_source</code>.</p>
+<h1 id="disable-the-_all-field">Disable the _all Field</h1>
+<hr>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: December 11, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

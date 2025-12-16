@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Single Transaction or Multi Transaction Documents - Which is Faster To Return a Transaction" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>Single Transaction or Multi Transaction Documents - Which is Faster To Return a Transaction</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>Single Transaction or Multi Transaction Documents - Which is Faster To Return a Transaction</h1>
+<h1 id="single-transaction-or-multi-transaction-documents-which-is-faster-to-return-a-transaction">Single Transaction or Multi Transaction Documents - Which is Faster To Return a Transaction</h1>
+<h3 id="the-question">The Question</h3>
+<p>If we are using Elastic Search to store transactions (bank account transactions), is it more performant to bundle transactions together and create fewer documents, or create a document for each transaction?</p>
+<p>For the purpose of this test, a transaction is:</p>
+<pre class="codehilite"><code>[transaction_id, account_number, date, payee, amount]
+</code></pre>
+
+<p>Where:
+- <strong>transaction_id</strong> - A unique number constructed from month, account number and transaction number.
+- <strong>account_number</strong> - 100000000000 + integer in range 1 - 100,000 (100,000 accounts).
+- <strong>date</strong> - yyyymmdd.  With a range of 36 months.
+- <strong>payee</strong> - 3 random words, circa 30 characters length in total.
+- <strong>amount</strong> - A number in the range -10,000.00 to 10,000.00.</p>
+<p>As I alluded to above, I generated transactions for 36 months and 100,000 accounts.  For each month I generated between 40 and 60 transactions per account.</p>
+<p>I'm comparing 3 indexing options:</p>
+<ul>
+<li>A document per transaction.</li>
+<li>A document per account per month.</li>
+<li>A document containing 10 accounts transactions per month.</li>
+</ul>
+<p>I'll compare time to index, size of index and time to return a set of random transactions.</p>
+<p>Before running the retrieval operations I'll run a force merge to reduce the index segments to 1 per shard to ensure this doesn't impact on performance.  My index is split of 5 shards.  Elastic Search service has 0.5GB memory and an Intel i7 CPU, running Windows 10.</p>
+<h2 id="results">Results</h2>
+<h3 id="one-document-per-transaction">One Document Per Transaction:</h3>
+<p>| <strong>Build Time</strong>                      | 278s per month               |
+| <strong>Index Size</strong>                      | 19.6gb                       |
+| <strong>Number of Documents</strong>             | 163,466,856                  |
+| <strong>Query 1,000 random transactions</strong> | 1.33s (average over 25 runs) |</p>
+<h3 id="one-document-per-month-for-each-account">One Document Per Month For Each Account:</h3>
+<p>| <strong>Build Time</strong>                      | 94.0s per month              |
+| <strong>Index Size</strong>                      | 16gb                         |
+| <strong>Number of Documents</strong>             | 36,000,000                   |
+| <strong>Query 1,000 random transactions</strong> | 1.38s (average over 25 runs) |</p>
+<h3 id="each-document-contains-transactions-for-10-accounts-per-month">Each document Contains Transactions For 10 Accounts Per Month:</h3>
+<p>| <strong>Build Time</strong>                      | 99.7s per month              |
+| <strong>Index Size</strong>                      | 13gb                         |
+| <strong>Number of Documents</strong>             | 3,600,000                    |
+| <strong>Query 1,000 random transactions</strong> | 2.38s (average over 25 runs) |</p>
+<h2 id="summary">Summary</h2>
+<p>Indexing 1 document per account per month was almost 3x quicker than 1 document per transaction and used circa 20% less space.  Query times between the two were very similar.</p>
+<p>Moving up to 1 document for 10 accounts transactions per month, took about the same time to index as 1 accounts transaction per month and saved a further 18% in space but took 70% longer to query.  I suspect it was due to the volume of data returned.  I got very close to 1 document returned for each transaction in both multi transaction per document tests.  However, in the multiple accounts per document per month test, the documents returned were 10x larger.</p>
+<p>This test suggest that it is best in terms of space used, index build time and random transaction query time to use 1 document per account per month.</p>
+<hr>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: December 11, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>Set Default User For WSL Ubuntu</title>
   </head>
   <body class="light" id="top">
@@ -90,12 +91,12 @@
           <h1>Set Default User For WSL Ubuntu</h1>
 <p>Useful if WSL switches to <code>root</code> as the default user.</p>
 <p>The command depend on the version of Ubuntu you have installed.  Press the windows key and type "Ubuntu" and you should see the Unbuntu app listed which may include a version number.  If so, add this to the end on the <code>ubuntu</code> command.</p>
-<div class="codehilite"><pre><span></span><code><span class="nv">ubuntu</span><span class="w"> </span><span class="nv">config</span><span class="w"> </span><span class="o">--</span><span class="nv">default</span><span class="o">-</span><span class="nv">user</span><span class="w"> </span><span class="nv">martin</span>
+<pre class="codehilite"><code>ubuntu config --default-user martin
 
-#<span class="w"> </span><span class="nv">Or</span><span class="w"> </span><span class="k">for</span>,<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nv">example</span>,<span class="w"> </span><span class="nv">version</span><span class="w"> </span><span class="mi">22</span>.<span class="mi">04</span>:
+# Or for, for example, version 22.04:
 
-<span class="nv">ubuntu2204</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nv">default</span><span class="o">-</span><span class="nv">user</span><span class="w"> </span><span class="nv">martin</span>
-</code></pre></div>
+ubuntu2204 -- default-user martin
+</code></pre>
         </div>
       </article>
     </main>
@@ -113,7 +114,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: November 25, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

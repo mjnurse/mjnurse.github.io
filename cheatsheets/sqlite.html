@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>SQLite</title>
   </head>
   <body class="light" id="top">
@@ -184,11 +185,11 @@
 </tbody>
 </table>
 <h1 id="comments">Comments</h1>
-<div class="codehilite"><pre><span></span><code><span class="c1">-- One line comment</span>
-<span class="cm">/*</span>
-<span class="cm">Mutliple line comment</span>
-<span class="cm">*/</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-sql">-- One line comment
+/*
+Mutliple line comment
+*/
+</code></pre>
 
 <h1 id="functions-expressions">Functions / Expressions</h1>
 <table>
@@ -331,19 +332,19 @@
 </table>
 <h1 id="operators">Operators</h1>
 <p>SQLite understands the following binary operators, in order from highest to lowest precedence:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">||</span>
-<span class="o">*</span><span class="w">    </span><span class="o">/</span><span class="w">    </span><span class="o">%</span>
-<span class="o">+</span><span class="w">    </span><span class="o">-</span>
-<span class="o">&lt;&lt;</span><span class="w">   </span><span class="o">&gt;&gt;</span><span class="w">   </span><span class="o">&amp;</span><span class="w">    </span><span class="o">|</span>
-<span class="o">&lt;</span><span class="w">    </span><span class="o">&lt;=</span><span class="w">   </span><span class="o">&gt;</span><span class="w">    </span><span class="o">&gt;=</span>
-<span class="o">=</span><span class="w">    </span><span class="o">==</span><span class="w">   </span><span class="o">!=</span><span class="w">   </span><span class="o">&lt;&gt;</span><span class="w">   </span><span class="k">IS</span><span class="w">   </span><span class="k">IS</span><span class="w"> </span><span class="k">NOT</span><span class="w">   </span><span class="k">IN</span><span class="w">   </span><span class="k">LIKE</span><span class="w">   </span><span class="n">GLOB</span><span class="w">   </span><span class="k">MATCH</span><span class="w">   </span><span class="n">REGEXP</span>
-<span class="k">AND</span><span class="w">   </span>
-<span class="k">OR</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-sql">||
+*    /    %
++    -
+&lt;&lt;   &gt;&gt;   &amp;    |
+&lt;    &lt;=   &gt;    &gt;=
+=    ==   !=   &lt;&gt;   IS   IS NOT   IN   LIKE   GLOB   MATCH   REGEXP
+AND   
+OR
+</code></pre>
 
 <p>Supported unary prefix operators are these:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">-</span><span class="w">    </span><span class="o">+</span><span class="w">    </span><span class="o">~</span><span class="w">    </span><span class="k">NOT</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-sql">-    +    ~    NOT
+</code></pre>
 
 <p>The COLLATE operator is a unary postfix operator that assigns a collating sequence to an expression.</p>
 <p>The <code>IS</code> and <code>IS NOT</code> operators work like <code>=</code> and <code>!=</code> except <code>NULL IS NULL</code> is true and <code>1 IS NOT NULL</code> is true.</p>
@@ -437,24 +438,24 @@
 </tbody>
 </table>
 <h1 id="case">CASE</h1>
-<div class="codehilite"><pre><span></span><code><span class="k">CASE</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="k">WHEN</span><span class="w"> </span><span class="n">w1</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="n">r1</span><span class="w"> </span><span class="k">WHEN</span><span class="w"> </span><span class="n">w2</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="n">r2</span><span class="w"> </span><span class="k">ELSE</span><span class="w"> </span><span class="n">r3</span><span class="w"> </span><span class="k">END</span>
-<span class="k">CASE</span><span class="w"> </span><span class="k">WHEN</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="n">w1</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="n">r1</span><span class="w"> </span><span class="k">WHEN</span><span class="w"> </span><span class="n">x</span><span class="o">=</span><span class="n">w2</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="n">r2</span><span class="w"> </span><span class="k">ELSE</span><span class="w"> </span><span class="n">r3</span><span class="w"> </span><span class="k">END</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-sql">CASE x WHEN w1 THEN r1 WHEN w2 THEN r2 ELSE r3 END
+CASE WHEN x=w1 THEN r1 WHEN x=w2 THEN r2 ELSE r3 END
+</code></pre>
 
 <p>A NULL result is considered untrue when evaluating WHEN terms.</p>
 <p>If the base expression is NULL then the result of the CASE is always the result of evaluating the ELSE expression if it exists, or NULL if it does not.</p>
 <p>Both forms of the CASE expression use lazy, or short-circuit, evaluation.</p>
 <h1 id="in-and-not-in">IN and NOT IN</h1>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">9</span><span class="p">);</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">z</span><span class="p">);</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-sql">SELECT v FROM t WHERE v IN (1, 4, 9);
+SELECT v FROM t WHERE v IN (SELECT y FROM z);
+</code></pre>
 
 <h1 id="rowid">ROWID</h1>
 <p><code>ROWID</code>, <code>OID</code>, or <code>_ROWID_</code></p>
 <p>The three special identifiers describe the unique integer key (the rowid) associated with every row of every table.</p>
 <h1 id="exists">EXISTS</h1>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">z</span><span class="p">);</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-sql">SELECT v FROM t WHERE EXISTS (SELECT a FROM b WHERE y = z);
+</code></pre>
 
 <h1 id="cast-expressions">CAST expressions</h1>
 <p><code>CAST(expr AS datatype-name)</code></p>
@@ -747,16 +748,16 @@
 </tbody>
 </table>
 <h1 id="explain-plan">Explain Plan</h1>
-<div class="codehilite"><pre><span></span><code><span class="k">EXPLAIN</span><span class="w"> </span><span class="n">QUERY</span><span class="w"> </span><span class="n">PLAN</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
-<span class="k">FROM</span><span class="w">   </span><span class="n">tab</span>
-<span class="k">WHERE</span><span class="w">  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;bloggs&#39;</span><span class="p">;</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-sql">EXPLAIN QUERY PLAN
+SELECT *
+FROM   tab
+WHERE  col = 'bloggs';
+</code></pre>
 
 <h1 id="load-csv-data">Load CSV Data</h1>
-<div class="codehilite"><pre><span></span><code><span class="p">.</span><span class="k">mode</span><span class="w"> </span><span class="n">csv</span>
-<span class="p">.</span><span class="n">import</span><span class="w"> </span><span class="n">file</span><span class="p">.</span><span class="n">csv</span><span class="w"> </span><span class="k">table_name</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-sql">.mode csv
+.import file.csv table_name
+</code></pre>
 
 <hr>
         </div>
@@ -776,7 +777,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: December 10, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

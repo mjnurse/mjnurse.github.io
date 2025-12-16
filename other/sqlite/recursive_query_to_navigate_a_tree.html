@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>Recursive Query to Navigate a Tree</title>
   </head>
   <body class="light" id="top">
@@ -90,63 +91,63 @@
           <h1>Recursive Query to Navigate a Tree</h1>
 <p>An example of a recursive query to navigate a tree.  For the tree I chose a small part of the Royal Family Tree.</p>
 <h3 id="step-1-create-the-parent-child-records-in-a-table">Step 1 - Create the parent child records in a table:</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">family</span><span class="p">(</span><span class="n">child</span><span class="p">,</span><span class="w"> </span><span class="n">parent</span><span class="p">);</span>
+<pre class="codehilite"><code class="language-sql">CREATE TABLE family(child, parent);
 
-<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;ElizabethI&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">);</span>
-<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;ElizabethII&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;ElizabethI&#39;</span><span class="p">);</span>
-<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Charles&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;ElizabethII&#39;</span><span class="p">);</span>
-<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Anne&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;ElizabethII&#39;</span><span class="p">);</span>
-<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Andrew&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;ElizabethII&#39;</span><span class="p">);</span>
-<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Edward&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;ElizabethII&#39;</span><span class="p">);</span>
-<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;William&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Charles&#39;</span><span class="p">);</span>
-<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Harry&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Charles&#39;</span><span class="p">);</span>
-<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;George&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;William&#39;</span><span class="p">);</span>
-<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Charlotte&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;William&#39;</span><span class="p">);</span>
-<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Louis&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;William&#39;</span><span class="p">);</span>
-<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;Archie&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Harry&#39;</span><span class="p">);</span>
-</code></pre></div>
+INSERT INTO family VALUES ('ElizabethI', '');
+INSERT INTO family VALUES ('ElizabethII', 'ElizabethI');
+INSERT INTO family VALUES ('Charles', 'ElizabethII');
+INSERT INTO family VALUES ('Anne', 'ElizabethII');
+INSERT INTO family VALUES ('Andrew', 'ElizabethII');
+INSERT INTO family VALUES ('Edward', 'ElizabethII');
+INSERT INTO family VALUES ('William', 'Charles');
+INSERT INTO family VALUES ('Harry', 'Charles');
+INSERT INTO family VALUES ('George', 'William');
+INSERT INTO family VALUES ('Charlotte', 'William');
+INSERT INTO family VALUES ('Louis', 'William');
+INSERT INTO family VALUES ('Archie', 'Harry');
+</code></pre>
 
 <h3 id="step-2-the-recursive-query">Step 2: The recursive query:</h3>
-<div class="codehilite"><pre><span></span><code><span class="p">.</span><span class="k">mode</span><span class="w"> </span><span class="k">column</span>
-<span class="p">.</span><span class="n">width</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">40</span>
-<span class="k">WITH</span><span class="w"> </span><span class="k">RECURSIVE</span><span class="w"> </span><span class="n">rec</span><span class="p">(</span><span class="n">person</span><span class="p">,</span><span class="w"> </span><span class="n">depth</span><span class="p">,</span><span class="w"> </span><span class="n">padding</span><span class="p">,</span><span class="w"> </span><span class="n">path</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span>
-<span class="w">  </span><span class="k">SELECT</span><span class="w">  </span><span class="n">child</span>
-<span class="w">        </span><span class="p">,</span><span class="w"> </span><span class="mi">1</span>
-<span class="w">        </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
-<span class="w">        </span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
-<span class="w">  </span><span class="k">FROM</span><span class="w">    </span><span class="n">family</span>
-<span class="w">  </span><span class="k">WHERE</span><span class="w"> </span><span class="n">parent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
-<span class="w">  </span><span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span>
-<span class="w">  </span><span class="k">SELECT</span><span class="w">  </span><span class="n">family</span><span class="p">.</span><span class="n">child</span>
-<span class="w">        </span><span class="p">,</span><span class="w"> </span><span class="n">depth</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span>
-<span class="w">        </span><span class="p">,</span><span class="w"> </span><span class="n">padding</span><span class="o">||</span><span class="s1">&#39;   &#39;</span><span class="w"> </span><span class="c1">-- for indenting children</span>
-<span class="w">        </span><span class="p">,</span><span class="w"> </span><span class="n">path</span><span class="o">||</span><span class="n">child</span><span class="w">    </span><span class="c1">-- to order the results</span>
-<span class="w">  </span><span class="k">FROM</span><span class="w">    </span><span class="n">family</span>
-<span class="w">  </span><span class="k">JOIN</span><span class="w">    </span><span class="n">rec</span>
-<span class="w">  </span><span class="k">ON</span><span class="w">      </span><span class="p">(</span><span class="n">family</span><span class="p">.</span><span class="n">parent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rec</span><span class="p">.</span><span class="n">person</span><span class="p">)</span>
-<span class="p">)</span>
-<span class="k">SELECT</span><span class="w">    </span><span class="n">depth</span>
-<span class="w">        </span><span class="p">,</span><span class="w"> </span><span class="n">padding</span><span class="o">||</span><span class="n">person</span>
-<span class="k">FROM</span><span class="w">      </span><span class="n">rec</span>
-<span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w">  </span><span class="n">path</span><span class="p">;</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-sql">.mode column
+.width 5 40
+WITH RECURSIVE rec(person, depth, padding, path) AS (
+  SELECT  child
+        , 1
+        , ''
+        , ''
+  FROM    family
+  WHERE parent = ''
+  UNION ALL
+  SELECT  family.child
+        , depth + 1
+        , padding||'   ' -- for indenting children
+        , path||child    -- to order the results
+  FROM    family
+  JOIN    rec
+  ON      (family.parent = rec.person)
+)
+SELECT    depth
+        , padding||person
+FROM      rec
+ORDER BY  path;
+</code></pre>
 
 <p>The output when running the query:</p>
-<div class="codehilite"><pre><span></span><code>$&gt;<span class="w"> </span>cat<span class="w"> </span>recursive.sql<span class="w"> </span><span class="p">|</span><span class="w"> </span>sqlite3
+<pre class="codehilite"><code class="language-bash">$&gt; cat recursive.sql | sqlite3
 
-<span class="m">1</span><span class="w">      </span>ElizabethI
-<span class="m">2</span><span class="w">         </span>ElizabethII
-<span class="m">3</span><span class="w">            </span>Andrew
-<span class="m">3</span><span class="w">            </span>Anne
-<span class="m">3</span><span class="w">            </span>Charles
-<span class="m">4</span><span class="w">               </span>Harry
-<span class="m">5</span><span class="w">                  </span>Archie
-<span class="m">4</span><span class="w">               </span>William
-<span class="m">5</span><span class="w">                  </span>Charlotte
-<span class="m">5</span><span class="w">                  </span>George
-<span class="m">5</span><span class="w">                  </span>Louis
-<span class="m">3</span><span class="w">            </span>Edward
-</code></pre></div>
+1      ElizabethI
+2         ElizabethII
+3            Andrew
+3            Anne
+3            Charles
+4               Harry
+5                  Archie
+4               William
+5                  Charlotte
+5                  George
+5                  Louis
+3            Edward
+</code></pre>
 
 <hr>
         </div>
@@ -166,7 +167,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: November 25, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>Formatting Python</title>
   </head>
   <body class="light" id="top">
@@ -100,18 +101,18 @@
 </ul>
 <h2 id="changing-the-config-options">Changing the config Options</h2>
 <p>For yapf - create a style definition document as follows and then modify to change the settings.</p>
-<div class="codehilite"><pre><span></span><code>yapf --style-help &gt; ~/.style.yapf
-</code></pre></div>
+<pre class="codehilite"><code>yapf --style-help &gt; ~/.style.yapf
+</code></pre>
 
 <p>The changes I made are:</p>
-<div class="codehilite"><pre><span></span><code>continuation_indent_width=3
+<pre class="codehilite"><code>continuation_indent_width=3
 indent_width=3
 column_limit=109
-</code></pre></div>
+</code></pre>
 
 <p>For pylint3, I've chosen to change the two settings using command line parameters.</p>
-<div class="codehilite"><pre><span></span><code>pylint3 --max-line-length=110 --indent-string=&#39;   &#39; --indent-after-paren=3 ...
-</code></pre></div>
+<pre class="codehilite"><code>pylint3 --max-line-length=110 --indent-string='   ' --indent-after-paren=3 ...
+</code></pre>
         </div>
       </article>
     </main>
@@ -129,7 +130,7 @@ column_limit=109
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: November 25, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

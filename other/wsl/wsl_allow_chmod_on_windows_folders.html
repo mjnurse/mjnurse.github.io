@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>WSL Allow chmod On Windows Folders</title>
   </head>
   <body class="light" id="top">
@@ -89,15 +90,15 @@
         <div class="article-body">
           <h1>WSL Allow chmod On Windows Folders</h1>
 <p>Create or edit a file named <code>/etc/wsl.conf</code> and edit it to contain the following.  Note I also move the mount point of the windows C drive from <code>/mnt/c</code> to <code>/c</code>.</p>
-<div class="codehilite"><pre><span></span><code><span class="o">[</span>automount<span class="o">]</span>
-<span class="nv">enabled</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span>
-<span class="nv">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>/
-<span class="nv">options</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;metadata,umask=22,fmask=11&quot;</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">[automount]
+enabled = true
+root = /
+options = &quot;metadata,umask=22,fmask=11&quot;
+</code></pre>
 
 <p>Reboot WSL</p>
-<div class="codehilite"><pre><span></span><code>wsl.exe --shutdown
-</code></pre></div>
+<pre class="codehilite"><code class="language-cmd">wsl.exe --shutdown
+</code></pre>
 
 <hr>
         </div>
@@ -117,7 +118,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: November 25, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

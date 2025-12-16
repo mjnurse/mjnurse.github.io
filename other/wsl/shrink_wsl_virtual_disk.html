@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>Shrink WSL Virtual Disk</title>
   </head>
   <body class="light" id="top">
@@ -89,26 +90,26 @@
         <div class="article-body">
           <h1>Shrink WSL Virtual Disk</h1>
 <p>I noticed a very large (32GB) file:</p>
-<div class="codehilite"><pre><span></span><code>C:\Users\...\AppData\Local\Docker\wsl\data\ext4.vhdx
-</code></pre></div>
+<pre class="codehilite"><code>C:\Users\...\AppData\Local\Docker\wsl\data\ext4.vhdx
+</code></pre>
 
 <p>Before doing anything it might be sensible to back the disk etc. up.</p>
 <h3 id="1-first-check-is-wsl-is-running-and-if-so-ternimate-it">1. First check is WSL is running and if so ternimate it</h3>
 <p>Using Windows Powershell:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">&gt; </span><span class="ge">wsl.exe --list --verbose</span>
+<pre class="codehilite"><code>&gt; wsl.exe --list --verbose
   NAME                   STATE           VERSION
-<span class="k">*</span> Ubuntu                 Running         1
+* Ubuntu                 Running         1
   docker-desktop-data    Running         2
   docker-desktop         Running         2
-</code></pre></div>
+</code></pre>
 
 <p>Terminate the running WSL(s):</p>
-<div class="codehilite"><pre><span></span><code>&gt; wsl.exe --terminate Ubuntu
-</code></pre></div>
+<pre class="codehilite"><code>&gt; wsl.exe --terminate Ubuntu
+</code></pre>
 
 <h3 id="2-use-diskpart-to-shrink-the-disk-partition">2. Use diskpart to shrink the disk partition</h3>
 <p>Using Windows Powershell:</p>
-<div class="codehilite"><pre><span></span><code>DISKPART&gt; select vdisk file=&quot;C:\Users\...\LocalState\ext4.vhdx&quot;
+<pre class="codehilite"><code>DISKPART&gt; select vdisk file=&quot;C:\Users\...\LocalState\ext4.vhdx&quot;
 
 DiskPart successfully selected the virtual disk file.
 
@@ -117,7 +118,7 @@ DISKPART&gt; compact vdisk
 100 percent completed
 
 DiskPart successfully compacted the virtual disk file.  
-</code></pre></div>
+</code></pre>
 
 <hr>
         </div>
@@ -137,7 +138,7 @@ DiskPart successfully compacted the virtual disk file.
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: November 25, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>Worked Example - Kubernetes</title>
   </head>
   <body class="light" id="top">
@@ -89,44 +90,44 @@
         <div class="article-body">
           <h1>Worked Example - Kubernetes</h1>
 <h2 id="1">1.</h2>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">http.server</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseHTTPRequestHandler</span><span class="p">,</span> <span class="n">HTTPServer</span>
+<pre class="codehilite"><code class="language-python">from http.server import BaseHTTPRequestHandler, HTTPServer
 
-<span class="n">hostName</span> <span class="o">=</span> <span class="s2">&quot;localhost&quot;</span>
-<span class="n">serverPort</span> <span class="o">=</span> <span class="mi">8080</span>
+hostName = &quot;localhost&quot;
+serverPort = 8080
 
-<span class="k">class</span><span class="w"> </span><span class="nc">MyServer</span><span class="p">(</span><span class="n">BaseHTTPRequestHandler</span><span class="p">):</span>
-  <span class="k">def</span><span class="w"> </span><span class="nf">do_GET</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">send_response</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">send_header</span><span class="p">(</span><span class="s2">&quot;Content-type&quot;</span><span class="p">,</span> <span class="s2">&quot;text/html&quot;</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">end_headers</span><span class="p">()</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">wfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="s2">&quot;&lt;html&gt;&lt;head&gt;&lt;title&gt;MJN&lt;/title&gt;&lt;/head&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">wfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="s2">&quot;&lt;body&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">wfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="s2">&quot;&lt;p&gt;Hello from MJN!&lt;/p&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">wfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="s2">&quot;&lt;p&gt;Request: </span><span class="si">%s</span><span class="s2">&lt;/p&gt;&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">wfile</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="s2">&quot;&lt;/body&gt;&lt;/html&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;utf-8&quot;</span><span class="p">))</span>
+class MyServer(BaseHTTPRequestHandler):
+  def do_GET(self):
+    self.send_response(200)
+    self.send_header(&quot;Content-type&quot;, &quot;text/html&quot;)
+    self.end_headers()
+    self.wfile.write(bytes(&quot;&lt;html&gt;&lt;head&gt;&lt;title&gt;MJN&lt;/title&gt;&lt;/head&gt;&quot;, &quot;utf-8&quot;))
+    self.wfile.write(bytes(&quot;&lt;body&gt;&quot;, &quot;utf-8&quot;))
+    self.wfile.write(bytes(&quot;&lt;p&gt;Hello from MJN!&lt;/p&gt;&quot;, &quot;utf-8&quot;))
+    self.wfile.write(bytes(&quot;&lt;p&gt;Request: %s&lt;/p&gt;&quot; % self.path, &quot;utf-8&quot;))
+    self.wfile.write(bytes(&quot;&lt;/body&gt;&lt;/html&gt;&quot;, &quot;utf-8&quot;))
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-  <span class="n">webServer</span> <span class="o">=</span> <span class="n">HTTPServer</span><span class="p">((</span><span class="n">hostName</span><span class="p">,</span> <span class="n">serverPort</span><span class="p">),</span> <span class="n">MyServer</span><span class="p">)</span>
-  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Server started http://</span><span class="si">%s</span><span class="s2">:</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">hostName</span><span class="p">,</span> <span class="n">serverPort</span><span class="p">))</span>
+if __name__ == &quot;__main__&quot;:
+  webServer = HTTPServer((hostName, serverPort), MyServer)
+  print(&quot;Server started http://%s:%s&quot; % (hostName, serverPort))
 
-  <span class="k">try</span><span class="p">:</span>
-    <span class="n">webServer</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">()</span>
-  <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
-    <span class="k">pass</span>
+  try:
+    webServer.serve_forever()
+  except KeyboardInterrupt:
+    pass
 
-  <span class="n">webServer</span><span class="o">.</span><span class="n">server_close</span><span class="p">()</span>
-  <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Server stopped.&quot;</span><span class="p">)</span>
-</code></pre></div>
+  webServer.server_close()
+  print(&quot;Server stopped.&quot;)
+</code></pre>
 
 <p>Create a Dockerfile - <code>dockerfile</code>:</p>
-<div class="codehilite"><pre><span></span><code>FROM python:3
+<pre class="codehilite"><code>FROM python:3
 ADD server.py server.py
 EXPOSE 8080
 ENTRYPOINT [&quot;python3&quot;, &quot;server.py&quot;]
-</code></pre></div>
+</code></pre>
 
-<div class="codehilite"><pre><span></span><code>&gt; podman build -f dockerfile  . -t web-server
-</code></pre></div>
+<pre class="codehilite"><code>&gt; podman build -f dockerfile  . -t web-server
+</code></pre>
 
 <blockquote>
 <p>podman run web-server:latest --expose=8080 &amp;</p>
@@ -149,7 +150,7 @@ ENTRYPOINT [&quot;python3&quot;, &quot;server.py&quot;]
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: November 25, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

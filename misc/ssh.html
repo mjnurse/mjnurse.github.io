@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>ssh</title>
   </head>
   <body class="light" id="top">
@@ -91,7 +92,7 @@
 <h2 id="storing-ssh-connection-config-details">Storing SSH Connection / Config details</h2>
 <p>Store SSH connection details in a config file in the .ssh directory.  File <code>~/.ssh/config</code></p>
 <p>Contents</p>
-<div class="codehilite"><pre><span></span><code>Host dev
+<pre class="codehilite"><code>Host dev
     HostName dev.example.com
     Port 22
     User martin
@@ -99,17 +100,17 @@ Host test
     HostName test.example.com
     Port 22
     User martin
-</code></pre></div>
+</code></pre>
 
 <h2 id="ssh-login-without-password">SSH Login Without Password</h2>
 <p>1)  Generate a public/private RSA key pair.  Save this to default location <code>/home/&lt;username&gt;/.ssh/id_rsa</code></p>
-<div class="codehilite"><pre><span></span><code>$<span class="w"> </span>ssh-keygen
-</code></pre></div>
+<pre class="codehilite"><code>$ ssh-keygen
+</code></pre>
 
 <p>Your public key will be saved in <code>/home/user/.ssh/id_rsa.pub</code></p>
 <p>2)  Copy the SSH Public Key to the Remote Host</p>
-<div class="codehilite"><pre><span></span><code>$<span class="w"> </span>ssh-copy-id<span class="w"> </span>&lt;username&gt;@remoteserver
-</code></pre></div>
+<pre class="codehilite"><code>$ ssh-copy-id &lt;username&gt;@remoteserver
+</code></pre>
 
 <hr>
         </div>
@@ -129,7 +130,7 @@ Host test
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: November 25, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

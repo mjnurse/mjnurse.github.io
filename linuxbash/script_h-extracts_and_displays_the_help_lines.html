@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="h - Extracts and displays the help_lines" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>h - Extracts and displays the help_lines</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>h - Extracts and displays the help_lines</h1>
+<pre class="codehilite"><code class="language-bash">#!/bin/bash
+help_text=&quot;
+NAME
+  h - Extracts and displays the (single line) help lines in bash scripts.
+
+USAGE
+  h [&lt;filenames - wildcards allowed&gt;]
+
+OPTIONS
+  -m|--matchesonly
+    Only display the help lines available, don't report on files missing a help line or with
+    a help line 'tbc'.
+
+DESCRIPTION
+  Extracts and displays the (single line) help lines.
+
+AUTHOR
+  mjnurse.dev - 2020
+&quot;
+
+# set -o errexit
+# set -o nounset
+# set -o pipefail
+# if [[ &quot;${TRACE-0}&quot; == &quot;1&quot; ]]; then
+    # set -o xtrace
+# fi
+
+help_line=&quot;Extracts and displays the help_lines&quot;
+web_desc_line=&quot;Extracts and displays the help_lines&quot;
+
+matches_only_yn=n
+
+case ${1-} in
+  -m|--matchesonly)
+    matches_only_yn=y
+    shift
+    ;;
+  -h|--help)
+    echo &quot;$help_text&quot;
+    exit
+    ;;
+  -*)
+    echo &quot;Bad option: $1&quot;
+    exit
+esac
+
+location=&quot;$(which h)&quot;
+cd &quot;${location:0:-2}&quot;
+
+files=&quot;${*-*}&quot;
+
+if [[ $matches_only_yn == n ]]; then
+
+  # create a file so that the grep command never fails
+  echo &quot;x&quot; &gt; /tmp/h.tmp0
+
+  grep --exclude-dir=&quot;*&quot; -s -L -e &quot;^help_line=&quot; -e &quot;^-- help_line:&quot; /tmp/h.tmp0 $files \
+      | sed '/README.*.md/d; /^h:/d; /tmp0/d' \
+      | sort -f &gt; /tmp/h.tmp
+
+  if [[ $(cat /tmp/h.tmp | wc -l) != 0 ]]; then
+    echo -------------
+    echo No help_line:
+    echo -------------
+    cat /tmp/h.tmp
+  fi
+
+  # create a file so that the grep command never fails
+  echo 'help_line=&quot;tbc&quot;' &gt; /tmp/h.tmp0
+
+  grep -s -l -e &quot;help_line=.*tbc.*&quot; /tmp/h.tmp0 $files \
+      | sed '/README.*.md/d; /^h$/d; /tmp0/d' \
+      | sort -f &gt; /tmp/h.tmp
+
+  if [[ $(cat /tmp/h.tmp | wc -l) != 0 ]]; then
+    echo --------------
+    echo help_line: tbc
+    echo --------------
+    cat /tmp/h.tmp | sed &quot;/tidy/d&quot;
+  fi
+
+  rm -f /tmp/h.tmp0
+
+  echo -----------
+  echo help_lines:
+  echo -----------
+fi
+
+prev_char=&quot;&quot;
+
+grep -H -s -e &quot;^help_line=&quot; -e &quot;^-- help_line:&quot; $files  &gt; /tmp/h.tmp
+cat /tmp/h.tmp | \
+  sed ' 
+    /help_line=.*tbc.*/d
+    /^h:/d; s/help_line=//; s/-- help_line://; s/&quot;/ /g;
+    /tidy:.*echo/d; /^README.*md/d;
+    s/:[0-9][0-9]*:/:/;
+    ' | \
+  sort | while IFS= read -r line ; do 
+    curr_char=&quot;${line:0:1}&quot;
+    if [[ &quot;$curr_char&quot; != &quot;$prev_char&quot; ]]; then
+         prev_char=&quot;$curr_char&quot;
+         echo &quot;$curr_char - $line&quot;
+    else
+         echo &quot;    $line&quot; 
+    fi
+  done | sed  '
+    s/: /:                        /;
+    s/\(.........................\) *\(.*\)/\1\2/; /tidy:.*echo/d' &gt; /tmp/h.out 
+cat /tmp/h.out
+rm -f /tmp/h.out /tmp/h.tmp
+</code></pre>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: December 11, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

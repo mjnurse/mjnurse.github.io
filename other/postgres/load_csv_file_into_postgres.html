@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>PostgreSQL</title>
   </head>
   <body class="light" id="top">
@@ -90,7 +91,7 @@
           <h1>PostgreSQL</h1>
 <h1 id="load-csv-file-into-postgres">Load CSV File Into Postgres</h1>
 <h3 id="create-your-table">Create your table</h3>
-<div class="codehilite"><pre><span></span><code>CREATE TABLE zip_codes 
+<pre class="codehilite"><code>CREATE TABLE zip_codes 
 ( zip CHAR(5)
 , latitude DOUBLE PRECISION
 , longitude DOUBLE PRECISION
@@ -98,15 +99,15 @@
 , state CHAR(2)
 , county VARCHAR
 , zip_class VARCHAR );
-</code></pre></div>
+</code></pre>
 
 <h3 id="copy-data-from-your-csv-file-to-the-table">Copy data from your CSV file to the table:</h3>
-<div class="codehilite"><pre><span></span><code>\copy zip_codes FROM &#39;/path/to/csv/ZIP_CODES.txt&#39; DELIMITER &#39;,&#39; CSV
-</code></pre></div>
+<pre class="codehilite"><code>\copy zip_codes FROM '/path/to/csv/ZIP_CODES.txt' DELIMITER ',' CSV
+</code></pre>
 
 <h3 id="you-can-also-specify-the-columns-to-read">You can also specify the columns to read:</h3>
-<div class="codehilite"><pre><span></span><code>\copy zip_codes(ZIP,CITY,STATE) FROM &#39;/path/to/csv/ZIP_CODES.txt&#39; DELIMITER &#39;,&#39; CSV
-</code></pre></div>
+<pre class="codehilite"><code>\copy zip_codes(ZIP,CITY,STATE) FROM '/path/to/csv/ZIP_CODES.txt' DELIMITER ',' CSV
+</code></pre>
 
 <hr>
         </div>
@@ -126,7 +127,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: November 25, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

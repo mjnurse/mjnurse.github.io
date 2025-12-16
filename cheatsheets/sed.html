@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>sed Cheatsheet</title>
   </head>
   <body class="light" id="top">
@@ -103,38 +104,38 @@
 <h2 id="overview">Overview</h2>
 <p><code>-i</code> - edit file in place.</p>
 <h2 id="3-solutions-to-only-output-matching-lines">3 solutions to only output matching lines:</h2>
-<div class="codehilite"><pre><span></span><code>&gt; cat file | sed -n &quot;/abc/p&quot;
+<pre class="codehilite"><code>&gt; cat file | sed -n &quot;/abc/p&quot;
 
 # Without -n option.  t - skips all further commands, d - deletes the line.
 &gt; cat file | sed &quot;s/\(abc\)/\1/;t;d&quot;
 
 # As above but also print first line.
 &gt; cat file | sed &quot;1p;t; s/\(abc\)/\1/;t;d&quot;
-</code></pre></div>
+</code></pre>
 
 <h2 id="only-output-lines-up-to-but-not-including-the-line-with-the-search-string">Only output lines up to but not including the line with the SEARCH-STRING.</h2>
-<div class="codehilite"><pre><span></span><code>&gt; sed -n &#39;/^SEARCH-STRING/q;p&#39; file
-</code></pre></div>
+<pre class="codehilite"><code>&gt; sed -n '/^SEARCH-STRING/q;p' file
+</code></pre>
 
 <h2 id="only-print-lines-after-and-including-the-line-with-the-search-string">Only print lines after and including the line with the SEARCH-STRING.</h2>
-<div class="codehilite"><pre><span></span><code>&gt; sed -n &#39;/^SEARCH-STRING/,$p&#39; file
-</code></pre></div>
+<pre class="codehilite"><code>&gt; sed -n '/^SEARCH-STRING/,$p' file
+</code></pre>
 
 <h2 id="delete-text-between-two-matching-lines">Delete text between two matching lines</h2>
-<div class="codehilite"><pre><span></span><code># Delete including matching lines
-&gt; cat file | sed sed &#39;/^startstring/,/^endstring}/d&#39;
+<pre class="codehilite"><code># Delete including matching lines
+&gt; cat file | sed sed '/^startstring/,/^endstring}/d'
 
 # Delete excluding matching lines
-&gt; cat file | sed sed &#39;/^startstring/,/^endstring}/{//!d;}&#39;
-</code></pre></div>
+&gt; cat file | sed sed '/^startstring/,/^endstring}/{//!d;}'
+</code></pre>
 
 <h2 id="case-insensitive-searchreplace">Case insensitive search/replace</h2>
-<div class="codehilite"><pre><span></span><code>sed &#39;s/one/two/I&#39;
-</code></pre></div>
+<pre class="codehilite"><code>sed 's/one/two/I'
+</code></pre>
 
 <h2 id="edit-first-line-only">Edit first line only</h2>
-<div class="codehilite"><pre><span></span><code>sed -i &quot;1s/hello/goodbye/&quot; &lt;file&gt;
-</code></pre></div>
+<pre class="codehilite"><code>sed -i &quot;1s/hello/goodbye/&quot; &lt;file&gt;
+</code></pre>
         </div>
       </article>
     </main>
@@ -152,7 +153,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: December 10, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

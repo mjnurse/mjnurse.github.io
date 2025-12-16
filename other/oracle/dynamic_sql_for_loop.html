@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>Oracle</title>
   </head>
   <body class="light" id="top">
@@ -89,28 +90,28 @@
         <div class="article-body">
           <h1>Oracle</h1>
 <h1 id="a-dynamic-sql-for-loop">A Dynamic SQL For Loop</h1>
-<div class="codehilite"><pre><span></span><code><span class="n">DECLARE</span>
-   <span class="kr">TYPE</span> <span class="n">name_salary_rt</span> <span class="kr">IS</span> <span class="kr">RECORD</span> <span class="p">(</span>
-   <span class="p">(</span> <span class="n">name</span>   <span class="n">VARCHAR2</span> <span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
-   <span class="p">,</span> <span class="n">salary</span> <span class="n">NUMBER</span>
-   <span class="p">);</span>
+<pre class="codehilite"><code>DECLARE
+   TYPE name_salary_rt IS RECORD (
+   ( name   VARCHAR2 (1000)
+   , salary NUMBER
+   );
 
-   <span class="kr">TYPE</span> <span class="n">name_salary_aat</span> <span class="kr">IS</span> <span class="n">TABLE</span> <span class="kr">OF</span> <span class="n">name_salary_rt</span> <span class="n">INDEX</span> <span class="kr">BY</span> <span class="n">PLS_INTEGER</span><span class="p">;</span>
+   TYPE name_salary_aat IS TABLE OF name_salary_rt INDEX BY PLS_INTEGER;
 
-   <span class="n">l_employees</span>   <span class="n">name_salary_aat</span><span class="p">;</span>
-<span class="kr">BEGIN</span>
-   <span class="n">EXECUTE</span> <span class="n">IMMEDIATE</span>
-      <span class="n">q</span><span class="s">&#39;[SELECT   first_name || &#39;</span> <span class="err">&#39;</span> <span class="p">||</span> <span class="n">last_name</span><span class="p">,</span> <span class="n">salary</span> 
-         <span class="n">FROM</span>     <span class="n">hr</span><span class="p">.</span><span class="n">employees</span>
-         <span class="n">ORDER</span> <span class="kr">BY</span> <span class="n">salary</span> <span class="n">desc</span><span class="p">]</span><span class="err">&#39;</span>
-      <span class="n">BULK</span> <span class="n">COLLECT</span> <span class="n">INTO</span> <span class="n">l_employees</span><span class="p">;</span>
+   l_employees   name_salary_aat;
+BEGIN
+   EXECUTE IMMEDIATE
+      q'[SELECT   first_name || ' ' || last_name, salary 
+         FROM     hr.employees
+         ORDER BY salary desc]'
+      BULK COLLECT INTO l_employees;
 
-   <span class="kr">FOR</span> <span class="n">indx</span> <span class="kr">IN</span> <span class="mi">1</span> <span class="p">..</span> <span class="n">l_employees</span><span class="p">.</span><span class="n">COUNT</span>
-   <span class="kr">LOOP</span>
-      <span class="n">DBMS_OUTPUT</span><span class="p">.</span><span class="n">put_line</span> <span class="p">(</span><span class="n">l_employees</span> <span class="p">(</span><span class="n">indx</span><span class="p">).</span><span class="n">name</span><span class="p">);</span>
-   <span class="kr">END</span> <span class="kr">LOOP</span><span class="p">;</span>
-<span class="kr">END</span><span class="p">;</span>
-</code></pre></div>
+   FOR indx IN 1 .. l_employees.COUNT
+   LOOP
+      DBMS_OUTPUT.put_line (l_employees (indx).name);
+   END LOOP;
+END;
+</code></pre>
 
 <hr>
         </div>
@@ -130,7 +131,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: November 25, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

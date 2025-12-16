@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="tidy - Fixes eg permission issues with files" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>tidy - Fixes eg permission issues with files</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>tidy - Fixes eg permission issues with files</h1>
+<pre class="codehilite"><code class="language-bash">#!/bin/bash
+help_text=&quot;
+NAME
+  tidy - Fixes issues such as permission issues with files in current directory.
+
+USAGE
+  tidy [&lt;folder&gt;]
+
+OPTIONS
+
+DESCRIPTION
+  Fixes issues such as permission issues with files in current directory.
+
+AUTHOR
+  mjnurse.dev - 2020
+&quot;
+help_line=&quot;Fixes issues such as permission issues with files in current directory&quot;
+web_desc_line=&quot;Fixes eg permission issues with files&quot;
+
+if [[ &quot;$1&quot; != &quot;&quot; ]]; then
+  cd $1
+fi
+
+echo ================================================================================
+echo Executable but not '#!/bin/bash'
+echo ================================================================================
+
+for f in $(find . -maxdepth 1 -executable); do
+
+   if [[ -f $f &amp;&amp; ! -L $f ]]; then
+      line1=&quot;$(head -1 $f)&quot;
+      line1=${line1//[$' \t\r\n']}
+      if [[ &quot;$line1&quot; != &quot;#!/bin/bash&quot; ]]; then
+         echo --------------------------------------------------------------------------------
+         echo FILE: $f
+         echo --------------------------------------------------------------------------------
+         echo First 5 lines:
+         echo --------------
+         head -5 $f
+         echo
+         read -p &quot;[i]gnore rule, [r]emove exec, [a]dd '#!/bin/bash', [s]kip, q[uit]. [iraSq]?: &quot; opt
+         case $opt in
+            r|R)
+               chmod a-x $f;;
+            a|A)
+               sed -i '1i#!/bin/bash' $f;;
+            i|I)
+               break;;
+            q|Q)
+               exit;;
+         esac
+      fi 
+   fi
+done
+
+echo ================================================================================
+echo '#!/bin/bash' but not Executable
+echo ================================================================================
+
+for f in $(find . -maxdepth 1 ! -executable); do
+   if [[ -f $f &amp;&amp; ! -L $f ]]; then
+      line1=&quot;$(head -1 $f)&quot;
+      line1=${line1//[$' \t\r\n']}
+      if [[ &quot;$line1&quot; == &quot;#!/bin/bash&quot; ]]; then
+         echo --------------------------------------------------------------------------------
+         echo FILE: $f
+         echo --------------------------------------------------------------------------------
+         echo First 5 lines:
+            echo --------------
+         head -5 $f
+         echo
+         read -p &quot;[i]gnore rule, [d]elete '#!/bin/bash', [m]ake exec, [s]kip, q[uit]. [idmSq]?: &quot; opt
+         case $opt in
+            d|D)
+               sed -i '1d' $f;;
+            m|M)
+               chmod u+x $f;;
+            i|I)
+               break;;
+            q|Q)
+               exit;;
+         esac
+      fi 
+   fi
+done
+
+echo ================================================================================
+echo Writable by Other
+echo ================================================================================
+
+for f in $(find . -maxdepth 1 -perm -o=w); do
+   if [[ -f $f &amp;&amp; ! -L $f ]]; then
+      echo --------------------------------------------------------------------------------
+      ls -al $f
+      echo
+      read -p &quot;[i]gnore rule, [r]remove writeable other, [s]kip, q[uit]. [irSq]?: &quot; opt
+      case $opt in
+         r|R)
+            chmod o-w $f;;
+         i|I)
+            break;;
+         q|Q)
+            exit;;
+      esac
+   fi
+done
+
+echo ================================================================================
+echo Writable by Group
+echo ================================================================================
+
+for f in $(find . -maxdepth 1 -perm -g=w); do
+   if [[ -f $f &amp;&amp; ! -L $f ]]; then
+      echo --------------------------------------------------------------------------------
+      ls -al $f
+      echo
+      read -p &quot;[i]gnore rule, [r]remove writeable group, [s]kip, q[uit]. [irSq]?: &quot; opt
+      case $opt in
+         r|R)
+            chmod g-w $f;;
+         i|I)
+            break;;
+         q|Q)
+            exit;;
+      esac
+   fi
+done
+
+echo ================================================================================
+echo Executable by Other
+echo ================================================================================
+
+for f in $(find . -maxdepth 1 -perm -o=x); do
+   if [[ -f $f &amp;&amp; ! -L $f ]]; then
+      echo --------------------------------------------------------------------------------
+      ls -al $f
+      echo
+      read -p &quot;[i]gnore rule, [r]remove Exec other, [s]kip, q[uit]. [irSq]?: &quot; opt
+      case $opt in
+         r|R)
+            chmod o-x $f;;
+         i|I)
+            break;;
+         q|Q)
+            exit;;
+      esac
+   fi
+done
+
+echo ================================================================================
+echo Executable by Group
+echo ================================================================================
+
+for f in $(find . -maxdepth 1 -perm -g=x); do
+   if [[ -f $f &amp;&amp; ! -L $f ]]; then
+      echo --------------------------------------------------------------------------------
+      ls -al $f
+      echo
+      read -p &quot;[i]gnore rule, [r]remove Exec group, [s]kip, q[uit]. [irSq]?: &quot; opt
+      case $opt in
+         r|R)
+            chmod g-x $f;;
+         i|I)
+            break;;
+         q|Q)
+            exit;;
+      esac
+   fi
+done
+
+echo ================================================================================
+echo No header
+echo ================================================================================
+
+for f in $(find . -maxdepth 1 -executable); do
+   if [[ -f $f &amp;&amp; ! -L $f ]]; then
+      l2=&quot;$(cat $f | sed -n '2p')&quot;
+      if [[ &quot;${l2:0:10}&quot; != &quot;help_text=&quot; ]]; then
+         echo --------------------------------------------------------------------------------
+         ls -al $f
+         echo
+         read -p &quot;[i]gnore , [a]dd header, [s]kip, q[uit]. [iaSq]?: &quot; opt
+         case $opt in
+            a|A)
+               tidytmp=&quot;/tmp/tidy.tmp&quot;
+echo '#!/bin/bash
+help_text=&quot;
+NAME
+   '${f:2}' - One line description.
+
+USAGE
+   '${f:2}' [options] &lt;parameters&gt;
+
+OPTIONS
+   -x
+      Description...
+
+   -h|--help
+      Show help text.
+
+DESCRIPTION
+   Description description description description.
+
+AUTHOR
+  mjnurse.dev - 2021
+&quot;
+help_line=&quot;'tbc'&quot;
+web_desc_line=&quot;'tbc'&quot;
+
+try=&quot;Try ${0##*/} -h for more information&quot;
+tmp=&quot;${help_text##*USAGE}&quot;
+usage=$(echo &quot;Usage: ${tmp%%OPTIONS*}&quot; | tr -d &quot;\n&quot; | sed &quot;s/  */ /g&quot;)
+
+if [[ &quot;$1&quot; == &quot;&quot; ]]; then
+  echo &quot;${usage}&quot;
+  echo &quot;${try}&quot;
+  exit 1
+fi
+
+if [[ &quot;$1&quot; == &quot;--help&quot; || &quot;$1&quot; == &quot;-h&quot; || &quot;$1&quot; == &quot;?&quot; ]]; then
+   echo &quot;$help_text&quot;
+   exit
+fi
+' &gt; $tidytmp
+               tail +2 $f &gt;&gt; $tidytmp
+               cp -f $tidytmp $f
+               gvim $f
+               ;;
+            i|I)
+               break;;
+            q|Q)
+               exit;;
+         esac
+      fi
+   fi
+done
+</code></pre>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: December 11, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

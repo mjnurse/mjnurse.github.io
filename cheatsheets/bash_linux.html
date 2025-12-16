@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>Bash / Linux Cheatsheet</title>
   </head>
   <body class="light" id="top">
@@ -126,390 +127,390 @@
 </div>
 <h1 id="bash">BASH</h1>
 <h2 id="variables">Variables</h2>
-<div class="codehilite"><pre><span></span><code><span class="si">${#</span><span class="nv">var</span><span class="si">}</span><span class="w">                </span><span class="c1"># var length.</span>
-<span class="si">${</span><span class="nv">var</span><span class="k">:-</span><span class="nv">default</span><span class="si">}</span><span class="w">        </span><span class="c1"># If missing use default.</span>
-<span class="si">${</span><span class="nv">var</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">4</span><span class="si">}</span><span class="w"> </span><span class="si">${</span><span class="nv">var</span><span class="p">:(-3)</span><span class="si">}</span><span class="w"> </span><span class="c1"># Substr if -n then take from end (need brackets as :- sets default)</span>
-<span class="si">${</span><span class="nv">var</span><span class="p">/hello/bye</span><span class="si">}</span><span class="w">       </span><span class="c1"># Search/replace</span>
-<span class="si">${</span><span class="nv">var</span><span class="p">//hello/bye</span><span class="si">}</span><span class="w">      </span><span class="c1"># Search/replace all</span>
-<span class="nv">$s</span><span class="w"> </span><span class="si">${</span><span class="nv">s</span><span class="p">^</span><span class="si">}</span><span class="w"> </span><span class="si">${</span><span class="nv">s</span><span class="p">^^</span><span class="si">}</span><span class="w">        </span><span class="c1"># Change case - hello Hello HELLO.  (uppercase)</span>
-<span class="nv">$s</span><span class="w"> </span><span class="si">${</span><span class="nv">s</span><span class="p">,</span><span class="si">}</span><span class="w"> </span><span class="si">${</span><span class="nv">s</span><span class="p">,,</span><span class="si">}</span><span class="w">        </span><span class="c1"># Change case - HELLO hELLO hello.  (lowercase)</span>
-<span class="si">${</span><span class="nv">var</span><span class="p">##*str</span><span class="si">}</span><span class="w">           </span><span class="c1"># Left Trim - trim up to and inc this string.</span>
-<span class="si">${</span><span class="nv">var</span><span class="p">%%str*</span><span class="si">}</span><span class="w">           </span><span class="c1"># Right Trim - trim from and inc this string.</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">${#var}                # var length.
+${var:-default}        # If missing use default.
+${var:0:4} ${var:(-3)} # Substr if -n then take from end (need brackets as :- sets default)
+${var/hello/bye}       # Search/replace
+${var//hello/bye}      # Search/replace all
+$s ${s^} ${s^^}        # Change case - hello Hello HELLO.  (uppercase)
+$s ${s,} ${s,,}        # Change case - HELLO hELLO hello.  (lowercase)
+${var##*str}           # Left Trim - trim up to and inc this string.
+${var%%str*}           # Right Trim - trim from and inc this string.
+</code></pre>
 
-<div class="codehilite"><pre><span></span><code><span class="nv">$RANDOM</span><span class="w">                </span><span class="c1"># eg echo $((RANDOM%100)).</span>
-<span class="nv">$?</span><span class="w">                     </span><span class="c1"># Last command exit status.</span>
-<span class="si">${</span><span class="nv">var</span><span class="p">//[</span><span class="s1">$&#39;\n\r&#39;</span><span class="p">]</span><span class="si">}</span><span class="w">      </span><span class="c1"># Strip newlines from var.</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">$RANDOM                # eg echo $((RANDOM%100)).
+$?                     # Last command exit status.
+${var//[$'\n\r']}      # Strip newlines from var.
+</code></pre>
 
 <h3 id="indirect-variable-references">Indirect variable references</h3>
-<div class="codehilite"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">varname</span><span class="o">=</span>size<span class="p">;</span><span class="w"> </span><span class="nb">export</span><span class="w"> </span><span class="nv">size</span><span class="o">=</span><span class="m">100</span><span class="p">;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="si">${</span><span class="nv">varname</span><span class="si">}</span><span class="w"> </span><span class="si">${</span><span class="p">!varname</span><span class="si">}</span><span class="w"> </span><span class="c1"># Yields: size 100</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">export varname=size; export size=100; echo ${varname} ${!varname} # Yields: size 100
+</code></pre>
 
 <h3 id="setting-session-path-to-include-current-directory">Setting session path to include current directory</h3>
-<div class="codehilite"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$PATH</span>:.
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">export PATH=$PATH:.
+</code></pre>
 
 <hr />
 <h2 id="arrays">Arrays</h2>
-<div class="codehilite"><pre><span></span><code><span class="nb">declare</span><span class="w"> </span>-a<span class="w"> </span><span class="nv">arr</span><span class="o">=(</span><span class="s2">&quot;Martin&quot;</span><span class="w"> </span><span class="s2">&quot;is&quot;</span><span class="w"> </span><span class="s2">&quot;cool&quot;</span><span class="o">)</span>
+<pre class="codehilite"><code class="language-bash">declare -a arr=(&quot;Martin&quot; &quot;is&quot; &quot;cool&quot;)
 
-<span class="nb">echo</span><span class="w"> </span><span class="si">${</span><span class="nv">arr</span><span class="p">[@]</span><span class="si">}</span><span class="w">  </span><span class="c1"># Yields: Martin, is, cool</span>
-<span class="nb">echo</span><span class="w"> </span><span class="si">${</span><span class="nv">arr</span><span class="p">[1]</span><span class="si">}</span><span class="w">  </span><span class="c1"># Yields: is,</span>
+echo ${arr[@]}  # Yields: Martin, is, cool
+echo ${arr[1]}  # Yields: is,
 
-arr<span class="o">[</span><span class="m">10</span><span class="o">]=</span><span class="s2">&quot;ace&quot;</span>
+arr[10]=&quot;ace&quot;
 
-<span class="nb">echo</span><span class="w"> </span><span class="si">${</span><span class="nv">arr</span><span class="p">[@]</span><span class="si">}</span><span class="w">   </span><span class="c1"># Yields: Martin is cool ace</span>
-<span class="nb">echo</span><span class="w"> </span><span class="si">${</span><span class="nv">arr</span><span class="p">[3]</span><span class="si">}</span><span class="w">   </span><span class="c1"># Yields nothing</span>
-<span class="nb">echo</span><span class="w"> </span><span class="si">${</span><span class="nv">arr</span><span class="p">[10]</span><span class="si">}</span><span class="w">  </span><span class="c1"># Yields: ace</span>
-</code></pre></div>
+echo ${arr[@]}   # Yields: Martin is cool ace
+echo ${arr[3]}   # Yields nothing
+echo ${arr[10]}  # Yields: ace
+</code></pre>
 
 <hr />
 <h2 id="files">Files</h2>
-<div class="codehilite"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-f<span class="w"> </span><span class="nv">$filename</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="s2">&quot;echo </span><span class="nv">$filename</span><span class="s2"> exists&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
+<pre class="codehilite"><code class="language-bash">if [[ -f $filename ]]; then &quot;echo $filename exists&quot;; fi
 
-Check<span class="w"> </span><span class="k">for</span><span class="w"> </span>files:<span class="w"> </span><span class="o">[</span><span class="w"> </span>-&lt;see<span class="w"> </span>below&gt;<span class="w"> </span><span class="s2">&quot;&lt;filename&gt;&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="c1"># Check for files.</span>
+Check for files: [ -&lt;see below&gt; &quot;&lt;filename&gt;&quot; ] # Check for files.
 
-<span class="c1">#   -d dirname    - Check for directory Existence.</span>
-<span class="c1">#   -e filename   - Check for file existence, regardless of type.</span>
-<span class="c1">#   -f filename   - Check for regular file existence not a directory.</span>
-<span class="c1">#   -r filename   - Check if file is readable.</span>
-<span class="c1">#   -s filename   - Check if file is nonzero size.</span>
-<span class="c1">#   -w filename   - Check if file is writable.</span>
-<span class="c1">#   -x filename   - Check if file is executable.</span>
-</code></pre></div>
+#   -d dirname    - Check for directory Existence.
+#   -e filename   - Check for file existence, regardless of type.
+#   -f filename   - Check for regular file existence not a directory.
+#   -r filename   - Check if file is readable.
+#   -s filename   - Check if file is nonzero size.
+#   -w filename   - Check if file is writable.
+#   -x filename   - Check if file is executable.
+</code></pre>
 
 <hr />
 <h2 id="if-then-else-case">IF THEN ELSE, CASE</h2>
-<div class="codehilite"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;-a&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">   </span><span class="nb">echo</span><span class="w"> </span>great!
-<span class="k">fi</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">if [[ &quot;$1&quot; == &quot;-a&quot; || &quot;$1&quot; == &quot;&quot; ]]; then
+   echo great!
+fi
+</code></pre>
 
-<div class="codehilite"><pre><span></span><code><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
-<span class="w">   </span><span class="o">[</span><span class="m">1</span>-3<span class="o">])</span><span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;matches 1 to 3&quot;</span><span class="w"> </span><span class="p">;;</span>
-<span class="w">   </span><span class="o">[</span><span class="m">4</span>-6<span class="o">]</span>*<span class="o">)</span><span class="w">     </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;matches 4 to 6 followed by any thing&quot;</span><span class="w"> </span><span class="p">;;</span>
-<span class="w">   </span><span class="m">1</span><span class="o">[</span><span class="m">0</span>-5<span class="o">]</span>*<span class="o">)</span><span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;matches 1 followed by 0 to 5&quot;</span><span class="w"> </span><span class="p">;;</span>
-<span class="w">   </span>*<span class="o">[</span><span class="m">8</span>-9<span class="o">])</span><span class="w">     </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;matches anything ending 8 to 9&quot;</span><span class="w"> </span><span class="p">;;</span>
-<span class="w">   </span>*ing<span class="o">)</span><span class="w">       </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;matches string ending ing&quot;</span><span class="w"> </span><span class="p">;;</span>
-<span class="w">   </span>-h<span class="p">|</span>--help<span class="o">)</span><span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;matches -h or --help&quot;</span><span class="w"> </span><span class="p">;;</span>
-<span class="w">   </span>?*<span class="o">)</span><span class="w">         </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;matches anything except nothing&quot;</span><span class="w"> </span><span class="p">;;</span>
-<span class="w">   </span>*<span class="o">)</span><span class="w">          </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;matches anything including nothing&quot;</span><span class="w"> </span><span class="p">;;</span>
-<span class="k">esac</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">case $1 in
+   [1-3])      echo &quot;matches 1 to 3&quot; ;;
+   [4-6]*)     echo &quot;matches 4 to 6 followed by any thing&quot; ;;
+   1[0-5]*)    echo &quot;matches 1 followed by 0 to 5&quot; ;;
+   *[8-9])     echo &quot;matches anything ending 8 to 9&quot; ;;
+   *ing)       echo &quot;matches string ending ing&quot; ;;
+   -h|--help)  echo &quot;matches -h or --help&quot; ;;
+   ?*)         echo &quot;matches anything except nothing&quot; ;;
+   *)          echo &quot;matches anything including nothing&quot; ;;
+esac
+</code></pre>
 
-<div class="codehilite"><pre><span></span><code><span class="o">[[</span><span class="w"> </span><span class="nv">$var</span><span class="w"> </span><span class="o">=</span>~<span class="w"> </span>.*hello.*<span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="c1"># Regexp match.</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">[[ $var =~ .*hello.* ]] # Regexp match.
+</code></pre>
 
 <hr />
 <h2 id="looping">Looping</h2>
 <h3 id="infinite-loop">Infinite loop</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">while</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;infinite loop&#39;</span><span class="p">;</span>
-<span class="k">done</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">while [ 1 ]; do 
+  echo 'infinite loop';
+done
+</code></pre>
 
 <h3 id="numeric-loop">Numeric Loop</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="o">((</span><span class="nv">i</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="w"> </span>i&lt;<span class="w"> </span><span class="m">10</span><span class="p">;</span><span class="w"> </span>i++<span class="o">))</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$1</span>
-<span class="k">done</span>
+<pre class="codehilite"><code class="language-bash">for ((i=0; i&lt; 10; i++)); do
+  echo $1
+done
 
-<span class="c1"># Using seq.  seq &lt;start value&gt; [&lt;step&gt;] &lt;end value&gt;</span>
-<span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>seq<span class="w"> </span><span class="m">10</span><span class="w"> </span>-2<span class="w"> </span><span class="m">2</span><span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$i</span>
-<span class="k">done</span>
-</code></pre></div>
+# Using seq.  seq &lt;start value&gt; [&lt;step&gt;] &lt;end value&gt;
+for i in $(seq 10 -2 2); do
+  echo $i
+done
+</code></pre>
 
 <h3 id="loop-through-files">Loop Through Files</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">for</span><span class="w"> </span>file<span class="w"> </span><span class="k">in</span><span class="w"> </span>*.txt<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$f</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
-<span class="k">for</span><span class="w"> </span>file<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>find<span class="w"> </span>.<span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>vi<span class="w"> </span>file:<span class="w"> </span><span class="nv">$f</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">for file in *.txt; do echo $f; done
+for file in $(find .); do vi file: $f; done
+</code></pre>
 
 <h3 id="loop-through-dates">Loop Through Dates</h3>
-<div class="codehilite"><pre><span></span><code><span class="nv">start_date</span><span class="o">=</span><span class="s2">&quot;2015-01-27&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">end_date</span><span class="o">=</span><span class="s2">&quot;2015-02-02&quot;</span>
-<span class="nv">d</span><span class="o">=</span><span class="nv">$start_date</span>
-<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$d</span><span class="s2">&quot;</span><span class="w"> </span>&lt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$end_date</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$d</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$end_date</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$d</span>
-<span class="w">   </span><span class="nv">d</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span>-I<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$d</span><span class="s2"> + 1 day&quot;</span><span class="k">)</span>
-<span class="k">done</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">start_date=&quot;2015-01-27&quot;; end_date=&quot;2015-02-02&quot;
+d=$start_date
+while [[ &quot;$d&quot; &lt; &quot;$end_date&quot; || &quot;$d&quot; = &quot;$end_date&quot; ]]; do
+   echo $d
+   d=$(date -I -d &quot;$d + 1 day&quot;)
+done
+</code></pre>
 
 <h3 id="process-file-line-by-line">Process File Line By Line</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">while</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>line<span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="k">done</span><span class="w"> </span>&lt;<span class="w"> </span>filename
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">while read line; do
+done &lt; filename
+</code></pre>
 
 <hr />
 <h2 id="functions">Functions</h2>
-<div class="codehilite"><pre><span></span><code><span class="k">function</span><span class="w"> </span>check_params<span class="o">()</span><span class="w"> </span><span class="o">{</span>
-<span class="w">   </span><span class="c1"># param 1 - actual number of parameters</span>
-<span class="w">   </span><span class="c1"># param 2 - required number of parameters</span>
-<span class="w">   </span><span class="c1"># param 3 - incorrect parameters message</span>
+<pre class="codehilite"><code class="language-bash">function check_params() {
+   # param 1 - actual number of parameters
+   # param 2 - required number of parameters
+   # param 3 - incorrect parameters message
 
-<span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$3</span><span class="s2">&quot;</span>
-<span class="w">      </span><span class="nb">exit</span>
-<span class="w">   </span><span class="k">fi</span>
-<span class="o">}</span>
+   if [[ &quot;$1&quot; != &quot;$2&quot; ]]; then
+      echo &quot;$3&quot;
+      exit
+   fi
+}
 
-check_params<span class="w"> </span><span class="c1">#$ 2 &quot;Usage: this_script &lt;username&gt;&quot;</span>
+check_params #$ 2 &quot;Usage: this_script &lt;username&gt;&quot;
 
-<span class="c1"># Parameter / Variable Validation</span>
-<span class="k">if</span><span class="w"> </span>!<span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$sleep_sec</span><span class="w"> </span><span class="o">=</span>~<span class="w"> </span>^<span class="o">[</span><span class="m">0</span>-9<span class="o">]</span>+$<span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Error: Sleep seconds: \&quot;</span><span class="nv">$sleep_sec</span><span class="s2">\&quot; is not a number&quot;</span>
-<span class="w">   </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
-<span class="k">fi</span>
-</code></pre></div>
+# Parameter / Variable Validation
+if ! [[ $sleep_sec =~ ^[0-9]+$ ]] ; then
+   echo &quot;Error: Sleep seconds: \&quot;$sleep_sec\&quot; is not a number&quot;
+   exit 1
+fi
+</code></pre>
 
 <hr />
 <h2 id="generate-a-random-string-password">Generate a Random String (Password)</h2>
-<div class="codehilite"><pre><span></span><code><span class="c1"># openssl generate strings in lengths of multiple of 4 (starting position 0) so need to trim</span>
-<span class="c1"># 10 character string.</span>
-openssl<span class="w"> </span>rand<span class="w"> </span>-base64<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-c<span class="w"> </span>-10
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash"># openssl generate strings in lengths of multiple of 4 (starting position 0) so need to trim
+# 10 character string.
+openssl rand -base64 10 | cut -c -10
+</code></pre>
 
 <hr />
 <h2 id="exit-traps">Exit Traps</h2>
 <p>Run a command when a script exists for any reason.</p>
 <p>Example script <code>example.sh</code>:</p>
-<div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<pre class="codehilite"><code class="language-bash">#!/bin/bash
 
-tmp-dir<span class="o">=</span><span class="k">$(</span>mkdir<span class="w"> </span>/tmp/test<span class="k">)</span>
+tmp-dir=$(mkdir /tmp/test)
 
-<span class="k">function</span><span class="w"> </span>cleanup<span class="w"> </span><span class="o">{</span>
-<span class="w">  </span>rm<span class="w"> </span>-rf<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmp</span><span class="s2">-dir&quot;</span>
-<span class="o">}</span>
+function cleanup {
+  rm -rf &quot;$tmp-dir&quot;
+}
 
-<span class="nb">trap</span><span class="w"> </span>cleanup<span class="w"> </span>EXIT
+trap cleanup EXIT
 
-<span class="c1"># The rest of the scripts</span>
-</code></pre></div>
+# The rest of the scripts
+</code></pre>
 
 <hr />
 <h2 id="scripts">Scripts</h2>
-<div class="codehilite"><pre><span></span><code><span class="c1"># Process command line parameters</span>
+<pre class="codehilite"><code class="language-bash"># Process command line parameters
 
-<span class="k">while</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="w">   </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
-<span class="w">      </span>-l<span class="o">)</span><span class="w"> </span><span class="nv">list_only</span><span class="o">=</span>Y<span class="w"> </span><span class="p">;;</span>
-<span class="w">      </span>-d<span class="o">)</span><span class="w"> </span><span class="nb">shift</span>
-<span class="w">          </span><span class="nv">run_date</span><span class="o">=</span><span class="nv">$1</span><span class="w"> </span><span class="p">;;</span>
-<span class="w">      </span>*<span class="o">)</span><span class="w">  </span><span class="nv">db</span><span class="o">=</span><span class="nv">$1</span><span class="w"> </span><span class="p">;;</span>
-<span class="w">   </span><span class="k">esac</span>
-<span class="w">   </span><span class="nb">shift</span>
-<span class="k">done</span>
-</code></pre></div>
+while [ &quot;$1&quot; != &quot;&quot; ]; do
+   case $1 in
+      -l) list_only=Y ;;
+      -d) shift
+          run_date=$1 ;;
+      *)  db=$1 ;;
+   esac
+   shift
+done
+</code></pre>
 
 <hr />
 <h1 id="linux">LINUX</h1>
 <h2 id="system">System</h2>
-<div class="codehilite"><pre><span></span><code>uname<span class="w"> </span>-a<span class="w">     </span><span class="c1"># Display linux system information </span>
-uname<span class="w"> </span>-r<span class="w">     </span><span class="c1"># Display kernel release information </span>
-uptime<span class="w">       </span><span class="c1"># Show how long the system has been running + load </span>
-hostname<span class="w">     </span><span class="c1"># Show system host name </span>
-hostname<span class="w"> </span>-i<span class="w">  </span><span class="c1"># Display the IP address of the host </span>
-last<span class="w"> </span>reboot<span class="w">  </span><span class="c1"># Show system reboot history </span>
-cal<span class="w">          </span><span class="c1"># Show this month calendar </span>
-w<span class="w">            </span><span class="c1"># Display who is online </span>
-whoami<span class="w">       </span><span class="c1"># Who you are logged in as </span>
-finger<span class="w"> </span>user<span class="w">  </span><span class="c1"># Display information about user </span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">uname -a     # Display linux system information 
+uname -r     # Display kernel release information 
+uptime       # Show how long the system has been running + load 
+hostname     # Show system host name 
+hostname -i  # Display the IP address of the host 
+last reboot  # Show system reboot history 
+cal          # Show this month calendar 
+w            # Display who is online 
+whoami       # Who you are logged in as 
+finger user  # Display information about user 
+</code></pre>
 
 <hr />
 <h2 id="hardware">Hardware</h2>
-<div class="codehilite"><pre><span></span><code>dmesg<span class="w">                  </span><span class="c1"># Detected hardware and boot messages</span>
-cat<span class="w"> </span>/proc/cpuinfo<span class="w">      </span><span class="c1"># CPU model</span>
-cat<span class="w"> </span>/proc/meminfo<span class="w">      </span><span class="c1"># Hardware memory</span>
-cat<span class="w"> </span>/proc/interrupts<span class="w">   </span><span class="c1"># Lists the number of interrupts per CPU per I/O device</span>
-lshw<span class="w">                   </span><span class="c1"># Displays information on hardware configuration</span>
-lsblk<span class="w">                  </span><span class="c1"># Displays block device related information in Linux</span>
-free<span class="w"> </span>-m<span class="w">                </span><span class="c1"># Used and free memory (-m for MB)</span>
-lspci<span class="w"> </span>-tv<span class="w">              </span><span class="c1"># Show PCI devices</span>
-lsusb<span class="w"> </span>-tv<span class="w">              </span><span class="c1"># Show USB devices</span>
-dmidecode<span class="w">              </span><span class="c1"># Show hardware info from the BIOS</span>
-hdparm<span class="w"> </span>-i<span class="w"> </span>/dev/sda<span class="w">     </span><span class="c1"># Show info about disk sda</span>
-hdparm<span class="w"> </span>-tT<span class="w"> </span>/dev/sda<span class="w">    </span><span class="c1"># Do a read speed test on disk sda</span>
-badblocks<span class="w"> </span>-s<span class="w"> </span>/dev/sda<span class="w">  </span><span class="c1"># Test for unreadable blocks on disk sda</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">dmesg                  # Detected hardware and boot messages
+cat /proc/cpuinfo      # CPU model
+cat /proc/meminfo      # Hardware memory
+cat /proc/interrupts   # Lists the number of interrupts per CPU per I/O device
+lshw                   # Displays information on hardware configuration
+lsblk                  # Displays block device related information in Linux
+free -m                # Used and free memory (-m for MB)
+lspci -tv              # Show PCI devices
+lsusb -tv              # Show USB devices
+dmidecode              # Show hardware info from the BIOS
+hdparm -i /dev/sda     # Show info about disk sda
+hdparm -tT /dev/sda    # Do a read speed test on disk sda
+badblocks -s /dev/sda  # Test for unreadable blocks on disk sda
+</code></pre>
 
 <hr />
 <h2 id="users">Users</h2>
-<div class="codehilite"><pre><span></span><code>id<span class="w">                                     </span><span class="c1"># Show the active user id with login and group</span>
-last<span class="w">                                   </span><span class="c1"># Show last logins on the system</span>
-who<span class="w">                                    </span><span class="c1"># Show who is logged on the system</span>
-groupadd<span class="w"> </span>admin<span class="w">                         </span><span class="c1"># Add group &quot;admin&quot;</span>
-useradd<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;Sam Tosh&quot;</span><span class="w"> </span>-g<span class="w"> </span>admin<span class="w"> </span>-m<span class="w"> </span>sam<span class="w">  </span><span class="c1"># Create user &quot;sam&quot;</span>
-userdel<span class="w"> </span>sam<span class="w">                            </span><span class="c1"># Delete user sam</span>
-adduser<span class="w"> </span>sam<span class="w">                            </span><span class="c1"># Add user &quot;sam&quot;</span>
-usermod<span class="w">                                </span><span class="c1"># Modify user information</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">id                                     # Show the active user id with login and group
+last                                   # Show last logins on the system
+who                                    # Show who is logged on the system
+groupadd admin                         # Add group &quot;admin&quot;
+useradd -c &quot;Sam Tosh&quot; -g admin -m sam  # Create user &quot;sam&quot;
+userdel sam                            # Delete user sam
+adduser sam                            # Add user &quot;sam&quot;
+usermod                                # Modify user information
+</code></pre>
 
 <hr />
 <h2 id="file-commands">File Commands</h2>
-<div class="codehilite"><pre><span></span><code>cat<span class="w"> </span>&gt;<span class="w"> </span>file<span class="w">                          </span><span class="c1"># Place standard input into file</span>
+<pre class="codehilite"><code class="language-bash">cat &gt; file                          # Place standard input into file
 
-cp<span class="w"> </span>-r<span class="w"> </span>dir1<span class="w"> </span>dir2<span class="w">                     </span><span class="c1"># Copy dir1 to dir2, create dir2 if it doesn&#39;t exist</span>
-cp<span class="w"> </span>file1<span class="w"> </span>file2<span class="w">                      </span><span class="c1"># Copy file1 to file2</span>
+cp -r dir1 dir2                     # Copy dir1 to dir2, create dir2 if it doesn't exist
+cp file1 file2                      # Copy file1 to file2
 
-gpg<span class="w"> </span>-c<span class="w"> </span>file<span class="w">                         </span><span class="c1"># Encrypt file</span>
-gpg<span class="w"> </span>file.gpg<span class="w">                        </span><span class="c1"># Decrypt file</span>
+gpg -c file                         # Encrypt file
+gpg file.gpg                        # Decrypt file
 
-head<span class="w"> </span>file<span class="w">                           </span><span class="c1"># Output first 10 lines of file</span>
+head file                           # Output first 10 lines of file
 
-ln<span class="w"> </span>-s<span class="w"> </span>/path/to/file-name<span class="w"> </span>link-name<span class="w">  </span><span class="c1"># Create symbolic link to file-name</span>
+ln -s /path/to/file-name link-name  # Create symbolic link to file-name
 
-ls<span class="w"> </span>-al<span class="w">                              </span><span class="c1"># Display all information about files/ directories</span>
+ls -al                              # Display all information about files/ directories
 
-mkdir<span class="w"> </span>dir-name<span class="w">                      </span><span class="c1"># Create a directory</span>
+mkdir dir-name                      # Create a directory
 
-more<span class="w"> </span>file<span class="w">                           </span><span class="c1"># Output contents of file</span>
+more file                           # Output contents of file
 
-mv<span class="w"> </span>file1<span class="w"> </span>file2<span class="w">                      </span><span class="c1"># Rename source to dest / move source to directory</span>
+mv file1 file2                      # Rename source to dest / move source to directory
 
-<span class="nb">pwd</span><span class="w">                                 </span><span class="c1"># Show the path of current directory</span>
+pwd                                 # Show the path of current directory
 
-rm<span class="w"> </span>-f<span class="w"> </span>file-name<span class="w">                     </span><span class="c1"># Forcefully remove file</span>
-rm<span class="w"> </span>-r<span class="w"> </span>dir-nam<span class="w">                       </span><span class="c1"># Delete directory recursively</span>
-rm<span class="w"> </span>file-name<span class="w">                        </span><span class="c1"># Delete file</span>
+rm -f file-name                     # Forcefully remove file
+rm -r dir-nam                       # Delete directory recursively
+rm file-name                        # Delete file
 
-tail<span class="w"> </span>-f<span class="w"> </span>file<span class="w">                        </span><span class="c1"># Output contents of file as it grows</span>
-tail<span class="w"> </span>file<span class="w">                           </span><span class="c1"># Output last 10 lines of file</span>
+tail -f file                        # Output contents of file as it grows
+tail file                           # Output last 10 lines of file
 
-touch<span class="w"> </span>file<span class="w">                          </span><span class="c1"># Create or update file</span>
+touch file                          # Create or update file
 
-wc<span class="w">                                  </span><span class="c1"># print the number of bytes, words, and lines in files</span>
+wc                                  # print the number of bytes, words, and lines in files
 
-xargs<span class="w">                               </span><span class="c1"># Execute command lines from standard input</span>
-</code></pre></div>
+xargs                               # Execute command lines from standard input
+</code></pre>
 
 <hr />
 <h2 id="diff">Diff</h2>
-<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;aaa\\nbbb&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>a<span class="p">;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;bbb\\nccc&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>b<span class="p">;</span><span class="w"> </span>diff<span class="w"> </span>a<span class="w"> </span>b
+<pre class="codehilite"><code class="language-bash">&gt; echo -e &quot;aaa\\nbbb&quot; &gt; a; echo -e &quot;bbb\\nccc&quot; &gt; b; diff a b
 1d0
-&lt;<span class="w"> </span>aaa
+&lt; aaa
 2a2
-&gt;<span class="w"> </span>ccc
-<span class="c1"># To change a into b, remove line with aaa and add line with ccc.</span>
-</code></pre></div>
+&gt; ccc
+# To change a into b, remove line with aaa and add line with ccc.
+</code></pre>
 
 <hr />
 <h2 id="process">Process</h2>
-<div class="codehilite"><pre><span></span><code>ps<span class="w">                      </span><span class="c1"># Display your currently active processes</span>
-ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s1">&#39;telnet&#39;</span><span class="w">  </span><span class="c1"># Find all process id related to telnet process</span>
-pmap<span class="w">                    </span><span class="c1"># Memory map of process</span>
-top<span class="w">                     </span><span class="c1"># Display all running processes</span>
-<span class="nb">kill</span><span class="w"> </span>pid<span class="w">                </span><span class="c1"># Kill process with mentioned pid id</span>
-killall<span class="w"> </span>proc<span class="w">            </span><span class="c1"># Kill all processes named proc</span>
-pkill<span class="w"> </span>process-name<span class="w">      </span><span class="c1"># Send signal to a process with its name</span>
-<span class="nb">bg</span><span class="w">                      </span><span class="c1"># Resumes suspended jobs without bringing them to</span>
-foreground<span class="w"> </span><span class="nb">fg</span><span class="w">           </span><span class="c1"># Brings the most recent job to foreground</span>
-<span class="nb">fg</span><span class="w"> </span>n<span class="w">                    </span><span class="c1"># Brings job n to the foreground:$</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">ps                      # Display your currently active processes
+ps aux | grep 'telnet'  # Find all process id related to telnet process
+pmap                    # Memory map of process
+top                     # Display all running processes
+kill pid                # Kill process with mentioned pid id
+killall proc            # Kill all processes named proc
+pkill process-name      # Send signal to a process with its name
+bg                      # Resumes suspended jobs without bringing them to
+foreground fg           # Brings the most recent job to foreground
+fg n                    # Brings job n to the foreground:$
+</code></pre>
 
 <hr />
 <h2 id="file-permissions">File Permissions</h2>
-<div class="codehilite"><pre><span></span><code>chmod<span class="w"> </span>octal<span class="w"> </span>file-name<span class="w">                 </span><span class="c1"># Change the permissions of file to octal</span>
-chmod<span class="w"> </span><span class="m">777</span><span class="w"> </span>/data/test.c<span class="w">                </span><span class="c1"># Set rwx permission for owner,group,world</span>
-chmod<span class="w"> </span><span class="m">755</span><span class="w"> </span>/data/test.c<span class="w">                </span><span class="c1"># Set rwx permission for owner,rx for group and world</span>
-chown<span class="w"> </span>owner-user<span class="w"> </span>file<span class="w">                 </span><span class="c1"># Change owner of the file or directory</span>
-chown<span class="w"> </span>owner-user:owner-group<span class="w"> </span>filename<span class="w"> </span><span class="c1"># Change owner and group owner of the file</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">chmod octal file-name                 # Change the permissions of file to octal
+chmod 777 /data/test.c                # Set rwx permission for owner,group,world
+chmod 755 /data/test.c                # Set rwx permission for owner,rx for group and world
+chown owner-user file                 # Change owner of the file or directory
+chown owner-user:owner-group filename # Change owner and group owner of the file
+</code></pre>
 
 <hr />
 <h2 id="network">Network</h2>
-<div class="codehilite"><pre><span></span><code>ip<span class="w"> </span>addr<span class="w"> </span>show<span class="w">                         </span><span class="c1"># Display all network interfaces and ip address</span>
-ip<span class="w"> </span>address<span class="w"> </span>add<span class="w"> </span><span class="m">192</span>.168.0.1<span class="w"> </span>dev<span class="w"> </span>eth0<span class="w">  </span><span class="c1"># Set ip address</span>
-ethtool<span class="w"> </span>eth0<span class="w">                         </span><span class="c1"># Linux tool to show ethernet status</span>
-mii-tool<span class="w"> </span>eth0<span class="w">                        </span><span class="c1"># Linux tool to show ethernet status</span>
-ping<span class="w"> </span>host<span class="w">                            </span><span class="c1"># Send echo request to test connection</span>
-whois<span class="w"> </span>domain<span class="w">                         </span><span class="c1"># Get who is information for domain</span>
-dig<span class="w"> </span>domain<span class="w">                           </span><span class="c1"># Get DNS information for domain</span>
-dig<span class="w"> </span>-x<span class="w"> </span>host<span class="w">                          </span><span class="c1"># Reverse lookup host</span>
-host<span class="w"> </span>google.com<span class="w">                      </span><span class="c1"># Lookup DNS ip address for the name</span>
-hostname<span class="w"> </span>ip<span class="w">                          </span><span class="c1"># Lookup local ip address</span>
-wget<span class="w"> </span>file<span class="w">                            </span><span class="c1"># Download file</span>
-netstat<span class="w"> </span>-tupl<span class="w">                        </span><span class="c1"># Listing all active listening ports</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">ip addr show                         # Display all network interfaces and ip address
+ip address add 192.168.0.1 dev eth0  # Set ip address
+ethtool eth0                         # Linux tool to show ethernet status
+mii-tool eth0                        # Linux tool to show ethernet status
+ping host                            # Send echo request to test connection
+whois domain                         # Get who is information for domain
+dig domain                           # Get DNS information for domain
+dig -x host                          # Reverse lookup host
+host google.com                      # Lookup DNS ip address for the name
+hostname ip                          # Lookup local ip address
+wget file                            # Download file
+netstat -tupl                        # Listing all active listening ports
+</code></pre>
 
 <hr />
 <h2 id="compression-archives">Compression / Archives</h2>
-<div class="codehilite"><pre><span></span><code>tar<span class="w"> </span>cf<span class="w"> </span>home.tar<span class="w"> </span>home<span class="w">       </span><span class="c1"># Create tar named home.tar containing home</span>
-tar<span class="w"> </span>xf<span class="w"> </span>file.tar<span class="w">            </span><span class="c1"># Extract the files from file.tar</span>
-tar<span class="w"> </span>czf<span class="w"> </span>file.tar.gz<span class="w"> </span>files<span class="w">  </span><span class="c1"># Create a tar with gzip compression</span>
-gzip<span class="w"> </span>file<span class="w">                  </span><span class="c1"># Compress file and renames it to file.gz</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">tar cf home.tar home       # Create tar named home.tar containing home
+tar xf file.tar            # Extract the files from file.tar
+tar czf file.tar.gz files  # Create a tar with gzip compression
+gzip file                  # Compress file and renames it to file.gz
+</code></pre>
 
 <hr />
 <h2 id="install-package">Install Package</h2>
-<div class="codehilite"><pre><span></span><code>rpm<span class="w"> </span>-i<span class="w"> </span>pkgname.rpm<span class="w">  </span><span class="c1"># Install rpm based package</span>
-rpm<span class="w"> </span>-e<span class="w"> </span>pkgname<span class="w">      </span><span class="c1"># Remove package</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">rpm -i pkgname.rpm  # Install rpm based package
+rpm -e pkgname      # Remove package
+</code></pre>
 
 <hr />
 <h2 id="search">Search</h2>
-<div class="codehilite"><pre><span></span><code>grep<span class="w"> </span>pattern<span class="w"> </span>files<span class="w">            </span><span class="c1"># Search for pattern in files</span>
-grep<span class="w"> </span>-r<span class="w"> </span>pattern<span class="w"> </span>dir<span class="w">           </span><span class="c1"># Search recursively for pattern in dir</span>
-locate<span class="w"> </span>file<span class="w">                   </span><span class="c1"># Find all instances of file</span>
-find<span class="w"> </span>/home/tom<span class="w"> </span>-name<span class="w"> </span><span class="s1">&#39;index*&#39;</span><span class="w"> </span><span class="c1"># Find files names that start with &quot;index&quot;</span>
-find<span class="w"> </span>/home<span class="w"> </span>-size<span class="w"> </span>+10000k<span class="w">      </span><span class="c1"># Find files larger than 10000k in /home</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">grep pattern files            # Search for pattern in files
+grep -r pattern dir           # Search recursively for pattern in dir
+locate file                   # Find all instances of file
+find /home/tom -name 'index*' # Find files names that start with &quot;index&quot;
+find /home -size +10000k      # Find files larger than 10000k in /home
+</code></pre>
 
 <hr />
 <h2 id="login-ssh-and-telnet">Login (SSH And TELNET)</h2>
-<div class="codehilite"><pre><span></span><code>ssh<span class="w"> </span>user@host<span class="w">          </span><span class="c1"># Connect to host as user</span>
-ssh<span class="w"> </span>-p<span class="w"> </span>port<span class="w"> </span>user@host<span class="w">  </span><span class="c1"># Connect to host using specific port</span>
-telnet<span class="w"> </span>host<span class="w">            </span><span class="c1"># Connect to the system using telnet port</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">ssh user@host          # Connect to host as user
+ssh -p port user@host  # Connect to host using specific port
+telnet host            # Connect to the system using telnet port
+</code></pre>
 
 <hr />
 <h2 id="file-transfer">File Transfer</h2>
-<div class="codehilite"><pre><span></span><code>scp<span class="w"> </span>file.txt<span class="w"> </span>server2:/tmp<span class="w">      </span><span class="c1"># Secure copy file.txt to remote host /tmp folder</span>
-rsync<span class="w"> </span>-a<span class="w"> </span>/home/apps<span class="w"> </span>/backup/<span class="w">   </span><span class="c1"># Synchronize source to destination</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">scp file.txt server2:/tmp      # Secure copy file.txt to remote host /tmp folder
+rsync -a /home/apps /backup/   # Synchronize source to destination
+</code></pre>
 
 <hr />
 <h2 id="disk-usage">Disk Usage</h2>
-<div class="codehilite"><pre><span></span><code>df<span class="w"> </span>-h<span class="w">                          </span><span class="c1"># Show free space on mounted filesystems</span>
-df<span class="w"> </span>-i<span class="w">                          </span><span class="c1"># Show free inodes on mounted filesystems</span>
-fdisk<span class="w"> </span>-l<span class="w">                       </span><span class="c1"># Show disks partitions sizes and types</span>
-du<span class="w"> </span>-ah<span class="w">                         </span><span class="c1"># Display disk usage in human readable form</span>
-du<span class="w"> </span>-sh<span class="w">                         </span><span class="c1"># Display total disk usage on the current directory</span>
-findmnt<span class="w">                        </span><span class="c1"># Displays target mount point for all filesystem</span>
-mount<span class="w"> </span>device-path<span class="w"> </span>mount-point<span class="w">  </span><span class="c1"># Mount a device</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">df -h                          # Show free space on mounted filesystems
+df -i                          # Show free inodes on mounted filesystems
+fdisk -l                       # Show disks partitions sizes and types
+du -ah                         # Display disk usage in human readable form
+du -sh                         # Display total disk usage on the current directory
+findmnt                        # Displays target mount point for all filesystem
+mount device-path mount-point  # Mount a device
+</code></pre>
 
 <hr />
 <h2 id="security">Security</h2>
-<div class="codehilite"><pre><span></span><code>sudo<span class="w"> </span>/usr/sbin/visudo<span class="w">  </span><span class="c1"># Alter sudo</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">sudo /usr/sbin/visudo  # Alter sudo
+</code></pre>
 
 <h1 id="useful-other">Useful / Other</h1>
 <h2 id="tarballs">tarballs</h2>
-<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>tar<span class="w"> </span>-cvzf<span class="w"> </span>filename<span class="w"> </span>sourcedir<span class="w"> </span><span class="c1"># Create tarball</span>
-&gt;<span class="w"> </span>tar<span class="w"> </span>-xvzf<span class="w"> </span>filename<span class="w">           </span><span class="c1"># Extract tarball</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">&gt; tar -cvzf filename sourcedir # Create tarball
+&gt; tar -xvzf filename           # Extract tarball
+</code></pre>
 
 <h2 id="date">date</h2>
-<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>date<span class="w"> </span>+<span class="s1">&#39;%y%m%d-%H%M&#39;</span><span class="w">          </span><span class="c1"># yields 20180101-2301 etc.</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">&gt; date +'%y%m%d-%H%M'          # yields 20180101-2301 etc.
+</code></pre>
 
 <h2 id="stderr-redirect">stderr Redirect</h2>
-<div class="codehilite"><pre><span></span><code><span class="c1"># Redirect stderr :: 2&gt;&amp;1 - redirect errors, error, linux</span>
-&gt;<span class="w"> </span>myprogram<span class="w"> </span>&gt;<span class="w"> </span>log<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash"># Redirect stderr :: 2&gt;&amp;1 - redirect errors, error, linux
+&gt; myprogram &gt; log 2&gt;&amp;1
+</code></pre>
 
 <h2 id="counting-values-in-a-list">Counting Values In A List</h2>
-<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;aaa</span>
-<span class="s2">aaa</span>
-<span class="s2">bbb</span>
-<span class="s2">ccc</span>
-<span class="s2">ccc</span>
-<span class="s2">ccc&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>uniq<span class="w"> </span>-c
+<pre class="codehilite"><code class="language-bash">&gt; echo &quot;aaa
+aaa
+bbb
+ccc
+ccc
+ccc&quot; | uniq -c
 
-<span class="w">      </span><span class="m">2</span><span class="w"> </span>aaa
-<span class="w">      </span><span class="m">1</span><span class="w"> </span>bbb
-<span class="w">      </span><span class="m">3</span><span class="w"> </span>ccc
-</code></pre></div>
+      2 aaa
+      1 bbb
+      3 ccc
+</code></pre>
         </div>
       </article>
     </main>
@@ -527,7 +528,7 @@ mount<span class="w"> </span>device-path<span class="w"> </span>mount-point<span
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: December 10, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

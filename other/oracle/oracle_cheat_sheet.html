@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>Oracle</title>
   </head>
   <body class="light" id="top">
@@ -90,103 +91,103 @@
           <h1>Oracle</h1>
 <h1 id="oracle-cheat-sheet">Oracle Cheat Sheet</h1>
 <h3 id="redirect-multiple-lines-to-sqlplus">Redirect Multiple Lines To SQLPLUS</h3>
-<div class="codehilite"><pre><span></span><code><span class="nt">sqlplus</span><span class="w"> </span><span class="nt">-s</span><span class="w"> </span><span class="o">/</span><span class="nt">NOLOG</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="nt">EOF</span>
-<span class="nt">CONN</span><span class="w"> </span><span class="nt">user</span><span class="o">/</span><span class="nt">pwd</span><span class="o">@//</span><span class="nt">0</span><span class="p">.</span><span class="nc">0</span><span class="p">.</span><span class="nc">0</span><span class="p">.</span><span class="nc">0</span><span class="p">.</span><span class="nc">0</span><span class="p">:</span><span class="nd">1521</span><span class="o">/</span><span class="nt">ORCL</span><span class="w"> </span>
-<span class="nt">SELECT</span><span class="w"> </span><span class="nt">1</span>
-<span class="nt">FROM</span><span class="w">   </span><span class="nt">dual</span><span class="o">;</span>
-<span class="nt">EOF</span>
-</code></pre></div>
+<pre class="codehilite"><code>sqlplus -s /NOLOG &lt;&lt;EOF
+CONN user/pwd@//0.0.0.0.0:1521/ORCL 
+SELECT 1
+FROM   dual;
+EOF
+</code></pre>
 
 <h3 id="create-a-user-with-dba-role">Create a User With DBA Role</h3>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="nv">create</span><span class="w"> </span><span class="nv">user</span><span class="w"> </span><span class="nv">mjn</span><span class="w"> </span><span class="nv">identified</span><span class="w"> </span><span class="nv">by</span><span class="w"> </span><span class="nv">mjn</span><span class="c1">;</span>
-<span class="nv">User</span><span class="w"> </span><span class="nv">created</span>.
+<pre class="codehilite"><code>&gt; create user mjn identified by mjn;
+User created.
 
-<span class="o">&gt;</span><span class="w"> </span><span class="nv">GRANT</span><span class="w"> </span><span class="k">CONNECT</span>,<span class="w"> </span><span class="nv">RESOURCE</span>,<span class="w"> </span><span class="nv">DBA</span><span class="w"> </span><span class="nv">TO</span><span class="w"> </span><span class="nv">mjn</span><span class="c1">;</span>
-<span class="nv">Grant</span><span class="w"> </span><span class="nv">succeeded</span>.
+&gt; GRANT CONNECT, RESOURCE, DBA TO mjn;
+Grant succeeded.
 
-<span class="o">&gt;</span><span class="w"> </span><span class="nv">GRANT</span><span class="w"> </span><span class="nv">CREATE</span><span class="w"> </span><span class="nv">SESSION</span><span class="w"> </span><span class="nv">TO</span><span class="w"> </span><span class="nv">mjn</span><span class="c1">;</span>
-<span class="nv">Grant</span><span class="w"> </span><span class="nv">succeeded</span>.
+&gt; GRANT CREATE SESSION TO mjn;
+Grant succeeded.
 
-<span class="o">&gt;</span><span class="w"> </span><span class="nv">GRANT</span><span class="w"> </span><span class="nv">UNLIMITED</span><span class="w"> </span><span class="nv">TABLESPACE</span><span class="w"> </span><span class="nv">TO</span><span class="w"> </span><span class="nv">mjn</span><span class="c1">;</span>
-<span class="nv">Grant</span><span class="w"> </span><span class="nv">succeeded</span>.
-</code></pre></div>
+&gt; GRANT UNLIMITED TABLESPACE TO mjn;
+Grant succeeded.
+</code></pre>
 
 <h3 id="sqlplus-variables">SQLPLUS Variables</h3>
 <h4 id="using-substitution-variables">Using Substitution Variables</h4>
 <p>A character substitution variable can be up to 240 bytes long.</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="nt">DEFINE</span><span class="w"> </span><span class="nt">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;King&#39;</span>
+<pre class="codehilite"><code>&gt; DEFINE name = 'King'
 
-<span class="o">&gt;</span><span class="w"> </span><span class="nt">ACCEPT</span><span class="w"> </span><span class="nt">name</span><span class="w"> </span><span class="nt">CHAR</span><span class="w"> </span><span class="nt">PROMPT</span><span class="w"> </span><span class="s1">&#39;Enter a last name: &#39;</span>
+&gt; ACCEPT name CHAR PROMPT 'Enter a last name: '
 
-<span class="nt">--</span><span class="w"> </span><span class="nt">Show</span><span class="w"> </span><span class="nt">the</span><span class="w"> </span><span class="nt">value</span><span class="o">.</span>
-<span class="o">&gt;</span><span class="w"> </span><span class="nt">DEFINE</span><span class="w"> </span><span class="nt">name</span>
-<span class="nt">DEFINE</span><span class="w"> </span><span class="nt">name</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;King&quot;</span><span class="w"> </span><span class="o">(</span><span class="nt">CHAR</span><span class="o">)</span>
+-- Show the value.
+&gt; DEFINE name
+DEFINE name  = &quot;King&quot; (CHAR)
 
-<span class="nt">--</span><span class="w"> </span><span class="nt">Show</span><span class="w"> </span><span class="nt">all</span><span class="w"> </span><span class="nt">values</span><span class="o">.</span>
-<span class="o">&gt;</span><span class="w"> </span><span class="nt">DEFINE</span>
-<span class="nt">DEFINE</span><span class="w"> </span><span class="nt">name</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;King&quot;</span><span class="w"> </span><span class="o">(</span><span class="nt">CHAR</span><span class="o">)</span>
-<span class="nt">DEFINE</span><span class="w"> </span><span class="nt">name2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Taylor&quot;</span><span class="w"> </span><span class="o">(</span><span class="nt">CHAR</span><span class="o">)</span>
+-- Show all values.
+&gt; DEFINE
+DEFINE name  = &quot;King&quot; (CHAR)
+DEFINE name2 = &quot;Taylor&quot; (CHAR)
 
-<span class="nt">--</span><span class="w"> </span><span class="nt">Use</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nt">SQL</span><span class="o">.</span><span class="w">  </span><span class="nt">If</span><span class="w"> </span><span class="nt">its</span><span class="w"> </span><span class="nt">doesn</span><span class="s1">&#39;t exist will be prompted.</span>
-<span class="s1">&gt; SELECT &#39;</span><span class="o">&amp;</span><span class="nt">name</span><span class="s1">&#39; FROM dual;</span>
+-- Use in SQL.  If its doesn't exist will be prompted.
+&gt; SELECT '&amp;name' FROM dual;
 
-<span class="s1">-- Difference Between &quot;&amp;&quot; and &quot;&amp;&amp;&quot; Prefixes. &quot;&amp;&quot; will re-prompt &quot;&amp;&amp;&quot; won&#39;</span><span class="nt">t</span><span class="o">.</span>
+-- Difference Between &quot;&amp;&quot; and &quot;&amp;&amp;&quot; Prefixes. &quot;&amp;&quot; will re-prompt &quot;&amp;&amp;&quot; won't.
 
-<span class="o">&gt;</span><span class="w"> </span><span class="nt">DEFINE</span><span class="w"> </span><span class="nt">c</span><span class="o">=</span><span class="nt">8</span>
-<span class="o">&gt;</span><span class="w"> </span><span class="nt">DEFINE</span><span class="w"> </span><span class="nt">d</span><span class="o">=</span><span class="nt">9</span>
-<span class="o">&gt;</span><span class="w"> </span><span class="nt">SELECT</span><span class="w"> </span><span class="o">&amp;</span><span class="nt">a</span><span class="o">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nt">a</span><span class="o">,</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="nt">b</span><span class="o">,</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="nt">b</span><span class="o">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nt">c</span><span class="o">,</span><span class="w"> </span><span class="o">&amp;</span><span class="nt">c</span><span class="o">,</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="nt">d</span><span class="o">,</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="nt">d</span><span class="w"> </span><span class="nt">FROM</span><span class="w"> </span><span class="nt">dual</span><span class="o">;</span>
-<span class="nt">Enter</span><span class="w"> </span><span class="nt">value</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nt">a</span><span class="o">:</span><span class="w"> </span><span class="nt">1</span>
-<span class="nt">Enter</span><span class="w"> </span><span class="nt">value</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nt">a</span><span class="o">:</span><span class="w"> </span><span class="nt">2</span>
-<span class="nt">Enter</span><span class="w"> </span><span class="nt">value</span><span class="w"> </span><span class="nt">for</span><span class="w"> </span><span class="nt">b</span><span class="o">:</span><span class="w"> </span><span class="nt">3</span>
+&gt; DEFINE c=8
+&gt; DEFINE d=9
+&gt; SELECT &amp;a, &amp;a, &amp;&amp;b, &amp;&amp;b, &amp;c, &amp;c, &amp;&amp;d, &amp;&amp;d FROM dual;
+Enter value for a: 1
+Enter value for a: 2
+Enter value for b: 3
 
-<span class="w">     </span><span class="nt">1</span><span class="w">      </span><span class="nt">2</span><span class="w">      </span><span class="nt">3</span><span class="w">      </span><span class="nt">3</span><span class="w">      </span><span class="nt">8</span><span class="w">      </span><span class="nt">8</span><span class="w">      </span><span class="nt">9</span><span class="w">      </span><span class="nt">9</span>
-<span class="nt">------</span><span class="w"> </span><span class="nt">------</span><span class="w"> </span><span class="nt">------</span><span class="w"> </span><span class="nt">------</span><span class="w"> </span><span class="nt">------</span><span class="w"> </span><span class="nt">------</span><span class="w"> </span><span class="nt">------</span><span class="w"> </span><span class="nt">------</span>
-<span class="w">     </span><span class="nt">1</span><span class="w">      </span><span class="nt">2</span><span class="w">      </span><span class="nt">3</span><span class="w">      </span><span class="nt">3</span><span class="w">      </span><span class="nt">8</span><span class="w">      </span><span class="nt">8</span><span class="w">      </span><span class="nt">9</span><span class="w">      </span><span class="nt">9</span>
+     1      2      3      3      8      8      9      9
+------ ------ ------ ------ ------ ------ ------ ------
+     1      2      3      3      8      8      9      9
 
-<span class="nt">--</span><span class="w"> </span><span class="nt">Storing</span><span class="w"> </span><span class="nt">a</span><span class="w"> </span><span class="nt">Query</span><span class="w"> </span><span class="nt">Column</span><span class="w"> </span><span class="nt">Value</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nt">a</span><span class="w"> </span><span class="nt">Substitution</span><span class="w"> </span><span class="nt">Variable</span><span class="o">.</span>
+-- Storing a Query Column Value in a Substitution Variable.
 
-<span class="o">&gt;</span><span class="w"> </span><span class="nt">COLUMN</span><span class="w"> </span><span class="nt">last_name</span><span class="w"> </span><span class="nt">NEW_VALUE</span><span class="w"> </span><span class="nt">last_name</span>
-<span class="o">&gt;</span><span class="w"> </span><span class="nt">SELECT</span><span class="w"> </span><span class="nt">last_name</span><span class="w"> </span><span class="nt">FROM</span><span class="w"> </span><span class="nt">employees</span><span class="w"> </span><span class="nt">WHERE</span><span class="w"> </span><span class="nt">employee_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nt">100</span><span class="o">;</span>
+&gt; COLUMN last_name NEW_VALUE last_name
+&gt; SELECT last_name FROM employees WHERE employee_id = 100;
 
-<span class="o">&gt;</span><span class="w"> </span><span class="nt">UNDEFINE</span><span class="w"> </span><span class="nt">a</span><span class="w"> </span><span class="nt">b</span><span class="w"> </span><span class="nt">c</span><span class="w"> </span><span class="nt">d</span>
-</code></pre></div>
+&gt; UNDEFINE a b c d
+</code></pre>
 
 <h4 id="predefined-substitution-variables">Predefined Substitution Variables</h4>
-<div class="codehilite"><pre><span></span><code>_CONNECT_IDENTIFIER _DATE _EDITOR _O_RELEASE _O_VERSION _PRIVILEGE _SQL_ID _SQLPLUS_RELEASE _USER
-</code></pre></div>
+<pre class="codehilite"><code>_CONNECT_IDENTIFIER _DATE _EDITOR _O_RELEASE _O_VERSION _PRIVILEGE _SQL_ID _SQLPLUS_RELEASE _USER
+</code></pre>
 
 <h4 id="other-substitution-variables">Other substitution Variables.</h4>
 <p><code>&amp;1</code>, <code>&amp;2</code>, <code>&amp;3</code> command line variables.  Can pass in strings with spaces in quotes: <code>"one two"</code>.</p>
 <p>NOTE: You CANNOT use a substitution variable as the first token of a command.</p>
-<div class="codehilite"><pre><span></span><code><span class="k">&gt; </span><span class="ge">&amp;cmd * from dual; -- Will error</span>
-</code></pre></div>
+<pre class="codehilite"><code>&gt; &amp;cmd * from dual; -- Will error
+</code></pre>
 
 <h3 id="using-bind-variables">Using Bind Variables</h3>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="n">VARIABLE</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">NUMBER</span>
-<span class="o">&gt;</span><span class="w"> </span><span class="n">EXEC</span><span class="w"> </span><span class="p">:</span><span class="k">var</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="mi">8</span>
+<pre class="codehilite"><code>&gt; VARIABLE var NUMBER
+&gt; EXEC :var := 8
 
-<span class="o">--</span><span class="w">  </span><span class="n">In</span><span class="w"> </span><span class="n">SQLPlus</span><span class="w"> </span><span class="mf">12.2</span>
-<span class="o">&gt;</span><span class="w"> </span><span class="n">VARIABLE</span><span class="w"> </span><span class="k">var</span><span class="w"> </span><span class="n">NUMBER</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span>
+--  In SQLPlus 12.2
+&gt; VARIABLE var NUMBER = 8
 
-<span class="o">&gt;</span><span class="w"> </span><span class="n">PRINT</span><span class="w"> </span><span class="k">var</span>
+&gt; PRINT var
 
-<span class="o">--</span><span class="n">Numeric</span><span class="w"> </span><span class="n">bind</span><span class="w"> </span><span class="n">variables</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">used</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">EXIT</span><span class="w"> </span><span class="n">command</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">value</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">operating</span><span class="w"> </span><span class="n">system</span><span class="p">:</span>
-<span class="o">&gt;</span><span class="w"> </span><span class="n">EXIT</span><span class="w"> </span><span class="p">:</span><span class="n">numeric</span><span class="o">-</span><span class="k">var</span>
+--Numeric bind variables can be used in the EXIT command to return a value to the operating system:
+&gt; EXIT :numeric-var
 
-<span class="o">--</span><span class="w"> </span><span class="n">Assigning</span><span class="w"> </span><span class="n">Bind</span><span class="w"> </span><span class="n">Variables</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">Substitution</span><span class="w"> </span><span class="n">Variables</span><span class="o">.</span>
-<span class="o">&gt;</span><span class="w"> </span><span class="n">VARIABLE</span><span class="w"> </span><span class="n">mybv</span><span class="w"> </span><span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span>
-<span class="o">&gt;</span><span class="w"> </span><span class="n">EXEC</span><span class="w"> </span><span class="p">:</span><span class="n">mybv</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;report.log&#39;</span><span class="p">;</span>
+-- Assigning Bind Variables to Substitution Variables.
+&gt; VARIABLE mybv VARCHAR2(14)
+&gt; EXEC :mybv := 'report.log';
 
-<span class="o">--</span><span class="w"> </span><span class="n">Pass</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">bind</span><span class="w"> </span><span class="n">variable</span><span class="s1">&#39;s value to a new substitution variable &quot;nv&quot; by using a query:</span>
-<span class="o">&gt;</span><span class="w"> </span><span class="n">COLUMN</span><span class="w"> </span><span class="n">mybvcol</span><span class="w"> </span><span class="n">NEW_VALUE</span><span class="w"> </span><span class="n">nv</span><span class="w"> </span><span class="n">NOPRINT</span>
-<span class="o">&gt;</span><span class="w"> </span><span class="n">SELECT</span><span class="w"> </span><span class="p">:</span><span class="n">mybv</span><span class="w"> </span><span class="n">AS</span><span class="w"> </span><span class="n">mybvcol</span><span class="w"> </span><span class="n">FROM</span><span class="w"> </span><span class="n">dual</span><span class="p">;</span>
-</code></pre></div>
+-- Pass the bind variable's value to a new substitution variable &quot;nv&quot; by using a query:
+&gt; COLUMN mybvcol NEW_VALUE nv NOPRINT
+&gt; SELECT :mybv AS mybvcol FROM dual;
+</code></pre>
 
 <h4 id="set-define-set-escape">SET DEFINE / SET ESCAPE</h4>
 <p>Use SET DEFINE OFF to stop SQLPlus performing any variable substitution. This makes SQLPlus treat all ampersands (&amp;) as literal characters.</p>
-<div class="codehilite"><pre><span></span><code>&gt; SET ESCAPE \
-&gt; SELECT &#39;B\&amp;W&#39; myHeading FROM dual;
-</code></pre></div>
+<pre class="codehilite"><code>&gt; SET ESCAPE \
+&gt; SELECT 'B\&amp;W' myHeading FROM dual;
+</code></pre>
 
 <hr>
         </div>
@@ -206,7 +207,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: November 25, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>jq</title>
   </head>
   <body class="light" id="top">
@@ -90,24 +91,24 @@
           <h1>jq</h1>
 <h2 id="multi-level-filter">Multi-level filter</h2>
 <p>Source JSON</p>
-<div class="codehilite"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;a&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;b&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nt">&quot;c&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
-<span class="w">    </span><span class="nt">&quot;d&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span>
-<span class="w">  </span><span class="p">},</span>
-<span class="w">  </span><span class="nt">&quot;e&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;f&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;g&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span>
-<span class="w">    </span><span class="p">},</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;f&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;g&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">9</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">]</span>
-<span class="p">}</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-json">{
+  &quot;a&quot;: 1,
+  &quot;b&quot;: {
+    &quot;c&quot;: 2,
+    &quot;d&quot;: 3
+  },
+  &quot;e&quot;: [
+    {
+      &quot;f&quot;: 6,
+      &quot;g&quot;: 7
+    },
+    {
+      &quot;f&quot;: 8,
+      &quot;g&quot;: 9
+    }
+  ]
+}
+</code></pre>
 
 <p>Filter section <code>b</code> to only show children <code>c</code> and filter section <code>e</code> to only show children <code>g</code>.</p>
 <p>Command: <code>jq '.b |= {c} | .e[] |= {g} | {e, b, a}'</code></p>
@@ -162,7 +163,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: November 25, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

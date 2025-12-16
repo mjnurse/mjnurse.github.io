@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>Elasticsearch Cheat Sheet</title>
   </head>
   <body class="light" id="top">
@@ -89,164 +90,164 @@
         <div class="article-body">
           <h1>Elasticsearch Cheat Sheet</h1>
 <h1 id="using-curl">Using Curl</h1>
-<div class="codehilite"><pre><span></span><code><span class="c1"># Note: &#39;?v&#39; add headers to the table of results.</span>
-&gt;<span class="w"> </span>curl<span class="w"> </span>--request<span class="w"> </span>GET<span class="w"> </span>http://localhost:9200/_cat/health?v<span class="w">  </span>
+<pre class="codehilite"><code class="language-bash"># Note: '?v' add headers to the table of results.
+&gt; curl --request GET http://localhost:9200/_cat/health?v  
 
-<span class="c1"># Passing JSON into the curl</span>
-&gt;<span class="w"> </span>curl<span class="w"> </span>--request<span class="w"> </span>GET<span class="w"> </span>http://localhost:9200/_search<span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{ &lt;json&gt; }&#39;</span>
-</code></pre></div>
+# Passing JSON into the curl
+&gt; curl --request GET http://localhost:9200/_search -H 'Content-Type: application/json' -d '{ &lt;json&gt; }'
+</code></pre>
 
 <h1 id="utilities">Utilities</h1>
-<div class="codehilite"><pre><span></span><code><span class="c1"># Index details</span>
-GET<span class="w"> </span>_cat/&lt;indices<span class="p">|</span>shards<span class="p">|</span>segments&gt;/&lt;index<span class="w"> </span>name<span class="w"> </span><span class="o">(</span>wildcards<span class="w"> </span>allowed<span class="o">)</span>&gt;?v
+<pre class="codehilite"><code class="language-bash"># Index details
+GET _cat/&lt;indices|shards|segments&gt;/&lt;index name (wildcards allowed)&gt;?v
 
-<span class="c1"># Force Merge segments</span>
-POST<span class="w"> </span>/&lt;index<span class="w"> </span>name&gt;/_forcemerge?<span class="o">[</span><span class="nv">max_num_segments</span><span class="o">=</span>&lt;num&gt;<span class="o">]</span><span class="p">&amp;</span><span class="o">[</span><span class="nv">only_expunge_deletes</span><span class="o">=</span>&lt;true<span class="p">|</span>false&gt;<span class="o">]</span>
+# Force Merge segments
+POST /&lt;index name&gt;/_forcemerge?[max_num_segments=&lt;num&gt;]&amp;[only_expunge_deletes=&lt;true|false&gt;]
 
-<span class="c1"># List running tasks / cancel a task (find a reindex task and cancel it).</span>
-GET<span class="w"> </span>_tasks?actions<span class="o">=</span>*reindex*<span class="p">&amp;</span>detailed
-POST<span class="w"> </span>_tasks/oTUltX4IQMOUUVeiohTt8A:12345/_cancel
-</code></pre></div>
+# List running tasks / cancel a task (find a reindex task and cancel it).
+GET _tasks?actions=*reindex*&amp;detailed
+POST _tasks/oTUltX4IQMOUUVeiohTt8A:12345/_cancel
+</code></pre>
 
 <h1 id="create">Create</h1>
-<div class="codehilite"><pre><span></span><code>PUT<span class="w"> </span>&lt;index-name&gt;
-<span class="o">{</span>
-<span class="w">    </span><span class="s2">&quot;settings&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">{</span>
-<span class="w">        </span><span class="s2">&quot;index&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">{</span>
-<span class="w">            </span><span class="s2">&quot;number_of_shards&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="m">3</span>,<span class="w"> </span>
-<span class="w">            </span><span class="s2">&quot;number_of_replicas&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="m">2</span><span class="w"> </span>
-<span class="w">        </span><span class="o">}</span>
-<span class="w">    </span><span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">PUT &lt;index-name&gt;
+{
+    &quot;settings&quot; : {
+        &quot;index&quot; : {
+            &quot;number_of_shards&quot; : 3, 
+            &quot;number_of_replicas&quot; : 2 
+        }
+    }
+}
+</code></pre>
 
 <h2 id="create-a-copy-of-an-index">Create a Copy of an Index</h2>
-<div class="codehilite"><pre><span></span><code>POST<span class="w"> </span>_reindex
-<span class="o">{</span>
-<span class="w">  </span><span class="s2">&quot;source&quot;</span>:<span class="w"> </span><span class="o">{</span>
-<span class="w">    </span><span class="s2">&quot;index&quot;</span>:<span class="w"> </span><span class="s2">&quot;&lt;current index name&gt;&quot;</span>
-<span class="w">  </span><span class="o">}</span>,
-<span class="w">  </span><span class="s2">&quot;dest&quot;</span>:<span class="w"> </span><span class="o">{</span>
-<span class="w">    </span><span class="s2">&quot;index&quot;</span>:<span class="w"> </span><span class="s2">&quot;&lt;new index name&gt;&quot;</span>
-<span class="w">  </span><span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">POST _reindex
+{
+  &quot;source&quot;: {
+    &quot;index&quot;: &quot;&lt;current index name&gt;&quot;
+  },
+  &quot;dest&quot;: {
+    &quot;index&quot;: &quot;&lt;new index name&gt;&quot;
+  }
+}
+</code></pre>
 
 <p>Note the new index can already exist.  Can also add a query to the source or specify a type to filter the documents copied.</p>
 <h1 id="insert">Insert</h1>
-<div class="codehilite"><pre><span></span><code>POST<span class="w"> </span>/&lt;index&gt;/&lt;<span class="nb">type</span><span class="w"> </span>use:default&gt;
-<span class="o">{</span>
-<span class="w">   </span><span class="s2">&quot;name&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="s2">&quot;martin&quot;</span>,
-<span class="w">   </span><span class="s2">&quot;age&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="m">21</span>
-<span class="o">}</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">POST /&lt;index&gt;/&lt;type use:default&gt;
+{
+   &quot;name&quot; : &quot;martin&quot;,
+   &quot;age&quot; : 21
+}
+</code></pre>
 
 <h2 id="bulk-insert">Bulk Insert</h2>
 <p>Note: Newlines are important separators for each command and data JSON statement.</p>
-<div class="codehilite"><pre><span></span><code>POST<span class="w"> </span>/&lt;index&gt;/&lt;<span class="nb">type</span><span class="w"> </span>use:default&gt;/_bulk
-<span class="o">{</span><span class="w"> </span><span class="s2">&quot;index&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="o">}</span>
-<span class="o">{</span><span class="w"> </span><span class="s2">&quot;name&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="s2">&quot;bill&quot;</span>,<span class="w"> </span><span class="s2">&quot;age&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="m">43</span><span class="w"> </span><span class="o">}</span>
-<span class="o">{</span><span class="w"> </span><span class="s2">&quot;index&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="o">}</span>
-<span class="o">{</span><span class="w"> </span><span class="s2">&quot;name&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="s2">&quot;carl&quot;</span>,<span class="w"> </span><span class="s2">&quot;age&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="m">12</span><span class="w"> </span><span class="o">}</span>
+<pre class="codehilite"><code class="language-bash">POST /&lt;index&gt;/&lt;type use:default&gt;/_bulk
+{ &quot;index&quot; : { } }
+{ &quot;name&quot; : &quot;bill&quot;, &quot;age&quot; : 43 }
+{ &quot;index&quot; : { } }
+{ &quot;name&quot; : &quot;carl&quot;, &quot;age&quot; : 12 }
 etc...
-</code></pre></div>
+</code></pre>
 
 <h1 id="search">Search</h1>
-<div class="codehilite"><pre><span></span><code>GET<span class="w"> </span>&lt;index&gt;/_search<span class="w"> </span>
-<span class="o">{</span><span class="w"> </span>&lt;json&gt;<span class="w"> </span><span class="o">}</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">GET &lt;index&gt;/_search 
+{ &lt;json&gt; }
+</code></pre>
 
 <h2 id="json-can-include-sections-which">JSON Can Include Sections Which</h2>
 <h2 id="specify-the-fields-returned">Specify the fields returned</h2>
-<div class="codehilite"><pre><span></span><code><span class="o">{</span><span class="w"> </span><span class="s2">&quot;_source&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">&quot;&lt;path&gt;.&lt;field&gt;&quot;</span><span class="w"> </span><span class="o">]</span>,<span class="w"> </span><span class="s2">&quot;query&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">{</span><span class="w"> </span>...<span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="o">}</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">{ &quot;_source&quot; : [ &quot;&lt;path&gt;.&lt;field&gt;&quot; ], &quot;query&quot; : { ... } }
+</code></pre>
 
 <h2 id="alter-number-of-results">Alter number of results</h2>
-<div class="codehilite"><pre><span></span><code><span class="o">{</span><span class="w"> </span><span class="s2">&quot;from&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="m">0</span>,<span class="w"> </span><span class="s2">&quot;size&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="m">10000</span><span class="w"> </span><span class="o">}</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">{ &quot;from&quot; : 0, &quot;size&quot; : 10000 }
+</code></pre>
 
 <h2 id="json-query-definitions">JSON Query Definitions</h2>
 <h3 id="wildcard-queries">Wildcard Queries</h3>
-<div class="codehilite"><pre><span></span><code><span class="o">{</span><span class="w"> </span><span class="s2">&quot;query&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;wildcard&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;&lt;path&gt;.&lt;field&gt;&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="s2">&quot;&lt;search_string&gt;*&quot;</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="o">}</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">{ &quot;query&quot; : { &quot;wildcard&quot; : { &quot;&lt;path&gt;.&lt;field&gt;&quot; : &quot;&lt;search_string&gt;*&quot; } } }
+</code></pre>
 
 <h3 id="matching-a-value-or-a-list-of-values">Matching a Value or a List of Values</h3>
-<div class="codehilite"><pre><span></span><code><span class="o">{</span><span class="w"> </span><span class="s2">&quot;query&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;term&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;&lt;path&gt;.&lt;field&gt;&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="s2">&quot;&lt;search_string&gt;&quot;</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="o">}</span>
-<span class="o">{</span><span class="w"> </span><span class="s2">&quot;query&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;terms&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;&lt;path&gt;.&lt;field&gt;&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">[</span><span class="s2">&quot;&lt;search_string1&gt;&quot;</span>,<span class="w"> </span><span class="s2">&quot;&lt;search_string2&gt;&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="o">}</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">{ &quot;query&quot; : { &quot;term&quot; : { &quot;&lt;path&gt;.&lt;field&gt;&quot; : &quot;&lt;search_string&gt;&quot; } } }
+{ &quot;query&quot; : { &quot;terms&quot; : { &quot;&lt;path&gt;.&lt;field&gt;&quot; : [&quot;&lt;search_string1&gt;&quot;, &quot;&lt;search_string2&gt;&quot;] } } }
+</code></pre>
 
 <h3 id="matching-one-or-more-of-many-terms">Matching One or More of Many Terms</h3>
-<div class="codehilite"><pre><span></span><code><span class="o">{</span><span class="w"> </span><span class="s2">&quot;query&quot;</span><span class="w"> </span>:<span class="w"> </span>
-<span class="w">   </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;dis_max&quot;</span><span class="w"> </span>:<span class="w"> </span>
-<span class="w">      </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;queries&quot;</span><span class="w"> </span>:<span class="w"> </span>
-<span class="w">         </span><span class="o">[</span><span class="w">  </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;term&quot;</span>:<span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;&lt;path&gt;.&lt;field&gt;&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="s2">&quot;&lt;search_string&gt;&quot;</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="o">}</span>,<span class="w"> </span>
-<span class="w">            </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;term&quot;</span>:<span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;&lt;path&gt;.&lt;field&gt;&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="s2">&quot;&lt;search_string&gt;&quot;</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="o">}</span><span class="w"> </span>
-<span class="w">         </span><span class="o">]</span>
-<span class="w">      </span><span class="o">}</span><span class="w"> </span>
-<span class="w">   </span><span class="o">}</span><span class="w"> </span>
-<span class="o">}</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">{ &quot;query&quot; : 
+   { &quot;dis_max&quot; : 
+      { &quot;queries&quot; : 
+         [  { &quot;term&quot;: { &quot;&lt;path&gt;.&lt;field&gt;&quot; : &quot;&lt;search_string&gt;&quot; } }, 
+            { &quot;term&quot;: { &quot;&lt;path&gt;.&lt;field&gt;&quot; : &quot;&lt;search_string&gt;&quot; } } 
+         ]
+      } 
+   } 
+}
+</code></pre>
 
 <h3 id="boolean-queries">Boolean Queries</h3>
 <p>OR  &gt; should
 AND &gt; must
 NOR &gt; should_not</p>
-<div class="codehilite"><pre><span></span><code><span class="o">{</span><span class="w"> </span><span class="s2">&quot;query&quot;</span>:<span class="w"> </span><span class="o">{</span>
-<span class="w">    </span><span class="s2">&quot;bool&quot;</span>:<span class="w"> </span><span class="o">{</span>
-<span class="w">      </span><span class="s2">&quot;must&quot;</span>:<span class="w"> </span><span class="o">[</span>
-<span class="w">        </span><span class="o">{</span>
-<span class="w">          </span><span class="s2">&quot;term&quot;</span>:<span class="w"> </span><span class="o">{</span><span class="s2">&quot;shape&quot;</span>:<span class="w"> </span><span class="s2">&quot;round&quot;</span><span class="o">}</span>
-<span class="w">        </span><span class="o">}</span>,
-<span class="w">        </span><span class="o">{</span>
-<span class="w">          </span><span class="s2">&quot;bool&quot;</span>:<span class="w"> </span><span class="o">{</span>
-<span class="w">            </span><span class="s2">&quot;should&quot;</span>:<span class="w"> </span><span class="o">[</span>
-<span class="w">              </span><span class="o">{</span><span class="s2">&quot;match&quot;</span>:<span class="w"> </span><span class="o">{</span><span class="s2">&quot;color&quot;</span>:<span class="w"> </span><span class="s2">&quot;red&quot;</span><span class="o">}}</span>,
-<span class="w">              </span><span class="o">{</span><span class="s2">&quot;match&quot;</span>:<span class="w"> </span><span class="o">{</span><span class="s2">&quot;color&quot;</span>:<span class="w"> </span><span class="s2">&quot;blue&quot;</span><span class="o">}</span>
-<span class="w">            </span><span class="o">]</span>
-<span class="w">          </span><span class="o">}</span>
-<span class="w">        </span><span class="o">}</span>
-<span class="w">      </span><span class="o">]</span>
-<span class="w">    </span><span class="o">}</span>
-<span class="w">  </span><span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-bash">{ &quot;query&quot;: {
+    &quot;bool&quot;: {
+      &quot;must&quot;: [
+        {
+          &quot;term&quot;: {&quot;shape&quot;: &quot;round&quot;}
+        },
+        {
+          &quot;bool&quot;: {
+            &quot;should&quot;: [
+              {&quot;match&quot;: {&quot;color&quot;: &quot;red&quot;}},
+              {&quot;match&quot;: {&quot;color&quot;: &quot;blue&quot;}
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
+</code></pre>
 
 <h1 id="multi-search">Multi Search</h1>
 <p>Note: Newlines are important separators for each command and data JSON statement.</p>
-<div class="codehilite"><pre><span></span><code>GET<span class="w"> </span>&lt;index&gt;/_msearch<span class="w"> </span>
-<span class="o">{</span><span class="w"> </span><span class="s2">&quot;index&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="s2">&quot;&lt;index&gt;&quot;</span><span class="w"> </span><span class="o">}</span>
-<span class="o">{</span><span class="w"> </span><span class="s2">&quot;query&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;terms&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;&lt;path&gt;.&lt;field&gt;&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">[</span><span class="s2">&quot;&lt;search_str1&gt;&quot;</span>,<span class="w"> </span><span class="s2">&quot;&lt;search_str2&gt;&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="o">}</span>
-<span class="o">{</span><span class="w"> </span><span class="s2">&quot;index&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="s2">&quot;&lt;index&gt;&quot;</span><span class="w"> </span><span class="o">}</span>
-<span class="o">{</span><span class="w"> </span><span class="s2">&quot;from&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="m">0</span>,<span class="w"> </span><span class="s2">&quot;size&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="m">10000</span>,<span class="w"> </span><span class="s2">&quot;query&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;terms&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="s2">&quot;&lt;path&gt;.&lt;field&gt;&quot;</span><span class="w"> </span>:<span class="w"> </span><span class="o">[</span><span class="s2">&quot;&lt;srch_str3&gt;&quot;</span>,<span class="w"> </span><span class="s2">&quot;&lt;srch_str4&gt;&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="o">}</span><span class="w"> </span><span class="o">}</span>
+<pre class="codehilite"><code class="language-bash">GET &lt;index&gt;/_msearch 
+{ &quot;index&quot; : &quot;&lt;index&gt;&quot; }
+{ &quot;query&quot; : { &quot;terms&quot; : { &quot;&lt;path&gt;.&lt;field&gt;&quot; : [&quot;&lt;search_str1&gt;&quot;, &quot;&lt;search_str2&gt;&quot;] } } }
+{ &quot;index&quot; : &quot;&lt;index&gt;&quot; }
+{ &quot;from&quot; : 0, &quot;size&quot; : 10000, &quot;query&quot; : { &quot;terms&quot; : { &quot;&lt;path&gt;.&lt;field&gt;&quot; : [&quot;&lt;srch_str3&gt;&quot;, &quot;&lt;srch_str4&gt;&quot;] } } }
 etc...
-</code></pre></div>
+</code></pre>
 
 <h1 id="scrolling-search-results">Scrolling Search Results</h1>
 <p>A walk-through example:</p>
-<div class="codehilite"><pre><span></span><code><span class="c1"># 1. Create an index</span>
-PUT<span class="w"> </span>/mjn/default/_bulk
-<span class="o">{</span><span class="s2">&quot;index&quot;</span>:<span class="o">{}}</span>
-<span class="o">{</span><span class="s2">&quot;word&quot;</span>:<span class="s2">&quot;one&quot;</span><span class="o">}</span>
-<span class="o">{</span><span class="s2">&quot;index&quot;</span>:<span class="o">{}}</span>
-<span class="o">{</span><span class="s2">&quot;word&quot;</span>:<span class="s2">&quot;two&quot;</span><span class="o">}</span>
-<span class="o">{</span><span class="s2">&quot;index&quot;</span>:<span class="o">{}}</span>
-<span class="o">{</span><span class="s2">&quot;word&quot;</span>:<span class="s2">&quot;three&quot;</span><span class="o">}</span>
-<span class="o">{</span><span class="s2">&quot;index&quot;</span>:<span class="o">{}}</span>
-<span class="o">{</span><span class="s2">&quot;word&quot;</span>:<span class="s2">&quot;four&quot;</span><span class="o">}</span>
-<span class="o">{</span><span class="s2">&quot;index&quot;</span>:<span class="o">{}}</span>
-<span class="o">{</span><span class="s2">&quot;word&quot;</span>:<span class="s2">&quot;five&quot;</span><span class="o">}</span>
+<pre class="codehilite"><code class="language-bash"># 1. Create an index
+PUT /mjn/default/_bulk
+{&quot;index&quot;:{}}
+{&quot;word&quot;:&quot;one&quot;}
+{&quot;index&quot;:{}}
+{&quot;word&quot;:&quot;two&quot;}
+{&quot;index&quot;:{}}
+{&quot;word&quot;:&quot;three&quot;}
+{&quot;index&quot;:{}}
+{&quot;word&quot;:&quot;four&quot;}
+{&quot;index&quot;:{}}
+{&quot;word&quot;:&quot;five&quot;}
 
-<span class="c1"># 2. Search the index, requesting the scroll_id and specifying the size of the dataset to be returned.</span>
-<span class="c1">#    The search results will include a _scroll_id field.</span>
-<span class="c1">#    (scroll=1m requests that the search context be kept alive for 1 minute).</span>
-GET<span class="w"> </span>/mjn/_search?scroll<span class="o">=</span>1m
-<span class="o">{</span><span class="s2">&quot;size&quot;</span>:2<span class="o">}</span>
+# 2. Search the index, requesting the scroll_id and specifying the size of the dataset to be returned.
+#    The search results will include a _scroll_id field.
+#    (scroll=1m requests that the search context be kept alive for 1 minute).
+GET /mjn/_search?scroll=1m
+{&quot;size&quot;:2}
 
-<span class="c1"># 3. Call the scroll API to get the next batch of results.  Can call this until no more hits returned.</span>
-POST<span class="w"> </span>/_search/scroll
-<span class="o">{</span><span class="w"> </span><span class="s2">&quot;scroll&quot;</span>:<span class="s2">&quot;1m&quot;</span>,
-<span class="w">  </span><span class="s2">&quot;scroll_id&quot;</span>:<span class="w"> </span><span class="s2">&quot;&lt;scroll id&gt;&quot;</span><span class="w"> </span><span class="o">}</span>
-</code></pre></div>
+# 3. Call the scroll API to get the next batch of results.  Can call this until no more hits returned.
+POST /_search/scroll
+{ &quot;scroll&quot;:&quot;1m&quot;,
+  &quot;scroll_id&quot;: &quot;&lt;scroll id&gt;&quot; }
+</code></pre>
 
 <hr>
         </div>
@@ -266,7 +267,7 @@ POST<span class="w"> </span>/_search/scroll
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: November 25, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

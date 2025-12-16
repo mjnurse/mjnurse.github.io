@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>Recursive HDFS Directory Sizes Script</title>
   </head>
   <body class="light" id="top">
@@ -88,30 +89,30 @@
       <article class="article">
         <div class="article-body">
           <h1>Recursive HDFS Directory Sizes Script</h1>
-<div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
-<span class="nv">max_depth</span><span class="o">=</span><span class="m">8</span>
+<pre class="codehilite"><code class="language-bash">#!/usr/bin/env bash
+max_depth=8
 
-<span class="nv">largest_root_dirs</span><span class="o">=</span><span class="k">$(</span>hdfs<span class="w"> </span>dfs<span class="w"> </span>-du<span class="w"> </span>-s<span class="w"> </span><span class="s1">&#39;/*&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-nr<span class="w"> </span><span class="p">|</span><span class="w"> </span>perl<span class="w"> </span>-ane<span class="w"> </span><span class="s1">&#39;print &quot;$F[2] &quot;&#39;</span><span class="k">)</span>
+largest_root_dirs=$(hdfs dfs -du -s '/*' | sort -nr | perl -ane 'print &quot;$F[2] &quot;')
 
-<span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;%15s  %s\n&quot;</span><span class="w"> </span><span class="s2">&quot;bytes&quot;</span><span class="w"> </span><span class="s2">&quot;directory&quot;</span>
-<span class="k">for</span><span class="w"> </span>ld<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nv">$largest_root_dirs</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="w">  </span><span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;%15.0f  %s\n&quot;</span><span class="w"> </span><span class="k">$(</span>hdfs<span class="w"> </span>dfs<span class="w"> </span>-du<span class="w"> </span>-s<span class="w"> </span><span class="nv">$ld</span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d<span class="s1">&#39; &#39;</span><span class="w"> </span>-f1<span class="k">)</span><span class="w"> </span><span class="nv">$ld</span>
-<span class="w">  </span><span class="nv">all_dirs</span><span class="o">=</span><span class="k">$(</span>hdfs<span class="w"> </span>dfs<span class="w"> </span>-ls<span class="w"> </span>-R<span class="w"> </span><span class="nv">$ld</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>egrep<span class="w"> </span><span class="s1">&#39;^dr........&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>perl<span class="w"> </span>-ane<span class="w"> </span><span class="s2">&quot;scalar(split(&#39;/&#39;,\$_)) &lt;= </span><span class="nv">$max_depth</span><span class="s2"> &amp;&amp; print \&quot;\$F[7]\n\&quot;&quot;</span><span class="w"> </span><span class="k">)</span>
+printf &quot;%15s  %s\n&quot; &quot;bytes&quot; &quot;directory&quot;
+for ld in $largest_root_dirs; do
+  printf &quot;%15.0f  %s\n&quot; $(hdfs dfs -du -s $ld| cut -d' ' -f1) $ld
+  all_dirs=$(hdfs dfs -ls -R $ld | egrep '^dr........' | \
+    perl -ane &quot;scalar(split('/',\$_)) &lt;= $max_depth &amp;&amp; print \&quot;\$F[7]\n\&quot;&quot; )
 
-<span class="w">  </span><span class="k">for</span><span class="w"> </span>d<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nv">$all_dirs</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="w">    </span><span class="nv">line</span><span class="o">=</span><span class="k">$(</span>hdfs<span class="w"> </span>dfs<span class="w"> </span>-du<span class="w"> </span>-s<span class="w"> </span><span class="nv">$d</span><span class="k">)</span>
-<span class="w">    </span><span class="nv">size</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$line</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d<span class="s1">&#39; &#39;</span><span class="w"> </span>-f1<span class="k">)</span>
-<span class="w">    </span><span class="nv">parent_dir</span><span class="o">=</span><span class="si">${</span><span class="nv">d</span><span class="p">%/*</span><span class="si">}</span>
-<span class="w">    </span><span class="nv">child</span><span class="o">=</span><span class="si">${</span><span class="nv">d</span><span class="p">##*/</span><span class="si">}</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$parent_dir</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">      </span><span class="nv">leading_dirs</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$parent_dir</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>perl<span class="w"> </span>-pe<span class="w"> </span><span class="s1">&#39;s/./-/g; s/^.(.+)$/\|$1/&#39;</span><span class="k">)</span>
-<span class="w">      </span><span class="nv">d</span><span class="o">=</span><span class="si">${</span><span class="nv">leading_dirs</span><span class="si">}</span>/<span class="nv">$child</span>
-<span class="w">    </span><span class="k">fi</span>
-<span class="w">    </span><span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;%15.0f  %s\n&quot;</span><span class="w"> </span><span class="nv">$size</span><span class="w"> </span><span class="nv">$d</span>
-<span class="w">  </span><span class="k">done</span>
-<span class="k">done</span>
-</code></pre></div>
+  for d in $all_dirs; do
+    line=$(hdfs dfs -du -s $d)
+    size=$(echo $line | cut -d' ' -f1)
+    parent_dir=${d%/*}
+    child=${d##*/}
+    if [ -n &quot;$parent_dir&quot; ]; then
+      leading_dirs=$(echo $parent_dir | perl -pe 's/./-/g; s/^.(.+)$/\|$1/')
+      d=${leading_dirs}/$child
+    fi
+    printf &quot;%15.0f  %s\n&quot; $size $d
+  done
+done
+</code></pre>
         </div>
       </article>
     </main>
@@ -129,7 +130,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: November 25, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="JWT - JSON Web Tokens" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>JWT - JSON Web Tokens</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>JWT - JSON Web Tokens</h1>
+<p>Today I was looking at authentication for a web-service.  It was using JSON Web Tokens.</p>
+<h1 id="what-are-jwts-how-do-they-work">What are JWTs?  How do they work?</h1>
+<p>A JWT is a cryptographically signed JSON token used to authenticate users making calls to an application.  A JWT is sent to a user when they authenticate with an authentication Service.  The user can send this token with requests to an application (web-service or other) as proof of identity.  The application talks to the authentication server and is told the how the token was cryptographically signed and the key used.  This allows the application to be sure that the token is valid and originated from the authentication service.</p>
+<p>Two types of cryptographic signatures can be used:</p>
+<ul>
+<li>Symmetric hash algorythm - where the same key is used to sign and assure the JWT.</li>
+<li>Asymmetric hash algorythm (public/private key) - Where a private key is used to sign the JWT and a public key is used to assure the JWT.</li>
+</ul>
+<p>Symmetric hashes are much quicker to compute than Asymmetric hashes, but mean the secret key will need to be shared with all applications which need to authenticate users.</p>
+<h1 id="the-contents-of-a-jwt">The contents of a JWT</h1>
+<p>A JWT is made up from 3 components:</p>
+<h2 id="header">Header</h2>
+<p>The header describes how the JWT was computed.  A typical header will contain:</p>
+<pre class="codehilite"><code>{ &quot;typ&quot; : &quot;JWT&quot;
+, &quot;alg&quot; : &quot;HS256&quot; }
+</code></pre>
+
+<p>The key:value 'typ' specifies that this is a JWT.  The key:value 'alg' specifies that this JWT was signed using the symmetric HMAC-SHA256 algorithm.  The header JSON is converted to a url encoded string using base64urlEncode.  </p>
+<h2 id="payload-also-called-the-claims">Payload (also called the 'Claims')</h2>
+<p>The payload contains the information which is asserted / claimed to be true.  This could contain:</p>
+<pre class="codehilite"><code>{ &quot;userId&quot; : &quot;martin-98999394&quot;
+, &quot;exp&quot; : 15634343 }
+</code></pre>
+
+<p>The free form key:value 'userId' could specify the Id of the user which the JWT asserts is authorised.  A request from that userId, along with the JWT, would authenticate that user.  The key:value 'exp' (which is one of a set of standard keys) specifies when the JWT expires.  The payload JSON is converted to a url encoded string using base64urlEncode.</p>
+<h2 id="signature">Signature</h2>
+<p>The signature is created by appending the payload url encoded string to the header url encoded string (separated by a '.') and then hashing this value using the specified algorithm and secret.  The hash value is then also converted to a url encoded string using base64urlEncode and then append to the header.payload string (again separated by a '.').</p>
+<h1 id="creating-the-jwt-using-a-symmetric-hash-algorithm">Creating the JWT (using a symmetric hash algorithm)</h1>
+<p>As pseudo we have:</p>
+<pre class="codehilite"><code>body = base64urlEncode( headerJSON ) + '.' + base64urlEncode( payloadJSON );
+
+signature = base64urlEncode( hash_algorithm( body, secret_key ) );
+
+JWT = body + '.' + signature;
+</code></pre>
+
+<p>The JWT will look something like:</p>
+<pre class="codehilite"><code>eyJ0eXAiOiJKV1QGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiMDhmODZhZi0zNWRhLTQ4ZjItO.GZhYi1jZWYzOTA0NjYwYmQifQ
+</code></pre>
+
+<p>NOTE: 
+- The payload is <strong>NOT</strong> encrypted, it is simply converted to base64url encoding and can be reversed.
+- If the contents of the JWT are modified in anyway then the signature will not longer match the contents.</p>
+<h1 id="assuring-the-jwt">Assuring the JWT</h1>
+<p>The application to which the JWT is passed to authenticate the user will:</p>
+<pre class="codehilite"><code>split( JWT ) =&gt; header, payload, signature;
+
+body = header + '.' + payload;
+
+new_signature = base64urlEncode( hash_algorithm( body, secret_key ) );
+
+if new_signature matches signature then JWT is valid;
+</code></pre>
+
+<p>NOTE:
+- The JWT assurance process recomputes the hash of header and payload using the <strong>same</strong> secret key as the process that created the JWT.
+- The payload can now be converted back to JSON to allow the application to check it has not expired and to get the authenticated userId.
+- If the secret key is known by a third party, the third party can also create valid JWTs so the secret must not be shared.</p>
+<h1 id="using-an-asymmetric-hash-algorithm">Using an Asymmetric Hash Algorithm</h1>
+<p>When symmetric hash algorithms are used, the authentication service needs to share the secret key used to create the signature with the applications / services which need to assure the JWT.  This is a security risk as the key could be maliciously use to create new JWTs.</p>
+<p>An Asymmetric encryption algorithm allows the signature to be created (encrypted) using a private key when the JWT is created.  To assure the JWT, the application / service can decrypt the signature using the public key.  The application can then compare this to the header and payload to assure the JWT is valid.</p>
+<p>As pseudo code:</p>
+<p><strong>Creating a JWT</strong></p>
+<pre class="codehilite"><code>body = base64urlEncode( headerJSON ) + '.' + base64urlEncode( payloadJSON );
+
+signature = base64urlEncode( hash_algorithm_encode( body, private_key ) );
+
+JWT = body + '.' + signature;
+</code></pre>
+
+<p><strong>Assuring the JWT</strong></p>
+<pre class="codehilite"><code>split( JWT ) =&gt; header, payload, signature;
+
+body = header + '.' + payload;
+
+decoded_signature = hash_algorithm_decode( base64urlDecode( signature ), public_key );
+
+if decoded_signature matches the body then JWT is valid;
+</code></pre>
+
+<p>In this case we can be sure that the service which created the JWT knows the private key.  For the signature to be successfully decrypted using the public key it MUST of be created using the private key.</p>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: December 11, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>Oracle Pivot Column to String</title>
   </head>
   <body class="light" id="top">
@@ -88,15 +89,15 @@
       <article class="article">
         <div class="article-body">
           <h1>Oracle Pivot Column to String</h1>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span>
-<span class="w">   </span><span class="n">dept_num</span>
-<span class="p">,</span><span class="w">  </span><span class="n">LISTAGG</span><span class="p">(</span><span class="w"> </span><span class="n">emp_name</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;,&#39;</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">WITHIN</span><span class="w"> </span><span class="k">GROUP</span><span class="w"> </span><span class="p">(</span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">emp_name</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">emps</span>
-<span class="k">FROM</span>
-<span class="w">   </span><span class="n">emp</span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span>
-<span class="w">   </span><span class="n">dept_num</span>
-<span class="p">;</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-sql">SELECT
+   dept_num
+,  LISTAGG( emp_name, ',' ) WITHIN GROUP (ORDER BY emp_name) AS emps
+FROM
+   emp
+GROUP BY
+   dept_num
+;
+</code></pre>
 
 <hr>
         </div>
@@ -116,7 +117,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: November 25, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

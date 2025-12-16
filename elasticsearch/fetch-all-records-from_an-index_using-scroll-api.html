@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Fetch All Records From an Index using Scroll API" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>Fetch All Records From an Index using Scroll API</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>Fetch All Records From an Index using Scroll API</h1>
+<p>A bash script to fetch all records from an Elasticsearch index.</p>
+<pre class="codehilite"><code class="language-bash">#!/bin/bash
+
+# Scroll through all records in index 'mjn-tiny', reading 5 records at a time.
+index=mjn-tiny
+query_size=5
+
+tmp1=$0.tmp1
+tmp2=$0.tmp2
+
+# Run initial search/fetch (no search criteria).  &quot;sort&quot;: [&quot;_doc&quot;] is an Elasticsearch
+# recommended performance setting.  Request a scroll key, set lifespan to 1 minute.
+curl -s -X GET http://localhost:9200/$index/_search?scroll=1m \
+     -H 'Content-Type: application/json' -d '
+{
+  &quot;size&quot;:'$query_size',
+  &quot;sort&quot;: [&quot;_doc&quot;]
+}
+' &gt; $tmp1
+
+# Show the hits (index records).
+cat $tmp1 | jq -c '.hits | .hits'
+echo &quot;--------------------&quot;
+
+# Extract the scroll id.
+scroll_id=&quot;$(cat $tmp1 | jq '._scroll_id')&quot;
+
+# An endless loop.
+while [ 1 ]; do
+
+  # Run a scroll query using the scroll id.
+  curl -s -X POST http://localhost:9200/_search/scroll \
+       -H 'Content-Type: application/json' -d '
+  {
+    &quot;scroll&quot; : &quot;1m&quot;,                                                                 
+    &quot;scroll_id&quot; : '$scroll_id'
+  }
+  ' &gt; $tmp1
+
+  # Extract the hits (index records).
+  cat $tmp1 | jq -c '.hits | .hits' &gt; $tmp2
+
+  # If the hits (JSON array) is empty then we have reached the end of the records, so exit.
+  if [[ &quot;$(cat $tmp2)&quot; == &quot;[]&quot; ]]; then
+    echo &quot;Done!&quot;
+    exit
+  fi
+  cat $tmp2
+  echo &quot;--------------------&quot;
+done
+
+rm -f $tmp1 $tmp2
+</code></pre>
+
+<p>Running the script.</p>
+<pre class="codehilite"><code class="language-bash">&gt; fetch_all
+
+[{&quot;_index&quot;:&quot;mjn-tiny&quot;,&quot;_type&quot;:&quot;_doc&quot;,&quot;_id&quot;:&quot;CZIpgYsBOIyX700AWp8p&quot;,&quot;_score&quot;:null,&quot;_source&quot;:{&quot;set&quot;:0,&quot;
+num&quot;:0},&quot;sort&quot;:[0]},{&quot;_index&quot;:&quot;mjn-tiny&quot;,&quot;_type&quot;:&quot;_doc&quot;,&quot;_id&quot;:&quot;CpIpgYsBOIyX700AWp8p&quot;,&quot;_score&quot;:null,&quot;
+_source&quot;:{&quot;set&quot;:0,&quot;num&quot;:1},&quot;sort&quot;:[1]},{&quot;_index&quot;:&quot;mjn-tiny&quot;,&quot;_type&quot;:&quot;_doc&quot;,&quot;_id&quot;:&quot;C5IpgYsBOIyX700AWp
+8p&quot;,&quot;_score&quot;:null,&quot;_source&quot;:{&quot;set&quot;:0,&quot;num&quot;:2},&quot;sort&quot;:[2]},{&quot;_index&quot;:&quot;mjn-tiny&quot;,&quot;_type&quot;:&quot;_doc&quot;,&quot;_id&quot;:
+&quot;DJIpgYsBOIyX700AWp8p&quot;,&quot;_score&quot;:null,&quot;_source&quot;:{&quot;set&quot;:0,&quot;num&quot;:3},&quot;sort&quot;:[3]},{&quot;_index&quot;:&quot;mjn-tiny&quot;,&quot;_
+type&quot;:&quot;_doc&quot;,&quot;_id&quot;:&quot;DZIpgYsBOIyX700AW58o&quot;,&quot;_score&quot;:null,&quot;_source&quot;:{&quot;set&quot;:1,&quot;num&quot;:0},&quot;sort&quot;:[4]}]
+--------------------
+[{&quot;_index&quot;:&quot;mjn-tiny&quot;,&quot;_type&quot;:&quot;_doc&quot;,&quot;_id&quot;:&quot;DpIpgYsBOIyX700AW58o&quot;,&quot;_score&quot;:null,&quot;_source&quot;:{&quot;set&quot;:1,&quot;
+num&quot;:1},&quot;sort&quot;:[5]},{&quot;_index&quot;:&quot;mjn-tiny&quot;,&quot;_type&quot;:&quot;_doc&quot;,&quot;_id&quot;:&quot;D5IpgYsBOIyX700AW58o&quot;,&quot;_score&quot;:null,&quot;
+_source&quot;:{&quot;set&quot;:1,&quot;num&quot;:2},&quot;sort&quot;:[6]},{&quot;_index&quot;:&quot;mjn-tiny&quot;,&quot;_type&quot;:&quot;_doc&quot;,&quot;_id&quot;:&quot;EJIpgYsBOIyX700AW5
+8o&quot;,&quot;_score&quot;:null,&quot;_source&quot;:{&quot;set&quot;:1,&quot;num&quot;:3},&quot;sort&quot;:[7]},{&quot;_index&quot;:&quot;mjn-tiny&quot;,&quot;_type&quot;:&quot;_doc&quot;,&quot;_id&quot;:
+&quot;EZIpgYsBOIyX700AW5-M&quot;,&quot;_score&quot;:null,&quot;_source&quot;:{&quot;set&quot;:2,&quot;num&quot;:0},&quot;sort&quot;:[8]},{&quot;_index&quot;:&quot;mjn-tiny&quot;,&quot;_
+type&quot;:&quot;_doc&quot;,&quot;_id&quot;:&quot;EpIpgYsBOIyX700AW5-M&quot;,&quot;_score&quot;:null,&quot;_source&quot;:{&quot;set&quot;:2,&quot;num&quot;:1},&quot;sort&quot;:[9]}]
+--------------------
+[{&quot;_index&quot;:&quot;mjn-tiny&quot;,&quot;_type&quot;:&quot;_doc&quot;,&quot;_id&quot;:&quot;E5IpgYsBOIyX700AW5-M&quot;,&quot;_score&quot;:null,&quot;_source&quot;:{&quot;set&quot;:2,&quot;
+num&quot;:2},&quot;sort&quot;:[10]},{&quot;_index&quot;:&quot;mjn-tiny&quot;,&quot;_type&quot;:&quot;_doc&quot;,&quot;_id&quot;:&quot;FJIpgYsBOIyX700AW5-M&quot;,&quot;_score&quot;:null,
+&quot;_source&quot;:{&quot;set&quot;:2,&quot;num&quot;:3},&quot;sort&quot;:[11]},{&quot;_index&quot;:&quot;mjn-tiny&quot;,&quot;_type&quot;:&quot;_doc&quot;,&quot;_id&quot;:&quot;FZIpgYsBOIyX700A
+XJ8A&quot;,&quot;_score&quot;:null,&quot;_source&quot;:{&quot;set&quot;:3,&quot;num&quot;:0},&quot;sort&quot;:[12]},{&quot;_index&quot;:&quot;mjn-tiny&quot;,&quot;_type&quot;:&quot;_doc&quot;,&quot;_i
+d&quot;:&quot;FpIpgYsBOIyX700AXJ8A&quot;,&quot;_score&quot;:null,&quot;_source&quot;:{&quot;set&quot;:3,&quot;num&quot;:1},&quot;sort&quot;:[13]},{&quot;_index&quot;:&quot;mjn-tiny
+&quot;,&quot;_type&quot;:&quot;_doc&quot;,&quot;_id&quot;:&quot;F5IpgYsBOIyX700AXJ8A&quot;,&quot;_score&quot;:null,&quot;_source&quot;:{&quot;set&quot;:3,&quot;num&quot;:2},&quot;sort&quot;:[14]}
+]
+--------------------
+[{&quot;_index&quot;:&quot;mjn-tiny&quot;,&quot;_type&quot;:&quot;_doc&quot;,&quot;_id&quot;:&quot;GJIpgYsBOIyX700AXJ8A&quot;,&quot;_score&quot;:null,&quot;_source&quot;:{&quot;set&quot;:3,&quot;
+num&quot;:3},&quot;sort&quot;:[15]}]
+--------------------
+Done!
+</code></pre>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: December 11, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>Adding git-bash Command Line Options</title>
   </head>
   <body class="light" id="top">
@@ -89,40 +90,40 @@
         <div class="article-body">
           <h1>Adding git-bash Command Line Options</h1>
 <p>To add command line options to <code>git-bash.exe</code> you need to instead use <code>sh.exe</code>.</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="ss">&quot;C:\Program Files\Git\bin\sh.exe&quot;</span><span class="w"> </span><span class="c1">--help</span>
+<pre class="codehilite"><code class="language-cmd">&gt; &quot;C:\Program Files\Git\bin\sh.exe&quot; --help
 
-<span class="n">GNU</span><span class="w"> </span><span class="n">bash</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="mf">5.2.15</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="k">release</span><span class="o">-</span><span class="p">(</span><span class="n">x86_64</span><span class="o">-</span><span class="n">pc</span><span class="o">-</span><span class="n">msys</span><span class="p">)</span>
-<span class="k">Usage</span><span class="err">:</span><span class="w">  </span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">bash</span><span class="w"> </span><span class="o">[</span><span class="n">GNU long option</span><span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="n">option</span><span class="o">]</span><span class="w"> </span><span class="p">...</span>
-<span class="w">        </span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">bash</span><span class="w"> </span><span class="o">[</span><span class="n">GNU long option</span><span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="n">option</span><span class="o">]</span><span class="w"> </span><span class="n">script</span><span class="o">-</span><span class="k">file</span><span class="w"> </span><span class="p">...</span>
-<span class="n">GNU</span><span class="w"> </span><span class="n">long</span><span class="w"> </span><span class="nl">options</span><span class="p">:</span>
-<span class="w">        </span><span class="c1">--debug</span>
-<span class="w">        </span><span class="c1">--debugger</span>
-<span class="w">        </span><span class="c1">--dump-po-strings</span>
-<span class="w">        </span><span class="c1">--dump-strings</span>
-<span class="w">        </span><span class="c1">--help</span>
-<span class="w">        </span><span class="c1">--init-file</span>
-<span class="w">        </span><span class="c1">--login</span>
-<span class="w">        </span><span class="c1">--noediting</span>
-<span class="w">        </span><span class="c1">--noprofile</span>
-<span class="w">        </span><span class="c1">--norc</span>
-<span class="w">        </span><span class="c1">--posix</span>
-<span class="w">        </span><span class="c1">--pretty-print</span>
-<span class="w">        </span><span class="c1">--protected</span>
-<span class="w">        </span><span class="c1">--rcfile</span>
-<span class="w">        </span><span class="c1">--restricted</span>
-<span class="w">        </span><span class="c1">--verbose</span>
-<span class="w">        </span><span class="c1">--version</span>
-<span class="w">        </span><span class="c1">--wordexp</span>
-<span class="n">Shell</span><span class="w"> </span><span class="nl">options</span><span class="p">:</span>
-<span class="w">        </span><span class="o">-</span><span class="n">ilrsD</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="o">-</span><span class="n">c</span><span class="w"> </span><span class="n">command</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="o">-</span><span class="n">O</span><span class="w"> </span><span class="n">shopt_option</span><span class="w">         </span><span class="p">(</span><span class="n">invocation</span><span class="w"> </span><span class="k">only</span><span class="p">)</span>
-<span class="w">        </span><span class="o">-</span><span class="n">abefhkmnptuvxBCEHPT</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="o">-</span><span class="n">o</span><span class="w"> </span><span class="k">option</span>
-<span class="n">Type</span><span class="w"> </span><span class="err">`</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">bash</span><span class="w"> </span><span class="o">-</span><span class="n">c</span><span class="w"> </span><span class="ss">&quot;help set&quot;</span><span class="s1">&#39; for more information about shell options.</span>
-<span class="s1">Type `/usr/bin/bash -c help&#39;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">more</span><span class="w"> </span><span class="n">information</span><span class="w"> </span><span class="n">about</span><span class="w"> </span><span class="n">shell</span><span class="w"> </span><span class="n">builtin</span><span class="w"> </span><span class="n">commands</span><span class="p">.</span>
-<span class="k">Use</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="err">`</span><span class="n">bashbug</span><span class="err">&#39;</span><span class="w"> </span><span class="n">command</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">report</span><span class="w"> </span><span class="n">bugs</span><span class="p">.</span>
+GNU bash, version 5.2.15(1)-release-(x86_64-pc-msys)
+Usage:  /usr/bin/bash [GNU long option] [option] ...
+        /usr/bin/bash [GNU long option] [option] script-file ...
+GNU long options:
+        --debug
+        --debugger
+        --dump-po-strings
+        --dump-strings
+        --help
+        --init-file
+        --login
+        --noediting
+        --noprofile
+        --norc
+        --posix
+        --pretty-print
+        --protected
+        --rcfile
+        --restricted
+        --verbose
+        --version
+        --wordexp
+Shell options:
+        -ilrsD or -c command or -O shopt_option         (invocation only)
+        -abefhkmnptuvxBCEHPT or -o option
+Type `/usr/bin/bash -c &quot;help set&quot;' for more information about shell options.
+Type `/usr/bin/bash -c help' for more information about shell builtin commands.
+Use the `bashbug' command to report bugs.
 
-<span class="n">bash</span><span class="w"> </span><span class="n">home</span><span class="w"> </span><span class="nl">page</span><span class="p">:</span><span class="w"> </span><span class="o">&lt;</span><span class="nl">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="p">.</span><span class="n">gnu</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="n">software</span><span class="o">/</span><span class="n">bash</span><span class="o">&gt;</span>
-<span class="k">General</span><span class="w"> </span><span class="n">help</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">GNU</span><span class="w"> </span><span class="nl">software</span><span class="p">:</span><span class="w"> </span><span class="o">&lt;</span><span class="nl">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="p">.</span><span class="n">gnu</span><span class="p">.</span><span class="n">org</span><span class="o">/</span><span class="n">gethelp</span><span class="o">/&gt;</span>
-</code></pre></div>
+bash home page: &lt;http://www.gnu.org/software/bash&gt;
+General help using GNU software: &lt;http://www.gnu.org/gethelp/&gt;
+</code></pre>
         </div>
       </article>
     </main>
@@ -140,7 +141,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: November 25, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

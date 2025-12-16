@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>SQL Cheat Sheet</title>
   </head>
   <body class="light" id="top">
@@ -110,74 +111,74 @@
 </ul>
 </div>
 <h1 id="sql-basics">SQL Basics</h1>
-<div class="codehilite"><pre><span></span><code><span class="c1">-- Selecting Data</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="k">column_name</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="p">;</span>
+<pre class="codehilite"><code class="language-sql">-- Selecting Data
+SELECT column_name FROM table_name;
 
-<span class="c1">-- Selecting Data with Conditions</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="k">column_name</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="k">column_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;value&#39;</span><span class="p">;</span>
+-- Selecting Data with Conditions
+SELECT column_name FROM table_name WHERE column_name = 'value';
 
-<span class="c1">-- Sorting Data</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="k">column_name</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">column_name</span><span class="w"> </span><span class="k">ASC</span><span class="p">;</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="k">column_name</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">column_name</span><span class="w"> </span><span class="k">DESC</span><span class="p">;</span>
+-- Sorting Data
+SELECT column_name FROM table_name ORDER BY column_name ASC;
+SELECT column_name FROM table_name ORDER BY column_name DESC;
 
-<span class="c1">-- Limiting Results</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="k">column_name</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span><span class="w"> </span><span class="c1">-- 100 rows</span>
+-- Limiting Results
+SELECT column_name FROM table_name LIMIT 100; -- 100 rows
 
-<span class="c1">-- Joining Tables</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="k">column_name</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">table1</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">table2</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="n">table1</span><span class="p">.</span><span class="k">column_name</span><span class="o">=</span><span class="n">table2</span><span class="p">.</span><span class="k">column_name</span><span class="p">;</span>
+-- Joining Tables
+SELECT column_name FROM table1 JOIN table2 ON table1.column_name=table2.column_name;
 
-<span class="c1">-- Grouping Data</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="k">column_name</span><span class="w"> </span><span class="n">column_name2</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">column_name</span><span class="p">;</span>
+-- Grouping Data
+SELECT column_name column_name2 FROM table_name GROUP BY column_name;
 
-<span class="c1">-- Filtering Groups</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="k">column_name</span><span class="p">,</span><span class="w"> </span><span class="k">SUM</span><span class="p">(</span><span class="n">column_name2</span><span class="p">)</span><span class="w"> </span>
-<span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span>
-<span class="k">GROUP</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="k">column_name</span><span class="w"> </span>
-<span class="k">HAVING</span><span class="w"> </span><span class="k">SUM</span><span class="p">(</span><span class="n">column_name2</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
-</code></pre></div>
+-- Filtering Groups
+SELECT column_name, SUM(column_name2) 
+FROM table_name 
+GROUP BY column_name 
+HAVING SUM(column_name2) &gt; 100;
+</code></pre>
 
 <h1 id="sql-functions">SQL Functions</h1>
 <h2 id="aggregate-functions">Aggregate Functions</h2>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">COUNT</span><span class="p">(</span><span class="k">column_name</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="p">;</span>
+<pre class="codehilite"><code class="language-sql">SELECT COUNT(column_name) FROM table_name;
 
-<span class="k">SELECT</span><span class="w"> </span><span class="k">SUM</span><span class="p">(</span><span class="k">column_name</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="p">;</span>
+SELECT SUM(column_name) FROM table_name;
 
-<span class="k">SELECT</span><span class="w"> </span><span class="k">AVG</span><span class="p">(</span><span class="k">column_name</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="p">;</span>
+SELECT AVG(column_name) FROM table_name;
 
-<span class="k">SELECT</span><span class="w"> </span><span class="k">MAX</span><span class="p">(</span><span class="k">column_name</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="p">;</span>
+SELECT MAX(column_name) FROM table_name;
 
-<span class="k">SELECT</span><span class="w"> </span><span class="k">MIN</span><span class="p">(</span><span class="k">column_name</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="p">;</span>
-</code></pre></div>
+SELECT MIN(column_name) FROM table_name;
+</code></pre>
 
 <h2 id="string-functions">String Functions</h2>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">CONCAT</span><span class="p">(</span><span class="n">column1</span><span class="p">,</span><span class="w"> </span><span class="n">column2</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="p">;</span>
+<pre class="codehilite"><code class="language-sql">SELECT CONCAT(column1, column2) FROM table_name;
 
-<span class="k">SELECT</span><span class="w"> </span><span class="k">SUBSTRING</span><span class="p">(</span><span class="k">column_name</span><span class="p">,</span><span class="w"> </span><span class="n">start_position</span><span class="p">,</span><span class="w"> </span><span class="k">length</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="p">;</span>
+SELECT SUBSTRING(column_name, start_position, length) FROM table_name;
 
-<span class="k">SELECT</span><span class="w"> </span><span class="k">UPPER</span><span class="p">(</span><span class="k">column_name</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="p">;</span>
+SELECT UPPER(column_name) FROM table_name;
 
-<span class="k">SELECT</span><span class="w"> </span><span class="k">LOWER</span><span class="p">(</span><span class="k">column_name</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="p">;</span>
+SELECT LOWER(column_name) FROM table_name;
 
-<span class="k">SELECT</span><span class="w"> </span><span class="k">LENGTH</span><span class="p">(</span><span class="k">column_name</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="p">;</span>
-</code></pre></div>
+SELECT LENGTH(column_name) FROM table_name;
+</code></pre>
 
 <h2 id="date-functions">Date Functions</h2>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">YEAR</span><span class="p">(</span><span class="k">column_name</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="p">;</span>
+<pre class="codehilite"><code class="language-sql">SELECT YEAR(column_name) FROM table_name;
 
-<span class="k">SELECT</span><span class="w"> </span><span class="k">MONTH</span><span class="p">(</span><span class="k">column_name</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="p">;</span>
+SELECT MONTH(column_name) FROM table_name;
 
-<span class="k">SELECT</span><span class="w"> </span><span class="k">DAY</span><span class="p">(</span><span class="k">column_name</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="p">;</span>
+SELECT DAY(column_name) FROM table_name;
 
-<span class="k">SELECT</span><span class="w"> </span><span class="n">HOUR</span><span class="p">(</span><span class="k">column_name</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="p">;</span>
+SELECT HOUR(column_name) FROM table_name;
 
-<span class="k">SELECT</span><span class="w"> </span><span class="k">MINUTE</span><span class="p">(</span><span class="k">column_name</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="p">;</span>
+SELECT MINUTE(column_name) FROM table_name;
 
-<span class="k">SELECT</span><span class="w"> </span><span class="k">SECOND</span><span class="p">(</span><span class="k">column_name</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="p">;</span>
-</code></pre></div>
+SELECT SECOND(column_name) FROM table_name;
+</code></pre>
 
 <h2 id="conditional-functions">Conditional Functions</h2>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="k">column_name</span><span class="p">,</span><span class="w"> </span><span class="k">CASE</span><span class="w"> </span><span class="k">WHEN</span><span class="w"> </span><span class="n">condition</span><span class="w"> </span><span class="k">THEN</span><span class="w"> </span><span class="s1">&#39;Result1&#39;</span><span class="w"> </span><span class="k">ELSE</span><span class="w"> </span><span class="s1">&#39;Result2&#39;</span><span class="w"> </span><span class="k">END</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="p">;</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-sql">SELECT column_name, CASE WHEN condition THEN 'Result1' ELSE 'Result2' END FROM table_name;
+</code></pre>
 
 <h2 id="sql-data-types">SQL Data Types</h2>
 <p>Numeric Data Types</p>
@@ -190,180 +191,180 @@
 <p><code>BOOLEAN, BLOB, ENUM, SET</code></p>
 <h1 id="other-sql">Other SQL</h1>
 <h2 id="sql-constraints">SQL Constraints</h2>
-<div class="codehilite"><pre><span></span><code><span class="c1">-- NOT NULL Constraint</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="p">(</span>
-<span class="w">  </span><span class="n">column1</span><span class="w"> </span><span class="n">datatype</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span><span class="p">,</span>
-<span class="w">  </span><span class="n">column2</span><span class="w"> </span><span class="n">datatype</span><span class="p">,</span>
-<span class="w">  </span><span class="n">column3</span><span class="w"> </span><span class="n">datatype</span><span class="p">,</span>
-<span class="w">  </span><span class="p">...</span>
-<span class="p">);</span>
+<pre class="codehilite"><code class="language-sql">-- NOT NULL Constraint
+CREATE TABLE table_name (
+  column1 datatype NOT NULL,
+  column2 datatype,
+  column3 datatype,
+  ...
+);
 
-<span class="c1">-- UNIQUE Constraint</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="p">(</span>
-<span class="w">  </span><span class="n">column1</span><span class="w"> </span><span class="n">datatype</span><span class="w"> </span><span class="k">UNIQUE</span><span class="p">,</span>
-<span class="w">  </span><span class="n">column2</span><span class="w"> </span><span class="n">datatype</span><span class="p">,</span>
-<span class="w">  </span><span class="n">column3</span><span class="w"> </span><span class="n">datatype</span><span class="p">,</span>
-<span class="w">  </span><span class="p">...</span>
-<span class="p">);</span>
+-- UNIQUE Constraint
+CREATE TABLE table_name (
+  column1 datatype UNIQUE,
+  column2 datatype,
+  column3 datatype,
+  ...
+);
 
-<span class="c1">-- PRIMARY KEY Constraint</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="p">(</span>
-<span class="w">  </span><span class="n">column1</span><span class="w"> </span><span class="n">datatype</span><span class="p">,</span>
-<span class="w">  </span><span class="n">column2</span><span class="w"> </span><span class="n">datatype</span><span class="p">,</span>
-<span class="w">  </span><span class="n">column3</span><span class="w"> </span><span class="n">datatype</span><span class="p">,</span>
-<span class="w">  </span><span class="p">...</span>
-<span class="w">  </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">pk_column1</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">column1</span><span class="p">,</span><span class="w"> </span><span class="n">column2</span><span class="p">)</span>
-<span class="p">);</span>
+-- PRIMARY KEY Constraint
+CREATE TABLE table_name (
+  column1 datatype,
+  column2 datatype,
+  column3 datatype,
+  ...
+  CONSTRAINT pk_column1 PRIMARY KEY (column1, column2)
+);
 
-<span class="c1">-- FOREIGN KEY Constraint</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">table_name1</span><span class="w"> </span><span class="p">(</span>
-<span class="w">  </span><span class="n">column1</span><span class="w"> </span><span class="n">datatype</span><span class="w"> </span><span class="k">PRIMARY</span><span class="w"> </span><span class="k">KEY</span><span class="p">,</span>
-<span class="w">  </span><span class="n">column2</span><span class="w"> </span><span class="n">datatype</span><span class="p">,</span>
-<span class="w">  </span><span class="n">column3</span><span class="w"> </span><span class="n">datatype</span><span class="p">,</span>
-<span class="w">  </span><span class="p">...</span>
-<span class="p">);</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">table_name2</span><span class="w"> </span><span class="p">(</span>
-<span class="w">  </span><span class="n">column1</span><span class="w"> </span><span class="n">datatype</span><span class="p">,</span>
-<span class="w">  </span><span class="n">column2</span><span class="w"> </span><span class="n">datatype</span><span class="p">,</span>
-<span class="w">  </span><span class="n">column3</span><span class="w"> </span><span class="n">datatype</span><span class="p">,</span>
-<span class="w">  </span><span class="p">...</span>
-<span class="w">  </span><span class="k">CONSTRAINT</span><span class="w"> </span><span class="n">fk_column1</span><span class="w"> </span><span class="k">FOREIGN</span><span class="w"> </span><span class="k">KEY</span><span class="w"> </span><span class="p">(</span><span class="n">column1</span><span class="p">)</span><span class="w"> </span><span class="k">REFERENCES</span><span class="w"> </span><span class="n">table_name1</span><span class="p">(</span><span class="n">column1</span><span class="p">)</span>
-<span class="p">);</span>
+-- FOREIGN KEY Constraint
+CREATE TABLE table_name1 (
+  column1 datatype PRIMARY KEY,
+  column2 datatype,
+  column3 datatype,
+  ...
+);
+CREATE TABLE table_name2 (
+  column1 datatype,
+  column2 datatype,
+  column3 datatype,
+  ...
+  CONSTRAINT fk_column1 FOREIGN KEY (column1) REFERENCES table_name1(column1)
+);
 
-<span class="c1">-- CHECK Constraint</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="p">(</span>
-<span class="w">  </span><span class="n">column1</span><span class="w"> </span><span class="n">datatype</span><span class="p">,</span>
-<span class="w">  </span><span class="n">column2</span><span class="w"> </span><span class="n">datatype</span><span class="w"> </span><span class="k">CHECK</span><span class="w"> </span><span class="p">(</span><span class="n">column2</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span>
-<span class="w">  </span><span class="n">column3</span><span class="w"> </span><span class="n">datatype</span><span class="p">,</span>
-<span class="w">  </span><span class="p">...</span>
-<span class="p">);</span>
-</code></pre></div>
+-- CHECK Constraint
+CREATE TABLE table_name (
+  column1 datatype,
+  column2 datatype CHECK (column2 &gt; 0),
+  column3 datatype,
+  ...
+);
+</code></pre>
 
 <h2 id="sql-indexes">SQL Indexes</h2>
-<div class="codehilite"><pre><span></span><code><span class="c1">-- Creating Index</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">index_name</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="p">(</span><span class="n">column1</span><span class="p">,</span><span class="w"> </span><span class="n">column2</span><span class="p">,</span><span class="w"> </span><span class="p">...);</span>
+<pre class="codehilite"><code class="language-sql">-- Creating Index
+CREATE INDEX index_name ON table_name (column1, column2, ...);
 
-<span class="c1">-- Removing Index</span>
-<span class="k">DROP</span><span class="w"> </span><span class="k">INDEX</span><span class="w"> </span><span class="n">index_name</span><span class="p">;</span>
-</code></pre></div>
+-- Removing Index
+DROP INDEX index_name;
+</code></pre>
 
 <h2 id="sql-views">SQL Views</h2>
-<div class="codehilite"><pre><span></span><code><span class="c1">-- Creating View</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="n">view_name</span><span class="w"> </span><span class="k">AS</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">column1</span><span class="p">,</span><span class="w"> </span><span class="n">column2</span><span class="p">,</span><span class="w"> </span><span class="p">...</span>
-<span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">condition</span><span class="p">;</span>
+<pre class="codehilite"><code class="language-sql">-- Creating View
+CREATE VIEW view_name AS
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition;
 
-<span class="c1">-- Updating View</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="k">OR</span><span class="w"> </span><span class="k">REPLACE</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="n">view_name</span><span class="w"> </span><span class="k">AS</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">column1</span><span class="p">,</span><span class="w"> </span><span class="n">column2</span><span class="p">,</span><span class="w"> </span><span class="p">...</span>
-<span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span>
-<span class="k">WHERE</span><span class="w"> </span><span class="n">condition</span><span class="p">;</span>
+-- Updating View
+CREATE OR REPLACE VIEW view_name AS
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition;
 
-<span class="c1">-- Dropping View</span>
-<span class="k">DROP</span><span class="w"> </span><span class="k">VIEW</span><span class="w"> </span><span class="n">view_name</span><span class="p">;</span>
-</code></pre></div>
+-- Dropping View
+DROP VIEW view_name;
+</code></pre>
 
 <h2 id="sql-joins">SQL Joins</h2>
-<div class="codehilite"><pre><span></span><code><span class="c1">-- Inner Join</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="k">column_name</span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">table1</span>
-<span class="k">INNER</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">table2</span>
-<span class="k">ON</span><span class="w"> </span><span class="n">table1</span><span class="p">.</span><span class="k">column_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">table2</span><span class="p">.</span><span class="k">column_name</span><span class="p">;</span>
+<pre class="codehilite"><code class="language-sql">-- Inner Join
+SELECT column_name
+FROM table1
+INNER JOIN table2
+ON table1.column_name = table2.column_name;
 
-<span class="c1">-- Left Join</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="k">column_name</span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">table1</span>
-<span class="k">LEFT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">table2</span>
-<span class="k">ON</span><span class="w"> </span><span class="n">table1</span><span class="p">.</span><span class="k">column_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">table2</span><span class="p">.</span><span class="k">column_name</span><span class="p">;</span>
+-- Left Join
+SELECT column_name
+FROM table1
+LEFT JOIN table2
+ON table1.column_name = table2.column_name;
 
-<span class="c1">-- Right Join</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="k">column_name</span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">table1</span>
-<span class="k">RIGHT</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">table2</span>
-<span class="k">ON</span><span class="w"> </span><span class="n">table1</span><span class="p">.</span><span class="k">column_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">table2</span><span class="p">.</span><span class="k">column_name</span><span class="p">;</span>
+-- Right Join
+SELECT column_name
+FROM table1
+RIGHT JOIN table2
+ON table1.column_name = table2.column_name;
 
-<span class="c1">-- Full Join</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="k">column_name</span>
-<span class="k">FROM</span><span class="w"> </span><span class="n">table1</span>
-<span class="k">FULL</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="n">table2</span>
-<span class="k">ON</span><span class="w"> </span><span class="n">table1</span><span class="p">.</span><span class="k">column_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">table2</span><span class="p">.</span><span class="k">column_name</span><span class="p">;</span>
-</code></pre></div>
+-- Full Join
+SELECT column_name
+FROM table1
+FULL JOIN table2
+ON table1.column_name = table2.column_name;
+</code></pre>
 
 <h2 id="sql-subqueries">SQL Subqueries</h2>
-<div class="codehilite"><pre><span></span><code><span class="c1">-- Using a Subquery in a WHERE Clause</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">column1</span><span class="p">,</span><span class="w"> </span><span class="n">column2</span><span class="p">,</span><span class="w"> </span><span class="p">...</span>
-<span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span>
-<span class="k">WHERE</span><span class="w"> </span><span class="k">column_name</span><span class="w"> </span><span class="k">IN</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="k">column_name</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">condition</span><span class="p">);</span>
+<pre class="codehilite"><code class="language-sql">-- Using a Subquery in a WHERE Clause
+SELECT column1, column2, ...
+FROM table_name
+WHERE column_name IN (SELECT column_name FROM table_name WHERE condition);
 
-<span class="c1">-- Using a Subquery in a FROM Clause</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">column1</span><span class="p">,</span><span class="w"> </span><span class="n">column2</span><span class="p">,</span><span class="w"> </span><span class="p">...</span>
-<span class="k">FROM</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="k">column_name</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">condition</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">subquery_name</span><span class="p">;</span>
-<span class="k">Using</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">Subquery</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">Clause</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">column1</span><span class="p">,</span><span class="w"> </span><span class="n">column2</span><span class="p">,</span><span class="w"> </span><span class="p">...,</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="k">column_name</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">condition</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">column_alias</span>
-<span class="k">FROM</span><span class="w"> </span><span class="k">table_name</span><span class="p">;</span>
+-- Using a Subquery in a FROM Clause
+SELECT column1, column2, ...
+FROM (SELECT column_name FROM table_name WHERE condition) AS subquery_name;
+Using a Subquery in a SELECT Clause
+SELECT column1, column2, ..., (SELECT column_name FROM table_name WHERE condition) AS column_alias
+FROM table_name;
 
-<span class="c1">-- SQL Union</span>
-<span class="n">Combining</span><span class="w"> </span><span class="n">Results</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">Multiple</span><span class="w"> </span><span class="n">Queries</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">column1</span><span class="p">,</span><span class="w"> </span><span class="n">column2</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">table_name1</span>
-<span class="k">UNION</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">column1</span><span class="p">,</span><span class="w"> </span><span class="n">column2</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">table_name2</span><span class="p">;</span>
+-- SQL Union
+Combining Results from Multiple Queries
+SELECT column1, column2, ... FROM table_name1
+UNION
+SELECT column1, column2, ... FROM table_name2;
 
-<span class="c1">-- Combining Results and Removing Duplicates</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">column1</span><span class="p">,</span><span class="w"> </span><span class="n">column2</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">table_name1</span>
-<span class="k">UNION</span><span class="w"> </span><span class="k">DISTINCT</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">column1</span><span class="p">,</span><span class="w"> </span><span class="n">column2</span><span class="p">,</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">table_name2</span><span class="p">;</span>
-</code></pre></div>
+-- Combining Results and Removing Duplicates
+SELECT column1, column2, ... FROM table_name1
+UNION DISTINCT
+SELECT column1, column2, ... FROM table_name2;
+</code></pre>
 
 <h2 id="sql-transactions">SQL Transactions</h2>
-<div class="codehilite"><pre><span></span><code><span class="c1">-- Starting a Transaction</span>
-<span class="k">START</span><span class="w"> </span><span class="k">TRANSACTION</span><span class="p">;</span>
+<pre class="codehilite"><code class="language-sql">-- Starting a Transaction
+START TRANSACTION;
 
-<span class="c1">-- Committing a Transaction</span>
-<span class="k">COMMIT</span><span class="p">;</span>
+-- Committing a Transaction
+COMMIT;
 
-<span class="c1">-- Rolling Back a Transaction</span>
-<span class="k">ROLLBACK</span><span class="p">;</span>
-</code></pre></div>
+-- Rolling Back a Transaction
+ROLLBACK;
+</code></pre>
 
 <h2 id="sql-stored-procedures">SQL Stored Procedures</h2>
-<div class="codehilite"><pre><span></span><code><span class="c1">-- Creating a Stored Procedure</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="k">PROCEDURE</span><span class="w"> </span><span class="n">procedure_name</span>
-<span class="k">AS</span>
-<span class="k">BEGIN</span>
-<span class="w">  </span><span class="k">SQL</span><span class="w"> </span><span class="n">statements</span>
-<span class="k">END</span><span class="p">;</span>
+<pre class="codehilite"><code class="language-sql">-- Creating a Stored Procedure
+CREATE PROCEDURE procedure_name
+AS
+BEGIN
+  SQL statements
+END;
 
-<span class="c1">-- Executing a Stored Procedure</span>
-<span class="k">EXEC</span><span class="w"> </span><span class="n">procedure_name</span><span class="p">;</span>
-<span class="n">Altering</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">Stored</span><span class="w"> </span><span class="k">Procedure</span>
-<span class="k">ALTER</span><span class="w"> </span><span class="k">PROCEDURE</span><span class="w"> </span><span class="n">procedure_name</span>
-<span class="k">AS</span>
-<span class="k">BEGIN</span>
-<span class="w">  </span><span class="k">SQL</span><span class="w"> </span><span class="n">statements</span>
-<span class="k">END</span><span class="p">;</span>
-</code></pre></div>
+-- Executing a Stored Procedure
+EXEC procedure_name;
+Altering a Stored Procedure
+ALTER PROCEDURE procedure_name
+AS
+BEGIN
+  SQL statements
+END;
+</code></pre>
 
 <h2 id="sql-triggers">SQL Triggers</h2>
-<div class="codehilite"><pre><span></span><code><span class="c1">-- Creating a Trigger</span>
-<span class="k">CREATE</span><span class="w"> </span><span class="k">TRIGGER</span><span class="w"> </span><span class="k">trigger_name</span>
-<span class="k">AFTER</span><span class="w"> </span><span class="k">INSERT</span><span class="p">,</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">,</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">table_name</span>
-<span class="k">FOR</span><span class="w"> </span><span class="k">EACH</span><span class="w"> </span><span class="k">ROW</span>
-<span class="k">BEGIN</span>
-<span class="w">  </span><span class="k">SQL</span><span class="w"> </span><span class="n">statements</span>
-<span class="k">END</span><span class="p">;</span>
+<pre class="codehilite"><code class="language-sql">-- Creating a Trigger
+CREATE TRIGGER trigger_name
+AFTER INSERT, UPDATE, DELETE ON table_name
+FOR EACH ROW
+BEGIN
+  SQL statements
+END;
 
-<span class="c1">-- Altering a Trigger</span>
-<span class="k">ALTER</span><span class="w"> </span><span class="k">TRIGGER</span><span class="w"> </span><span class="k">trigger_name</span>
-<span class="k">AFTER</span><span class="w"> </span><span class="k">INSERT</span><span class="p">,</span><span class="w"> </span><span class="k">UPDATE</span><span class="p">,</span><span class="w"> </span><span class="k">DELETE</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">table_name</span>
-<span class="k">FOR</span><span class="w"> </span><span class="k">EACH</span><span class="w"> </span><span class="k">ROW</span>
-<span class="k">BEGIN</span>
-<span class="w">  </span><span class="k">SQL</span><span class="w"> </span><span class="n">statements</span>
-<span class="k">END</span><span class="p">;</span>
+-- Altering a Trigger
+ALTER TRIGGER trigger_name
+AFTER INSERT, UPDATE, DELETE ON table_name
+FOR EACH ROW
+BEGIN
+  SQL statements
+END;
 
-<span class="c1">-- Dropping a Trigger</span>
-<span class="k">DROP</span><span class="w"> </span><span class="k">TRIGGER</span><span class="w"> </span><span class="k">trigger_name</span><span class="p">;</span>
-</code></pre></div>
+-- Dropping a Trigger
+DROP TRIGGER trigger_name;
+</code></pre>
         </div>
       </article>
     </main>
@@ -381,7 +382,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: December 10, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

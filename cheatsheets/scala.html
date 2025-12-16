@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>Scala Cheatsheet</title>
   </head>
   <body class="light" id="top">
@@ -137,62 +138,62 @@
 
 <h1 id="utilities">Utilities</h1>
 <h2 id="repl-ammonite">REPL - Ammonite</h2>
-<div class="codehilite"><pre><span></span><code>&gt; amm
-</code></pre></div>
+<pre class="codehilite"><code>&gt; amm
+</code></pre>
 
 <h1 id="hello-world">Hello World</h1>
 <h2 id="scala-script">Scala Script</h2>
 <p>File: <code>helloWorld.sc</code></p>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">helloWorld</span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="s">&quot;hello world! &quot;</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">n</span>
-<span class="p">}</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-scala">def helloWorld(n: Int = 1) = {
+  &quot;hello world! &quot; * n
+}
+</code></pre>
 
 <p>To run the script in Ammonite:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="n">amm</span><span class="w"> </span><span class="o">--</span><span class="n">predef</span><span class="w"> </span><span class="n">helloWorld</span><span class="p">.</span><span class="n">sc</span>
-<span class="nc">Loading</span><span class="p">...</span>
-<span class="nc">Welcome</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="nc">Ammonite</span><span class="w"> </span><span class="nc">Repl</span><span class="w"> </span><span class="mf">2.2.0</span><span class="w"> </span><span class="p">(</span><span class="nc">Scala</span><span class="w"> </span><span class="mf">2.13.3</span><span class="w"> </span><span class="nc">Java</span><span class="w"> </span><span class="mf">1.8.0_292</span><span class="p">)</span>
+<pre class="codehilite"><code class="language-scala">&gt; amm --predef helloWorld.sc
+Loading...
+Welcome to the Ammonite Repl 2.2.0 (Scala 2.13.3 Java 1.8.0_292)
 
-<span class="o">@</span><span class="w"> </span><span class="n">helloWorld</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">res1</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;hello world! hello world! hello world! &quot;</span>
+@ helloWorld(3)
+res1: String = &quot;hello world! hello world! hello world! &quot;
 
-<span class="o">@</span><span class="w"> </span><span class="nc">Bye</span><span class="o">!</span>
-</code></pre></div>
+@ Bye!
+</code></pre>
 
 <h2 id="scala-app">Scala App</h2>
-<div class="codehilite"><pre><span></span><code><span class="k">object</span><span class="w"> </span><span class="nc">Main</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">App</span><span class="w"> </span><span class="p">{</span>
-<span class="w">   </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;hello world!&quot;</span><span class="p">)</span>
-<span class="p">}</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-scala">object Main extends App {
+   println(&quot;hello world!&quot;)
+}
+</code></pre>
 
 <h1 id="data-types">Data Types</h1>
 <h2 id="hierarchy">Hierarchy</h2>
-<div class="codehilite"><pre><span></span><code><span class="nc">Any</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">AnyVal</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">Double</span><span class="p">,</span><span class="w"> </span><span class="nc">Float</span><span class="p">,</span><span class="w"> </span><span class="nc">Long</span><span class="p">,</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="nc">Short</span><span class="p">,</span><span class="w"> </span><span class="nc">Byte</span><span class="p">,</span><span class="w"> </span><span class="nc">Char</span><span class="p">,</span><span class="w"> </span><span class="nc">Unit</span><span class="p">,</span><span class="w"> </span><span class="nc">Boolean</span>
-<span class="w">    </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">AnyRef</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">List</span><span class="p">,</span><span class="w"> </span><span class="nc">Iterable</span><span class="p">,</span><span class="w"> </span><span class="nc">Seq</span><span class="p">,</span><span class="w"> </span><span class="nc">Strings</span><span class="p">,</span><span class="w"> </span><span class="nc">Other</span><span class="w"> </span><span class="nc">Scala</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="nc">Java</span><span class="w"> </span><span class="nc">Classes</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-scala">Any -&gt; AnyVal -&gt; Double, Float, Long, Int, Short, Byte, Char, Unit, Boolean
+    -&gt; AnyRef -&gt; List, Iterable, Seq, Strings, Other Scala / Java Classes
+</code></pre>
 
 <h2 id="type-casting">Type Casting</h2>
-<div class="codehilite"><pre><span></span><code><span class="nc">Byte</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">Short</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">Long</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">Float</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">Double</span>
-<span class="w">                     </span><span class="o">&lt;-</span><span class="w"> </span><span class="nc">Char</span><span class="w">  </span><span class="p">(</span><span class="nc">Char</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="n">gives</span><span class="w"> </span><span class="nc">ASCII</span><span class="w"> </span><span class="n">code</span><span class="p">)</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-scala">Byte -&gt; Short -&gt; Int -&gt; Long -&gt; Float -&gt; Double
+                     &lt;- Char  (Char -&gt; Int gives ASCII code)
+</code></pre>
 
 <h1 id="values-and-variables">Values And Variables</h1>
-<div class="codehilite"><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">     </span><span class="c1">// Eval when set. Constant. Both set to 2</span>
-<span class="k">lazy</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">c</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w">   </span><span class="c1">// Eval FIRST time used</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">x</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;22&quot;</span><span class="w">  </span><span class="c1">// Eval EVERY time used. Constant</span>
-<span class="kd">var</span><span class="w"> </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="nc">Char</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sc">&#39;2&#39;</span><span class="w">     </span><span class="c1">// Eval when set, can be updated, avoid</span>
-<span class="kd">var</span><span class="w"> </span><span class="n">z</span><span class="p">:</span><span class="w"> </span><span class="nc">Any</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="w">       </span><span class="c1">// Can store any value</span>
+<pre class="codehilite"><code class="language-scala">val a, b: Int = 2     // Eval when set. Constant. Both set to 2
+lazy val c: Int = 2   // Eval FIRST time used
+def x: String = &quot;22&quot;  // Eval EVERY time used. Constant
+var y: Char = '2'     // Eval when set, can be updated, avoid
+var z: Any = 12       // Can store any value
 
-<span class="kd">val</span><span class="w"> </span><span class="n">i</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0FF</span><span class="w">    </span><span class="c1">// i = 255.  Assigning a Hex literal</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">l</span><span class="p">:</span><span class="w"> </span><span class="nc">Long</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mh">0x0FF</span><span class="nc">L</span><span class="w">  </span><span class="c1">// l = 255.  &#39;L&#39; signifies a Long literal</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">f</span><span class="p">:</span><span class="w"> </span><span class="nc">Float</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.5e2F</span><span class="w"> </span><span class="c1">// f = 150.  &#39;F&#39; signifies a Float literal</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">d</span><span class="p">:</span><span class="w"> </span><span class="nc">Double</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1.5e3</span><span class="w"> </span><span class="c1">// d = 1500</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">b</span><span class="p">:</span><span class="w"> </span><span class="nc">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+val i: Int = 0x0FF    // i = 255.  Assigning a Hex literal
+val l: Long = 0x0FFL  // l = 255.  'L' signifies a Long literal
+val f: Float = 1.5e2F // f = 150.  'F' signifies a Float literal
+val d: Double = 1.5e3 // d = 1500
+val b: Boolean = true
 
-<span class="kd">val</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;hi&quot;</span>
-<span class="n">println</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">getClass</span><span class="p">())</span><span class="w">         </span><span class="c1">// class java.lang.String</span>
-<span class="n">println</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="k">isInstanceOf</span><span class="p">[</span><span class="nc">Int</span><span class="p">])</span><span class="w">  </span><span class="c1">// false</span>
-</code></pre></div>
+val s = &quot;hi&quot;
+println(s.getClass())         // class java.lang.String
+println(s.isInstanceOf[Int])  // false
+</code></pre>
 
 <h2 id="string-char-literals">String / Char Literals</h2>
 <table>
@@ -237,619 +238,619 @@
 </tbody>
 </table>
 <h1 id="operators">Operators</h1>
-<div class="codehilite"><pre><span></span><code><span class="mi">1</span><span class="p">.</span><span class="o">+</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="w">  </span><span class="c1">// 4.  1 + 3</span>
-<span class="mi">10</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">7</span><span class="w">  </span><span class="c1">// Yields: Int = 1 </span>
-<span class="mf">10F</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="c1">// Yields: Float 1.42..</span>
+<pre class="codehilite"><code class="language-scala">1.+(3)  // 4.  1 + 3
+10 / 7  // Yields: Int = 1 
+10F / 7 // Yields: Float 1.42..
 
-<span class="kd">val</span><span class="w"> </span><span class="n">t</span><span class="p">:</span><span class="w"> </span><span class="nc">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">f</span><span class="p">:</span><span class="w"> </span><span class="nc">Boolean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span>
-<span class="n">println</span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="o">!</span><span class="n">f</span><span class="p">)</span><span class="w">  </span><span class="c1">// Yields: (true, false, true)</span>
+val t: Boolean = true; val f: Boolean = false
+println(t || f, t &amp;&amp; f, !f)  // Yields: (true, false, true)
 
-<span class="n">a</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">c</span><span class="o">*=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">/=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">%=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="c1">// Yields: 2</span>
-</code></pre></div>
+a += 1; b -= 1; c*= 2; d /= 2; val e = 5; e %= 3 // Yields: 2
+</code></pre>
 
 <p><strong>Note</strong>: Scala uses short-circuit (lazy) evaluation so with  <code>(false || val)</code>, <code>val</code> will not be evaluated.</p>
 <h1 id="strings">Strings</h1>
 <p><code>"""</code> - triple double quotes - multiline string.</p>
 <h2 id="3-string-types">3 String Types</h2>
 <h3 id="sstring">s"String"</h3>
-<div class="codehilite"><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Yo&quot;</span><span class="p">;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">v</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; Martin&quot;</span><span class="p">)</span><span class="w">     </span><span class="c1">// Yields: &quot;Yo Martin&quot;</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Yo&quot;</span><span class="p">;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">s&quot;</span><span class="si">$</span><span class="n">v</span><span class="s"> </span><span class="si">${</span><span class="n">v</span><span class="si">}</span><span class="s"> Martin&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: &quot;Yo Yo Martin&quot;</span>
-<span class="n">println</span><span class="p">(</span><span class="s">s&quot;</span><span class="si">${</span><span class="mi">3</span><span class="o">+</span><span class="mi">4</span><span class="si">}</span><span class="s">&quot;</span><span class="p">)</span><span class="w">                       </span><span class="c1">// Yields: &quot;7&quot;</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-scala">val v = &quot;Yo&quot;; println(v + &quot; Martin&quot;)     // Yields: &quot;Yo Martin&quot;
+val v = &quot;Yo&quot;; println(s&quot;$v ${v} Martin&quot;) // Yields: &quot;Yo Yo Martin&quot;
+println(s&quot;${3+4}&quot;)                       // Yields: &quot;7&quot;
+</code></pre>
 
 <h3 id="fstring">f"String"</h3>
 <p><code>$[var]%[flag][Width].[Precision][Type]</code></p>
 <p><strong>Flag</strong>: <code>-</code>: Left align, <code>+</code>: show +, <code>0</code>: leading 0's, <code>,</code>: comma numbers</p>
 <p><strong>Type</strong>: <code>s</code>: strings, <code>d</code>: decimal integers, <code>f</code>: floating-point numbers, <code>t</code>: date/time values</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="n">pi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3.14159F</span>
-<span class="n">println</span><span class="p">(</span><span class="s">f&quot;</span><span class="si">$</span><span class="n">pi</span><span class="s">%6.2f&quot;</span><span class="p">)</span><span class="w">   </span><span class="c1">// Yields: &quot;  3.14&quot;</span>
-<span class="n">println</span><span class="p">(</span><span class="s">f&quot;</span><span class="si">$</span><span class="n">pi</span><span class="s">%-6.2f&quot;</span><span class="p">)</span><span class="w">  </span><span class="c1">// Yields: &quot;3.14  &quot;</span>
-<span class="n">println</span><span class="p">(</span><span class="s">f&quot;</span><span class="si">$</span><span class="n">pi</span><span class="s">%+6.2f&quot;</span><span class="p">)</span><span class="w">  </span><span class="c1">// Yields: &quot;+3.14 &quot;</span>
-<span class="n">println</span><span class="p">(</span><span class="s">f&quot;</span><span class="si">$</span><span class="n">pi</span><span class="s">%06.2f&quot;</span><span class="p">)</span><span class="w">  </span><span class="c1">// Yields: &quot;003.14&quot;</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100000000</span>
-<span class="n">println</span><span class="p">(</span><span class="s">f&quot;</span><span class="si">$</span><span class="n">d</span><span class="s">%,d&quot;</span><span class="p">)</span><span class="w">      </span><span class="c1">// Yields: &quot;100,000,000&quot;</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-scala">val pi = 3.14159F
+println(f&quot;$pi%6.2f&quot;)   // Yields: &quot;  3.14&quot;
+println(f&quot;$pi%-6.2f&quot;)  // Yields: &quot;3.14  &quot;
+println(f&quot;$pi%+6.2f&quot;)  // Yields: &quot;+3.14 &quot;
+println(f&quot;$pi%06.2f&quot;)  // Yields: &quot;003.14&quot;
+val d = 100000000
+println(f&quot;$d%,d&quot;)      // Yields: &quot;100,000,000&quot;
+</code></pre>
 
 <h3 id="rawstring">raw"String"</h3>
-<div class="codehilite"><pre><span></span><code><span class="n">println</span><span class="p">(</span><span class="s">raw&quot;one\ntwo&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: &quot;one\ntwo&quot;</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-scala">println(raw&quot;one\ntwo&quot;) // Yields: &quot;one\ntwo&quot;
+</code></pre>
 
 <h2 id="string-functions">String Functions</h2>
-<div class="codehilite"><pre><span></span><code><span class="c1">// compareTo</span>
-<span class="nc">String1</span><span class="p">.</span><span class="n">compareTo</span><span class="p">(</span><span class="n">string2</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">greater</span><span class="o">/</span><span class="n">less</span><span class="o">/</span><span class="n">equal</span>
-<span class="s">&quot;A&quot;</span><span class="p">.</span><span class="n">compareTo</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: 0</span>
-<span class="s">&quot;A&quot;</span><span class="p">.</span><span class="n">compareTo</span><span class="p">(</span><span class="s">&quot;B&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: -1</span>
-<span class="s">&quot;C&quot;</span><span class="p">.</span><span class="n">compareTo</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: 2</span>
+<pre class="codehilite"><code class="language-scala">// compareTo
+String1.compareTo(string2) -&gt; Int : greater/less/equal
+&quot;A&quot;.compareTo(&quot;A&quot;) // Yields: 0
+&quot;A&quot;.compareTo(&quot;B&quot;) // Yields: -1
+&quot;C&quot;.compareTo(&quot;A&quot;) // Yields: 2
 
-<span class="c1">// equals / equalsIgnoreCase</span>
-<span class="nc">String1</span><span class="p">.</span><span class="n">equals</span><span class="p">(</span><span class="nc">String2</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">Boolean</span>
-<span class="s">&quot;martin&quot;</span><span class="p">.</span><span class="n">equals</span><span class="p">(</span><span class="s">&quot;fred&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: false</span>
+// equals / equalsIgnoreCase
+String1.equals(String2) -&gt; Boolean
+&quot;martin&quot;.equals(&quot;fred&quot;) // Yields: false
 
-<span class="c1">// findAllIn</span>
-<span class="nc">Regex</span><span class="p">.</span><span class="n">findAllIn</span><span class="p">(</span><span class="nc">String</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">Iterator</span>
-<span class="s">&quot;t.* &quot;</span><span class="p">.</span><span class="n">r</span><span class="p">.</span><span class="n">findAllIn</span><span class="p">(</span><span class="s">&quot;there&#39;s the dog&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: scala.util.matching.Regex.MatchIterator</span>
-<span class="s">&quot;t.* &quot;</span><span class="p">.</span><span class="n">r</span><span class="p">.</span><span class="n">findAllIn</span><span class="p">(</span><span class="s">&quot;there&#39;s the dog&quot;</span><span class="p">).</span><span class="n">foreach</span><span class="p">(</span><span class="n">println</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: there&#39;s the</span>
+// findAllIn
+Regex.findAllIn(String) -&gt; Iterator
+&quot;t.* &quot;.r.findAllIn(&quot;there's the dog&quot;) // Yields: scala.util.matching.Regex.MatchIterator
+&quot;t.* &quot;.r.findAllIn(&quot;there's the dog&quot;).foreach(println) // Yields: there's the
 
-<span class="c1">// findFirstIn</span>
-<span class="nc">Regex</span><span class="p">.</span><span class="n">findFirstIn</span><span class="p">(</span><span class="nc">String</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">String</span>
-<span class="s">&quot;th. &quot;</span><span class="p">.</span><span class="n">r</span><span class="p">.</span><span class="n">findFirstIn</span><span class="p">(</span><span class="s">&quot;there&#39;s the dog&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: Option[String] = Some(&quot;the &quot;)</span>
+// findFirstIn
+Regex.findFirstIn(String) -&gt; String
+&quot;th. &quot;.r.findFirstIn(&quot;there's the dog&quot;) // Yields: Option[String] = Some(&quot;the &quot;)
 
-<span class="c1">// intersect</span>
-<span class="nc">String1</span><span class="p">.</span><span class="n">intersect</span><span class="p">(</span><span class="nc">String2</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">String</span>
-<span class="s">&quot;Martin&quot;</span><span class="p">.</span><span class="n">intersect</span><span class="p">(</span><span class="s">&quot;tank&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: &quot;atn&quot;</span>
+// intersect
+String1.intersect(String2) -&gt; String
+&quot;Martin&quot;.intersect(&quot;tank&quot;) // Yields: &quot;atn&quot;
 
-<span class="c1">// matches</span>
-<span class="nc">String1</span><span class="p">.</span><span class="n">matches</span><span class="p">(</span><span class="nc">String2</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">Boolean</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="nc">String2</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="nc">Regex</span><span class="w"> </span><span class="nc">Expression</span>
-<span class="s">&quot;martin&quot;</span><span class="p">.</span><span class="n">matches</span><span class="p">(</span><span class="s">&quot;m.{4}n&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: true </span>
+// matches
+String1.matches(String2) -&gt; Boolean : String2 is Regex Expression
+&quot;martin&quot;.matches(&quot;m.{4}n&quot;) // Yields: true 
 
-<span class="c1">// split</span>
-<span class="nc">String</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="nc">Char</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">Array</span><span class="p">(</span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="p">..)</span>
-<span class="s">&quot;a b c&quot;</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="sc">&#39; &#39;</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: Array(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;)</span>
+// split
+String.split(Char) -&gt; Array(String, ..)
+&quot;a b c&quot;.split(' ') // Yields: Array(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;)
 
-<span class="c1">// toLowerCase</span>
-<span class="s">&quot;HI&quot;</span><span class="p">.</span><span class="n">toLowerCase</span><span class="w"> </span><span class="c1">// As toLowerCase has no parameters the () are omitted.</span>
+// toLowerCase
+&quot;HI&quot;.toLowerCase // As toLowerCase has no parameters the () are omitted.
 
-<span class="c1">// toString</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">123</span><span class="p">;</span><span class="w"> </span><span class="n">v</span><span class="p">.</span><span class="n">toString</span><span class="w"> </span><span class="c1">// As toString has no parameters the () are omitted.</span>
+// toString
+val v = 123; v.toString // As toString has no parameters the () are omitted.
 
-<span class="c1">// toUpperCase</span>
-<span class="s">&quot;hello&quot;</span><span class="p">.</span><span class="n">toUpperCase</span><span class="w"> </span><span class="c1">// As toUpperCase has no parameters the () are omitted.</span>
-</code></pre></div>
+// toUpperCase
+&quot;hello&quot;.toUpperCase // As toUpperCase has no parameters the () are omitted.
+</code></pre>
 
 <h1 id="regexp">Regexp</h1>
-<div class="codehilite"><pre><span></span><code><span class="s">&quot;[a-z].*&quot;</span><span class="p">.</span><span class="n">r</span><span class="w"> </span><span class="c1">// Yields: scala.util.matching.Regex = [a-z].*</span>
+<pre class="codehilite"><code class="language-scala">&quot;[a-z].*&quot;.r // Yields: scala.util.matching.Regex = [a-z].*
 
-<span class="kd">val</span><span class="w"> </span><span class="n">numPattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;[0-9]+&quot;</span><span class="p">.</span><span class="n">r</span>
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">numPattern</span><span class="p">.</span><span class="n">findAllIn</span><span class="p">(</span><span class="s">&quot;a11b12c13&quot;</span><span class="p">))</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: 11 12 13</span>
-<span class="n">numPattern</span><span class="p">.</span><span class="n">findAllIn</span><span class="p">(</span><span class="s">&quot;a 2 3&quot;</span><span class="p">).</span><span class="n">toArray</span><span class="w">                   </span><span class="c1">// Yields: Array(2,3)</span>
-<span class="n">numPattern</span><span class="p">.</span><span class="n">replaceAllIn</span><span class="p">(</span><span class="s">&quot;a 2 3&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;x&quot;</span><span class="p">).</span><span class="n">toArray</span><span class="w">           </span><span class="c1">// Yields: Array(a,x,x)</span>
+val numPattern = &quot;[0-9]+&quot;.r
+for (n &lt;- numPattern.findAllIn(&quot;a11b12c13&quot;)) println(n) // Yields: 11 12 13
+numPattern.findAllIn(&quot;a 2 3&quot;).toArray                   // Yields: Array(2,3)
+numPattern.replaceAllIn(&quot;a 2 3&quot;, &quot;x&quot;).toArray           // Yields: Array(a,x,x)
 
-<span class="kd">val</span><span class="w"> </span><span class="n">spacePattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;&quot;\s+&quot;&quot;&quot;</span><span class="p">.</span><span class="n">r</span><span class="w">                                   </span><span class="c1">// &quot;&quot;&quot; - Instead of &quot;\\s+&quot;</span>
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">spacePattern</span><span class="p">.</span><span class="n">findAllIn</span><span class="p">(</span><span class="s">&quot;abc 12 def&quot;</span><span class="p">))</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;found&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: found found</span>
+val spacePattern = &quot;&quot;&quot;\s+&quot;&quot;&quot;.r                                   // &quot;&quot;&quot; - Instead of &quot;\\s+&quot;
+for (s &lt;- spacePattern.findAllIn(&quot;abc 12 def&quot;)) println(&quot;found&quot;) // Yields: found found
 
-<span class="c1">// Regexp Groups</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">numItemPttn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;([0-9]+) ([a-z]+)&quot;</span><span class="p">.</span><span class="n">r</span><span class="p">()</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">numItemPttn</span><span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="w"> </span><span class="n">item</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;99 bottles&quot;</span><span class="w"> </span><span class="c1">// Yields: num=99, item=bottles</span>
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">numItemPttn</span><span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="w"> </span><span class="n">item</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">numItemPttn</span><span class="p">.</span><span class="n">findAllIn</span><span class="p">(</span><span class="s">&quot;5 cats, 3 dogs&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">   </span><span class="n">println</span><span class="p">(</span><span class="n">item</span><span class="p">,</span><span class="w"> </span><span class="n">num</span><span class="p">)</span>
-<span class="p">}</span><span class="w"> </span><span class="c1">// Yields: (cats,5)(dogs,3)</span>
-</code></pre></div>
+// Regexp Groups
+val numItemPttn = &quot;([0-9]+) ([a-z]+)&quot;.r()
+val numItemPttn(num, item) = &quot;99 bottles&quot; // Yields: num=99, item=bottles
+for (numItemPttn(num, item) &lt;- numItemPttn.findAllIn(&quot;5 cats, 3 dogs&quot;)) {
+   println(item, num)
+} // Yields: (cats,5)(dogs,3)
+</code></pre>
 
 <h1 id="collections">Collections</h1>
 <h2 id="seq">Seq</h2>
 <h3 id="hierarchy_1">Hierarchy</h3>
-<div class="codehilite"><pre><span></span><code><span class="nc">Seq</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">IndexedSeq</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">Vector</span><span class="p">,</span><span class="w"> </span><span class="nc">Array</span><span class="p">,</span><span class="w"> </span><span class="nc">ArrayBuffer</span><span class="p">,</span><span class="w"> </span><span class="nc">Range</span><span class="w"> </span>
-<span class="w">    </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">LinearSeq</span><span class="w">  </span><span class="o">-&gt;</span><span class="w"> </span><span class="nc">List</span><span class="p">,</span><span class="w"> </span><span class="nc">Stream</span><span class="w"> </span><span class="p">(</span><span class="n">now</span><span class="w"> </span><span class="n">called</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="nc">LazyList</span><span class="p">)</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-scala">Seq -&gt; IndexedSeq -&gt; Vector, Array, ArrayBuffer, Range 
+    -&gt; LinearSeq  -&gt; List, Stream (now called a LazyList)
+</code></pre>
 
 <p><strong>LinearSeq</strong> collections have efficient head and tail operations. 
 <strong>IndexedSeq</strong> collections have efficient apply and length operations.</p>
 <h3 id="examples">Examples</h3>
-<div class="codehilite"><pre><span></span><code><span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Seq</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;two&quot;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;3&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c1">// s: Seq[Any] = List(1, &quot;two&quot;, &#39;3&#39;, 1)</span>
-<span class="o">@</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c1">// res1: Any = &quot;two&quot;</span>
-<span class="o">@</span><span class="w"> </span><span class="n">s</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w">       </span><span class="c1">// res2: Any = &#39;3&#39;</span>
-<span class="o">@</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">foreach</span><span class="p">(</span><span class="n">println</span><span class="p">)</span><span class="w"> </span><span class="c1">// Prints all elements</span>
-<span class="o">@</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">filter</span><span class="p">(</span><span class="n">_</span><span class="p">.</span><span class="k">isInstanceOf</span><span class="p">[</span><span class="nc">Int</span><span class="p">])</span><span class="w"> </span><span class="c1">//res3: Seq[Any] = List(1, 1)</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-scala">@ val s = Seq(1, &quot;two&quot;, '3', 1) // s: Seq[Any] = List(1, &quot;two&quot;, '3', 1)
+@ s.apply(1) // res1: Any = &quot;two&quot;
+@ s(2)       // res2: Any = '3'
+@ s.foreach(println) // Prints all elements
+@ s.filter(_.isInstanceOf[Int]) //res3: Seq[Any] = List(1, 1)
+</code></pre>
 
 <h3 id="arrays-an-indexedseq-fixed-length">Arrays (an IndexedSeq) Fixed Length</h3>
-<div class="codehilite"><pre><span></span><code><span class="c1">// filter(), map(), sorted, reverse, length</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Array</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w">  </span><span class="c1">// a: Array[Int] = Array(5, 2, 3, 4, 1)</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">filter</span><span class="p">(</span><span class="n">_</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w">  </span><span class="c1">// e: Array[Int] = Array(2, 4)</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">map</span><span class="p">(</span><span class="n">_</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w">          </span><span class="c1">// d: Array[Int] = Array(10, 4, 6, 8, 2)</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">sorted</span><span class="p">.</span><span class="n">reverse</span><span class="w">      </span><span class="c1">// r: Array[Int] = Array(10, 8, 6, 4, 2)</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">d</span><span class="p">.</span><span class="n">length</span><span class="w">              </span><span class="c1">// l: Int = 5</span>
+<pre class="codehilite"><code class="language-scala">// filter(), map(), sorted, reverse, length
+@ val a = Array(5, 2, 3, 4, 1)  // a: Array[Int] = Array(5, 2, 3, 4, 1)
+@ val e = a.filter(_ % 2 == 0)  // e: Array[Int] = Array(2, 4)
+@ val d = a.map(_ * 2)          // d: Array[Int] = Array(10, 4, 6, 8, 2)
+@ val r = d.sorted.reverse      // r: Array[Int] = Array(10, 8, 6, 4, 2)
+@ val l = d.length              // l: Int = 5
 
-<span class="c1">// mkString(separator: String) or mkString(start: String, sep: String, end: String)</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">mkString</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">)</span><span class="w">            </span><span class="c1">// s: String = &quot;52341&quot;</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">mkString</span><span class="p">(</span><span class="s">&quot;[&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;,&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;]&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// s: String = &quot;[5,2,3,4,1]&quot;</span>
+// mkString(separator: String) or mkString(start: String, sep: String, end: String)
+@ val s = a.mkString(&quot;&quot;)            // s: String = &quot;52341&quot;
+@ val s = a.mkString(&quot;[&quot;, &quot;,&quot;, &quot;]&quot;) // s: String = &quot;[5,2,3,4,1]&quot;
 
-<span class="c1">// range(start, end, [interval])</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Array</span><span class="p">.</span><span class="n">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="c1">// a: Array[Int] = Array(0, 3, 6, 9)</span>
+// range(start, end, [interval])
+@ val a = Array.range(0, 10, 3) // a: Array[Int] = Array(0, 3, 6, 9)
 
-<span class="c1">// fill(number of entries)(value)</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Array</span><span class="p">.</span><span class="n">fill</span><span class="p">(</span><span class="mi">2</span><span class="p">)(</span><span class="s">&quot;a&quot;</span><span class="p">)</span><span class="w">    </span><span class="c1">// a: Array[String] = Array(&quot;a&quot;, &quot;a&quot;)</span>
+// fill(number of entries)(value)
+@ val a = Array.fill(2)(&quot;a&quot;)    // a: Array[String] = Array(&quot;a&quot;, &quot;a&quot;)
 
-<span class="c1">// Create a fixed size &#39;empty&#39; array</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Array</span><span class="p">[</span><span class="nc">Int</span><span class="p">](</span><span class="mi">4</span><span class="p">)</span><span class="w">     </span><span class="c1">// a: Array[Int] = Array(0, 0, 0, 0)</span>
+// Create a fixed size 'empty' array
+@ val a = new Array[Int](4)     // a: Array[Int] = Array(0, 0, 0, 0)
 
-<span class="c1">// Update array element</span>
-<span class="o">@</span><span class="w"> </span><span class="n">a</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">a</span><span class="w">                   </span><span class="c1">// a: Array[Int] = Array(0, 0, 2, 0)</span>
+// Update array element
+@ a(2) = 2; a                   // a: Array[Int] = Array(0, 0, 2, 0)
 
-<span class="c1">// toArray</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span><span class="p">.</span><span class="n">toArray</span><span class="w">       </span><span class="c1">// a: Array[Char] = Array(&#39;H&#39;, &#39;e&#39;, &#39;l&#39;, &#39;l&#39;, &#39;o&#39;) </span>
+// toArray
+@ val a = &quot;Hello&quot;.toArray       // a: Array[Char] = Array('H', 'e', 'l', 'l', 'o') 
 
-<span class="c1">// Multi dimensional Array - An Array or Array&#39;s</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Array</span><span class="p">.</span><span class="n">ofDim</span><span class="p">[</span><span class="nc">Int</span><span class="p">](</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="c1">// a: Array[Array[Int]] = Array(Array(0, 0, 0), Array(0, 0, 0))</span>
+// Multi dimensional Array - An Array or Array's
+@ val a = Array.ofDim[Int](2, 3) // a: Array[Array[Int]] = Array(Array(0, 0, 0), Array(0, 0, 0))
 
-<span class="c1">// Traverse Array.</span>
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-</code></pre></div>
+// Traverse Array.
+for (i &lt;- a) println(i)
+</code></pre>
 
 <h3 id="list">List</h3>
 <p><strong>Lists</strong> are Immutable.  <strong>ListBuffer</strong> is the Mutable counterpart.</p>
 <p>Lists are linear.  This means is that if you want to access a central element in a List, the compiler has to start from the beginning and linearly progress through the List until it finds the element you are trying to access.</p>
-<div class="codehilite"><pre><span></span><code><span class="c1">// ::, Nil - element::list is know as cons, Nil is a list terminator</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="n">::</span><span class="p">(</span><span class="mi">2</span><span class="n">::</span><span class="p">(</span><span class="mi">3</span><span class="n">::</span><span class="nc">Nil</span><span class="p">))</span><span class="w"> </span><span class="c1">// l: List[Int] = List(1, 2, 3)</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="n">::</span><span class="mi">2</span><span class="n">::</span><span class="mi">3</span><span class="n">::</span><span class="nc">Nil</span><span class="w">     </span><span class="c1">// l: List[Int] = List(1, 2, 3) - can avoid brackets</span>
+<pre class="codehilite"><code class="language-scala">// ::, Nil - element::list is know as cons, Nil is a list terminator
+@ val l = 1::(2::(3::Nil)) // l: List[Int] = List(1, 2, 3)
+@ val l = 1::2::3::Nil     // l: List[Int] = List(1, 2, 3) - can avoid brackets
 
-<span class="c1">// Append: use :+, Prepend: use ::, Concat two lists: use :::</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">l2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">l</span><span class="p">:</span><span class="o">+</span><span class="mi">0</span><span class="w">    </span><span class="c1">// l2: List[Int] = List(1, 2, 3, 0)</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">l3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">9</span><span class="n">::l</span><span class="w">    </span><span class="c1">// l3: List[Int] = List(9, 1, 2, 3)</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">l4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">l2:::l3</span><span class="w"> </span><span class="c1">// l4: List[Int] = List(1, 2, 3, 0, 9, 1, 2, 3)</span>
+// Append: use :+, Prepend: use ::, Concat two lists: use :::
+@ val l2 = l:+0    // l2: List[Int] = List(1, 2, 3, 0)
+@ val l3 = 9::l    // l3: List[Int] = List(9, 1, 2, 3)
+@ val l4 = l2:::l3 // l4: List[Int] = List(1, 2, 3, 0, 9, 1, 2, 3)
 
-<span class="c1">// head, tail, value at position </span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">l4</span><span class="p">.</span><span class="n">head</span><span class="w"> </span><span class="c1">// h: Int = 1</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">l4</span><span class="p">.</span><span class="n">tail</span><span class="w"> </span><span class="c1">// t: List[Int] = List(2, 3, 0, 9, 1, 2, 3)</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">l4</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w">   </span><span class="c1">// i: Int = 2</span>
-</code></pre></div>
+// head, tail, value at position 
+@ val h = l4.head // h: Int = 1
+@ val t = l4.tail // t: List[Int] = List(2, 3, 0, 9, 1, 2, 3)
+@ val i = l4(1)   // i: Int = 2
+</code></pre>
 
 <h3 id="vector">Vector</h3>
 <p>Vectors are indexed, when you want to access a central element in a Vector, the compiler can directly go to that index and access the element in constant time.</p>
-<div class="codehilite"><pre><span></span><code><span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Vector</span><span class="p">.</span><span class="n">empty</span><span class="w">       </span><span class="c1">// v: Vector[Nothing] = Vector()</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Vector</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="c1">// v: Vector[Int] = Vector(1, 2, 3, 0)</span>
+<pre class="codehilite"><code class="language-scala">@ val v = Vector.empty       // v: Vector[Nothing] = Vector()
+@ val v = Vector(1, 2, 3, 0) // v: Vector[Int] = Vector(1, 2, 3, 0)
 
-<span class="c1">// Prepend / Append: use +:,  Concatenation: use ++</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">v2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="o">+</span><span class="p">:</span><span class="n">v</span><span class="w">   </span><span class="c1">// v2: Vector[Int] = Vector(8, 1, 2, 3, 0)</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">v2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v::v2</span><span class="w">  </span><span class="c1">// v3: Vector[Int] = Vector(1, 2, 3, 0, 8, 1, 2, 3, 0)</span>
-</code></pre></div>
+// Prepend / Append: use +:,  Concatenation: use ++
+@ val v2 = 8+:v   // v2: Vector[Int] = Vector(8, 1, 2, 3, 0)
+@ val v2 = v::v2  // v3: Vector[Int] = Vector(1, 2, 3, 0, 8, 1, 2, 3, 0)
+</code></pre>
 
 <h3 id="range">Range</h3>
-<div class="codehilite"><pre><span></span><code><span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">6</span><span class="w">       </span><span class="c1">// r: Range.Inclusive = Range(1, 2, 3, 4, 5, 6)</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="mi">3</span><span class="w">  </span><span class="c1">// r: Range = Range(1, 4)</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">until</span><span class="w"> </span><span class="mi">6</span><span class="w">    </span><span class="c1">// r: Range = Range(1, 2, 3, 4, 5)</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-scala">@ val r = 1 to 6       // r: Range.Inclusive = Range(1, 2, 3, 4, 5, 6)
+@ val r = 1 to 6 by 3  // r: Range = Range(1, 4)
+@ val r = 1 until 6    // r: Range = Range(1, 2, 3, 4, 5)
+</code></pre>
 
 <h3 id="variable-length-arrays-array-buffers">Variable Length Arrays - Array Buffers</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">collection</span><span class="p">.</span><span class="nn">mutable</span><span class="p">.</span><span class="nc">ArrayBuffer</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">ArrayBuffer</span><span class="p">[</span><span class="nc">Any</span><span class="p">]()</span><span class="w"> </span><span class="c1">// a: ArrayBuffer[Any] = ArrayBuffer()</span>
+<pre class="codehilite"><code class="language-scala">import scala.collection.mutable.ArrayBuffer
+@ val a = ArrayBuffer[Any]() // a: ArrayBuffer[Any] = ArrayBuffer()
 
-<span class="c1">// +=, -=, remove(position, [num elements]), insert(after position, value), trimEnd(num elements)</span>
-<span class="o">@</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="sc">&#39;a&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;hi&quot;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;a&#39;</span><span class="p">)</span><span class="w">   </span><span class="c1">// res1: ArrayBuffer[Any] = ArrayBuffer(&#39;a&#39;, 1, &quot;hi&quot;, &#39;a&#39;)</span>
-<span class="o">@</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="sc">&#39;a&#39;</span><span class="w">                   </span><span class="c1">// res2: ArrayBuffer[Any] = ArrayBuffer(1, &quot;hi&quot;, &#39;a&#39;)</span>
-<span class="o">@</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w">                </span><span class="c1">// res3: Any = &quot;hi&quot;</span>
-<span class="o">@</span><span class="w"> </span><span class="n">a</span><span class="w">                          </span><span class="c1">// res4: ArrayBuffer[Any] = ArrayBuffer(1, &#39;a&#39;)</span>
-<span class="o">@</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;hi&quot;</span><span class="p">);</span><span class="w"> </span><span class="n">a</span><span class="w">       </span><span class="c1">// res5: ArrayBuffer[Any] = ArrayBuffer(1, &quot;hi&quot;, &#39;a&#39;)</span>
-<span class="o">@</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">trimEnd</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span><span class="w"> </span><span class="n">a</span><span class="w">            </span><span class="c1">// res6: ArrayBuffer[Any] = ArrayBuffer(1)</span>
+// +=, -=, remove(position, [num elements]), insert(after position, value), trimEnd(num elements)
+@ a += ('a', 1, &quot;hi&quot;, 'a')   // res1: ArrayBuffer[Any] = ArrayBuffer('a', 1, &quot;hi&quot;, 'a')
+@ a -= 'a'                   // res2: ArrayBuffer[Any] = ArrayBuffer(1, &quot;hi&quot;, 'a')
+@ a.remove(1)                // res3: Any = &quot;hi&quot;
+@ a                          // res4: ArrayBuffer[Any] = ArrayBuffer(1, 'a')
+@ a.insert(1, &quot;hi&quot;); a       // res5: ArrayBuffer[Any] = ArrayBuffer(1, &quot;hi&quot;, 'a')
+@ a.trimEnd(2); a            // res6: ArrayBuffer[Any] = ArrayBuffer(1)
 
-<span class="c1">// toArray, toBuffer</span>
-<span class="o">@</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">toArray</span><span class="w">  </span><span class="c1">// Creates a fixed size Array from Array Buffer.</span>
-<span class="o">@</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">toBuffer</span><span class="w"> </span><span class="c1">// Creates an Array Buffer from a fixed size Array.</span>
-</code></pre></div>
+// toArray, toBuffer
+@ a.toArray  // Creates a fixed size Array from Array Buffer.
+@ a.toBuffer // Creates an Array Buffer from a fixed size Array.
+</code></pre>
 
 <h2 id="set">Set</h2>
 <p>Duplicates values removed.</p>
-<div class="codehilite"><pre><span></span><code><span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Set</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;two&quot;</span><span class="p">,</span><span class="w"> </span><span class="sc">&#39;3&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c1">// s: Set[Any] = Set(1, &quot;two&quot;, &#39;3&#39;) - no dupes</span>
-<span class="o">@</span><span class="w"> </span><span class="n">s</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w">                          </span><span class="c1">// res1: Boolean = false - Int: 2 not in set</span>
-<span class="o">@</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="s">&quot;two&quot;</span><span class="p">)</span><span class="w">                </span><span class="c1">// res2: Boolean = true - String: &quot;two&quot; in set</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-scala">@ val s = Set(1, &quot;two&quot;, '3', 1) // s: Set[Any] = Set(1, &quot;two&quot;, '3') - no dupes
+@ s(2)                          // res1: Boolean = false - Int: 2 not in set
+@ s.apply(&quot;two&quot;)                // res2: Boolean = true - String: &quot;two&quot; in set
+</code></pre>
 
 <h2 id="map-hash-table">Map (hash table)</h2>
-<div class="codehilite"><pre><span></span><code><span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Map</span><span class="p">((</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="mi">25</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="sc">&#39;b&#39;</span><span class="p">,</span><span class="mi">50</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="sc">&#39;a&#39;</span><span class="p">))</span><span class="w"> </span><span class="c1">// m: Map[Any, AnyVal] = Map(&quot;a&quot;-&gt;25, &#39;b&#39;-&gt;50, 3-&gt;&#39;a&#39;)</span>
-<span class="o">@</span><span class="w"> </span><span class="n">m</span><span class="p">(</span><span class="s">&quot;a&quot;</span><span class="p">)</span><span class="w">     </span><span class="c1">// res1: AnyVal = 25 - Same as m.get(&quot;a&quot;)</span>
-<span class="o">@</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">apply</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="c1">// res2: AnyVal = &#39;a&#39;</span>
-<span class="o">@</span><span class="w"> </span><span class="n">m</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w">       </span><span class="c1">// java.util.NoSuchElementException: key not found: 1</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="p">.</span><span class="n">getOrElse</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;none&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// v: Any = &quot;none&quot;</span>
+<pre class="codehilite"><code class="language-scala">@ val m = Map((&quot;a&quot;,25), ('b',50), (3,'a')) // m: Map[Any, AnyVal] = Map(&quot;a&quot;-&gt;25, 'b'-&gt;50, 3-&gt;'a')
+@ m(&quot;a&quot;)     // res1: AnyVal = 25 - Same as m.get(&quot;a&quot;)
+@ m.apply(3) // res2: AnyVal = 'a'
+@ m(1)       // java.util.NoSuchElementException: key not found: 1
+@ val v = m.getOrElse(1, &quot;none&quot;) // v: Any = &quot;none&quot;
 
-<span class="c1">// Mutable Map</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">collection</span><span class="p">.</span><span class="n">mutable</span><span class="p">.</span><span class="nc">Map</span><span class="p">(</span><span class="s">&quot;MN&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;FB&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mi">44</span><span class="p">)</span>
-<span class="o">@</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;XX&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;YY&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mi">34</span><span class="p">)</span><span class="w"> </span><span class="c1">// res1: collection.mutable.Map[String, Int] = </span>
-<span class="w">                               </span><span class="c1">// HashMap(&quot;XX&quot; -&gt; 2, &quot;YY&quot; -&gt; 34, &quot;MN&quot; -&gt; 21, &quot;FB&quot; -&gt; 44)</span>
-<span class="o">@</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="s">&quot;XX&quot;</span><span class="w">                    </span><span class="c1">// res2: collection.mutable.Map[String, Int] = </span>
-<span class="w">                               </span><span class="c1">// HashMap(&quot;YY&quot; -&gt; 34, &quot;MN&quot; -&gt; 21, &quot;FB&quot; -&gt; 44)</span>
+// Mutable Map
+@ val m = collection.mutable.Map(&quot;MN&quot; -&gt; 21, &quot;FB&quot; -&gt; 44)
+@ m += (&quot;XX&quot; -&gt; 2, &quot;YY&quot; -&gt; 34) // res1: collection.mutable.Map[String, Int] = 
+                               // HashMap(&quot;XX&quot; -&gt; 2, &quot;YY&quot; -&gt; 34, &quot;MN&quot; -&gt; 21, &quot;FB&quot; -&gt; 44)
+@ m -= &quot;XX&quot;                    // res2: collection.mutable.Map[String, Int] = 
+                               // HashMap(&quot;YY&quot; -&gt; 34, &quot;MN&quot; -&gt; 21, &quot;FB&quot; -&gt; 44)
 
-<span class="c1">// Sorted Map - Stores sorted on key</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">agesOrd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">collection</span><span class="p">.</span><span class="n">immutable</span><span class="p">.</span><span class="nc">SortedMap</span><span class="p">(</span><span class="s">&quot;MN&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;FB&quot;</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mi">26</span><span class="p">)</span><span class="w"> </span>
+// Sorted Map - Stores sorted on key
+val agesOrd = collection.immutable.SortedMap(&quot;MN&quot; -&gt; 18, &quot;FB&quot; -&gt; 26) 
 
-<span class="c1">// &#39;Zipping&#39; Array to create a Map</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">names3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Array</span><span class="p">(</span><span class="s">&quot;MN&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;FB&quot;</span><span class="p">);</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">ages3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Array</span><span class="p">(</span><span class="mi">21</span><span class="p">,</span><span class="w"> </span><span class="mi">34</span><span class="p">)</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">people</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">names3</span><span class="p">.</span><span class="n">zip</span><span class="p">(</span><span class="n">ages3</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: Array((MN,21), (FB,34)).</span>
-</code></pre></div>
+// 'Zipping' Array to create a Map
+@ val names3 = Array(&quot;MN&quot;, &quot;FB&quot;); val ages3 = Array(21, 34)
+@ val people = names3.zip(ages3) // Yields: Array((MN,21), (FB,34)).
+</code></pre>
 
 <h2 id="tuple">Tuple</h2>
-<div class="codehilite"><pre><span></span><code><span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="s">&quot;MN&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span><span class="w"> </span><span class="mf">1.84</span><span class="p">)</span><span class="w">  </span><span class="c1">// person: (String, Int, Double) = (&quot;MN&quot;, 21, 1.84)</span>
-<span class="o">@</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Age:&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">person</span><span class="p">.</span><span class="n">_2</span><span class="p">)</span><span class="w">    </span><span class="c1">// Age: 21 - In a Tuple, position starts with 1.</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">age</span><span class="p">,</span><span class="n">height</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">person</span><span class="w"> </span><span class="c1">// name: String = &quot;MN&quot; age: Int = 21 height: Double = 1.84</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-scala">@ val person = (&quot;MN&quot;, 21, 1.84)  // person: (String, Int, Double) = (&quot;MN&quot;, 21, 1.84)
+@ println(&quot;Age:&quot; + person._2)    // Age: 21 - In a Tuple, position starts with 1.
+@ val (name,age,height) = person // name: String = &quot;MN&quot; age: Int = 21 height: Double = 1.84
+</code></pre>
 
 <h1 id="conditional-control">Conditional Control</h1>
-<div class="codehilite"><pre><span></span><code><span class="c1">// if</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
-<span class="o">@</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">     </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;match&quot;</span><span class="p">)</span>
-<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">     </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;no match&quot;</span><span class="p">)</span>
-<span class="w">  </span><span class="p">}</span>
+<pre class="codehilite"><code class="language-scala">// if
+@ val (i, j) = (1, 2)
+@ if (i == j) {
+     println(&quot;match&quot;)
+  } else {
+     println(&quot;no match&quot;)
+  }
 
-<span class="c1">// match</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
-<span class="o">@</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;one&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;other&quot;</span><span class="w"> </span><span class="p">}</span><span class="w">  </span><span class="c1">// Yields: &quot;one&quot;</span>
+// match
+@ val i = 1
+@ i match { case 1 =&gt; &quot;one&quot;; case _ =&gt; &quot;other&quot; }  // Yields: &quot;one&quot;
 
-<span class="c1">// match - Seq</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span>
-<span class="o">@</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="nc">Array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;match&quot;</span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;other&quot;</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="c1">// Yields: &quot;match&quot;</span>
+// match - Seq
+@ val s = Array(1, 2, 3)
+@ s match { 
+      case Array(1,_,_) =&gt; &quot;match&quot;
+      case _ =&gt; &quot;other&quot;
+    } // Yields: &quot;match&quot;
 
-<span class="c1">// match - Tuple</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">t</span><span class="p">:</span><span class="w"> </span><span class="nc">Any</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;hi&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span>
-<span class="o">@</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;match&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">case</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;other&quot;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// Yields &quot;match&quot;</span>
+// match - Tuple
+@ val t: Any = (1, &quot;hi&quot;, true)
+@ t match { case (1, _, true) =&gt; &quot;match&quot;; case _ =&gt; &quot;other&quot; } // Yields &quot;match&quot;
 
-<span class="c1">// match - Types</span>
-<span class="o">@</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">v</span><span class="p">:</span><span class="w"> </span><span class="nc">Any</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;hi&quot;</span>
-<span class="o">@</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;a string&quot;</span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;an int&quot;</span>
-<span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Boolean</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="s">&quot;a boolean&quot;</span>
-<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="c1">// Yields: &quot;a string&quot;</span>
-</code></pre></div>
+// match - Types
+@ val v: Any = &quot;hi&quot;
+@ v match {
+      case x: String =&gt; &quot;a string&quot;
+      case x: Int =&gt; &quot;an int&quot;
+      case x: Boolean =&gt; &quot;a boolean&quot;
+    } // Yields: &quot;a string&quot;
+</code></pre>
 
 <h1 id="conditional-expressions">Conditional Expressions</h1>
-<div class="codehilite"><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="o">-</span><span class="mi">2</span><span class="w"> </span><span class="c1">// if(a &gt;= 1) x = 1 else x = -1.  Needs x to be a var.</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="c1">// () is a Class called Unit - it represents &quot;no value&quot;.</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-scala">val c = if (a &gt;= 2) 2 else -2 // if(a &gt;= 1) x = 1 else x = -1.  Needs x to be a var.
+val d = if (a &gt;= 2) 2 else () // () is a Class called Unit - it represents &quot;no value&quot;.
+</code></pre>
 
 <h1 id="block-expressions">Block Expressions</h1>
-<div class="codehilite"><pre><span></span><code><span class="kd">val</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="kd">val</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">g</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">g</span><span class="p">}</span><span class="w"> </span><span class="c1">// e == 4, takes last value of block.</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="kd">val</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">}</span><span class="w"> </span><span class="c1">// h == (), the Unit value. i == 2.</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-scala">val e = {val f = 2; val g = 2; f + g} // e == 4, takes last value of block.
+val h = {val i = 2} // h == (), the Unit value. i == 2.
+</code></pre>
 
 <h1 id="loops">Loops</h1>
 <p>Loops are not expressions - they have a return type of unit which is a <em>void</em> value.</p>
-<div class="codehilite"><pre><span></span><code><span class="c1">// while loop</span>
-<span class="kd">var</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">-=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">}</span>
+<pre class="codehilite"><code class="language-scala">// while loop
+var i = 3; while (i &gt; 0) { println(i); i -= 1 }
 
-<span class="c1">// do-while loop</span>
-<span class="k">do</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;here&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: here (always executes ay least once)</span>
+// do-while loop
+do { println(&quot;here&quot;) } while (0 == 1) // Yields: here (always executes ay least once)
 
-<span class="c1">// for loop: for (variable &lt;- generator expression) { block of code }</span>
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w">                                </span><span class="c1">// Yields: 1 2 3</span>
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">bi</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w">                          </span><span class="c1">// Yields: 3 2 1</span>
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">until</span><span class="w"> </span><span class="s">&quot;dog&quot;</span><span class="p">.</span><span class="n">length</span><span class="p">)</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;:&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;dog&quot;</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="w"> </span><span class="c1">// Yields: 0:d 1:o 2:g</span>
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">ch</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span><span class="p">)</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">ch</span><span class="p">)</span><span class="w">                             </span><span class="c1">// Yields: H e l l o</span>
+// for loop: for (variable &lt;- generator expression) { block of code }
+for (i &lt;- 1 to 3) println(i)                                // Yields: 1 2 3
+for (i &lt;- 3 to 1 bi -1) println(i)                          // Yields: 3 2 1
+for (i &lt;- 0 until &quot;dog&quot;.length) println(i + &quot;:&quot; + &quot;dog&quot;(i)) // Yields: 0:d 1:o 2:g
+for (ch &lt;- &quot;Hello&quot;) println(ch)                             // Yields: H e l l o
 
-<span class="c1">// Complex for loops with other vars</span>
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">11</span><span class="p">))</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span><span class="w">   </span><span class="c1">// Yields: (0,10)(0,12)(1,10)(1,12)</span>
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="p">(</span><span class="n">k</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: (0,10)(0,11)(1,11)(1,12)</span>
+// Complex for loops with other vars
+for (i &lt;- 0 to 1; j &lt;- 10 to 12; if (j != 11)) println(i,j)   // Yields: (0,10)(0,12)(1,10)(1,12)
+for (i &lt;- 0 to 1; k = i + 10; j &lt;- k to (k + 1)) println(i,j) // Yields: (0,10)(0,11)(1,11)(1,12)
 
-<span class="c1">// Yield creates a return expression - called a comprehension.</span>
-<span class="o">@</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s">&quot;Hi&quot;</span><span class="p">)</span><span class="w"> </span><span class="k">yield</span><span class="w"> </span><span class="nc">BigInt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="c1">// res1: IndexedSeq[BigInt] = ArraySeq(72, 105)</span>
+// Yield creates a return expression - called a comprehension.
+@ for (i &lt;- &quot;Hi&quot;) yield BigInt(i) // res1: IndexedSeq[BigInt] = ArraySeq(72, 105)
 
-<span class="c1">// Note: can use {} in place of the outer () in a for loop. {} can span multiple lines.</span>
-</code></pre></div>
+// Note: can use {} in place of the outer () in a for loop. {} can span multiple lines.
+</code></pre>
 
 <h1 id="exception-handling">Exception Handling</h1>
-<div class="codehilite"><pre><span></span><code><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
-<span class="w">  </span><span class="kd">val</span><span class="w"> </span><span class="n">quotient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="o">/</span><span class="mi">0</span>
-<span class="w">  </span><span class="n">println</span><span class="p">(</span><span class="n">quotient</span><span class="p">)</span>
-<span class="p">}</span>
-<span class="k">catch</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">ex</span><span class="p">:</span><span class="w"> </span><span class="nc">ArithmeticException</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Dividing by zero is not allowed&quot;</span><span class="p">)</span>
-<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">ex</span><span class="p">:</span><span class="w"> </span><span class="p">...</span>
-<span class="p">}</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-scala">try { 
+  val quotient = 10/0
+  println(quotient)
+}
+catch {
+  case ex: ArithmeticException =&gt; println(&quot;Dividing by zero is not allowed&quot;)
+  case ex: ...
+}
+</code></pre>
 
 <h1 id="functions">Functions</h1>
 <p><code>def functionName(parameters): returnType = {function body}</code></p>
 <h2 id="call-by-value-call-by-name">Call by Value / Call by Name</h2>
-<div class="codehilite"><pre><span></span><code><span class="c1">// </span>
-<span class="o">@</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">endless</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">endless</span><span class="w"> </span><span class="c1">// an endless recursive function</span>
+<pre class="codehilite"><code class="language-scala">// 
+@ def endless: Int = endless // an endless recursive function
 
-<span class="c1">// Call by Name: all =&gt; to parameter definition</span>
-<span class="c1">// In this case a parameter y isn&#39;t used its not evaluated.</span>
-<span class="c1">// Function endless name is passed and as it not used it not run.</span>
-<span class="o">@</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">accessFirst</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="c1">// function only use parameter x</span>
-<span class="o">@</span><span class="w"> </span><span class="n">accessFirst</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">endless</span><span class="p">)</span><span class="w"> </span><span class="c1">// res1: Int = 1</span>
+// Call by Name: all =&gt; to parameter definition
+// In this case a parameter y isn't used its not evaluated.
+// Function endless name is passed and as it not used it not run.
+@ def accessFirst(x: =&gt; Int, y: =&gt; Int) = x // function only use parameter x
+@ accessFirst(1, endless) // res1: Int = 1
 
-<span class="c1">// Call by Value</span>
-<span class="c1">// In this case, endless is evaluated (run) to produce a value to pass in.</span>
-<span class="c1">// accessFirst never returns.</span>
-<span class="o">@</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">accessFirst</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span>
-<span class="o">@</span><span class="w"> </span><span class="n">accessFirst</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">endless</span><span class="p">)</span><span class="w"> </span><span class="c1">// Never returns - actually is never run.</span>
-</code></pre></div>
+// Call by Value
+// In this case, endless is evaluated (run) to produce a value to pass in.
+// accessFirst never returns.
+@ def accessFirst(x: Int, y: Int) = x
+@ accessFirst(1, endless) // Never returns - actually is never run.
+</code></pre>
 
 <h2 id="recursive-functions">Recursive Functions</h2>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">sumList</span><span class="p">(</span><span class="n">numberList</span><span class="p">:</span><span class="w"> </span><span class="nc">List</span><span class="p">[</span><span class="nc">Int</span><span class="p">]):</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">numberList</span><span class="w"> </span><span class="k">match</span><span class="w"> </span><span class="p">{</span><span class="w"> </span>
-<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nc">Nil</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="mi">0</span>
-<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">::</span><span class="w"> </span><span class="n">tail</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">tail</span><span class="p">)</span>
-<span class="p">}</span><span class="w"> </span><span class="c1">// sumList(List(1,2,3,4,5)) - Yields 15</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-scala">def sumList(numberList: List[Int]): Int = numberList match { 
+  case Nil =&gt; 0
+  case x :: tail =&gt; x + sum(tail)
+} // sumList(List(1,2,3,4,5)) - Yields 15
+</code></pre>
 
 <h2 id="tail-recursive-function">Tail Recursive Function</h2>
 <p><strong>These reuse the functions stack frame</strong>.  If the last action in the function is the recursive call, then the function is typically tail recursive.  This is only true if the final call has no other manipulation - eg. <code>x + fn(x)</code> is not tail recursive, but <code>fn(x - 1)</code> is.</p>
-<div class="codehilite"><pre><span></span><code><span class="c1">// Greatest Common Factor</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">gcd</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">):</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">if</span><span class="p">(</span><span class="n">y</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="n">x</span>
-<span class="w">  </span><span class="k">else</span><span class="w"> </span><span class="n">gcd</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="o">%</span><span class="n">y</span><span class="p">)</span>
-<span class="p">}</span>
-<span class="o">@</span><span class="w"> </span><span class="n">gcd</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">24</span><span class="p">)</span><span class="w"> </span><span class="c1">// res1: Int = 6</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-scala">// Greatest Common Factor
+def gcd(x: Int, y: Int): Int = {
+  if(y==0) x
+  else gcd(y, x%y)
+}
+@ gcd(18,24) // res1: Int = 6
+</code></pre>
 
 <h2 id="higher-order-functions">Higher Order Functions</h2>
 <p>Functions that take functions as parameters are called higher order functions - For Example:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">):</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span>
+<pre class="codehilite"><code class="language-scala">def add(a: Int, b: Int): Int = a + b
 
-<span class="c1">// A higher order function</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">functionPrinter</span><span class="p">(</span><span class="n">f</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">   </span><span class="n">println</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">))</span>
-<span class="p">}</span>
-<span class="o">@</span><span class="w"> </span><span class="n">functionPrinter</span><span class="p">(</span><span class="n">add</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="c1">// Prints: 3</span>
-</code></pre></div>
+// A higher order function
+def functionPrinter(f: (Int, Int) =&gt; Int, x: Int, y: Int) = {
+   println(f(x, y))
+}
+@ functionPrinter(add, 1, 2) // Prints: 3
+</code></pre>
 
 <h2 id="anonymous-functions">Anonymous Functions</h2>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">functionPrinter</span><span class="p">(</span><span class="n">f</span><span class="p">:</span><span class="w"> </span><span class="p">(</span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">   </span><span class="n">println</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">))</span>
-<span class="p">}</span>
-<span class="c1">// (a, b) =&gt; a * b is an anonymous function</span>
-<span class="o">@</span><span class="w"> </span><span class="n">functionPrinter</span><span class="p">((</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="c1">// Prints: 2</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-scala">def functionPrinter(f: (Int, Int) =&gt; Int, x: Int, y: Int) = {
+   println(f(x, y))
+}
+// (a, b) =&gt; a * b is an anonymous function
+@ functionPrinter((a, b) =&gt; a * b, 1, 2) // Prints: 2
+</code></pre>
 
 <h2 id="functions-returning-functions">Functions Returning Functions</h2>
 <p>The following function takes a function as a parameter and returns a function which runs the parameter function on all values between two parameters, summing the results.</p>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">f</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Int</span><span class="p">):</span><span class="w"> </span><span class="p">(</span><span class="nc">Int</span><span class="p">,</span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="p">{</span>
-<span class="w">  </span><span class="k">def</span><span class="w"> </span><span class="nf">sumHelper</span><span class="p">(</span><span class="n">a</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">):</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span>
-<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="o">&gt;</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="mi">0</span>
-<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sumHelper</span><span class="p">(</span><span class="n">a</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span>
-<span class="w">  </span><span class="n">sumHelper</span>
-<span class="p">}</span>
+<pre class="codehilite"><code class="language-scala">def sum(f: Int =&gt; Int): (Int,Int) =&gt; Int ={
+  def sumHelper(a: Int, b: Int): Int =
+    if(a&gt;b) 0
+    else f(a) + sumHelper(a+1, b)
+  sumHelper
+}
 
-<span class="k">def</span><span class="w"> </span><span class="nf">sumOfInts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="p">)</span>
-<span class="n">println</span><span class="p">(</span><span class="n">sumOfInts</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span><span class="w"> </span><span class="c1">// Prints: 15</span>
+def sumOfInts = sum(x =&gt; x)
+println(sumOfInts(1,5)) // Prints: 15
 
-<span class="k">def</span><span class="w"> </span><span class="nf">sumOfCubes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
-<span class="n">println</span><span class="p">(</span><span class="n">sumOfCubes</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="w"> </span><span class="c1">// Prints: 8 (1*1*1 + 2*2*2) </span>
-</code></pre></div>
+def sumOfCubes = sum(x =&gt; x*x*x)
+println(sumOfCubes(1,2)) // Prints: 8 (1*1*1 + 2*2*2) 
+</code></pre>
 
 <h2 id="currying">Currying</h2>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">sumRange</span><span class="p">(</span><span class="n">f</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">Int</span><span class="p">)(</span><span class="n">from</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">too</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">):</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">from</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">too</span><span class="p">)</span><span class="w"> </span><span class="mi">0</span>
-<span class="w">   </span><span class="k">else</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">from</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">sum</span><span class="p">(</span><span class="n">f</span><span class="p">)(</span><span class="n">from</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">too</span><span class="p">)</span>
-<span class="p">}</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">cube</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">):</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">sumCubes1to3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sumRange</span><span class="p">(</span><span class="n">cube</span><span class="p">)(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="c1">// sumCubes1to3: Int = 36</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">sumSquares1to3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sumRange</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="p">)(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="c1">// sumSquares1to3: Int = 14</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-scala">def sumRange(f: Int =&gt; Int)(from: Int, too: Int): Int = {
+   if (from &gt; too) 0
+   else f(from) + sum(f)(from + 1, too)
+}
+def cube(x: Int): Int = x * x * x
+val sumCubes1to3 = sumRange(cube)(1, 3) // sumCubes1to3: Int = 36
+val sumSquares1to3 = sumRange(x =&gt; x * x)(1, 3) // sumSquares1to3: Int = 14
+</code></pre>
 
 <p>def first(x: Int) = (y: Int) =&gt; x+y</p>
 <p>def second = first(3)</p>
 <p>val result = second(2)</p>
 <p>print(result)</p>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">func</span><span class="p">(</span><span class="w"> </span><span class="n">p1</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">,</span><span class="w"> </span><span class="n">p2</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">p3</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">p1</span><span class="p">,</span><span class="w"> </span><span class="n">p2</span><span class="p">,</span><span class="w"> </span><span class="n">p3</span><span class="p">)</span><span class="w"> </span><span class="c1">// p2 defaults to 0.  Yields: a Tuple.</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">func</span><span class="p">(</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">p3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: 2,0,3.</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">fac</span><span class="p">(</span><span class="n">v</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="kd">var</span><span class="w"> </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="k">for</span><span class="p">(</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="n">rv</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rv</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"> </span><span class="n">rv</span><span class="p">}</span><span class="w"> </span><span class="c1">// Returns Int.</span>
+<pre class="codehilite"><code class="language-scala">def func( p1: Int, p2: Int = 0, p3: Int = 0) = (p1, p2, p3) // p2 defaults to 0.  Yields: a Tuple.
+val res = func( 2, p3 = 3 ) // Yields: 2,0,3.
+def fac(v: Int) = {var rv = 1; for( i &lt;- 1 to v ) rv = rv * i; rv} // Returns Int.
 
-<span class="c1">// Recursive functions need a return type specifying.</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">fac2</span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">):</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">fac2</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+// Recursive functions need a return type specifying.
+def fac2(n: Int): Int = if (n &lt;= 0) 1 else n * fac2(n - 1)
 
-<span class="c1">// Variable argument sets.</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">sum</span><span class="p">(</span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">tot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="n">tot</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w"> </span><span class="n">tot</span><span class="w"> </span><span class="p">}</span>
-<span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="mi">5</span><span class="p">:</span><span class="w"> </span><span class="n">_*</span><span class="p">)</span><span class="w"> </span><span class="c1">// _* syntax is specific to parameters.</span>
+// Variable argument sets.
+def sum(args: Int*) = { var tot = 0; for (i &lt;- args) tot += i; tot }
+sum(1,2,3)
+sum(1 to 5: _*) // _* syntax is specific to parameters.
 
-<span class="c1">// Procedures - no &quot;=&quot; between (param) and {code...}</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">proc</span><span class="p">(</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;Hello &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name</span><span class="p">}</span><span class="w"> </span><span class="c1">// Returns Unit ie. ().  Can declare as proc(...): Unit = {...}.</span>
-</code></pre></div>
+// Procedures - no &quot;=&quot; between (param) and {code...}
+def proc( name: String ) {&quot;Hello &quot; + name} // Returns Unit ie. ().  Can declare as proc(...): Unit = {...}.
+</code></pre>
 
 <h1 id="mathematical-functions">Mathematical Functions</h1>
-<div class="codehilite"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">math</span><span class="p">.</span><span class="n">_</span><span class="w">  </span><span class="c1">// same as import scala.math._ (scala can be omitted).</span>
-<span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="c1">// Obv. many many more functions.</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-scala">import math._  // same as import scala.math._ (scala can be omitted).
+sqrt(2) // Obv. many many more functions.
+</code></pre>
 
 <h2 id="classes-note-classes-can-be-nested">Classes (Note Classes can be nested)</h2>
-<div class="codehilite"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">Per</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">}</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">per</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Per</span><span class="p">()</span><span class="w"> </span><span class="c1">// Brackets not mandatory</span>
+<pre class="codehilite"><code class="language-scala">class Per { var age = 0 }
+val per = new Per() // Brackets not mandatory
 
-<span class="c1">// Getter/Setter methods are created for all fields (inc private but they are also private).</span>
-<span class="c1">// With a val field only a getter is created. This allows:</span>
-<span class="n">per</span><span class="p">.</span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">21</span><span class="p">;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">per</span><span class="p">.</span><span class="n">age</span><span class="p">)</span><span class="w"> </span><span class="c1">// Also per.age=_(21)</span>
+// Getter/Setter methods are created for all fields (inc private but they are also private).
+// With a val field only a getter is created. This allows:
+per.age = 21; println(per.age) // Also per.age=_(21)
 
-<span class="c1">// Can replace/create getters and setters:</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">Per2</span><span class="w"> </span><span class="p">{</span>
-<span class="w">   </span><span class="k">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">privAge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">   </span><span class="k">def</span><span class="w"> </span><span class="nf">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">privAge</span><span class="w"> </span><span class="c1">// getter</span>
-<span class="w">   </span><span class="k">def</span><span class="w"> </span><span class="nf">age_=</span><span class="p">(</span><span class="n">newVal</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">newVal</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="n">privAge</span><span class="p">)</span><span class="w"> </span><span class="n">privAge</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">newVa</span><span class="w"> </span><span class="n">l</span><span class="p">}</span><span class="w"> </span><span class="c1">// Can&#39;t get younger</span>
-<span class="p">}</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">per2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Per2</span>
-<span class="n">per2</span><span class="p">.</span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span><span class="w"> </span><span class="n">per2</span><span class="p">.</span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">per2</span><span class="p">.</span><span class="n">age</span><span class="p">)</span><span class="w"> </span><span class="c1">// Prints 12</span>
+// Can replace/create getters and setters:
+class Per2 {
+   private var privAge = 0;
+   def age = privAge // getter
+   def age_=(newVal: Int) { if (newVal &gt; privAge) privAge = newVa l} // Can't get younger
+}
+val per2 = new Per2
+per2.age = 12; per2.age = 5; println(per2.age) // Prints 12
 
-<span class="c1">// Bean Properties (to match JavaBeans specification).  This will generate a getName():Unit</span>
-<span class="c1">// method and a setName(newValue: String): Unit method.</span>
-<span class="c1">// import scala.reflect.BeanProperty</span>
-<span class="c1">// class Per3 { @BeanProperty var name: String = _ }</span>
+// Bean Properties (to match JavaBeans specification).  This will generate a getName():Unit
+// method and a setName(newValue: String): Unit method.
+// import scala.reflect.BeanProperty
+// class Per3 { @BeanProperty var name: String = _ }
 
-<span class="c1">// Auxiliary Constructors (all aux&#39; constructors must call previously defined constructor).</span>
-<span class="c1">// They are all called this.</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">Per4</span><span class="w"> </span><span class="p">{</span>
-<span class="w">   </span><span class="k">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span>
-<span class="w">   </span><span class="k">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">   </span><span class="k">def</span><span class="w"> </span><span class="nf">this</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="bp">this</span><span class="p">();</span><span class="w"> </span><span class="bp">this</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">}</span>
-<span class="w">   </span><span class="k">def</span><span class="w"> </span><span class="nf">this</span><span class="p">(</span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="bp">this</span><span class="p">(</span><span class="n">name</span><span class="p">);</span><span class="w"> </span><span class="bp">this</span><span class="p">.</span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="p">}</span>
-<span class="p">}</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">p4a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Per4</span><span class="p">;</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">p4b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Per4</span><span class="p">(</span><span class="s">&quot;MN&quot;</span><span class="p">);</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">p4c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Per4</span><span class="p">(</span><span class="s">&quot;MN&quot;</span><span class="p">,</span><span class="mi">21</span><span class="p">)</span>
+// Auxiliary Constructors (all aux' constructors must call previously defined constructor).
+// They are all called this.
+class Per4 {
+   private var name = &quot;&quot;
+   private var age = 0;
+   def this(name: String) { this(); this.name = name }
+   def this(name: String, age: Int) { this(name); this.age = age }
+}
+val p4a = new Per4; val p4b = new Per4(&quot;MN&quot;); val p4c = new Per4(&quot;MN&quot;,21)
 
-<span class="c1">// Primary Constructor.  Is the code straight after definition.  With or without parameters.</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">Per5</span><span class="w"> </span><span class="p">(</span><span class="kd">val</span><span class="w"> </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;no name&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">   </span><span class="k">private</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">whoMsg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;This is &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="c1">// This is the constructor code.</span>
-<span class="w">   </span><span class="k">def</span><span class="w"> </span><span class="nf">who</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">whoMsg</span>
-<span class="p">}</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">per5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Per5</span><span class="p">(</span><span class="s">&quot;MN&quot;</span><span class="p">);</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">per5</span><span class="p">.</span><span class="n">who</span><span class="p">)</span><span class="w"> </span><span class="c1">// Prints This is MN.</span>
-</code></pre></div>
+// Primary Constructor.  Is the code straight after definition.  With or without parameters.
+class Per5 (val name: String = &quot;no name&quot;) {
+   private val whoMsg = &quot;This is &quot; + name // This is the constructor code.
+   def who = whoMsg
+}
+val per5 = new Per5(&quot;MN&quot;); println(per5.who) // Prints This is MN.
+</code></pre>
 
 <h2 id="objects">Objects</h2>
-<div class="codehilite"><pre><span></span><code><span class="c1">// Singletons - Constructor run on first use.</span>
-<span class="k">object</span><span class="w"> </span><span class="nc">Accs</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">accNum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">newAccNum</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">accNum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">accNum</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
-<span class="n">println</span><span class="p">(</span><span class="nc">Accs</span><span class="p">.</span><span class="n">newAccNum</span><span class="p">,</span><span class="w"> </span><span class="nc">Accs</span><span class="p">.</span><span class="n">newAccNum</span><span class="p">)</span>
+<pre class="codehilite"><code class="language-scala">// Singletons - Constructor run on first use.
+object Accs { private var accNum = 0; def newAccNum() = { accNum += 1; accNum } }
+println(Accs.newAccNum, Accs.newAccNum)
 
-<span class="c1">// Companion Objects.  Must be in same source file.  (In REPL use :paste mode to define).</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">Accs2</span><span class="w"> </span><span class="p">{</span>
-<span class="w">   </span><span class="kd">val</span><span class="w"> </span><span class="n">accNum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Accs2</span><span class="p">.</span><span class="n">newAccNum</span><span class="p">()</span><span class="w"> </span><span class="c1">// As Class/Object share name, class can see object.</span>
-<span class="w">   </span><span class="k">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">bal</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span>
-<span class="w">   </span><span class="k">def</span><span class="w"> </span><span class="nf">payIn</span><span class="p">(</span><span class="n">amt</span><span class="p">:</span><span class="w"> </span><span class="nc">Double</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="n">bal</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">amt</span><span class="p">}</span>
-<span class="p">}</span>
-<span class="k">object</span><span class="w"> </span><span class="nc">Accs2</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">private</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">accNum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">newAccNum</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">accNum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">accNum</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+// Companion Objects.  Must be in same source file.  (In REPL use :paste mode to define).
+class Accs2 {
+   val accNum = Accs2.newAccNum() // As Class/Object share name, class can see object.
+   private var bal = 0.0;
+   def payIn(amt: Double) {bal += amt}
+}
+object Accs2 { private var accNum = 0; def newAccNum() = { accNum += 1; accNum } }
 
-<span class="c1">// Objects extending a Class or a Trait - TBC...</span>
+// Objects extending a Class or a Trait - TBC...
 
-<span class="c1">// The apply method.  eg. Array has an apply method so we can create an Array without</span>
-<span class="c1">// specifying new.  Useful for declarations such as Array(Array(2,3), Array(3,4))</span>
-<span class="c1">// Note: Array(100) calls apply and create an array of one Int value 100. new Array(100)</span>
-<span class="c1">// creates an Array os 100 Int values of 0.</span>
+// The apply method.  eg. Array has an apply method so we can create an Array without
+// specifying new.  Useful for declarations such as Array(Array(2,3), Array(3,4))
+// Note: Array(100) calls apply and create an array of one Int value 100. new Array(100)
+// creates an Array os 100 Int values of 0.
 
-<span class="c1">// Application Objects.</span>
-<span class="k">object</span><span class="w"> </span><span class="nc">HelloWorld</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">:</span><span class="w"> </span><span class="nc">Array</span><span class="p">[</span><span class="nc">String</span><span class="p">])</span><span class="w"> </span><span class="p">{</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="p">)}}</span>
-<span class="k">object</span><span class="w"> </span><span class="nc">HelloWorld2</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">App</span><span class="w"> </span><span class="p">{</span><span class="n">println</span><span class="p">(</span><span class="s">&quot;Hello world!&quot;</span><span class="p">)}</span>
+// Application Objects.
+object HelloWorld { def main(args: Array[String]) {println(&quot;Hello World!&quot;)}}
+object HelloWorld2 extends App {println(&quot;Hello world!&quot;)}
 
-<span class="c1">// Enumerations</span>
-<span class="k">object</span><span class="w"> </span><span class="nc">TrafficLightColor</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Enumeration</span><span class="w"> </span><span class="p">{</span>
-<span class="w">   </span><span class="k">type</span><span class="w"> </span><span class="nc">TrafficLightColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Value</span>
-<span class="w">   </span><span class="kd">val</span><span class="w"> </span><span class="nc">Red</span><span class="p">,</span><span class="w"> </span><span class="nc">Yellow</span><span class="p">,</span><span class="w"> </span><span class="nc">Green</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Value</span>
-<span class="p">}</span>
-<span class="k">import</span><span class="w"> </span><span class="nc">TrafficLightColor</span><span class="p">.</span><span class="n">_</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="nc">TrafficLightColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Red</span><span class="p">;</span>
-<span class="n">println</span><span class="p">(</span><span class="nc">TrafficLightColor</span><span class="p">.</span><span class="n">values</span><span class="p">)</span><span class="w"> </span><span class="c1">// Yields: a set of all the values.</span>
-</code></pre></div>
+// Enumerations
+object TrafficLightColor extends Enumeration {
+   type TrafficLightColor = Value
+   val Red, Yellow, Green = Value
+}
+import TrafficLightColor._
+val x: TrafficLightColor = Red;
+println(TrafficLightColor.values) // Yields: a set of all the values.
+</code></pre>
 
 <h2 id="packages">Packages</h2>
-<div class="codehilite"><pre><span></span><code><span class="c1">// Every package can have a single package object.  it shares the same name as the package</span>
-<span class="c1">// and is declared at the same level (within the same parent package) as the package.</span>
+<pre class="codehilite"><code class="language-scala">// Every package can have a single package object.  it shares the same name as the package
+// and is declared at the same level (within the same parent package) as the package.
 
-<span class="c1">// Top of package notation - no braces required.  Chained definitions.</span>
-<span class="c1">// -------------------------------</span>
-<span class="c1">// package com.horstmann.impatient</span>
-<span class="c1">// package people</span>
-<span class="c1">// class Person ...</span>
-<span class="c1">// -------------------------------</span>
+// Top of package notation - no braces required.  Chained definitions.
+// -------------------------------
+// package com.horstmann.impatient
+// package people
+// class Person ...
+// -------------------------------
 
-<span class="c1">//package animal {</span>
-<span class="c1">//   package object people {</span>
-<span class="c1">//      val defaultName = &quot;John Q. Public&quot;</span>
-<span class="c1">//   }</span>
-<span class="c1">//   package people {</span>
-<span class="c1">//      class Person {</span>
-<span class="c1">//         var name = defaultName // A constant from the package</span>
-<span class="c1">//      }</span>
-<span class="c1">//   }</span>
-<span class="c1">//}</span>
+//package animal {
+//   package object people {
+//      val defaultName = &quot;John Q. Public&quot;
+//   }
+//   package people {
+//      class Person {
+//         var name = defaultName // A constant from the package
+//      }
+//   }
+//}
 
-<span class="c1">// Can import all members of a package using import com.abc._</span>
-<span class="k">import</span><span class="w"> </span><span class="nn">java</span><span class="p">.</span><span class="nn">awt</span><span class="p">.</span><span class="nc">Color</span><span class="p">.</span><span class="n">_</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">colour1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">RED</span><span class="w"> </span><span class="c1">//Color.RED</span>
+// Can import all members of a package using import com.abc._
+import java.awt.Color._
+val colour1 = RED //Color.RED
 
-<span class="c1">// Once imported can access package members using shorter name.  Imports can be included</span>
-<span class="c1">// anywhere in the code.  They follow usual scope rules which is useful when using them to</span>
-<span class="c1">// deliver shorter names.</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">dummy</span><span class="w"> </span><span class="p">{</span>
-<span class="w">   </span><span class="k">import</span><span class="w"> </span><span class="nn">java</span><span class="p">.</span><span class="nn">awt</span><span class="p">.</span><span class="n">_</span>
-<span class="w">   </span><span class="kd">val</span><span class="w"> </span><span class="n">af</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">event</span><span class="p">.</span><span class="nc">ActionEvent</span><span class="p">.</span><span class="nc">ACTION_FIRST</span><span class="w"> </span><span class="c1">// java.awt.event.ActionEvent.ACTION_FIRST</span>
-<span class="p">}</span>
+// Once imported can access package members using shorter name.  Imports can be included
+// anywhere in the code.  They follow usual scope rules which is useful when using them to
+// deliver shorter names.
+def dummy {
+   import java.awt._
+   val af = event.ActionEvent.ACTION_FIRST // java.awt.event.ActionEvent.ACTION_FIRST
+}
 
-<span class="k">import</span><span class="w"> </span><span class="nn">java</span><span class="p">.</span><span class="nn">awt</span><span class="p">.{</span><span class="nc">Color</span><span class="p">,</span><span class="w"> </span><span class="nc">Font</span><span class="p">}</span><span class="w"> </span><span class="c1">// Import only a few members</span>
-<span class="k">import</span><span class="w"> </span><span class="nn">java</span><span class="p">.</span><span class="nn">awt</span><span class="p">.{</span><span class="nc">Color</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="nc">AwtColor</span><span class="p">}</span><span class="w"> </span><span class="c1">// Rename members</span>
-</code></pre></div>
+import java.awt.{Color, Font} // Import only a few members
+import java.awt.{Color =&gt; AwtColor} // Rename members
+</code></pre>
 
 <h2 id="inheritance">Inheritance</h2>
-<div class="codehilite"><pre><span></span><code><span class="c1">// Notes: Only a primary subclass constructor can call super class constructor.</span>
+<pre class="codehilite"><code class="language-scala">// Notes: Only a primary subclass constructor can call super class constructor.
 
-<span class="c1">// Extending a Class</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">Person3</span><span class="w"> </span><span class="p">{</span>
-<span class="w">   </span><span class="k">protected</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="n">sex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;unknown&quot;</span>
-<span class="w">   </span><span class="kd">var</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;unknown&quot;</span>
-<span class="w">   </span><span class="kd">var</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span>
-<span class="w">   </span><span class="k">def</span><span class="w"> </span><span class="nf">getName</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;Name:&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="p">}</span>
-<span class="w">   </span><span class="k">def</span><span class="w"> </span><span class="nf">getAge</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s">&quot;age:&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">age</span><span class="w"> </span><span class="p">}</span>
-<span class="p">}</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">Worker</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Person3</span><span class="w"> </span><span class="p">{</span>
-<span class="w">   </span><span class="kd">var</span><span class="w"> </span><span class="n">salary</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span>
-<span class="w">   </span><span class="n">sex</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;hidden&quot;</span><span class="w"> </span><span class="c1">// sex is visible within subclass even though protected.</span>
-<span class="w">   </span><span class="k">override</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">getAge</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;hidden&quot;</span><span class="w"> </span><span class="c1">// override def with a String val</span>
-<span class="w">   </span><span class="k">override</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">getName</span><span class="p">:</span><span class="w"> </span><span class="nc">String</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="s">&quot;Worker:&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="bp">super</span><span class="p">.</span><span class="n">getName</span><span class="w"> </span><span class="c1">// Call the superclass method.</span>
-<span class="w">   </span><span class="p">}</span>
-<span class="p">}</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">per</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Person3</span><span class="p">;</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">wkr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Worker</span><span class="p">;</span><span class="w"> </span><span class="n">wkr</span><span class="p">.</span><span class="n">name</span><span class="o">=</span><span class="s">&quot;Fred&quot;</span><span class="p">;</span><span class="w"> </span><span class="n">wkr</span><span class="p">.</span><span class="n">getName</span><span class="w">  </span><span class="c1">// Yields: Worker:Name:Fred</span>
-<span class="c1">// Note wkr.age and per.age not visible.</span>
-<span class="p">(</span><span class="n">wkr</span><span class="p">.</span><span class="k">isInstanceOf</span><span class="p">[</span><span class="nc">Person3</span><span class="p">],</span><span class="w"> </span><span class="n">wkr</span><span class="p">.</span><span class="k">isInstanceOf</span><span class="p">[</span><span class="nc">Worker</span><span class="p">])</span><span class="w">  </span><span class="c1">// True, True</span>
-<span class="p">(</span><span class="n">wkr</span><span class="p">.</span><span class="n">getClass</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">classOf</span><span class="p">[</span><span class="nc">Person3</span><span class="p">],</span><span class="w"> </span><span class="n">wkr</span><span class="p">.</span><span class="n">getClass</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">classOf</span><span class="p">[</span><span class="nc">Worker</span><span class="p">])</span><span class="w"> </span><span class="c1">// False, True</span>
+// Extending a Class
+class Person3 {
+   protected var sex = &quot;unknown&quot;
+   var name = &quot;unknown&quot;
+   var age = 0
+   def getName: String = { &quot;Name:&quot; + name }
+   def getAge: String = { &quot;age:&quot; + age }
+}
+class Worker extends Person3 {
+   var salary = 0.0
+   sex = &quot;hidden&quot; // sex is visible within subclass even though protected.
+   override val getAge: String = &quot;hidden&quot; // override def with a String val
+   override def getName: String = {
+      &quot;Worker:&quot; + super.getName // Call the superclass method.
+   }
+}
+val per = new Person3;
+val wkr = new Worker; wkr.name=&quot;Fred&quot;; wkr.getName  // Yields: Worker:Name:Fred
+// Note wkr.age and per.age not visible.
+(wkr.isInstanceOf[Person3], wkr.isInstanceOf[Worker])  // True, True
+(wkr.getClass == classOf[Person3], wkr.getClass == classOf[Worker]) // False, True
 
-<span class="c1">// per2 has type Person{def greeting: String}.  This could be used a a parameter:</span>
-<span class="c1">// def meet( p: Person{def greeting: String}) { println(p.name + p.greeting) }</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">per2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="nc">Person3</span><span class="w"> </span><span class="p">{</span>
-<span class="w">   </span><span class="k">def</span><span class="w"> </span><span class="nf">greeting</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="s">&quot;Hello!&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">name</span><span class="p">}</span>
-<span class="p">}</span>
+// per2 has type Person{def greeting: String}.  This could be used a a parameter:
+// def meet( p: Person{def greeting: String}) { println(p.name + p.greeting) }
+val per2 = new Person3 {
+   def greeting = {&quot;Hello!&quot; + name}
+}
 
-<span class="c1">// Abstract Class cannot be instantiated - forms the basis of other classes.</span>
-<span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Person4</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">id</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// abstract method - we don&#39;t know how to calc.</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">Worker4</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nc">Person4</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">def</span><span class="w"> </span><span class="nf">id</span><span class="p">:</span><span class="w"> </span><span class="nc">Int</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1231</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// Override keyword not required.</span>
-</code></pre></div>
+// Abstract Class cannot be instantiated - forms the basis of other classes.
+abstract class Person4 { def id: Int } // abstract method - we don't know how to calc.
+class Worker4 extends Person4 { def id: Int = 1231 } // Override keyword not required.
+</code></pre>
 
 <h2 id="files">Files</h2>
-<div class="codehilite"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">com</span><span class="p">.</span><span class="nn">sun</span><span class="p">.</span><span class="nn">org</span><span class="p">.</span><span class="nn">apache</span><span class="p">.</span><span class="nn">bcel</span><span class="p">.</span><span class="nn">internal</span><span class="p">.</span><span class="nn">classfile</span><span class="p">.</span><span class="nc">SourceFile</span>
-<span class="k">import</span><span class="w"> </span><span class="nn">scala</span><span class="p">.</span><span class="nn">io</span><span class="p">.</span><span class="nc">Source</span>
+<pre class="codehilite"><code class="language-scala">import com.sun.org.apache.bcel.internal.classfile.SourceFile
+import scala.io.Source
 
-<span class="c1">// Text Files, URLS</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">srcFile</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Source</span><span class="p">.</span><span class="n">fromFile</span><span class="p">(</span><span class="s">&quot;c:/MJN/dummy.txt&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;UTF-8&quot;</span><span class="p">)</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">lineIterator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">srcFile</span><span class="p">.</span><span class="n">getLines</span><span class="p">;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">l</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">lineIterator</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="n">println</span><span class="p">(</span><span class="n">l</span><span class="p">)}</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">srcFile</span><span class="p">.</span><span class="n">getLines</span><span class="p">.</span><span class="n">toArray</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">contents</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">srcFile</span><span class="p">.</span><span class="n">mkString</span>
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">c</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">srcFile</span><span class="p">)</span><span class="w"> </span><span class="n">println</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="c1">// Read characters.</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">words</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">srcFile</span><span class="p">.</span><span class="n">mkString</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">&quot;\\s+&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// Array of words sep by whitespace.</span>
-<span class="n">srcFile</span><span class="p">.</span><span class="n">close</span><span class="p">()</span><span class="w"> </span><span class="c1">// Close when finished.</span>
+// Text Files, URLS
+val srcFile = Source.fromFile(&quot;c:/MJN/dummy.txt&quot;, &quot;UTF-8&quot;)
+val lineIterator = srcFile.getLines; for (l &lt;- lineIterator) {println(l)}
+val lines = srcFile.getLines.toArray
+val contents = srcFile.mkString
+for (c &lt;- srcFile) println(c) // Read characters.
+val words = srcFile.mkString.split(&quot;\\s+&quot;) // Array of words sep by whitespace.
+srcFile.close() // Close when finished.
 
-<span class="kd">val</span><span class="w"> </span><span class="n">srcFile2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Source</span><span class="p">.</span><span class="n">fromURL</span><span class="p">(</span><span class="s">&quot;http://www.mjnurse.uk&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;UTF-8&quot;</span><span class="p">);</span><span class="w"> </span><span class="n">srcFile2</span><span class="p">.</span><span class="n">close</span><span class="p">()</span>
-<span class="kd">val</span><span class="w"> </span><span class="n">srcFile3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Source</span><span class="p">.</span><span class="n">fromString</span><span class="p">(</span><span class="s">&quot;one two three&quot;</span><span class="p">);</span><span class="w"> </span><span class="n">srcFile3</span><span class="p">.</span><span class="n">close</span><span class="p">()</span><span class="w"> </span><span class="c1">// Useful for debug.</span>
+val srcFile2 = Source.fromURL(&quot;http://www.mjnurse.uk&quot;, &quot;UTF-8&quot;); srcFile2.close()
+val srcFile3 = Source.fromString(&quot;one two three&quot;); srcFile3.close() // Useful for debug.
 
-<span class="c1">// Write Test Files - Scala has no built in support so use java.io.PrintWriter</span>
-<span class="c1">// val out = new PrintWriter(&quot;numbers.txt&quot;); for (i &lt;- 1 to 5) out.println(i); out.close()</span>
+// Write Test Files - Scala has no built in support so use java.io.PrintWriter
+// val out = new PrintWriter(&quot;numbers.txt&quot;); for (i &lt;- 1 to 5) out.println(i); out.close()
 
-<span class="c1">// Binary Files - scala has no provision for binary files so use Java</span>
-<span class="c1">// val file = new File(filename); val in = new FileInputStream(file)</span>
-<span class="c1">// val bytes = new Array[Byte](file.length.toInt)</span>
-<span class="c1">// in.read(bytes); in.close()</span>
+// Binary Files - scala has no provision for binary files so use Java
+// val file = new File(filename); val in = new FileInputStream(file)
+// val bytes = new Array[Byte](file.length.toInt)
+// in.read(bytes); in.close()
 
-<span class="c1">// Serialization</span>
-<span class="c1">// class Person6 extends Serializable { val name = &quot;unknown&quot; }</span>
-<span class="c1">// val fred = new Person6</span>
-<span class="c1">//  import java.io._</span>
-<span class="c1">// Serialize</span>
-<span class="c1">// val out = new ObjectOutputStream(new FileOutputStream(&quot;/tmp/test.obj&quot;))</span>
-<span class="c1">// out.writeObject(fred); out.close()</span>
-<span class="c1">// Deserialize</span>
-<span class="c1">// val in = new ObjectInputStream(new FileInputStream(&quot;/tmp/test.obj&quot;))</span>
-<span class="c1">// val savedFred = in.readObject().asInstanceOf[Person6]</span>
-</code></pre></div>
+// Serialization
+// class Person6 extends Serializable { val name = &quot;unknown&quot; }
+// val fred = new Person6
+//  import java.io._
+// Serialize
+// val out = new ObjectOutputStream(new FileOutputStream(&quot;/tmp/test.obj&quot;))
+// out.writeObject(fred); out.close()
+// Deserialize
+// val in = new ObjectInputStream(new FileInputStream(&quot;/tmp/test.obj&quot;))
+// val savedFred = in.readObject().asInstanceOf[Person6]
+</code></pre>
 
 <h2 id="sys-process">sys Process</h2>
-<div class="codehilite"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nn">sys</span><span class="p">.</span><span class="nn">process</span><span class="p">.</span><span class="n">_</span>
-<span class="s">&quot;c:/MJN/hello.bat&quot;</span><span class="w"> </span><span class="o">!</span><span class="w">  </span><span class="c1">// Runs cmd</span>
+<pre class="codehilite"><code class="language-scala">import sys.process._
+&quot;c:/MJN/hello.bat&quot; !  // Runs cmd
 
-<span class="s">&quot;c:/MJN/hello.bat&quot;</span><span class="w"> </span><span class="o">!!</span><span class="w"> </span><span class="c1">// Runs cmd returns String</span>
+&quot;c:/MJN/hello.bat&quot; !! // Runs cmd returns String
 
-<span class="c1">// #| is pipe, #&gt; and #&lt; are redirect.</span>
-<span class="c1">// &quot;ls&quot; #| &quot;grep xxx&quot; !</span>
-<span class="c1">// &quot;ls&quot; #&gt; new File(&quot;x&quot;) !</span>
-</code></pre></div>
+// #| is pipe, #&gt; and #&lt; are redirect.
+// &quot;ls&quot; #| &quot;grep xxx&quot; !
+// &quot;ls&quot; #&gt; new File(&quot;x&quot;) !
+</code></pre>
 
 <hr>
         </div>
@@ -869,7 +870,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: December 10, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

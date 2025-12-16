@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="utils - Some bash Utility Functions" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>utils - Some bash Utility Functions</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>utils - Some bash Utility Functions</h1>
+<pre class="codehilite"><code class="language-bash">#!/bin/bash
+help_text=&quot;
+NAME
+  utils - One line description.
+
+USAGE
+  utils [options] &lt;parameters&gt;
+
+OPTIONS
+  -x
+    Description...
+
+  -h|--help
+    Show help text.
+
+DESCRIPTION
+  Description description description description.
+
+AUTHOR
+  mjnurse.dev - 2020
+&quot;
+help_line=&quot;Some bash Utility Functions&quot;
+web_desc_line=&quot;Some bash Utility Functions&quot;
+
+colour_default=&quot;\e[39m&quot;
+colour_black=&quot;\e[30m&quot;
+colour_red=&quot;\e[31m&quot;
+colour_green=&quot;\e[32m&quot;
+colour_yellow=&quot;\e[33m&quot;
+colour_blue=&quot;\e[34m&quot;
+colour_magenta=&quot;\e[35m&quot;
+colour_cyan=&quot;\e[36m&quot;
+colour_dark_gray=&quot;\e[90m&quot;
+colour_light_gray=&quot;\e[37m&quot;
+colour_light_red=&quot;\e[91m&quot;
+colour_light_green=&quot;\e[92m&quot;
+colour_light_yellow=&quot;\e[93m&quot;
+colour_light_blue=&quot;\e[94m&quot;
+colour_light_magenta=&quot;\e[95m&quot;
+colour_light_cyan=&quot;\e[96m&quot;
+colour_white=&quot;\e[97m&quot;
+
+ls=&quot;${colour_white}&quot;
+le=&quot;${colour_white}&quot;
+
+
+function set_colour() {
+  while [[ &quot;$1&quot; != &quot;&quot; ]]; do
+    case $1 in
+      -red)
+        ls=&quot;${colour_red}&quot;
+        ;;
+      -lred)
+        ls=&quot;${colour_light_red}&quot;
+        ;;
+      -default)
+        ls=&quot;${colour_default}&quot;
+        ;;
+      -black)
+        ls=&quot;${colour_black}&quot;
+        ;;
+      -red)
+        ls=&quot;${colour_red}&quot;
+        ;;
+      -green)
+        ls=&quot;${colour_green}&quot;
+        ;;
+      -yellow)
+        ls=&quot;${colour_yellow}&quot;
+        ;;
+      -blue)
+        ls=&quot;${colour_blue}&quot;
+        ;;
+      -magenta)
+        ls=&quot;${colour_magenta}&quot;
+        ;;
+      -cyan)
+        ls=&quot;${colour_cyan}&quot;
+        ;;
+      -dark_gray)
+        ls=&quot;${colour_dark_gray}&quot;
+        ;;
+      -light_gray|-lgray)
+        ls=&quot;${colour_light_gray}&quot;
+        ;;
+      -light_red|-lred)
+        ls=&quot;${colour_light_red}&quot;
+        ;;
+      -light_green|-lgreen)
+        ls=&quot;${colour_light_green}&quot;
+        ;;
+      -light_yellow|-lyellow)
+        ls=&quot;${colour_light_yellow}&quot;
+        ;;
+      -light_blue|-lblue)
+        ls=&quot;${colour_light_blue}&quot;
+        ;;
+      -light_magenta|-lmagenta)
+        ls=&quot;${colour_light_magenta}&quot;
+        ;;
+      -light_cyan|-lcyan)
+        ls=&quot;${colour_light_cyan}&quot;
+        ;;
+      -white)
+        ls=&quot;${colour_white}&quot;
+        ;;
+      *)
+        break
+        ;;
+    esac
+     shift
+  done
+}
+
+function reset_colour() {
+  ls=&quot;${colour_white}&quot;
+  le=&quot;${colour_white}&quot;
+}
+
+# 
+function echo_line() {
+  if [[ &quot;$1&quot; == &quot;-r&quot; ]]; then
+    shift
+    str=&quot;$*&quot;
+    underline=&quot;$(echo &quot;$str&quot; | sed &quot;s/./-/g&quot;)&quot;
+    echo -e &quot;${ls}${underline}${le}&quot;
+  else
+    char=&quot;${2:--}&quot;
+    echo $(printf &quot;%0.s${char}&quot; $(seq 1 $1))
+  fi
+}
+
+function echo_h1() {
+  if [[ &quot;$1&quot; =~ -.* ]]; then
+    set_colour $1
+    shift
+  fi
+  heading=&quot;$*&quot;
+  echo -e &quot;${ls}${heading^^}${le}&quot;
+  echo_line -r &quot;${heading}&quot;
+  echo &quot;&quot;
+  reset_colour
+}
+
+function echo_h2() {
+  if [[ &quot;$1&quot; =~ -.* ]]; then
+    set_colour $1
+    shift
+  fi
+  heading=&quot;$*&quot;
+  echo -e &quot;${ls}${heading}${le}&quot;
+  echo_line -r &quot;${heading}&quot;
+}
+</code></pre>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: December 11, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>CLI builder</title>
   </head>
   <body class="light" id="top">
@@ -93,264 +94,264 @@ definition file.  The structure of the definition file is code header below.
 This script also generates an alias file which contains a set of alias
 commands which run each command in the definition file using the associated
 shortcut prepended with an '@'.</p>
-<div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
-<span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
-<span class="s2">NAME</span>
-<span class="s2">  cli-builder - A bash script which generates a CLI bash script from a definition file.</span>
+<pre class="codehilite"><code class="language-bash">#!/bin/bash
+help_text=&quot;
+NAME
+  cli-builder - A bash script which generates a CLI bash script from a definition file.
 
-<span class="s2">USAGE</span>
-<span class="s2">  cli-builder [-d] &lt;definition_filename&gt;</span>
+USAGE
+  cli-builder [-d] &lt;definition_filename&gt;
 
-<span class="s2">OPTIONS</span>
-<span class="s2">  -d</span>
-<span class="s2">    Run in debug mode.</span>
+OPTIONS
+  -d
+    Run in debug mode.
 
-<span class="s2">  -h|--help</span>
-<span class="s2">    Show help text.</span>
+  -h|--help
+    Show help text.
 
-<span class="s2">DESCRIPTION</span>
-<span class="s2">  This bash script generates a cli (command line interface) bash script from a definition file.</span>
-<span class="s2">  The structure of the definition file is described below.  This script also generates an alias</span>
-<span class="s2">  file which contains a set of alias commands which run each command in the definition file using</span>
-<span class="s2">  the associated shortcut prepended with an &#39;@&#39;.</span>
+DESCRIPTION
+  This bash script generates a cli (command line interface) bash script from a definition file.
+  The structure of the definition file is described below.  This script also generates an alias
+  file which contains a set of alias commands which run each command in the definition file using
+  the associated shortcut prepended with an '@'.
 
-<span class="s2">  Definition File Structure</span>
-<span class="s2">   -------------------------</span>
+  Definition File Structure
+   -------------------------
 
-<span class="s2">  # - a line starting with a # is a comment</span>
+  # - a line starting with a # is a comment
 
-<span class="s2">  = - a line starting with a = is a group description for the set of commands following this</span>
-<span class="s2">      line up until the next line starting with a = or the end of the file.</span>
+  = - a line starting with a = is a group description for the set of commands following this
+      line up until the next line starting with a = or the end of the file.
 
-<span class="s2">  ( / - is the line continuation character.  Any line ending / is joined to the next line. )</span>
+  ( / - is the line continuation character.  Any line ending / is joined to the next line. )
 
-<span class="s2">  All other lines in the file are command definitions.  These lines are structured as follows:</span>
+  All other lines in the file are command definitions.  These lines are structured as follows:
 
-<span class="s2">  name-1..name-n (shortcut) &lt;param&gt; [&lt;opt_param] :: command \$1 \$2</span>
+  name-1..name-n (shortcut) &lt;param&gt; [&lt;opt_param] :: command \$1 \$2
 
-<span class="s2">  Where:</span>
+  Where:
 
-<span class="s2">  name-1..name-n</span>
-<span class="s2">    A list of words which describe the command and which are typed to run the command.</span>
+  name-1..name-n
+    A list of words which describe the command and which are typed to run the command.
 
-<span class="s2">  shortcut</span>
-<span class="s2">    A single word which can also be typed to run the command.  If the aliases are created</span>
-<span class="s2">    then the alias can also be run direct from the command as @alias.</span>
+  shortcut
+    A single word which can also be typed to run the command.  If the aliases are created
+    then the alias can also be run direct from the command as @alias.
 
-<span class="s2">  param</span>
-<span class="s2">    A mandatory parameter.  There can be 0 or more mandatory parameters.</span>
+  param
+    A mandatory parameter.  There can be 0 or more mandatory parameters.
 
-<span class="s2">  opt_param</span>
-<span class="s2">    A optional parameter.  There can me 0 or more optional parameters.  The must always follow</span>
-<span class="s2">    the mandatory parameters and there can be no gaps.  This means if optional parameter 3 is</span>
-<span class="s2">    passed in so must optional parameters 1 and 2.</span>
+  opt_param
+    A optional parameter.  There can me 0 or more optional parameters.  The must always follow
+    the mandatory parameters and there can be no gaps.  This means if optional parameter 3 is
+    passed in so must optional parameters 1 and 2.
 
-<span class="s2">  ::</span>
-<span class="s2">    Separates the command definition with the Linux command that is run.</span>
+  ::
+    Separates the command definition with the Linux command that is run.
 
-<span class="s2">  command</span>
-<span class="s2">    Is an Linux command.  Parameter values entered after the command are specified using there</span>
-<span class="s2">    position preceded by a \$.  e.g \$1, \$2.</span>
+  command
+    Is an Linux command.  Parameter values entered after the command are specified using there
+    position preceded by a \$.  e.g \$1, \$2.
 
-<span class="s2">  Example</span>
+  Example
 
-<span class="s2">  sort_cli.def:</span>
-<span class="s2">  ----------------------------------------------------------------</span>
-<span class="s2">  # FILE OPTIONS</span>
-<span class="s2">  sort file (sf) &lt;filename&gt; &lt;sort_parameter&gt; :: cat \$1 | sort \$2</span>
-<span class="s2">  ----------------------------------------------------------------</span>
+  sort_cli.def:
+  ----------------------------------------------------------------
+  # FILE OPTIONS
+  sort file (sf) &lt;filename&gt; &lt;sort_parameter&gt; :: cat \$1 | sort \$2
+  ----------------------------------------------------------------
 
-<span class="s2">  This example sorts a file specified by a mandatory filename.  An optional sort parameter can</span>
-<span class="s2">  be passed to modify the sort order.  Once the cli is built the command can be run as follows.</span>
-<span class="s2">  Note: the name of the cli command is the same as the name of the definition file</span>
-<span class="s2">  (without the .def).</span>
+  This example sorts a file specified by a mandatory filename.  An optional sort parameter can
+  be passed to modify the sort order.  Once the cli is built the command can be run as follows.
+  Note: the name of the cli command is the same as the name of the definition file
+  (without the .def).
 
-<span class="s2">  &gt; sort_cli sort file my_file</span>
+  &gt; sort_cli sort file my_file
 
-<span class="s2">  &gt; sort_cli sf my_file --ignore_case</span>
+  &gt; sort_cli sf my_file --ignore_case
 
-<span class="s2">  &gt; @sf my_file</span>
+  &gt; @sf my_file
 
-<span class="s2">AUTHOR</span>
-<span class="s2">  mjnurse - 2019</span>
-<span class="s2">&quot;</span>
-<span class="nv">name</span><span class="o">=</span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span>
-<span class="nv">try</span><span class="o">=</span><span class="s2">&quot;Try &#39;</span><span class="nv">$name</span><span class="s2"> -h&#39; for more information&quot;</span>
+AUTHOR
+  mjnurse - 2019
+&quot;
+name=${0##*/}
+try=&quot;Try '$name -h' for more information&quot;
 
-<span class="c1"># Get usage from help_text.</span>
-<span class="nv">usage</span><span class="o">=</span><span class="si">${</span><span class="nv">help_text</span><span class="p">##*USAGE</span><span class="si">}</span>
-<span class="nv">usage</span><span class="o">=</span><span class="si">${</span><span class="nv">usage</span><span class="p">%%OPTIONS*</span><span class="si">}</span>
-<span class="nv">usage</span><span class="o">=</span><span class="si">${</span><span class="nv">usage</span><span class="p">%%PARAMETERS*</span><span class="si">}</span>
-<span class="nv">usage</span><span class="o">=</span><span class="si">${</span><span class="nv">usage</span><span class="p">%%DESCRIPTION*</span><span class="si">}</span>
-<span class="nv">usage</span><span class="o">=</span><span class="si">${</span><span class="nv">usage</span><span class="p">//[</span><span class="s1">$&#39;\n\r&#39;</span><span class="p">]</span><span class="si">}</span>
-<span class="nv">usage</span><span class="o">=</span><span class="si">${</span><span class="nv">usage</span><span class="p">##*   </span><span class="si">}</span>
-<span class="nv">usage</span><span class="o">=</span><span class="s2">&quot;Usage: </span><span class="si">${</span><span class="nv">usage</span><span class="si">}</span><span class="s2">&quot;</span>
+# Get usage from help_text.
+usage=${help_text##*USAGE}
+usage=${usage%%OPTIONS*}
+usage=${usage%%PARAMETERS*}
+usage=${usage%%DESCRIPTION*}
+usage=${usage//[$'\n\r']}
+usage=${usage##*   }
+usage=&quot;Usage: ${usage}&quot;
 
-<span class="k">function</span><span class="w"> </span>debug<span class="w"> </span><span class="o">{</span>
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$debug_yn</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>y<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$*</span><span class="s2">&quot;</span>
-<span class="w">  </span><span class="k">fi</span>
-<span class="o">}</span>
+function debug {
+  if [[ $debug_yn == y ]]; then
+    echo &quot;$*&quot;
+  fi
+}
 
-<span class="nv">debug_yn</span><span class="o">=</span>n
+debug_yn=n
 
-<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$usage</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$try</span>
-<span class="w">  </span><span class="nb">exit</span>
-<span class="k">elif</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;-h&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;--help&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span><span class="w"> </span>
-<span class="w">  </span><span class="nb">exit</span>
-<span class="k">elif</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;-d&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">  </span><span class="nv">debug_yn</span><span class="o">=</span>y
-<span class="w">  </span><span class="nb">shift</span>
-<span class="k">fi</span>
+if [[ &quot;$1&quot; == &quot;&quot; ]]; then
+  echo $usage
+  echo $try
+  exit
+elif [[ &quot;$1&quot; == &quot;-h&quot; || &quot;$1&quot; == &quot;--help&quot; ]]; then
+  echo &quot;$help_text&quot; 
+  exit
+elif [[ &quot;$1&quot; == &quot;-d&quot; ]]; then
+  debug_yn=y
+  shift
+fi
 
-<span class="nv">def_file</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">1</span><span class="p">/.def/</span><span class="si">}</span><span class="s2">&quot;</span>
+def_file=&quot;${1/.def/}&quot;
 
-<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="nv">$def_file</span>.def<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Error: Definition file \&quot;</span><span class="nv">$def_file</span><span class="s2">.def\&quot; missing&quot;</span>
-<span class="w">  </span><span class="nb">exit</span>
-<span class="k">fi</span>
-<span class="nv">cli_name</span><span class="o">=</span><span class="si">${</span><span class="nv">def_file</span><span class="si">}</span>
-<span class="nv">defns</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>cat<span class="w"> </span><span class="nv">$def_file</span>.def<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/^  *//&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;:a;/\\ *$/{N;s/\\ *\n//;ba}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;/^ *#/d; s/(\(.*::\)/(&#39;</span><span class="si">${</span><span class="nv">cli_name</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span><span class="s1">&#39;\1/&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
+if [[ ! -f $def_file.def ]]; then
+  echo &quot;Error: Definition file \&quot;$def_file.def\&quot; missing&quot;
+  exit
+fi
+cli_name=${def_file}
+defns=&quot;$(cat $def_file.def | sed 's/^  *//' | sed ':a;/\\ *$/{N;s/\\ *\n//;ba}' | sed '/^ *#/d; s/(\(.*::\)/('${cli_name:0:1}'\1/')&quot;
 
-<span class="nv">CCYA</span><span class="o">=</span><span class="s2">&quot;\x1b[96m&quot;</span>
-<span class="nv">CGRE</span><span class="o">=</span><span class="s2">&quot;\x1b[92m&quot;</span>
-<span class="nv">CMAG</span><span class="o">=</span><span class="s2">&quot;\x1b[95m&quot;</span>
-<span class="nv">CWHI</span><span class="o">=</span><span class="s2">&quot;\x1b[97m&quot;</span>
-<span class="nv">CDEF</span><span class="o">=</span><span class="s2">&quot;\x1b[0m&quot;</span>
+CCYA=&quot;\x1b[96m&quot;
+CGRE=&quot;\x1b[92m&quot;
+CMAG=&quot;\x1b[95m&quot;
+CWHI=&quot;\x1b[97m&quot;
+CDEF=&quot;\x1b[0m&quot;
 
-<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;#!/bin/bash</span>
+echo '#!/bin/bash
 
-<span class="s1">debug_yn=n</span>
-<span class="s1">if [[ &quot;$1&quot; == &quot;-d&quot; ]]; then</span>
-<span class="s1">  debug_yn=y</span>
-<span class="s1">  shift</span>
-<span class="s1">fi</span>
-<span class="s1">if [[ &quot;${CLI_DEBUG^^}&quot; == &quot;TRUE&quot; ]]; then</span>
-<span class="s1">  debug_yn=y</span>
-<span class="s1">fi</span>
+debug_yn=n
+if [[ &quot;$1&quot; == &quot;-d&quot; ]]; then
+  debug_yn=y
+  shift
+fi
+if [[ &quot;${CLI_DEBUG^^}&quot; == &quot;TRUE&quot; ]]; then
+  debug_yn=y
+fi
 
-<span class="s1">l80=&quot;--------------------------------------------------------------------------------&quot;</span>
-<span class="s1">&#39;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$cli_name</span>
+l80=&quot;--------------------------------------------------------------------------------&quot;
+' &gt; $cli_name
 
-<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;# Shortcut aliases&#39;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$cli_name</span>.alias
+echo '# Shortcut aliases' &gt; $cli_name.alias
 
-<span class="nv">defns</span><span class="o">=</span><span class="nv">$defns</span><span class="s1">&#39;</span>
-<span class="s1">= HELP</span>
-<span class="s1">help (&#39;</span><span class="si">${</span><span class="nv">cli_name</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span><span class="s1">&#39;he) :: egrep &quot;usage=|section=&quot; &quot;$0&quot; | grep -v &quot;grep&quot; | sed &quot;s/.*usage=/   /; s/.*section=/&#39;</span><span class="nv">$CGRE</span><span class="s1">&#39;/; s/\&quot;//g&quot;</span>
-<span class="s1">&#39;</span>
+defns=$defns'
+= HELP
+help ('${cli_name:0:1}'he) :: egrep &quot;usage=|section=&quot; &quot;$0&quot; | grep -v &quot;grep&quot; | sed &quot;s/.*usage=/   /; s/.*section=/'$CGRE'/; s/\&quot;//g&quot;
+'
 
-<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;</span>
-<span class="s1">function check_params() {</span>
-<span class="s1">  # param 1 - actual number of parameters</span>
-<span class="s1">  # param 2 - required number of parameters</span>
-<span class="s1">  # param 3 - incorrect parameters message</span>
+echo '
+function check_params() {
+  # param 1 - actual number of parameters
+  # param 2 - required number of parameters
+  # param 3 - incorrect parameters message
 
-<span class="s1">  if [[ &quot;$1&quot; &lt; &quot;$2&quot; ]]; then</span>
-<span class="s1">    echo &quot;$3&quot;</span>
-<span class="s1">    exit</span>
-<span class="s1">  fi</span>
-<span class="s1">}</span>
+  if [[ &quot;$1&quot; &lt; &quot;$2&quot; ]]; then
+    echo &quot;$3&quot;
+    exit
+  fi
+}
 
-<span class="s1">function print_command() {</span>
-<span class="s1">  # param 1 - command</span>
+function print_command() {
+  # param 1 - command
 
-<span class="s1">  if [[ $debug_yn == y ]]; then</span>
-<span class="s1">    echo &quot;COMMAND: $*&quot; | sed &#39;</span><span class="s2">&quot;&#39;&quot;</span><span class="s1">&#39;s/./-/g&#39;</span><span class="s2">&quot;&#39;&quot;</span><span class="s1">&#39;</span>
-<span class="s1">    echo &quot;COMMAND: $*&quot; | sed &#39;</span><span class="s2">&quot;&#39;&quot;</span><span class="s1">&#39;s/&quot;/\&quot;/g&#39;</span><span class="s2">&quot;&#39;&quot;</span><span class="s1">&#39;</span>
-<span class="s1">    echo &quot;COMMAND: $*&quot; | sed &#39;</span><span class="s2">&quot;&#39;&quot;</span><span class="s1">&#39;s/./-/g&#39;</span><span class="s2">&quot;&#39;&quot;</span><span class="s1">&#39;</span>
-<span class="s1">  fi</span>
-<span class="s1">}</span>
-<span class="s1">&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$cli_name</span>
+  if [[ $debug_yn == y ]]; then
+    echo &quot;COMMAND: $*&quot; | sed '&quot;'&quot;'s/./-/g'&quot;'&quot;'
+    echo &quot;COMMAND: $*&quot; | sed '&quot;'&quot;'s/&quot;/\&quot;/g'&quot;'&quot;'
+    echo &quot;COMMAND: $*&quot; | sed '&quot;'&quot;'s/./-/g'&quot;'&quot;'
+  fi
+}
+' &gt;&gt; $cli_name
 
-debug<span class="w"> </span><span class="s2">&quot;Commands&quot;</span>
-debug<span class="w"> </span><span class="s2">&quot;--------&quot;</span>
+debug &quot;Commands&quot;
+debug &quot;--------&quot;
 
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$defns</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
-<span class="k">while</span><span class="w"> </span><span class="nv">IFS</span><span class="o">=</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>line<span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+echo &quot;$defns&quot; | \
+while IFS= read -r line ; do
 
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">line</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;=&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;section=\&quot;</span><span class="si">${</span><span class="nv">line</span><span class="p">:</span><span class="nv">2</span><span class="si">}</span><span class="s2">\&quot;&quot;</span><span class="w">  </span>&gt;&gt;<span class="w"> </span><span class="nv">$cli_name</span>
-<span class="w">  </span><span class="k">elif</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">line</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">4</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;cmd &quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">line</span><span class="p">:</span><span class="nv">4</span><span class="p">:</span><span class="nv">99999</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$cli_name</span>
-<span class="w">  </span><span class="k">elif</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$line</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="nv">cmd</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$line</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/^.*:://; s/##.*//&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="nv">usage</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="si">${</span><span class="nv">line</span><span class="p">%% ::*</span><span class="si">}</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/\[/\x1b[37m\[/g; s/\]/\]</span><span class="nv">$CWHI</span><span class="s2">/g; s/^/</span><span class="nv">$CMAG</span><span class="s2">/; s/(/</span><span class="nv">$CCYA</span><span class="s2">(/; s/)/)</span><span class="nv">$CWHI</span><span class="s2">/; s/</span>$<span class="s2">/</span><span class="nv">$CDEF</span><span class="s2">/&quot;</span><span class="k">)</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$line</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;##&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nv">help</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$line</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/^.*## */</span><span class="nv">$CGRE</span><span class="s2"> # /; s/</span>$<span class="s2">/\x1b[0m/&quot;</span><span class="k">)</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="nv">help</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
-<span class="w">    </span><span class="nv">word_list</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">line</span><span class="p">%%::*</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="nv">word_list</span><span class="o">=</span><span class="si">${</span><span class="nv">word_list</span><span class="p">//[/ [ </span><span class="si">}</span>
-<span class="w">    </span><span class="nv">word_list</span><span class="o">=</span><span class="si">${</span><span class="nv">word_list</span><span class="p">//]/ ] </span><span class="si">}</span>
+  if [[ &quot;${line:0:1}&quot; == &quot;=&quot; ]]; then
+    echo &quot;section=\&quot;${line:2}\&quot;&quot;  &gt;&gt; $cli_name
+  elif [[ &quot;${line:0:4}&quot; == &quot;cmd &quot; ]]; then
+    echo &quot;${line:4:99999}&quot; &gt;&gt; $cli_name
+  elif [[ &quot;$line&quot; != &quot;&quot; ]]; then
+    cmd=&quot;$(echo $line | sed 's/^.*:://; s/##.*//')&quot;
+    usage=&quot;$(echo ${line%% ::*} | sed &quot;s/\[/\x1b[37m\[/g; s/\]/\]$CWHI/g; s/^/$CMAG/; s/(/$CCYA(/; s/)/)$CWHI/; s/$/$CDEF/&quot;)&quot;
+    if echo $line | grep &quot;##&quot; &gt; /dev/null; then help=&quot;$(echo $line | sed &quot;s/^.*## */$CGRE # /; s/$/\x1b[0m/&quot;)&quot;; else help=&quot;&quot;; fi
+    word_list=&quot;${line%%::*}&quot;
+    word_list=${word_list//[/ [ }
+    word_list=${word_list//]/ ] }
 
-<span class="w">    </span><span class="nv">key_word_template</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
-<span class="w">    </span><span class="nv">key_words</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
-<span class="w">    </span><span class="nv">num_mandatory_params</span><span class="o">=</span><span class="m">0</span>
-<span class="w">    </span><span class="nv">optional_params_yn</span><span class="o">=</span>n
-<span class="w">    </span><span class="nv">optional_params</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
-<span class="w">    </span><span class="nv">mandatory_params</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
-<span class="w">    </span><span class="nv">shortcut</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
-<span class="w">    </span><span class="nv">word_count</span><span class="o">=</span><span class="m">0</span>
+    key_word_template=&quot;&quot;
+    key_words=&quot;&quot;
+    num_mandatory_params=0
+    optional_params_yn=n
+    optional_params=&quot;&quot;
+    mandatory_params=&quot;&quot;
+    shortcut=&quot;&quot;
+    word_count=0
 
-<span class="w">    </span><span class="k">for</span><span class="w"> </span>word<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nv">$word_list</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$word</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;[&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">        </span><span class="nv">optional_params_yn</span><span class="o">=</span>y
-<span class="w">      </span><span class="k">elif</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$word</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;]&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">        </span><span class="nv">optional_params_yn</span><span class="o">=</span>n
-<span class="w">      </span><span class="k">elif</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">word</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&lt;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$optional_params_yn</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;y&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">          </span><span class="nv">optional_params</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$optional_params</span><span class="s2"> </span><span class="nv">$word</span><span class="s2">&quot;</span>
-<span class="w">        </span><span class="k">else</span>
-<span class="w">          </span><span class="nv">mandatory_params</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$mandatory_params</span><span class="s2"> </span><span class="nv">$word</span><span class="s2">&quot;</span>
-<span class="w">          </span><span class="nb">let</span><span class="w"> </span><span class="nv">num_mandatory_params</span><span class="o">=</span>num_mandatory_params+1
-<span class="w">        </span><span class="k">fi</span>
-<span class="w">      </span><span class="k">elif</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">word</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;(&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">        </span><span class="nv">shortcut</span><span class="o">=</span><span class="si">${</span><span class="nv">word</span><span class="p">/(/</span><span class="si">}</span>
-<span class="w">        </span><span class="nv">shortcut</span><span class="o">=</span><span class="si">${</span><span class="nv">shortcut</span><span class="p">/)/</span><span class="si">}</span>
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;alias @&#39;</span><span class="si">${</span><span class="nv">shortcut</span><span class="si">}</span><span class="s1">&#39;=&quot;&#39;</span><span class="nv">$cli_name</span><span class="w"> </span><span class="nv">$shortcut</span><span class="s1">&#39;&quot;&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$cli_name</span>.alias
-<span class="w">      </span><span class="k">else</span>
-<span class="w">        </span><span class="nb">let</span><span class="w"> </span><span class="nv">word_count</span><span class="o">=</span>word_count+1
-<span class="w">        </span><span class="nv">key_words</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$key_words</span><span class="s2"> </span><span class="nv">$word</span><span class="s2">&quot;</span>
-<span class="w">        </span><span class="nv">key_word_template</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$key_word_template</span><span class="s2"> &quot;</span><span class="s1">&#39;$&#39;</span><span class="s2">&quot;</span><span class="nv">$word_count</span><span class="s2">&quot;</span>
-<span class="w">      </span><span class="k">fi</span>
-<span class="w">    </span><span class="k">done</span>
+    for word in $word_list; do
+      if [[ &quot;$word&quot; == &quot;[&quot; ]]; then
+        optional_params_yn=y
+      elif [[ &quot;$word&quot; == &quot;]&quot; ]]; then
+        optional_params_yn=n
+      elif [[ &quot;${word:0:1}&quot; == &quot;&lt;&quot; ]]; then
+        if [[ &quot;$optional_params_yn&quot; == &quot;y&quot; ]]; then
+          optional_params=&quot;$optional_params $word&quot;
+        else
+          mandatory_params=&quot;$mandatory_params $word&quot;
+          let num_mandatory_params=num_mandatory_params+1
+        fi
+      elif [[ &quot;${word:0:1}&quot; == &quot;(&quot; ]]; then
+        shortcut=${word/(/}
+        shortcut=${shortcut/)/}
+        echo 'alias @'${shortcut}'=&quot;'$cli_name $shortcut'&quot;' &gt;&gt; $cli_name.alias
+      else
+        let word_count=word_count+1
+        key_words=&quot;$key_words $word&quot;
+        key_word_template=&quot;$key_word_template &quot;'$'&quot;$word_count&quot;
+      fi
+    done
 
-<span class="w">    </span><span class="nv">key_words</span><span class="o">=</span><span class="si">${</span><span class="nv">key_words</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span>
-<span class="w">    </span><span class="nv">key_word_template</span><span class="o">=</span><span class="si">${</span><span class="nv">key_word_template</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span>
-<span class="w">    </span><span class="nv">mandatory_params</span><span class="o">=</span><span class="si">${</span><span class="nv">mandatory_params</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span>
-<span class="w">    </span><span class="nv">optional_params</span><span class="o">=</span><span class="si">${</span><span class="nv">optional_params</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span>
-<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">cmd</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="w">      </span><span class="nv">cmd</span><span class="o">=</span><span class="si">${</span><span class="nv">cmd</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span>
-<span class="w">    </span><span class="k">done</span>
+    key_words=${key_words:1}
+    key_word_template=${key_word_template:1}
+    mandatory_params=${mandatory_params:1}
+    optional_params=${optional_params:1}
+    while [[ &quot;${cmd:0:1}&quot; == &quot; &quot; ]]; do
+      cmd=${cmd:1}
+    done
 
-<span class="w">    </span>debug<span class="w"> </span><span class="s2">&quot;- </span><span class="nv">$key_words</span><span class="s2"> (</span><span class="nv">$shortcut</span><span class="s2">)&quot;</span>
+    debug &quot;- $key_words ($shortcut)&quot;
 
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;if [[ \&quot;</span><span class="nv">$key_word_template</span><span class="s2">\&quot; == \&quot;</span><span class="nv">$key_words</span><span class="s2">\&quot; || \&quot;&quot;</span><span class="s1">&#39;$1&#39;</span><span class="s2">&quot;\&quot; == \&quot;</span><span class="nv">$shortcut</span><span class="s2">\&quot; ]]; then&quot;</span><span class="w">  </span>&gt;&gt;<span class="w"> </span><span class="nv">$cli_name</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;   if [[ \&quot;&quot;</span><span class="s1">&#39;$1&#39;</span><span class="s2">&quot;\&quot; == \&quot;</span><span class="nv">$shortcut</span><span class="s2">\&quot; ]]; then shift; else shift </span><span class="nv">$word_count</span><span class="s2">; fi&quot;</span><span class="w">  </span>&gt;&gt;<span class="w"> </span><span class="nv">$cli_name</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;   usage=\&quot;</span><span class="nv">$usage</span><span class="s2"> </span><span class="nv">$help</span><span class="s2">\&quot;&quot;</span><span class="w">  </span>&gt;&gt;<span class="w"> </span><span class="nv">$cli_name</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;   check_params &quot;</span><span class="s1">&#39;$&#39;</span><span class="s2">&quot;# </span><span class="nv">$num_mandatory_params</span><span class="s2"> \&quot;Usage: &quot;</span><span class="s1">&#39;$&#39;</span><span class="s2">&quot;usage\&quot;&quot;</span><span class="w">  </span>&gt;&gt;<span class="w"> </span><span class="nv">$cli_name</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$key_words</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;h&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$key_words</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;help&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;   print_command \&quot; </span><span class="si">${</span><span class="nv">cmd</span><span class="p">//</span><span class="se">\&quot;</span><span class="p">/</span><span class="se">\\\&quot;</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\&quot;</span><span class="w">  </span>&gt;&gt;<span class="w"> </span><span class="nv">$cli_name</span>
-<span class="w">    </span><span class="k">fi</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;   </span><span class="nv">$cmd</span><span class="s2">&quot;</span><span class="w">  </span>&gt;&gt;<span class="w"> </span><span class="nv">$cli_name</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;   exit&quot;</span><span class="w">  </span>&gt;&gt;<span class="w"> </span><span class="nv">$cli_name</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;fi&quot;</span><span class="w">  </span>&gt;&gt;<span class="w"> </span><span class="nv">$cli_name</span>
-<span class="w">  </span><span class="k">fi</span>
-<span class="k">done</span>
+    echo &quot;if [[ \&quot;$key_word_template\&quot; == \&quot;$key_words\&quot; || \&quot;&quot;'$1'&quot;\&quot; == \&quot;$shortcut\&quot; ]]; then&quot;  &gt;&gt; $cli_name
+    echo &quot;   if [[ \&quot;&quot;'$1'&quot;\&quot; == \&quot;$shortcut\&quot; ]]; then shift; else shift $word_count; fi&quot;  &gt;&gt; $cli_name
+    echo &quot;   usage=\&quot;$usage $help\&quot;&quot;  &gt;&gt; $cli_name
+    echo &quot;   check_params &quot;'$'&quot;# $num_mandatory_params \&quot;Usage: &quot;'$'&quot;usage\&quot;&quot;  &gt;&gt; $cli_name
+    if [[ &quot;$key_words&quot; != &quot;h&quot; &amp;&amp; &quot;$key_words&quot; != &quot;help&quot; ]]; then
+      echo &quot;   print_command \&quot; ${cmd//\&quot;/\\\&quot;}&quot; \&quot;  &gt;&gt; $cli_name
+    fi
+    echo &quot;   $cmd&quot;  &gt;&gt; $cli_name
+    echo &quot;   exit&quot;  &gt;&gt; $cli_name
+    echo &quot;fi&quot;  &gt;&gt; $cli_name
+  fi
+done
 
-<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;</span>
-<span class="s1">if [[ &quot;$1&quot; == &quot;&quot; ]]; then</span>
-<span class="s1">  echo &quot;No option passed&quot;</span>
-<span class="s1">else</span>
-<span class="s1">  echo &quot;$*: invalid option&quot;</span>
-<span class="s1">fi</span>
-<span class="s1">echo &quot;Try \&quot;&#39;</span><span class="nv">$cli_name</span><span class="s1">&#39; help\&quot; for more information.&quot;</span>
-<span class="s1">&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$cli_name</span>
+echo '
+if [[ &quot;$1&quot; == &quot;&quot; ]]; then
+  echo &quot;No option passed&quot;
+else
+  echo &quot;$*: invalid option&quot;
+fi
+echo &quot;Try \&quot;'$cli_name' help\&quot; for more information.&quot;
+' &gt;&gt; $cli_name
 
-chmod<span class="w"> </span>+x<span class="w"> </span><span class="nv">$cli_name</span>
+chmod +x $cli_name
 
-cp<span class="w"> </span><span class="nv">$cli_name</span>.alias<span class="w"> </span>~
-</code></pre></div>
+cp $cli_name.alias ~
+</code></pre>
         </div>
       </article>
     </main>
@@ -368,7 +369,7 @@ cp<span class="w"> </span><span class="nv">$cli_name</span>.alias<span class="w"
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: November 25, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

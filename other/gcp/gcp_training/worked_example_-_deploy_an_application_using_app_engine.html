@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>Worked Example - Deploy An Application Using App Engine</title>
   </head>
   <body class="light" id="top">
@@ -95,104 +96,104 @@
 <p>Create a directory for the service: <code>mkdir service-1</code></p>
 <p>Within the directory, create 3 files:</p>
 <p><code>app.yaml</code> (Application configuration)</p>
-<div class="codehilite"><pre><span></span><code><span class="nt">runtime</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python39</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-yaml">runtime: python39
+</code></pre>
 
 <p><code>main.py</code> (Python service)</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flask</span>
+<pre class="codehilite"><code class="language-python">from flask import Flask
 
-<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+app = Flask(__name__)
 
-<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">hello</span><span class="p">():</span>
-    <span class="k">return</span> <span class="s1">&#39;App Service 1 - VERSION 1&#39;</span>
-</code></pre></div>
+@app.route('/')
+def hello():
+    return 'App Service 1 - VERSION 1'
+</code></pre>
 
 <p><code>requirements.txt</code> (Python dependencies)</p>
-<div class="codehilite"><pre><span></span><code>Flask==2.0.2
-</code></pre></div>
+<pre class="codehilite"><code>Flask==2.0.2
+</code></pre>
 
 <h2 id="3-deploy-service">3. Deploy Service</h2>
-<div class="codehilite"><pre><span></span><code><span class="c1"># Set the project</span>
+<pre class="codehilite"><code class="language-bash"># Set the project
 
-&gt;<span class="w"> </span>gcloud<span class="w"> </span>projects<span class="w"> </span>list
+&gt; gcloud projects list
 
-PROJECT_ID:<span class="w"> </span>app-eng-mjn
-NAME:<span class="w"> </span>app-eng-mjn
-PROJECT_NUMBER:<span class="w"> </span><span class="m">999908460627</span>
+PROJECT_ID: app-eng-mjn
+NAME: app-eng-mjn
+PROJECT_NUMBER: 999908460627
 
-PROJECT_ID:<span class="w"> </span>lustrous-method-999999
-NAME:<span class="w"> </span>My<span class="w"> </span>First<span class="w"> </span>Project
-PROJECT_NUMBER:<span class="w"> </span><span class="m">999956012473</span>
+PROJECT_ID: lustrous-method-999999
+NAME: My First Project
+PROJECT_NUMBER: 999956012473
 
-&gt;<span class="w"> </span>gcloud<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>project<span class="w"> </span>app-eng-mjn
+&gt; gcloud config set project app-eng-mjn
 
-Updated<span class="w"> </span>property<span class="w"> </span><span class="o">[</span>core/project<span class="o">]</span>.
+Updated property [core/project].
 
-<span class="c1"># Deploy the app</span>
+# Deploy the app
 
-&gt;<span class="w"> </span>gcloud<span class="w"> </span>app<span class="w"> </span>deploy
+&gt; gcloud app deploy
 
-descriptor:<span class="w">                  </span><span class="o">[</span>/home/mjnlearnsgcp/service-1/app.yaml<span class="o">]</span>
-source:<span class="w">                      </span><span class="o">[</span>/home/mjnlearnsgcp/service-1<span class="o">]</span>
-target<span class="w"> </span>project:<span class="w">              </span><span class="o">[</span>app-eng-mjn<span class="o">]</span>
-target<span class="w"> </span>service:<span class="w">              </span><span class="o">[</span>default<span class="o">]</span>
-target<span class="w"> </span>version:<span class="w">              </span><span class="o">[</span>20221223t145157<span class="o">]</span>
-target<span class="w"> </span>url:<span class="w">                  </span><span class="o">[</span>https://app-eng-mjn.uc.r.appspot.com<span class="o">]</span>
-target<span class="w"> </span>service<span class="w"> </span>account:<span class="w">      </span><span class="o">[</span>App<span class="w"> </span>Engine<span class="w"> </span>default<span class="w"> </span>service<span class="w"> </span>account<span class="o">]</span>
+descriptor:                  [/home/mjnlearnsgcp/service-1/app.yaml]
+source:                      [/home/mjnlearnsgcp/service-1]
+target project:              [app-eng-mjn]
+target service:              [default]
+target version:              [20221223t145157]
+target url:                  [https://app-eng-mjn.uc.r.appspot.com]
+target service account:      [App Engine default service account]
 
-Do<span class="w"> </span>you<span class="w"> </span>want<span class="w"> </span>to<span class="w"> </span><span class="k">continue</span><span class="w"> </span><span class="o">(</span>Y/n<span class="o">)</span>?<span class="w">  </span>y
+Do you want to continue (Y/n)?  y
 
-Beginning<span class="w"> </span>deployment<span class="w"> </span>of<span class="w"> </span>service<span class="w"> </span><span class="o">[</span>default<span class="o">]</span>...
-Created<span class="w"> </span>.gcloudignore<span class="w"> </span>file.<span class="w"> </span>See<span class="w"> </span><span class="sb">`</span>gcloud<span class="w"> </span>topic<span class="w"> </span>gcloudignore<span class="sb">`</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>details.
-Uploading<span class="w"> </span><span class="m">3</span><span class="w"> </span>files<span class="w"> </span>to<span class="w"> </span>Google<span class="w"> </span>Cloud<span class="w"> </span>Storage
-<span class="m">33</span>%
-<span class="m">67</span>%
-<span class="m">100</span>%
-File<span class="w"> </span>upload<span class="w"> </span><span class="k">done</span>.
-Updating<span class="w"> </span>service<span class="w"> </span><span class="o">[</span>default<span class="o">]</span>...done.<span class="w">     </span>
-Setting<span class="w"> </span>traffic<span class="w"> </span>split<span class="w"> </span><span class="k">for</span><span class="w"> </span>service<span class="w"> </span><span class="o">[</span>default<span class="o">]</span>...done.<span class="w">     </span>
-Deployed<span class="w"> </span>service<span class="w"> </span><span class="o">[</span>default<span class="o">]</span><span class="w"> </span>to<span class="w"> </span><span class="o">[</span>https://app-eng-mjn.uc.r.appspot.com<span class="o">]</span>
-</code></pre></div>
+Beginning deployment of service [default]...
+Created .gcloudignore file. See `gcloud topic gcloudignore` for details.
+Uploading 3 files to Google Cloud Storage
+33%
+67%
+100%
+File upload done.
+Updating service [default]...done.     
+Setting traffic split for service [default]...done.     
+Deployed service [default] to [https://app-eng-mjn.uc.r.appspot.com]
+</code></pre>
 
 <p>Navigate to the URL: https://app-eng-mjn.uc.r.appspot.com</p>
 <p>Browser will display <strong>App Service 1 - VERSION 1</strong></p>
 <p>Check what's deployed.</p>
-<div class="codehilite"><pre><span></span><code><span class="k">&gt; </span><span class="ge">gcloud app services list</span>
+<pre class="codehilite"><code>&gt; gcloud app services list
 SERVICE: default
 NUM_VERSIONS: 1
 
-<span class="k">&gt; </span><span class="ge">gcloud app versions list</span>
+&gt; gcloud app versions list
 SERVICE: default
 VERSION.ID: 20221223t145157
 TRAFFIC_SPLIT: 1.00
 LAST_DEPLOYED: 2022-12-23T14:54:20+00:00
 SERVING_STATUS: SERVING
 
-<span class="k">&gt; </span><span class="ge">gcloud app instances list</span>
+&gt; gcloud app instances list
 SERVICE: default
 VERSION: 20221223t145157
 ID: 00c61b117ca953b7c54044eebe54eb87956b42bc1dc01cd9ab84dd5e80120b1a60533e859332fd1bcc4a4a3c5686eba83811d058d42673253d6b
 VM_STATUS: N/A
 VM_LIVENESS:
 DEBUG_MODE:
-</code></pre></div>
+</code></pre>
 
 <h2 id="4-deploy-a-second-version-of-the-service">4. Deploy A Second Version Of The Service</h2>
 <p>Edit file: <code>main.py</code></p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flask</span>
+<pre class="codehilite"><code class="language-python">from flask import Flask
 
-<span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+app = Flask(__name__)
 
-<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">hello</span><span class="p">():</span>
-    <span class="k">return</span> <span class="s1">&#39;App Service 1 - VERSION 2&#39;</span>
-</code></pre></div>
+@app.route('/')
+def hello():
+    return 'App Service 1 - VERSION 2'
+</code></pre>
 
 <p>Deploy version 2.  Name the version this time.</p>
-<div class="codehilite"><pre><span></span><code><span class="k">&gt; </span><span class="ge">gcloud app deploy --version=v2</span>
+<pre class="codehilite"><code>&gt; gcloud app deploy --version=v2
 
-<span class="k">&gt; </span><span class="ge">gcloud app list versions</span>
+&gt; gcloud app list versions
 SERVICE: default
 VERSION.ID: 20221223t145157
 TRAFFIC_SPLIT: 0.00
@@ -204,7 +205,7 @@ VERSION.ID: v2
 TRAFFIC_SPLIT: 1.00
 LAST_DEPLOYED: 2022-12-23T15:07:33+00:00
 SERVING_STATUS: SERVING
-</code></pre></div>
+</code></pre>
 
 <p>Navigate to the URL: https://app-eng-mjn.uc.r.appspot.com</p>
 <p>Browser will display <strong>App Service 1 - VERSION 2</strong></p>
@@ -213,29 +214,29 @@ SERVING_STATUS: SERVING
 <h2 id="5-split-traffic-between-version">5. Split Traffic Between Version</h2>
 <p>Update <code>main.py</code> to display <code>App Service 1 - VERSION 3</code>.</p>
 <p>Deploy new version BUT don't make this active.</p>
-<div class="codehilite"><pre><span></span><code>&gt; gcloud app deploy --version=v3 --no-promote
-</code></pre></div>
+<pre class="codehilite"><code>&gt; gcloud app deploy --version=v3 --no-promote
+</code></pre>
 
 <p>Split traffic between v2 and v3.</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="n">gcloud</span><span class="w"> </span><span class="n">app</span><span class="w"> </span><span class="n">services</span><span class="w"> </span><span class="k">set</span><span class="o">-</span><span class="n">traffic</span><span class="w"> </span><span class="c1">--splits=v2=.8,v3=.2A --split-by=random</span>
-<span class="n">Setting</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">following</span><span class="w"> </span><span class="n">traffic</span><span class="w"> </span><span class="nl">allocation</span><span class="p">:</span>
-<span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">app</span><span class="o">-</span><span class="n">eng</span><span class="o">-</span><span class="n">mjn</span><span class="o">/</span><span class="k">default</span><span class="o">/</span><span class="nl">v2</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8</span>
-<span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">app</span><span class="o">-</span><span class="n">eng</span><span class="o">-</span><span class="n">mjn</span><span class="o">/</span><span class="k">default</span><span class="o">/</span><span class="nl">v3</span><span class="p">:</span><span class="w"> </span><span class="mf">0.2</span>
-<span class="nl">NOTE</span><span class="p">:</span><span class="w"> </span><span class="n">Splitting</span><span class="w"> </span><span class="n">traffic</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">random</span><span class="p">.</span>
-<span class="ow">Any</span><span class="w"> </span><span class="n">other</span><span class="w"> </span><span class="n">versions</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">specified</span><span class="w"> </span><span class="n">service</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">receive</span><span class="w"> </span><span class="n">zero</span><span class="w"> </span><span class="n">traffic</span><span class="p">.</span>
-<span class="n">Do</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">want</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">continue</span><span class="w"> </span><span class="p">(</span><span class="n">Y</span><span class="o">/</span><span class="n">n</span><span class="p">)</span><span class="vm">?</span><span class="w">  </span><span class="n">y</span>
+<pre class="codehilite"><code>&gt; gcloud app services set-traffic --splits=v2=.8,v3=.2A --split-by=random
+Setting the following traffic allocation:
+ - app-eng-mjn/default/v2: 0.8
+ - app-eng-mjn/default/v3: 0.2
+NOTE: Splitting traffic by random.
+Any other versions of the specified service will receive zero traffic.
+Do you want to continue (Y/n)?  y
 
-<span class="n">Setting</span><span class="w"> </span><span class="n">traffic</span><span class="w"> </span><span class="n">split</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">service</span><span class="w"> </span><span class="o">[</span><span class="n">default</span><span class="o">]</span><span class="p">...</span><span class="n">done</span><span class="p">.</span>
-</code></pre></div>
+Setting traffic split for service [default]...done.
+</code></pre>
 
 <p>Note: By default split will be by IP (the IP address of the requester - the browser).</p>
 <p>Navigate to the URL: https://app-eng-mjn.uc.r.appspot.com</p>
 <p>Browser will display version 2 and version 3 randomly in the split ration specified.</p>
 <h2 id="6-naming-a-service">6. Naming A Service</h2>
 <p>To name a service, add the service name to the <code>app.yaml</code></p>
-<div class="codehilite"><pre><span></span><code><span class="nt">runtime</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python39</span>
-<span class="nt">service</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mjn-service</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-yaml">runtime: python39
+service: mjn-service
+</code></pre>
         </div>
       </article>
     </main>
@@ -253,7 +254,7 @@ SERVING_STATUS: SERVING
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: November 25, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

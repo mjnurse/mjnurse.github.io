@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Using Git and GitHub - A Walk-through" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>Using Git and GitHub - A Walk-through</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>Using Git and GitHub - A Walk-through</h1>
+<p>In the following walk-through we use Git and GitHub from the view point of two 'users' in parallel and look at the workflow and interaction between the two.</p>
+<hr />
+<h2 id="simulate-two-users-each-has-a-home-directory">Simulate two users - each has a home directory</h2>
+<p>Create two 'user home' directories:</p>
+<pre class="codehilite"><code>&gt; ~/git-test$ mkdir user1
+&gt; ~/git-test$ mkdir user2
+</code></pre>
+
+<hr />
+<h2 id="use-user1-to-create-a-file-add-this-to-git-and-push-the-local-git-repo-up-and-into-github">Use User1 to create a file, add this to Git and push the local Git repo up and into GitHub</h2>
+<p>Go to User1 home directory and initialise local Git:</p>
+<pre class="codehilite"><code>&gt; ~/git-test$ cd user1
+&gt; ~/git-test/user1$ git init
+Initialized empty Git repository in /home/martin/git-test/user1/.git/
+</code></pre>
+
+<p>Create a text file add add this is local Git:</p>
+<pre class="codehilite"><code>&gt; ~/git-test/user1$ echo &quot;hello - I am the first version of the file&quot; &gt; file
+&gt; ~/git-test/user2$ cat file
+hello - I am the first version of the file
+&gt; ~/git-test/user1$ git add file 
+</code></pre>
+
+<p>Set username and email in local Git:</p>
+<p>If we don't do this, Git will prompt for this information for a commit.</p>
+<pre class="codehilite"><code>&gt; ~/git-test/user1$ git config --local user.name &quot;User 1&quot;
+&gt; ~/git-test/user1$ git config --local user.email &quot;user1@test.com&quot;
+</code></pre>
+
+<p>Ask Git to store the credentials locally:</p>
+<pre class="codehilite"><code>&gt; ~/git-test$ git config credential.helper store
+</code></pre>
+
+<p>Commit this (new file) change to local Git:</p>
+<pre class="codehilite"><code>&gt; ~/git-test/user1$ git commit -m &quot;Created the file&quot;
+[master (root-commit) aaa4a05] Created the file
+ Committer: Martin &lt;martin@server&gt;
+ 1 file changed, 1 insertion(+)
+ create mode 100644 file
+</code></pre>
+
+<p>Push this local Git repo up and into GitHub:  </p>
+<p>First add (create connection to) remote git - call it origin.</p>
+<pre class="codehilite"><code>&gt; ~/git-test/user1$ git remote add origin https://github.com/mjnurse/git-test.git
+</code></pre>
+
+<p>Second push to origin the current branch - master.</p>
+<pre class="codehilite"><code>&gt; ~/git-test/user1$ git push origin master
+Username for 'https://github.com': mjnurse
+Password for 'https://mjnurse@github.com': 
+Counting objects: 3, done.
+Writing objects: 100% (3/3), 276 bytes | 0 bytes/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+To https://github.com/mjnurse/git-test.git
+ * [new branch]      master -&gt; master
+</code></pre>
+
+<hr />
+<p><strong>INFO</strong> We now have a repository in GitHub called git-test and this is in sync with the local Got repo for User 1.</p>
+<hr />
+<h2 id="use-user-2-to-develop-a-new-feature-in-the-code-stored-in-github">Use User 2 to develop a new feature in the code stored in GitHub</h2>
+<h3 id="first-we-create-a-local-git-repo-for-user-2-we-clone-the-repo-in-github">First we create a local Git repo for User 2 - We clone the repo in GitHub</h3>
+<p>Switch to User 2 directory, clone the GitHub repo to a local instance of Git:</p>
+<pre class="codehilite"><code>&gt; ~/git-test/user2$ git clone https://github.com/mjnurse/git-test.git .
+</code></pre>
+
+<p>Again set username and email in local Git:</p>
+<pre class="codehilite"><code>&gt; ~/git-test/user2$ git config --local user.name &quot;User 2&quot;
+&gt; ~/git-test/user2$ git config --local user.email &quot;user2@test.com&quot;
+</code></pre>
+
+<h3 id="now-user-2-develops-a-new-feature-in-the-code">Now User 2 develops a new feature in the code</h3>
+<p>Create a development branch for User 2 to create a feature (call it x):</p>
+<pre class="codehilite"><code>&gt; ~/git-test/user2$ git branch feature-x-u2
+</code></pre>
+
+<p>Switch to (checkout) the development branch code to current directory:</p>
+<pre class="codehilite"><code>&gt; ~/git-test/user2$ git checkout feature-x-u2
+Switched to branch 'feature-x-u2'
+</code></pre>
+
+<p>Confirm we are now working on the branch feature-x-u2:</p>
+<pre class="codehilite"><code>&gt; ~/git-test/user2$ git branch
+* feature-x-u2
+  master
+</code></pre>
+
+<p>Make a change to file, add this to local Git and Commit:</p>
+<pre class="codehilite"><code>&gt; ~/git-test/user2$ echo &quot;This is a second line added by User2 (on branch feature-x-u2).&quot; &gt;&gt; file
+&gt; ~/git-test/user2$ cat file
+hello - I am the first version of the file
+This is a second line added by User2 (on branch feature-x-u2).
+&gt; ~/git-test/user2$ git add file
+&gt; ~/git-test/user2$ git commit -m &quot;Modified file (add new line)&quot;
+[feature-x-u2 eb279ab] Modified file (add new line)
+ 1 file changed, 1 insertion(+)
+</code></pre>
+
+<h3 id="now-user-2-wants-to-have-the-changes-merged-up-and-into-the-master-branch-in-github">Now User 2 wants to have the changes merged up and into the master branch in GitHub</h3>
+<p>This is a three stage process to ensure, as best we can, we don't break (invalidate) the current code in master.</p>
+<h4 id="stage-1">Stage 1:</h4>
+<p>We merge the most recent version of master in GitHub into the current development branch.  This means that we are responsible for ensuring our branch changes plus master is valid.</p>
+<h4 id="stage-2">Stage 2:</h4>
+<p>We push the latest version of branch in local Git up and into GitHub.</p>
+<h4 id="stage-3">Stage 3:</h4>
+<p>We request / preform a GitHub 'pull request' to have he branch merged into the current master branch.</p>
+<p>Note: Master could of changed again but the risk here is small - however we could check by pulling the master branch again from GitHub</p>
+<p>Switch back to the master branch in local Git and run a pull from GitHub to make sure this is up to date:</p>
+<pre class="codehilite"><code>&gt; ~/git-test/user2$ git checkout master
+Switched to branch 'master'
+Your branch is up-to-date with 'origin/master'.
+&gt; ~/git-test/user2$ git pull origin master
+From https://github.com/mjnurse/git-test
+ * branch            master     -&gt; FETCH_HEAD
+Already up-to-date.
+</code></pre>
+
+<p>Switch back to the dev branch and merge the master branch into the dev branch:</p>
+<pre class="codehilite"><code>&gt; ~/git-test/user2$ git checkout feature-x-u2
+Switched to branch 'feature-x-u2'
+&gt; ~/git-test/user2$ git merge master
+Already up-to-date.
+</code></pre>
+
+<p>Not changes were made or conflicts identified.</p>
+<p>Push the dev branch up and into GitHub:</p>
+<p>Note: As this branch does not already exist in GitHub we need to instruct Git to create the branch.</p>
+<pre class="codehilite"><code>&gt; ~/git-test/user2$ git push --set-upstream origin feature-x-u2
+Username for 'https://github.com': mjnurse
+Password for 'https://mjnurse@github.com': 
+Counting objects: 3, done.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (3/3), 335 bytes | 0 bytes/s, done.
+Total 3 (delta 0), reused 0 (delta 0)
+remote: 
+remote: Create a pull request for 'feature-x-u2' on GitHub by visiting:
+remote:      https://github.com/mjnurse/git-test/pull/new/feature-x-u2
+remote: 
+To https://github.com/mjnurse/git-test.git
+ * [new branch]      feature-x-u2 -&gt; feature-x-u2
+Branch feature-x-u2 set up to track remote branch feature-x-u2 from origin.
+</code></pre>
+
+<h3 id="execute-a-pull-request-to-merge-dev-branch-to-master-in-github">Execute a Pull Request to merge dev branch to master in GitHub</h3>
+<p>Open GitHub in a browser and navigate to the repository in use.</p>
+<p><img alt="" src="images/github_pullrequest.png" /></p>
+<p>Click on 'Compare &amp; pull request' to request the merge into master.</p>
+<p><img alt="" src="images/github_pullrequest2.png" /></p>
+<p>Add a comment and click on 'Create pull request'.</p>
+<p><img alt="" src="images/github_pullrequest3.png" /></p>
+<p>Click on 'Merge pull request' and then click on 'Confirm merge'.</p>
+<p><img alt="" src="images/github_pullrequest4.png" /></p>
+<p>The merge is complete.</p>
+<p>Note: It is common (best) practice to limit the number of users who are able to merge changes into the master branch but I've skipped that here for simplicity.</p>
+<hr />
+<p><strong>INFO</strong> We now have a repository in GitHub which includes the feature-x-u2 development branch and the feature-x-u2 branch has been merged into the master branch.</p>
+<hr />
+<h2 id="back-to-user-1-assume-user-1-is-also-adding-a-new-feature-and-started-work-before-user-2-had-merged-their-change">Back to User 1 - Assume User 1 is also adding a new feature and started work before User 2 had merged their change:</h2>
+<h3 id="now-user-1-develops-a-new-feature-in-the-code">Now User 1 develops a new feature in the code</h3>
+<p>Create and switch to (checkout) development branch for User 1 to create a feature (call it y):</p>
+<pre class="codehilite"><code>&gt; ~/git-test/user2$ git checkout -b feature-x-u2
+Switched to a new branch 'feature-y-u1'
+</code></pre>
+
+<p>Make a change to file, add this to local Git and Commit:</p>
+<pre class="codehilite"><code>&gt; ~/git-test/user1$ echo &quot;This is a second line added by User1 (on branch feature-y-u2).&quot; &gt;&gt; file
+&gt; ~/git-test/user1$ cat file 
+hello - I am the first version of the file
+This is a second line added by User1 (on branch feature-y-u2).
+&gt; ~/git-test/user1$ git add file 
+&gt; ~/git-test/user1$ git commit -m &quot;Modified file (added a new line)&quot;
+[feature-y-u1 606700e] Modified file (added a new line)
+ 1 file changed, 1 insertion(+)
+</code></pre>
+
+<hr />
+<p>As above, to prepare for a merge into master, get most recent version of master from GitHub and merge it into this branch:</p>
+<p>Switch back to the master branch in local Git and run a pull from GitHub to make sure this is up to date:</p>
+<pre class="codehilite"><code>&gt; ~/git-test/user1$ git checkout master
+Switched to branch 'master'
+&gt; ~/git-test/user1$ git pull origin master
+remote: Enumerating objects: 6, done.
+remote: Counting objects: 100% (6/6), done.
+remote: Compressing objects: 100% (3/3), done.
+remote: Total 4 (delta 0), reused 3 (delta 0), pack-reused 0
+Unpacking objects: 100% (4/4), done.
+From https://github.com/mjnurse/git-test
+ * branch            master     -&gt; FETCH_HEAD
+   aaa4a05..ba6c3da  master     -&gt; origin/master
+Updating aaa4a05..ba6c3da
+Fast-forward
+ file | 1 +
+ 1 file changed, 1 insertion(+)
+</code></pre>
+
+<p>Check file in the local Git master branch and notice it is the version merged into GitHub by User 2:</p>
+<pre class="codehilite"><code>&gt; ~/git-test/user1$ cat file
+hello - I am the first version of the file
+This is a second line added by User2 (on branch feature-x-u2).
+</code></pre>
+
+<p>Switch back to the dev branch and merge the master branch into the dev branch:</p>
+<pre class="codehilite"><code>&gt; ~/git-test/user1$ git checkout feature-y-u1
+Switched to branch 'feature-y-u1'
+&gt; ~/git-test/user1$ git merge master
+Auto-merging file
+CONFLICT (content): Merge conflict in file
+Automatic merge failed; fix conflicts and then commit the result.
+</code></pre>
+
+<p>The merge failed as Git was unable to determine which line 2 is correct.</p>
+<p>Inspect the conflict and the manually fix the conflict.  In this case rename one of the lines:</p>
+<pre class="codehilite"><code>&gt; ~/git-test/user1$ cat file
+hello - I am the first version of the file
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+This is a second line added by User1 (on branch feature-y-u2).
+=======
+This is a second line added by User2 (on branch feature-x-u2).
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; master
+&gt; ~/git-test/user1$ vi file
+&gt; ~/git-test/user1$ cat file
+hello - I am the first version of the file
+This is a second line added by User1 (on branch feature-y-u2).
+This is a third line added by User2 (on branch feature-x-u2).
+</code></pre>
+
+<p>Add and commit the new version of file to the dev branch in the local Git:</p>
+<pre class="codehilite"><code>&gt; ~/git-test/user1$ git add file
+&gt; ~/git-test/user1$ git commit -m &quot;Merged master into feature y&quot;
+[feature-y-u1 238442a] Merged master into feature y
+</code></pre>
+
+<hr />
+<p><strong>INFO</strong> We now have a dev branch within which all conflicts for a merge into GitHub master have been addressed.</p>
+<hr />
+<h2 id="push-this-local-git-dev-branch-up-into-github">Push this local Git dev branch up into GitHub</h2>
+<pre class="codehilite"><code>&gt; ~/git-test/user1$ git push --set-upstream origin feature-y-u1
+Username for 'https://github.com': mjnurse
+Password for 'https://mjnurse@github.com': 
+Counting objects: 6, done.
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (6/6), 597 bytes | 0 bytes/s, done.
+Total 6 (delta 1), reused 0 (delta 0)
+remote: Resolving deltas: 100% (1/1), done.
+remote: This repository moved.  Please use the new location:
+remote:   https://github.com/mjnurse/git-test.git
+remote: 
+remote: Create a pull request for 'feature-y-u1' on GitHub by visiting:
+remote:      https://github.com/mjnurse/git-test/pull/new/feature-y-u1
+remote: 
+To https://github.com/mjnurse/git-test.git
+ * [new branch]      feature-y-u1 -&gt; feature-y-u1
+Branch feature-y-u1 set up to track remote branch feature-y-u1 from origin.
+</code></pre>
+
+<p>This branch in GitHub can now be merged into the GitHub master branch using the same process as described above.  Assuming this master branch has not changed since User 1 last pulled from GitHub the merge will not have any conflicts.</p>
+<p>If there are conflicts, User 1 can be asked to pull the master branch again and repeat the merge.</p>
+<hr>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: December 11, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="A High Level Overview of Elasticsearch" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>A High Level Overview of Elasticsearch</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/shortcutkeys/" data-shortcut="s"><strong>s</strong>hortcutkeys</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1>A High Level Overview of Elasticsearch</h1>
+<h1 id="structure">Structure</h1>
+<ul>
+<li>
+<p>Elasticsearch creates, manages and searches <strong>Indexes</strong>.  </p>
+</li>
+<li>
+<p><strong>Indexes</strong> are stored on <strong>Nodes</strong>.</p>
+</li>
+<li>
+<p>Multiple <strong>Nodes</strong> make up a <strong>Cluster</strong>.</p>
+</li>
+<li>
+<p>A <strong>Cluster</strong> is identified by a unique name.</p>
+</li>
+<li>
+<p>A <strong>Node</strong> is a member of one <strong>Cluster</strong> and is identified by a name (defaulting to a random UUID - Universally Unique Identifier).</p>
+</li>
+<li>
+<p>A <strong>Node</strong> runs on a <strong>Server</strong>, a <strong>Server</strong> can host multiple <strong>Nodes</strong>.</p>
+</li>
+<li>
+<p><strong>Indexes</strong> are (logically and physically) split into <strong>Shards</strong> (horizontal scaling).</p>
+</li>
+<li>
+<p>Multiple replicas of a <strong>Shard</strong> can be created (vertical scaling).  Replicas can protect against <strong>Server</strong> loss / outage.</p>
+</li>
+<li>
+<p>One or more <strong>Shards</strong> are written to a <strong>Node</strong>.</p>
+</li>
+<li>
+<p>Each <strong>Shard</strong> is a <strong>Lucene Index</strong>. </p>
+</li>
+<li>
+<p>Each Lucene <strong>Index</strong> is split into <strong>Segments</strong>.</p>
+</li>
+<li>
+<p>A <strong>Segment</strong> is created when a write opens, commits or closes.</p>
+</li>
+<li>
+<p><strong>Segments</strong> are immutable.</p>
+</li>
+<li>
+<p><strong>Segments</strong> are akin to mini <strong>Indexes</strong>.</p>
+</li>
+<li>
+<p>Lucene <strong>Indexes</strong> are 'Inverted Indexes' - terms map to documents (document ids and perhaps locations within).</p>
+</li>
+</ul>
+<p>Terms are stored in alpha-numeric order and can be stored in a number of formats.  An ordered lists of terms is good for finding <code>word*</code> but not <code>*word</code> (which would mean searching all terms).  To support performant <code>*word</code> searches, terms are also stored in reverse order.  Other manipulations of terms are done to support other complex searches - for example geo-location, number ranges and more.</p>
+<p>Historically, Elasticsearch contained <strong>Mapping Types</strong>.  These a being deprecated from v6.0.0 onwards.  <strong>Mapping Types</strong> described the format of <strong>Documents</strong> in an <strong>Index</strong> and an <strong>Index</strong> could contain multiple <strong>types</strong>.  From v6.0.0 onwards an <strong>Index</strong> can only contain a single <strong>Document type</strong>.  This is typically called <code>_doc</code> but can be given a different name.</p>
+<h1 id="operations">Operations</h1>
+<h2 id="add-document">Add Document:</h2>
+<ul>
+<li>
+<p>Add new Document requests are first appended to a 'transaction log' (a fast operation ).  Documents are then indexed (slower operation).</p>
+</li>
+<li>
+<p>When new Documents are added to an Index, they are first stored in memory and then Flushed to disk as a new Index Segment.</p>
+</li>
+<li>
+<p>Documents are added to the Index (as new Segments) in batches (using the DocumentWriter).</p>
+</li>
+<li>
+<p>Using default Routing, Documents are stored on (routed to) a Shard based on a document id hash.</p>
+</li>
+<li>
+<p>Custom routing can be used to Route documents to a particular Shard (and it's replica) based on a mapping (for example document author).</p>
+</li>
+</ul>
+<h2 id="delete-document">Delete Document:</h2>
+<ul>
+<li>To Delete a document from the index, the document is marked as deleted in a (bitmap) file.'</li>
+</ul>
+<h2 id="update-document">Update Document:</h2>
+<ul>
+<li>Index updates are a Delete (flagged as deleted) and an Insert (into a new Segment).</li>
+</ul>
+<h1 id="search">Search</h1>
+<ul>
+<li>
+<p>STEP 0: Check the query cache for results.</p>
+</li>
+<li>
+<p>STEP 1: The query is sent to either all Shards (default Routing) or a particular Shard (Custom Routing).</p>
+</li>
+<li>
+<p>STEP 2: Within a shard, all Index Segments are read <strong>Sequentially</strong> for the search term(s).</p>
+</li>
+<li>
+<p>STEP 3: Any documents flagged as deleted are removed from the results.</p>
+</li>
+</ul>
+<h1 id="percolator">Percolator</h1>
+<p>Think of this as the reverse operation of what elasticsearch does by nature: instead of sending docs, indexing them, and then running queries, one sends queries, registers them, and then sends docs and finds out which queries match that doc.</p>
+<h1 id="maintenance">Maintenance</h1>
+<h2 id="index-segment-merges-automatic-but-can-be-triggered-using-the-api">Index Segment Merges (automatic - but can be triggered using the API)</h2>
+<ul>
+<li>
+<p>Lucene will automatically Merge Segments (removing Deleted documents in the process).</p>
+</li>
+<li>
+<p>A number of index settings can alter when Segments are Merged.  </p>
+</li>
+<li>
+<p>Merging effort needs to be balanced against Search effort (over multiple segments).</p>
+</li>
+</ul>
+<h1 id="slow-queries">Slow Queries</h1>
+<p>A good way to know which queries take the more time is by using Elasticsearch slow queries logs.</p>
+<pre class="codehilite"><code>PUT /index/_settings 
+{
+    &quot;index.search.slowlog.threshold.query.warn: 1s&quot;,
+    &quot;index.search.slowlog.threshold.query.info: 500ms&quot;,
+    &quot;index.search.slowlog.threshold.query.debug: 1500ms&quot;,
+    &quot;index.search.slowlog.threshold.query.trace: 300ms&quot;,
+    &quot;index.search.slowlog.threshold.fetch.warn: 500ms&quot;,
+    &quot;index.search.slowlog.threshold.fetch.info: 400ms&quot;,
+    &quot;index.search.slowlog.threshold.fetch.debug: 300ms&quot;,
+    &quot;index.search.slowlog.threshold.fetch.trace: 200ms&quot;
+}
+</code></pre>
+
+<hr>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: December 11, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

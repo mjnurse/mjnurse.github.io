@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>19-02-14 - JWT - JSON Web Tokens</title>
   </head>
   <body class="light" id="top">
@@ -101,46 +102,46 @@
 <p>A JWT is made up from 3 components:</p>
 <h2 id="header">Header</h2>
 <p>The header describes how the JWT was computed.  A typical header will contain:</p>
-<div class="codehilite"><pre><span></span><code>{ &quot;typ&quot; : &quot;JWT&quot;
+<pre class="codehilite"><code>{ &quot;typ&quot; : &quot;JWT&quot;
 , &quot;alg&quot; : &quot;HS256&quot; }
-</code></pre></div>
+</code></pre>
 
 <p>The key:value 'typ' specifies that this is a JWT.  The key:value 'alg' specifies that this JWT was signed using the symmetric HMAC-SHA256 algorithm.  The header JSON is converted to a url encoded string using base64urlEncode.  </p>
 <h2 id="payload-also-called-the-claims">Payload (also called the 'Claims')</h2>
 <p>The payload contains the information which is asserted / claimed to be true.  This could contain:</p>
-<div class="codehilite"><pre><span></span><code>{ &quot;userId&quot; : &quot;martin-98999394&quot;
+<pre class="codehilite"><code>{ &quot;userId&quot; : &quot;martin-98999394&quot;
 , &quot;exp&quot; : 15634343 }
-</code></pre></div>
+</code></pre>
 
 <p>The free form key:value 'userId' could specify the Id of the user which the JWT asserts is authorised.  A request from that userId, along with the JWT, would authenticate that user.  The key:value 'exp' (which is one of a set of standard keys) specifies when the JWT expires.  The payload JSON is converted to a url encoded string using base64urlEncode.</p>
 <h2 id="signature">Signature</h2>
 <p>The signature is created by appending the payload url encoded string to the header url encoded string (separated by a '.') and then hashing this value using the specified algorithm and secret.  The hash value is then also converted to a url encoded string using base64urlEncode and then append to the header.payload string (again separated by a '.').</p>
 <h1 id="creating-the-jwt-using-a-symmetric-hash-algorithm">Creating the JWT (using a symmetric hash algorithm)</h1>
 <p>As pseudo we have:</p>
-<div class="codehilite"><pre><span></span><code><span class="n">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base64urlEncode</span><span class="p">(</span><span class="w"> </span><span class="n">headerJSON</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;.&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">base64urlEncode</span><span class="p">(</span><span class="w"> </span><span class="n">payloadJSON</span><span class="w"> </span><span class="p">);</span>
+<pre class="codehilite"><code>body = base64urlEncode( headerJSON ) + '.' + base64urlEncode( payloadJSON );
 
-<span class="n">signature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base64urlEncode</span><span class="p">(</span><span class="w"> </span><span class="n">hash_algorithm</span><span class="p">(</span><span class="w"> </span><span class="n">body</span><span class="p">,</span><span class="w"> </span><span class="n">secret_key</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">);</span>
+signature = base64urlEncode( hash_algorithm( body, secret_key ) );
 
-<span class="n">JWT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">body</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;.&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">signature</span><span class="p">;</span>
-</code></pre></div>
+JWT = body + '.' + signature;
+</code></pre>
 
 <p>The JWT will look something like:</p>
-<div class="codehilite"><pre><span></span><code>eyJ0eXAiOiJKV1QGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiMDhmODZhZi0zNWRhLTQ4ZjItO.GZhYi1jZWYzOTA0NjYwYmQifQ
-</code></pre></div>
+<pre class="codehilite"><code>eyJ0eXAiOiJKV1QGciOiJIUzI1NiJ9.eyJ1c2VySWQiOiJiMDhmODZhZi0zNWRhLTQ4ZjItO.GZhYi1jZWYzOTA0NjYwYmQifQ
+</code></pre>
 
 <p>NOTE: 
 - The payload is <strong>NOT</strong> encrypted, it is simply converted to base64url encoding and can be reversed.
 - If the contents of the JWT are modified in anyway then the signature will not longer match the contents.</p>
 <h1 id="assuring-the-jwt">Assuring the JWT</h1>
 <p>The application to which the JWT is passed to authenticate the user will:</p>
-<div class="codehilite"><pre><span></span><code><span class="n">split</span><span class="p">(</span><span class="w"> </span><span class="n">JWT</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">header</span><span class="p">,</span><span class="w"> </span><span class="n">payload</span><span class="p">,</span><span class="w"> </span><span class="n">signature</span><span class="p">;</span>
+<pre class="codehilite"><code>split( JWT ) =&gt; header, payload, signature;
 
-<span class="n">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;.&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">payload</span><span class="p">;</span>
+body = header + '.' + payload;
 
-<span class="n">new_signature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base64urlEncode</span><span class="p">(</span><span class="w"> </span><span class="n">hash_algorithm</span><span class="p">(</span><span class="w"> </span><span class="n">body</span><span class="p">,</span><span class="w"> </span><span class="n">secret_key</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">);</span>
+new_signature = base64urlEncode( hash_algorithm( body, secret_key ) );
 
-<span class="k">if</span><span class="w"> </span><span class="n">new_signature</span><span class="w"> </span><span class="n">matches</span><span class="w"> </span><span class="n">signature</span><span class="w"> </span><span class="n">then</span><span class="w"> </span><span class="n">JWT</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">valid</span><span class="p">;</span>
-</code></pre></div>
+if new_signature matches signature then JWT is valid;
+</code></pre>
 
 <p>NOTE:
 - The JWT assurance process recomputes the hash of header and payload using the <strong>same</strong> secret key as the process that created the JWT.
@@ -151,22 +152,22 @@
 <p>An Asymmetric encryption algorithm allows the signature to be created (encrypted) using a private key when the JWT is created.  To assure the JWT, the application / service can decrypt the signature using the public key.  The application can then compare this to the header and payload to assure the JWT is valid.</p>
 <p>As pseudo code:</p>
 <p><strong>Creating a JWT</strong></p>
-<div class="codehilite"><pre><span></span><code><span class="n">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base64urlEncode</span><span class="p">(</span><span class="w"> </span><span class="n">headerJSON</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;.&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">base64urlEncode</span><span class="p">(</span><span class="w"> </span><span class="n">payloadJSON</span><span class="w"> </span><span class="p">);</span>
+<pre class="codehilite"><code>body = base64urlEncode( headerJSON ) + '.' + base64urlEncode( payloadJSON );
 
-<span class="n">signature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">base64urlEncode</span><span class="p">(</span><span class="w"> </span><span class="n">hash_algorithm_encode</span><span class="p">(</span><span class="w"> </span><span class="n">body</span><span class="p">,</span><span class="w"> </span><span class="n">private_key</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="p">);</span>
+signature = base64urlEncode( hash_algorithm_encode( body, private_key ) );
 
-<span class="n">JWT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">body</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;.&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">signature</span><span class="p">;</span>
-</code></pre></div>
+JWT = body + '.' + signature;
+</code></pre>
 
 <p><strong>Assuring the JWT</strong></p>
-<div class="codehilite"><pre><span></span><code><span class="n">split</span><span class="p">(</span><span class="w"> </span><span class="n">JWT</span><span class="w"> </span><span class="p">)</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">header</span><span class="p">,</span><span class="w"> </span><span class="n">payload</span><span class="p">,</span><span class="w"> </span><span class="n">signature</span><span class="p">;</span>
+<pre class="codehilite"><code>split( JWT ) =&gt; header, payload, signature;
 
-<span class="n">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">header</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s1">&#39;.&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">payload</span><span class="p">;</span>
+body = header + '.' + payload;
 
-<span class="n">decoded_signature</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">hash_algorithm_decode</span><span class="p">(</span><span class="w"> </span><span class="n">base64urlDecode</span><span class="p">(</span><span class="w"> </span><span class="n">signature</span><span class="w"> </span><span class="p">),</span><span class="w"> </span><span class="n">public_key</span><span class="w"> </span><span class="p">);</span>
+decoded_signature = hash_algorithm_decode( base64urlDecode( signature ), public_key );
 
-<span class="k">if</span><span class="w"> </span><span class="n">decoded_signature</span><span class="w"> </span><span class="n">matches</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">body</span><span class="w"> </span><span class="n">then</span><span class="w"> </span><span class="n">JWT</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">valid</span><span class="p">;</span>
-</code></pre></div>
+if decoded_signature matches the body then JWT is valid;
+</code></pre>
 
 <p>In this case we can be sure that the service which created the JWT knows the private key.  For the signature to be successfully decrypted using the public key it MUST of be created using the private key.</p>
 <hr>
@@ -187,7 +188,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: November 25, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

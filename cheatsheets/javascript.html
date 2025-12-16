@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>Javascript Cheat Sheet</title>
   </head>
   <body class="light" id="top">
@@ -154,608 +155,608 @@
 
 <h1 id="basics">Basics</h1>
 <h2 id="including-javascript-on-a-page">Including Javascript On A Page</h2>
-<div class="codehilite"><pre><span></span><code><span class="c1">// On page script</span>
-<span class="o">&lt;</span><span class="nx">script</span><span class="w"> </span><span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span><span class="w">  </span><span class="p">...</span><span class="w">  </span><span class="o">&lt;</span><span class="err">/script&gt;</span>
+<pre class="codehilite"><code class="language-javascript">// On page script
+&lt;script type=&quot;text/javascript&quot;&gt;  ...  &lt;/script&gt;
 
-<span class="c1">// Include external JS file</span>
-<span class="o">&lt;</span><span class="nx">script</span><span class="w"> </span><span class="nx">src</span><span class="o">=</span><span class="s2">&quot;filename.js&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
-</code></pre></div>
+// Include external JS file
+&lt;script src=&quot;filename.js&quot;&gt;&lt;/script&gt;
+</code></pre>
 
 <h2 id="functions">Functions</h2>
 <h2 id="standard-function">Standard Function</h2>
-<div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">add</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">b</span><span class="p">;}</span>
+<pre class="codehilite"><code class="language-javascript">function add(a, b) {return a + b;}
 
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">add</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">));</span><span class="w"> </span><span class="c1">// 3</span>
-</code></pre></div>
+console.log(add(1, 2)); // 3
+</code></pre>
 
 <h2 id="lamda-function-arrow-function">Lamda Function / Arrow Function</h2>
-<div class="codehilite"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">b</span><span class="p">;}</span>
+<pre class="codehilite"><code class="language-javascript">const add = function(a, b) {return a + b;}
 
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">add</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">));</span><span class="w"> </span><span class="c1">// 3</span>
+console.log(add(1, 2)); // 3
 
-<span class="kd">const</span><span class="w"> </span><span class="nx">add</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">b</span><span class="p">;}</span>
+const add = (a, b) =&gt; {return a + b;}
 
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">add</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">));</span><span class="w"> </span><span class="c1">// 3</span>
+console.log(add(1, 2)); // 3
 
-<span class="c1">// One parameter</span>
+// One parameter
 
-<span class="kd">const</span><span class="w"> </span><span class="nx">cube</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">a</span><span class="p">;}</span>
+const cube = a =&gt; {return a * a * a;}
 
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">cube</span><span class="p">(</span><span class="mf">2</span><span class="p">));</span><span class="w"> </span><span class="c1">// 8</span>
+console.log(cube(2)); // 8
 
-<span class="c1">// No parameters</span>
+// No parameters
 
-<span class="kd">const</span><span class="w"> </span><span class="nx">rnd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">();}</span>
+const rnd = _ =&gt; {return Math.random();}
 
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">rnd</span><span class="p">());</span><span class="w"> </span><span class="c1">// Some random number</span>
-</code></pre></div>
+console.log(rnd()); // Some random number
+</code></pre>
 
 <h2 id="misc">Misc</h2>
-<div class="codehilite"><pre><span></span><code><span class="c1">// Edit DOM element</span>
-<span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;elementID&quot;</span><span class="p">).</span><span class="nx">innerHTML</span><span class="o">=</span><span class="s2">&quot;Hello World!&quot;</span><span class="p">;</span>
+<pre class="codehilite"><code class="language-javascript">// Edit DOM element
+document.getElementById(&quot;elementID&quot;).innerHTML=&quot;Hello World!&quot;;
 
-<span class="c1">// Output</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span><span class="w">          </span><span class="c1">// Write to the browser console</span>
-<span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span><span class="w">       </span><span class="c1">// Write to the HTML</span>
-<span class="nx">alert</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span><span class="w">                </span><span class="c1">// Output in an alert box</span>
-<span class="nx">confirm</span><span class="p">(</span><span class="s2">&quot;Really?&quot;</span><span class="p">);</span><span class="w">      </span><span class="c1">// Yes/no dialogue, returns true/false depending on user click</span>
-<span class="nx">prompt</span><span class="p">(</span><span class="s2">&quot;Your age?&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// Input dialogue. Second argument is the initial value</span>
+// Output
+console.log(a);          // Write to the browser console
+document.write(a);       // Write to the HTML
+alert(a);                // Output in an alert box
+confirm(&quot;Really?&quot;);      // Yes/no dialogue, returns true/false depending on user click
+prompt(&quot;Your age?&quot;,&quot;0&quot;); // Input dialogue. Second argument is the initial value
 
-<span class="c1">// Comments</span>
-<span class="cm">/* Multi line</span>
-<span class="cm">   comment */</span>
+// Comments
+/* Multi line
+   comment */
 
-<span class="c1">// Delay 1 second</span>
-<span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="mf">1000</span><span class="p">);</span>
-</code></pre></div>
+// Delay 1 second
+setTimeout(function () { ...  }, 1000);
+</code></pre>
 
 <h1 id="data-types">Data Types</h1>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">age</span><span class="o">=</span><span class="mf">18</span><span class="p">;</span><span class="w">                           </span><span class="c1">// Number</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">name</span><span class="o">=</span><span class="s2">&quot;Jane&quot;</span><span class="p">;</span><span class="w">                      </span><span class="c1">// String</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">name</span><span class="o">=</span><span class="p">{</span><span class="nx">first</span><span class="o">:</span><span class="s2">&quot;Jane&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">last</span><span class="o">:</span><span class="s2">&quot;Doe&quot;</span><span class="p">};</span><span class="w">  </span><span class="c1">// Object</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">truth</span><span class="o">=</span><span class="kc">false</span><span class="p">;</span><span class="w">                      </span><span class="c1">// Boolean</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">sheets</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;HTML&quot;</span><span class="p">,</span><span class="s2">&quot;CSS&quot;</span><span class="p">,</span><span class="s2">&quot;JS&quot;</span><span class="p">];</span><span class="w">       </span><span class="c1">// Array</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="p">;</span><span class="w"> </span><span class="ow">typeof</span><span class="w"> </span><span class="nx">a</span><span class="p">;</span><span class="w">                      </span><span class="c1">// Undefined</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="o">=</span><span class="kc">null</span><span class="p">;</span><span class="w">                           </span><span class="c1">// Value null</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">var age=18;                           // Number
+var name=&quot;Jane&quot;;                      // String
+var name={first:&quot;Jane&quot;, last:&quot;Doe&quot;};  // Object
+var truth=false;                      // Boolean
+var sheets=[&quot;HTML&quot;,&quot;CSS&quot;,&quot;JS&quot;];       // Array
+var a; typeof a;                      // Undefined
+var a=null;                           // Value null
+</code></pre>
 
 <h1 id="objects">Objects</h1>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">student</span><span class="o">=</span><span class="p">{</span><span class="w"> </span><span class="c1">// Object name</span>
-<span class="w">  </span><span class="nx">firstName</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Jane&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// List of properties and values</span>
-<span class="w">  </span><span class="nx">lastName</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Doe&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nx">age</span><span class="o">:</span><span class="w"> </span><span class="mf">18</span><span class="p">,</span>
-<span class="w">  </span><span class="nx">fullName</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// Object function</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">firstName</span><span class="o">+</span><span class="s2">&quot; &quot;</span><span class="o">+</span><span class="k">this</span><span class="p">.</span><span class="nx">lastName</span><span class="p">;</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
-<span class="nx">student</span><span class="p">.</span><span class="nx">age</span><span class="o">=</span><span class="mf">19</span><span class="p">;</span><span class="w">          </span><span class="c1">// Setting value</span>
-<span class="nx">name</span><span class="o">=</span><span class="nx">student</span><span class="p">.</span><span class="nx">fullName</span><span class="p">();</span><span class="w"> </span><span class="c1">// Call object function</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">var student={ // Object name
+  firstName: &quot;Jane&quot;, // List of properties and values
+  lastName: &quot;Doe&quot;,
+  age: 18,
+  fullName: function() { // Object function
+    return this.firstName+&quot; &quot;+this.lastName;
+  }
+}
+student.age=19;          // Setting value
+name=student.fullName(); // Call object function
+</code></pre>
 
 <h1 id="variables">Variables</h1>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">b</span><span class="o">=</span><span class="s2">&quot;init&quot;</span><span class="p">;</span><span class="w">       </span><span class="c1">// String</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">d</span><span class="o">=</span><span class="mf">1</span><span class="o">+</span><span class="mf">2</span><span class="o">+</span><span class="s2">&quot;3&quot;</span><span class="p">;</span><span class="w">      </span><span class="c1">// &quot;33&quot;</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">e</span><span class="o">=</span><span class="p">[</span><span class="mf">2</span><span class="p">,</span><span class="mf">3</span><span class="p">,</span><span class="mf">5</span><span class="p">,</span><span class="mf">8</span><span class="p">];</span><span class="w">    </span><span class="c1">// Array</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">g</span><span class="o">=</span><span class="sr">/()/</span><span class="p">;</span><span class="w">         </span><span class="c1">// RegEx</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">h</span><span class="o">=</span><span class="kd">function</span><span class="p">(){};</span><span class="w"> </span><span class="c1">// Function object</span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">PI</span><span class="o">=</span><span class="mf">3.14</span><span class="p">;</span><span class="w">      </span><span class="c1">// Constant</span>
-<span class="kd">let</span><span class="w"> </span><span class="nx">z</span><span class="o">=</span><span class="s1">&#39;zzz&#39;</span><span class="p">;</span><span class="w">        </span><span class="c1">// Block scope local variable</span>
-<span class="kd">let</span><span class="w"> </span><span class="nx">a</span><span class="o">??=</span><span class="mf">10</span><span class="p">;</span><span class="w">         </span><span class="c1">// Only assign is a is Nullish (null or undefined)</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">var b=&quot;init&quot;;       // String
+var d=1+2+&quot;3&quot;;      // &quot;33&quot;
+var e=[2,3,5,8];    // Array
+var g=/()/;         // RegEx
+var h=function(){}; // Function object
+const PI=3.14;      // Constant
+let z='zzz';        // Block scope local variable
+let a??=10;         // Only assign is a is Nullish (null or undefined)
+</code></pre>
 
 <h2 id="strict-mode">Strict Mode</h2>
-<div class="codehilite"><pre><span></span><code><span class="s2">&quot;use strict&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Use strict mode to write secure code</span>
-<span class="nx">x</span><span class="o">=</span><span class="mf">1</span><span class="p">;</span><span class="w">          </span><span class="c1">// Throws an error because variable is not declared</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">&quot;use strict&quot;; // Use strict mode to write secure code
+x=1;          // Throws an error because variable is not declared
+</code></pre>
 
 <h2 id="values">Values</h2>
-<div class="codehilite"><pre><span></span><code><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="w">                  </span><span class="c1">// Boolean</span>
-<span class="mf">18</span><span class="p">,</span><span class="w"> </span><span class="mf">3.14</span><span class="p">,</span><span class="w"> </span><span class="mb">0b10011</span><span class="p">,</span><span class="w"> </span><span class="mh">0xF6</span><span class="p">,</span><span class="w"> </span><span class="kc">NaN</span><span class="w"> </span><span class="c1">// Number</span>
-<span class="s2">&quot;flower&quot;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;John&#39;</span><span class="w">             </span><span class="c1">// String</span>
-<span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">,</span><span class="kc">Infinity</span><span class="w">    </span><span class="c1">// Special</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">false, true                  // Boolean
+18, 3.14, 0b10011, 0xF6, NaN // Number
+&quot;flower&quot;, 'John'             // String
+undefined, null ,Infinity    // Special
+</code></pre>
 
 <h2 id="operators">Operators</h2>
-<div class="codehilite"><pre><span></span><code><span class="nx">x</span><span class="o">=</span><span class="mf">100</span><span class="o">%</span><span class="mf">48</span><span class="p">;</span><span class="w"> </span><span class="c1">// 4 Modulo 100/48</span>
-<span class="o">&amp;</span><span class="w">  </span><span class="c1">// AND         5 &amp; 1  (0101 &amp; 0001) (1)     1</span>
-<span class="o">|</span><span class="w">  </span><span class="c1">// OR          5 | 1  (0101 | 0001) (101)   5</span>
-<span class="o">~</span><span class="w">  </span><span class="c1">// NOT         ~ 5    (~0101)       (1010) 10</span>
-<span class="o">^</span><span class="w">  </span><span class="c1">// XOR         5 ^ 1  (0101 ^ 0001) (100)   4</span>
-<span class="o">&lt;&lt;</span><span class="w"> </span><span class="c1">// left shift  5 &lt;&lt; 1 (0101 &lt;&lt; 1)   (1010) 10</span>
-<span class="o">&gt;&gt;</span><span class="w"> </span><span class="c1">// right shift 5 &gt;&gt; 1 (0101 &gt;&gt; 1)   (10)    2</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">x=100%48; // 4 Modulo 100/48
+&amp;  // AND         5 &amp; 1  (0101 &amp; 0001) (1)     1
+|  // OR          5 | 1  (0101 | 0001) (101)   5
+~  // NOT         ~ 5    (~0101)       (1010) 10
+^  // XOR         5 ^ 1  (0101 ^ 0001) (100)   4
+&lt;&lt; // left shift  5 &lt;&lt; 1 (0101 &lt;&lt; 1)   (1010) 10
+&gt;&gt; // right shift 5 &gt;&gt; 1 (0101 &gt;&gt; 1)   (10)    2
+</code></pre>
 
-<div class="codehilite"><pre><span></span><code><span class="nx">person</span><span class="p">.</span><span class="nx">age</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">person</span><span class="p">[</span><span class="nx">age</span><span class="p">]</span><span class="w"> </span><span class="c1">// Member</span>
-<span class="o">!</span><span class="p">(</span><span class="nx">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w">   </span><span class="c1">// Logical not</span>
-<span class="ow">typeof</span><span class="w"> </span><span class="nx">a</span><span class="w">    </span><span class="c1">// Type (number, object, function...)</span>
-<span class="nx">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">b</span><span class="w">      </span><span class="c1">// Equals</span>
-<span class="nx">a</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">b</span><span class="w">      </span><span class="c1">// Unequal</span>
-<span class="nx">a</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">b</span><span class="w">     </span><span class="c1">// Strict equal (datatypes must also match)</span>
-<span class="nx">a</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nx">b</span><span class="w">     </span><span class="c1">// Strict unequal (value or datatypes don&#39;t match)</span>
-<span class="nx">a</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">b</span>
-<span class="nx">a</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">b</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">person.age === person[age] // Member
+!(a == b)   // Logical not
+typeof a    // Type (number, object, function...)
+a == b      // Equals
+a != b      // Unequal
+a === b     // Strict equal (datatypes must also match)
+a !== b     // Strict unequal (value or datatypes don't match)
+a &amp;&amp; b
+a || b
+</code></pre>
 
 <h1 id="conditions">Conditions</h1>
 <h2 id="if-then-else">If Then Else</h2>
-<div class="codehilite"><pre><span></span><code><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="nx">age</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mf">14</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="nx">age</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">19</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span>
-<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">age</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">60</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">2</span><span class="p">;</span>
-<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">3</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">if ((age &gt;= 14) &amp;&amp; (age &lt; 19)) {
+  group = 1;
+} else if (age &lt; 60) {
+  group = 2;
+} else {
+  group = 3;
+}
+</code></pre>
 
 <h2 id="in-line">In Line</h2>
-<div class="codehilite"><pre><span></span><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="o">&gt;</span><span class="nx">b</span><span class="o">?</span><span class="s1">&#39;a biggest&#39;</span><span class="o">:</span><span class="s1">&#39;b biggest&#39;</span><span class="p">);</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">console.log(a&gt;b?'a biggest':'b biggest');
+</code></pre>
 
 <h2 id="switch">Switch</h2>
-<div class="codehilite"><pre><span></span><code><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">().</span><span class="nx">getDay</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mf">6</span><span class="o">:</span>
-<span class="w">        </span><span class="nx">text</span><span class="o">=</span><span class="s2">&quot;Saturday&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="k">break</span><span class="p">;</span>
-<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mf">0</span><span class="o">:</span>
-<span class="w">        </span><span class="nx">text</span><span class="o">=</span><span class="s2">&quot;Sunday&quot;</span><span class="p">;</span>
-<span class="w">        </span><span class="k">break</span><span class="p">;</span>
-<span class="w">    </span><span class="k">default</span><span class="o">:</span>
-<span class="w">        </span><span class="nx">text</span><span class="o">=</span><span class="s2">&quot;Whatever&quot;</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">switch (new Date().getDay()) {
+    case 6:
+        text=&quot;Saturday&quot;;
+        break;
+    case 0:
+        text=&quot;Sunday&quot;;
+        break;
+    default:
+        text=&quot;Whatever&quot;;
+}
+</code></pre>
 
 <h2 id="defined-or-not">Defined Or Not</h2>
-<div class="codehilite"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">val</span><span class="p">;</span>
+<pre class="codehilite"><code class="language-javascript">let val;
 
-<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Will</span><span class="w"> </span><span class="nx">not</span><span class="w"> </span><span class="nx">go</span><span class="w"> </span><span class="nx">here</span><span class="w"> </span><span class="p">}</span>
+if (val) { Will not go here }
 
-<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Will</span><span class="w"> </span><span class="nx">go</span><span class="w"> </span><span class="nx">here</span><span class="w"> </span><span class="p">}</span>
-</code></pre></div>
+if (!val) { Will go here }
+</code></pre>
 
-<div class="codehilite"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">person_obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;nonsense&#39;</span><span class="p">;</span>
+<pre class="codehilite"><code class="language-javascript">const person_obj = 'nonsense';
 
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">person</span><span class="p">.</span><span class="nx">obj</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">first</span><span class="p">);</span><span class="w"> </span><span class="c1">// Error!</span>
+console.log(person.obj.name.first); // Error!
 
-<span class="c1">// Check if it&#39;s defined</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">person_obj</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">person_obj</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">person_obj</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">first</span><span class="p">);</span><span class="w"> </span><span class="c1">// undefined.</span>
+// Check if it's defined
+console.log(person_obj &amp;&amp; person_obj.name &amp;&amp; person_obj.name.first); // undefined.
 
-<span class="c1">// Cleaner option.</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">person_obj</span><span class="o">?</span><span class="p">.</span><span class="nx">name</span><span class="o">?</span><span class="p">.</span><span class="nx">first</span><span class="p">);</span><span class="w"> </span><span class="c1">// undefined.</span>
-</code></pre></div>
+// Cleaner option.
+console.log(person_obj?.name?.first); // undefined.
+</code></pre>
 
 <h1 id="loops">Loops</h1>
 <h2 id="for-loop">For Loop</h2>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">arr</span><span class="o">=</span><span class="p">[</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">4</span><span class="p">];</span><span class="w"> </span><span class="kd">var</span><span class="w"> </span><span class="nx">sum</span><span class="o">=</span><span class="mf">0</span><span class="p">;</span>
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="o">=</span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">&lt;</span><span class="nx">a</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">sum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">a</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
-<span class="p">}</span>
-<span class="nx">html</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">;</span>
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">custOrder</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">var arr=[1, 2, 4]; var sum=0;
+for (var i=0; i&lt;a.length; i++) {
+    sum += a[i];
+}
+html=&quot;&quot;;
+for (var i of custOrder) { ... }
+</code></pre>
 
 <h2 id="while-loop-do-while-loop">While Loop / Do While Loop</h2>
-<div class="codehilite"><pre><span></span><code><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="nx">i</span><span class="o">&lt;</span><span class="mf">100</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w">  </span><span class="p">}</span>
-<span class="k">do</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="nx">i</span><span class="o">&lt;</span><span class="mf">100</span><span class="p">);</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">while (i&lt;100) { ...  }
+do { ... } while i&lt;100);
+</code></pre>
 
 <h2 id="break">Break</h2>
-<div class="codehilite"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="o">=</span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">&lt;</span><span class="mf">10</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">5</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">for (var i=0; i&lt;10; i++) {
+  if (i == 5) { break; }
+}
+</code></pre>
 
 <h2 id="continue">Continue</h2>
-<div class="codehilite"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="o">=</span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">&lt;</span><span class="mf">10</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">5</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">continue</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// Skips the rest of the cycle</span>
-<span class="w">  </span><span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;, &quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// 5 not output</span>
-<span class="p">}</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">for (var i=0; i&lt;10; i++) {
+  if (i == 5) { continue; } // Skips the rest of the cycle
+  document.write(i + &quot;, &quot;); // 5 not output
+}
+</code></pre>
 
 <h1 id="strings">Strings</h1>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">esc</span><span class="o">=</span><span class="s1">&#39;I don\&#39;t \n know&#39;</span><span class="p">;</span><span class="w"> </span><span class="c1">// \n new line</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">len</span><span class="o">=</span><span class="nx">abc</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w">         </span><span class="c1">// String length</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">var esc='I don\'t \n know'; // \n new line
+var len=abc.length;         // String length
+</code></pre>
 
-<div class="codehilite"><pre><span></span><code><span class="s2">&quot;abc&quot;</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s2">&quot;lmno&quot;</span><span class="p">);</span><span class="w">      </span><span class="c1">// Find substring, -1 if doesn&#39;t contain</span>
-<span class="s2">&quot;abc&quot;</span><span class="p">.</span><span class="nx">lastIndexOf</span><span class="p">(</span><span class="s2">&quot;lmno&quot;</span><span class="p">);</span><span class="w">  </span><span class="c1">// Last occurrence</span>
-<span class="s2">&quot;abc&quot;</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="mf">6</span><span class="p">);</span><span class="w">          </span><span class="c1">// Cuts out &quot;def&quot;, negative values count from behind</span>
-<span class="s2">&quot;abc&quot;</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="s2">&quot;abc&quot;</span><span class="p">,</span><span class="s2">&quot;123&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// Find and replace, takes regular expressions</span>
-<span class="s2">&quot;abc&quot;</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">();</span><span class="w">        </span><span class="c1">// Convert to upper case</span>
-<span class="s2">&quot;abc&quot;</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">();</span><span class="w">        </span><span class="c1">// Convert to lower case</span>
-<span class="s2">&quot;abc&quot;</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">str2</span><span class="p">);</span><span class="w">    </span><span class="c1">// Abc + &quot; &quot; + str2</span>
-<span class="s2">&quot;abc&quot;</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="mf">2</span><span class="p">);</span><span class="w">            </span><span class="c1">// Character at index: &quot;c&quot;</span>
-<span class="s2">&quot;abc&quot;</span><span class="p">[</span><span class="mf">2</span><span class="p">];</span><span class="w">                   </span><span class="c1">// Unsafe, abc[2]=&quot;C&quot; doesn&#39;t work</span>
-<span class="s2">&quot;abc&quot;</span><span class="p">.</span><span class="nx">charCodeAt</span><span class="p">(</span><span class="mf">2</span><span class="p">);</span><span class="w">        </span><span class="c1">// Character code at index: &quot;c&quot; -&gt; 99</span>
-<span class="s2">&quot;abc&quot;</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">);</span><span class="w">           </span><span class="c1">// Splitting a string on commas gives an array</span>
-<span class="s2">&quot;abc&quot;</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span><span class="w">            </span><span class="c1">// Splitting on characters</span>
-<span class="mf">128.</span><span class="nx">toString</span><span class="p">(</span><span class="mf">16</span><span class="p">);</span><span class="w">           </span><span class="c1">// Number to hex(16), octal (8) or binary (2)</span>
-<span class="s2">&quot;abc&quot;</span><span class="p">.</span><span class="nx">padEnd</span><span class="p">(</span><span class="mf">4</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">);</span><span class="w">        </span><span class="c1">// Rpad</span>
-<span class="s2">&quot;abc&quot;</span><span class="p">.</span><span class="nx">padStart</span><span class="p">(</span><span class="mf">4</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">);</span><span class="w">      </span><span class="c1">// Lpad</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">&quot;abc&quot;.indexOf(&quot;lmno&quot;);      // Find substring, -1 if doesn't contain
+&quot;abc&quot;.lastIndexOf(&quot;lmno&quot;);  // Last occurrence
+&quot;abc&quot;.slice(3, 6);          // Cuts out &quot;def&quot;, negative values count from behind
+&quot;abc&quot;.replace(&quot;abc&quot;,&quot;123&quot;); // Find and replace, takes regular expressions
+&quot;abc&quot;.toUpperCase();        // Convert to upper case
+&quot;abc&quot;.toLowerCase();        // Convert to lower case
+&quot;abc&quot;.concat(&quot; &quot;, str2);    // Abc + &quot; &quot; + str2
+&quot;abc&quot;.charAt(2);            // Character at index: &quot;c&quot;
+&quot;abc&quot;[2];                   // Unsafe, abc[2]=&quot;C&quot; doesn't work
+&quot;abc&quot;.charCodeAt(2);        // Character code at index: &quot;c&quot; -&gt; 99
+&quot;abc&quot;.split(&quot;,&quot;);           // Splitting a string on commas gives an array
+&quot;abc&quot;.split(&quot;&quot;);            // Splitting on characters
+128.toString(16);           // Number to hex(16), octal (8) or binary (2)
+&quot;abc&quot;.padEnd(4,'-');        // Rpad
+&quot;abc&quot;.padStart(4,'-');      // Lpad
+</code></pre>
 
 <h1 id="numbers-and-math">Numbers and Math</h1>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pi</span><span class="o">=</span><span class="mf">3.141</span><span class="p">;</span>
-<span class="nx">pi</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span><span class="w">    </span><span class="c1">// Returns 3</span>
-<span class="nx">pi</span><span class="p">.</span><span class="nx">toFixed</span><span class="p">(</span><span class="mf">2</span><span class="p">);</span><span class="w">    </span><span class="c1">// Returns 3.14 - for working with money</span>
-<span class="nx">pi</span><span class="p">.</span><span class="nx">toPrecision</span><span class="p">(</span><span class="mf">2</span><span class="p">)</span><span class="w"> </span><span class="c1">// Returns 3.1</span>
-<span class="nx">pi</span><span class="p">.</span><span class="nx">valueOf</span><span class="p">();</span><span class="w">     </span><span class="c1">// Returns number</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">var pi=3.141;
+pi.toFixed(0);    // Returns 3
+pi.toFixed(2);    // Returns 3.14 - for working with money
+pi.toPrecision(2) // Returns 3.1
+pi.valueOf();     // Returns number
+</code></pre>
 
-<div class="codehilite"><pre><span></span><code><span class="nb">Number</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w">           </span><span class="c1">// Converts to number</span>
-<span class="nb">Number</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">())</span><span class="w">      </span><span class="c1">// Number of milliseconds since 1970</span>
-<span class="nb">parseInt</span><span class="p">(</span><span class="s2">&quot;3 months&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">// Returns the first number: 3</span>
-<span class="nb">parseFloat</span><span class="p">(</span><span class="s2">&quot;3.5 days&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// Returns 3.5</span>
-<span class="nb">Number</span><span class="p">.</span><span class="nx">MAX_VALUE</span><span class="w">        </span><span class="c1">// Largest possible JS number</span>
-<span class="nb">Number</span><span class="p">.</span><span class="nx">MIN_VALUE</span><span class="w">        </span><span class="c1">// Smallest possible JS number</span>
-<span class="nb">Number</span><span class="p">.</span><span class="nx">NEGATIVE_INFINITY</span>
-<span class="nb">Number</span><span class="p">.</span><span class="nx">POSITIVE_INFINITY</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">Number(true);           // Converts to number
+Number(new Date())      // Number of milliseconds since 1970
+parseInt(&quot;3 months&quot;);   // Returns the first number: 3
+parseFloat(&quot;3.5 days&quot;); // Returns 3.5
+Number.MAX_VALUE        // Largest possible JS number
+Number.MIN_VALUE        // Smallest possible JS number
+Number.NEGATIVE_INFINITY
+Number.POSITIVE_INFINITY
+</code></pre>
 
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">pi</span><span class="o">=</span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">;</span>
-<span class="nb">Math</span><span class="p">.</span><span class="nx">round</span><span class="p">(</span><span class="mf">4.4</span><span class="p">);</span><span class="w">       </span><span class="c1">// 4 - rounded</span>
-<span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="mf">2</span><span class="p">,</span><span class="mf">8</span><span class="p">);</span><span class="w">         </span><span class="c1">// 256 - 2 to the power of 8</span>
-<span class="nb">Math</span><span class="p">.</span><span class="nx">sqrt</span><span class="p">(</span><span class="mf">49</span><span class="p">);</span>
-<span class="nb">Math</span><span class="p">.</span><span class="nx">abs</span><span class="p">(</span><span class="o">-</span><span class="mf">3.14</span><span class="p">);</span><span class="w">       </span><span class="c1">// 3.14 - absolute, positive value</span>
-<span class="nb">Math</span><span class="p">.</span><span class="nx">ceil</span><span class="p">(</span><span class="mf">3.14</span><span class="p">);</span><span class="w">       </span><span class="c1">// 4 - rounded up</span>
-<span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="mf">3.99</span><span class="p">);</span><span class="w">      </span><span class="c1">// 3 - rounded down</span>
-<span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="mf">0</span><span class="p">);</span><span class="w">           </span><span class="c1">// 0 - sine OTHERS: tan,atan,asin,acos,</span>
-<span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">);</span><span class="w"> </span><span class="c1">// -2 - the lowest value</span>
-<span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">);</span><span class="w"> </span><span class="c1">// 3 - the highest value</span>
-<span class="nb">Math</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="mf">1</span><span class="p">);</span><span class="w">           </span><span class="c1">// 0 natural logarithm</span>
-<span class="nb">Math</span><span class="p">.</span><span class="nx">exp</span><span class="p">(</span><span class="mf">1</span><span class="p">);</span><span class="w">           </span><span class="c1">// 2.7182 pow(E,x)</span>
-<span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">();</span><span class="w">         </span><span class="c1">// Random number between 0 and 1</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">var pi=Math.PI;
+Math.round(4.4);       // 4 - rounded
+Math.pow(2,8);         // 256 - 2 to the power of 8
+Math.sqrt(49);
+Math.abs(-3.14);       // 3.14 - absolute, positive value
+Math.ceil(3.14);       // 4 - rounded up
+Math.floor(3.99);      // 3 - rounded down
+Math.sin(0);           // 0 - sine OTHERS: tan,atan,asin,acos,
+Math.min(0, 3, -2, 2); // -2 - the lowest value
+Math.max(0, 3, -2, 2); // 3 - the highest value
+Math.log(1);           // 0 natural logarithm
+Math.exp(1);           // 2.7182 pow(E,x)
+Math.random();         // Random number between 0 and 1
+</code></pre>
 
-<div class="codehilite"><pre><span></span><code><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">5</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span><span class="w"> </span><span class="c1">// Random integer, from 1 to 5</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">Math.floor(Math.random() * 5) + 1; // Random integer, from 1 to 5
+</code></pre>
 
 <h1 id="dates-times">Dates / Times</h1>
-<div class="codehilite"><pre><span></span><code><span class="nb">Date</span><span class="p">(</span><span class="s2">&quot;2017-06-23&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// Date declaration. Also: Date(&quot;June 23 2017&quot;)</span>
-<span class="nb">Date</span><span class="p">(</span><span class="s2">&quot;2017&quot;</span><span class="p">);</span><span class="w">       </span><span class="c1">// Is set to Jan 01</span>
-<span class="nb">Date</span><span class="p">(</span><span class="s2">&quot;2017-06-23T12:00:00-09:45&quot;</span><span class="p">);</span>
-<span class="nb">Date</span><span class="p">(</span><span class="s2">&quot;Jun 23 2017 07:45:00 GMT+0100 (Tokyo Time)&quot;</span><span class="p">);</span>
-<span class="nb">Date</span><span class="p">(</span><span class="mf">2012</span><span class="p">,</span><span class="mf">10</span><span class="p">,</span><span class="mf">23</span><span class="p">,</span><span class="mf">17</span><span class="p">,</span><span class="mf">34</span><span class="p">,</span><span class="mf">32</span><span class="p">)</span><span class="w"> </span><span class="c1">// 2012-11-23T17:34:32.000Z</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">Date(&quot;2017-06-23&quot;); // Date declaration. Also: Date(&quot;June 23 2017&quot;)
+Date(&quot;2017&quot;);       // Is set to Jan 01
+Date(&quot;2017-06-23T12:00:00-09:45&quot;);
+Date(&quot;Jun 23 2017 07:45:00 GMT+0100 (Tokyo Time)&quot;);
+Date(2012,10,23,17,34,32) // 2012-11-23T17:34:32.000Z
+</code></pre>
 
-<div class="codehilite"><pre><span></span><code><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">());</span><span class="w">         </span><span class="c1">// Milliseconds passed since 1970</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">Date.now());         // Milliseconds passed since 1970
+</code></pre>
 
 <p>Date in the format: YYYYMMDDHH24MISS</p>
-<div class="codehilite"><pre><span></span><code><span class="nx">date</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">();</span>
-<span class="nx">date</span><span class="p">.</span><span class="nx">toISOString</span><span class="p">().</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[ZT:-]/g</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\..*/g</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">date = new Date();
+date.toISOString().replace(/[ZT:-]/g,'').replace(/\..*/g,'');
+</code></pre>
 
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">d</span><span class="o">=</span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">();</span><span class="w">    </span><span class="c1">// Thu Aug 22 2019 16:26:11 GMT+0100 (British Summer Time)</span>
-<span class="nb">Number</span><span class="p">(</span><span class="nx">d</span><span class="p">)</span><span class="w">            </span><span class="c1">// Milliseconds passed since 1970</span>
-<span class="nx">d</span><span class="p">.</span><span class="nx">getDay</span><span class="p">();</span><span class="w">          </span><span class="c1">// Getting the weekday</span>
-<span class="nx">d</span><span class="p">.</span><span class="nx">getDate</span><span class="p">();</span><span class="w">         </span><span class="c1">// Day as a number (1-31)</span>
-<span class="nx">d</span><span class="p">.</span><span class="nx">getDay</span><span class="p">();</span><span class="w">          </span><span class="c1">// Weekday as a number (0-6)</span>
-<span class="nx">d</span><span class="p">.</span><span class="nx">getFullYear</span><span class="p">();</span><span class="w">     </span><span class="c1">// Four digit year (yyyy)</span>
-<span class="nx">d</span><span class="p">.</span><span class="nx">getHours</span><span class="p">();</span><span class="w">        </span><span class="c1">// Hour (0-23)</span>
-<span class="nx">d</span><span class="p">.</span><span class="nx">getMilliseconds</span><span class="p">();</span><span class="w"> </span><span class="c1">// Milliseconds (0-999)</span>
-<span class="nx">d</span><span class="p">.</span><span class="nx">getMinutes</span><span class="p">();</span><span class="w">      </span><span class="c1">// Minutes (0-59)</span>
-<span class="nx">d</span><span class="p">.</span><span class="nx">getMonth</span><span class="p">();</span><span class="w">        </span><span class="c1">// Month (0-11)</span>
-<span class="nx">d</span><span class="p">.</span><span class="nx">getSeconds</span><span class="p">();</span><span class="w">      </span><span class="c1">// Seconds (0-59)</span>
-<span class="nx">d</span><span class="p">.</span><span class="nx">getTime</span><span class="p">();</span><span class="w">         </span><span class="c1">// Milliseconds since 1970</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">var d=new Date();    // Thu Aug 22 2019 16:26:11 GMT+0100 (British Summer Time)
+Number(d)            // Milliseconds passed since 1970
+d.getDay();          // Getting the weekday
+d.getDate();         // Day as a number (1-31)
+d.getDay();          // Weekday as a number (0-6)
+d.getFullYear();     // Four digit year (yyyy)
+d.getHours();        // Hour (0-23)
+d.getMilliseconds(); // Milliseconds (0-999)
+d.getMinutes();      // Minutes (0-59)
+d.getMonth();        // Month (0-11)
+d.getSeconds();      // Seconds (0-59)
+d.getTime();         // Milliseconds since 1970
+</code></pre>
 
-<div class="codehilite"><pre><span></span><code><span class="nx">d</span><span class="p">.</span><span class="nx">setDate</span><span class="p">();</span><span class="w">         </span><span class="c1">// Day as a number (1-31)</span>
-<span class="nx">d</span><span class="p">.</span><span class="nx">setFullYear</span><span class="p">();</span><span class="w">     </span><span class="c1">// Year (optionally month and day)</span>
-<span class="nx">d</span><span class="p">.</span><span class="nx">setHours</span><span class="p">();</span><span class="w">        </span><span class="c1">// Hour (0-23)</span>
-<span class="nx">d</span><span class="p">.</span><span class="nx">setMilliseconds</span><span class="p">();</span><span class="w"> </span><span class="c1">// Milliseconds (0-999)</span>
-<span class="nx">d</span><span class="p">.</span><span class="nx">setMinutes</span><span class="p">();</span><span class="w">      </span><span class="c1">// Minutes (0-59)</span>
-<span class="nx">d</span><span class="p">.</span><span class="nx">setMonth</span><span class="p">();</span><span class="w">        </span><span class="c1">// Month (0-11)</span>
-<span class="nx">d</span><span class="p">.</span><span class="nx">setSeconds</span><span class="p">();</span><span class="w">      </span><span class="c1">// Seconds (0-59)</span>
-<span class="nx">d</span><span class="p">.</span><span class="nx">setTime</span><span class="p">();</span><span class="w">         </span><span class="c1">// Milliseconds since 1970)</span>
+<pre class="codehilite"><code class="language-javascript">d.setDate();         // Day as a number (1-31)
+d.setFullYear();     // Year (optionally month and day)
+d.setHours();        // Hour (0-23)
+d.setMilliseconds(); // Milliseconds (0-999)
+d.setMinutes();      // Minutes (0-59)
+d.setMonth();        // Month (0-11)
+d.setSeconds();      // Seconds (0-59)
+d.setTime();         // Milliseconds since 1970)
 
-<span class="nx">d</span><span class="p">.</span><span class="nx">setDate</span><span class="p">(</span><span class="nx">d</span><span class="p">.</span><span class="nx">getDate</span><span class="p">()</span><span class="o">+</span><span class="mf">7</span><span class="p">);</span><span class="w"> </span><span class="c1">// Adds a week to a date</span>
-</code></pre></div>
+d.setDate(d.getDate()+7); // Adds a week to a date
+</code></pre>
 
 <h1 id="arrays">Arrays</h1>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">dogs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Bulldog&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Beagle&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Labrador&quot;</span><span class="p">];</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">dogs</span><span class="o">=</span><span class="ow">new</span><span class="w"> </span><span class="nb">Array</span><span class="p">(</span><span class="s2">&quot;Bulldog&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Beagle&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Labrador&quot;</span><span class="p">);</span><span class="w">  </span><span class="c1">// Declaration</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">var dogs=[&quot;Bulldog&quot;, &quot;Beagle&quot;, &quot;Labrador&quot;];
+var dogs=new Array(&quot;Bulldog&quot;, &quot;Beagle&quot;, &quot;Labrador&quot;);  // Declaration
+</code></pre>
 
-<div class="codehilite"><pre><span></span><code><span class="nx">alert</span><span class="p">(</span><span class="nx">dogs</span><span class="p">[</span><span class="mf">1</span><span class="p">]);</span><span class="w">         </span><span class="c1">// Access value at index, first item being [0]</span>
-<span class="nx">dogs</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;Bull Terrier&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Change the first item</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">alert(dogs[1]);         // Access value at index, first item being [0]
+dogs[0]=&quot;Bull Terrier&quot;; // Change the first item
+</code></pre>
 
-<div class="codehilite"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="o">=</span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">&lt;</span><span class="nx">dogs</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dogs</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span><span class="w"> </span><span class="p">}</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">for (var i=0; i&lt;dogs.length; i++) { console.log(dogs[i]); }
+</code></pre>
 
-<div class="codehilite"><pre><span></span><code><span class="nx">dogs</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span><span class="w">                     </span><span class="c1">// Convert to string: results &quot;Bulldog,Beagle,Labrador&quot;</span>
-<span class="nx">dogs</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s2">&quot; * &quot;</span><span class="p">);</span><span class="w">                    </span><span class="c1">// Join: &quot;Bulldog * Beagle * Labrador&quot;</span>
-<span class="nx">dogs</span><span class="p">.</span><span class="nx">pop</span><span class="p">();</span><span class="w">                          </span><span class="c1">// Remove last element</span>
-<span class="nx">dogs</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">&quot;Chihuahua&quot;</span><span class="p">);</span><span class="w">              </span><span class="c1">// Add new element to the end</span>
-<span class="nx">dogs</span><span class="p">[</span><span class="nx">dogs</span><span class="p">.</span><span class="nx">length</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;Chihuahua&quot;</span><span class="p">;</span><span class="w">       </span><span class="c1">// The same as push</span>
-<span class="nx">dogs</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">&#39;Boxer&#39;</span><span class="p">);</span><span class="w">              </span><span class="c1">// Returns True / False</span>
-<span class="nx">dogs</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">&#39;Boxer&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">);</span><span class="w">           </span><span class="c1">// Includes from position 3 onwards</span>
-<span class="nx">dogs</span><span class="p">.</span><span class="nx">shift</span><span class="p">();</span><span class="w">                        </span><span class="c1">// Remove first element</span>
-<span class="nx">dogs</span><span class="p">.</span><span class="nx">unshift</span><span class="p">(</span><span class="s2">&quot;Chihuahua&quot;</span><span class="p">);</span><span class="w">           </span><span class="c1">// Add new element to the beginning</span>
-<span class="ow">delete</span><span class="w"> </span><span class="nx">dogs</span><span class="p">[</span><span class="mf">0</span><span class="p">];</span><span class="w">                      </span><span class="c1">// Change element to undefined (not recommended)</span>
-<span class="nx">dogs</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Pug&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Boxer&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">// Add elements (where, how many to remove, element list)</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">animals</span><span class="o">=</span><span class="nx">dogs</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">cats</span><span class="p">,</span><span class="nx">birds</span><span class="p">);</span><span class="w"> </span><span class="c1">// Join two arrays (dogs followed by cats and birds)</span>
-<span class="nx">dogs</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="mf">4</span><span class="p">);</span><span class="w">                     </span><span class="c1">// Elements from [1] to [4-1]</span>
-<span class="nx">dogs</span><span class="p">.</span><span class="nx">sort</span><span class="p">();</span><span class="w">                         </span><span class="c1">// Sort string alphabetically</span>
-<span class="nx">dogs</span><span class="p">.</span><span class="nx">reverse</span><span class="p">();</span><span class="w">                      </span><span class="c1">// Sort string in descending order</span>
-<span class="nx">x</span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">){</span><span class="k">return</span><span class="w"> </span><span class="nx">a</span><span class="o">-</span><span class="nx">b</span><span class="p">});</span><span class="w">  </span><span class="c1">// Numeric sort</span>
-<span class="nx">x</span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">){</span><span class="k">return</span><span class="w"> </span><span class="nx">b</span><span class="o">-</span><span class="nx">a</span><span class="p">});</span><span class="w">  </span><span class="c1">// Numeric descending sort</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">dogs.toString();                     // Convert to string: results &quot;Bulldog,Beagle,Labrador&quot;
+dogs.join(&quot; * &quot;);                    // Join: &quot;Bulldog * Beagle * Labrador&quot;
+dogs.pop();                          // Remove last element
+dogs.push(&quot;Chihuahua&quot;);              // Add new element to the end
+dogs[dogs.length]=&quot;Chihuahua&quot;;       // The same as push
+dogs.includes('Boxer');              // Returns True / False
+dogs.includes('Boxer', 3);           // Includes from position 3 onwards
+dogs.shift();                        // Remove first element
+dogs.unshift(&quot;Chihuahua&quot;);           // Add new element to the beginning
+delete dogs[0];                      // Change element to undefined (not recommended)
+dogs.splice(2, 0, &quot;Pug&quot;, &quot;Boxer&quot;);   // Add elements (where, how many to remove, element list)
+var animals=dogs.concat(cats,birds); // Join two arrays (dogs followed by cats and birds)
+dogs.slice(1,4);                     // Elements from [1] to [4-1]
+dogs.sort();                         // Sort string alphabetically
+dogs.reverse();                      // Sort string in descending order
+x.sort(function(a, b){return a-b});  // Numeric sort
+x.sort(function(a, b){return b-a});  // Numeric descending sort
+</code></pre>
 
-<div class="codehilite"><pre><span></span><code><span class="nx">x</span><span class="p">.</span><span class="nx">sort</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">){</span><span class="k">return</span><span class="w"> </span><span class="mf">0.5</span><span class="o">-</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()});</span><span class="w"> </span><span class="c1">// Random order sort</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">x.sort(function(a, b){return 0.5-Math.random()}); // Random order sort
+</code></pre>
 
 <h2 id="others">Others</h2>
-<div class="codehilite"><pre><span></span><code><span class="nx">concat</span><span class="p">,</span><span class="w"> </span><span class="nx">copyWithin</span><span class="p">,</span><span class="w"> </span><span class="nx">every</span><span class="p">,</span><span class="w"> </span><span class="nx">fill</span><span class="p">,</span><span class="w"> </span><span class="nx">filter</span><span class="p">,</span><span class="w"> </span><span class="nx">find</span><span class="p">,</span><span class="w"> </span><span class="nx">findIndex</span><span class="p">,</span><span class="w"> </span><span class="nx">forEach</span><span class="p">,</span><span class="w"> </span><span class="nx">indexOf</span><span class="p">,</span><span class="w"> </span><span class="nx">isArray</span><span class="p">,</span><span class="w"> </span><span class="nx">join</span><span class="p">,</span>
-<span class="nx">lastIndexOf</span><span class="p">,</span><span class="w"> </span><span class="nx">map</span><span class="p">,</span><span class="w"> </span><span class="nx">pop</span><span class="p">,</span><span class="w"> </span><span class="nx">push</span><span class="p">,</span><span class="w"> </span><span class="nx">reduce</span><span class="p">,</span><span class="w"> </span><span class="nx">reduceRight</span><span class="p">,</span><span class="w"> </span><span class="nx">reverse</span><span class="p">,</span><span class="w"> </span><span class="nx">shift</span><span class="p">,</span><span class="w"> </span><span class="nx">slice</span><span class="p">,</span><span class="w"> </span><span class="nx">some</span><span class="p">,</span><span class="w"> </span><span class="nx">sort</span><span class="p">,</span><span class="w"> </span><span class="nx">splice</span><span class="p">,</span>
-<span class="nx">toString</span><span class="p">,</span><span class="w"> </span><span class="nx">unshift</span><span class="p">,</span><span class="w"> </span><span class="nx">valueOf</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">concat, copyWithin, every, fill, filter, find, findIndex, forEach, indexOf, isArray, join,
+lastIndexOf, map, pop, push, reduce, reduceRight, reverse, shift, slice, some, sort, splice,
+toString, unshift, valueOf
+</code></pre>
 
 <h1 id="global-functions">Global Functions()</h1>
-<div class="codehilite"><pre><span></span><code><span class="nb">eval</span><span class="p">();</span><span class="w">                  </span><span class="c1">// Executes a string as if it was script code</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">eval();                  // Executes a string as if it was script code
+</code></pre>
 
-<div class="codehilite"><pre><span></span><code><span class="nb">String</span><span class="p">(</span><span class="mf">23</span><span class="p">);</span><span class="w">              </span><span class="c1">// Return string from number</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">String(23);              // Return string from number
+</code></pre>
 
-<div class="codehilite"><pre><span></span><code><span class="p">(</span><span class="mf">23</span><span class="p">).</span><span class="nx">toString</span><span class="p">();</span><span class="w">         </span><span class="c1">// Return string from number</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">(23).toString();         // Return string from number
+</code></pre>
 
-<div class="codehilite"><pre><span></span><code><span class="nb">Number</span><span class="p">(</span><span class="s2">&quot;23&quot;</span><span class="p">);</span><span class="w">            </span><span class="c1">// Return number from string</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">Number(&quot;23&quot;);            // Return number from string
+</code></pre>
 
-<div class="codehilite"><pre><span></span><code><span class="nb">decodeURI</span><span class="p">(</span><span class="nx">enc</span><span class="p">);</span><span class="w">          </span><span class="c1">// Decode URI. Result: &quot;my page.asp&quot;</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">decodeURI(enc);          // Decode URI. Result: &quot;my page.asp&quot;
+</code></pre>
 
-<div class="codehilite"><pre><span></span><code><span class="nb">encodeURI</span><span class="p">(</span><span class="nx">uri</span><span class="p">);</span><span class="w">          </span><span class="c1">// Encode URI. Result: &quot;my%page.asp&quot;</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">encodeURI(uri);          // Encode URI. Result: &quot;my%page.asp&quot;
+</code></pre>
 
-<div class="codehilite"><pre><span></span><code><span class="nb">decodeURIComponent</span><span class="p">(</span><span class="nx">enc</span><span class="p">);</span><span class="w"> </span><span class="c1">// Decode a URI component</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">decodeURIComponent(enc); // Decode a URI component
+</code></pre>
 
-<div class="codehilite"><pre><span></span><code><span class="nb">encodeURIComponent</span><span class="p">(</span><span class="nx">uri</span><span class="p">);</span><span class="w"> </span><span class="c1">// Encode a URI component</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">encodeURIComponent(uri); // Encode a URI component
+</code></pre>
 
-<div class="codehilite"><pre><span></span><code><span class="nb">isFinite</span><span class="p">();</span><span class="w">              </span><span class="c1">// Is variable a finite, legal number</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">isFinite();              // Is variable a finite, legal number
+</code></pre>
 
-<div class="codehilite"><pre><span></span><code><span class="nb">isNaN</span><span class="p">();</span><span class="w">                 </span><span class="c1">// Is variable an illegal number</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">isNaN();                 // Is variable an illegal number
+</code></pre>
 
-<div class="codehilite"><pre><span></span><code><span class="nb">parseFloat</span><span class="p">();</span><span class="w">            </span><span class="c1">// Returns floating point number of string</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">parseFloat();            // Returns floating point number of string
+</code></pre>
 
-<div class="codehilite"><pre><span></span><code><span class="nb">parseInt</span><span class="p">();</span><span class="w">              </span><span class="c1">// Parses a string and returns an integer</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">parseInt();              // Parses a string and returns an integer
+</code></pre>
 
 <h2 id="regular-expressions">Regular Expressions</h2>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="o">=</span><span class="nx">str</span><span class="p">.</span><span class="nx">search</span><span class="p">(</span><span class="sr">/CheatSheet/i</span><span class="p">);</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">var a=str.search(/CheatSheet/i);
+</code></pre>
 
 <h2 id="modifiers">Modifiers</h2>
-<div class="codehilite"><pre><span></span><code><span class="nx">i</span><span class="w">  </span><span class="c1">// Perform case-insensitive matching</span>
-<span class="nx">g</span><span class="w">  </span><span class="c1">// Perform a global match</span>
-<span class="nx">m</span><span class="w">  </span><span class="c1">// Perform multiline matching</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">i  // Perform case-insensitive matching
+g  // Perform a global match
+m  // Perform multiline matching
+</code></pre>
 
 <h2 id="patterns">Patterns</h2>
-<div class="codehilite"><pre><span></span><code><span class="err">\</span><span class="w">         </span><span class="c1">// Escape character</span>
-<span class="err">\</span><span class="nx">d</span><span class="w">        </span><span class="c1">// Find a digit</span>
-<span class="err">\</span><span class="nx">s</span><span class="w">        </span><span class="c1">// Find a whitespace character</span>
-<span class="err">\</span><span class="nx">b</span><span class="w">        </span><span class="c1">// Find match at beginning or end of a word</span>
-<span class="nx">n</span><span class="o">+</span><span class="w">        </span><span class="c1">// Contains at least one n</span>
-<span class="nx">n</span><span class="o">*</span><span class="w">        </span><span class="c1">// Contains zero or more occurrences of n</span>
-<span class="nx">n</span><span class="o">?</span><span class="w">        </span><span class="c1">// Contains zero or one occurrences of n</span>
-<span class="o">^</span><span class="w">         </span><span class="c1">// Start of string</span>
-<span class="nx">$</span><span class="w">         </span><span class="c1">// End of string</span>
-<span class="err">\</span><span class="nx">uxxxx</span><span class="w">    </span><span class="c1">// Find the Unicode character</span>
-<span class="p">.</span><span class="w">         </span><span class="c1">// Any single character</span>
-<span class="p">(</span><span class="nx">a</span><span class="w"> </span><span class="nx">bar</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="c1">// A or b</span>
-<span class="p">(...)</span><span class="w">     </span><span class="c1">// Group section</span>
-<span class="p">[</span><span class="nx">abc</span><span class="p">]</span><span class="w">     </span><span class="c1">// In range (a, b or c)</span>
-<span class="p">[</span><span class="mf">0</span><span class="o">-</span><span class="mf">9</span><span class="p">]</span><span class="w">     </span><span class="c1">// Any of the digits between the brackets</span>
-<span class="p">[</span><span class="o">^</span><span class="nx">abc</span><span class="p">]</span><span class="w">    </span><span class="c1">// Not in range</span>
-<span class="err">\</span><span class="nx">s</span><span class="w">        </span><span class="c1">// White space</span>
-<span class="nx">a</span><span class="o">?</span><span class="w">        </span><span class="c1">// Zero or one of a</span>
-<span class="nx">a</span><span class="o">*</span><span class="w">        </span><span class="c1">// Zero or more of a</span>
-<span class="nx">a</span><span class="o">*</span><span class="w">        </span><span class="c1">// ?Zero or more, ungreedy</span>
-<span class="nx">a</span><span class="o">+</span><span class="w">        </span><span class="c1">// One or more of a</span>
-<span class="nx">a</span><span class="o">+?</span><span class="w">       </span><span class="c1">// One or more, ungreedy</span>
-<span class="nx">a</span><span class="p">{</span><span class="mf">2</span><span class="p">}</span><span class="w">      </span><span class="c1">// Exactly 2 of a</span>
-<span class="nx">a</span><span class="p">{</span><span class="mf">2</span><span class="p">,}</span><span class="w">     </span><span class="c1">// 2 or more of a</span>
-<span class="nx">a</span><span class="p">{,</span><span class="mf">5</span><span class="p">}</span><span class="w">     </span><span class="c1">// Up to 5 of a</span>
-<span class="nx">a</span><span class="p">{</span><span class="mf">2</span><span class="p">,</span><span class="mf">5</span><span class="p">}</span><span class="w">    </span><span class="c1">// 2 to 5 of a</span>
-<span class="nx">a</span><span class="p">{</span><span class="mf">2</span><span class="p">,</span><span class="mf">5</span><span class="p">}</span><span class="o">?</span><span class="w">   </span><span class="c1">// 2 to 5 of a, ungreedy</span>
-<span class="p">[</span><span class="o">:</span><span class="nx">punct</span><span class="o">:</span><span class="p">]</span><span class="w"> </span><span class="c1">// Any punctuation symbol</span>
-<span class="p">[</span><span class="o">:</span><span class="nx">space</span><span class="o">:</span><span class="p">]</span><span class="w"> </span><span class="c1">// Any space character</span>
-<span class="p">[</span><span class="o">:</span><span class="nx">blank</span><span class="o">:</span><span class="p">]</span><span class="w"> </span><span class="c1">// Space or tab</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">\         // Escape character
+\d        // Find a digit
+\s        // Find a whitespace character
+\b        // Find match at beginning or end of a word
+n+        // Contains at least one n
+n*        // Contains zero or more occurrences of n
+n?        // Contains zero or one occurrences of n
+^         // Start of string
+$         // End of string
+\uxxxx    // Find the Unicode character
+.         // Any single character
+(a bar b) // A or b
+(...)     // Group section
+[abc]     // In range (a, b or c)
+[0-9]     // Any of the digits between the brackets
+[^abc]    // Not in range
+\s        // White space
+a?        // Zero or one of a
+a*        // Zero or more of a
+a*        // ?Zero or more, ungreedy
+a+        // One or more of a
+a+?       // One or more, ungreedy
+a{2}      // Exactly 2 of a
+a{2,}     // 2 or more of a
+a{,5}     // Up to 5 of a
+a{2,5}    // 2 to 5 of a
+a{2,5}?   // 2 to 5 of a, ungreedy
+[:punct:] // Any punctuation symbol
+[:space:] // Any space character
+[:blank:] // Space or tab
+</code></pre>
 
 <h2 id="errors">Errors</h2>
-<div class="codehilite"><pre><span></span><code><span class="k">try</span><span class="w"> </span><span class="p">{</span><span class="w">                    </span><span class="c1">// Block of code to try</span>
-<span class="w">    </span><span class="nx">undefinedFunction</span><span class="p">();</span>
-<span class="p">}</span>
-<span class="k">catch</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">             </span><span class="c1">// Block to handle errors</span>
-<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">try {                    // Block of code to try
+    undefinedFunction();
+}
+catch(err) {             // Block to handle errors
+    console.log(err.message);
+}
+</code></pre>
 
 <h2 id="throw-error">Throw Error</h2>
-<div class="codehilite"><pre><span></span><code><span class="k">throw</span><span class="w"> </span><span class="s2">&quot;My error message&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Throw a text</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">throw &quot;My error message&quot;; // Throw a text
+</code></pre>
 
 <h2 id="input-validation">Input Validation</h2>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">x</span><span class="o">=</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;mynum&quot;</span><span class="p">).</span><span class="nx">value</span><span class="p">;</span><span class="w"> </span><span class="c1">// Get input value</span>
-<span class="k">try</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="nx">x</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="w">  </span><span class="k">throw</span><span class="w"> </span><span class="s2">&quot;empty&quot;</span><span class="p">;</span><span class="w">         </span><span class="c1">// Error cases</span>
-<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="nb">isNaN</span><span class="p">(</span><span class="nx">x</span><span class="p">))</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="s2">&quot;not a number&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="nx">x</span><span class="o">=</span><span class="nb">Number</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
-<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="nx">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">10</span><span class="p">)</span><span class="w">   </span><span class="k">throw</span><span class="w"> </span><span class="s2">&quot;too high&quot;</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="k">catch</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">                            </span><span class="c1">// If there&#39;s an error</span>
-<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">&quot;Input is &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">err</span><span class="p">);</span><span class="w">  </span><span class="c1">// Output error</span>
-<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span><span class="w">                 </span><span class="c1">// Write the error in console</span>
-<span class="p">}</span>
-<span class="k">finally</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">&quot;&lt;/br /&gt;Done&quot;</span><span class="p">);</span><span class="w">      </span><span class="c1">// Executed regardless of the try / catch result</span>
-<span class="p">}</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">var x=document.getElementById(&quot;mynum&quot;).value; // Get input value
+try {
+    if(x == &quot;&quot;)  throw &quot;empty&quot;;         // Error cases
+    if(isNaN(x)) throw &quot;not a number&quot;;
+    x=Number(x);
+    if(x &gt; 10)   throw &quot;too high&quot;;
+}
+catch(err) {                            // If there's an error
+    document.write(&quot;Input is &quot; + err);  // Output error
+    console.error(err);                 // Write the error in console
+}
+finally {
+    document.write(&quot;&lt;/br /&gt;Done&quot;);      // Executed regardless of the try / catch result
+}
+</code></pre>
 
 <h2 id="error-name-values">Error Name Values</h2>
-<div class="codehilite"><pre><span></span><code><span class="ne">RangeError</span><span class="w">     </span><span class="c1">// A number is &quot;out of range&quot;</span>
-<span class="ne">ReferenceError</span><span class="w"> </span><span class="c1">// An illegal reference has occurred</span>
-<span class="ne">SyntaxError</span><span class="w">    </span><span class="c1">// A syntax error has occurred</span>
-<span class="ne">TypeError</span><span class="w">      </span><span class="c1">// A type error has occurred</span>
-<span class="ne">URIError</span><span class="w">       </span><span class="c1">// An encodeURI() error has occurred</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">RangeError     // A number is &quot;out of range&quot;
+ReferenceError // An illegal reference has occurred
+SyntaxError    // A syntax error has occurred
+TypeError      // A type error has occurred
+URIError       // An encodeURI() error has occurred
+</code></pre>
 
 <h2 id="json">JSON</h2>
 <h2 id="create-json-object">Create JSON object</h2>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">str</span><span class="o">=</span><span class="s1">&#39;{&quot;names&quot;:[{&quot;first&quot;:&quot;Hakuna&quot;,&quot;last&quot;:&quot;Matata&quot;},{&quot;first&quot;:&quot;Air&quot;,&quot;last&quot;:&quot;Jordan&quot;}]}&#39;</span><span class="p">;</span>
+<pre class="codehilite"><code class="language-javascript">var str='{&quot;names&quot;:[{&quot;first&quot;:&quot;Hakuna&quot;,&quot;last&quot;:&quot;Matata&quot;},{&quot;first&quot;:&quot;Air&quot;,&quot;last&quot;:&quot;Jordan&quot;}]}';
 
-<span class="nx">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">str</span><span class="p">);</span><span class="w">               </span><span class="c1">// Parse</span>
-<span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">names</span><span class="p">[</span><span class="mf">1</span><span class="p">].</span><span class="nx">first</span><span class="p">);</span><span class="w">  </span><span class="c1">// Access</span>
-</code></pre></div>
+obj = JSON.parse(str);               // Parse
+document.write(obj.names[1].first);  // Access
+</code></pre>
 
 <h2 id="iterate-loop-through-json-elements">Iterate / Loop Through JSON Elements</h2>
-<div class="codehilite"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Martin&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;age&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">21</span><span class="w"> </span><span class="p">};</span>
-<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">j</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">json</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">j</span><span class="p">,</span><span class="w"> </span><span class="nx">json</span><span class="p">[</span><span class="nx">j</span><span class="p">]);</span><span class="w">  </span><span class="c1">// Yields name Martin etc</span>
-<span class="p">}</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">let json = { &quot;name&quot;: &quot;Martin&quot;, &quot;age&quot;: 21 };
+for (let j in json) {
+  console.log(j, json[j]);  // Yields name Martin etc
+}
+</code></pre>
 
 <h2 id="send">Send</h2>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">myObj</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="s2">&quot;Jane&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;age&quot;</span><span class="o">:</span><span class="mf">18</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;city&quot;</span><span class="o">:</span><span class="s2">&quot;Chicago&quot;</span><span class="p">};</span><span class="w"> </span><span class="c1">// Create object</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">myJSON</span><span class="o">=</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">myObj</span><span class="p">);</span><span class="w">                      </span><span class="c1">// Stringify</span>
-<span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="o">=</span><span class="s2">&quot;demo.php?x=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">myJSON</span><span class="p">;</span><span class="w">                </span><span class="c1">// Send to php</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">var myObj={&quot;name&quot;:&quot;Jane&quot;, &quot;age&quot;:18, &quot;city&quot;:&quot;Chicago&quot;}; // Create object
+var myJSON=JSON.stringify(myObj);                      // Stringify
+window.location=&quot;demo.php?x=&quot; + myJSON;                // Send to php
+</code></pre>
 
 <h2 id="storing-and-retrieving">Storing And Retrieving</h2>
-<div class="codehilite"><pre><span></span><code><span class="nx">myJSON</span><span class="o">=</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">myObj</span><span class="p">);</span><span class="w">            </span><span class="c1">// Storing data</span>
-<span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s2">&quot;testJSON&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">myJSON</span><span class="p">);</span>
-<span class="nx">text</span><span class="o">=</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s2">&quot;testJSON&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">// Retrieving data</span>
-<span class="nx">obj</span><span class="o">=</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
-<span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">myJSON=JSON.stringify(myObj);            // Storing data
+localStorage.setItem(&quot;testJSON&quot;, myJSON);
+text=localStorage.getItem(&quot;testJSON&quot;);   // Retrieving data
+obj=JSON.parse(text);
+document.write(obj.name);
+</code></pre>
 
 <h1 id="promises">Promises</h1>
-<div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">sum</span><span class="w"> </span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span><span class="w"> </span><span class="nx">reject</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// Send the response after 1 second</span>
-<span class="w">         </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="ow">typeof</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// Testing input types</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nx">reject</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Inputs must be numbers&quot;</span><span class="p">));</span>
-<span class="w">         </span><span class="p">}</span>
-<span class="w">         </span><span class="nx">resolve</span><span class="p">(</span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">b</span><span class="p">);</span>
-<span class="w">      </span><span class="p">},</span><span class="w"> </span><span class="mf">1000</span><span class="p">);</span>
-<span class="w">   </span><span class="p">});</span>
-<span class="p">}</span>
+<pre class="codehilite"><code class="language-javascript">function sum (a, b) {
+   return Promise(function (resolve, reject) {
+      setTimeout(function () {  // Send the response after 1 second
+         if (typeof a !== &quot;number&quot; || typeof b !== &quot;number&quot;) {  // Testing input types
+            return reject(new TypeError(&quot;Inputs must be numbers&quot;));
+         }
+         resolve(a + b);
+      }, 1000);
+   });
+}
 
-<span class="kd">var</span><span class="w"> </span><span class="nx">myPromise</span><span class="o">=</span><span class="nx">sum</span><span class="p">(</span><span class="mf">10</span><span class="p">,</span><span class="w"> </span><span class="mf">5</span><span class="p">);</span>
+var myPromise=sum(10, 5);
 
-<span class="nx">myPromsise</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">result</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">   </span><span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">&quot; 10 + 5: &quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">result</span><span class="p">);</span>
-<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="nx">sum</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;foo&quot;</span><span class="p">);</span><span class="w">  </span><span class="c1">// Invalid data and return another promise</span>
-<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">        </span><span class="c1">// Won&#39;t be called because of the error</span>
-<span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">    </span><span class="c1">// The catch handler is called instead, after another second</span>
-<span class="w">   </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span><span class="w">       </span><span class="c1">// =&gt; Please provide two numbers to sum.</span>
-<span class="p">});</span>
-</code></pre></div>
+myPromsise.then(function (result) {
+   document.write(&quot; 10 + 5: &quot;, result);
+   return sum(null, &quot;foo&quot;);  // Invalid data and return another promise
+}).then(function () {        // Won't be called because of the error
+}).catch(function (err) {    // The catch handler is called instead, after another second
+   console.error(err);       // =&gt; Please provide two numbers to sum.
+});
+</code></pre>
 
 <h2 id="states">States</h2>
-<div class="codehilite"><pre><span></span><code><span class="nx">pending</span><span class="p">,</span><span class="w"> </span><span class="nx">fulfilled</span><span class="p">,</span><span class="w"> </span><span class="nx">rejected</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">pending, fulfilled, rejected
+</code></pre>
 
 <h2 id="properties">Properties</h2>
-<div class="codehilite"><pre><span></span><code><span class="nb">Promise</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span><span class="w"> </span><span class="nb">Promise</span><span class="p">.</span><span class="nx">prototype</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">Promise.length, Promise.prototype
+</code></pre>
 
 <h2 id="methods">Methods</h2>
-<div class="codehilite"><pre><span></span><code><span class="nb">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="nx">iterable</span><span class="p">),</span><span class="w"> </span><span class="nb">Promise</span><span class="p">.</span><span class="nx">race</span><span class="p">(</span><span class="nx">iterable</span><span class="p">),</span><span class="w"> </span><span class="nb">Promise</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="nx">reason</span><span class="p">),</span><span class="w"> </span><span class="nb">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">Promise.all(iterable), Promise.race(iterable), Promise.reject(reason), Promise.resolve(value)
+</code></pre>
 
 <h2 id="events">Events</h2>
-<div class="codehilite"><pre><span></span><code><span class="o">&lt;</span><span class="nx">button</span><span class="w"> </span><span class="nx">onclick</span><span class="o">=</span><span class="s2">&quot;myFunction();&quot;</span><span class="o">&gt;</span><span class="w"> </span><span class="nx">Click</span><span class="w"> </span><span class="nx">here</span><span class="w"> </span><span class="o">&lt;</span><span class="err">/button&gt;</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">&lt;button onclick=&quot;myFunction();&quot;&gt; Click here &lt;/button&gt;
+</code></pre>
 
 <h2 id="mouse">Mouse</h2>
-<div class="codehilite"><pre><span></span><code><span class="nx">onclick</span><span class="p">,</span><span class="w"> </span><span class="nx">oncontextmenu</span><span class="p">,</span><span class="w"> </span><span class="nx">ondblclick</span><span class="p">,</span><span class="w"> </span><span class="nx">onmousedown</span><span class="p">,</span><span class="w"> </span><span class="nx">onmouseenter</span><span class="p">,</span><span class="w"> </span><span class="nx">onmouseleave</span><span class="p">,</span><span class="w"> </span><span class="nx">onmousemove</span><span class="p">,</span>
-<span class="nx">onmouseover</span><span class="p">,</span><span class="w"> </span><span class="nx">onmouseout</span><span class="p">,</span><span class="w"> </span><span class="nx">onmouseup</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">onclick, oncontextmenu, ondblclick, onmousedown, onmouseenter, onmouseleave, onmousemove,
+onmouseover, onmouseout, onmouseup
+</code></pre>
 
 <h2 id="keyboard">Keyboard</h2>
-<div class="codehilite"><pre><span></span><code><span class="nx">onkeydown</span><span class="p">,</span><span class="w"> </span><span class="nx">onkeypress</span><span class="p">,</span><span class="w"> </span><span class="nx">onkeyup</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">onkeydown, onkeypress, onkeyup
+</code></pre>
 
 <h2 id="frame">Frame</h2>
-<div class="codehilite"><pre><span></span><code><span class="nx">onabort</span><span class="p">,</span><span class="w"> </span><span class="nx">onbeforeunload</span><span class="p">,</span><span class="w"> </span><span class="nx">onerror</span><span class="p">,</span><span class="w"> </span><span class="nx">onhashchange</span><span class="p">,</span><span class="w"> </span><span class="nx">onload</span><span class="p">,</span><span class="w"> </span><span class="nx">onpageshow</span><span class="p">,</span><span class="w"> </span><span class="nx">onpagehide</span><span class="p">,</span><span class="w"> </span><span class="nx">onresize</span><span class="p">,</span>
-<span class="nx">onscroll</span><span class="p">,</span><span class="w"> </span><span class="nx">onunload</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">onabort, onbeforeunload, onerror, onhashchange, onload, onpageshow, onpagehide, onresize,
+onscroll, onunload
+</code></pre>
 
 <h2 id="form">Form</h2>
-<div class="codehilite"><pre><span></span><code><span class="nx">onblur</span><span class="p">,</span><span class="w"> </span><span class="nx">onchange</span><span class="p">,</span><span class="w"> </span><span class="nx">onfocus</span><span class="p">,</span><span class="w"> </span><span class="nx">onfocusin</span><span class="p">,</span><span class="w"> </span><span class="nx">onfocusout</span><span class="p">,</span><span class="w"> </span><span class="nx">oninput</span><span class="p">,</span><span class="w"> </span><span class="nx">oninvalid</span><span class="p">,</span><span class="w"> </span><span class="nx">onreset</span><span class="p">,</span><span class="w"> </span><span class="nx">onsearch</span><span class="p">,</span>
-<span class="nx">onselect</span><span class="p">,</span><span class="w"> </span><span class="nx">onsubmit</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">onblur, onchange, onfocus, onfocusin, onfocusout, oninput, oninvalid, onreset, onsearch,
+onselect, onsubmit
+</code></pre>
 
 <h2 id="drag">Drag</h2>
-<div class="codehilite"><pre><span></span><code><span class="nx">ondrag</span><span class="p">,</span><span class="w"> </span><span class="nx">ondragend</span><span class="p">,</span><span class="w"> </span><span class="nx">ondragenter</span><span class="p">,</span><span class="w"> </span><span class="nx">ondragleave</span><span class="p">,</span><span class="w"> </span><span class="nx">ondragover</span><span class="p">,</span><span class="w"> </span><span class="nx">ondragstart</span><span class="p">,</span><span class="w"> </span><span class="nx">ondrop</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">ondrag, ondragend, ondragenter, ondragleave, ondragover, ondragstart, ondrop
+</code></pre>
 
 <h2 id="clipboard">Clipboard</h2>
-<div class="codehilite"><pre><span></span><code><span class="nx">oncopy</span><span class="p">,</span><span class="w"> </span><span class="nx">oncut</span><span class="p">,</span><span class="w"> </span><span class="nx">onpaste</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">oncopy, oncut, onpaste
+</code></pre>
 
 <h2 id="media">Media</h2>
-<div class="codehilite"><pre><span></span><code><span class="nx">onabort</span><span class="p">,</span><span class="w"> </span><span class="nx">oncanplay</span><span class="p">,</span><span class="w"> </span><span class="nx">oncanplaythrough</span><span class="p">,</span><span class="w"> </span><span class="nx">ondurationchange</span><span class="p">,</span><span class="w"> </span><span class="nx">onended</span><span class="p">,</span><span class="w"> </span><span class="nx">onerror</span><span class="p">,</span><span class="w"> </span><span class="nx">onloadeddata</span><span class="p">,</span>
-<span class="nx">onloadedmetadata</span><span class="p">,</span><span class="w"> </span><span class="nx">onloadstart</span><span class="p">,</span><span class="w"> </span><span class="nx">onpause</span><span class="p">,</span><span class="w"> </span><span class="nx">onplay</span><span class="p">,</span><span class="w"> </span><span class="nx">onplaying</span><span class="p">,</span><span class="w"> </span><span class="nx">onprogress</span><span class="p">,</span><span class="w"> </span><span class="nx">onratechange</span><span class="p">,</span>
-<span class="nx">onseeked</span><span class="p">,</span><span class="w"> </span><span class="nx">onseeking</span><span class="p">,</span><span class="w"> </span><span class="nx">onstalled</span><span class="p">,</span><span class="w"> </span><span class="nx">onsuspend</span><span class="p">,</span><span class="w"> </span><span class="nx">ontimeupdate</span><span class="p">,</span><span class="w"> </span><span class="nx">onvolumechange</span><span class="p">,</span><span class="w"> </span><span class="nx">onwaiting</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">onabort, oncanplay, oncanplaythrough, ondurationchange, onended, onerror, onloadeddata,
+onloadedmetadata, onloadstart, onpause, onplay, onplaying, onprogress, onratechange,
+onseeked, onseeking, onstalled, onsuspend, ontimeupdate, onvolumechange, onwaiting
+</code></pre>
 
 <h2 id="animation">Animation</h2>
-<div class="codehilite"><pre><span></span><code><span class="nx">animationend</span><span class="p">,</span><span class="w"> </span><span class="nx">animationiteration</span><span class="p">,</span><span class="w"> </span><span class="nx">animationstart</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">animationend, animationiteration, animationstart
+</code></pre>
 
 <h2 id="miscellaneous">Miscellaneous</h2>
-<div class="codehilite"><pre><span></span><code><span class="nx">transitionend</span><span class="p">,</span><span class="w"> </span><span class="nx">onmessage</span><span class="p">,</span><span class="w"> </span><span class="nx">onmousewheel</span><span class="p">,</span><span class="w"> </span><span class="nx">ononline</span><span class="p">,</span><span class="w"> </span><span class="nx">onoffline</span><span class="p">,</span><span class="w"> </span><span class="nx">onpopstate</span><span class="p">,</span><span class="w"> </span><span class="nx">onshow</span><span class="p">,</span>
-<span class="nx">onstorage</span><span class="p">,</span><span class="w"> </span><span class="nx">ontoggle</span><span class="p">,</span><span class="w"> </span><span class="nx">onwheel</span><span class="p">,</span><span class="w"> </span><span class="nx">ontouchcancel</span><span class="p">,</span><span class="w"> </span><span class="nx">ontouchend</span><span class="p">,</span><span class="w"> </span><span class="nx">ontouchmove</span><span class="p">,</span><span class="w"> </span><span class="nx">ontouchstart</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">transitionend, onmessage, onmousewheel, ononline, onoffline, onpopstate, onshow,
+onstorage, ontoggle, onwheel, ontouchcancel, ontouchend, ontouchmove, ontouchstart
+</code></pre>
 
 <h1 id="save-text-to-local-file">Save Text To Local File</h1>
-<div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">saveText</span><span class="p">(</span><span class="nx">text</span><span class="p">,</span><span class="w"> </span><span class="nx">fileName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="o">=</span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">);</span>
-<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
-<span class="w">    </span><span class="nx">a</span><span class="p">.</span><span class="nx">style</span><span class="o">=</span><span class="s2">&quot;display: none&quot;</span><span class="p">;</span>
+<pre class="codehilite"><code class="language-javascript">function saveText(text, fileName) {
+    var a=document.createElement(&quot;a&quot;);
+    document.body.appendChild(a);
+    a.style=&quot;display: none&quot;;
 
-<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">json</span><span class="o">=</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">text</span><span class="p">),</span>
-<span class="w">        </span><span class="nx">blob</span><span class="o">=</span><span class="ow">new</span><span class="w"> </span><span class="nx">Blob</span><span class="p">([</span><span class="nx">text</span><span class="p">],</span><span class="w"> </span><span class="p">{</span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;text/plain;charset=utf-8&quot;</span><span class="p">}),</span>
-<span class="w">        </span><span class="nx">url</span><span class="o">=</span><span class="nb">window</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">blob</span><span class="p">);</span>
-<span class="w">    </span><span class="nx">a</span><span class="p">.</span><span class="nx">href</span><span class="o">=</span><span class="nx">url</span><span class="p">;</span>
-<span class="w">    </span><span class="nx">a</span><span class="p">.</span><span class="nx">download</span><span class="o">=</span><span class="nx">fileName</span><span class="p">;</span>
-<span class="w">    </span><span class="nx">a</span><span class="p">.</span><span class="nx">click</span><span class="p">();</span>
-<span class="w">    </span><span class="nb">window</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">revokeObjectURL</span><span class="p">(</span><span class="nx">url</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div>
+    var json=JSON.stringify(text),
+        blob=new Blob([text], {type: &quot;text/plain;charset=utf-8&quot;}),
+        url=window.URL.createObjectURL(blob);
+    a.href=url;
+    a.download=fileName;
+    a.click();
+    window.URL.revokeObjectURL(url);
+}
+</code></pre>
 
 <h1 id="command-line-arguments-process">Command Line Arguments / process</h1>
-<div class="codehilite"><pre><span></span><code>let args = process.argv;
+<pre class="codehilite"><code>let args = process.argv;
 
 // 0 - command.  eg. node
 // 1 - file. eg my_app
 // 1 .. n - The arguments
 
 process.exit(1);
-</code></pre></div>
+</code></pre>
 
 <h1 id="jsdoc">JSDoc</h1>
-<div class="codehilite"><pre><span></span><code><span class="cm">/**</span>
-<span class="cm"> * Adds two numbers together.</span>
-<span class="cm"> * @param {int} num1 The first number.</span>
-<span class="cm"> * @param {int} num2 The second number.</span>
-<span class="cm"> * @returns {int} The sum of the two numbers.</span>
-<span class="cm"> */</span>
-<span class="kd">function</span><span class="w"> </span><span class="nx">sum</span><span class="p">(</span><span class="nx">num1</span><span class="p">,</span><span class="w"> </span><span class="nx">num2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">num1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">num2</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">/**
+ * Adds two numbers together.
+ * @param {int} num1 The first number.
+ * @param {int} num2 The second number.
+ * @returns {int} The sum of the two numbers.
+ */
+function sum(num1, num2) {
+    return num1 + num2;
+}
+</code></pre>
 
 <hr>
         </div>
@@ -775,7 +776,7 @@ process.exit(1);
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: December 10, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

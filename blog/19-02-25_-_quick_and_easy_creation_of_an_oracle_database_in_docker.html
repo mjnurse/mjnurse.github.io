@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>19-02-25 - Quick and Easy Creation of an Oracle Database in Docker</title>
   </head>
   <body class="light" id="top">
@@ -92,27 +93,27 @@
 <p>A container is an ideal place to do this.  Google led me to a container image <code>alexeiled/docker-oracle-xe-11g</code>.  An old version but, xe is light weight, and does what I need.  For a full set of Oracle containers Oracle has a GitHub repository: <a href="https://github.com/oracle/docker-images">github:oracle</a>.</p>
 <p>I'm running Docker Desktop on Windows 10.</p>
 <h4 id="get-the-image">Get the Image</h4>
-<div class="codehilite"><pre><span></span><code>&gt; docker pull alexeiled/docker-oracle-xe-11g
-</code></pre></div>
+<pre class="codehilite"><code>&gt; docker pull alexeiled/docker-oracle-xe-11g
+</code></pre>
 
 <h4 id="create-a-container">Create a Container</h4>
 <p>Open two network ports, one of the oracle client (1521), the other for the oracle web tool (8080).</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="o">--</span><span class="n">shm</span><span class="o">-</span><span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="n">g</span><span class="w"> </span><span class="o">--</span><span class="n">name</span><span class="w"> </span><span class="n">oracle</span><span class="o">-</span><span class="n">xe</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="mi">1521</span><span class="o">:</span><span class="mi">1521</span><span class="w"> </span><span class="o">-</span><span class="n">p</span><span class="w"> </span><span class="mi">8080</span><span class="o">:</span><span class="mi">8080</span><span class="w"> </span><span class="n">alexeiled</span><span class="o">/</span><span class="n">docker</span><span class="o">-</span><span class="n">oracle</span><span class="o">-</span><span class="n">xe</span><span class="o">-</span><span class="mi">11</span><span class="n">g</span>
-<span class="p">...</span>
+<pre class="codehilite"><code>&gt; docker run -d --shm-size=2g --name oracle-xe -p 1521:1521 -p 8080:8080 alexeiled/docker-oracle-xe-11g
+...
 
-<span class="o">&gt;</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">container</span><span class="w"> </span><span class="o">-</span><span class="n">ls</span>
-<span class="n">CONTAINER</span><span class="w"> </span><span class="n">ID</span><span class="w">        </span><span class="n">IMAGE</span><span class="w">                            </span><span class="n">COMMAND</span><span class="w">                  </span><span class="n">CREATED</span><span class="w">             </span><span class="n">STATUS</span>
-<span class="n">PORTS</span><span class="w">                                            </span><span class="n">NAMES</span>
-<span class="n">e93f1a668767</span><span class="w">        </span><span class="n">alexeiled</span><span class="o">/</span><span class="n">docker</span><span class="o">-</span><span class="n">oracle</span><span class="o">-</span><span class="n">xe</span><span class="o">-</span><span class="mi">11</span><span class="n">g</span><span class="w">   </span><span class="s">&quot;/bin/sh -c /start.sh&quot;</span><span class="w">   </span><span class="mi">37</span><span class="w"> </span><span class="n">seconds</span><span class="w"> </span><span class="n">ago</span><span class="w">      </span><span class="n">Up</span><span class="w"> </span><span class="mi">35</span><span class="w"> </span><span class="n">seconds</span>
-<span class="mf">0.0.0.0</span><span class="o">:</span><span class="mi">1521</span><span class="o">-&gt;</span><span class="mi">1521</span><span class="o">/</span><span class="n">tcp</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0.0.0</span><span class="o">:</span><span class="mi">8080</span><span class="o">-&gt;</span><span class="mi">8080</span><span class="o">/</span><span class="n">tcp</span><span class="w">   </span><span class="n">oracle</span><span class="o">-</span><span class="n">xe</span>
-</code></pre></div>
+&gt; docker container -ls
+CONTAINER ID        IMAGE                            COMMAND                  CREATED             STATUS
+PORTS                                            NAMES
+e93f1a668767        alexeiled/docker-oracle-xe-11g   &quot;/bin/sh -c /start.sh&quot;   37 seconds ago      Up 35 seconds
+0.0.0.0:1521-&gt;1521/tcp, 0.0.0.0:8080-&gt;8080/tcp   oracle-xe
+</code></pre>
 
 <p>The oracle container is now running and accessible.</p>
 <p><strong>An aside:</strong> I wanted to mount a local file share inside the container for oracle sql scripts etc.  But, docker doesn't play well with Azure Active Directory so I skipped this for now.  The syntax to include a local file share is <code>--volume c:/MJN/oracle/scripts</code>.</p>
 <h4 id="connecting-to-oracle">Connecting to Oracle</h4>
 <p>I have the Oracle client installed locally - see elsewhere if you need to install this.</p>
 <p>I opened the Docker Desktop Settings window and by going to the Network tab established the Internal Virtual Switch Network address is the default 10.0.75.0.  This can also be checked using ipconfig:</p>
-<div class="codehilite"><pre><span></span><code>&gt; ipconfig
+<pre class="codehilite"><code>&gt; ipconfig
 
 Windows IP Configuration
 ...
@@ -123,29 +124,29 @@ Ethernet adapter vEthernet (DockerNAT):
    Subnet Mask . . . . . . . . . . . : 255.255.255.0
    Default Gateway . . . . . . . . . :
 ...
-</code></pre></div>
+</code></pre>
 
 <p>Run the sqlplus client and connect.</p>
-<div class="codehilite"><pre><span></span><code><span class="nl">c</span><span class="p">:</span><span class="err">\</span><span class="n">MJN</span><span class="err">\</span><span class="n">oracle_client</span><span class="o">&gt;</span><span class="n">sqlplus</span><span class="w"> </span><span class="o">/</span><span class="n">nolog</span>
+<pre class="codehilite"><code>c:\MJN\oracle_client&gt;sqlplus /nolog
 
-<span class="k">SQL</span><span class="o">*</span><span class="nl">Plus</span><span class="p">:</span><span class="w"> </span><span class="k">Release</span><span class="w"> </span><span class="mf">18.0.0.0.0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Production</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">Mon</span><span class="w"> </span><span class="n">Feb</span><span class="w"> </span><span class="mi">25</span><span class="w"> </span><span class="mi">12</span><span class="err">:</span><span class="mi">35</span><span class="err">:</span><span class="mi">49</span><span class="w"> </span><span class="mi">2019</span>
-<span class="n">Version</span><span class="w"> </span><span class="mf">18.3.0.0.0</span>
+SQL*Plus: Release 18.0.0.0.0 - Production on Mon Feb 25 12:35:49 2019
+Version 18.3.0.0.0
 
-<span class="n">Copyright</span><span class="w"> </span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="mi">1982</span><span class="p">,</span><span class="w"> </span><span class="mi">2018</span><span class="p">,</span><span class="w"> </span><span class="n">Oracle</span><span class="p">.</span><span class="w">  </span><span class="ow">All</span><span class="w"> </span><span class="n">rights</span><span class="w"> </span><span class="n">reserved</span><span class="p">.</span>
+Copyright (c) 1982, 2018, Oracle.  All rights reserved.
 
-<span class="k">SQL</span><span class="o">&gt;</span><span class="w"> </span><span class="n">conn</span><span class="w"> </span><span class="k">system</span><span class="o">/</span><span class="n">oracle</span><span class="err">@</span><span class="o">//</span><span class="mf">10.0.75.1</span><span class="err">:</span><span class="mi">1521</span><span class="o">/</span><span class="n">xe</span>
+SQL&gt; conn system/oracle@//10.0.75.1:1521/xe
 
-<span class="n">Connected</span><span class="p">.</span>
+Connected.
 
-<span class="k">system</span><span class="nv">@XE</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span>
-</code></pre></div>
+system@XE(100) &gt;
+</code></pre>
 
 <h4 id="connecting-to-the-oracle-server-os">Connecting to the Oracle Server OS</h4>
 <p>To complete the overview, to connect to the Oracle server OS:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="k">exec</span><span class="w"> </span><span class="o">-</span><span class="n">it</span><span class="w"> </span><span class="n">oracle</span><span class="o">-</span><span class="n">xe</span><span class="w"> </span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">bash</span>
+<pre class="codehilite"><code>&gt; docker exec -it oracle-xe /bin/bash
 
-<span class="n">root</span><span class="nv">@e93f1a668767</span><span class="err">:</span><span class="o">/</span><span class="err">#</span>
-</code></pre></div>
+root@e93f1a668767:/#
+</code></pre>
         </div>
       </article>
     </main>
@@ -163,7 +164,7 @@ Ethernet adapter vEthernet (DockerNAT):
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: November 25, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

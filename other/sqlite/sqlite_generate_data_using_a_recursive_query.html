@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>sqlite Generate Data using a Recursive Query</title>
   </head>
   <body class="light" id="top">
@@ -89,19 +90,19 @@
         <div class="article-body">
           <h1>sqlite Generate Data using a Recursive Query</h1>
 <p>A query to return 100 records.</p>
-<div class="codehilite"><pre><span></span><code><span class="k">WITH</span><span class="w"> </span><span class="k">RECURSIVE</span>
-<span class="w">  </span><span class="n">rec</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="k">VALUES</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">rec</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">x</span><span class="o">&lt;</span><span class="mi">100</span><span class="p">)</span>
-<span class="k">SELECT</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="k">ABS</span><span class="p">(</span><span class="n">RANDOM</span><span class="p">())</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">rec</span><span class="p">;</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-sql">WITH RECURSIVE
+  rec(x) AS (VALUES(1) UNION ALL SELECT x+1 FROM rec WHERE x&lt;100)
+SELECT x, ABS(RANDOM()) % 1000 FROM rec;
+</code></pre>
 
 <p>A more complex example using two record generators.</p>
-<div class="codehilite"><pre><span></span><code><span class="k">WITH</span><span class="w"> </span><span class="k">RECURSIVE</span>
-<span class="w">  </span><span class="n">ent</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="k">VALUES</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">e</span><span class="o">+</span><span class="mi">1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">ent</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">e</span><span class="o">&lt;</span><span class="mi">10</span><span class="p">),</span>
-<span class="w">  </span><span class="n">rec</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="p">(</span><span class="k">VALUES</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="k">UNION</span><span class="w"> </span><span class="k">ALL</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="n">r</span><span class="o">+</span><span class="mi">1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">rec</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">r</span><span class="o">&lt;</span><span class="mi">100</span><span class="p">)</span>
-<span class="k">SELECT</span><span class="w">  </span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="n">r</span>
-<span class="k">FROM</span><span class="w">    </span><span class="n">ent</span>
-<span class="k">JOIN</span><span class="w">    </span><span class="n">rec</span><span class="p">;</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-sql">WITH RECURSIVE
+  ent(e) AS (VALUES(1) UNION ALL SELECT e+1 FROM ent WHERE e&lt;10),
+  rec(r) AS (VALUES(1) UNION ALL SELECT r+1 FROM rec WHERE r&lt;100)
+SELECT  e, r
+FROM    ent
+JOIN    rec;
+</code></pre>
 
 <hr>
         </div>
@@ -121,7 +122,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: November 25, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>19-06-12 - Setting Prompt Colour In bash and Putty</title>
   </head>
   <body class="light" id="top">
@@ -90,93 +91,93 @@
           <h1>19-06-12 - Setting Prompt Colour In bash and Putty</h1>
 <p>I want a different colour prompt for different machines.</p>
 <p>The following script gives colour names to the various escape sequences.  Can put this in (for example) .bashrc file.</p>
-<div class="codehilite"><pre><span></span><code># Regular Text Colours
-txtblk=&#39;\e[0;30m&#39; # Black
-txtred=&#39;\e[0;31m&#39; # Red
-txtgrn=&#39;\e[0;32m&#39; # Green
-txtylw=&#39;\e[0;33m&#39; # Yellow
-txtblu=&#39;\e[0;34m&#39; # Blue
-txtpur=&#39;\e[0;35m&#39; # Purple
-txtcyn=&#39;\e[0;36m&#39; # Cyan
-txtwht=&#39;\e[0;37m&#39; # White
+<pre class="codehilite"><code># Regular Text Colours
+txtblk='\e[0;30m' # Black
+txtred='\e[0;31m' # Red
+txtgrn='\e[0;32m' # Green
+txtylw='\e[0;33m' # Yellow
+txtblu='\e[0;34m' # Blue
+txtpur='\e[0;35m' # Purple
+txtcyn='\e[0;36m' # Cyan
+txtwht='\e[0;37m' # White
 
 # Bold Text Colours
-bldblk=&#39;\e[1;30m&#39; # Black
-bldred=&#39;\e[1;31m&#39; # Red
-bldgrn=&#39;\e[1;32m&#39; # Green
-bldylw=&#39;\e[1;33m&#39; # Yellow
-bldblu=&#39;\e[1;34m&#39; # Blue
-bldpur=&#39;\e[1;35m&#39; # Purple
-bldcyn=&#39;\e[1;36m&#39; # Cyan
-bldwht=&#39;\e[1;37m&#39; # White
+bldblk='\e[1;30m' # Black
+bldred='\e[1;31m' # Red
+bldgrn='\e[1;32m' # Green
+bldylw='\e[1;33m' # Yellow
+bldblu='\e[1;34m' # Blue
+bldpur='\e[1;35m' # Purple
+bldcyn='\e[1;36m' # Cyan
+bldwht='\e[1;37m' # White
 
 # Underlined Text Colours
-unkblk=&#39;\e[4;30m&#39; # Black
-undred=&#39;\e[4;31m&#39; # Red
-undgrn=&#39;\e[4;32m&#39; # Green
-undylw=&#39;\e[4;33m&#39; # Yellow
-undblu=&#39;\e[4;34m&#39; # Blue
-undpur=&#39;\e[4;35m&#39; # Purple
-undcyn=&#39;\e[4;36m&#39; # Cyan
-undwht=&#39;\e[4;37m&#39; # White
+unkblk='\e[4;30m' # Black
+undred='\e[4;31m' # Red
+undgrn='\e[4;32m' # Green
+undylw='\e[4;33m' # Yellow
+undblu='\e[4;34m' # Blue
+undpur='\e[4;35m' # Purple
+undcyn='\e[4;36m' # Cyan
+undwht='\e[4;37m' # White
 
 # Background Colours
-bakblk=&#39;\e[40m&#39;   # Black
-bakred=&#39;\e[41m&#39;   # Red
-badgrn=&#39;\e[42m&#39;   # Green
-bakylw=&#39;\e[43m&#39;   # Yellow
-bakblu=&#39;\e[44m&#39;   # Blue
-bakpur=&#39;\e[45m&#39;   # Purple
-bakcyn=&#39;\e[46m&#39;   # Cyan
-bakwht=&#39;\e[47m&#39;   # White
-txtrst=&#39;\e[0m&#39;    # Text Reset
-</code></pre></div>
+bakblk='\e[40m'   # Black
+bakred='\e[41m'   # Red
+badgrn='\e[42m'   # Green
+bakylw='\e[43m'   # Yellow
+bakblu='\e[44m'   # Blue
+bakpur='\e[45m'   # Purple
+bakcyn='\e[46m'   # Cyan
+bakwht='\e[47m'   # White
+txtrst='\e[0m'    # Text Reset
+</code></pre>
 
 <p>The following sets the prompt text and with colour.</p>
-<div class="codehilite"><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="n">PS1</span><span class="o">=</span><span class="s2">&quot;${txtcyn}&quot;</span><span class="s1">&#39;\u@\h &#39;</span><span class="s2">&quot;${txtred}&quot;</span><span class="s1">&#39;\W&gt; &#39;</span><span class="s2">&quot;${txtwht}&quot;</span>
-</code></pre></div>
+<pre class="codehilite"><code>export PS1=&quot;${txtcyn}&quot;'\u@\h '&quot;${txtred}&quot;'\W&gt; '&quot;${txtwht}&quot;
+</code></pre>
 
 <p>It is preferable to use single quotes but within single quotes the colour variables do not get replaced so here I use a mixture of double and single quotes.</p>
 <p>The following variables can be used in the prompt.</p>
-<div class="codehilite"><pre><span></span><code><span class="err">\</span><span class="nt">d</span><span class="w">   </span><span class="nt">The</span><span class="w"> </span><span class="nt">date</span><span class="o">,</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="s2">&quot;Weekday Month Date&quot;</span><span class="w"> </span><span class="nt">format</span><span class="w"> </span><span class="o">(</span><span class="nt">e</span><span class="p">.</span><span class="nc">g</span><span class="o">.,</span><span class="w"> </span><span class="s2">&quot;Tue May 26&quot;</span><span class="o">).</span><span class="w"> </span>
+<pre class="codehilite"><code>\d   The date, in &quot;Weekday Month Date&quot; format (e.g., &quot;Tue May 26&quot;). 
 
-<span class="err">\</span><span class="nt">h</span><span class="w">   </span><span class="nt">The</span><span class="w"> </span><span class="nt">hostname</span><span class="o">,</span><span class="w"> </span><span class="nt">up</span><span class="w"> </span><span class="nt">to</span><span class="w"> </span><span class="nt">the</span><span class="w"> </span><span class="nt">first</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">(</span><span class="nt">e</span><span class="p">.</span><span class="nc">g</span><span class="o">.</span><span class="w"> </span><span class="nt">deckard</span><span class="o">)</span><span class="w"> </span>
-<span class="err">\</span><span class="nt">H</span><span class="w">   </span><span class="nt">The</span><span class="w"> </span><span class="nt">hostname</span><span class="o">.</span><span class="w"> </span><span class="o">(</span><span class="nt">e</span><span class="p">.</span><span class="nc">g</span><span class="o">.</span><span class="w"> </span><span class="nt">deckard</span><span class="p">.</span><span class="nc">SS64</span><span class="p">.</span><span class="nc">com</span><span class="o">)</span>
+\h   The hostname, up to the first . (e.g. deckard) 
+\H   The hostname. (e.g. deckard.SS64.com)
 
-<span class="err">\</span><span class="nt">j</span><span class="w">   </span><span class="nt">The</span><span class="w"> </span><span class="nt">number</span><span class="w"> </span><span class="nt">of</span><span class="w"> </span><span class="nt">jobs</span><span class="w"> </span><span class="nt">currently</span><span class="w"> </span><span class="nt">managed</span><span class="w"> </span><span class="nt">by</span><span class="w"> </span><span class="nt">the</span><span class="w"> </span><span class="nt">shell</span><span class="o">.</span><span class="w"> </span>
+\j   The number of jobs currently managed by the shell. 
 
-<span class="err">\</span><span class="nt">l</span><span class="w">   </span><span class="nt">The</span><span class="w"> </span><span class="nt">basename</span><span class="w"> </span><span class="nt">of</span><span class="w"> </span><span class="nt">the</span><span class="w"> </span><span class="nt">shells</span><span class="w"> </span><span class="nt">terminal</span><span class="w"> </span><span class="nt">device</span><span class="w"> </span><span class="nt">name</span><span class="o">.</span><span class="w"> </span>
+\l   The basename of the shells terminal device name. 
 
-<span class="err">\</span><span class="nt">s</span><span class="w">   </span><span class="nt">The</span><span class="w"> </span><span class="nt">name</span><span class="w"> </span><span class="nt">of</span><span class="w"> </span><span class="nt">the</span><span class="w"> </span><span class="nt">shell</span><span class="o">,</span><span class="w"> </span><span class="nt">the</span><span class="w"> </span><span class="nt">basename</span><span class="w"> </span><span class="nt">of</span><span class="w"> </span><span class="o">$</span><span class="nt">0</span><span class="w"> </span><span class="o">(</span><span class="nt">the</span><span class="w"> </span><span class="nt">portion</span><span class="w"> </span><span class="nt">following</span><span class="w"> </span><span class="nt">the</span><span class="w"> </span><span class="nt">final</span><span class="w"> </span><span class="nt">slash</span><span class="o">).</span><span class="w"> </span>
+\s   The name of the shell, the basename of $0 (the portion following the final slash). 
 
-<span class="err">\</span><span class="nt">t</span><span class="w">   </span><span class="nt">The</span><span class="w"> </span><span class="nt">time</span><span class="o">,</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nt">24-hour</span><span class="w"> </span><span class="nt">HH</span><span class="p">:</span><span class="nd">MM</span><span class="p">:</span><span class="nd">SS</span><span class="w"> </span><span class="nt">format</span><span class="o">.</span><span class="w"> </span>
-<span class="err">\</span><span class="nt">T</span><span class="w">   </span><span class="nt">The</span><span class="w"> </span><span class="nt">time</span><span class="o">,</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nt">12-hour</span><span class="w"> </span><span class="nt">HH</span><span class="p">:</span><span class="nd">MM</span><span class="p">:</span><span class="nd">SS</span><span class="w"> </span><span class="nt">format</span><span class="o">.</span><span class="w"> </span>
-<span class="err">\</span><span class="o">@</span><span class="w">   </span><span class="nt">The</span><span class="w"> </span><span class="nt">time</span><span class="o">,</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nt">12-hour</span><span class="w"> </span><span class="nt">am</span><span class="o">/</span><span class="nt">pm</span><span class="w"> </span><span class="nt">format</span><span class="o">.</span><span class="w"> </span>
+\t   The time, in 24-hour HH:MM:SS format. 
+\T   The time, in 12-hour HH:MM:SS format. 
+\@   The time, in 12-hour am/pm format. 
 
-<span class="err">\</span><span class="nt">u</span><span class="w">   </span><span class="nt">The</span><span class="w"> </span><span class="nt">username</span><span class="w"> </span><span class="nt">of</span><span class="w"> </span><span class="nt">the</span><span class="w"> </span><span class="nt">current</span><span class="w"> </span><span class="nt">user</span><span class="o">.</span><span class="w"> </span>
+\u   The username of the current user. 
 
-<span class="err">\</span><span class="nt">v</span><span class="w">   </span><span class="nt">The</span><span class="w"> </span><span class="nt">version</span><span class="w"> </span><span class="nt">of</span><span class="w"> </span><span class="nt">Bash</span><span class="w"> </span><span class="o">(</span><span class="nt">e</span><span class="p">.</span><span class="nc">g</span><span class="o">.,</span><span class="w"> </span><span class="nt">2</span><span class="p">.</span><span class="nc">00</span><span class="o">)</span><span class="w"> </span>
-<span class="err">\</span><span class="nt">V</span><span class="w">   </span><span class="nt">The</span><span class="w"> </span><span class="nt">release</span><span class="w"> </span><span class="nt">of</span><span class="w"> </span><span class="nt">Bash</span><span class="o">,</span><span class="w"> </span><span class="nt">version</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nt">patchlevel</span><span class="w"> </span><span class="o">(</span><span class="nt">e</span><span class="p">.</span><span class="nc">g</span><span class="o">.,</span><span class="w"> </span><span class="nt">2</span><span class="p">.</span><span class="nc">00</span><span class="p">.</span><span class="nc">0</span><span class="o">)</span><span class="w"> </span>
+\v   The version of Bash (e.g., 2.00) 
+\V   The release of Bash, version + patchlevel (e.g., 2.00.0) 
 
-<span class="err">\</span><span class="nt">w</span><span class="w">   </span><span class="nt">The</span><span class="w"> </span><span class="nt">current</span><span class="w"> </span><span class="nt">working</span><span class="w"> </span><span class="nt">directory</span><span class="o">.</span><span class="w"> </span>
-<span class="err">\</span><span class="nt">W</span><span class="w">   </span><span class="nt">The</span><span class="w"> </span><span class="nt">basename</span><span class="w"> </span><span class="nt">of</span><span class="w"> </span><span class="o">$</span><span class="nt">PWD</span><span class="o">.</span><span class="w"> </span>
+\w   The current working directory. 
+\W   The basename of $PWD. 
 
-<span class="err">\</span><span class="o">!</span><span class="w">   </span><span class="nt">The</span><span class="w"> </span><span class="nt">history</span><span class="w"> </span><span class="nt">number</span><span class="w"> </span><span class="nt">of</span><span class="w"> </span><span class="nt">this</span><span class="w"> </span><span class="nt">command</span><span class="o">.</span><span class="w"> </span>
-<span class="err">\#</span><span class="w">   </span><span class="nt">The</span><span class="w"> </span><span class="nt">command</span><span class="w"> </span><span class="nt">number</span><span class="w"> </span><span class="nt">of</span><span class="w"> </span><span class="nt">this</span><span class="w"> </span><span class="nt">command</span><span class="o">.</span><span class="w"> </span>
+\!   The history number of this command. 
+\#   The command number of this command. 
 
-<span class="err">\</span><span class="o">$</span><span class="w">   </span><span class="nt">If</span><span class="w"> </span><span class="nt">you</span><span class="w"> </span><span class="nt">are</span><span class="w"> </span><span class="nt">not</span><span class="w"> </span><span class="nt">root</span><span class="o">,</span><span class="w"> </span><span class="nt">inserts</span><span class="w"> </span><span class="nt">a</span><span class="w"> </span><span class="s2">&quot;$&quot;</span><span class="o">;</span><span class="w"> </span><span class="nt">if</span><span class="w"> </span><span class="nt">you</span><span class="w"> </span><span class="nt">are</span><span class="w"> </span><span class="nt">root</span><span class="o">,</span><span class="w"> </span><span class="nt">you</span><span class="w"> </span><span class="nt">get</span><span class="w"> </span><span class="nt">a</span><span class="w"> </span><span class="s2">&quot;#&quot;</span><span class="w">  </span><span class="o">(</span><span class="nt">root</span><span class="w"> </span><span class="nt">uid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nt">0</span><span class="o">)</span><span class="w"> </span>
+\$   If you are not root, inserts a &quot;$&quot;; if you are root, you get a &quot;#&quot;  (root uid = 0) 
 
-<span class="err">\</span><span class="nt">nnn</span><span class="w">   </span><span class="nt">The</span><span class="w"> </span><span class="nt">character</span><span class="w"> </span><span class="nt">whose</span><span class="w"> </span><span class="nt">ASCII</span><span class="w"> </span><span class="nt">code</span><span class="w"> </span><span class="nt">is</span><span class="w"> </span><span class="nt">the</span><span class="w"> </span><span class="nt">octal</span><span class="w"> </span><span class="nt">value</span><span class="w"> </span><span class="nt">nnn</span><span class="o">.</span><span class="w"> </span>
+\nnn   The character whose ASCII code is the octal value nnn. 
 
-<span class="err">\</span><span class="nt">n</span><span class="w">   </span><span class="nt">A</span><span class="w"> </span><span class="nt">newline</span><span class="o">.</span><span class="w"> </span>
-<span class="err">\</span><span class="nt">r</span><span class="w">   </span><span class="nt">A</span><span class="w"> </span><span class="nt">carriage</span><span class="w"> </span><span class="nt">return</span><span class="o">.</span><span class="w"> </span>
-<span class="err">\</span><span class="nt">e</span><span class="w">   </span><span class="nt">An</span><span class="w"> </span><span class="nt">escape</span><span class="w"> </span><span class="nt">character</span><span class="w"> </span><span class="o">(</span><span class="nt">typically</span><span class="w"> </span><span class="nt">a</span><span class="w"> </span><span class="nt">color</span><span class="w"> </span><span class="nt">code</span><span class="o">).</span><span class="w"> </span>
-<span class="err">\\</span><span class="w">   </span><span class="nt">A</span><span class="w"> </span><span class="nt">backslash</span><span class="o">.</span><span class="w"> </span>
+\n   A newline. 
+\r   A carriage return. 
+\e   An escape character (typically a color code). 
+\\   A backslash. 
 
-<span class="err">\</span><span class="cp">[</span><span class="w">   </span><span class="nx">Begin</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="nx">sequence</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">non</span><span class="na">-printing</span><span class="w"> </span><span class="nx">characters.</span><span class="w"> </span><span class="p">(</span><span class="nx">like</span><span class="w"> </span><span class="nx">color</span><span class="w"> </span><span class="nx">escape</span><span class="w"> </span><span class="nx">sequences</span><span class="p">)</span><span class="bp">.</span><span class="w"> </span><span class="nx nx-Member">This</span>
-<span class="w">     </span><span class="nx">allows</span><span class="w"> </span><span class="nx">bash</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="nx">calculate</span><span class="w"> </span><span class="nx">word</span><span class="w"> </span><span class="nx">wrapping</span><span class="w"> </span><span class="nx">correctly.</span>
-<span class="o">\</span><span class="cp">]</span><span class="w">   </span><span class="nt">End</span><span class="w"> </span><span class="nt">a</span><span class="w"> </span><span class="nt">sequence</span><span class="w"> </span><span class="nt">of</span><span class="w"> </span><span class="nt">non-printing</span><span class="w"> </span><span class="nt">characters</span><span class="o">.</span>
-</code></pre></div>
+\[   Begin a sequence of non-printing characters. (like color escape sequences). This
+     allows bash to calculate word wrapping correctly.
+\]   End a sequence of non-printing characters.
+</code></pre>
 
 <hr>
         </div>
@@ -196,7 +197,7 @@ txtrst=&#39;\e[0m&#39;    # Text Reset
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: November 25, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

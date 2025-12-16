@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>Creating a Javascript Module</title>
   </head>
   <body class="light" id="top">
@@ -92,22 +93,22 @@
 <p><strong>myModule.js</strong></p>
 <p>This contains one private function <code>rndInt</code> and one public (exported) function <code>rndColor</code>.</p>
 <p>I have also included a check with code which will run when <code>myModule.js</code> is run directly.  This might be useful for unit tests in the module (not sure).</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">rndInt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">max</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">max</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span>
+<pre class="codehilite"><code class="language-javascript">const rndInt = (max) =&gt; Math.floor(Math.random() * max) + 1;
 
-<span class="nx">exports</span><span class="p">.</span><span class="nx">rndColor</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s1">&#39;#&#39;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="nx">rndInt</span><span class="p">(</span><span class="mf">256</span><span class="p">)</span><span class="o">-</span><span class="mf">1</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="mf">16</span><span class="p">)</span><span class="w"> </span><span class="o">+</span>
-<span class="w">    </span><span class="p">(</span><span class="nx">rndInt</span><span class="p">(</span><span class="mf">256</span><span class="p">)</span><span class="o">-</span><span class="mf">1</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="mf">16</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="nx">rndInt</span><span class="p">(</span><span class="mf">256</span><span class="p">)</span><span class="o">-</span><span class="mf">1</span><span class="p">).</span><span class="nx">toString</span><span class="p">(</span><span class="mf">16</span><span class="p">);</span>
+exports.rndColor = () =&gt; '#' + (rndInt(256)-1).toString(16) +
+    (rndInt(256)-1).toString(16) + (rndInt(256)-1).toString(16);
 
-<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">argv</span><span class="p">[</span><span class="mf">1</span><span class="p">].</span><span class="nx">match</span><span class="p">(</span><span class="sr">/myModule.js$/g</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;myModule run directly&#39;</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div>
+if (process.argv[1].match(/myModule.js$/g)) {
+  console.log('myModule run directly');
+}
+</code></pre>
 
 <h2 id="second-we-use-the-module">Second We Use the Module</h2>
 <p><strong>myProgram.js</strong></p>
-<div class="codehilite"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./myModule&#39;</span><span class="p">);</span>
+<pre class="codehilite"><code class="language-javascript">const m = require('./myModule');
 
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">m</span><span class="p">.</span><span class="nx">rndColor</span><span class="p">());</span>
-</code></pre></div>
+console.log(m.rndColor());
+</code></pre>
 
 <hr>
         </div>
@@ -127,7 +128,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: November 25, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

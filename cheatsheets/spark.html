@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>Spark Cheatsheet</title>
   </head>
   <body class="light" id="top">
@@ -106,21 +107,21 @@
 <p><code>spark.driver.memory</code> - this is the memory allocated to the Spark driver.</p>
 <p><code>spark.driver.memoryOverhead</code> - Container process or other none JVM processes in the container.  This is a percentage and the minimum allocated is <code>max(spark.driver.memoryOverhead * spark.driver.memory, 384MB)</code>.</p>
 <h1 id="pyspark">PySpark</h1>
-<div class="codehilite"><pre><span></span><code><span class="c1"># Dataframe to JSON (string)</span>
-<span class="n">jsonStrings</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">toJSON</span><span class="p">()</span><span class="o">.</span><span class="n">collect</span><span class="p">()</span>
+<pre class="codehilite"><code class="language-python"># Dataframe to JSON (string)
+jsonStrings = df.toJSON().collect()
 
-<span class="c1"># Dataframe to list</span>
-<span class="nb">list</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span><span class="o">.</span><span class="n">asDict</span><span class="p">()</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">collect</span><span class="p">()]</span>
-<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">:</span>
-      <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+# Dataframe to list
+list = [row.asDict() for row in df.collect()]
+for row in list:
+      print(row)
 
-<span class="c1"># Create dataframe from list - need to define schema</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="n">schema</span><span class="p">)</span>
+# Create dataframe from list - need to define schema
+df = spark.createDataFrame(list, schema)
 
-<span class="c1"># Get the schema definition for a dataframe</span>
-<span class="n">schema</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">schema</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">schema</span><span class="p">)</span>
-</code></pre></div>
+# Get the schema definition for a dataframe
+schema = df.schema
+print(schema)
+</code></pre>
         </div>
       </article>
     </main>
@@ -138,7 +139,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: November 25, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

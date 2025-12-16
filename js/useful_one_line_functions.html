@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>Useful One Line Functions</title>
   </head>
   <body class="light" id="top">
@@ -90,27 +91,27 @@
           <h1>Useful One Line Functions</h1>
 <style>code {font-size: 1.3em !important} </style>
 
-<div class="codehilite"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">rndInt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">max</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">max</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">;</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">const rndInt = (max) =&gt; Math.floor(Math.random() * max) + 1;
+</code></pre>
 
-<div class="codehilite"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">timeMS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">prevTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">prevTime</span><span class="p">;</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">const timeMS = (prevTime = 0) =&gt; Date.now() - prevTime;
+</code></pre>
 
-<div class="codehilite"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">DEBUG</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span><span class="w"> </span><span class="kd">const</span><span class="w"> </span><span class="nx">debug</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">DEBUG</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;DEBUG:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">args</span><span class="p">);</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">let DEBUG = true; const debug = (...args) =&gt; DEBUG &amp;&amp; console.log('DEBUG:', args);
+</code></pre>
 
-<div class="codehilite"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">delay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">ms</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Promise</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">setTimeout</span><span class="p">(</span><span class="nx">res</span><span class="p">,</span><span class="w"> </span><span class="nx">ms</span><span class="p">));</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">const delay = (ms) =&gt; new Promise((res) =&gt; setTimeout(res, ms));
+</code></pre>
 
-<div class="codehilite"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">concat</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">args</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">);</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-javascript">const concat = (...args) =&gt; args.join(' ');
+</code></pre>
 
 <p>Not quite one line</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">cls</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;\u001b[3J\u001b[1J&#39;</span><span class="p">);</span>
-<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
-<span class="p">};</span>
-</code></pre></div>
+<pre class="codehilite"><code class="language-js">const cls = () =&gt; {
+  log('\u001b[3J\u001b[1J');
+  console.clear();
+};
+</code></pre>
 
 <hr>
         </div>
@@ -130,7 +131,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: November 25, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

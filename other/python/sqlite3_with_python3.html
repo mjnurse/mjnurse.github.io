@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>Sqlite3 With Python3</title>
   </head>
   <body class="light" id="top">
@@ -89,39 +90,39 @@
         <div class="article-body">
           <h1>Sqlite3 With Python3</h1>
 <p>An example of how to use a Sqlite3 database with Python3.</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
+<pre class="codehilite"><code class="language-python">import sqlite3
 
-<span class="k">def</span><span class="w"> </span><span class="nf">dbOpen</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
-  <span class="k">return</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+def dbOpen(name):
+  return sqlite3.connect(name)
 
-<span class="k">def</span><span class="w"> </span><span class="nf">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">sql</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="p">()):</span>
-  <span class="k">try</span><span class="p">:</span>
-    <span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
-    <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
-    <span class="n">rows</span> <span class="o">=</span> <span class="n">cur</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()</span>
-    <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">rows</span>
-  <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+def dbRunSQL(conn, sql, values = ()):
+  try:
+    cur = conn.cursor()
+    cur.execute(sql, values)
+    rows = cur.fetchall()
+    conn.commit()
+    return rows
+  except Exception as e:
+    print('Error:', e)
 
-<span class="k">def</span><span class="w"> </span><span class="nf">test</span><span class="p">():</span>
-  <span class="n">conn</span> <span class="o">=</span> <span class="n">dbOpen</span><span class="p">(</span><span class="s1">&#39;test.db&#39;</span><span class="p">)</span>
-  <span class="n">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">&#39;DROP TABLE test&#39;</span><span class="p">)</span>
-  <span class="n">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">&#39;CREATE TABLE test(n NUMBER, t TEXT)&#39;</span><span class="p">)</span>
+def test():
+  conn = dbOpen('test.db')
+  dbRunSQL(conn, 'DROP TABLE test')
+  dbRunSQL(conn, 'CREATE TABLE test(n NUMBER, t TEXT)')
 
-  <span class="n">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">&#39;INSERT INTO test(n, t) VALUES (?, ?)&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Hello&#39;</span><span class="p">))</span>
-  <span class="n">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">&#39;INSERT INTO test(n, t) VALUES (?, ?)&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Goodbye&#39;</span><span class="p">))</span>
-  <span class="nb">print</span><span class="p">(</span><span class="n">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">&#39;SELECT * FROM test&#39;</span><span class="p">))</span>
+  dbRunSQL(conn, 'INSERT INTO test(n, t) VALUES (?, ?)', (1, 'Hello'))
+  dbRunSQL(conn, 'INSERT INTO test(n, t) VALUES (?, ?)', (2, 'Goodbye'))
+  print(dbRunSQL(conn, 'SELECT * FROM test'))
 
-  <span class="n">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">&#39;UPDATE test SET t = ? WHERE n = ?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;See ya&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-  <span class="nb">print</span><span class="p">(</span><span class="n">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">&#39;SELECT * FROM test&#39;</span><span class="p">))</span>
+  dbRunSQL(conn, 'UPDATE test SET t = ? WHERE n = ?', ('See ya', 2))
+  print(dbRunSQL(conn, 'SELECT * FROM test'))
 
-  <span class="n">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">&#39;DELETE FROM test WHERE n = ?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,))</span>
-  <span class="nb">print</span><span class="p">(</span><span class="n">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">&#39;SELECT * FROM test&#39;</span><span class="p">))</span>
+  dbRunSQL(conn, 'DELETE FROM test WHERE n = ?', (1,))
+  print(dbRunSQL(conn, 'SELECT * FROM test'))
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-  <span class="n">test</span><span class="p">()</span>
-</code></pre></div>
+if __name__ == '__main__':
+  test()
+</code></pre>
 
 <hr>
         </div>
@@ -141,7 +142,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: December 10, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

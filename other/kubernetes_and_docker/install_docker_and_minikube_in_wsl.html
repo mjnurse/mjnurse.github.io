@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>Install Docker and Minikube in WSL</title>
   </head>
   <body class="light" id="top">
@@ -100,24 +101,24 @@
 </div>
 <h1 id="docker">Docker</h1>
 <p>Works for Ubuntu and Debian based distros.</p>
-<div class="codehilite"><pre><span></span><code><span class="c1"># Install Docker, you can ignore the warning from Docker about using WSL.</span>
+<pre class="codehilite"><code class="language-bash"># Install Docker, you can ignore the warning from Docker about using WSL.
 
-&gt;<span class="w"> </span>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://get.docker.com<span class="w"> </span>-o<span class="w"> </span>get-docker.sh
-&gt;<span class="w"> </span>sudo<span class="w"> </span>sh<span class="w"> </span>get-docker.sh
+&gt; curl -fsSL https://get.docker.com -o get-docker.sh
+&gt; sudo sh get-docker.sh
 
-<span class="c1"># Add your user to the Docker group.</span>
+# Add your user to the Docker group.
 
-&gt;<span class="w"> </span>sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>docker<span class="w"> </span><span class="nv">$USER</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>newgrp<span class="w"> </span>docker
+&gt; sudo usermod -aG docker $USER &amp;&amp; newgrp docker
 
-<span class="c1"># Check it&#39;s installed successfully.</span>
+# Check it's installed successfully.
 
-&gt;<span class="w"> </span>docker<span class="w"> </span>--version
+&gt; docker --version
 
-<span class="c1"># Using Ubuntu 22.04 or Debian 10 / 11? You need to do 1 extra step for iptables</span>
-<span class="c1"># compatibility, you&#39;ll want to choose option (1) from the prompt to use iptables-legacy.</span>
+# Using Ubuntu 22.04 or Debian 10 / 11? You need to do 1 extra step for iptables
+# compatibility, you'll want to choose option (1) from the prompt to use iptables-legacy.
 
-&gt;<span class="w"> </span>sudo<span class="w"> </span>update-alternatives<span class="w"> </span>--config<span class="w"> </span>iptables
-</code></pre></div>
+&gt; sudo update-alternatives --config iptables
+</code></pre>
 
 <h1 id="minikube">Minikube</h1>
 <p>Install systemctl
@@ -200,7 +201,7 @@ minikube config set cpus 4</p>
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: December 10, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

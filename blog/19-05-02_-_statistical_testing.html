@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>19-05-02 - Statistical Testing</title>
   </head>
   <body class="light" id="top">
@@ -253,7 +254,7 @@
 <p>The Python programs is <a href="attatchments/stats_test.py">stats_test.py</a></p>
 <h1 id="the-statistics">The Statistics</h1>
 <p>Running <code>stats_test.py</code>.</p>
-<div class="codehilite"><pre><span></span><code><span class="k">&gt; </span><span class="ge">python3 stats_test.py</span>
+<pre class="codehilite"><code>&gt; python3 stats_test.py
 
 Usage:
 
@@ -272,134 +273,134 @@ Usage:
 (3) stats_test.py -t &lt;num test sets&gt; &lt;bad rec perc&gt; &lt;set size&gt; &lt;num of tests&gt;
 
 Percentages (perc) in range 0 - 100
-</code></pre></div>
+</code></pre>
 
 <p>Let's calculate the die / balls in a bag scenario above.</p>
-<div class="codehilite"><pre><span></span><code><span class="nv">&gt;</span><span class="c"> python3 stats_test</span><span class="nt">.</span><span class="c">py 16</span><span class="nt">.</span><span class="c">667 6 99</span>
-<span class="nb">--------------------------------------------------------------------------------</span>
-<span class="c">bad record likelihood: 16</span><span class="nt">.</span><span class="c">667 %</span>
-<span class="c">set size:              6</span>
-<span class="c">target certainty:      99</span><span class="nt">.</span><span class="c">0 %</span>
-<span class="nb">--------------------------------------------------------------------------------</span>
-<span class="c">With good recs removed </span><span class="nb">-</span><span class="c">   reached target certainty 99</span><span class="nt">.</span><span class="c">0% after 6 tests</span>
-<span class="c">With good recs remaining </span><span class="nb">-</span><span class="c"> reached target certainty 99</span><span class="nt">.</span><span class="c">0% after 26 tests</span>
-<span class="nb">--------------------------------------------------------------------------------</span>
-</code></pre></div>
+<pre class="codehilite"><code>&gt; python3 stats_test.py 16.667 6 99
+--------------------------------------------------------------------------------
+bad record likelihood: 16.667 %
+set size:              6
+target certainty:      99.0 %
+--------------------------------------------------------------------------------
+With good recs removed -   reached target certainty 99.0% after 6 tests
+With good recs remaining - reached target certainty 99.0% after 26 tests
+--------------------------------------------------------------------------------
+</code></pre>
 
 <p>Now lets calculate something a little more useful.  Assuming we have 100,000,000 records and we want to be 99.99% sure the risk of an error is less than 0.01%.</p>
-<div class="codehilite"><pre><span></span><code><span class="nv">&gt;</span><span class="c"> python3 stats_test</span><span class="nt">.</span><span class="c">py 0</span><span class="nt">.</span><span class="c">01 100000000 99</span><span class="nt">.</span><span class="c">99</span>
-<span class="nb">--------------------------------------------------------------------------------</span>
-<span class="c">bad record likelihood: 0</span><span class="nt">.</span><span class="c">01 %</span>
-<span class="c">set size:              100000000</span>
-<span class="c">target certainty:      99</span><span class="nt">.</span><span class="c">99 %</span>
-<span class="nb">--------------------------------------------------------------------------------</span>
-<span class="c">With good recs removed </span><span class="nb">-</span><span class="c">   reached target certainty 99</span><span class="nt">.</span><span class="c">99% after 92057 tests</span>
-<span class="c">With good recs remaining </span><span class="nb">-</span><span class="c"> reached target certainty 99</span><span class="nt">.</span><span class="c">99% after 92099 tests</span>
-<span class="nb">--------------------------------------------------------------------------------</span>
-</code></pre></div>
+<pre class="codehilite"><code>&gt; python3 stats_test.py 0.01 100000000 99.99
+--------------------------------------------------------------------------------
+bad record likelihood: 0.01 %
+set size:              100000000
+target certainty:      99.99 %
+--------------------------------------------------------------------------------
+With good recs removed -   reached target certainty 99.99% after 92057 tests
+With good recs remaining - reached target certainty 99.99% after 92099 tests
+--------------------------------------------------------------------------------
+</code></pre>
 
 <p>So we need to test a little over 92,000 records chosen at random from 100,000,000 records to be 99.99% sure there is less than 0.01% of records in error.  Also, note that with this large set size the difference between the number of tests required if the good records are left in or removed is negligible.</p>
 <p>Lets try a larger set size, 100,000,000,000.</p>
-<div class="codehilite"><pre><span></span><code><span class="nv">&gt;</span><span class="c"> python3 stats_test</span><span class="nt">.</span><span class="c">py 0</span><span class="nt">.</span><span class="c">01 100000000000 99</span><span class="nt">.</span><span class="c">99</span>
-<span class="nb">--------------------------------------------------------------------------------</span>
-<span class="c">bad record likelihood: 0</span><span class="nt">.</span><span class="c">01 %</span>
-<span class="c">set size:              100000000000</span>
-<span class="c">target certainty:      99</span><span class="nt">.</span><span class="c">99 %</span>
-<span class="nb">--------------------------------------------------------------------------------</span>
-<span class="c">With good recs removed </span><span class="nb">-</span><span class="c">   reached target certainty 99</span><span class="nt">.</span><span class="c">99% after 92099 tests</span>
-<span class="c">With good recs remaining </span><span class="nb">-</span><span class="c"> reached target certainty 99</span><span class="nt">.</span><span class="c">99% after 92099 tests</span>
-<span class="nb">--------------------------------------------------------------------------------</span>
-</code></pre></div>
+<pre class="codehilite"><code>&gt; python3 stats_test.py 0.01 100000000000 99.99
+--------------------------------------------------------------------------------
+bad record likelihood: 0.01 %
+set size:              100000000000
+target certainty:      99.99 %
+--------------------------------------------------------------------------------
+With good recs removed -   reached target certainty 99.99% after 92099 tests
+With good recs remaining - reached target certainty 99.99% after 92099 tests
+--------------------------------------------------------------------------------
+</code></pre>
 
 <p>What's interesting here is that the number if tests (with good records remaining in the data set) is the same even though we have 1,000x more records.  This surprised me at first but the reason is obvious once seen.  As we are stating the max likelihood of there being a bad records as a percentage (of the total data set), as the set size increase so does the number of bad records.</p>
 <p>If we reduce the bad record likelihood percentage value by a factor of 1,000 so that the max number of bad records in the same as was in the 100,000,000 test set then the number of test should go up.</p>
-<div class="codehilite"><pre><span></span><code><span class="nv">&gt;</span><span class="c"> python3 stats_test</span><span class="nt">.</span><span class="c">py 0</span><span class="nt">.</span><span class="c">00001 100000000000 99</span><span class="nt">.</span><span class="c">99</span>
-<span class="nb">--------------------------------------------------------------------------------</span>
-<span class="c">bad record likelihood: 1e</span><span class="nb">-</span><span class="c">05 %</span>
-<span class="c">set size:              100000000000</span>
-<span class="c">target certainty:      99</span><span class="nt">.</span><span class="c">99 %</span>
-<span class="nb">--------------------------------------------------------------------------------</span>
-<span class="c">With good recs removed </span><span class="nb">-</span><span class="c">   reached target certainty 99</span><span class="nt">.</span><span class="c">99% after 92060997 tests</span>
-<span class="c">With good recs remaining </span><span class="nb">-</span><span class="c"> reached target certainty 99</span><span class="nt">.</span><span class="c">99% after 92103400 tests</span>
-<span class="nb">--------------------------------------------------------------------------------</span>
-</code></pre></div>
+<pre class="codehilite"><code>&gt; python3 stats_test.py 0.00001 100000000000 99.99
+--------------------------------------------------------------------------------
+bad record likelihood: 1e-05 %
+set size:              100000000000
+target certainty:      99.99 %
+--------------------------------------------------------------------------------
+With good recs removed -   reached target certainty 99.99% after 92060997 tests
+With good recs remaining - reached target certainty 99.99% after 92103400 tests
+--------------------------------------------------------------------------------
+</code></pre>
 
 <p>The number of tests does go up, a lot.</p>
 <h1 id="double-checking-these-results">Double Checking These Results</h1>
 <p>Lets check the math is correct by simulating a real scenario.  I wrote a function in <code>stats_test.py</code> to do this.  Below I calculate the test required for a few different scenarios and then test the values.</p>
 <h2 id="scenario-1">Scenario 1:</h2>
 <h3 id="calculate-number-of-tests">Calculate number of tests</h3>
-<div class="codehilite"><pre><span></span><code><span class="nv">&gt;</span><span class="c"> python3 stats_test</span><span class="nt">.</span><span class="c">py 0</span><span class="nt">.</span><span class="c">01 1000000 99</span><span class="nt">.</span><span class="c">9</span>
-<span class="nb">--------------------------------------------------------------------------------</span>
-<span class="c">bad record likelihood: 0</span><span class="nt">.</span><span class="c">01 %</span>
-<span class="c">set size:              1000000</span>
-<span class="c">target certainty:      99</span><span class="nt">.</span><span class="c">9 %</span>
-<span class="nb">--------------------------------------------------------------------------------</span>
-<span class="c">With good recs removed </span><span class="nb">-</span><span class="c">   reached target certainty 99</span><span class="nt">.</span><span class="c">9% after 66743 tests</span>
-<span class="c">With good recs remaining </span><span class="nb">-</span><span class="c"> reached target certainty 99</span><span class="nt">.</span><span class="c">9% after 69075 tests</span>
-<span class="nb">--------------------------------------------------------------------------------</span>
-</code></pre></div>
+<pre class="codehilite"><code>&gt; python3 stats_test.py 0.01 1000000 99.9
+--------------------------------------------------------------------------------
+bad record likelihood: 0.01 %
+set size:              1000000
+target certainty:      99.9 %
+--------------------------------------------------------------------------------
+With good recs removed -   reached target certainty 99.9% after 66743 tests
+With good recs remaining - reached target certainty 99.9% after 69075 tests
+--------------------------------------------------------------------------------
+</code></pre>
 
 <h3 id="check-that-the-suggested-number-of-tests-is-correct">Check that the suggested number of tests is correct</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">&gt; </span><span class="ge">python3 stats_test.py -t 10000 0.01 1000000 69075</span>
+<pre class="codehilite"><code>&gt; python3 stats_test.py -t 10000 0.01 1000000 69075
 
 num test sets: 10000 , num which found bad record: 9996 , percentage: 99.96%
-</code></pre></div>
+</code></pre>
 
 <p>Above, I ran 10,000 iterations of a test scenario which tests that I find a bad record by checking up to 69,075 records.  Of the 10,000 iterations, 9,996 found a bad record which is 99.96% of cases.  This confirms the suggested number of tests is good.</p>
 <h2 id="scenario-2">Scenario 2:</h2>
 <h3 id="calculate-number-of-tests_1">Calculate number of tests</h3>
-<div class="codehilite"><pre><span></span><code><span class="nv">&gt;</span><span class="c"> python3 stats_test</span><span class="nt">.</span><span class="c">py 0</span><span class="nt">.</span><span class="c">1 10000 50</span>
-<span class="nb">--------------------------------------------------------------------------------</span>
-<span class="c">bad record likelihood: 0</span><span class="nt">.</span><span class="c">1 %</span>
-<span class="c">set size:              10000</span>
-<span class="c">target certainty:      50</span><span class="nt">.</span><span class="c">0 %</span>
-<span class="nb">--------------------------------------------------------------------------------</span>
-<span class="c">With good recs removed </span><span class="nb">-</span><span class="c">   reached target certainty 50</span><span class="nt">.</span><span class="c">0% after 670 tests</span>
-<span class="c">With good recs remaining </span><span class="nb">-</span><span class="c"> reached target certainty 50</span><span class="nt">.</span><span class="c">0% after 693 tests</span>
-<span class="nb">--------------------------------------------------------------------------------</span>
-</code></pre></div>
+<pre class="codehilite"><code>&gt; python3 stats_test.py 0.1 10000 50
+--------------------------------------------------------------------------------
+bad record likelihood: 0.1 %
+set size:              10000
+target certainty:      50.0 %
+--------------------------------------------------------------------------------
+With good recs removed -   reached target certainty 50.0% after 670 tests
+With good recs remaining - reached target certainty 50.0% after 693 tests
+--------------------------------------------------------------------------------
+</code></pre>
 
 <h3 id="check-that-the-suggested-number-of-tests-is-correct_1">Check that the suggested number of tests is correct</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">&gt; </span><span class="ge">python3 stats_test.py -t 100000 0.1 10000 693</span>
+<pre class="codehilite"><code>&gt; python3 stats_test.py -t 100000 0.1 10000 693
 
 num test sets: 100000 , num which found bad record: 51357 , percentage: 51.36%
-</code></pre></div>
+</code></pre>
 
 <p>Above, I ran 100,000 iterations of a test scenario which tests that I find a bad record by checking up to 693 records.  Of the 100,000 iterations, 51,357 found a bad record which is 51.36% of cases.  This confirms the suggested number of tests is good.</p>
 <h2 id="scenario-3">Scenario 3:</h2>
 <h3 id="calculate-number-of-tests_2">Calculate number of tests</h3>
 <p>Repeating the die test again.</p>
-<div class="codehilite"><pre><span></span><code><span class="nv">&gt;</span><span class="c"> python3 stats_test</span><span class="nt">.</span><span class="c">py 16</span><span class="nt">.</span><span class="c">67 6 99</span>
-<span class="nb">--------------------------------------------------------------------------------</span>
-<span class="c">bad record likelihood: 16</span><span class="nt">.</span><span class="c">67 %</span>
-<span class="c">set size:              6</span>
-<span class="c">target certainty:      99</span><span class="nt">.</span><span class="c">0 %</span>
-<span class="nb">--------------------------------------------------------------------------------</span>
-<span class="c">With good recs removed </span><span class="nb">-</span><span class="c">   reached target certainty 99</span><span class="nt">.</span><span class="c">0% after 6 tests</span>
-<span class="c">With good recs remaining </span><span class="nb">-</span><span class="c"> reached target certainty 99</span><span class="nt">.</span><span class="c">0% after 26 tests</span>
-<span class="nb">--------------------------------------------------------------------------------</span>
-</code></pre></div>
+<pre class="codehilite"><code>&gt; python3 stats_test.py 16.67 6 99
+--------------------------------------------------------------------------------
+bad record likelihood: 16.67 %
+set size:              6
+target certainty:      99.0 %
+--------------------------------------------------------------------------------
+With good recs removed -   reached target certainty 99.0% after 6 tests
+With good recs remaining - reached target certainty 99.0% after 26 tests
+--------------------------------------------------------------------------------
+</code></pre>
 
 <h3 id="check-that-the-suggested-number-of-tests-is-correct_2">Check that the suggested number of tests is correct</h3>
-<div class="codehilite"><pre><span></span><code><span class="k">&gt; </span><span class="ge">python3 stats_test.py -t 1000000 16.67 6 26</span>
+<pre class="codehilite"><code>&gt; python3 stats_test.py -t 1000000 16.67 6 26
 
 num test sets: 1000000 , num which found bad record: 999843 , percentage: 99.98%
-</code></pre></div>
+</code></pre>
 
 <p>Above, I ran 1,000,000 iterations of a test scenario which tests that I find a bad record by checking up to 26 records (rolls).  Of the 1,000,000 iterations, 999,843 found a bad record which is 99.98% of cases.  This confirms the suggested number of tests is good.</p>
 <h1 id="some-useful-statistics">Some Useful Statistics</h1>
 <p>I added a procedure to <code>stats_test.py</code> to print a grid of number of tests required to a range of bad record likelihood percentages and target certainty percentages.</p>
-<div class="codehilite"><pre><span></span><code><span class="c">|</span><span class="nb">--------------------------</span><span class="c">|</span><span class="nb">--------------------------------------</span><span class="c">|</span>
-<span class="c">|                          | Level of certainty                   |</span>
-<span class="c">| Number of bad records    |</span><span class="nb">--------------------------------------</span><span class="c">|</span>
-<span class="c">| less than                |      99</span><span class="nt">.</span><span class="c">9% |     99</span><span class="nt">.</span><span class="c">99% |    99</span><span class="nt">.</span><span class="c">999% |</span>
-<span class="c">|</span><span class="nb">--------------------------</span><span class="c">|</span><span class="nb">------------</span><span class="c">|</span><span class="nb">------------</span><span class="c">|</span><span class="nb">------------</span><span class="c">|</span>
-<span class="c">| 1 in 10</span><span class="nt">,</span><span class="c">000    = 0</span><span class="nt">.</span><span class="c">01%   |     69</span><span class="nt">,</span><span class="c">075 |     92</span><span class="nt">,</span><span class="c">099 |    115</span><span class="nt">,</span><span class="c">124 |</span>
-<span class="c">| 1 in 100</span><span class="nt">,</span><span class="c">000   = 0</span><span class="nt">.</span><span class="c">001%  |    690</span><span class="nt">,</span><span class="c">773 |    921</span><span class="nt">,</span><span class="c">030 |  1</span><span class="nt">,</span><span class="c">151</span><span class="nt">,</span><span class="c">287 |</span>
-<span class="c">| 1 in 1</span><span class="nt">,</span><span class="c">000</span><span class="nt">,</span><span class="c">000 = 0</span><span class="nt">.</span><span class="c">0001% |  6</span><span class="nt">,</span><span class="c">907</span><span class="nt">,</span><span class="c">752 |  9</span><span class="nt">,</span><span class="c">210</span><span class="nt">,</span><span class="c">336 | 11</span><span class="nt">,</span><span class="c">512</span><span class="nt">,</span><span class="c">920 |</span>
-<span class="c">|</span><span class="nb">-----------------------------------------------------------------</span><span class="c">|</span>
-</code></pre></div>
+<pre class="codehilite"><code>|--------------------------|--------------------------------------|
+|                          | Level of certainty                   |
+| Number of bad records    |--------------------------------------|
+| less than                |      99.9% |     99.99% |    99.999% |
+|--------------------------|------------|------------|------------|
+| 1 in 10,000    = 0.01%   |     69,075 |     92,099 |    115,124 |
+| 1 in 100,000   = 0.001%  |    690,773 |    921,030 |  1,151,287 |
+| 1 in 1,000,000 = 0.0001% |  6,907,752 |  9,210,336 | 11,512,920 |
+|-----------------------------------------------------------------|
+</code></pre>
 
 <hr>
         </div>
@@ -419,7 +420,7 @@ num test sets: 1000000 , num which found bad record: 999843 , percentage: 99.98%
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: November 25, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

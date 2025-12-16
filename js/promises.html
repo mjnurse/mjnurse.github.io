@@ -17,6 +17,7 @@
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>Promises</title>
   </head>
   <body class="light" id="top">
@@ -90,44 +91,44 @@
           <h1>Promises</h1>
 <h2 id="example-1">Example 1</h2>
 <p>An example using no function short hands.</p>
-<div class="codehilite"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">rndInt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">max</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">max</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mf">1</span><span class="p">}</span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">timeMS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="nx">prevTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="k">return</span><span class="w"> </span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nx">prevTime</span><span class="p">}</span>
+<pre class="codehilite"><code class="language-javascript">const rndInt = max =&gt; {return Math.floor(Math.random() * max) + 1}
+const timeMS = (prevTime = 0) =&gt; {return Date.now() - prevTime}
 
-<span class="kd">function</span><span class="w"> </span><span class="nx">prom</span><span class="p">(</span><span class="nx">resolveFunc</span><span class="p">,</span><span class="w"> </span><span class="nx">rejectFunc</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="c1">// Waste some time</span>
-<span class="w">  </span><span class="kd">let</span><span class="w"> </span><span class="nx">x</span><span class="p">;</span>
-<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mf">1000000000</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nx">i</span><span class="p">;</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="w">  </span><span class="c1">// So we can test both the resolve and reject paths</span>
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">rndInt</span><span class="p">(</span><span class="mf">2</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">resolveFunc</span><span class="p">(</span><span class="s1">&#39;Promise - a success value&#39;</span><span class="p">);</span>
-<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">rejectFunc</span><span class="p">(</span><span class="s1">&#39;Promise - a failure value&#39;</span><span class="p">);</span>
-<span class="w">  </span><span class="p">}</span>
-<span class="p">}</span>
+function prom(resolveFunc, rejectFunc) {
+  // Waste some time
+  let x;
+  for (let i = 0; i &lt; 1000000000; i++) {
+    x = i * i * i * i * i * i;
+  }
+  // So we can test both the resolve and reject paths
+  if (rndInt(2) == 2) {
+    resolveFunc('Promise - a success value');
+  } else {
+    rejectFunc('Promise - a failure value');
+  }
+}
 
-<span class="kd">function</span><span class="w"> </span><span class="nx">resolve</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;resolve value:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">timeMS</span><span class="p">(</span><span class="nx">startTime</span><span class="p">));</span>
-<span class="p">}</span>
+function resolve(value) {
+  console.log('resolve value:', value, timeMS(startTime));
+}
 
-<span class="kd">function</span><span class="w"> </span><span class="nx">reject</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;reject value:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">timeMS</span><span class="p">(</span><span class="nx">startTime</span><span class="p">));</span>
-<span class="p">}</span>
+function reject(value) {
+  console.log('reject value:', value, timeMS(startTime));
+}
 
-<span class="kd">const</span><span class="w"> </span><span class="nx">startTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">timeMS</span><span class="p">();</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;start - create promises&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">timeMS</span><span class="p">(</span><span class="nx">startTime</span><span class="p">));</span>
+const startTime = timeMS();
+console.log('start - create promises', timeMS(startTime));
 
-<span class="kd">const</span><span class="w"> </span><span class="nx">prom1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Promise</span><span class="p">(</span><span class="nx">prom</span><span class="p">);</span>
-<span class="kd">const</span><span class="w"> </span><span class="nx">prom2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Promise</span><span class="p">(</span><span class="nx">prom</span><span class="p">);</span>
+const prom1 = new Promise(prom);
+const prom2 = new Promise(prom);
 
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;promises created&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">timeMS</span><span class="p">(</span><span class="nx">startTime</span><span class="p">));</span>
+console.log('promises created', timeMS(startTime));
 
-<span class="nx">prom1</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span><span class="w"> </span><span class="nx">reject</span><span class="p">);</span>
-<span class="nx">prom2</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span><span class="w"> </span><span class="nx">reject</span><span class="p">);</span>
+prom1.then(resolve, reject);
+prom2.then(resolve, reject);
 
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;end&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">timeMS</span><span class="p">(</span><span class="nx">startTime</span><span class="p">));</span>
-</code></pre></div>
+console.log('end', timeMS(startTime));
+</code></pre>
 
 <hr>
         </div>
@@ -147,7 +148,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: November 25, 2025</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">
