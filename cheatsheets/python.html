@@ -136,7 +136,7 @@
 </code></pre></div>
 
 <h3 id="regexp">Regexp</h3>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">re</span>
 <span class="n">my_name</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">my_str</span><span class="p">,</span> <span class="s1">&#39;.*: ([^ ]*) .*&#39;</span><span class="p">,</span> <span class="s1">&#39;Name: Martin, Age: 18&#39;</span><span class="p">)</span>
 <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">my_name</span> <span class="o">+</span> <span class="s1">&#39;.*&#39;</span><span class="p">,</span> <span class="n">my_str</span><span class="p">):</span>
 <span class="n">new_str</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^[^-]*- &#39;</span><span class="p">,</span> <span class="sa">r</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">line</span><span class="p">)</span>
@@ -187,7 +187,7 @@
 
 <div class="codehilite"><pre><span></span><code><span class="c1"># Sorting dict&#39;s in a list</span>
 <span class="n">my_list</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;name&quot;</span><span class="p">,</span><span class="s2">&quot;tom&quot;</span><span class="p">},{</span><span class="s2">&quot;name&quot;</span><span class="p">:</span><span class="s2">&quot;bill&quot;</span><span class="p">}]</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">my_key</span><span class="p">(</span><span class="n">a_dict</span><span class="p">):</span> <span class="k">return</span> <span class="n">a_dict</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
+<span class="k">def</span> <span class="nf">my_key</span><span class="p">(</span><span class="n">a_dict</span><span class="p">):</span> <span class="k">return</span> <span class="n">a_dict</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
 <span class="n">my_list</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span> <span class="o">=</span> <span class="n">my_key</span><span class="p">)</span>
 </code></pre></div>
 
@@ -234,7 +234,7 @@
 </code></pre></div>
 
 <h2 id="command-line-parameters">Command Line Parameters</h2>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">sys</span>
 <span class="nb">print</span><span class="p">(</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span> <span class="c1"># The script/program name</span>
 <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">:</span> <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 </code></pre></div>
@@ -251,12 +251,12 @@
 </code></pre></div>
 
 <h2 id="pretty-print-json">Pretty Print JSON</h2>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">json</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">json_var</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">sort_keys</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></div>
 
 <h2 id="clear-the-screen">Clear the screen</h2>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">os</span><span class="w"> </span><span class="kn">import</span> <span class="n">system</span><span class="p">,</span> <span class="n">name</span> 
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">system</span><span class="p">,</span> <span class="n">name</span> 
 <span class="k">if</span> <span class="n">name</span> <span class="o">==</span> <span class="s1">&#39;nt&#39;</span><span class="p">:</span> <span class="c1"># windows </span>
    <span class="n">_</span> <span class="o">=</span> <span class="n">system</span><span class="p">(</span><span class="s1">&#39;cls&#39;</span><span class="p">)</span> 
 <span class="k">else</span><span class="p">:</span> <span class="c1"># linux etc</span>
@@ -271,7 +271,7 @@
 
 <h2 id="variable-set-of-arguments">Variable Set of Arguments</h2>
 <p>args(*) - delivers a tuple containing a set of (unnamed) values</p>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">multiply_all</span><span class="p">(</span><span class="o">*</span><span class="n">values</span><span class="p">):</span> 
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">multiply_all</span><span class="p">(</span><span class="o">*</span><span class="n">values</span><span class="p">):</span> 
    <span class="n">mul</span> <span class="o">=</span> <span class="mi">1</span> 
    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">values</span><span class="p">:</span> 
       <span class="n">mul</span> <span class="o">=</span> <span class="n">mul</span> <span class="o">*</span> <span class="n">i</span> 
@@ -280,7 +280,7 @@
 </code></pre></div>
 
 <p>kwargs(*) - delivers a dict containing keywords and values</p>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">print_details</span><span class="p">(</span><span class="o">**</span><span class="n">details</span><span class="p">):</span> 
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">print_details</span><span class="p">(</span><span class="o">**</span><span class="n">details</span><span class="p">):</span> 
    <span class="nb">print</span> <span class="s2">&quot;First Name = &quot;</span><span class="p">,</span> <span class="n">details</span><span class="p">[</span><span class="s1">&#39;first_name&#39;</span><span class="p">]</span> 
    <span class="nb">print</span> <span class="s2">&quot;Department = &quot;</span><span class="p">,</span> <span class="n">details</span><span class="p">[</span><span class="s1">&#39;department&#39;</span><span class="p">]</span> 
 

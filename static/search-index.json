@@ -99,36 +99,36 @@
   },
   {
     "id": "14",
-    "title": "Python",
-    "url": "/python/convert_json_file_to_csv.html",
-    "content": "Convert JSON File to CSV import csv, json, sys input = open(sys.argv[1]) data = json.load(input) input.close() output = csv.writer(sys.stdout) output.writerow(data[0].keys()) # header row for row in data: output.writerow(row.values())",
+    "title": "Convert JSON File to CSV",
+    "url": "/python/convert-json-file_to-csv.html",
+    "content": "import csv, json, sys input = open(sys.argv[1]) data = json.load(input) input.close() output = csv.writer(sys.stdout) output.writerow(data[0].keys()) # header row for row in data: output.writerow(row.values())",
     "type": "page"
   },
   {
     "id": "15",
     "title": "Faker - Synthetic Data",
-    "url": "/python/faker_-_synthetic_data.html",
+    "url": "/python/faker-synthetic-data.html",
     "content": "See Faker. Locales and Initialization # Locale: ar_AA, ar_AE, ar_BH, ar_EG, ar_JO, ar_PS, ar_SA, az_AZ, bg_BG, bn_BD, bs_BA, # cs_CZ, da_DK, de_AT, de_CH, de_DE, dk_DK, el_CY, el_GR, en_AU, en_BD, en_CA, # en_GB, en_IE, en_IN, en_NZ, en_PH, en_TH, en_US, es_AR, es_CA, es_CL, es_CO, # es_ES, es_MX, et_EE, fa_IR, fi_FI, fil_PH, fr_BE, fr_CA, fr_CH, fr_FR, fr_QC, # ga_IE, he_IL, hi_IN, hr_HR, hu_HU, hy_AM, id_ID, it_CH, it_IT, ja_JP, ka_GE, # ko_KR, lb_LU, lt_LT, lv_LV, mt_MT, ne_NP, nl_BE, nl_NL, ",
     "type": "page"
   },
   {
     "id": "16",
     "title": "Fixing ModuleNotFoundError - No module named xxx",
-    "url": "/python/fixing_modulenotfounderror_no_module_named_xxx.html",
+    "url": "/python/fixing-module-not-found-error-no_module_named_xxx.html",
     "content": "pip tells you that (for example) the module requests is installed but import requests fails in a Python program. This may be because the libraries are being stored in a location not in the list of locations searched by Python. Type pip show packagename to get the location of the installed package. Next, open python and type: import sys print(sys.path) This lists the locations python searches for any packages. If the two don't overlap, you can append a path to list searched: sys.path.append(&#39;",
     "type": "page"
   },
   {
     "id": "17",
     "title": "Formatting Python",
-    "url": "/python/formatting_python.html",
+    "url": "/python/formatting-python.html",
     "content": "This week I got a little interested in best practice formatting for Python. Never been a big fan of formatting tools, however I found 2 python tools and I like them both. Both are highly configurable but the only thing I've changed so far is to extend the max line length to 110 characters and to change the indent level to 3 characters. pylint3 - this tool checks formatting and produces a detailed description of improvements which can be made. yapf - this formats python code. Changing the config ",
     "type": "page"
   },
   {
     "id": "18",
     "title": "Sqlite3 With Python3",
-    "url": "/python/sqlite3_with_python3.html",
+    "url": "/python/sqlite3-with-python3.html",
     "content": "An example of how to use a Sqlite3 database with Python3. import sqlite3 def dbOpen(name): return sqlite3.connect(name) def dbRunSQL(conn, sql, values = ()): try: cur = conn.cursor() cur.execute(sql, values) rows = cur.fetchall() conn.commit() return rows except Exception as e: print(&#39;Error:&#39;, e) def test(): conn = dbOpen(&#39;test.db&#39;) dbRunSQL(conn, &#39;DROP TABLE test&#39;) dbRunSQL(conn, &#39;CREATE TABLE test(n NUMBER, t TEXT)&#39;) dbRunSQL(conn, &#39;INSERT INTO test(n, t) VA",
     "type": "page"
   },

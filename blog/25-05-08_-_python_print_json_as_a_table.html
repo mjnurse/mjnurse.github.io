@@ -90,7 +90,7 @@
         <div class="article-body">
           <h1>25-05-08 - Python Print JSON as a Table</h1>
 <p>I often want to look at an array/set of JSON objects in a tabular format.  I wrote the following.  Posting here as I'll want it again...</p>
-<div class="codehilite"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">jsontable</span><span class="p">(</span><span class="n">jsn</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="p">[]):</span>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">jsontable</span><span class="p">(</span><span class="n">jsn</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="p">[]):</span>
     <span class="c1"># Get all the keys (columns)</span>
     <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">key</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">jsn</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span> <span class="ow">or</span> <span class="n">keys</span> <span class="o">==</span> <span class="p">[]]</span> <span class="k">if</span> <span class="n">jsn</span> <span class="k">else</span> <span class="p">[]</span>
 

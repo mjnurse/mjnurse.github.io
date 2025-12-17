@@ -100,12 +100,12 @@
 </code></pre></div>
 
 <p><code>main.py</code> (Python service)</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flask</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">hello</span><span class="p">():</span>
+<span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
     <span class="k">return</span> <span class="s1">&#39;App Service 1 - VERSION 1&#39;</span>
 </code></pre></div>
 
@@ -181,12 +181,12 @@ DEBUG_MODE:
 
 <h2 id="4-deploy-a-second-version-of-the-service">4. Deploy A Second Version Of The Service</h2>
 <p>Edit file: <code>main.py</code></p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Flask</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
 <span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">hello</span><span class="p">():</span>
+<span class="k">def</span> <span class="nf">hello</span><span class="p">():</span>
     <span class="k">return</span> <span class="s1">&#39;App Service 1 - VERSION 2&#39;</span>
 </code></pre></div>
 
@@ -218,7 +218,7 @@ SERVING_STATUS: SERVING
 </code></pre></div>
 
 <p>Split traffic between v2 and v3.</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="n">gcloud</span><span class="w"> </span><span class="n">app</span><span class="w"> </span><span class="n">services</span><span class="w"> </span><span class="k">set</span><span class="o">-</span><span class="n">traffic</span><span class="w"> </span><span class="c1">--splits=v2=.8,v3=.2A --split-by=random</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="n">gcloud</span><span class="w"> </span><span class="n">app</span><span class="w"> </span><span class="n">services</span><span class="w"> </span><span class="k">set</span><span class="o">-</span><span class="n">traffic</span><span class="w"> </span><span class="o">--</span><span class="n">splits</span><span class="o">=</span><span class="n">v2</span><span class="o">=</span><span class="mf">.8</span><span class="p">,</span><span class="n">v3</span><span class="o">=</span><span class="mf">.2</span><span class="n">A</span><span class="w"> </span><span class="o">--</span><span class="n">split</span><span class="o">-</span><span class="k">by</span><span class="o">=</span><span class="n">random</span>
 <span class="n">Setting</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">following</span><span class="w"> </span><span class="n">traffic</span><span class="w"> </span><span class="nl">allocation</span><span class="p">:</span>
 <span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">app</span><span class="o">-</span><span class="n">eng</span><span class="o">-</span><span class="n">mjn</span><span class="o">/</span><span class="k">default</span><span class="o">/</span><span class="nl">v2</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8</span>
 <span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">app</span><span class="o">-</span><span class="n">eng</span><span class="o">-</span><span class="n">mjn</span><span class="o">/</span><span class="k">default</span><span class="o">/</span><span class="nl">v3</span><span class="p">:</span><span class="w"> </span><span class="mf">0.2</span>

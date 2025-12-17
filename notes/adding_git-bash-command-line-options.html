@@ -90,30 +90,30 @@
         <div class="article-body">
           <h1>Adding git-bash Command Line Options</h1>
 <p>To add command line options to <code>git-bash.exe</code> you need to instead use <code>sh.exe</code>.</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="ss">&quot;C:\Program Files\Git\bin\sh.exe&quot;</span><span class="w"> </span><span class="c1">--help</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="ss">&quot;C:\Program Files\Git\bin\sh.exe&quot;</span><span class="w"> </span><span class="o">--</span><span class="n">help</span>
 
 <span class="n">GNU</span><span class="w"> </span><span class="n">bash</span><span class="p">,</span><span class="w"> </span><span class="n">version</span><span class="w"> </span><span class="mf">5.2.15</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="k">release</span><span class="o">-</span><span class="p">(</span><span class="n">x86_64</span><span class="o">-</span><span class="n">pc</span><span class="o">-</span><span class="n">msys</span><span class="p">)</span>
 <span class="k">Usage</span><span class="err">:</span><span class="w">  </span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">bash</span><span class="w"> </span><span class="o">[</span><span class="n">GNU long option</span><span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="n">option</span><span class="o">]</span><span class="w"> </span><span class="p">...</span>
 <span class="w">        </span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">bash</span><span class="w"> </span><span class="o">[</span><span class="n">GNU long option</span><span class="o">]</span><span class="w"> </span><span class="o">[</span><span class="n">option</span><span class="o">]</span><span class="w"> </span><span class="n">script</span><span class="o">-</span><span class="k">file</span><span class="w"> </span><span class="p">...</span>
 <span class="n">GNU</span><span class="w"> </span><span class="n">long</span><span class="w"> </span><span class="nl">options</span><span class="p">:</span>
-<span class="w">        </span><span class="c1">--debug</span>
-<span class="w">        </span><span class="c1">--debugger</span>
-<span class="w">        </span><span class="c1">--dump-po-strings</span>
-<span class="w">        </span><span class="c1">--dump-strings</span>
-<span class="w">        </span><span class="c1">--help</span>
-<span class="w">        </span><span class="c1">--init-file</span>
-<span class="w">        </span><span class="c1">--login</span>
-<span class="w">        </span><span class="c1">--noediting</span>
-<span class="w">        </span><span class="c1">--noprofile</span>
-<span class="w">        </span><span class="c1">--norc</span>
-<span class="w">        </span><span class="c1">--posix</span>
-<span class="w">        </span><span class="c1">--pretty-print</span>
-<span class="w">        </span><span class="c1">--protected</span>
-<span class="w">        </span><span class="c1">--rcfile</span>
-<span class="w">        </span><span class="c1">--restricted</span>
-<span class="w">        </span><span class="c1">--verbose</span>
-<span class="w">        </span><span class="c1">--version</span>
-<span class="w">        </span><span class="c1">--wordexp</span>
+<span class="w">        </span><span class="o">--</span><span class="n">debug</span>
+<span class="w">        </span><span class="o">--</span><span class="n">debugger</span>
+<span class="w">        </span><span class="o">--</span><span class="k">dump</span><span class="o">-</span><span class="n">po</span><span class="o">-</span><span class="n">strings</span>
+<span class="w">        </span><span class="o">--</span><span class="k">dump</span><span class="o">-</span><span class="n">strings</span>
+<span class="w">        </span><span class="o">--</span><span class="n">help</span>
+<span class="w">        </span><span class="o">--</span><span class="n">init</span><span class="o">-</span><span class="k">file</span>
+<span class="w">        </span><span class="o">--</span><span class="n">login</span>
+<span class="w">        </span><span class="o">--</span><span class="n">noediting</span>
+<span class="w">        </span><span class="o">--</span><span class="n">noprofile</span>
+<span class="w">        </span><span class="o">--</span><span class="n">norc</span>
+<span class="w">        </span><span class="o">--</span><span class="n">posix</span>
+<span class="w">        </span><span class="o">--</span><span class="n">pretty</span><span class="o">-</span><span class="k">print</span>
+<span class="w">        </span><span class="o">--</span><span class="n">protected</span>
+<span class="w">        </span><span class="o">--</span><span class="n">rcfile</span>
+<span class="w">        </span><span class="o">--</span><span class="n">restricted</span>
+<span class="w">        </span><span class="o">--</span><span class="n">verbose</span>
+<span class="w">        </span><span class="o">--</span><span class="n">version</span>
+<span class="w">        </span><span class="o">--</span><span class="n">wordexp</span>
 <span class="n">Shell</span><span class="w"> </span><span class="nl">options</span><span class="p">:</span>
 <span class="w">        </span><span class="o">-</span><span class="n">ilrsD</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="o">-</span><span class="n">c</span><span class="w"> </span><span class="n">command</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="o">-</span><span class="n">O</span><span class="w"> </span><span class="n">shopt_option</span><span class="w">         </span><span class="p">(</span><span class="n">invocation</span><span class="w"> </span><span class="k">only</span><span class="p">)</span>
 <span class="w">        </span><span class="o">-</span><span class="n">abefhkmnptuvxBCEHPT</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="o">-</span><span class="n">o</span><span class="w"> </span><span class="k">option</span>

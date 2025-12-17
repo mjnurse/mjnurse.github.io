@@ -90,12 +90,12 @@
         <div class="article-body">
           <h1>Sqlite3 With Python3</h1>
 <p>An example of how to use a Sqlite3 database with Python3.</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">sqlite3</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">dbOpen</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">dbOpen</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
   <span class="k">return</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">sql</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="p">()):</span>
+<span class="k">def</span> <span class="nf">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">sql</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="p">()):</span>
   <span class="k">try</span><span class="p">:</span>
     <span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
     <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
@@ -105,7 +105,7 @@
   <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">test</span><span class="p">():</span>
+<span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
   <span class="n">conn</span> <span class="o">=</span> <span class="n">dbOpen</span><span class="p">(</span><span class="s1">&#39;test.db&#39;</span><span class="p">)</span>
   <span class="n">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">&#39;DROP TABLE test&#39;</span><span class="p">)</span>
   <span class="n">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">&#39;CREATE TABLE test(n NUMBER, t TEXT)&#39;</span><span class="p">)</span>
