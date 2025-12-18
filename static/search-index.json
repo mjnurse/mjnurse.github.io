@@ -687,790 +687,783 @@
   },
   {
     "id": "98",
-    "title": "Install Docker and Minikube in WSL",
-    "url": "/other/kubernetes_and_docker/install_docker_and_minikube_in_wsl.html",
-    "content": "Docker Works for Ubuntu and Debian based distros. # Install Docker, you can ignore the warning from Docker about using WSL. &gt; curl -fsSL https://get.docker.com -o get-docker.sh &gt; sudo sh get-docker.sh # Add your user to the Docker group. &gt; sudo usermod -aG docker $USER &amp;&amp; newgrp docker # Check it&#39;s installed successfully. &gt; docker --version # Using Ubuntu 22.04 or Debian 10 / 11? You need to do 1 extra step for iptables # compatibility, you&#39;ll want to choose option (1",
-    "type": "page"
-  },
-  {
-    "id": "99",
     "title": "Quick and Easy Creation of an Oracle Database in Docker",
     "url": "/other/kubernetes_and_docker/quick_and_easy_creation_of_an_oracle_database_in_docker.html",
     "content": "Google led me to a container image alexeiled/docker-oracle-xe-11g. An old version but, xe is light weight, and does what I need. For a full set of Oracle containers Oracle has a GitHub repository: github:oracle. I'm running Docker Desktop on Windows 10. Get the Image &gt; docker pull alexeiled/docker-oracle-xe-11g Create a Container Open two network ports, one of the oracle client (1521), the other for the oracle web tool (8080). &gt; docker run -d --shm-size=2g --name oracle-xe -p 1521:1521 -p ",
     "type": "page"
   },
   {
-    "id": "100",
+    "id": "99",
     "title": "CLI builder",
     "url": "/other/cli_builder/cli_builder_script.html",
     "content": "This bash script generates a cli (command line interface) bash script from a definition file. The structure of the definition file is code header below. This script also generates an alias file which contains a set of alias commands which run each command in the definition file using the associated shortcut prepended with an '@'. #!/bin/bash help_text=&quot; NAME cli-builder - A bash script which generates a CLI bash script from a definition file. USAGE cli-builder [-d] &lt;definition_filename&g",
     "type": "page"
   },
   {
-    "id": "101",
+    "id": "100",
     "title": "dc.def",
     "url": "/other/cli_builder/definition_file_-_docker_-_dc.def.html",
     "content": "# Docker # ------------------------------------------------------------------------------------------------- = CONTAINERS # ------------------------------------------------------------------------------------------------- delete container (rm) &lt;container_name&gt; :: \\ read -p &quot;Are you sure [yN]? &quot; yn; \\ if [[ ${yn^} == Y ]]; then \\ docker rm $1; \\ fi list containers (ps) [-d] :: \\ if [[ $1 == -d ]]; then docker ps --all; \\ else \\ tmp=&quot;$(docker ps --all --format &#39;table {{.ID",
     "type": "page"
   },
   {
-    "id": "102",
+    "id": "101",
     "title": "es.def",
     "url": "/other/cli_builder/definition_file_-_es_-_es.def.html",
     "content": "# ES cmd ES_AUTH=&quot;&quot; cmd ES_HOST=&quot;${ES_HOST:-localhost}&quot; cmd ES_PORT=&quot;${ES_PORT:-9200}&quot; # ---------------------------------------------------------------------------------------------------------------------------------- = CLUSTER # ---------------------------------------------------------------------------------------------------------------------------------- clear cache (cc) [&lt;index_name&gt;] :: \\ curl -X POST &quot;http://$ES_HOST:$ES_PORT/$1/_cache/clear&quot",
     "type": "page"
   },
   {
-    "id": "103",
+    "id": "102",
     "title": "gi.def",
     "url": "/other/cli_builder/definition_file_-_git_-_gi.def.html",
     "content": "# GIT # --------------------------------------------------------------------------------------- = HISTORY # --------------------------------------------------------------------------------------- history (h) :: \\ git log &gt; /tmp/gi1; \\ while read line; do echo $line; \\ if [[ ${line:0:6} == commit ]]; then \\ git diff-tree --no-commit-id --name-only -r ${line:7:99} | \\ tr &quot;\\n&quot; &quot; &quot; | fold -s -w 100; echo; \\ fi; \\ done &lt; /tmp/gi1 | \\ sed &quot;s/^ *//; /^$/d; s/^commit/${l80",
     "type": "page"
   },
   {
-    "id": "104",
+    "id": "103",
     "title": "kc.def",
     "url": "/other/cli_builder/definition_file_-_kubectl_-_kc.def.html",
     "content": "# Kubectl # ------------------------------------------------------------------------------------------------- = ALL # ------------------------------------------------------------------------------------------------- get all (ga) [&lt;namespace&gt;] :: \\ if [[ &quot;$1&quot; == &quot;&quot; ]]; then kubectl get all -A; else kubectl get all -n $1; fi get (g) &lt;item&gt; :: kubectl get $1 # ------------------------------------------------------------------------------------------------- = LOGS # -",
     "type": "page"
   },
   {
-    "id": "105",
+    "id": "104",
     "title": "pg.def",
     "url": "/other/cli_builder/definition_file_-_postgres_psql_-_pg.def.html",
     "content": "# Postgres PSQL cmd [ -f ./pg_conn_defaults ] &amp;&amp; source ./pg_conn_defaults cmd PG_HOST=&quot;${PG_HOST:-127.0.0.1}&quot; cmd PG_PORT=&quot;${PG_PORT:-5431}&quot; cmd PG_DB=&quot;${PG_DB:-postgres}&quot; cmd PG_USER=&quot;${PG_NAME:-postgres}&quot; cmd PG_PASSWORD=&quot;${PG_PASSWORD:-postgres}&quot; cmd export PGPASSWORD=&quot;$PG_PASSWORD&quot; cmd export PAGER=cat # ------------------------------------------------------------------------------------------------- = SESSION # -----------",
     "type": "page"
   },
   {
-    "id": "106",
+    "id": "105",
     "title": "PostgreSQL",
     "url": "/other/postgres/load_csv_file_into_postgres.html",
     "content": "Load CSV File Into Postgres Create your table CREATE TABLE zip_codes ( zip CHAR(5) , latitude DOUBLE PRECISION , longitude DOUBLE PRECISION , city VARCHAR , state CHAR(2) , county VARCHAR , zip_class VARCHAR ); Copy data from your CSV file to the table: \\copy zip_codes FROM &#39;/path/to/csv/ZIP_CODES.txt&#39; DELIMITER &#39;,&#39; CSV You can also specify the columns to read: \\copy zip_codes(ZIP,CITY,STATE) FROM &#39;/path/to/csv/ZIP_CODES.txt&#39; DELIMITER &#39;,&#39; CSV",
     "type": "page"
   },
   {
-    "id": "107",
+    "id": "106",
     "title": "PostgreSQL",
     "url": "/other/postgres/postgres_-_reset_password.html",
     "content": "Resetting the PostgreSQL Password Find the file pg_hba.conf - it may be located in /etc/postgresql-9.1/pg_hba.conf or /var/lib/pgsql/data/pg_hba.conf (back it up). Place the following line (as either the first uncommented line, or as the only one): local all all trust Restart your PostgreSQL server, e.g., on Linux: sudo /etc/init.d/postgresql restart or (for systemd) sudo service postgresql restart If the service (daemon) doesn't start reporting in log file: local connections are not supported b",
     "type": "page"
   },
   {
-    "id": "108",
+    "id": "107",
     "title": "Google Cloud Platform",
     "url": "/other/gcp/bigquery_-_aead_sql_encryption_walk-through.html",
     "content": "GCP AEAD SQL Encryption A walk through using the AEAD SQL encryption functions (Private Beta as off Nov 2018) In this example I encrypt some PPI data (person name). I encrypt each name twice. The first encryption uses a key which is unique to the person and is stored in a parallel person key table. This type of encryption is a great way to implement the GDPR \"right to be forgotten\" rule. To forget a person we don't need to locate and delete all PPI records in all tables, we just need to delete t",
     "type": "page"
   },
   {
-    "id": "109",
+    "id": "108",
     "title": "Google Cloud Platform",
     "url": "/other/gcp/bigquery_-_performance.html",
     "content": "GCP BigQuery Performance Background BigQuery is built on Googles Colossus filesystem and Dremel massively distributed query engine. BigQuery is a Columnar database / datastore. Queries are split and run over many worker nodes, called slots. The 'shuffle', where slots share data, runs over the Google high performance network. Loading / Linking Data Data can be loaded into or linked to BQ. Queries over loaded data is more performant. Data can be linked from Cloud Storage (CS), currently stored in ",
     "type": "page"
   },
   {
-    "id": "110",
+    "id": "109",
     "title": "Google Cloud Platform",
     "url": "/other/gcp/cloud_storage.html",
     "content": "GCP Cloud Storage Overview Binary Large Object Storage - Fully managed, scalable. Can be used to serve website content, archive data or content for download. Each object has a URL. Stored in buckets. Immutable. Can create ACLs (access control lists) - A scope (who) &amp; permission (what). New overwrites old but can keep previous versions (object versioning) - With rules on how many. Lifecycle management policies can delete old versions of objects or simply old object. Cloud Storage Classes Mult",
     "type": "page"
   },
   {
-    "id": "111",
+    "id": "110",
     "title": "Google Cloud Platform",
     "url": "/other/gcp/creating_a_compute_instance_on_gcp_using_terraform.html",
     "content": "Creating a Compute Instance on GCP Using Terraform Download and Install terraform Download the most recent version of Terraform. No install, its just an executable. Move it to an accessible location. &gt; wget https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip ... &gt; unzip terraform_0.11.11_linux_amd64.zip ... &gt; mv terraform ~/bin ... &gt; terraform --version Terraform v0.11.11 Create a terraform Config File Create a provider config file: main.tf provider &qu",
     "type": "page"
   },
   {
-    "id": "112",
+    "id": "111",
     "title": "Google Cloud Platform",
     "url": "/other/gcp/identity_and_access_management_-_iam.html",
     "content": "GCP Identity and Access Management (IAM) Overview WHO can do WHAT to which RESOURCE WHO: - Can be a service account: PROJECT_ID@appspot.gserviceaccount.com WHAT (roles): - Primitive (owner, editor, viewer) (also billing administrator). Broadest roles. - Predefined - apply to specific services (eg BigQuery). - Custom. Note - cannot be used at a folder level - only Org. or Proj. Finest Grain roles.",
     "type": "page"
   },
   {
-    "id": "113",
+    "id": "112",
     "title": "Google Cloud Platform",
     "url": "/other/gcp/virtual_private_cloud_-_vpc_-_networking.html",
     "content": "GCP VPC Networks Overview VPCs are owned by projects. VPCs connect instances to each other and to the internet. VPCs have global scope. VPC subnets can span zones - they have regional scope. Routing Tables created automatically. Firewalls - Global distributed firewall created automatically. Rules can use meta data tags for rules (eg. open port 80 for all instances tagged web) In a VPC Firewall everything is block by default (not open by default as perhaps my PC) VPC Peering - VPCs in different p",
     "type": "page"
   },
   {
-    "id": "114",
+    "id": "113",
     "title": "GCP Training - Introduction and Overview",
     "url": "/other/gcp/gcp_training/an_introduction_and_overview.html",
     "content": "Introduction What is Cloud Computing? 5 features of Cloud Computing On demand, self service. Broad network access. Resource pooling. Rapid elasticity. Measure service (PAYG). Acronyms IaaS - Infrastructure as a service. PaaS - Platform as a service. SaaS - Software as a service. Regions / Zones Zone is a deployment area (europe-west2-a). Regions contain many zones. Zone -&gt; Zone &lt; 5ms latency. Multi Region - stored redundantly in 2 locations &gt;= 160km apart Billing Discount: Sustained use",
     "type": "page"
   },
   {
-    "id": "115",
+    "id": "114",
     "title": "Kubernetes and Containers",
     "url": "/other/gcp/gcp_training/ref_-_kubernetes_and_containers.html",
     "content": "Overview Containers deliver a solution that sits somewhere between IaaS (GCE) and PaaS (App Engine). GCE - VMs - An App runs on an OS running on a Hypervisor running on HW. App Engine - An App runs on a service delivering Data, Cache, Storage, DBs, NW etc - very abstracted from the HW. Containers - An App runs in a container which provides an OS delivered by the container engines which utilises the HW OS. Kubernetes manages the execution of containers over a cluster of nodes (running on servers)",
     "type": "page"
   },
   {
-    "id": "116",
+    "id": "115",
     "title": "Ref - Network Layers",
     "url": "/other/gcp/gcp_training/ref_-_network_layers.html",
     "content": "HTTP vs HTTPS vs TCP vs TLS vs UDP Application Layer: (Layer 7) - HTTP(Hypertext Transfer Protocol): Stateless Request Response Cycle. - HTTPS: Secure HTTP. - SMTP: Email Transfer Protocol. - FTP etc... Transport Layer: (Layer 4) - TCP (Transmission Control): Reliability &gt; Performance. - TLS (Transport Layer Security): Secure TCP. - UDP (User Datagram Protocol): Performance &gt; Reliability. Some applications (eg. video streaming) might use this network layer (UDP protocol) directly (skipping",
     "type": "page"
   },
   {
-    "id": "117",
+    "id": "116",
     "title": "Section 1 - GCE - Compute Engine",
     "url": "/other/gcp/gcp_training/section_1_-_gcs_-_compute_engine.html",
     "content": "Regions / Zones Regions contain zones. Machine Families Different Machine Families for Different Workloads: General Purpose (E2, N2, N2D, N1) : Best price-performance ratio Web and application servers, Small-medium databases, Dev environments Memory Optimized (M2, M1): Ultra high memory workloads Large in-memory databases and In-memory analytics Compute Optimized (C2): Compute intensive workloads Gaming applications Machine Images Public images. Customer images. IP Addresses External IP Addresse",
     "type": "page"
   },
   {
-    "id": "118",
+    "id": "117",
     "title": "Section 2 - GCE - Instance Groups and Load Balancing",
     "url": "/other/gcp/gcp_training/section_2_-_gcs_-_instance_groups_and_load_balancing.html",
     "content": "Instance Groups Two Types of Instance Groups: Managed : Identical VMs created using an instance template: - Features: Auto scaling, auto healing and managed releases. - All instances must be same machine type. Unmanaged : Different configuration for VMs in same group: - Does NOT offer auto scaling, auto healing &amp; other services. - NOT Recommended unless you need different kinds of VMs. Can be in a single Zone or over a Region. Managed Instance Groups Maintain certain number of instances (If ",
     "type": "page"
   },
   {
-    "id": "119",
+    "id": "118",
     "title": "Section 3 - gcloud",
     "url": "/other/gcp/gcp_training/section_3_-_gcloud.html",
     "content": "Overview Some services have specific tools: Cloud Storage - gsutil. Cloud BigQuery - bq. Cloud Bigtable - cbt. Kubernetes - kubectl (Note: gcloud is used to manage clusters). gcloud is part of Google Cloud SDK (Cloud SDK requires Python). Install: https://cloud.google.com/sdk/docs/install Syntax: gcloud GROUP SUBGROUP ACTION ... Connecting to GCP: gcloud init - initialize or reinitialize gcloud. Authorize gcloud to use your user account credentials). Setup configuration (includes current project",
     "type": "page"
   },
   {
-    "id": "120",
+    "id": "119",
     "title": "Section 4 - App Engine",
     "url": "/other/gcp/gcp_training/section_4_-_app_engine.html",
     "content": "Overview Simple way to deploy and scale your applications in GCP. Provides end-to-end application management. Supports: Go, Java, .NET, Node.js, PHP, Python, Ruby using pre-configured runtimes. Use custom run-time and write code in any language. Connect to variety of Google Cloud storage products (Cloud SQL etc). No usage charges - Pay for resources provisioned Features: Automatic load balancing &amp; Auto scaling. Managed platform updates &amp; Application health monitoring. Application version",
     "type": "page"
   },
   {
-    "id": "121",
+    "id": "120",
     "title": "Section 4 - Google Kubernetes Engine - GKE",
     "url": "/other/gcp/gcp_training/section_5_-_google_kubernetes_engine_-_gke.html",
     "content": "Overview GKE Provides: Cluster Management (including upgrades - auto upgrades to latest version of Kubernetes). Cluster can have different types of virtual machines. Auto Scaling (of Cluster and Pods). Service Discovery. Load Balancer. Self Healing (repair failed nodes). Zero Downtime Deployments. Enable Cloud Logging and Cloud Monitoring with simple configuration. Uses Container-Optimized OS, a hardened OS built by Google. Provides support for Persistent disks and Local SSD. 2 Cluster Modes: St",
     "type": "page"
   },
   {
-    "id": "122",
+    "id": "121",
     "title": "Worked Example - Create Load Balanced Web-Server Managed Instance Group",
     "url": "/other/gcp/gcp_training/worked_example_-_create_load_balanced_web-server_managed_instance_group.html",
     "content": "1. Create a VM. Create a VM Note: - Select Allow HTTP traffic. | | | | 2. Install Apache, create a default web page. SSH to the VM and install config Apache web server. Create a script to run when the instance boots which sets the default web page to show the machine name. Use crontab to run this script when the machine boots. &gt; sudo su &gt; apt install apache2 # Create a script to set the default webpage to display the hostname on boot. &gt; echo &#39;echo &quot;Hello!&quot; &gt; /var/www/ht",
     "type": "page"
   },
   {
-    "id": "123",
+    "id": "122",
     "title": "Worked Example - Deploy An Application Using App Engine",
     "url": "/other/gcp/gcp_training/worked_example_-_deploy_an_application_using_app_engine.html",
     "content": "1. Create an App | | 2. Create Service Open a cloud shell. Create a directory for the service: mkdir service-1 Within the directory, create 3 files: app.yaml (Application configuration) runtime: python39 main.py (Python service) from flask import Flask app = Flask(__name__) @app.route(&#39;/&#39;) def hello(): return &#39;App Service 1 - VERSION 1&#39; requirements.txt (Python dependencies) Flask==2.0.2 3. Deploy Service # Set the project &gt; gcloud projects list PROJECT_ID: app-eng-mjn NAME: a",
     "type": "page"
   },
   {
-    "id": "124",
+    "id": "123",
     "title": "Worked Example - Kubernetes",
     "url": "/other/gcp/gcp_training/worked_example_-_kubernetes.html",
     "content": "1. from http.server import BaseHTTPRequestHandler, HTTPServer hostName = &quot;localhost&quot; serverPort = 8080 class MyServer(BaseHTTPRequestHandler): def do_GET(self): self.send_response(200) self.send_header(&quot;Content-type&quot;, &quot;text/html&quot;) self.end_headers() self.wfile.write(bytes(&quot;&lt;html&gt;&lt;head&gt;&lt;title&gt;MJN&lt;/title&gt;&lt;/head&gt;&quot;, &quot;utf-8&quot;)) self.wfile.write(bytes(&quot;&lt;body&gt;&quot;, &quot;utf-8&quot;)) self.wfile.write(bytes(&quo",
     "type": "page"
   },
   {
-    "id": "125",
+    "id": "124",
     "title": "HTML datalist",
     "url": "/other/html/html_datalist.html",
     "content": "&lt;body&gt; &lt;form action=&quot;&quot; method=&quot;get&quot;&gt; &lt;label for=&quot;fruit&quot;&gt;Choose your fruit :&lt;/label&gt; &lt;input list=&quot;fruits&quot; name=&quot;fruit&quot; id=&quot;fruit&quot;&gt; &lt;datalist id=&quot;fruits&quot;&gt; &lt;option value=&quot;Apple&quot;&gt; &lt;option value=&quot;Orange&quot;&gt; &lt;option value=&quot;Banana&quot;&gt; &lt;option value=&quot;Mango&quot;&gt; &lt;option value=&quot;Avacado&quot;&gt; &lt;/datalist&gt; &lt;input type=&quot;sub",
     "type": "page"
   },
   {
-    "id": "126",
+    "id": "125",
     "title": "19-01-14 - snake case",
     "url": "/blog/19-01-14_-_snake_case.html",
     "content": "Today I learned that the field / variable naming standard I used for 15+ years in Oracle is called snake_case. I'm wondering if there is a name for variables-formatted-like-this? Maybe that's snake case too. camelCaseFormat is the most common format I've used outside of Oracle.",
     "type": "page"
   },
   {
-    "id": "127",
+    "id": "126",
     "title": "19-01-22 - Emulating sudo in dos cmd",
     "url": "/blog/19-01-22_-_emulating_sudo_in_dos_cmd.html",
     "content": "I found a useful method for running a dos command as Administrator. Create a script sudo.bat: @echo Set objShell = CreateObject(&quot;Shell.Application&quot;) &gt; %temp%\\sudo.tmp.vbs @echo args = Right(&quot;%*&quot;, (Len(&quot;%*&quot;) - Len(&quot;%1&quot;))) &gt;&gt; %temp%\\sudo.tmp.vbs @echo objShell.ShellExecute &quot;%1&quot;, args, &quot;&quot;, &quot;runas&quot; &gt;&gt; %temp%\\sudo.tmp.vbs @cscript %temp%\\sudo.tmp.vbs To open a new cmd window running as administrator: &gt; sudo cmd",
     "type": "page"
   },
   {
-    "id": "128",
+    "id": "127",
     "title": "19-02-14 - JWT - JSON Web Tokens",
     "url": "/blog/19-02-14_-_jwt_-_json_web_tokens.html",
     "content": "Today I was looking at authentication for a web-service. It was using JSON Web Tokens. What are JWTs? How do they work? A JWT is a cryptographically signed JSON token used to authenticate users making calls to an application. A JWT is sent to a user when they authenticate with an authentication Service. The user can send this token with requests to an application (web-service or other) as proof of identity. The application talks to the authentication server and is told the how the token was cryp",
     "type": "page"
   },
   {
-    "id": "129",
+    "id": "128",
     "title": "19-02-25 - Quick and Easy Creation of an Oracle Database in Docker",
     "url": "/blog/19-02-25_-_quick_and_easy_creation_of_an_oracle_database_in_docker.html",
     "content": "I needed an Oracle database to demonstrate to someone that Oracle does not lock a table for read. A container is an ideal place to do this. Google led me to a container image alexeiled/docker-oracle-xe-11g. An old version but, xe is light weight, and does what I need. For a full set of Oracle containers Oracle has a GitHub repository: github:oracle. I'm running Docker Desktop on Windows 10. Get the Image &gt; docker pull alexeiled/docker-oracle-xe-11g Create a Container Open two network ports, o",
     "type": "page"
   },
   {
-    "id": "130",
+    "id": "129",
     "title": "19-03-13 - Dont Tell Anyone But Ive Stopped My Screen Locking In Windows Using AHK",
     "url": "/blog/19-03-13_-_dont_tell_anyone_but_ive_stopped_my_screen_locking_in_windows_using_ahk.html",
     "content": "I'm working on 2 computers right now. One automatically locks after 5 minutes. Really great for security but maddening for me. It's a policy setting which I can't override. I keep knocking the mouse to keep it unlocked. I then dawned on me that AHK could do that for me. ; Script to stop the screen locking in Windows by generating some mouse activity. #Persistent #SingleInstance Force SetTimer, MoveMouse ; Check the time that has passed since the last key press or mouse move, if its greater than ",
     "type": "page"
   },
   {
-    "id": "131",
+    "id": "130",
     "title": "19-04-11 - Formatting Python",
     "url": "/blog/19-04-11_-_formatting_python.html",
     "content": "This week I got a little interested in best practice formatting for Python. Never been a big fan of formatting tools, however I found 2 python tools and I like them both. Both are highly configurable but the only thing I've changed so far is to extend the max line length to 110 characters and to change the indent level to 3 characters. pylint3 - this tool checks formatting and produces a detailed description of improvements which can be made. yapf - this formats python code. Changing the config ",
     "type": "page"
   },
   {
-    "id": "132",
+    "id": "131",
     "title": "19-05-02 - Statistical Testing",
     "url": "/blog/19-05-02_-_statistical_testing.html",
     "content": "For a long time I've wanted to explore using statistics to determine how many tests are needed to test for errors. The question I have is that, for a set of n records, if we want to be say 99.9% sure none contain an error, how many would be need to test at random to reach a point where we can be statistically, say, 99.9% sure there are no errors. The Basics Tests with a fixed number of options / records to test If I have a die and there is a chance the number has not been printed on one side, ho",
     "type": "page"
   },
   {
-    "id": "133",
+    "id": "132",
     "title": "19-06-12 - Setting Prompt Colour In bash and Putty",
     "url": "/blog/19-06-12_-_setting_prompt_colour_in_bash_and_putty.html",
     "content": "I want a different colour prompt for different machines. The following script gives colour names to the various escape sequences. Can put this in (for example) .bashrc file. # Regular Text Colours txtblk=&#39;\\e[0;30m&#39; # Black txtred=&#39;\\e[0;31m&#39; # Red txtgrn=&#39;\\e[0;32m&#39; # Green txtylw=&#39;\\e[0;33m&#39; # Yellow txtblu=&#39;\\e[0;34m&#39; # Blue txtpur=&#39;\\e[0;35m&#39; # Purple txtcyn=&#39;\\e[0;36m&#39; # Cyan txtwht=&#39;\\e[0;37m&#39; # White # Bold Text Colours bldblk=&#39;\\",
     "type": "page"
   },
   {
-    "id": "134",
+    "id": "133",
     "title": "19-11-04 - Text To Speech - Clipboard",
     "url": "/blog/19-11-04_-_text_to_speech_-_clipboard.html",
     "content": "I've been using the Microsoft Word text-to-speech function for a while to proof read text. Works great but the text needs to be a Word document or I need to copy and paste it there first. I've been looking online for an application to read aloud the clipboard. It's surprisingly difficult to find an application. I then thought about AHK and (convinced it would be far to complex for AHK) I ran a search. I was wrong, a very simple AHK script now means I can read aloud the contents of the clipboard ",
     "type": "page"
   },
   {
-    "id": "135",
+    "id": "134",
     "title": "19-11-11 - Oracle and Postgres Schema Copy Process",
     "url": "/blog/19-11-11_-_oracle_and_postgres_schema_copy_process.html",
     "content": "I liked these diagrams (drawn in DrawIO). First time I've used the 'sketch' look. Oracle Specific Solution The limitations on access and control for the Oracle Databases mean that using the Oracle 'export' and 'import' (database dump) utility is not practical. Oracle provides a data dictionary and stored procedure which will generate the DDL needed to create database objects. However, [this company] does not allow access to the \"all database\" data dictionary views, they only allow access to the ",
     "type": "page"
   },
   {
-    "id": "136",
+    "id": "135",
     "title": "20-10-29 Using the console.log Alternatives",
     "url": "/blog/20-10-29_-_using_the_console.log_alternatives.html",
     "content": "console.log() This is the method we all use... console.error() This method is useful while testing code. It is used to log errors to the browser console. By default, the error message will be highlighted with red color. console.warn() This method is also used to test code. Usually, it helps in throwing warnings to the console. By default, the warning message will be highlighted with yellow color. console.clear() This method is used to clear the console. console.time() and console.timeEnd() Both ",
     "type": "page"
   },
   {
-    "id": "137",
+    "id": "136",
     "title": "20-12-10 - Async Await with Array Assignment",
     "url": "/blog/20-12-10_-_async_await_with_array_assignment.html",
     "content": "const [user, account] = await Promise.all([ fetch(&#39;/user&#39;), fetch(&#39;/account&#39;) ])",
     "type": "page"
   },
   {
-    "id": "138",
+    "id": "137",
     "title": "20-12-21 - Javascript ASYNC AWAIT By Example",
     "url": "/blog/20-12-21_-_javascript_async_await_by_example.html",
     "content": "At first sight the Javascript ASYNC / AWAIT commands can look quite confusing when in use. But, once I wrote a worked example, it was actually quite clear. In the example below, the function fetchData is declared ASYNC so that it can wrap an AWAIT on a call to axios.get. I use axios.get to fetch a web page to introduce an unpredictable delay. This isn't the ASYNC / AWAIT example as such. In the main body of the example, I invoke the function fetchData 3 times and these run in parallel. Due to th",
     "type": "page"
   },
   {
-    "id": "139",
+    "id": "138",
     "title": "21-01-11 - HTML datalist",
     "url": "/blog/21-01-11_-_html_datalist.html",
     "content": "&lt;body&gt; &lt;form action=&quot;&quot; method=&quot;get&quot;&gt; &lt;label for=&quot;fruit&quot;&gt;Choose your fruit :&lt;/label&gt; &lt;input list=&quot;fruits&quot; name=&quot;fruit&quot; id=&quot;fruit&quot;&gt; &lt;datalist id=&quot;fruits&quot;&gt; &lt;option value=&quot;Apple&quot;&gt; &lt;option value=&quot;Orange&quot;&gt; &lt;option value=&quot;Banana&quot;&gt; &lt;option value=&quot;Mango&quot;&gt; &lt;option value=&quot;Avacado&quot;&gt; &lt;/datalist&gt; &lt;input type=&quot;sub",
     "type": "page"
   },
   {
-    "id": "140",
+    "id": "139",
     "title": "21-02-23 - Useful Elasticsearch cURLS",
     "url": "/blog/21-02-23_-_useful_elasticsearch_curls.html",
     "content": "Syntax Convention: &lt;parameter&gt; - a parameter to replace with actual values. [&lt;parameter&gt;] - an optional parameter. ${HOSTNAME} - a bash variable containing the Elasticsearch Host Name. ${PORT} - a bash variable containing the Elasticsearch Port Number. Cluster Clear Cache Elasticsearch caches query results which can be use if the same query is run again. This will clear results from the cache for a single named index or, if no index is specified, all indexes. curl -X POST http://${HO",
     "type": "page"
   },
   {
-    "id": "141",
+    "id": "140",
     "title": "22-03-22 - LDAP / SAML",
     "url": "/blog/22-03-22_-_ldap_saml.html",
     "content": "Introduction What are LDAP and SAML? LDAP Overview Lightweight Directory Access Protocol - a protocol to access a directory service such as MS Active Directory. LDAP Operation Types Here are some basic operation types in LDAP: Bind (Authentication) When you create a session by connecting to an LDAP server, the session's default authentication state is anonymous. The LDAP bind feature validates the authentication state and changes it from anonymous. Bind can occur either through the Simple or SAS",
     "type": "page"
   },
   {
-    "id": "142",
+    "id": "141",
     "title": "22-05-18 - Read Aloud In MS Word",
     "url": "/blog/22-05-18_-_read_aloud_in_ms_word.html",
     "content": "To activate: [Alt][Ctrl][Space]. Cursor at a specific point in the text: The document will be read aloud from here on. Text selected: The selected text will be read aloud. [Ctrl][Space] - Play or pause. [Ctrl][Left arrow] - Jump to the previous paragraph. [Ctrl][Right arrow] - Jump to the next paragraph. [Alt][Left arrow] - Slower reading speed. [Alt][Arrow right] - Faster reading speed.",
     "type": "page"
   },
   {
-    "id": "143",
+    "id": "142",
     "title": "22-06-17 - I Wrote A Bash Function To Parse And Describe A Scripts Parameters",
     "url": "/blog/22-06-17_-_i_wrote_a_bash_function_to_parse_and_describe_a_scripts_parameters.html",
     "content": "Overview I am always skipping up and down in a bash script as I add script parameters and need to add a description for the parameter in the help_text / header. I decided to write a function to generate the PARAMETER description from the parameter parsing case statement in the script. It uses the parameter case elements and comments within the case statement. The Function # Parses and prints script parameter details between two comments: # &quot;# Start Parse Script Parameters&quot; and &quot;# ",
     "type": "page"
   },
   {
-    "id": "144",
+    "id": "143",
     "title": "22-06-22 - One Liner to Run SQL Over a CSV File Using Sqlite",
     "url": "/blog/22-06-22_-_one_liner_to_run_sql_over_a_csv_file_using_sqlite.html",
     "content": "Assume we have a cvs file people.csv: &gt; cat people.csv name,sex,age martin,m,21 paul,m,50 dave,m,58 sarah,f,33 anna,f,53 We can run a SQL command on this file using a single line (Linux) sqlite3 command: &gt; sqlite3 :memory: \\ # Use an in memory database -cmd &#39;.mode csv&#39; \\ # Switch to csv mode for import -cmd &#39;.import &lt;filename&gt; &lt;tablename&gt;&#39; \\ # Import file as csv -cmd &#39;.mode column&#39; # Switch to column mode for output -header \\ # Show header for output &#3",
     "type": "page"
   },
   {
-    "id": "145",
+    "id": "144",
     "title": "22-10-06 - Create The Equivalent To .bashrc For Windows CMD",
     "url": "/blog/22-10-06_-_create_the_equivalent_to_.bashrc_for_windows_cmd.html",
     "content": "WARNING: This did break an application which ran (in the background) in (I assume) some CMD shell... Took me an age to work this out. Create a cmdrc.bat file, for example: @echo off set GITHUB_TOKEN=[here is my github token] Get this executed each time a CMD session starts by adding a registry key specifying the path of the cmdrc.bat file. The following script should be run as Admin: :: ################################################################################## @echo off color 04 title Ad",
     "type": "page"
   },
   {
-    "id": "146",
+    "id": "145",
     "title": "23-06-27 - Generating a Bookmarks Page From a Chrome Bookmarks Folder",
     "url": "/blog/23-06-27_-_generating_a_bookmarks_page_from_a_chrome_bookmarks_folder.html",
     "content": "I wanted a bookmark web page I could switch to (using CTRL-&lt;Tab Number&gt;) and then quickly open a bookmarked site. I created a bash script to read the bookmarks from a folder in the Chrome bookmark bar (folder name: Page) and create a web page. I added Javascript (from this site) that allows me to go to a bookmark (link) by typing in the associated number. I can also search the bookmarks by typing / and then entering part of the name. Pressing Return opens the first matching bookmark. All b",
     "type": "page"
   },
   {
-    "id": "147",
+    "id": "146",
     "title": "24-05-14 - Kg - Stone-Lbs",
     "url": "/blog/24-05-14_-_kg_-_stone-lbs.html",
     "content": "Kg Lbs Stone-Lbs 69.9 154 11-0 70.3 155 11-1 70.8 156 11-2 71.2 157 11-3 71.7 158 11-4 72.1 159 11-5 72.6 160 11-6 73.0 161 11-7 73.5 162 11-8 73.9 163 11-9 74.4 164 11-10 74.8 165 11-11 75.3 166 11-12 75.8 167 11-13 76.2 168 12-0 76.7 169 12-1 77.1 170 12-2 77.6 171 12-3 78.0 172 12-4 78.5 173 12-5 78.9 174 12-6 79.4 175 12-7 79.8 176 12-8 80.3 177 12-9 80.7 178 12-10 81.2 179 12-11 81.6 180 12-12 82.1 181 12-13 82.6 182 13-0 83.0 183 13-1 83.5 184 13-2 83.9 185 13-3 84.4 186 13-4 84.8 187 13-5",
     "type": "page"
   },
   {
-    "id": "148",
+    "id": "147",
     "title": "25-02-11 - Hash Value Clash Probability",
     "url": "/blog/25-02-11_-_hash_value_clash_probability.html",
     "content": "I needed to know what the probability of a clash was if I used only the first 16 characters of a 32 hexadecimal character MD5 hash was. I found the function for this is 1-EXP(-(([Number of Values]^2)/(2*2^[Number of bits]))). MD5 is a 128 bit hash. The first 16 hexadecimal characters is effectively a 64 bit hash. The table below show the percentage probability of a clash for an increasing number of values. The table below that shows the number of values that would need to be hashed to get to the",
     "type": "page"
   },
   {
-    "id": "149",
+    "id": "148",
     "title": "25-02-20 - A-series Paper Sizes",
     "url": "/blog/25-02-20_-_a-series_paper_sizes.html",
     "content": "Very Interesting... If you take a sheet of A-series sized paper and fold it in half, the ratio of height to width remains the same. To achieve this the ratio of height to width is height = sqrt(2) * width. The size (area) of A0 is 1 square meter, A1 is 1/2 square meter, ..., A4 is 1/16 square meter. There is A-1 (2 square meters), A-2 (4 square meters) etc.",
     "type": "page"
   },
   {
-    "id": "150",
+    "id": "149",
     "title": "25-05-08 - Python Print JSON as a Table",
     "url": "/blog/25-05-08_-_python_print_json_as_a_table.html",
     "content": "I often want to look at an array/set of JSON objects in a tabular format. I wrote the following. Posting here as I'll want it again... def jsontable(jsn, keys=[]): # Get all the keys (columns) columns = [key for key in jsn[0].keys() if key in keys or keys == []] if jsn else [] # Determine max width for each column, including the column name and the longest value in that column column_widths = {col: max(len(col), max(len(str(row.get(col, &#39;&#39;))) for row in jsn)) for col in columns} # Print ",
     "type": "page"
   },
   {
-    "id": "151",
+    "id": "150",
     "title": "Linux bash default Pack",
     "url": "/linuxbash/linux_bash_default_pack.html",
     "content": "Packs contain bash scripts which have been compressed and converted to a base64 string. This is a convenient wat to copy a set of bash scripts into a linux environment using only a command line terminal. let packText=`# -------------------------------------------------------------------------------------------------- # CONTENTS: file-watch-do, cls, calc # -------------------------------------------------------------------------------------------------- # FILE: file-watch-do # -------------------",
     "type": "page"
   },
   {
-    "id": "152",
+    "id": "151",
     "title": "Bash Hashmap",
     "url": "/linuxbash/bash-hashmap.html",
     "content": "Bash supports associative arrays / hashmaps! # Declare COUNTRIES hashmap which maps city names to Countries, and add some values. # # -A means associative array (hashmap) # -r means read-only $ declare -A COUNTRIES=( [&quot;London&quot;]=&quot;UK&quot; [&quot;Paris&quot;]=&quot;France&quot; [&quot;Birmingham&quot;]=&quot;UK&quot; ) # Add additional value $ COUNTRIES[&quot;New York&quot;]=&quot;US&quot; # Echo the hashamp - returns nothing $ echo $COUNTRIES # Echo below returns nothing for $COUNT",
     "type": "page"
   },
   {
-    "id": "153",
+    "id": "152",
     "title": "Command Line Animation",
     "url": "/linuxbash/command-line-animation.html",
     "content": "An example of command line animation. #!/bin/bash frames=&quot;/ | \\\\ -&quot; # Run a 5 second sleep command in the background sleep 5 &amp; pid=$! # Check that the sleep process (above) still exists, and if so draw some animation while kill -0 $pid 2&amp;&gt;1 &gt; /dev/null; do for frame in $frames; do printf &quot;\\r$frame Waiting...&quot; sleep 0.5 done done printf &quot;\\n&quot;",
     "type": "page"
   },
   {
-    "id": "154",
+    "id": "153",
     "title": "Create An Encrypted Linux Virtual Disk",
     "url": "/linuxbash/create-an-encrypted-linux-virtual-disk.html",
     "content": "Create An Empty File With Space Allocated Create a (64MB) empty file with space allocated. &gt; dd if=/dev/urandom iflag=fullblock | dd of=./diskfile1 bs=1M count=64 iflag=fullblock Create a dm-crypt LUKS Container &gt; sudo cryptsetup -y luksFormat ./diskfile1 WARNING! ======== This will overwrite data on ./diskfile1 irrevocably. Are you sure? (Type uppercase yes): YES Enter passphrase for ./diskfile1: Verify passphrase: Check the file. &gt; file diskfile1 diskfile1: LUKS encrypted file, ver 2 ",
     "type": "page"
   },
   {
-    "id": "155",
+    "id": "154",
     "title": "I Wrote A Bash Function To Parse And Describe A Scripts Parameters",
     "url": "/linuxbash/i-wrote-a-bash-function-to-parse-and-describe-a-scripts-parameters.html",
     "content": "Overview I am always skipping up and down in a bash script as I add script parameters and need to add a description for the parameter in the help_text / header. I decided to write a function to generate the PARAMETER description from the parameter parsing case statement in the script. It uses the parameter case elements and comments within the case statement. The Function # Parses and prints script parameter details between two comments: # &quot;# Start Parse Script Parameters&quot; and &quot;# ",
     "type": "page"
   },
   {
-    "id": "156",
+    "id": "155",
     "title": "Linux bash default Pack",
     "url": "/linuxbash/linux_bash_default_pack.html",
     "content": "Packs contain bash scripts which have been compressed and converted to a base64 string. This is a convenient wat to copy a set of bash scripts into a linux environment using only a command line terminal. let packText=`# -------------------------------------------------------------------------------------------------- # CONTENTS: calc, cls, file-watch-do # -------------------------------------------------------------------------------------------------- # FILE: calc # ----------------------------",
     "type": "page"
   },
   {
-    "id": "157",
+    "id": "156",
     "title": "Linux go Script",
     "url": "/linuxbash/my-linux_g-command.html",
     "content": "A script that allows me to go to a directory using an alias - eg: gbin to go to my bin directory. I name this script g. It contains an alias ge which edits the script and an alias g which lists all the go to aliases. The script needs to be sourced to set the aliases - eg: source g (or . g). I add this to my .bashrc. I also make sure the location of g is in my path so I can re-source it after any changes using . g (with no path). alias ge=&quot;gvim /c/MJN/github/bash/g; echo; echo REMEMBER . g; ",
     "type": "page"
   },
   {
-    "id": "158",
+    "id": "157",
     "title": "Processing Command Line Parameters in a Bash Script",
     "url": "/linuxbash/processing-command-line-parameters_in_a-bash-script.html",
     "content": "Option 1: Process a single string of parameters which start with a -. param=$1 # Only if parameters start with a &#39;-&#39; while [[ &quot;${param:0:1}&quot; == &quot;-&quot; &amp;&amp; &quot;$param&quot; != &quot;&quot; ]]; do case $param in -h|--help) echo &quot;$help_text&quot; exit ;; *a*) echo a param=&quot;${param//a/}&quot; ;; *b*) echo b param=&quot;${param//b/}&quot; ;; *) param=&quot;&quot; ;; esac done Option 2: Process a set of separate parameters (optionally with associated values)",
     "type": "page"
   },
   {
-    "id": "159",
+    "id": "158",
     "title": "3wp - Generates a random 3 word password",
     "url": "/linuxbash/script_3wp_-_generates_a_random_3_word_password.html",
     "content": "#!/bin/bash help_text=&quot; NAME 3wp - Generates a random 3 word password USAGE 3wp DESCRIPTION A script to generate a 3 word password. AUTHOR mjnurse.github.io - 2025 &quot; help_line=&quot;Generates a random 3 word password&quot; web_desc_line=&quot;Generates a random 3 word password&quot; if [ &quot;$1&quot; == &quot;-h&quot; ] || [ &quot;$1&quot; == &quot;--help&quot; ]; then echo &quot;$help_text&quot; exit fi words=&quot;$MJNWINROOT/MJN/words.txt&quot; num_words=$(cat &quot;$words&quot; |",
     "type": "page"
   },
   {
-    "id": "160",
+    "id": "159",
     "title": "ah - Add header to web page markdown document",
     "url": "/linuxbash/script_ah_-_add_header_to_web_page_markdown_document.html",
     "content": "#!/bin/bash help_text=&quot; NAME ah - Add header to web page markdown document USAGE ah &lt;Web page markdown document&gt; DESCRIPTION Add header to web page markdown document. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;Add header to web page markdown document&quot; web_desc_line=&quot;Add header to web page markdown document&quot; tmp=&quot;${1/.md/}&quot; title=&quot;${tmp//_/ }&quot; echo &quot;---&quot; &gt; ah.tmp echo &quot;title: $title&quot; &gt;&gt; ah.tmp echo &quot;layout",
     "type": "page"
   },
   {
-    "id": "161",
+    "id": "160",
     "title": "backup - Creates dated zip backups and copies them to BACKUP_DIR",
     "url": "/linuxbash/script_backup_-_creates_dated_zip_backups_and_copies_them_to_backup_dir.html",
     "content": "#!/bin/bash help_text=&quot; NAME backup - Create a dated zip archive of files and directories. USAGE backup [options] &lt;backup_name&gt; &lt;file_or_directory&gt; [...] OPTIONS -h|--help Show help text. DESCRIPTION Creates a zip archive with the format &lt;backup_name&gt;_YYMMDD.zip containing the specified files and directories, then copies it to \\$BACKUP_DIR. Requires the BACKUP_DIR environment variable to be set. Prompts for confirmation before creating the backup. AUTHOR Martin N 2025 &quo",
     "type": "page"
   },
   {
-    "id": "162",
+    "id": "161",
     "title": "bash-script-example - Example Bash Script",
     "url": "/linuxbash/script_bash-script-example_-_example_bash_script.html",
     "content": "#!/bin/bash help_text=&quot; NAME bash-func - One line description. USAGE bash-func [options] &lt;parameters&gt; OPTIONS -x Description... -h|--help Show help text. DESCRIPTION Description description description description. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;tbc&quot; web_desc_line=&quot;Example Bash Script&quot; try=&quot;Try ${0##*/} -h for more information&quot; tmp=&quot;${help_text##*USAGE}&quot; usage=$(echo &quot;Usage: ${tmp%%OPTIONS*}&quot; | tr -d &quot;\\n&quot; |",
     "type": "page"
   },
   {
-    "id": "163",
+    "id": "162",
     "title": "calc - Command line calculator",
     "url": "/linuxbash/script_calc_-_command_line_calculator.html",
     "content": "#!/bin/bash help_text=&quot; NAME calc - Command line calculator USAGE calc [options] &lt;calculation&gt; OPTIONS -h|--help Show help text. -i|--interactive Launch an interactive (bc) calculator. -s|--sizes Convert number to KB, MB, GB, TB, PB. DESCRIPTION In the calculation us &#39;x&#39; for multiply, use &#39;r&#39; for the previous result. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;Command line calculator&quot; web_desc_line=&quot;Command line calculator&quot; pack_member=&quot;d",
     "type": "page"
   },
   {
-    "id": "164",
+    "id": "163",
     "title": "cls - Clear terminal and putty terminal buffer",
     "url": "/linuxbash/script_cls_-_clear_terminal_and_putty_terminal_buffer.html",
     "content": "#!/bin/bash help_text=&quot; NAME cls - Clear terminal and putty terminal buffer USAGE cls DESCRIPTION Clear terminal and putty terminal buffer. AUTHOR mjnurse.github.io - 2019 &quot; help_line=&quot;Clear terminal and putty terminal buffer&quot; web_desc_line=&quot;Clear terminal and putty terminal buffer&quot; pack_member=&quot;basics,default&quot; # doesn&#39;t always work first time round so twice. printf &#39;\\033[3J&#39; clear printf &#39;\\033[3J&#39; clear",
     "type": "page"
   },
   {
-    "id": "165",
+    "id": "164",
     "title": "crreadme - Creates a README.md document from READMEscr.md",
     "url": "/linuxbash/script_crreadme_-_creates_a_readme.md_document_from_readmescr.md.html",
     "content": "#!/bin/bash help_text=&quot; NAME crreadme - Creates a README.md document from READMEscr.md USAGE crreadme &lt;READMEscr.md document name&gt; DESCRIPTION Creates a README.md document from READMEscr.md AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;Creates a README.md document from READMEscr.md&quot; web_desc_line=&quot;Creates a README.md document from READMEscr.md&quot; mv -f README.md /tmp while read line; do if [[ &quot;$line&quot; == &quot;[[help_lines]]&quot; ]]; then echo &#39;```&",
     "type": "page"
   },
   {
-    "id": "166",
+    "id": "165",
     "title": "csvplot - Generates a HTML page containing a Google Chart plotting the csv data",
     "url": "/linuxbash/script_csvplot_-_generates_a_html_page_containing_a_google_chart_plotting_the_csv_data.html",
     "content": "#!/bin/bash help_text=&quot; NAME csvplot - Generates a HTML page containing a Google Chart plotting the csv data. USAGE csvplot [options] &lt;csv filename&gt; OPTIONS -f|--fontsize The font size for the chart -h|--help Show help text. -s|--smooth Adds smoothing to the plotted line. -x|--xaxis|--haxis &lt;name&gt; sets the xaxis / haxis. -y|--yaxis|--vaxis &lt;name&gt; sets the yaxis / vaxis. DESCRIPTION Generates a HTML page containing a Google Chart plotting the csv data. AUTHOR mjnurse.github",
     "type": "page"
   },
   {
-    "id": "167",
+    "id": "166",
     "title": "csvsql - Run a SQL query over a csv file",
     "url": "/linuxbash/script_csvsql_-_run_a_sql_query_over_a_csv_file.html",
     "content": "#!/bin/bash help_text=&quot; NAME csvsql - Run a SQL query over a csv file USAGE csvsql &lt;csv-filename&gt; &lt;sql-query: in quotes&gt; DESCRIPTION A script to run a SQL query over data in a csv file using sqlite3. The table to query has the same name as the csv file (with the file extension - anything after a &#39;.&#39; removed). AUTHOR mjnurse.github.io - 2022 &quot; help_line=&quot;Run a SQL query over a csv file&quot; web_desc_line=&quot;Run a SQL query over a csv file&quot; if [ &quot;$1",
     "type": "page"
   },
   {
-    "id": "168",
+    "id": "167",
     "title": "cve - CVE Lookup",
     "url": "/linuxbash/script_cve_-_cve_lookup.html",
     "content": "#!/bin/bash help_text=&quot; NAME cve - CVE Lookup USAGE cve [options] &lt;cve-code&gt; OPTIONS -h|--help Show help text. DESCRIPTION Lookup CVE using the services.nvd.nist.gov API. AUTHOR mjnurse.github.io - 2024 &quot; help_line=&quot;CVE Lookup&quot; web_desc_line=&quot;CVE Lookup&quot; try=&quot;Try ${0##*/} -h for more information&quot; tmp=&quot;${help_text##*USAGE}&quot; usage=$(echo &quot;Usage: ${tmp%%OPTIONS*}&quot; | tr -d &quot;\\n&quot; | sed &quot;s/ */ /g&quot;) if [[ &quot;$1&quot",
     "type": "page"
   },
   {
-    "id": "169",
+    "id": "168",
     "title": "file-watch-do - Watch a file and each time it is modified run a command",
     "url": "/linuxbash/script_file-watch-do_-_watch_a_file_and_each_time_it_is_modified_run_a_command.html",
     "content": "#!/bin/bash help_text=&quot; NAME file-watch-do - Watch a file (or directory) and each time it is modified run a command. USAGE file-watch-do &lt;file name&gt; &lt;command&gt; [&lt;command parameters&gt;] DESCRIPTION Watch a file (or directory) and each time the file or a file within the directory is modified run a command. AUTHOR mjnurse.github.io - 2019 &quot; help_line=&quot;Watch a file and each time it is modified run a command&quot; web_desc_line=&quot;Watch a file and each time it is modi",
     "type": "page"
   },
   {
-    "id": "170",
+    "id": "169",
     "title": "filename-cleanse - Rename files to only lowercase characters and a dash.",
     "url": "/linuxbash/script_filename-cleanse_-_rename_files_to_only_lowercase_characters_and_a_dash..html",
     "content": "#!/bin/bash help_text=&quot; NAME filename-cleanse - Rename files to only lowercase characters and a dash. USAGE filename-cleanse [options] &lt;filename(s)&gt; OPTIONS -h|--help Show help text. DESCRIPTION Search for filenames which contain any characters which are not either lowercase or a dash and rename these. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;Rename files to only lowercase characters and a dash.&quot; web_desc_line=&quot;Rename files to only lowercase characters and a da",
     "type": "page"
   },
   {
-    "id": "171",
+    "id": "170",
     "title": "gen-bash-func - Example Bash Script",
     "url": "/linuxbash/script_gen-bash-func_-_example_bash_script.html",
     "content": "#!/bin/bash help_text=&quot; NAME gen-bash-func - Generates code and header of a bash function USAGE gen-bash-func [options] &lt;function_name&gt; &lt;parameters&gt; OPTIONS -f|--flag &lt;param_name&gt; &lt;variable_name&gt; A flag parameter. If passed then a corresponding variable named &lt;variable_name&gt;_yn is set to &#39;y&#39;. -fv|--flagvalue &lt;param_name&gt; &lt;variable_name&gt; A flag plus value parameter. If passed then a corresponding variable named &lt;variable_name&gt; is set to",
     "type": "page"
   },
   {
-    "id": "172",
+    "id": "171",
     "title": "gen-bookmark-page - Generates a bookmark web page from a folder in the Chrome bookmarks bar",
     "url": "/linuxbash/script_gen-bookmark-page_-_generates_a_bookmark_web_page_from_a_folder_in_the_chrome_bookmarks_bar.html",
     "content": "#!/bin/bash help_text=&quot; NAME gen-bookmark-page - generates a bookmark web page from a folder in the Chrome bookmarks bar. USAGE gen-bookmark-page [options] OPTIONS -h|--help Show help text. DESCRIPTION Generates a bookmark web page from a folder in the Chrome bookmarks bar. AUTHOR mjnurse.github.io - 2022 &quot; help_line=&quot;Generates a bookmark web page from a folder in the Chrome bookmarks bar&quot; web_desc_line=&quot;Generates a bookmark web page from a folder in the Chrome bookmarks",
     "type": "page"
   },
   {
-    "id": "173",
+    "id": "172",
     "title": "gvim - Runs windows gvim and fixes file paths",
     "url": "/linuxbash/script_gvim_-_runs_windows_gvim_and_fixes_file_paths.html",
     "content": "#!/bin/bash help_text=&quot; NAME gvim - Runs windows gvim and fixes files paths USAGE gvim &lt;filename(s)&gt; DESCRIPTION Runs windows gvim and fixes files paths. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;Runs windows gvim and fixes file paths&quot; web_desc_line=&quot;Runs windows gvim and fixes file paths&quot; files=&quot;$*&quot; fixed_files=&quot;$(echo $files | sed &#39;s/\\/c\\//C:\\//g&#39;)&quot; /c/Program\\ Files\\ \\(x86\\)/Vim/vim90/gvim.exe &quot;$fixed_files&quot; &amp;",
     "type": "page"
   },
   {
-    "id": "174",
+    "id": "173",
     "title": "h - Extracts and displays the help_lines",
     "url": "/linuxbash/script_h_-_extracts_and_displays_the_help_lines.html",
     "content": "#!/bin/bash help_text=&quot; NAME h - Extracts and displays the (single line) help lines in bash scripts. USAGE h [&lt;filenames - wildcards allowed&gt;] OPTIONS -m|--matchesonly Only display the help lines available, don&#39;t report on files missing a help line or with a help line &#39;tbc&#39;. DESCRIPTION Extracts and displays the (single line) help lines. AUTHOR mjnurse.github.io - 2020 &quot; # set -o errexit # set -o nounset # set -o pipefail # if [[ &quot;${TRACE-0}&quot; == &quot;1&quot",
     "type": "page"
   },
   {
-    "id": "175",
+    "id": "174",
     "title": "lf - A script to recursively list folders and show folder details",
     "url": "/linuxbash/script_lf_-_a_script_to_recursively_list_folders_and_show_folder_details.html",
     "content": "#!/bin/bash help_text=&quot; NAME lf - A script to recursively list folders and show folder details. USAGE lf [options] &lt;directory (. for current directory)&gt; OPTIONS -m|maxdepth &lt;number&gt; Max directory depth. -t|--filetypecount Show a count of files by file type. -h|--help Show help text. DESCRIPTION A script to recursively list folders, show folder details (size and number of files) and optionally a count of files by file size. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;A",
     "type": "page"
   },
   {
-    "id": "176",
+    "id": "175",
     "title": "move-mail - Move images of mail from Google Scanner a chosen folder",
     "url": "/linuxbash/script_move-mail_-_move_images_of_mail_from_google_scanner_a_chosen_folder.html",
     "content": "#!/bin/bash help_text=&quot; NAME move-mail - Takes images of mail from Google Scanner and moves these to a chosen folder. USAGE move-mail [options] &lt;parameters&gt; OPTIONS -h|--help Show help text. DESCRIPTION Takes images of mail from Google Scanner and moves these to a chosen folder. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;Move images of mail from Google Scanner a chosen folder&quot; web_desc_line=&quot;Move images of mail from Google Scanner a chosen folder&quot; try=&quot;",
     "type": "page"
   },
   {
-    "id": "177",
+    "id": "176",
     "title": "n - Record and query notes",
     "url": "/linuxbash/script_n_-_record_and_query_notes.html",
     "content": "#!/bin/bash help_text=&quot; NAME n - Notes USAGE n [options] &lt;text - consider wrapping in quotes&gt; OPTIONS -h|--help Show this help message. -a|--add Add the &lt;text&gt; as a new note. -e|--edit Edit the notes text file. DESCRIPTION Record and query notes. AUTHOR mjnurse.github.io - 2023 &quot; help_line=&quot;Record and query notes&quot; web_desc_line=&quot;Record and query notes&quot; nf=~/.notes.txt if [[ &quot;$1&quot; == &quot;&quot; ]]; then echo &#39; _ _ _&#39; echo &#39;| \\| |___",
     "type": "page"
   },
   {
-    "id": "178",
+    "id": "177",
     "title": "optional-step-run - A script which prompts a user to decide if a step should be run",
     "url": "/linuxbash/script_optional-step-run_-_a_script_which_prompts_a_user_to_decide_if_a_step_should_be_run.html",
     "content": "#!/bin/bash help_text=&quot; NAME optional-step-run - A template script which prompts a user to decide if steps should be run. USAGE optional-step-run [options] [&lt;start step number&gt;] OPTIONS -l|--list List the steps only. -h|--help Show help text. DESCRIPTION A template script which prompts a user to decide if steps should be run. An optional start step number can be passed in and all steps before this are automatically skipped. AUTHOR mjnurse.github.io - 2023 &quot; help_line=&quot;A scri",
     "type": "page"
   },
   {
-    "id": "179",
+    "id": "178",
     "title": "or - Connect to oracle using sqlplus",
     "url": "/linuxbash/script_or_-_connect_to_oracle_using_sqlplus.html",
     "content": "#!/bin/bash help_text=&quot; NAME or - Connect to oracle using sqlplus. USAGE or DESCRIPTION Connect to oracle using sqlplus. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;Connect to oracle using sqlplus&quot; web_desc_line=&quot;Connect to oracle using sqlplus&quot; export ORACLE_PATH=.:/c/MJN/gdrive/code/oracle:/c/MJN/gdrive/code/private/oracle rlwrap /c/MJN/oracle_client/product/11.2.0/client_1/bin/sqlplus.exe /NOLOG #rlwrap sqlplus /NOLOG",
     "type": "page"
   },
   {
-    "id": "180",
+    "id": "179",
     "title": "pack - Compresses and converts files base64 to copy and paste into a command line session",
     "url": "/linuxbash/script_pack_-_compresses_and_converts_files_base64_to_copy_and_paste_into_a_command_line_session.html",
     "content": "#!/bin/bash help_text=&quot; NAME pack - Compresses and converts files base64 to copy / paste into a command line session. USAGE pack [options] &lt;filename(s)&gt; OPTIONS -h|--help Show help text. -n|--name Specify a name from the pack file. -s|--silent Suppress terminal output. DESCRIPTION Compresses one or more files and converts these to base64 to copy and paste into a command line session with commands to convert these back to the original file. The output is also written to a file, the nam",
     "type": "page"
   },
   {
-    "id": "181",
+    "id": "180",
     "title": "parameters-function - Contains a function to parse and print details about script parameters",
     "url": "/linuxbash/script_parameters-function_-_contains_a_function_to_parse_and_print_details_about_script_parameters.html",
     "content": "#!/bin/bash help_text=&quot; NAME parameters-function USAGE print_parameters DESCRIPTION A function to parse and print details about script parameters. AUTHOR mjnurse.github.io - 2022 &quot; help_line=&quot;Contains a function to parse and print details about script parameters&quot; web_desc_line=&quot;Contains a function to parse and print details about script parameters&quot; # Parses and prints script parameter details between two comments: # &quot;# Start Parse Script Parameters&quot; and &q",
     "type": "page"
   },
   {
-    "id": "182",
+    "id": "181",
     "title": "parq-to-json - Example Bash Script",
     "url": "/linuxbash/script_parq-to-json_-_example_bash_script.html",
     "content": "#!/bin/bash help_text=&quot; NAME bash-func - One line description. USAGE bash-func [options] &lt;parameters&gt; OPTIONS -x Description... -h|--help Show help text. DESCRIPTION Description description description description. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;tbc&quot; web_desc_line=&quot;Example Bash Script&quot; try=&quot;Try ${0##*/} -h for more information&quot; tmp=&quot;${help_text##*USAGE}&quot; usage=$(echo &quot;Usage: ${tmp%%OPTIONS*}&quot; | tr -d &quot;\\n&quot; |",
     "type": "page"
   },
   {
-    "id": "183",
+    "id": "182",
     "title": "parq - A bash utility for viewing Apache Parquet files in JSON, CSV, or schema format",
     "url": "/linuxbash/script_parq_-_a_bash_utility_for_viewing_apache_parquet_files_in_json,_csv,_or_schema_format.html",
     "content": "#!/bin/bash help_text=&quot; NAME parq - Read and display parquet files in various formats. USAGE parq [options] &lt;parquet-file&gt; OPTIONS -a|--all Display all records (default shows 10 records). -c|--csv Output data in CSV format (default is JSON). -h|--help Show help text. -n|--num &lt;number&gt; Specify number of records to display. -s|--schema Display the parquet file schema only. DESCRIPTION parq is a utility for reading Apache Parquet files and displaying their contents in different for",
     "type": "page"
   },
   {
-    "id": "184",
+    "id": "183",
     "title": "pwd-gen - Random Password Generator",
     "url": "/linuxbash/script_pwd-gen_-_random_password_generator.html",
     "content": "```bash !/bin/bash help_text=\" NAME gen-pwd - Random Password Generator using OpenSSL USAGE gen-pwd [options] OPTIONS -l|--length Specify the length of the generated password. Default is 16. -h|--help Show help text. DESCRIPTION This script generates a random password of specified length using OpenSSL. The password includes a mix of uppercase, lowercase, digits, and special characters. AUTHOR Martin N 2025 \" help_line=\"Random Password Generator\" web_desc_line=\"Random Password Generator\" Default ",
     "type": "page"
   },
   {
-    "id": "185",
+    "id": "184",
     "title": "script-template - A script containing an example script-template",
     "url": "/linuxbash/script_script-template_-_a_script_containing_an_example_script-template.html",
     "content": "#!/bin/bash help_text=&quot; NAME script-template - A script containing an example script-template. USAGE script-template [options] &lt;parameters&gt; OPTIONS -x Description... -h|--help Show help text. DESCRIPTION Description description description description. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;A script containing an example script-template&quot; web_desc_line=&quot;A script containing an example script-template&quot; try=&quot;Try ${0##*/} -h for more information&quot; tm",
     "type": "page"
   },
   {
-    "id": "186",
+    "id": "185",
     "title": "sqlite-load-csv - Load a csv file into a sqlite3 database",
     "url": "/linuxbash/script_sqlite-load-csv_-_load_a_csv_file_into_a_sqlite3_database.html",
     "content": "#!/bin/bash help_text=&quot; NAME sqlite-load-csv - Load a csv file into a sqlite3 database. USAGE sqlite-load-csv [options] &lt;csv_filename&gt; [&lt;database_name&gt;] OPTIONS -h|--help Show help text. -t|--table &lt;table name&gt; Specify the name of the table created. DESCRIPTION Loads a csv file into a table with the same name as the file (or passed in as an option t|table) into a database the name of which is passed as a parameter or if no database name is specified, a database with the sa",
     "type": "page"
   },
   {
-    "id": "187",
+    "id": "186",
     "title": "tidy - Tidies filenames and fixes issues such as permission issues with files in the specified directory",
     "url": "/linuxbash/script_tidy_-_tidies_filenames_and_fixes_issues_such_as_permission_issues_with_files_in_the_specified_directory.html",
     "content": "#!/bin/bash help_text=&quot; NAME tidy - Tidies filenames and fixes issues such as permission issues with files in the specified directory. USAGE tidy [&lt;folder&gt;] OPTIONS -n|--name Only tidy filenames - do not check permissions etc. -fn|-nf Force rename of filenames without prompting. Implies -n. -h|--help Show help text. DESCRIPTION Tidies filenames and fixes issues such as permission issues with files in the specified directory. AUTHORS mjnurse.github.io - 2020 &quot; help_line=&quot;Tidi",
     "type": "page"
   },
   {
-    "id": "188",
+    "id": "187",
     "title": "utils - Some bash Utility Functions",
     "url": "/linuxbash/script_utils_-_some_bash_utility_functions.html",
     "content": "#!/bin/bash help_text=&quot; NAME utils - One line description. USAGE utils [options] &lt;parameters&gt; OPTIONS -x Description... -h|--help Show help text. DESCRIPTION Description description description description. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;Some bash Utility Functions&quot; web_desc_line=&quot;Some bash Utility Functions&quot; colour_default=&quot;\\e[39m&quot; colour_black=&quot;\\e[30m&quot; colour_red=&quot;\\e[31m&quot; colour_green=&quot;\\e[32m&quot; colour_yell",
     "type": "page"
   },
   {
-    "id": "189",
+    "id": "188",
     "title": "Setting Prompt Colour In bash and Putty",
     "url": "/linuxbash/setting-prompt-colour-in_bash_and-putty.html",
     "content": "I want a different colour prompt for different machines. The following script gives colour names to the various escape sequences. Can put this in (for example) .bashrc file. # Regular Text Colours txtblk=&#39;\\e[0;30m&#39; # Black txtred=&#39;\\e[0;31m&#39; # Red txtgrn=&#39;\\e[0;32m&#39; # Green txtylw=&#39;\\e[0;33m&#39; # Yellow txtblu=&#39;\\e[0;34m&#39; # Blue txtpur=&#39;\\e[0;35m&#39; # Purple txtcyn=&#39;\\e[0;36m&#39; # Cyan txtwht=&#39;\\e[0;37m&#39; # White # Bold Text Colours bldblk=&#39;\\",
     "type": "page"
   },
   {
-    "id": "190",
+    "id": "189",
     "title": "SSH Login Without Password",
     "url": "/linuxbash/ssh-login-without-password.html",
     "content": "ssh Command Line Create public and private keys using ssh-key-gen on local machine. $&gt; ssh-keygen Generating public/private rsa key pair. Enter file in which to save the key (/home/martin/.ssh/id_rsa): Enter passphrase (empty for no passphrase): Enter same passphrase again: Your identification has been saved in /home/martin/.ssh/id_rsa. Your public key has been saved in /home/martin/.ssh/id_rsa.pub. The key fingerprint is: SHA256:sfuidygosifudyosiduygosidfuygosiduygisdyuiy martin@local Copy t",
     "type": "page"
   },
   {
-    "id": "191",
+    "id": "190",
     "title": "sudo Without Password",
     "url": "/linuxbash/sudo-without-password.html",
     "content": "To stop being prompted for a password when running sudo commands. Open the sudoers file whist ensuring you don\u2019t lock yourself out due to syntax errors: sudo visudo Add the following rule for Your user (add this line at the end of the file): &lt;username&gt; ALL=(ALL) NOPASSWD: ALL eg. martin ALL=(ALL) NOPASSWD: ALL",
     "type": "page"
   },
   {
-    "id": "192",
+    "id": "191",
     "title": "Waiting On Background Processes",
     "url": "/linuxbash/waiting-on-background-processes.html",
     "content": "The wait command waits for all background processes start in the current session to end. Example: #!/bin/bash function f1() { echo &quot;process 1, sleeping 3s&quot; sleep 3 echo &quot;process 1 complete&quot; } function f2() { echo &quot;process 2, sleeping 2s&quot; sleep 2 echo &quot;process 2 complete&quot; } f1 &amp; f2 &amp; wait echo &quot;all done&quot; Output: $ xxx process 1, sleeping 3s process 2, sleeping 2s process 2 complete process 1 complete all done $",
     "type": "page"
   },
   {
-    "id": "193",
+    "id": "192",
     "title": "WSL - Hadoop 3.0",
     "url": "/linuxbash/wsl-hadoop_3.0.html",
     "content": "HDFS Config Datanode and Namenode directories default to /tmp - these didn't work for me (and not really a ideal location...). /c/MJN/wsl-hadoop-3.3.0/etc/hadoop/hdfs-site.xml &lt;configuration&gt; &lt;property&gt; &lt;name&gt;dfs.replication&lt;/name&gt; &lt;value&gt;1&lt;/value&gt; &lt;/property&gt; &lt;property&gt; &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt; &lt;value&gt;/c/MJN/hdfs-data/datanode&lt;/value&gt; &lt;/property&gt; &lt;property&gt; &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt",
     "type": "page"
   },
   {
-    "id": "194",
+    "id": "193",
     "title": "Azure AD - Find My AD Group Memberships",
     "url": "/misc/azure-ad.html",
     "content": "First authenticate - this command will pop up a window to sign in. &gt; Connect-AzureAD Account Environment TenantId TenantDomain AccountType ------- ----------- -------- ------------ ----------- martinnurse@demo.com AzureCloud c780234d-ed5b-4ccd demo.com User Get my AD group memberships. &gt; Get-AzureADUser -SearchString martinnurse@demo.com ` | Get-AzureADUserMembership ` | % {Get-AzureADObjectByObjectId -ObjectId $_.ObjectId ` | select DisplayName,ObjectType,MailEnabled,SecurityEnabled,Objec",
     "type": "page"
   },
   {
-    "id": "195",
+    "id": "194",
     "title": "BMI Calculator",
     "url": "/misc/bmi-calculator.html",
     "content": "Weight St Lb lbs Kg Height Ft In m Target Weight Current BMI: 0 Target Weight (BMI 20 - 25) BMI 20 weight (lose/gain)BMI 25 weight (lose/gain) Kg00 Lbs00 St Lb00 Notes: - BMI for adults only. Doesn't account for body / bone structure, other formulae exist. - BMI &lt;20: Underweight. BMI 20-25: Healthy weight. BMI 25-30: Over Weight. BMI 30-35: Obese. BMI&gt;35 very/morbidly obese. function getFloat(id) { return parseFloat(document.getElementById(id).value) || 0; } function setValue(id, value) { ",
     "type": "page"
   },
   {
-    "id": "196",
+    "id": "195",
     "title": "Dashboard Design Principles",
     "url": "/misc/dashboard-design-principles.html",
     "content": "'The greatest value of a picture is when it forces us to notice what we never expected to see'John Tukey, 'Exploratory Data Analysis', 1977 'A picture is worth a thousand words. An interface is worth a thousand pictures'Ben Shneiderman, 2003 'Data becomes useful knowledge of something that matters when it builds a bridge between a question and an answer. This connection is the signal.' Stephen Few, 'Signal: Understanding What Matters in a World of Noise, 2015 'Graphical excellence is that which ",
     "type": "page"
   },
   {
-    "id": "197",
+    "id": "196",
     "title": "Generating a Bookmarks Page From a Chrome Bookmarks Folder",
     "url": "/misc/generating_a-bookmarks-page-from_a-chrome-bookmarks-folder.html",
     "content": "I wanted a bookmark web page I could switch to (using CTRL-&lt;Tab Number&gt;) and then quickly open a bookmarked site. I created a bash script to read the bookmarks from a folder in the Chrome bookmark bar (folder name: Page) and create a web page. I added Javascript (from this site) that allows me to go to a bookmark (link) by typing in the associated number. I can also search the bookmarks by typing / and then entering part of the name. Pressing Return opens the first matching bookmark. All b",
     "type": "page"
   },
   {
-    "id": "198",
+    "id": "197",
     "title": "Google Charts",
     "url": "/misc/google-charts.html",
     "content": "Google Charts function toggle_yn(obj) { if (obj.value == 'Yes') obj.value = 'No'; else obj.value = 'Yes' } Chart Data Chart Options Redraw | Pivot | Column Headings | Row Headings | Chart Type | &nbsp;Line&nbsp;&nbsp;&nbsp;Column&nbsp;&nbsp;&nbsp;Bar&nbsp;&nbsp;&nbsp;Area&nbsp;&nbsp;&nbsp;Pie",
     "type": "page"
   },
   {
-    "id": "199",
+    "id": "198",
     "title": "History Of My Cars",
     "url": "/misc/history_of_my_cars.html",
     "content": "This perhaps the oldest page on this website and its predecessors. It is, as it says, a history of the cars I've owned. Best Car Audi S5 Quattro 354bhp, 369lb-ft, 0-60mph: 4.7s, Top Speed: 155mph. A great car, very quick, accelerates hard in any gear. The exhaust growls in sports mode. The 8 speed auto gearbox changes very quickly - gear change let down my A5 V6 TDi Quattro, and this was the first thing I checked on the test drive. Came with almost every extra including massaging heated front se",
     "type": "page"
   },
   {
-    "id": "200",
+    "id": "199",
     "title": "HTML Colour Converter",
     "url": "/misc/html-colour-converter.html",
     "content": "RGB: HEX: I've found rotating the RGB values around can give some colours that work well together. Not sure if this has a name... function setColors() { let h = document.getElementById('h'); let rh = h.value.slice(0,2); let gh = h.value.slice(2,4); let bh = h.value.slice(4,6); color = rh + gh + bh; document.getElementById('c1').style.backgroundColor = '#' + color; document.getElementById('c1').innerHTML = '#' + color + '&nbsp;#' + color + ''; color = bh + rh + gh; document.getElementById('c2').s",
     "type": "page"
   },
   {
-    "id": "201",
+    "id": "200",
     "title": "JWT - JSON Web Tokens",
     "url": "/misc/jwt-json-web-tokens.html",
     "content": "Today I was looking at authentication for a web-service. It was using JSON Web Tokens. What are JWTs? How do they work? A JWT is a cryptographically signed JSON token used to authenticate users making calls to an application. A JWT is sent to a user when they authenticate with an authentication Service. The user can send this token with requests to an application (web-service or other) as proof of identity. The application talks to the authentication server and is told the how the token was cryp",
     "type": "page"
   },
   {
-    "id": "202",
+    "id": "201",
     "title": "Public Key Encryption Analogy",
     "url": "/misc/public-key-encryption-analogy.html",
     "content": "What is Public Private Key Encryption? This process uses an algorithm that can encrypt data using a public key however, the data can only be decrypted using a private key. I share my public key with everyone and they use it to encrypt data they send to me. Only I can decrypt and read that data. The Analogy As an analogy to public, private key encryption, consider a secure, locked post-box which contains a slot through which notes can be posted. Notes posted in to the post-box cannot be read (as ",
     "type": "page"
   },
   {
-    "id": "203",
+    "id": "202",
     "title": "Read Aloud In MS Word",
     "url": "/misc/read-aloud-in-ms-word.html",
     "content": "To activate: [Alt][Ctrl][Space]. Cursor at a specific point in the text: The document will be read aloud from here on. Text selected: The selected text will be read aloud. [Ctrl][Space] - Play or pause. [Ctrl][Left arrow] - Jump to the previous paragraph. [Ctrl][Right arrow] - Jump to the next paragraph. [Alt][Left arrow] - Slower reading speed. [Alt][Arrow right] - Faster reading speed.",
     "type": "page"
   },
   {
-    "id": "204",
+    "id": "203",
     "title": "Running Spark on YARN - Cluster or Client Mode",
     "url": "/misc/running-spark_on-yarn-cluster_or-client-mode.html",
     "content": "Spark jobs can run on YARN in two modes: cluster mode and client mode. Understanding the difference between the two modes is important for choosing an appropriate memory allocation configuration, and to submit jobs as expected. A Spark job consists of two parts: Spark Executors that run the actual tasks, and a Spark Driver that schedules the Executors. Cluster Mode Everything runs inside the cluster. You can start a job from your laptop and the job will continue running even if you close your co",
     "type": "page"
   },
   {
-    "id": "205",
+    "id": "204",
     "title": "Shortcut Keys",
     "url": "/misc/shortcut-keys.html",
     "content": "Note: This page is automatically generated using sck Confluence | // | Opens the date picker | | Alt +SHIFT+DOWN | Insert table row after | | Alt +SHIFT+UP | Insert table row before | | CTRL+0 | Set paragraph style | | CTRL+1-6 | Set as heading 1-6 | | CTRL+7 | Preformatted | | CTRL+8 | Quote | | CTRL+ENTER | Publish page | | CTRL+ENTER | Publish | | CTRL+SHIFT+I | Insert table | | CTRL+SHIFT+a | Insert macro | | CTRL+SHIFT+b | Bulleted list | | CTRL+SHIFT+d | Insert markup | | CTRL+SHIFT+e | Pr",
     "type": "page"
   },
   {
-    "id": "206",
+    "id": "205",
     "title": "ssh",
     "url": "/misc/ssh.html",
     "content": "Storing SSH Connection / Config details Store SSH connection details in a config file in the .ssh directory. File ~/.ssh/config Contents Host dev HostName dev.example.com Port 22 User martin Host test HostName test.example.com Port 22 User martin SSH Login Without Password 1) Generate a public/private RSA key pair. Save this to default location /home/&lt;username&gt;/.ssh/id_rsa $ ssh-keygen Your public key will be saved in /home/user/.ssh/id_rsa.pub 2) Copy the SSH Public Key to the Remote Host",
     "type": "page"
   },
   {
-    "id": "207",
+    "id": "206",
     "title": "Statistical Testing",
     "url": "/misc/statistical-testing.html",
     "content": "For a long time I've wanted to explore using statistics to determine how many tests are needed to test for errors. The question I have is that, for a set of n records, if we want to be say 99.9% sure none contain an error, how many would be need to test at random to reach a point where we can be statistically, say, 99.9% sure there are no errors. The Basics Tests with a fixed number of options / records to test If I have a die and there is a chance the number has not been printed on one side, ho",
     "type": "page"
   },
   {
-    "id": "208",
+    "id": "207",
     "title": "Text To Speech - Clipboard",
     "url": "/misc/text-to-speech-clipboard.html",
     "content": "I've been using the Microsoft Word text-to-speech function for a while to proof read text. Works great but the text needs to be a Word document or I need to copy and paste it there first. I've been looking online for an application to read aloud the clipboard. It's surprisingly difficult to find an application. I then thought about AHK and (convinced it would be far to complex for AHK) I ran a search. I was wrong, a very simple AHK script now means I can read aloud the contents of the clipboard ",
     "type": "page"
   },
   {
-    "id": "209",
+    "id": "208",
     "title": "This Sites Markdown",
     "url": "/misc/this-sites-markdown.html",
     "content": "Heading 1 # Heading 1 Heading 2 ## Heading 2 Heading 3 Heading 4 Heading 5 Heading 6 Horizontal Line: --- Bold: **Bold** Italic: *Italic* Bold Italic: ***Bold Italic*** GitHub: [GitHub](http://github.com) Block Quote: &gt; Block Quote Links I'm an inline-style link I'm an inline-style link with title Markdown: [I&#39;m an inline-style link](https://www.google.com) [I&#39;m an inline-style link with title](https://www.google.com &quot;Google&#39;s Homepage&quot;) Simple Lists Single spacing: Simp",
     "type": "page"
   },
   {
-    "id": "210",
+    "id": "209",
     "title": "Using Git and GitHub - A Walk-through",
     "url": "/misc/using-git_and-git-hub-a-walkthrough.html",
     "content": "In the following walk-through we use Git and GitHub from the view point of two 'users' in parallel and look at the workflow and interaction between the two. Simulate two users - each has a home directory Create two 'user home' directories: &gt; ~/git-test$ mkdir user1 &gt; ~/git-test$ mkdir user2 Use User1 to create a file, add this to Git and push the local Git repo up and into GitHub Go to User1 home directory and initialise local Git: &gt; ~/git-test$ cd user1 &gt; ~/git-test/user1$ git init ",
