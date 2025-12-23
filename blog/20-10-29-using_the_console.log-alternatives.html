@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="25-02-20 - A-series Paper Sizes" />
+    <meta name="description" content="20-10-29 Using the console.log Alternatives" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>25-02-20 - A-series Paper Sizes</title>
+    <title>20-10-29 Using the console.log Alternatives</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
@@ -88,12 +88,37 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/blog/25-02-20_-_A-series_Paper_Sizes.md">25-02-20 - A-series Paper Sizes</a></h1>
-<h2 id="very-interesting">Very Interesting...</h2>
-<p>If you take a sheet of A-series sized paper and fold it in half, the ratio of <code>height</code> to <code>width</code> remains the same.</p>
-<p>To achieve this the ratio of <code>height</code> to <code>width</code> is <code>height = sqrt(2) * width</code>.</p>
-<p>The size (area) of <code>A0</code> is 1 square meter, <code>A1</code> is 1/2 square meter, ..., <code>A4</code> is 1/16 square meter.</p>
-<p>There is <code>A-1</code> (2 square meters), <code>A-2</code> (4 square meters) etc.</p>
+          <h1><a href="#" data-clipboard="/home/martin/mjnurse/mjnurse-website/blog/20-10-29-using_the_console.log-alternatives.md">20-10-29 Using the console.log Alternatives</a></h1>
+<h2 id="consolelog">console.log()</h2>
+<p>This is the method we all use...</p>
+<h2 id="consoleerror">console.error()</h2>
+<p>This method is useful while testing code. It is used to log errors to the browser console. By default, the error message will be highlighted with red color.</p>
+<h2 id="consolewarn">console.warn()</h2>
+<p>This method is also used to test code. Usually, it helps in throwing warnings to the console. By default, the warning message will be highlighted with yellow color.</p>
+<h2 id="consoleclear">console.clear()</h2>
+<p>This method is used to clear the console.</p>
+<h2 id="consoletime-and-consoletimeend">console.time() and console.timeEnd()</h2>
+<p>Both these methods are used in conjunction with each other. Whenever we want to know the amount of time spent by a block or a function, we can make use of the time() and timeEnd() methods. Both these functions take a string as a parameter. Make sure you use the same string for both these functions to measure the time.</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">console</span><span class="p">.</span><span class="nx">time</span><span class="p">(</span><span class="s1">&#39;timer&#39;</span><span class="p">);</span><span class="w"> </span>
+<span class="o">&lt;</span><span class="nx">code</span><span class="o">&gt;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">timeEnd</span><span class="p">(</span><span class="s1">&#39;timer&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+<h2 id="consoletable">console.table()</h2>
+<p>This method generates a table inside a console, for better readability. A table will be automatically generated for an array or an object.</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">console</span><span class="p">.</span><span class="nx">table</span><span class="p">({</span><span class="nx">a</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="o">:</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="nx">c</span><span class="o">:</span><span class="w"> </span><span class="mf">3</span><span class="p">});</span><span class="w"> </span>
+</code></pre></div>
+
+<h2 id="consolecount">console.count()</h2>
+<p>This method is used to count the number that the function hit by this counting method. This can be used inside a loop to check how many times a particular value has been executed.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">i</span><span class="o">=</span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">&lt;</span><span class="mf">3</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">count</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h2 id="consolegroup-and-consolegroupend">console.group() and console.groupEnd()</h2>
+<p>These methods group() and groupEnd() allows us to group contents in a separate block, which will be indented. Just like the time() and the timeEnd() they also accept a label, of the same value. You can expand and collapse the group.</p>
+<hr>
         </div>
       </article>
     </main>

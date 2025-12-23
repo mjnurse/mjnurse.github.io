@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="19-03-13 - Dont Tell Anyone But Ive Stopped My Screen Locking In Windows Using AHK" />
+    <meta name="description" content="20-12-10 - Async Await with Array Assignment" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>19-03-13 - Dont Tell Anyone But Ive Stopped My Screen Locking In Windows Using AHK</title>
+    <title>20-12-10 - Async Await with Array Assignment</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
@@ -88,26 +88,11 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/blog/19-03-13_-_Dont_Tell_Anyone_But_Ive_Stopped_My_Screen_Locking_In_Windows_Using_AHK.md">19-03-13 - Dont Tell Anyone But Ive Stopped My Screen Locking In Windows Using AHK</a></h1>
-<p>I'm working on 2 computers right now.  One automatically locks after 5 minutes.  Really great for security but maddening for me.</p>
-<p>It's a policy setting which I can't override.</p>
-<p>I keep knocking the mouse to keep it unlocked.  I then dawned on me that AHK could do that for me.</p>
-<div class="codehilite"><pre><span></span><code><span class="c">; Script to stop the screen locking in Windows by generating some mouse activity.</span>
-
-<span class="gh">#</span>Persistent
-<span class="gh">#</span>SingleInstance Force
-
-SetTimer, MoveMouse
-
-<span class="c">; Check the time that has passed since the last key press or mouse move, if its greater than 60 seconds</span>
-<span class="c">; move the mouse 1 pixel and then back.</span>
-
-MoveMouse:
-If ( A_TimeIdle &gt; 60000 ) {
-  MouseMove, 1 , 1,, R
-  MouseMove, -1,-1,, R
-}
-Return
+          <h1><a href="#" data-clipboard="/home/martin/mjnurse/mjnurse-website/blog/20-12-10-async-await_with-array-assignment.md">20-12-10 - Async Await with Array Assignment</a></h1>
+<div class="codehilite"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">user</span><span class="p">,</span><span class="w"> </span><span class="nx">account</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nb">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">([</span>
+<span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;/user&#39;</span><span class="p">),</span>
+<span class="w"> </span><span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;/account&#39;</span><span class="p">)</span>
+<span class="w"> </span><span class="p">])</span>
 </code></pre></div>
 
 <hr>

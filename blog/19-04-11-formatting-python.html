@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Set Default User For WSL Ubuntu" />
+    <meta name="description" content="19-04-11 - Formatting Python" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>Set Default User For WSL Ubuntu</title>
+    <title>19-04-11 - Formatting Python</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
@@ -88,14 +88,30 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1><a href="#" data-clipboard="/home/martin/mjnurse/mjnurse-website/other/wsl/Set_Default_User_For_WSL_Ubuntu.md">Set Default User For WSL Ubuntu</a></h1>
-<p>Useful if WSL switches to <code>root</code> as the default user.</p>
-<p>The command depend on the version of Ubuntu you have installed.  Press the windows key and type "Ubuntu" and you should see the Unbuntu app listed which may include a version number.  If so, add this to the end on the <code>ubuntu</code> command.</p>
-<div class="codehilite"><pre><span></span><code><span class="nv">ubuntu</span><span class="w"> </span><span class="nv">config</span><span class="w"> </span><span class="o">--</span><span class="nv">default</span><span class="o">-</span><span class="nv">user</span><span class="w"> </span><span class="nv">martin</span>
+          <h1><a href="#" data-clipboard="/home/martin/mjnurse/mjnurse-website/blog/19-04-11-formatting-python.md">19-04-11 - Formatting Python</a></h1>
+<p>This week I got a little interested in best practice formatting for Python.</p>
+<p>Never been a big fan of formatting tools, however I found 2 python tools and I like them both.  Both are highly configurable but the only thing I've changed so far is to extend the max line length to 110 characters and to change the indent level to 3 characters.</p>
+<ul>
+<li>
+<p>pylint3 - this tool checks formatting and produces a detailed description of improvements which can be made.</p>
+</li>
+<li>
+<p>yapf - this formats python code.</p>
+</li>
+</ul>
+<h2 id="changing-the-config-options">Changing the config Options</h2>
+<p>For yapf - create a style definition document as follows and then modify to change the settings.</p>
+<div class="codehilite"><pre><span></span><code>yapf --style-help &gt; ~/.style.yapf
+</code></pre></div>
 
-#<span class="w"> </span><span class="nv">Or</span><span class="w"> </span><span class="k">for</span>,<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nv">example</span>,<span class="w"> </span><span class="nv">version</span><span class="w"> </span><span class="mi">22</span>.<span class="mi">04</span>:
+<p>The changes I made are:</p>
+<div class="codehilite"><pre><span></span><code>continuation_indent_width=3
+indent_width=3
+column_limit=109
+</code></pre></div>
 
-<span class="nv">ubuntu2204</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nv">default</span><span class="o">-</span><span class="nv">user</span><span class="w"> </span><span class="nv">martin</span>
+<p>For pylint3, I've chosen to change the two settings using command line parameters.</p>
+<div class="codehilite"><pre><span></span><code>pylint3 --max-line-length=110 --indent-string=&#39;   &#39; --indent-after-paren=3 ...
 </code></pre></div>
         </div>
       </article>

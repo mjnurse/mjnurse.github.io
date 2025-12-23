@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="22-10-06 - Create The Equivalent To .bashrc For Windows CMD" />
+    <meta name="description" content="19-11-11 - Oracle and Postgres Schema Copy Process" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>22-10-06 - Create The Equivalent To .bashrc For Windows CMD</title>
+    <title>19-11-11 - Oracle and Postgres Schema Copy Process</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
@@ -88,30 +88,34 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/blog/22-10-06_-_Create_The_Equivalent_To_.bashrc_For_Windows_CMD.md">22-10-06 - Create The Equivalent To .bashrc For Windows CMD</a></h1>
-<p><strong>WARNING</strong>: This did break an application which ran (in the background) in (I assume) some CMD shell... Took me an age to work this out.</p>
-<p>Create a <code>cmdrc.bat</code> file, for example:</p>
-<div class="codehilite"><pre><span></span><code><span class="nv">@echo</span><span class="w"> </span><span class="k">off</span>
-<span class="k">set</span><span class="w"> </span><span class="n">GITHUB_TOKEN</span><span class="o">=[</span><span class="n">here is my github token</span><span class="o">]</span>
-</code></pre></div>
-
-<p>Get this executed each time a <code>CMD</code> session starts by adding a registry key specifying the path of the <code>cmdrc.bat</code> file.  The following script should be run as Admin:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">::</span><span class="w"> </span><span class="err">##################################################################################</span>
-<span class="nv">@echo</span><span class="w"> </span><span class="k">off</span>
-<span class="n">color</span><span class="w"> </span><span class="mi">04</span>
-<span class="n">title</span><span class="w"> </span><span class="k">Add</span><span class="w"> </span><span class="n">cmd</span><span class="w"> </span><span class="n">rc</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">registry</span>
-
-<span class="o">::</span><span class="w"> </span><span class="err">##################################################################################</span>
-<span class="k">set</span><span class="w"> </span><span class="ss">&quot;OpenCurrentFolderKey=HKLM\SOFTWARE\Microsoft\Command Processor&quot;</span>
-<span class="k">set</span><span class="w"> </span><span class="ss">&quot;cmdRcPath=C:\scripts\cmdrc.bat&quot;</span>
-<span class="n">REG</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="ss">&quot;%OpenCurrentFolderKey%&quot;</span><span class="w"> </span><span class="o">/</span><span class="n">v</span><span class="w"> </span><span class="ss">&quot;AutoRun&quot;</span><span class="w"> </span><span class="o">/</span><span class="n">t</span><span class="w"> </span><span class="n">REG_EXPAND_SZ</span><span class="w"> </span><span class="o">/</span><span class="n">d</span><span class="w"> </span><span class="ss">&quot;\&quot;</span><span class="o">%</span><span class="n">cmdRcPath</span><span class="o">%</span><span class="err">\</span><span class="ss">&quot;&quot;</span>
-
-<span class="o">::</span><span class="w"> </span><span class="err">##################################################################################</span>
-<span class="n">pause</span><span class="o">&gt;</span><span class="n">nul</span>
-<span class="k">exit</span><span class="w"> </span><span class="o">/</span><span class="n">b</span>
-
-<span class="o">::</span><span class="w"> </span><span class="err">##################################################################################</span>
-</code></pre></div>
+          <h1><a href="#" data-clipboard="/home/martin/mjnurse/mjnurse-website/blog/19-11-11-oracle_and-postgres-schema-copy-process.md">19-11-11 - Oracle and Postgres Schema Copy Process</a></h1>
+<p>I liked these diagrams (drawn in DrawIO).  First time I've used the 'sketch' look.</p>
+<h2 id="oracle-specific-solution">Oracle Specific Solution</h2>
+<p>The limitations on access and control for the Oracle Databases mean that using the Oracle 'export' and 'import' (database dump) utility is not practical.</p>
+<p>Oracle provides a data dictionary and stored procedure which will generate the DDL needed to create database objects.  However, [this company] does not allow access to the "all database" data dictionary views, they only allow access to the view of the data dictionary for the current user / schema.  To get around this, we need two stored procedures. </p>
+<p>First a procedure to extract the DDL. This is run as the source schema user, using the source schema's access to its own data in the data dictionary.  We store this DDL in a table: SCHEMA_COPY_DDL_CACHE.  We can then grant access to this table to the destination schema user. </p>
+<p>A second procedure in the destination schema can then read the DDL and create the objects in the destination schema. </p>
+<p>We can also grant the destination schema user access to the application tables in the source schema and then the second stored procedure can copy the data from the source schema.</p>
+<p><img alt="" src="images/OracleSchemaCopy.png" /></p>
+<p>Step:</p>
+<p>1) A Bash script running on the Edge Node server connects to Oracle as the source schema user using SQLPlus and executes the SCHEMA_COPY_EXTRACT_DDL procedure.</p>
+<p>2) The SCHEMA_COPY_EXTRACT_DDL procedure extracts the DDL from the data dictionary and writes this to the SCHEMA_COPY_DDL_CACHE table.</p>
+<p>3) A Bash script running on the Edge Node server connects to Oracle as the destination schema using SQLPlus and executes the SCHEMA_COPY_CREATE_OBJECTS procedure.</p>
+<p>4) The SCHEMA_COPY_CREATE_OBJECTS procedure deletes all existing objects in the destination schema.</p>
+<p>5) The SCHEMA_COPY_CREATE_OBJECTS procedure creates the new objects in the destination schema (with the referential integrity constraints disabled).</p>
+<p>6) The SCHEMA_COPY_CREATE_OBJECTS procedure copies the data from the source schema to the destination schema and then enables the integrity constraints.</p>
+<p>7) Progress (and potentially error) messages are written to the SCHEMA_COPY_LOG table and a file on the Edge Node.</p>
+<h2 id="postgres-specific-solution">Postgres Specific Solution</h2>
+<p>The Postgres solution makes use of the Postgres pg_dump utility.  This is used to extract the object DDL from the source schema which is then used to create the objects in the destination schema.  The data in the tables is NOT extracted - this is a very slow process.  Rather than extract and import the data, this is copied using SQL from the source to the destination schema.</p>
+<p><img alt="" src="images/PostgresSchemaCopy.png" /></p>
+<p>Step:
+1) A Bash script running on the Edge Node server manages the schema copy process.</p>
+<p>2) The pg_dump utility is used to extract object delete statements from the destination schema which is then use to drop all the objects in the destination schema.</p>
+<p>3) The pg_dump utility is used to extract the DDL which will create all objects in the source schema.</p>
+<p>4) The extract DDL is written to a file in the Edge node.</p>
+<p>5) The psql utility is used to execute the extracted DDL to create the objects in the destination schema.  The steps to create the referential integrity constraints and the Id population triggers are skipped.</p>
+<p>6) The psql utility is used to execute SQL to copy the data from the source schema tables to the destination schema.  Then the integrity constraints and Id population triggers are created.</p>
+<p>7) Progress (and potentially error) messages are written to the SCHEMA_COPY_LOG table and a file on the Edge Node.</p>
         </div>
       </article>
     </main>

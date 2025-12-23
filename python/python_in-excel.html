@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="23-06-27 - Generating a Bookmarks Page From a Chrome Bookmarks Folder" />
+    <meta name="description" content="Python in Excel" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>23-06-27 - Generating a Bookmarks Page From a Chrome Bookmarks Folder</title>
+    <title>Python in Excel</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
@@ -88,14 +88,20 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/blog/23-06-27_-_Generating_a_Bookmarks_Page_From_a_Chrome_Bookmarks_Folder.md">23-06-27 - Generating a Bookmarks Page From a Chrome Bookmarks Folder</a></h1>
-<p>I wanted a bookmark web page I could switch to (using <code>CTRL-&lt;Tab Number&gt;</code>) and then quickly open a bookmarked site.</p>
-<p>I created a bash script to read the bookmarks from a folder in the Chrome bookmark bar (folder name: <code>Page</code>) and create a web page.</p>
-<p>I added Javascript (from this site) that allows me to go to a bookmark (link) by typing in the associated number.  I can also search the bookmarks by typing <code>/</code> and then entering part of the name.  Pressing Return opens the first matching bookmark.</p>
-<p>All bookmarks are opened in a new tab meaning the bookmark page can be used again.</p>
-<p>The bash script is <a href="https://mjnurse.github.io/LinuxBash-L/Script_gen-bookmark-page_-_Generates_a_bookmark_web_page_from_a_folder_in_the_Chrome_bookmarks_bar.html">here</a>.</p>
-<p>Bookmark page shown below.</p>
-<p>| <img alt="" src="/Blog-B/images/gen-bookmarks-page.png" /> |</p>
+          <h1><a href="#" data-clipboard="/home/martin/mjnurse/mjnurse-website/python/python_in-excel.md">Python in Excel</a></h1>
+<div class="table-of-contents">
+<h2>Contents</h2>
+<ul>
+<li><a href="#background">Background</a></li>
+<li><a href="#example">Example</a></li>
+</ul>
+</div>
+<h1 id="background">Background</h1>
+<p>My biggest gripe with Python in Excel is that it's difficult to test and debug. I wanted to write and test this outside of Excel first, but there was no easy way to do that.</p>
+<p>With a little help from Co-pilot and wrote a small Python library that mimics the Excel environment. You read in the Excel file, and use the <code>xl()</code> function as you would in Excel and then write, test and debug in your favorite IDE.</p>
+<p>Here is the <code>xlshim</code> library: <em><a href="script_xlshim.py_-_python_excel_shim_-_excel_python_test_framework.html">xlshim.py</a></em></p>
+<h1 id="example">Example</h1>
+<p>I have an Excel file which contains the following:</p>
         </div>
       </article>
     </main>
@@ -113,7 +119,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: December 11, 2025</p>
+      <p>Last updated: December 23, 2025</p>
     </footer>
 
     <div class="scroll-container">

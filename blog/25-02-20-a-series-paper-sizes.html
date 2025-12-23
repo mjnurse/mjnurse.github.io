@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="19-04-11 - Formatting Python" />
+    <meta name="description" content="25-02-20 - A-series Paper Sizes" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>19-04-11 - Formatting Python</title>
+    <title>25-02-20 - A-series Paper Sizes</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
@@ -88,31 +88,12 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/blog/19-04-11_-_Formatting_Python.md">19-04-11 - Formatting Python</a></h1>
-<p>This week I got a little interested in best practice formatting for Python.</p>
-<p>Never been a big fan of formatting tools, however I found 2 python tools and I like them both.  Both are highly configurable but the only thing I've changed so far is to extend the max line length to 110 characters and to change the indent level to 3 characters.</p>
-<ul>
-<li>
-<p>pylint3 - this tool checks formatting and produces a detailed description of improvements which can be made.</p>
-</li>
-<li>
-<p>yapf - this formats python code.</p>
-</li>
-</ul>
-<h2 id="changing-the-config-options">Changing the config Options</h2>
-<p>For yapf - create a style definition document as follows and then modify to change the settings.</p>
-<div class="codehilite"><pre><span></span><code>yapf --style-help &gt; ~/.style.yapf
-</code></pre></div>
-
-<p>The changes I made are:</p>
-<div class="codehilite"><pre><span></span><code>continuation_indent_width=3
-indent_width=3
-column_limit=109
-</code></pre></div>
-
-<p>For pylint3, I've chosen to change the two settings using command line parameters.</p>
-<div class="codehilite"><pre><span></span><code>pylint3 --max-line-length=110 --indent-string=&#39;   &#39; --indent-after-paren=3 ...
-</code></pre></div>
+          <h1><a href="#" data-clipboard="/home/martin/mjnurse/mjnurse-website/blog/25-02-20-a-series-paper-sizes.md">25-02-20 - A-series Paper Sizes</a></h1>
+<h2 id="very-interesting">Very Interesting...</h2>
+<p>If you take a sheet of A-series sized paper and fold it in half, the ratio of <code>height</code> to <code>width</code> remains the same.</p>
+<p>To achieve this the ratio of <code>height</code> to <code>width</code> is <code>height = sqrt(2) * width</code>.</p>
+<p>The size (area) of <code>A0</code> is 1 square meter, <code>A1</code> is 1/2 square meter, ..., <code>A4</code> is 1/16 square meter.</p>
+<p>There is <code>A-1</code> (2 square meters), <code>A-2</code> (4 square meters) etc.</p>
         </div>
       </article>
     </main>

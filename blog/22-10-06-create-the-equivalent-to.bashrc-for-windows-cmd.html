@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="19-01-22 - Emulating sudo in dos cmd" />
+    <meta name="description" content="22-10-06 - Create The Equivalent To .bashrc For Windows CMD" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>19-01-22 - Emulating sudo in dos cmd</title>
+    <title>22-10-06 - Create The Equivalent To .bashrc For Windows CMD</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
@@ -88,20 +88,30 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/blog/19-01-22_-_Emulating_sudo_in_dos_cmd.md">19-01-22 - Emulating sudo in dos cmd</a></h1>
-<p>I found a useful method for running a dos command as Administrator.</p>
-<p>Create a script <code>sudo.bat</code>:</p>
-<div class="codehilite"><pre><span></span><code><span class="nv">@echo</span><span class="w"> </span><span class="k">Set</span><span class="w"> </span><span class="n">objShell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CreateObject</span><span class="p">(</span><span class="ss">&quot;Shell.Application&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">%</span><span class="n">temp</span><span class="o">%</span><span class="err">\</span><span class="n">sudo</span><span class="p">.</span><span class="n">tmp</span><span class="p">.</span><span class="n">vbs</span>
-<span class="nv">@echo</span><span class="w"> </span><span class="n">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Right</span><span class="p">(</span><span class="ss">&quot;%*&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="nf">Len</span><span class="p">(</span><span class="ss">&quot;%*&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nf">Len</span><span class="p">(</span><span class="ss">&quot;%1&quot;</span><span class="p">)))</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="o">%</span><span class="n">temp</span><span class="o">%</span><span class="err">\</span><span class="n">sudo</span><span class="p">.</span><span class="n">tmp</span><span class="p">.</span><span class="n">vbs</span>
-<span class="nv">@echo</span><span class="w"> </span><span class="n">objShell</span><span class="p">.</span><span class="n">ShellExecute</span><span class="w"> </span><span class="ss">&quot;%1&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;runas&quot;</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="o">%</span><span class="n">temp</span><span class="o">%</span><span class="err">\</span><span class="n">sudo</span><span class="p">.</span><span class="n">tmp</span><span class="p">.</span><span class="n">vbs</span>
-<span class="nv">@cscript</span><span class="w"> </span><span class="o">%</span><span class="n">temp</span><span class="o">%</span><span class="err">\</span><span class="n">sudo</span><span class="p">.</span><span class="n">tmp</span><span class="p">.</span><span class="n">vbs</span>
+          <h1><a href="#" data-clipboard="/home/martin/mjnurse/mjnurse-website/blog/22-10-06-create-the-equivalent-to.bashrc-for-windows-cmd.md">22-10-06 - Create The Equivalent To .bashrc For Windows CMD</a></h1>
+<p><strong>WARNING</strong>: This did break an application which ran (in the background) in (I assume) some CMD shell... Took me an age to work this out.</p>
+<p>Create a <code>cmdrc.bat</code> file, for example:</p>
+<div class="codehilite"><pre><span></span><code><span class="nv">@echo</span><span class="w"> </span><span class="k">off</span>
+<span class="k">set</span><span class="w"> </span><span class="n">GITHUB_TOKEN</span><span class="o">=[</span><span class="n">here is my github token</span><span class="o">]</span>
 </code></pre></div>
 
-<p>To open a new cmd window running as administrator:</p>
-<div class="codehilite"><pre><span></span><code>&gt; sudo cmd
-</code></pre></div>
+<p>Get this executed each time a <code>CMD</code> session starts by adding a registry key specifying the path of the <code>cmdrc.bat</code> file.  The following script should be run as Admin:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">::</span><span class="w"> </span><span class="err">##################################################################################</span>
+<span class="nv">@echo</span><span class="w"> </span><span class="k">off</span>
+<span class="n">color</span><span class="w"> </span><span class="mi">04</span>
+<span class="n">title</span><span class="w"> </span><span class="k">Add</span><span class="w"> </span><span class="n">cmd</span><span class="w"> </span><span class="n">rc</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">registry</span>
 
-<hr>
+<span class="o">::</span><span class="w"> </span><span class="err">##################################################################################</span>
+<span class="k">set</span><span class="w"> </span><span class="ss">&quot;OpenCurrentFolderKey=HKLM\SOFTWARE\Microsoft\Command Processor&quot;</span>
+<span class="k">set</span><span class="w"> </span><span class="ss">&quot;cmdRcPath=C:\scripts\cmdrc.bat&quot;</span>
+<span class="n">REG</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="ss">&quot;%OpenCurrentFolderKey%&quot;</span><span class="w"> </span><span class="o">/</span><span class="n">v</span><span class="w"> </span><span class="ss">&quot;AutoRun&quot;</span><span class="w"> </span><span class="o">/</span><span class="n">t</span><span class="w"> </span><span class="n">REG_EXPAND_SZ</span><span class="w"> </span><span class="o">/</span><span class="n">d</span><span class="w"> </span><span class="ss">&quot;\&quot;</span><span class="o">%</span><span class="n">cmdRcPath</span><span class="o">%</span><span class="err">\</span><span class="ss">&quot;&quot;</span>
+
+<span class="o">::</span><span class="w"> </span><span class="err">##################################################################################</span>
+<span class="n">pause</span><span class="o">&gt;</span><span class="n">nul</span>
+<span class="k">exit</span><span class="w"> </span><span class="o">/</span><span class="n">b</span>
+
+<span class="o">::</span><span class="w"> </span><span class="err">##################################################################################</span>
+</code></pre></div>
         </div>
       </article>
     </main>

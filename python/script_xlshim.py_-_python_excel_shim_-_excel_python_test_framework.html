@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="xlshim.py - Python Excel Shim - Excel Python test framework" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/fa62c117c7.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>xlshim.py - Python Excel Shim - Excel Python test framework</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1><a href="#" data-clipboard="/home/martin/mjnurse/mjnurse-website/python/script_xlshim.py_-_Python_Excel_Shim_-_Excel_Python_test_framework.md">xlshim.py - Python Excel Shim - Excel Python test framework</a></h1>
+<div class="codehilite"><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Excel Shim - Excel Python test framework</span>
+
+<span class="sd">This module provides a lightweight interface test Python code specifically written to run inside Excel</span>
+<span class="sd">workbooks. If provides the xl() function to extract cell values or tables from Excel workbooks.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">openpyxl</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">UserWarning</span><span class="p">,</span> <span class="n">module</span><span class="o">=</span><span class="s2">&quot;openpyxl&quot;</span><span class="p">)</span>
+
+<span class="n">WEB_DESC_LINE</span> <span class="o">=</span> <span class="s2">&quot;Python Excel Shim - Excel Python test framework&quot;</span>
+
+<span class="k">class</span> <span class="nc">ExcelShim</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handles Excel workbook operations including cell and table data extraction&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_wb</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Workbook object</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ws</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Current worksheet</span>
+
+    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Load an Excel workbook and set the active sheet&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Workbook not found: </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_wb</span> <span class="o">=</span> <span class="n">openpyxl</span><span class="o">.</span><span class="n">load_workbook</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">data_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ws</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wb</span><span class="p">[</span><span class="n">sheet_name</span><span class="p">]</span> <span class="k">if</span> <span class="n">sheet_name</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wb</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_wb</span><span class="o">.</span><span class="n">sheetnames</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+    <span class="k">def</span> <span class="nf">xlc</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ref</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract a cell value by reference or named range&quot;&quot;&quot;</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">ws</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wb</span><span class="p">[</span><span class="n">sheet_name</span><span class="p">]</span> <span class="k">if</span> <span class="n">sheet_name</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ws</span>
+
+        <span class="c1"># Handle named ranges</span>
+        <span class="k">if</span> <span class="n">ref</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wb</span><span class="o">.</span><span class="n">defined_names</span><span class="p">:</span>
+            <span class="n">defn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wb</span><span class="o">.</span><span class="n">defined_names</span><span class="p">[</span><span class="n">ref</span><span class="p">]</span>
+            <span class="n">dest</span> <span class="o">=</span> <span class="n">defn</span><span class="o">.</span><span class="n">destinations</span>
+            <span class="k">for</span> <span class="n">sheet_title</span><span class="p">,</span> <span class="n">cell_ref</span> <span class="ow">in</span> <span class="n">dest</span><span class="p">:</span>
+                <span class="n">target_ws</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wb</span><span class="p">[</span><span class="n">sheet_title</span><span class="p">]</span>
+                <span class="n">val</span> <span class="o">=</span> <span class="n">target_ws</span><span class="p">[</span><span class="n">cell_ref</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+                <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Named range &#39;</span><span class="si">{</span><span class="n">ref</span><span class="si">}</span><span class="s2">&#39; has no valid destination.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># Direct cell reference (e.g., &#39;B2&#39;)</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="n">ws</span><span class="p">[</span><span class="n">ref</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+
+        <span class="k">return</span> <span class="n">val</span>
+
+    <span class="k">def</span> <span class="nf">xlt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table_name</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Extract a table as a pandas DataFrame&quot;&quot;&quot;</span>
+        <span class="n">ws</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_wb</span><span class="p">[</span><span class="n">sheet_name</span><span class="p">]</span> <span class="k">if</span> <span class="n">sheet_name</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">_ws</span>
+        <span class="c1"># Find the table by name</span>
+        <span class="n">table_obj</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">t</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">ws</span><span class="o">.</span><span class="n">_tables</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">if</span> <span class="n">t</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">table_name</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">table_obj</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Table &#39;</span><span class="si">{</span><span class="n">table_name</span><span class="si">}</span><span class="s2">&#39; not found in sheet &#39;</span><span class="si">{</span><span class="n">sheet_name</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">ws</span><span class="o">.</span><span class="n">title</span><span class="si">}</span><span class="s2">&#39;.&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Get table boundaries and extract data</span>
+        <span class="n">min_col</span><span class="p">,</span> <span class="n">min_row</span><span class="p">,</span> <span class="n">max_col</span><span class="p">,</span> <span class="n">max_row</span> <span class="o">=</span> <span class="n">openpyxl</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">range_boundaries</span><span class="p">(</span><span class="n">table_obj</span><span class="o">.</span><span class="n">ref</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">[</span><span class="n">cell</span><span class="o">.</span><span class="n">value</span> <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="n">row</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">ws</span><span class="o">.</span><span class="n">iter_rows</span><span class="p">(</span><span class="n">min_row</span><span class="o">=</span><span class="n">min_row</span><span class="p">,</span> <span class="n">max_row</span><span class="o">=</span><span class="n">max_row</span><span class="p">,</span>
+                                    <span class="n">min_col</span><span class="o">=</span><span class="n">min_col</span><span class="p">,</span> <span class="n">max_col</span><span class="o">=</span><span class="n">max_col</span><span class="p">)</span>
+        <span class="p">]</span>
+        <span class="c1"># First row as headers, remaining rows as data</span>
+        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">columns</span><span class="o">=</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">xl</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ref</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generic accessor - routes to table or cell extraction based on type&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">type</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;T&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">xlt</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">sheet_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">xlc</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">sheet_name</span><span class="p">)</span>
+
+<span class="c1"># Global singleton instance</span>
+<span class="n">_shim</span> <span class="o">=</span> <span class="n">ExcelShim</span><span class="p">()</span>
+
+<span class="c1"># Public API functions</span>
+<span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="n">workbook_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load an Excel workbook using the global shim instance&quot;&quot;&quot;</span>
+    <span class="n">_shim</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">workbook_path</span><span class="p">,</span> <span class="n">sheet_name</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">xl</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convenience function to extract cells or tables from the loaded workbook&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">_shim</span><span class="o">.</span><span class="n">xl</span><span class="p">(</span><span class="n">ref</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;[#All]&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="n">sheet_name</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span>
+</code></pre></div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: December 23, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>
