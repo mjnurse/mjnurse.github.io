@@ -90,7 +90,7 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1><a href="#" data-clipboard="/home/martin/mjnurse/mjnurse-website/linuxbash/script_file-watch-do_-_Watch_a_file_and_each_time_it_is_modified_run_a_command.md">file-watch-do - Watch a file and each time it is modified run a command</a></h1>
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script_file-watch-do_-_Watch_a_file_and_each_time_it_is_modified_run_a_command.md">file-watch-do - Watch a file and each time it is modified run a command</a></h1>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 <span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
 <span class="s2">NAME</span>
@@ -122,37 +122,65 @@
 <span class="nv">usage</span><span class="o">=</span><span class="si">${</span><span class="nv">usage</span><span class="p">##*   </span><span class="si">}</span>
 <span class="nv">usage</span><span class="o">=</span><span class="s2">&quot;Usage: </span><span class="si">${</span><span class="nv">usage</span><span class="si">}</span><span class="s2">&quot;</span>
 
-<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;--help&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;-h&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;?&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
-<span class="w">   </span><span class="nb">exit</span>
-<span class="k">fi</span>
+<span class="nv">FD</span><span class="o">=</span><span class="s2">&quot;f&quot;</span><span class="w">  </span><span class="c1"># File or directory flag</span>
+
+<span class="k">function</span><span class="w"> </span>get_date<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$FD</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;f&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span>date<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="nv">st</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span>+<span class="s2">&quot;%H%M%S%N&quot;</span><span class="k">)</span>
+<span class="w">        </span>find<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-printf<span class="w"> </span><span class="s1">&#39;%T@ %p\n&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-n<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-1
+<span class="w">        </span><span class="nv">ed</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span>+<span class="s2">&quot;%H%M%S%N&quot;</span><span class="k">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="k">$((</span><span class="nv">ed</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">st</span><span class="k">))</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">500000000</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Warning: Scanning directory &#39;</span><span class="nv">$1</span><span class="s2">&#39; is taking &gt; 0.5s&quot;</span>
+<span class="w">        </span><span class="k">fi</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="o">}</span>
+
+<span class="k">case</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="k">in</span>
+<span class="w">    </span>--help<span class="p">|</span>-h<span class="p">|</span><span class="se">\?</span><span class="o">)</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="nb">exit</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="k">esac</span>
 
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$usage</span><span class="s2">&quot;</span>
-<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$try</span><span class="s2">&quot;</span>
-<span class="w">   </span><span class="nb">exit</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$usage</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$try</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">exit</span>
 <span class="k">fi</span>
 
 <span class="nv">file_name</span><span class="o">=</span><span class="nv">$1</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file_name</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Watching file: </span><span class="nv">$file_name</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nv">FD</span><span class="o">=</span><span class="s2">&quot;f&quot;</span>
+<span class="k">elif</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file_name</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Watching directory: </span><span class="nv">$file_name</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nv">FD</span><span class="o">=</span><span class="s2">&quot;d&quot;</span>
+<span class="k">else</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Error: File or directory &#39;</span><span class="nv">$file_name</span><span class="s2">&#39; not found&quot;</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+
 <span class="nb">shift</span>
-<span class="nv">prev_file_date</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file_name</span><span class="s2">&quot;</span><span class="k">)</span>
-<span class="nb">echo</span><span class="w"> </span><span class="nv">$prev_file_date</span>
+
+<span class="nv">prev_file_date</span><span class="o">=</span><span class="k">$(</span>get_date<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file_name</span><span class="s2">&quot;</span><span class="k">)</span>
 <span class="nv">file_date</span><span class="o">=</span><span class="nv">$prev_file_date</span>
 <span class="k">while</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="w">   </span><span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file_date</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$prev_file_date</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="w">      </span>sleep<span class="w"> </span><span class="m">1</span>
-<span class="w">      </span><span class="nv">file_date</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file_name</span><span class="s2">&quot;</span><span class="k">)</span>
-<span class="w">   </span><span class="k">done</span>
-<span class="w">   </span><span class="nv">prev_file_date</span><span class="o">=</span><span class="nv">$file_date</span>
-<span class="w">   </span><span class="nb">echo</span>
-<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;------------------------------------------------------------&quot;</span>
-<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$prev_file_date</span><span class="w"> </span>-<span class="w">  </span>Run:<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$*</span><span class="s2">&quot;</span>
-<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;------------------------------------------------------------&quot;</span>
-<span class="w">   </span><span class="nv">$*</span>
-<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;------------------------------------------------------------&quot;</span>
-<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Run Complete&quot;</span>
-<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;------------------------------------------------------------&quot;</span>
-<span class="w">   </span><span class="nb">echo</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file_date</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$prev_file_date</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">        </span>sleep<span class="w"> </span><span class="m">1</span>
+<span class="w">        </span><span class="nv">file_date</span><span class="o">=</span><span class="k">$(</span>get_date<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file_name</span><span class="s2">&quot;</span><span class="k">)</span>
+<span class="w">    </span><span class="k">done</span>
+<span class="w">    </span><span class="nv">prev_file_date</span><span class="o">=</span><span class="nv">$file_date</span>
+<span class="w">    </span><span class="nb">echo</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;------------------------------------------------------------&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$prev_file_date</span><span class="w"> </span>-<span class="w">  </span>Run:<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$*</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;------------------------------------------------------------&quot;</span>
+<span class="w">    </span><span class="nv">$*</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;------------------------------------------------------------&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Run Complete&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;------------------------------------------------------------&quot;</span>
+<span class="w">    </span><span class="nb">echo</span>
 <span class="k">done</span>
 </code></pre></div>
         </div>
@@ -172,7 +200,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: December 16, 2025</p>
+      <p>Last updated: December 23, 2025</p>
     </footer>
 
     <div class="scroll-container">

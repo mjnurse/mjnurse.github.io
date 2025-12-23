@@ -90,7 +90,7 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1><a href="#" data-clipboard="/home/martin/mjnurse/mjnurse-website/blog/19-01-22-emulating_sudo_in_dos_cmd.md">19-01-22 - Emulating sudo in dos cmd</a></h1>
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/blog/19-01-22-emulating_sudo_in_dos_cmd.md">19-01-22 - Emulating sudo in dos cmd</a></h1>
 <p>I found a useful method for running a dos command as Administrator.</p>
 <p>Create a script <code>sudo.bat</code>:</p>
 <div class="codehilite"><pre><span></span><code><span class="nv">@echo</span><span class="w"> </span><span class="k">Set</span><span class="w"> </span><span class="n">objShell</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CreateObject</span><span class="p">(</span><span class="ss">&quot;Shell.Application&quot;</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="o">%</span><span class="n">temp</span><span class="o">%</span><span class="err">\</span><span class="n">sudo</span><span class="p">.</span><span class="n">tmp</span><span class="p">.</span><span class="n">vbs</span>

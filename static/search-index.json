@@ -8,9 +8,9 @@
   },
   {
     "id": "1",
-    "title": "Help",
+    "title": "Site Navigation Help",
     "url": "/help.html",
-    "content": "(Help) I need somebody (Help) not just anybody (Help) you know I need someone, help So much younger than today (I never need) I never needed anybody's help in any way (Now) but now these days are gone (these days are gone) I'm not so self assured (And now I find) now I find I've changed my mind And opened up the doors Help me if you can, I'm feeling down And I do appreciate you being 'round Help me get my feet back on the ground Won't you please, please help me In oh so many ways (My independ-) ",
+    "content": "This page explains how to navigate the website using keyboard shortcuts and other features. Keyboard Shortcuts Global Navigation Key Action H Go to Home page U Scroll to top of page, or if already at top, go back to previous page / Open search Section Navigation Press the first letter of any section name in the navigation bar to jump directly to that section: Key Section B Blog C Cheatsheets E Elasticsearch J JS L LinuxBash M Misc N Notes O Other P Python Page Lists On section index pages and th",
     "type": "page"
   },
   {
@@ -1205,44 +1205,44 @@
   },
   {
     "id": "172",
+    "title": "fsa - A file system analyzer for finding duplicates and analyzing disk usage",
+    "url": "/linuxbash/script_fsa_-_a_file_system_analyzer_for_finding_duplicates_and_analyzing_disk_usage.html",
+    "content": "#!/bin/bash help_text=&quot; NAME fsa - File system analyzer and duplicate file finder. USAGE fsa [options] OPTIONS -r|--reuse Reuse the previous scan instead of running a new one. -h|--help Show help text. COMMANDS c Show file count by type (file/directory). ds Show directory sizes. fd Find duplicate files (same name and size). f Show current filter settings. f fn &lt;pat&gt; Set filename filter pattern. f ms &lt;size&gt; Set minimum size filter. lg List 100 largest files. sq Open SQLite3 shell",
+    "type": "page"
+  },
+  {
+    "id": "173",
     "title": "gen-bash-func - Example Bash Script",
     "url": "/linuxbash/script_gen-bash-func_-_example_bash_script.html",
     "content": "#!/bin/bash help_text=&quot; NAME gen-bash-func - Generates code and header of a bash function USAGE gen-bash-func [options] &lt;function_name&gt; &lt;parameters&gt; OPTIONS -f|--flag &lt;param_name&gt; &lt;variable_name&gt; A flag parameter. If passed then a corresponding variable named &lt;variable_name&gt;_yn is set to &#39;y&#39;. -fv|--flagvalue &lt;param_name&gt; &lt;variable_name&gt; A flag plus value parameter. If passed then a corresponding variable named &lt;variable_name&gt; is set to",
     "type": "page"
   },
   {
-    "id": "173",
+    "id": "174",
     "title": "gen-bookmark-page - Generates a bookmark web page from a folder in the Chrome bookmarks bar",
     "url": "/linuxbash/script_gen-bookmark-page_-_generates_a_bookmark_web_page_from_a_folder_in_the_chrome_bookmarks_bar.html",
     "content": "#!/bin/bash help_text=&quot; NAME gen-bookmark-page - generates a bookmark web page from a folder in the Chrome bookmarks bar. USAGE gen-bookmark-page [options] OPTIONS -h|--help Show help text. DESCRIPTION Generates a bookmark web page from a folder in the Chrome bookmarks bar. AUTHOR mjnurse.github.io - 2022 &quot; help_line=&quot;Generates a bookmark web page from a folder in the Chrome bookmarks bar&quot; web_desc_line=&quot;Generates a bookmark web page from a folder in the Chrome bookmarks",
     "type": "page"
   },
   {
-    "id": "174",
+    "id": "175",
     "title": "gvim - Runs windows gvim and fixes file paths",
     "url": "/linuxbash/script_gvim_-_runs_windows_gvim_and_fixes_file_paths.html",
     "content": "#!/bin/bash help_text=&quot; NAME gvim - Runs windows gvim and fixes files paths USAGE gvim &lt;filename(s)&gt; DESCRIPTION Runs windows gvim and fixes files paths. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;Runs windows gvim and fixes file paths&quot; web_desc_line=&quot;Runs windows gvim and fixes file paths&quot; files=&quot;$*&quot; fixed_files=&quot;$(echo $files | sed &#39;s/\\/c\\//C:\\//g&#39;)&quot; /c/Program\\ Files\\ \\(x86\\)/Vim/vim90/gvim.exe &quot;$fixed_files&quot; &amp;",
     "type": "page"
   },
   {
-    "id": "175",
+    "id": "176",
     "title": "h - Extracts and displays the help_lines",
     "url": "/linuxbash/script_h_-_extracts_and_displays_the_help_lines.html",
     "content": "#!/bin/bash help_text=&quot; NAME h - Extracts and displays the (single line) help lines in bash scripts. USAGE h [&lt;filenames - wildcards allowed&gt;] OPTIONS -m|--matchesonly Only display the help lines available, don&#39;t report on files missing a help line or with a help line &#39;tbc&#39;. DESCRIPTION Extracts and displays the (single line) help lines. AUTHOR mjnurse.github.io - 2020 &quot; # set -o errexit # set -o nounset # set -o pipefail # if [[ &quot;${TRACE-0}&quot; == &quot;1&quot",
     "type": "page"
   },
   {
-    "id": "176",
+    "id": "177",
     "title": "lf - A script to recursively list folders and show folder details",
     "url": "/linuxbash/script_lf_-_a_script_to_recursively_list_folders_and_show_folder_details.html",
     "content": "#!/bin/bash help_text=&quot; NAME lf - A script to recursively list folders and show folder details. USAGE lf [options] &lt;directory (. for current directory)&gt; OPTIONS -m|maxdepth &lt;number&gt; Max directory depth. -t|--filetypecount Show a count of files by file type. -h|--help Show help text. DESCRIPTION A script to recursively list folders, show folder details (size and number of files) and optionally a count of files by file size. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;A",
-    "type": "page"
-  },
-  {
-    "id": "177",
-    "title": "move-mail - Move images of mail from Google Scanner a chosen folder",
-    "url": "/linuxbash/script_move-mail_-_move_images_of_mail_from_google_scanner_a_chosen_folder.html",
-    "content": "#!/bin/bash help_text=&quot; NAME move-mail - Takes images of mail from Google Scanner and moves these to a chosen folder. USAGE move-mail [options] &lt;parameters&gt; OPTIONS -h|--help Show help text. DESCRIPTION Takes images of mail from Google Scanner and moves these to a chosen folder. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;Move images of mail from Google Scanner a chosen folder&quot; web_desc_line=&quot;Move images of mail from Google Scanner a chosen folder&quot; try=&quot;",
     "type": "page"
   },
   {
@@ -1310,174 +1310,181 @@
   },
   {
     "id": "187",
+    "title": "sl - An interactive SQLite shell wrapper with enhanced CLI features",
+    "url": "/linuxbash/script_sl_-_an_interactive_sqlite_shell_wrapper_with_enhanced_cli_features.html",
+    "content": "#!/bin/bash help_text=&quot; NAME sl - SQLite interactive command-line shell wrapper. USAGE sl [options] [database] OPTIONS -d|--debug Run in debug mode. -h|--help Show help text. COMMANDS a Append to buffer (continue multi-line SQL). c Clear the buffer. cls Clear the screen. g &lt;file&gt; Load file contents into the buffer. l List (display) the current buffer. ls List files in the current directory. ll List files with details (ls -al). o &lt;db&gt; Open a database. q|x|quit|exit Quit the shell",
+    "type": "page"
+  },
+  {
+    "id": "188",
     "title": "sqlite-load-csv - Load a csv file into a sqlite3 database",
     "url": "/linuxbash/script_sqlite-load-csv_-_load_a_csv_file_into_a_sqlite3_database.html",
     "content": "#!/bin/bash help_text=&quot; NAME sqlite-load-csv - Load a csv file into a sqlite3 database. USAGE sqlite-load-csv [options] &lt;csv_filename&gt; [&lt;database_name&gt;] OPTIONS -h|--help Show help text. -t|--table &lt;table name&gt; Specify the name of the table created. DESCRIPTION Loads a csv file into a table with the same name as the file (or passed in as an option t|table) into a database the name of which is passed as a parameter or if no database name is specified, a database with the sa",
     "type": "page"
   },
   {
-    "id": "188",
+    "id": "189",
     "title": "tidy - Tidies filenames and fixes issues such as permission issues with files in the specified directory",
     "url": "/linuxbash/script_tidy_-_tidies_filenames_and_fixes_issues_such_as_permission_issues_with_files_in_the_specified_directory.html",
     "content": "#!/bin/bash help_text=&quot; NAME tidy - Tidies filenames and fixes issues such as permission issues with files in the specified directory. USAGE tidy [&lt;folder&gt;] OPTIONS -n|--name Only tidy filenames - do not check permissions etc. -fn|-nf Force rename of filenames without prompting. Implies -n. -h|--help Show help text. DESCRIPTION Tidies filenames and fixes issues such as permission issues with files in the specified directory. AUTHORS mjnurse.github.io - 2020 &quot; help_line=&quot;Tidi",
     "type": "page"
   },
   {
-    "id": "189",
+    "id": "190",
     "title": "utils - Some bash Utility Functions",
     "url": "/linuxbash/script_utils_-_some_bash_utility_functions.html",
     "content": "#!/bin/bash help_text=&quot; NAME utils - One line description. USAGE utils [options] &lt;parameters&gt; OPTIONS -x Description... -h|--help Show help text. DESCRIPTION Description description description description. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;Some bash Utility Functions&quot; web_desc_line=&quot;Some bash Utility Functions&quot; colour_default=&quot;\\e[39m&quot; colour_black=&quot;\\e[30m&quot; colour_red=&quot;\\e[31m&quot; colour_green=&quot;\\e[32m&quot; colour_yell",
     "type": "page"
   },
   {
-    "id": "190",
+    "id": "191",
     "title": "Setting Prompt Colour In bash and Putty",
     "url": "/linuxbash/setting-prompt-colour-in_bash_and-putty.html",
     "content": "I want a different colour prompt for different machines. The following script gives colour names to the various escape sequences. Can put this in (for example) .bashrc file. # Regular Text Colours txtblk=&#39;\\e[0;30m&#39; # Black txtred=&#39;\\e[0;31m&#39; # Red txtgrn=&#39;\\e[0;32m&#39; # Green txtylw=&#39;\\e[0;33m&#39; # Yellow txtblu=&#39;\\e[0;34m&#39; # Blue txtpur=&#39;\\e[0;35m&#39; # Purple txtcyn=&#39;\\e[0;36m&#39; # Cyan txtwht=&#39;\\e[0;37m&#39; # White # Bold Text Colours bldblk=&#39;\\",
     "type": "page"
   },
   {
-    "id": "191",
+    "id": "192",
     "title": "SSH Login Without Password",
     "url": "/linuxbash/ssh-login-without-password.html",
     "content": "ssh Command Line Create public and private keys using ssh-key-gen on local machine. $&gt; ssh-keygen Generating public/private rsa key pair. Enter file in which to save the key (/home/martin/.ssh/id_rsa): Enter passphrase (empty for no passphrase): Enter same passphrase again: Your identification has been saved in /home/martin/.ssh/id_rsa. Your public key has been saved in /home/martin/.ssh/id_rsa.pub. The key fingerprint is: SHA256:sfuidygosifudyosiduygosidfuygosiduygisdyuiy martin@local Copy t",
     "type": "page"
   },
   {
-    "id": "192",
+    "id": "193",
     "title": "sudo Without Password",
     "url": "/linuxbash/sudo-without-password.html",
     "content": "To stop being prompted for a password when running sudo commands. Open the sudoers file whist ensuring you don\u2019t lock yourself out due to syntax errors: sudo visudo Add the following rule for Your user (add this line at the end of the file): &lt;username&gt; ALL=(ALL) NOPASSWD: ALL eg. martin ALL=(ALL) NOPASSWD: ALL",
     "type": "page"
   },
   {
-    "id": "193",
+    "id": "194",
     "title": "Waiting On Background Processes",
     "url": "/linuxbash/waiting-on-background-processes.html",
     "content": "The wait command waits for all background processes start in the current session to end. Example: #!/bin/bash function f1() { echo &quot;process 1, sleeping 3s&quot; sleep 3 echo &quot;process 1 complete&quot; } function f2() { echo &quot;process 2, sleeping 2s&quot; sleep 2 echo &quot;process 2 complete&quot; } f1 &amp; f2 &amp; wait echo &quot;all done&quot; Output: $ xxx process 1, sleeping 3s process 2, sleeping 2s process 2 complete process 1 complete all done $",
     "type": "page"
   },
   {
-    "id": "194",
+    "id": "195",
     "title": "WSL - Hadoop 3.0",
     "url": "/linuxbash/wsl-hadoop_3.0.html",
     "content": "HDFS Config Datanode and Namenode directories default to /tmp - these didn't work for me (and not really a ideal location...). /c/MJN/wsl-hadoop-3.3.0/etc/hadoop/hdfs-site.xml &lt;configuration&gt; &lt;property&gt; &lt;name&gt;dfs.replication&lt;/name&gt; &lt;value&gt;1&lt;/value&gt; &lt;/property&gt; &lt;property&gt; &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt; &lt;value&gt;/c/MJN/hdfs-data/datanode&lt;/value&gt; &lt;/property&gt; &lt;property&gt; &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt",
     "type": "page"
   },
   {
-    "id": "195",
+    "id": "196",
     "title": "Azure AD - Find My AD Group Memberships",
     "url": "/misc/azure-ad.html",
     "content": "First authenticate - this command will pop up a window to sign in. &gt; Connect-AzureAD Account Environment TenantId TenantDomain AccountType ------- ----------- -------- ------------ ----------- martinnurse@demo.com AzureCloud c780234d-ed5b-4ccd demo.com User Get my AD group memberships. &gt; Get-AzureADUser -SearchString martinnurse@demo.com ` | Get-AzureADUserMembership ` | % {Get-AzureADObjectByObjectId -ObjectId $_.ObjectId ` | select DisplayName,ObjectType,MailEnabled,SecurityEnabled,Objec",
     "type": "page"
   },
   {
-    "id": "196",
+    "id": "197",
     "title": "BMI Calculator",
     "url": "/misc/bmi-calculator.html",
     "content": "Weight St Lb lbs Kg Height Ft In m Target Weight Current BMI: 0 Target Weight (BMI 20 - 25) BMI 20 weight (lose/gain)BMI 25 weight (lose/gain) Kg00 Lbs00 St Lb00 Notes: - BMI for adults only. Doesn't account for body / bone structure, other formulae exist. - BMI &lt;20: Underweight. BMI 20-25: Healthy weight. BMI 25-30: Over Weight. BMI 30-35: Obese. BMI&gt;35 very/morbidly obese. function getFloat(id) { return parseFloat(document.getElementById(id).value) || 0; } function setValue(id, value) { ",
     "type": "page"
   },
   {
-    "id": "197",
+    "id": "198",
     "title": "Dashboard Design Principles",
     "url": "/misc/dashboard-design-principles.html",
     "content": "'The greatest value of a picture is when it forces us to notice what we never expected to see'John Tukey, 'Exploratory Data Analysis', 1977 'A picture is worth a thousand words. An interface is worth a thousand pictures'Ben Shneiderman, 2003 'Data becomes useful knowledge of something that matters when it builds a bridge between a question and an answer. This connection is the signal.' Stephen Few, 'Signal: Understanding What Matters in a World of Noise, 2015 'Graphical excellence is that which ",
     "type": "page"
   },
   {
-    "id": "198",
+    "id": "199",
     "title": "Generating a Bookmarks Page From a Chrome Bookmarks Folder",
     "url": "/misc/generating_a-bookmarks-page-from_a-chrome-bookmarks-folder.html",
     "content": "I wanted a bookmark web page I could switch to (using CTRL-&lt;Tab Number&gt;) and then quickly open a bookmarked site. I created a bash script to read the bookmarks from a folder in the Chrome bookmark bar (folder name: Page) and create a web page. I added Javascript (from this site) that allows me to go to a bookmark (link) by typing in the associated number. I can also search the bookmarks by typing / and then entering part of the name. Pressing Return opens the first matching bookmark. All b",
     "type": "page"
   },
   {
-    "id": "199",
+    "id": "200",
     "title": "Google Charts",
     "url": "/misc/google-charts.html",
     "content": "Google Charts function toggle_yn(obj) { if (obj.value == 'Yes') obj.value = 'No'; else obj.value = 'Yes' } Chart Data Chart Options Redraw | Pivot | Column Headings | Row Headings | Chart Type | &nbsp;Line&nbsp;&nbsp;&nbsp;Column&nbsp;&nbsp;&nbsp;Bar&nbsp;&nbsp;&nbsp;Area&nbsp;&nbsp;&nbsp;Pie",
     "type": "page"
   },
   {
-    "id": "200",
+    "id": "201",
     "title": "History Of My Cars",
     "url": "/misc/history_of_my_cars.html",
     "content": "This perhaps the oldest page on this website and its predecessors. It is, as it says, a history of the cars I've owned. Best Car Audi S5 Quattro 354bhp, 369lb-ft, 0-60mph: 4.7s, Top Speed: 155mph. A great car, very quick, accelerates hard in any gear. The exhaust growls in sports mode. The 8 speed auto gearbox changes very quickly - gear change let down my A5 V6 TDi Quattro, and this was the first thing I checked on the test drive. Came with almost every extra including massaging heated front se",
     "type": "page"
   },
   {
-    "id": "201",
+    "id": "202",
     "title": "HTML Colour Converter",
     "url": "/misc/html-colour-converter.html",
     "content": "RGB: HEX: I've found rotating the RGB values around can give some colours that work well together. Not sure if this has a name... function setColors() { let h = document.getElementById('h'); let rh = h.value.slice(0,2); let gh = h.value.slice(2,4); let bh = h.value.slice(4,6); color = rh + gh + bh; document.getElementById('c1').style.backgroundColor = '#' + color; document.getElementById('c1').innerHTML = '#' + color + '&nbsp;#' + color + ''; color = bh + rh + gh; document.getElementById('c2').s",
     "type": "page"
   },
   {
-    "id": "202",
+    "id": "203",
     "title": "JWT - JSON Web Tokens",
     "url": "/misc/jwt-json-web-tokens.html",
     "content": "Today I was looking at authentication for a web-service. It was using JSON Web Tokens. What are JWTs? How do they work? A JWT is a cryptographically signed JSON token used to authenticate users making calls to an application. A JWT is sent to a user when they authenticate with an authentication Service. The user can send this token with requests to an application (web-service or other) as proof of identity. The application talks to the authentication server and is told the how the token was cryp",
     "type": "page"
   },
   {
-    "id": "203",
+    "id": "204",
     "title": "Public Key Encryption Analogy",
     "url": "/misc/public-key-encryption-analogy.html",
     "content": "What is Public Private Key Encryption? This process uses an algorithm that can encrypt data using a public key however, the data can only be decrypted using a private key. I share my public key with everyone and they use it to encrypt data they send to me. Only I can decrypt and read that data. The Analogy As an analogy to public, private key encryption, consider a secure, locked post-box which contains a slot through which notes can be posted. Notes posted in to the post-box cannot be read (as ",
     "type": "page"
   },
   {
-    "id": "204",
+    "id": "205",
     "title": "Read Aloud In MS Word",
     "url": "/misc/read-aloud-in-ms-word.html",
     "content": "To activate: [Alt][Ctrl][Space]. Cursor at a specific point in the text: The document will be read aloud from here on. Text selected: The selected text will be read aloud. [Ctrl][Space] - Play or pause. [Ctrl][Left arrow] - Jump to the previous paragraph. [Ctrl][Right arrow] - Jump to the next paragraph. [Alt][Left arrow] - Slower reading speed. [Alt][Arrow right] - Faster reading speed.",
     "type": "page"
   },
   {
-    "id": "205",
+    "id": "206",
     "title": "Running Spark on YARN - Cluster or Client Mode",
     "url": "/misc/running-spark_on-yarn-cluster_or-client-mode.html",
     "content": "Spark jobs can run on YARN in two modes: cluster mode and client mode. Understanding the difference between the two modes is important for choosing an appropriate memory allocation configuration, and to submit jobs as expected. A Spark job consists of two parts: Spark Executors that run the actual tasks, and a Spark Driver that schedules the Executors. Cluster Mode Everything runs inside the cluster. You can start a job from your laptop and the job will continue running even if you close your co",
     "type": "page"
   },
   {
-    "id": "206",
+    "id": "207",
     "title": "Shortcut Keys",
     "url": "/misc/shortcut-keys.html",
     "content": "Note: This page is automatically generated using sck Confluence | // | Opens the date picker | | Alt +SHIFT+DOWN | Insert table row after | | Alt +SHIFT+UP | Insert table row before | | CTRL+0 | Set paragraph style | | CTRL+1-6 | Set as heading 1-6 | | CTRL+7 | Preformatted | | CTRL+8 | Quote | | CTRL+ENTER | Publish page | | CTRL+ENTER | Publish | | CTRL+SHIFT+I | Insert table | | CTRL+SHIFT+a | Insert macro | | CTRL+SHIFT+b | Bulleted list | | CTRL+SHIFT+d | Insert markup | | CTRL+SHIFT+e | Pr",
     "type": "page"
   },
   {
-    "id": "207",
+    "id": "208",
     "title": "ssh",
     "url": "/misc/ssh.html",
     "content": "Storing SSH Connection / Config details Store SSH connection details in a config file in the .ssh directory. File ~/.ssh/config Contents Host dev HostName dev.example.com Port 22 User martin Host test HostName test.example.com Port 22 User martin SSH Login Without Password 1) Generate a public/private RSA key pair. Save this to default location /home/&lt;username&gt;/.ssh/id_rsa $ ssh-keygen Your public key will be saved in /home/user/.ssh/id_rsa.pub 2) Copy the SSH Public Key to the Remote Host",
     "type": "page"
   },
   {
-    "id": "208",
+    "id": "209",
     "title": "Statistical Testing",
     "url": "/misc/statistical-testing.html",
     "content": "For a long time I've wanted to explore using statistics to determine how many tests are needed to test for errors. The question I have is that, for a set of n records, if we want to be say 99.9% sure none contain an error, how many would be need to test at random to reach a point where we can be statistically, say, 99.9% sure there are no errors. The Basics Tests with a fixed number of options / records to test If I have a die and there is a chance the number has not been printed on one side, ho",
     "type": "page"
   },
   {
-    "id": "209",
+    "id": "210",
     "title": "Text To Speech - Clipboard",
     "url": "/misc/text-to-speech-clipboard.html",
     "content": "I've been using the Microsoft Word text-to-speech function for a while to proof read text. Works great but the text needs to be a Word document or I need to copy and paste it there first. I've been looking online for an application to read aloud the clipboard. It's surprisingly difficult to find an application. I then thought about AHK and (convinced it would be far to complex for AHK) I ran a search. I was wrong, a very simple AHK script now means I can read aloud the contents of the clipboard ",
     "type": "page"
   },
   {
-    "id": "210",
+    "id": "211",
     "title": "This Sites Markdown",
     "url": "/misc/this-sites-markdown.html",
     "content": "Heading 1 # Heading 1 Heading 2 ## Heading 2 Heading 3 ### Heading 3 Heading 4 #### Heading 4 Heading 5 ##### Heading 5 Heading 6 ###### Heading 6 Horizontal Line: --- Bold: **Bold** Italic: *Italic* Bold Italic: ***Bold Italic*** ~~Strikethrough~~: ~~Strikethrough~~ Links I'm an inline-style link [I'm an inline-style link](https://www.google.com) I'm an inline-style link with title [I'm an inline-style link with title](https://www.google.com \"Google's Homepage\") Simple Lists Single spacing: Sim",
     "type": "page"
   },
   {
-    "id": "211",
+    "id": "212",
     "title": "Using Git and GitHub - A Walk-through",
     "url": "/misc/using-git_and-git-hub-a-walkthrough.html",
     "content": "In the following walk-through we use Git and GitHub from the view point of two 'users' in parallel and look at the workflow and interaction between the two. Simulate two users - each has a home directory Create two 'user home' directories: &gt; ~/git-test$ mkdir user1 &gt; ~/git-test$ mkdir user2 Use User1 to create a file, add this to Git and push the local Git repo up and into GitHub Go to User1 home directory and initialise local Git: &gt; ~/git-test$ cd user1 &gt; ~/git-test/user1$ git init ",
