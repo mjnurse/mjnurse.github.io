@@ -129,7 +129,7 @@
     "id": "18",
     "title": "Python in Excel",
     "url": "/python/python_in-excel.html",
-    "content": "Background My biggest gripe with Python in Excel is that it's difficult to test and debug. I wanted to write and test this outside of Excel first, but there was no easy way to do that. With a little help from Co-pilot and wrote a small Python library that mimics the Excel environment. You read in the Excel file, and use the xl() function as you would in Excel and then write, test and debug in your favorite IDE. Here is the xlshim library: xlshim.py Example I have an Excel file which contains the",
+    "content": "Background My biggest gripe with Python in Excel is that it's difficult to test and debug. I wanted to write and test this outside of Excel first, but there was no easy way to do that. With a little help from Co-pilot and wrote a small Python library that mimics the Excel environment. You read in the Excel file, and use the xl() function as you would in Excel and then write, test and debug in your favorite IDE. Here is the xlshim library: xlshim.py NOTE: One word of warning - Excel limits the le",
     "type": "page"
   },
   {

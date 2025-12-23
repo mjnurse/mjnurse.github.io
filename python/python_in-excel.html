@@ -10,10 +10,12 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-    <script
-      src="https://kit.fontawesome.com/fa62c117c7.js"
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
       crossorigin="anonymous"
-    ></script>
+      referrerpolicy="no-referrer"
+    />
     <script src="https://unpkg.com/lunr/lunr.js"></script>
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
@@ -94,14 +96,97 @@
 <ul>
 <li><a href="#background">Background</a></li>
 <li><a href="#example">Example</a></li>
+<li class="toc-h2"><a href="#writing-and-testing-outside-excel">Writing and Testing Outside Excel</a></li>
+<li class="toc-h2"><a href="#using-in-excel">Using in Excel</a></li>
+<li><a href="#example-2">Example 2</a></li>
 </ul>
 </div>
 <h1 id="background">Background</h1>
 <p>My biggest gripe with Python in Excel is that it's difficult to test and debug. I wanted to write and test this outside of Excel first, but there was no easy way to do that.</p>
 <p>With a little help from Co-pilot and wrote a small Python library that mimics the Excel environment. You read in the Excel file, and use the <code>xl()</code> function as you would in Excel and then write, test and debug in your favorite IDE.</p>
 <p>Here is the <code>xlshim</code> library: <em><a href="script_xlshim.py_-_python_excel_shim_-_excel_python_test_framework.html">xlshim.py</a></em></p>
+<p><strong>NOTE:</strong> One word of warning - Excel limits the length of the Python code you can enter in a cell to 8192 characters, so keep the code compact...</p>
 <h1 id="example">Example</h1>
-<p>I have an Excel file which contains the following:</p>
+<p>I have an Excel file <code>example.xlsx</code> which contains the following:</p>
+<p><img src="/python/images/excel-no-python.png" width="400"></p>
+<p>The Opening Balance is in a cell named <code>openingBalance</code>, the table is named <code>transactions</code>.</p>
+<h2 id="writing-and-testing-outside-excel">Writing and Testing Outside Excel</h2>
+<p>Here is the Python code that uses the <code>xlshim</code> library to read the Excel file, process the transactions and calculate a cumulative balance.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">xlshim</span> <span class="kn">import</span> <span class="n">load</span><span class="p">,</span> <span class="n">xl</span>
+
+<span class="n">load</span><span class="p">(</span><span class="s2">&quot;example.xlsx&quot;</span><span class="p">)</span>
+
+<span class="n">opening_bal</span> <span class="o">=</span> <span class="n">xl</span><span class="p">(</span><span class="s2">&quot;openingBalance&quot;</span><span class="p">)</span>  <span class="c1"># Single value from named cell</span>
+<span class="n">trans</span> <span class="o">=</span> <span class="n">xl</span><span class="p">(</span><span class="s2">&quot;transactions[#All]&quot;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;T&quot;</span><span class="p">)</span> <span class="c1"># Table with headers</span>
+
+<span class="c1"># Note: </span>
+<span class="c1"># - [#All] is important in the Table read otherwise the header is ignored even though headers=True</span>
+<span class="c1"># - type=&quot;T&quot; is not a Excel xl() parameter, but is needed here and is ignored in Excel is used</span>
+
+<span class="n">bal</span> <span class="o">=</span> <span class="n">opening_bal</span>
+<span class="n">balances</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Iterate through the table rows</span>
+<span class="c1"># (could simply use balance = opening_bal + trans[&quot;Amount&quot;].cumsum())</span>
+<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">trans</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">bal</span> <span class="o">+=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;Amount&quot;</span><span class="p">]</span>
+    <span class="n">balances</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bal</span><span class="p">)</span>
+
+<span class="c1"># Add to the trans data frame</span>
+<span class="c1"># (an unnecessary step here, could instead return balances)</span>
+<span class="n">trans</span><span class="p">[</span><span class="s2">&quot;balance&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">balances</span>
+
+<span class="c1"># Return to Excel (.values return only row, no header)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">trans</span><span class="p">[</span><span class="s1">&#39;balance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+</code></pre></div>
+
+<p>When run, this produces the following output:</p>
+<div class="codehilite"><pre><span></span><code>[5734.   5679.73 5675.93 5583.79 5602.78 5590.28 5560.29 5519.09 5520.51
+ 5496.51 5479.76 5487.41 5439.11 5406.01 5856.01 5846.02 5783.58 5683.58
+ 5708.58 5693.98]
+</code></pre></div>
+
+<h2 id="using-in-excel">Using in Excel</h2>
+<p>To use the above python code in Excel, you simply copy and paste it into a cell using the <code>=PY()</code> function, change the cell type from <code>Python Object</code> to <code>Cell Value</code> and in the Python, replace the final <code>print()</code> statement with just the value to return, in this case <code>trans['balance'].values</code>.</p>
+<p><img src="/python/images/excel-cell-type.png" width="280"></p>
+<p>This produces the following in Excel:</p>
+<p><img src="/python/images/excel-with-balances.png" width="600"></p>
+<h1 id="example-2">Example 2</h1>
+<p>Using the same Excel file, here is another example that calculates the total debits and credits and added them as a <strong>Stats</strong> table.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">xlshim</span> <span class="kn">import</span> <span class="n">load</span><span class="p">,</span> <span class="n">xl</span>
+
+<span class="n">load</span><span class="p">(</span><span class="s2">&quot;example.xlsx&quot;</span><span class="p">)</span>
+
+<span class="n">opening_bal</span> <span class="o">=</span> <span class="n">xl</span><span class="p">(</span><span class="s2">&quot;openingBalance&quot;</span><span class="p">)</span>  <span class="c1"># Single value from named cell</span>
+<span class="n">trans</span> <span class="o">=</span> <span class="n">xl</span><span class="p">(</span><span class="s2">&quot;transactions[#All]&quot;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;T&quot;</span><span class="p">)</span> <span class="c1"># Table with headers</span>
+
+<span class="c1"># Separate Credits and Debits using Vectorized Masks</span>
+<span class="n">amounts</span> <span class="o">=</span> <span class="n">trans</span><span class="p">[</span><span class="s2">&quot;Amount&quot;</span><span class="p">]</span>
+<span class="n">credits</span> <span class="o">=</span> <span class="n">amounts</span><span class="p">[</span><span class="n">amounts</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">debits</span> <span class="o">=</span> <span class="n">amounts</span><span class="p">[</span><span class="n">amounts</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Calculate final balance</span>
+<span class="n">total_credits</span> <span class="o">=</span> <span class="n">credits</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">total_debits</span> <span class="o">=</span> <span class="n">debits</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">closing_bal</span> <span class="o">=</span> <span class="n">opening_bal</span> <span class="o">+</span> <span class="n">total_credits</span> <span class="o">+</span> <span class="n">total_debits</span>
+
+<span class="c1"># Create the stats table</span>
+<span class="n">stats</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">[</span><span class="s1">&#39;Credits&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">credits</span><span class="p">),</span> <span class="n">total_credits</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;Debits&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">debits</span><span class="p">),</span> <span class="n">total_debits</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">&#39;Closing Balance&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">closing_bal</span><span class="p">]</span>
+<span class="p">]</span>
+
+<span class="c1"># Return to Excel</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">stats</span><span class="p">)</span>
+</code></pre></div>
+
+<p>When run, this produces the following output:</p>
+<div class="codehilite"><pre><span></span><code>[[&#39;Credits&#39;, 6, 3703.06], [&#39;Debits&#39;, 14, -543.08], [&#39;Closing Balance&#39;, &#39;&#39;, 5693.98]]
+</code></pre></div>
+
+<p>When used in Excel, this produces the following:</p>
+<p><img src="/python/images/excel-with-stats.png" width="600"></p>
         </div>
       </article>
     </main>
