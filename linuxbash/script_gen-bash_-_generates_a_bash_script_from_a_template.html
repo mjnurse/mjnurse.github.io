@@ -91,51 +91,60 @@
       <article class="article">
         <div class="article-body">
           <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script_gen-bash_-_Generates_a_bash_script_from_a_template.md">gen-bash - Generates a bash script from a template</a></h1>
-<p>```bash</p>
-<h1 id="binbash">!/bin/bash</h1>
-<p>help_line="Generates a bash script from a template"
-web_desc_line="Generates a bash script from a template"</p>
-<p>help_text="
-usage: gen_bash [options] <filename>
--h : This help text.
--b : Basic bash script only.
-"</p>
-<p>basic_yn=n
-case $1 in
-    -h|--help)
-        echo "$help_text"
-        exit
-        ;;
-    -b|--basic)
-        basic_yn=y
-        shift
-        ;;
-esac</p>
-<p>new_file="$1"</p>
-<p>if [[ "$1" == "" ]]; then
-    echo "Error: no filename provided"
-    echo "$help_text"
-    exit 1
-fi</p>
-<p>if [[ -f "$new_file" ]]; then
-    echo "Error: file: $1 already exists"
-    exit 1
-fi</p>
-<p>if [[ $basic_yn == y ]]; then
-    cat "$B/bash-basic-script-example" | sed "s/&lt;<FILENAME>&gt;/$1/" &gt; "$new_file"
-else
-    cat "$B/bash-script-example" &gt; "$new_file"
-fi
-chmod +x "$new_file"</p>
-<p>read -p "Edit $1? c - code, g - gvim, n - No [cgN]: " cgn</p>
-<p>case ${cgn^} in
-    C)
-        code "$new_file"
-        ;;
-    G)
-        gvim "$new_file"
-        ;;
-esac```</p>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Generates a bash script from a template&quot;</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Generates a bash script from a template&quot;</span>
+
+<span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
+<span class="s2">usage: gen_bash [options] &lt;filename&gt;</span>
+<span class="s2">-h : This help text.</span>
+<span class="s2">-b : Basic bash script only.</span>
+<span class="s2">&quot;</span>
+
+<span class="nv">basic_yn</span><span class="o">=</span>n
+<span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
+<span class="w">    </span>-h<span class="p">|</span>--help<span class="o">)</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="nb">exit</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="w">    </span>-b<span class="p">|</span>--basic<span class="o">)</span>
+<span class="w">        </span><span class="nv">basic_yn</span><span class="o">=</span>y
+<span class="w">        </span><span class="nb">shift</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="k">esac</span>
+
+<span class="nv">new_file</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Error: no filename provided&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$new_file</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Error: file: </span><span class="nv">$1</span><span class="s2"> already exists&quot;</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$basic_yn</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>y<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span>cat<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$B</span><span class="s2">/bash-basic-script-example&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/&lt;&lt;FILENAME&gt;&gt;/</span><span class="nv">$1</span><span class="s2">/&quot;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$new_file</span><span class="s2">&quot;</span>
+<span class="k">else</span>
+<span class="w">    </span>cat<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$B</span><span class="s2">/bash-script-example&quot;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$new_file</span><span class="s2">&quot;</span>
+<span class="k">fi</span>
+chmod<span class="w"> </span>+x<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$new_file</span><span class="s2">&quot;</span>
+
+<span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Edit </span><span class="nv">$1</span><span class="s2">? c - code, g - gvim, n - No [cgN]: &quot;</span><span class="w"> </span>cgn
+
+<span class="k">case</span><span class="w"> </span><span class="si">${</span><span class="nv">cgn</span><span class="p">^</span><span class="si">}</span><span class="w"> </span><span class="k">in</span>
+<span class="w">    </span>C<span class="o">)</span>
+<span class="w">        </span>code<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$new_file</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="w">    </span>G<span class="o">)</span>
+<span class="w">        </span>gvim<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$new_file</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="k">esac</span>
+</code></pre></div>
         </div>
       </article>
     </main>

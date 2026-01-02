@@ -1228,7 +1228,7 @@
     "id": "175",
     "title": "gen-bash - Generates a bash script from a template",
     "url": "/linuxbash/script_gen-bash_-_generates_a_bash_script_from_a_template.html",
-    "content": "```bash !/bin/bash help_line=\"Generates a bash script from a template\" web_desc_line=\"Generates a bash script from a template\" help_text=\" usage: gen_bash [options] -h : This help text. -b : Basic bash script only. \" basic_yn=n case $1 in -h|--help) echo \"$help_text\" exit ;; -b|--basic) basic_yn=y shift ;; esac new_file=\"$1\" if [[ \"$1\" == \"\" ]]; then echo \"Error: no filename provided\" echo \"$help_text\" exit 1 fi if [[ -f \"$new_file\" ]]; then echo \"Error: file: $1 already exists\" exit 1 fi if [[ ",
+    "content": "#!/bin/bash help_line=&quot;Generates a bash script from a template&quot; web_desc_line=&quot;Generates a bash script from a template&quot; help_text=&quot; usage: gen_bash [options] &lt;filename&gt; -h : This help text. -b : Basic bash script only. &quot; basic_yn=n case $1 in -h|--help) echo &quot;$help_text&quot; exit ;; -b|--basic) basic_yn=y shift ;; esac new_file=&quot;$1&quot; if [[ &quot;$1&quot; == &quot;&quot; ]]; then echo &quot;Error: no filename provided&quot; echo &quot;$help_text&",
     "type": "page"
   },
   {
