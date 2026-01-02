@@ -1128,9 +1128,9 @@
   },
   {
     "id": "161",
-    "title": "ah - Add header to web page markdown document",
-    "url": "/linuxbash/script_ah_-_add_header_to_web_page_markdown_document.html",
-    "content": "#!/bin/bash help_text=&quot; NAME ah - Add header to web page markdown document USAGE ah &lt;Web page markdown document&gt; DESCRIPTION Add header to web page markdown document. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;Add header to web page markdown document&quot; web_desc_line=&quot;Add header to web page markdown document&quot; tmp=&quot;${1/.md/}&quot; title=&quot;${tmp//_/ }&quot; echo &quot;---&quot; &gt; ah.tmp echo &quot;title: $title&quot; &gt;&gt; ah.tmp echo &quot;layout",
+    "title": "api-doc - Generates API endpoint documentation in markdown format based on provided parameters, request JSON, and response details.",
+    "url": "/linuxbash/script_api-doc_-_generates_api_endpoint_documentation_in_markdown_format_based_on_provided_parameters,_request_json,_and_response_details..html",
+    "content": "```bash !/bin/bash help_line=\"Generate API endpoint documentation in markdown format\" web_desc_line=\"Generates API endpoint documentation in markdown format based on provided parameters, request JSON, and response details.\" function example_desc() { echo \"Example:\" echo echo \"api-doc -n example-api \\\" echo \" -d \\\"This is an API endpoint document generation example.\\\" \\\" echo \" -p \\\"id|UUID|Example id parameter\\\" \\\" echo \" -p \\\"param name|PARAM TYPE|Parameter description\\\" \\\" echo \" -j '{\\\"desc\\\"",
     "type": "page"
   },
   {
@@ -1142,349 +1142,370 @@
   },
   {
     "id": "163",
+    "title": "bash-basic-script-example - Example Bash Script",
+    "url": "/linuxbash/script_bash-basic-script-example_-_example_bash_script.html",
+    "content": "#!/bin/bash help_line=&quot;tbc&quot; web_desc_line=&quot;Example Bash Script&quot; help_text=&quot; usage: &lt;&lt;FILENAME&gt;&gt; [options] &lt;filename&gt; -h : This help text. &quot; case $1 in -h|--help) echo &quot;$help_text&quot; exit ;; esac if [[ &quot;$1&quot; == &quot;&quot; ]]; then echo &quot;$help_text&quot; exit 1 fi",
+    "type": "page"
+  },
+  {
+    "id": "164",
+    "title": "bash-opts-example - Example Bash script processing short and long command-line options, including grouped short options.",
+    "url": "/linuxbash/script_bash-opts-example_-_example_bash_script_processing_short_and_long_command-line_options,_including_grouped_short_options..html",
+    "content": "```bash !/usr/bin/env bash help_line=\"Example Bash script processing short and long command-line options, including grouped short options.\" web_desc_line=\"Example Bash script processing short and long command-line options, including grouped short options.\" help_text=\"Usage: ${0#*/} [options] Options: -h Show this help message -d Enable debug mode -f FILENAME Specify a file --debug Enable debug mode --help Show this help message --file=FILENAME Specify a file\" function arg_err { echo \"Error: $1\" ",
+    "type": "page"
+  },
+  {
+    "id": "165",
     "title": "bash-script-example - Example Bash Script",
     "url": "/linuxbash/script_bash-script-example_-_example_bash_script.html",
     "content": "#!/bin/bash help_text=&quot; NAME bash-func - One line description. USAGE bash-func [options] &lt;parameters&gt; OPTIONS -x Description... -h|--help Show help text. DESCRIPTION Description description description description. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;tbc&quot; web_desc_line=&quot;Example Bash Script&quot; try=&quot;Try ${0##*/} -h for more information&quot; tmp=&quot;${help_text##*USAGE}&quot; usage=$(echo &quot;Usage: ${tmp%%OPTIONS*}&quot; | tr -d &quot;\\n&quot; |",
     "type": "page"
   },
   {
-    "id": "164",
+    "id": "166",
     "title": "calc - Command line calculator",
     "url": "/linuxbash/script_calc_-_command_line_calculator.html",
     "content": "#!/bin/bash help_text=&quot; NAME calc - Command line calculator USAGE calc [options] &lt;calculation&gt; OPTIONS -h|--help Show help text. -i|--interactive Launch an interactive (bc) calculator. -s|--sizes Convert number to KB, MB, GB, TB, PB. DESCRIPTION In the calculation us &#39;x&#39; for multiply, use &#39;r&#39; for the previous result. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;Command line calculator&quot; web_desc_line=&quot;Command line calculator&quot; pack_member=&quot;d",
     "type": "page"
   },
   {
-    "id": "165",
+    "id": "167",
     "title": "cls - Clear terminal and putty terminal buffer",
     "url": "/linuxbash/script_cls_-_clear_terminal_and_putty_terminal_buffer.html",
     "content": "#!/bin/bash help_text=&quot; NAME cls - Clear terminal and putty terminal buffer USAGE cls DESCRIPTION Clear terminal and putty terminal buffer. AUTHOR mjnurse.github.io - 2019 &quot; help_line=&quot;Clear terminal and putty terminal buffer&quot; web_desc_line=&quot;Clear terminal and putty terminal buffer&quot; pack_member=&quot;basics,default&quot; # doesn&#39;t always work first time round so twice. printf &#39;\\033[3J&#39; clear printf &#39;\\033[3J&#39; clear",
     "type": "page"
   },
   {
-    "id": "166",
+    "id": "168",
     "title": "crreadme - Creates a README.md document from READMEscr.md",
     "url": "/linuxbash/script_crreadme_-_creates_a_readme.md_document_from_readmescr.md.html",
     "content": "#!/bin/bash help_text=&quot; NAME crreadme - Creates a README.md document from READMEscr.md USAGE crreadme &lt;READMEscr.md document name&gt; DESCRIPTION Creates a README.md document from READMEscr.md AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;Creates a README.md document from READMEscr.md&quot; web_desc_line=&quot;Creates a README.md document from READMEscr.md&quot; mv -f README.md /tmp while read line; do if [[ &quot;$line&quot; == &quot;[[help_lines]]&quot; ]]; then echo &#39;```&",
     "type": "page"
   },
   {
-    "id": "167",
+    "id": "169",
     "title": "csvplot - Generates a HTML page containing a Google Chart plotting the csv data",
     "url": "/linuxbash/script_csvplot_-_generates_a_html_page_containing_a_google_chart_plotting_the_csv_data.html",
     "content": "#!/bin/bash help_text=&quot; NAME csvplot - Generates a HTML page containing a Google Chart plotting the csv data. USAGE csvplot [options] &lt;csv filename&gt; OPTIONS -f|--fontsize The font size for the chart -h|--help Show help text. -s|--smooth Adds smoothing to the plotted line. -x|--xaxis|--haxis &lt;name&gt; sets the xaxis / haxis. -y|--yaxis|--vaxis &lt;name&gt; sets the yaxis / vaxis. DESCRIPTION Generates a HTML page containing a Google Chart plotting the csv data. AUTHOR mjnurse.github",
     "type": "page"
   },
   {
-    "id": "168",
+    "id": "170",
     "title": "csvsql - Run a SQL query over a csv file",
     "url": "/linuxbash/script_csvsql_-_run_a_sql_query_over_a_csv_file.html",
     "content": "#!/bin/bash help_text=&quot; NAME csvsql - Run a SQL query over a csv file USAGE csvsql &lt;csv-filename&gt; &lt;sql-query: in quotes&gt; DESCRIPTION A script to run a SQL query over data in a csv file using sqlite3. The table to query has the same name as the csv file (with the file extension - anything after a &#39;.&#39; removed). AUTHOR mjnurse.github.io - 2022 &quot; help_line=&quot;Run a SQL query over a csv file&quot; web_desc_line=&quot;Run a SQL query over a csv file&quot; if [ &quot;$1",
     "type": "page"
   },
   {
-    "id": "169",
+    "id": "171",
     "title": "cve - CVE Lookup",
     "url": "/linuxbash/script_cve_-_cve_lookup.html",
     "content": "#!/bin/bash help_text=&quot; NAME cve - CVE Lookup USAGE cve [options] &lt;cve-code&gt; OPTIONS -h|--help Show help text. DESCRIPTION Lookup CVE using the services.nvd.nist.gov API. AUTHOR mjnurse.github.io - 2024 &quot; help_line=&quot;CVE Lookup&quot; web_desc_line=&quot;CVE Lookup&quot; try=&quot;Try ${0##*/} -h for more information&quot; tmp=&quot;${help_text##*USAGE}&quot; usage=$(echo &quot;Usage: ${tmp%%OPTIONS*}&quot; | tr -d &quot;\\n&quot; | sed &quot;s/ */ /g&quot;) if [[ &quot;$1&quot",
     "type": "page"
   },
   {
-    "id": "170",
+    "id": "172",
     "title": "file-watch-do - Watch a file or directory and each time it or a member is modified run a command",
     "url": "/linuxbash/script_file-watch-do_-_watch_a_file_or_directory_and_each_time_it_or_a_member_is_modified_run_a_command.html",
     "content": "#!/bin/bash help_text=&quot; NAME file-watch-do - Watch a file (or directory) and each time it is modified run a command. USAGE file-watch-do &lt;file name&gt; &lt;command&gt; [&lt;command parameters&gt;] DESCRIPTION Watch a file (or directory) and each time the file or a file within the directory is modified run a command. AUTHOR mjnurse.github.io - 2019 &quot; help_line=&quot;Watch a file or directory and each time it or a member is modified run a command&quot; web_desc_line=&quot;Watch a file",
     "type": "page"
   },
   {
-    "id": "171",
-    "title": "filename-cleanse - Rename files to only lowercase characters and a dash.",
-    "url": "/linuxbash/script_filename-cleanse_-_rename_files_to_only_lowercase_characters_and_a_dash..html",
-    "content": "#!/bin/bash help_text=&quot; NAME filename-cleanse - Rename files to only lowercase characters and a dash. USAGE filename-cleanse [options] &lt;filename(s)&gt; OPTIONS -h|--help Show help text. DESCRIPTION Search for filenames which contain any characters which are not either lowercase or a dash and rename these. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;Rename files to only lowercase characters and a dash.&quot; web_desc_line=&quot;Rename files to only lowercase characters and a da",
-    "type": "page"
-  },
-  {
-    "id": "172",
+    "id": "173",
     "title": "fsa - A file system analyzer for finding duplicates and analyzing disk usage",
     "url": "/linuxbash/script_fsa_-_a_file_system_analyzer_for_finding_duplicates_and_analyzing_disk_usage.html",
     "content": "#!/bin/bash help_text=&quot; NAME fsa - File system analyzer and duplicate file finder. USAGE fsa [options] OPTIONS -r|--reuse Reuse the previous scan instead of running a new one. -h|--help Show help text. COMMANDS c Show file count by type (file/directory). ds Show directory sizes. fd Find duplicate files (same name and size). f Show current filter settings. f fn &lt;pat&gt; Set filename filter pattern. f ms &lt;size&gt; Set minimum size filter. lg List 100 largest files. sq Open SQLite3 shell",
     "type": "page"
   },
   {
-    "id": "173",
+    "id": "174",
     "title": "gen-bash-func - Example Bash Script",
     "url": "/linuxbash/script_gen-bash-func_-_example_bash_script.html",
     "content": "#!/bin/bash help_text=&quot; NAME gen-bash-func - Generates code and header of a bash function USAGE gen-bash-func [options] &lt;function_name&gt; &lt;parameters&gt; OPTIONS -f|--flag &lt;param_name&gt; &lt;variable_name&gt; A flag parameter. If passed then a corresponding variable named &lt;variable_name&gt;_yn is set to &#39;y&#39;. -fv|--flagvalue &lt;param_name&gt; &lt;variable_name&gt; A flag plus value parameter. If passed then a corresponding variable named &lt;variable_name&gt; is set to",
     "type": "page"
   },
   {
-    "id": "174",
+    "id": "175",
+    "title": "gen-bash - Generates a bash script from a template",
+    "url": "/linuxbash/script_gen-bash_-_generates_a_bash_script_from_a_template.html",
+    "content": "```bash !/bin/bash help_line=\"Generates a bash script from a template\" web_desc_line=\"Generates a bash script from a template\" help_text=\" usage: gen_bash [options] -h : This help text. -b : Basic bash script only. \" basic_yn=n case $1 in -h|--help) echo \"$help_text\" exit ;; -b|--basic) basic_yn=y shift ;; esac new_file=\"$1\" if [[ \"$1\" == \"\" ]]; then echo \"Error: no filename provided\" echo \"$help_text\" exit 1 fi if [[ -f \"$new_file\" ]]; then echo \"Error: file: $1 already exists\" exit 1 fi if [[ ",
+    "type": "page"
+  },
+  {
+    "id": "176",
     "title": "gen-bookmark-page - Generates a bookmark web page from a folder in the Chrome bookmarks bar",
     "url": "/linuxbash/script_gen-bookmark-page_-_generates_a_bookmark_web_page_from_a_folder_in_the_chrome_bookmarks_bar.html",
     "content": "#!/bin/bash help_text=&quot; NAME gen-bookmark-page - generates a bookmark web page from a folder in the Chrome bookmarks bar. USAGE gen-bookmark-page [options] OPTIONS -h|--help Show help text. DESCRIPTION Generates a bookmark web page from a folder in the Chrome bookmarks bar. AUTHOR mjnurse.github.io - 2022 &quot; help_line=&quot;Generates a bookmark web page from a folder in the Chrome bookmarks bar&quot; web_desc_line=&quot;Generates a bookmark web page from a folder in the Chrome bookmarks",
     "type": "page"
   },
   {
-    "id": "175",
+    "id": "177",
     "title": "gvim - Runs windows gvim and fixes file paths",
     "url": "/linuxbash/script_gvim_-_runs_windows_gvim_and_fixes_file_paths.html",
     "content": "#!/bin/bash help_text=&quot; NAME gvim - Runs windows gvim and fixes files paths USAGE gvim &lt;filename(s)&gt; DESCRIPTION Runs windows gvim and fixes files paths. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;Runs windows gvim and fixes file paths&quot; web_desc_line=&quot;Runs windows gvim and fixes file paths&quot; files=&quot;$*&quot; fixed_files=&quot;$(echo $files | sed &#39;s/\\/c\\//C:\\//g&#39;)&quot; /c/Program\\ Files\\ \\(x86\\)/Vim/vim90/gvim.exe &quot;$fixed_files&quot; &amp;",
     "type": "page"
   },
   {
-    "id": "176",
+    "id": "178",
     "title": "h - Extracts and displays the help_lines",
     "url": "/linuxbash/script_h_-_extracts_and_displays_the_help_lines.html",
     "content": "#!/bin/bash help_text=&quot; NAME h - Extracts and displays the (single line) help lines in bash scripts. USAGE h [&lt;filenames - wildcards allowed&gt;] OPTIONS -m|--matchesonly Only display the help lines available, don&#39;t report on files missing a help line or with a help line &#39;tbc&#39;. DESCRIPTION Extracts and displays the (single line) help lines. AUTHOR mjnurse.github.io - 2020 &quot; # set -o errexit # set -o nounset # set -o pipefail # if [[ &quot;${TRACE-0}&quot; == &quot;1&quot",
     "type": "page"
   },
   {
-    "id": "177",
+    "id": "179",
     "title": "lf - A script to recursively list folders and show folder details",
     "url": "/linuxbash/script_lf_-_a_script_to_recursively_list_folders_and_show_folder_details.html",
     "content": "#!/bin/bash help_text=&quot; NAME lf - A script to recursively list folders and show folder details. USAGE lf [options] &lt;directory (. for current directory)&gt; OPTIONS -m|maxdepth &lt;number&gt; Max directory depth. -t|--filetypecount Show a count of files by file type. -h|--help Show help text. DESCRIPTION A script to recursively list folders, show folder details (size and number of files) and optionally a count of files by file size. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;A",
     "type": "page"
   },
   {
-    "id": "178",
+    "id": "180",
     "title": "n - Record and query notes",
     "url": "/linuxbash/script_n_-_record_and_query_notes.html",
     "content": "#!/bin/bash help_text=&quot; NAME n - Notes USAGE n [options] &lt;text - consider wrapping in quotes&gt; OPTIONS -h|--help Show this help message. -a|--add Add the &lt;text&gt; as a new note. -e|--edit Edit the notes text file. DESCRIPTION Record and query notes. AUTHOR mjnurse.github.io - 2023 &quot; help_line=&quot;Record and query notes&quot; web_desc_line=&quot;Record and query notes&quot; nf=~/.notes.txt if [[ &quot;$1&quot; == &quot;&quot; ]]; then echo &#39; _ _ _&#39; echo &#39;| \\| |___",
     "type": "page"
   },
   {
-    "id": "179",
+    "id": "181",
     "title": "optional-step-run - A script which prompts a user to decide if a step should be run",
     "url": "/linuxbash/script_optional-step-run_-_a_script_which_prompts_a_user_to_decide_if_a_step_should_be_run.html",
     "content": "#!/bin/bash help_text=&quot; NAME optional-step-run - A template script which prompts a user to decide if steps should be run. USAGE optional-step-run [options] [&lt;start step number&gt;] OPTIONS -l|--list List the steps only. -h|--help Show help text. DESCRIPTION A template script which prompts a user to decide if steps should be run. An optional start step number can be passed in and all steps before this are automatically skipped. AUTHOR mjnurse.github.io - 2023 &quot; help_line=&quot;A scri",
     "type": "page"
   },
   {
-    "id": "180",
+    "id": "182",
     "title": "or - Connect to oracle using sqlplus",
     "url": "/linuxbash/script_or_-_connect_to_oracle_using_sqlplus.html",
     "content": "#!/bin/bash help_text=&quot; NAME or - Connect to oracle using sqlplus. USAGE or DESCRIPTION Connect to oracle using sqlplus. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;Connect to oracle using sqlplus&quot; web_desc_line=&quot;Connect to oracle using sqlplus&quot; export ORACLE_PATH=.:/c/MJN/gdrive/code/oracle:/c/MJN/gdrive/code/private/oracle rlwrap /c/MJN/oracle_client/product/11.2.0/client_1/bin/sqlplus.exe /NOLOG #rlwrap sqlplus /NOLOG",
     "type": "page"
   },
   {
-    "id": "181",
+    "id": "183",
     "title": "pack - Compresses and converts files base64 to copy and paste into a command line session",
     "url": "/linuxbash/script_pack_-_compresses_and_converts_files_base64_to_copy_and_paste_into_a_command_line_session.html",
     "content": "#!/bin/bash help_text=&quot; NAME pack - Compresses and converts files base64 to copy / paste into a command line session. USAGE pack [options] &lt;filename(s)&gt; OPTIONS -h|--help Show help text. -n|--name Specify a name from the pack file. -s|--silent Suppress terminal output. DESCRIPTION Compresses one or more files and converts these to base64 to copy and paste into a command line session with commands to convert these back to the original file. The output is also written to a file, the nam",
     "type": "page"
   },
   {
-    "id": "182",
+    "id": "184",
     "title": "parameters-function - Contains a function to parse and print details about script parameters",
     "url": "/linuxbash/script_parameters-function_-_contains_a_function_to_parse_and_print_details_about_script_parameters.html",
     "content": "#!/bin/bash help_text=&quot; NAME parameters-function USAGE print_parameters DESCRIPTION A function to parse and print details about script parameters. AUTHOR mjnurse.github.io - 2022 &quot; help_line=&quot;Contains a function to parse and print details about script parameters&quot; web_desc_line=&quot;Contains a function to parse and print details about script parameters&quot; # Parses and prints script parameter details between two comments: # &quot;# Start Parse Script Parameters&quot; and &q",
     "type": "page"
   },
   {
-    "id": "183",
+    "id": "185",
     "title": "parq-to-json - Example Bash Script",
     "url": "/linuxbash/script_parq-to-json_-_example_bash_script.html",
     "content": "#!/bin/bash help_text=&quot; NAME bash-func - One line description. USAGE bash-func [options] &lt;parameters&gt; OPTIONS -x Description... -h|--help Show help text. DESCRIPTION Description description description description. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;tbc&quot; web_desc_line=&quot;Example Bash Script&quot; try=&quot;Try ${0##*/} -h for more information&quot; tmp=&quot;${help_text##*USAGE}&quot; usage=$(echo &quot;Usage: ${tmp%%OPTIONS*}&quot; | tr -d &quot;\\n&quot; |",
     "type": "page"
   },
   {
-    "id": "184",
+    "id": "186",
     "title": "parq - A bash utility for viewing Apache Parquet files in JSON, CSV, or schema format",
     "url": "/linuxbash/script_parq_-_a_bash_utility_for_viewing_apache_parquet_files_in_json,_csv,_or_schema_format.html",
     "content": "#!/bin/bash help_text=&quot; NAME parq - Read and display parquet files in various formats. USAGE parq [options] &lt;parquet-file&gt; OPTIONS -a|--all Display all records (default shows 10 records). -c|--csv Output data in CSV format (default is JSON). -h|--help Show help text. -n|--num &lt;number&gt; Specify number of records to display. -s|--schema Display the parquet file schema only. DESCRIPTION parq is a utility for reading Apache Parquet files and displaying their contents in different for",
     "type": "page"
   },
   {
-    "id": "185",
+    "id": "187",
     "title": "pwd-gen - Random Password Generator",
     "url": "/linuxbash/script_pwd-gen_-_random_password_generator.html",
     "content": "```bash !/bin/bash help_text=\" NAME gen-pwd - Random Password Generator using OpenSSL USAGE gen-pwd [options] OPTIONS -l|--length Specify the length of the generated password. Default is 16. -h|--help Show help text. DESCRIPTION This script generates a random password of specified length using OpenSSL. The password includes a mix of uppercase, lowercase, digits, and special characters. AUTHOR Martin N 2025 \" help_line=\"Random Password Generator\" web_desc_line=\"Random Password Generator\" Default ",
     "type": "page"
   },
   {
-    "id": "186",
+    "id": "188",
+    "title": "rep - Repeats a command each time you press return",
+    "url": "/linuxbash/script_rep_-_repeats_a_command_each_time_you_press_return.html",
+    "content": "#!/bin/bash help_line=&quot;Repeats a command each time you press return&quot; web_desc_line=&quot;Repeats a command each time you press return&quot; help_text=&quot; usage: rep [options] &lt;command&gt; -h : This help text. &quot; case $1 in -h|--help) echo &quot;$help_text&quot; exit ;; esac if [[ &quot;$1&quot; == &quot;&quot; ]]; then echo &quot;Error: no command provided&quot; echo &quot;$help_text&quot; exit 1 fi while [[ 1 ]]; do $* echo echo &quot;---------------------------------------&",
+    "type": "page"
+  },
+  {
+    "id": "189",
     "title": "script-template - A script containing an example script-template",
     "url": "/linuxbash/script_script-template_-_a_script_containing_an_example_script-template.html",
     "content": "#!/bin/bash help_text=&quot; NAME script-template - A script containing an example script-template. USAGE script-template [options] &lt;parameters&gt; OPTIONS -x Description... -h|--help Show help text. DESCRIPTION Description description description description. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;A script containing an example script-template&quot; web_desc_line=&quot;A script containing an example script-template&quot; try=&quot;Try ${0##*/} -h for more information&quot; tm",
     "type": "page"
   },
   {
-    "id": "187",
+    "id": "190",
     "title": "sl - An interactive SQLite shell wrapper with enhanced CLI features",
     "url": "/linuxbash/script_sl_-_an_interactive_sqlite_shell_wrapper_with_enhanced_cli_features.html",
     "content": "#!/bin/bash help_text=&quot; NAME sl - SQLite interactive command-line shell wrapper. USAGE sl [options] [database] OPTIONS -d|--debug Run in debug mode. -h|--help Show help text. COMMANDS a Append to buffer (continue multi-line SQL). c Clear the buffer. cls Clear the screen. g &lt;file&gt; Load file contents into the buffer. l List (display) the current buffer. ls List files in the current directory. ll List files with details (ls -al). o &lt;db&gt; Open a database. q|x|quit|exit Quit the shell",
     "type": "page"
   },
   {
-    "id": "188",
+    "id": "191",
     "title": "sqlite-load-csv - Load a csv file into a sqlite3 database",
     "url": "/linuxbash/script_sqlite-load-csv_-_load_a_csv_file_into_a_sqlite3_database.html",
     "content": "#!/bin/bash help_text=&quot; NAME sqlite-load-csv - Load a csv file into a sqlite3 database. USAGE sqlite-load-csv [options] &lt;csv_filename&gt; [&lt;database_name&gt;] OPTIONS -h|--help Show help text. -t|--table &lt;table name&gt; Specify the name of the table created. DESCRIPTION Loads a csv file into a table with the same name as the file (or passed in as an option t|table) into a database the name of which is passed as a parameter or if no database name is specified, a database with the sa",
     "type": "page"
   },
   {
-    "id": "189",
+    "id": "192",
     "title": "tidy - Tidies filenames and fixes issues such as permission issues with files in the specified directory",
     "url": "/linuxbash/script_tidy_-_tidies_filenames_and_fixes_issues_such_as_permission_issues_with_files_in_the_specified_directory.html",
     "content": "#!/bin/bash help_text=&quot; NAME tidy - Tidies filenames and fixes issues such as permission issues with files in the specified directory. USAGE tidy [&lt;folder&gt;] OPTIONS -n|--name Only tidy filenames - do not check permissions etc. -fn|-nf Force rename of filenames without prompting. Implies -n. -h|--help Show help text. DESCRIPTION Tidies filenames and fixes issues such as permission issues with files in the specified directory. AUTHORS mjnurse.github.io - 2020 &quot; help_line=&quot;Tidi",
     "type": "page"
   },
   {
-    "id": "190",
+    "id": "193",
     "title": "utils - Some bash Utility Functions",
     "url": "/linuxbash/script_utils_-_some_bash_utility_functions.html",
     "content": "#!/bin/bash help_text=&quot; NAME utils - One line description. USAGE utils [options] &lt;parameters&gt; OPTIONS -x Description... -h|--help Show help text. DESCRIPTION Description description description description. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;Some bash Utility Functions&quot; web_desc_line=&quot;Some bash Utility Functions&quot; colour_default=&quot;\\e[39m&quot; colour_black=&quot;\\e[30m&quot; colour_red=&quot;\\e[31m&quot; colour_green=&quot;\\e[32m&quot; colour_yell",
     "type": "page"
   },
   {
-    "id": "191",
+    "id": "194",
     "title": "Setting Prompt Colour In bash and Putty",
     "url": "/linuxbash/setting-prompt-colour-in_bash_and-putty.html",
     "content": "I want a different colour prompt for different machines. The following script gives colour names to the various escape sequences. Can put this in (for example) .bashrc file. # Regular Text Colours txtblk=&#39;\\e[0;30m&#39; # Black txtred=&#39;\\e[0;31m&#39; # Red txtgrn=&#39;\\e[0;32m&#39; # Green txtylw=&#39;\\e[0;33m&#39; # Yellow txtblu=&#39;\\e[0;34m&#39; # Blue txtpur=&#39;\\e[0;35m&#39; # Purple txtcyn=&#39;\\e[0;36m&#39; # Cyan txtwht=&#39;\\e[0;37m&#39; # White # Bold Text Colours bldblk=&#39;\\",
     "type": "page"
   },
   {
-    "id": "192",
+    "id": "195",
     "title": "SSH Login Without Password",
     "url": "/linuxbash/ssh-login-without-password.html",
     "content": "ssh Command Line Create public and private keys using ssh-key-gen on local machine. $&gt; ssh-keygen Generating public/private rsa key pair. Enter file in which to save the key (/home/martin/.ssh/id_rsa): Enter passphrase (empty for no passphrase): Enter same passphrase again: Your identification has been saved in /home/martin/.ssh/id_rsa. Your public key has been saved in /home/martin/.ssh/id_rsa.pub. The key fingerprint is: SHA256:sfuidygosifudyosiduygosidfuygosiduygisdyuiy martin@local Copy t",
     "type": "page"
   },
   {
-    "id": "193",
+    "id": "196",
     "title": "sudo Without Password",
     "url": "/linuxbash/sudo-without-password.html",
     "content": "To stop being prompted for a password when running sudo commands. Open the sudoers file whist ensuring you don\u2019t lock yourself out due to syntax errors: sudo visudo Add the following rule for Your user (add this line at the end of the file): &lt;username&gt; ALL=(ALL) NOPASSWD: ALL eg. martin ALL=(ALL) NOPASSWD: ALL",
     "type": "page"
   },
   {
-    "id": "194",
+    "id": "197",
     "title": "Waiting On Background Processes",
     "url": "/linuxbash/waiting-on-background-processes.html",
     "content": "The wait command waits for all background processes start in the current session to end. Example: #!/bin/bash function f1() { echo &quot;process 1, sleeping 3s&quot; sleep 3 echo &quot;process 1 complete&quot; } function f2() { echo &quot;process 2, sleeping 2s&quot; sleep 2 echo &quot;process 2 complete&quot; } f1 &amp; f2 &amp; wait echo &quot;all done&quot; Output: $ xxx process 1, sleeping 3s process 2, sleeping 2s process 2 complete process 1 complete all done $",
     "type": "page"
   },
   {
-    "id": "195",
+    "id": "198",
     "title": "WSL - Hadoop 3.0",
     "url": "/linuxbash/wsl-hadoop_3.0.html",
     "content": "HDFS Config Datanode and Namenode directories default to /tmp - these didn't work for me (and not really a ideal location...). /c/MJN/wsl-hadoop-3.3.0/etc/hadoop/hdfs-site.xml &lt;configuration&gt; &lt;property&gt; &lt;name&gt;dfs.replication&lt;/name&gt; &lt;value&gt;1&lt;/value&gt; &lt;/property&gt; &lt;property&gt; &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt; &lt;value&gt;/c/MJN/hdfs-data/datanode&lt;/value&gt; &lt;/property&gt; &lt;property&gt; &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt",
     "type": "page"
   },
   {
-    "id": "196",
+    "id": "199",
     "title": "Azure AD - Find My AD Group Memberships",
     "url": "/misc/azure-ad.html",
     "content": "First authenticate - this command will pop up a window to sign in. &gt; Connect-AzureAD Account Environment TenantId TenantDomain AccountType ------- ----------- -------- ------------ ----------- martinnurse@demo.com AzureCloud c780234d-ed5b-4ccd demo.com User Get my AD group memberships. &gt; Get-AzureADUser -SearchString martinnurse@demo.com ` | Get-AzureADUserMembership ` | % {Get-AzureADObjectByObjectId -ObjectId $_.ObjectId ` | select DisplayName,ObjectType,MailEnabled,SecurityEnabled,Objec",
     "type": "page"
   },
   {
-    "id": "197",
+    "id": "200",
     "title": "BMI Calculator",
     "url": "/misc/bmi-calculator.html",
-    "content": "Weight St Lb lbs Kg Height Ft In m Target Weight Current BMI: 0 Target Weight (BMI 20 - 25) BMI 20 weight (lose/gain)BMI 25 weight (lose/gain) Kg00 Lbs00 St Lb00 Notes: - BMI for adults only. Doesn't account for body / bone structure, other formulae exist. - BMI &lt;20: Underweight. BMI 20-25: Healthy weight. BMI 25-30: Over Weight. BMI 30-35: Obese. BMI&gt;35 very/morbidly obese. function getFloat(id) { return parseFloat(document.getElementById(id).value) || 0; } function setValue(id, value) { ",
+    "content": "Weight St Lb lbs Kg Height Ft In m Target Weight Current BMI: 0 Target Weight (BMI 20 - 25) BMI 20 weight (lose/gain)BMI 25 weight (lose/gain) Kg00 Lbs00 St Lb00 Notes: BMI for adults only. Doesn't account for body / bone structure, other formulae exist. BMI &lt;20: Underweight. BMI 20-25: Healthy weight. BMI 25-30: Over Weight. BMI 30-35: Obese. BMI&gt;35 very/morbidly obese. function getFloat(id) { return parseFloat(document.getElementById(id).value) || 0; } function setValue(id, value) { docu",
     "type": "page"
   },
   {
-    "id": "198",
+    "id": "201",
     "title": "Dashboard Design Principles",
     "url": "/misc/dashboard-design-principles.html",
     "content": "'The greatest value of a picture is when it forces us to notice what we never expected to see'John Tukey, 'Exploratory Data Analysis', 1977 'A picture is worth a thousand words. An interface is worth a thousand pictures'Ben Shneiderman, 2003 'Data becomes useful knowledge of something that matters when it builds a bridge between a question and an answer. This connection is the signal.' Stephen Few, 'Signal: Understanding What Matters in a World of Noise, 2015 'Graphical excellence is that which ",
     "type": "page"
   },
   {
-    "id": "199",
+    "id": "202",
     "title": "Generating a Bookmarks Page From a Chrome Bookmarks Folder",
     "url": "/misc/generating_a-bookmarks-page-from_a-chrome-bookmarks-folder.html",
     "content": "I wanted a bookmark web page I could switch to (using CTRL-&lt;Tab Number&gt;) and then quickly open a bookmarked site. I created a bash script to read the bookmarks from a folder in the Chrome bookmark bar (folder name: Page) and create a web page. I added Javascript (from this site) that allows me to go to a bookmark (link) by typing in the associated number. I can also search the bookmarks by typing / and then entering part of the name. Pressing Return opens the first matching bookmark. All b",
     "type": "page"
   },
   {
-    "id": "200",
+    "id": "203",
     "title": "Google Charts",
     "url": "/misc/google-charts.html",
     "content": "Google Charts function toggle_yn(obj) { if (obj.value == 'Yes') obj.value = 'No'; else obj.value = 'Yes' } Chart Data Chart Options Redraw | Pivot | Column Headings | Row Headings | Chart Type | &nbsp;Line&nbsp;&nbsp;&nbsp;Column&nbsp;&nbsp;&nbsp;Bar&nbsp;&nbsp;&nbsp;Area&nbsp;&nbsp;&nbsp;Pie",
     "type": "page"
   },
   {
-    "id": "201",
+    "id": "204",
     "title": "History Of My Cars",
     "url": "/misc/history_of_my_cars.html",
     "content": "This perhaps the oldest page on this website and its predecessors. It is, as it says, a history of the cars I've owned. Best Car Audi S5 Quattro 354bhp, 369lb-ft, 0-60mph: 4.7s, Top Speed: 155mph. A great car, very quick, accelerates hard in any gear. The exhaust growls in sports mode. The 8 speed auto gearbox changes very quickly - gear change let down my A5 V6 TDi Quattro, and this was the first thing I checked on the test drive. Came with almost every extra including massaging heated front se",
     "type": "page"
   },
   {
-    "id": "202",
+    "id": "205",
     "title": "HTML Colour Converter",
     "url": "/misc/html-colour-converter.html",
     "content": "RGB: HEX: I've found rotating the RGB values around can give some colours that work well together. Not sure if this has a name... function setColors() { let h = document.getElementById('h'); let rh = h.value.slice(0,2); let gh = h.value.slice(2,4); let bh = h.value.slice(4,6); color = rh + gh + bh; document.getElementById('c1').style.backgroundColor = '#' + color; document.getElementById('c1').innerHTML = '#' + color + '&nbsp;#' + color + ''; color = bh + rh + gh; document.getElementById('c2').s",
     "type": "page"
   },
   {
-    "id": "203",
+    "id": "206",
     "title": "JWT - JSON Web Tokens",
     "url": "/misc/jwt-json-web-tokens.html",
     "content": "Today I was looking at authentication for a web-service. It was using JSON Web Tokens. What are JWTs? How do they work? A JWT is a cryptographically signed JSON token used to authenticate users making calls to an application. A JWT is sent to a user when they authenticate with an authentication Service. The user can send this token with requests to an application (web-service or other) as proof of identity. The application talks to the authentication server and is told the how the token was cryp",
     "type": "page"
   },
   {
-    "id": "204",
+    "id": "207",
     "title": "Public Key Encryption Analogy",
     "url": "/misc/public-key-encryption-analogy.html",
     "content": "What is Public Private Key Encryption? This process uses an algorithm that can encrypt data using a public key however, the data can only be decrypted using a private key. I share my public key with everyone and they use it to encrypt data they send to me. Only I can decrypt and read that data. The Analogy As an analogy to public, private key encryption, consider a secure, locked post-box which contains a slot through which notes can be posted. Notes posted in to the post-box cannot be read (as ",
     "type": "page"
   },
   {
-    "id": "205",
+    "id": "208",
     "title": "Read Aloud In MS Word",
     "url": "/misc/read-aloud-in-ms-word.html",
     "content": "To activate: [Alt][Ctrl][Space]. Cursor at a specific point in the text: The document will be read aloud from here on. Text selected: The selected text will be read aloud. [Ctrl][Space] - Play or pause. [Ctrl][Left arrow] - Jump to the previous paragraph. [Ctrl][Right arrow] - Jump to the next paragraph. [Alt][Left arrow] - Slower reading speed. [Alt][Arrow right] - Faster reading speed.",
     "type": "page"
   },
   {
-    "id": "206",
+    "id": "209",
     "title": "Running Spark on YARN - Cluster or Client Mode",
     "url": "/misc/running-spark_on-yarn-cluster_or-client-mode.html",
     "content": "Spark jobs can run on YARN in two modes: cluster mode and client mode. Understanding the difference between the two modes is important for choosing an appropriate memory allocation configuration, and to submit jobs as expected. A Spark job consists of two parts: Spark Executors that run the actual tasks, and a Spark Driver that schedules the Executors. Cluster Mode Everything runs inside the cluster. You can start a job from your laptop and the job will continue running even if you close your co",
     "type": "page"
   },
   {
-    "id": "207",
+    "id": "210",
     "title": "Shortcut Keys",
     "url": "/misc/shortcut-keys.html",
     "content": "Note: This page is automatically generated using sck Confluence | // | Opens the date picker | | Alt +SHIFT+DOWN | Insert table row after | | Alt +SHIFT+UP | Insert table row before | | CTRL+0 | Set paragraph style | | CTRL+1-6 | Set as heading 1-6 | | CTRL+7 | Preformatted | | CTRL+8 | Quote | | CTRL+ENTER | Publish page | | CTRL+ENTER | Publish | | CTRL+SHIFT+I | Insert table | | CTRL+SHIFT+a | Insert macro | | CTRL+SHIFT+b | Bulleted list | | CTRL+SHIFT+d | Insert markup | | CTRL+SHIFT+e | Pr",
     "type": "page"
   },
   {
-    "id": "208",
+    "id": "211",
     "title": "ssh",
     "url": "/misc/ssh.html",
     "content": "Storing SSH Connection / Config details Store SSH connection details in a config file in the .ssh directory. File ~/.ssh/config Contents Host dev HostName dev.example.com Port 22 User martin Host test HostName test.example.com Port 22 User martin SSH Login Without Password 1) Generate a public/private RSA key pair. Save this to default location /home/&lt;username&gt;/.ssh/id_rsa $ ssh-keygen Your public key will be saved in /home/user/.ssh/id_rsa.pub 2) Copy the SSH Public Key to the Remote Host",
     "type": "page"
   },
   {
-    "id": "209",
+    "id": "212",
     "title": "Statistical Testing",
     "url": "/misc/statistical-testing.html",
     "content": "For a long time I've wanted to explore using statistics to determine how many tests are needed to test for errors. The question I have is that, for a set of n records, if we want to be say 99.9% sure none contain an error, how many would be need to test at random to reach a point where we can be statistically, say, 99.9% sure there are no errors. The Basics Tests with a fixed number of options / records to test If I have a die and there is a chance the number has not been printed on one side, ho",
     "type": "page"
   },
   {
-    "id": "210",
+    "id": "213",
     "title": "Text To Speech - Clipboard",
     "url": "/misc/text-to-speech-clipboard.html",
     "content": "I've been using the Microsoft Word text-to-speech function for a while to proof read text. Works great but the text needs to be a Word document or I need to copy and paste it there first. I've been looking online for an application to read aloud the clipboard. It's surprisingly difficult to find an application. I then thought about AHK and (convinced it would be far to complex for AHK) I ran a search. I was wrong, a very simple AHK script now means I can read aloud the contents of the clipboard ",
     "type": "page"
   },
   {
-    "id": "211",
+    "id": "214",
     "title": "This Sites Markdown",
     "url": "/misc/this-sites-markdown.html",
     "content": "Heading 1 # Heading 1 Heading 2 ## Heading 2 Heading 3 ### Heading 3 Heading 4 #### Heading 4 Heading 5 ##### Heading 5 Heading 6 ###### Heading 6 Horizontal Line: --- Bold: **Bold** Italic: *Italic* Bold Italic: ***Bold Italic*** ~~Strikethrough~~: ~~Strikethrough~~ Links I'm an inline-style link [I'm an inline-style link](https://www.google.com) I'm an inline-style link with title [I'm an inline-style link with title](https://www.google.com \"Google's Homepage\") Simple Lists Single spacing: Sim",
     "type": "page"
   },
   {
-    "id": "212",
+    "id": "215",
     "title": "Using Git and GitHub - A Walk-through",
     "url": "/misc/using-git_and-git-hub-a-walkthrough.html",
     "content": "In the following walk-through we use Git and GitHub from the view point of two 'users' in parallel and look at the workflow and interaction between the two. Simulate two users - each has a home directory Create two 'user home' directories: &gt; ~/git-test$ mkdir user1 &gt; ~/git-test$ mkdir user2 Use User1 to create a file, add this to Git and push the local Git repo up and into GitHub Go to User1 home directory and initialise local Git: &gt; ~/git-test$ cd user1 &gt; ~/git-test/user1$ git init ",

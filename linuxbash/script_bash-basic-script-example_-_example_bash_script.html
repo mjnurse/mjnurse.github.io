@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="ah - Add header to web page markdown document" />
+    <meta name="description" content="bash-basic-script-example - Example Bash Script" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>ah - Add header to web page markdown document</title>
+    <title>bash-basic-script-example - Example Bash Script</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
@@ -90,33 +90,28 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script_ah_-_Add_header_to_web_page_markdown_document.md">ah - Add header to web page markdown document</a></h1>
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script_bash-basic-script-example_-_Example_Bash_Script.md">bash-basic-script-example - Example Bash Script</a></h1>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;tbc&quot;</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Example Bash Script&quot;</span>
+
 <span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
-<span class="s2">NAME</span>
-<span class="s2">  ah - Add header to web page markdown document</span>
-
-<span class="s2">USAGE</span>
-<span class="s2">  ah &lt;Web page markdown document&gt;</span>
-
-<span class="s2">DESCRIPTION</span>
-<span class="s2">  Add header to web page markdown document.</span>
-
-<span class="s2">AUTHOR</span>
-<span class="s2">  mjnurse.github.io - 2020</span>
+<span class="s2">usage: &lt;&lt;FILENAME&gt;&gt; [options] &lt;filename&gt;</span>
+<span class="s2">-h : This help text.</span>
 <span class="s2">&quot;</span>
-<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Add header to web page markdown document&quot;</span>
-<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Add header to web page markdown document&quot;</span>
 
-<span class="nv">tmp</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">1</span><span class="p">/.md/</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="nv">title</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">tmp</span><span class="p">//_/ </span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
+<span class="w">    </span>-h<span class="p">|</span>--help<span class="o">)</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="nb">exit</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="k">esac</span>
 
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;---&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>ah.tmp
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;title: </span><span class="nv">$title</span><span class="s2">&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>ah.tmp
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;layout: page-with-contents-list&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>ah.tmp
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;---&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>ah.tmp
-cat<span class="w"> </span><span class="nv">$1</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>ah.tmp
-mv<span class="w"> </span>ah.tmp<span class="w"> </span><span class="nv">$1</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
 </code></pre></div>
         </div>
       </article>
@@ -135,7 +130,7 @@ mv<span class="w"> </span>ah.tmp<span class="w"> </span><span class="nv">$1</spa
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: December 16, 2025</p>
+      <p>Last updated: January 02, 2026</p>
     </footer>
 
     <div class="scroll-container">

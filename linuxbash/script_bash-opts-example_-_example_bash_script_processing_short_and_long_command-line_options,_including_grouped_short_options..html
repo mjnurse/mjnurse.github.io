@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="bash-opts-example - Example Bash script processing short and long command-line options, including grouped short options." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>bash-opts-example - Example Bash script processing short and long command-line options, including grouped short options.</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script_bash-opts-example_-_Example_Bash_script_processing_short_and_long_command-line_options,_including_grouped_short_optionscode ~/mjnursemd">bash-opts-example - Example Bash script processing short and long command-line options, including grouped short options.</a></h1>
+<p>```bash</p>
+<h1 id="usrbinenv-bash">!/usr/bin/env bash</h1>
+<p>help_line="Example Bash script processing short and long command-line options, including grouped short options."
+web_desc_line="Example Bash script processing short and long command-line options, including grouped short options."</p>
+<p>help_text="Usage: ${0#*/} [options] <arguments>
+Options:
+  -h               Show this help message
+  -d               Enable debug mode
+  -f FILENAME      Specify a file
+  --debug          Enable debug mode
+  --help           Show this help message
+  --file=FILENAME  Specify a file"</p>
+<p>function arg_err {
+    echo "Error: $1"
+    echo "Try ${0#*/} -h for more information"
+    exit 1
+}</p>
+<p>file=""
+debug=false</p>
+<h1 id="-parse-arguments-">--- Parse arguments ---</h1>
+<p>while [[ $# -gt 0 ]]; do
+    arg="$1"</p>
+<div class="codehilite"><pre><span></span><code>#<span class="w"> </span>---<span class="w"> </span>Long<span class="w"> </span>options<span class="w"> </span>---
+case<span class="w"> </span>&quot;<span class="nv">$arg</span>&quot;<span class="w"> </span>in
+<span class="w">    </span>--help)
+<span class="w">        </span>echo<span class="w"> </span>&quot;<span class="nv">$help_text</span>&quot;
+<span class="w">        </span>exit<span class="w"> </span>0
+<span class="w">        </span>;;
+<span class="w">    </span>--debug)
+<span class="w">        </span>debug=true
+<span class="w">        </span>shift
+<span class="w">        </span>;;
+<span class="w">    </span>--file=*|-f=*)
+<span class="w">        </span>#<span class="w"> </span>Treat<span class="w"> </span>-f=<span class="w"> </span>as<span class="w"> </span>a<span class="w"> </span>long<span class="w"> </span>option<span class="w"> </span>for<span class="w"> </span>simplicity
+<span class="w">        </span>file=&quot;<span class="cp">${</span><span class="n">arg</span><span class="c1">#*=</span><span class="cp">}</span>&quot;
+<span class="w">        </span>if<span class="w"> </span>[[<span class="w"> </span>-z<span class="w"> </span>&quot;<span class="nv">$file</span>&quot;<span class="w"> </span>]];<span class="w"> </span>then
+<span class="w">            </span>arg_err<span class="w"> </span>&quot;<span class="nv">$arg</span><span class="w"> </span>requires<span class="w"> </span>an<span class="w"> </span>argument&quot;
+<span class="w">        </span>fi
+<span class="w">        </span>shift
+<span class="w">        </span>;;
+<span class="w">    </span>--file)
+<span class="w">        </span>if<span class="w"> </span>[[<span class="w"> </span>-z<span class="w"> </span>&quot;$2&quot;<span class="w"> </span>]];<span class="w"> </span>then
+<span class="w">            </span>arg_err<span class="w"> </span>&quot;<span class="nv">$arg</span><span class="w"> </span>requires<span class="w"> </span>an<span class="w"> </span>argument&quot;
+<span class="w">        </span>fi
+<span class="w">        </span>file=&quot;$2&quot;
+<span class="w">        </span>shift<span class="w"> </span>2
+<span class="w">        </span>;;
+<span class="w">    </span>--*)
+<span class="w">        </span>arg_err<span class="w"> </span>&quot;Unknown<span class="w"> </span>option:<span class="w"> </span><span class="nv">$arg</span>&quot;
+<span class="w">        </span>;;
+esac
+
+arg=&quot;$1&quot;<span class="w"> </span>#<span class="w"> </span>Get<span class="w"> </span>$1<span class="w"> </span>again<span class="w"> </span>in<span class="w"> </span>case<span class="w"> </span>it<span class="w"> </span>was<span class="w"> </span>shifted
+
+#<span class="w"> </span>---<span class="w"> </span>Short<span class="w"> </span>options<span class="w"> </span>(grouped<span class="w"> </span>or<span class="w"> </span>single)<span class="w"> </span>---
+if<span class="w"> </span>[[<span class="w"> </span>&quot;<span class="nv">$arg</span>&quot;<span class="w"> </span>==<span class="w"> </span>-*<span class="w"> </span>]];<span class="w"> </span>then
+<span class="w">    </span>opts=&quot;<span class="cp">${</span><span class="n">arg</span><span class="c1">#-</span><span class="cp">}</span>&quot;
+
+<span class="w">    </span>for<span class="w"> </span>((<span class="w"> </span>i=0;<span class="w"> </span>i<span class="err">&lt;</span><span class="cp">${</span><span class="c1">#opts</span><span class="cp">}</span>;<span class="w"> </span>i++<span class="w"> </span>));<span class="w"> </span>do
+<span class="w">        </span>opt=&quot;<span class="cp">${</span><span class="n">opts</span><span class="p">:</span><span class="err">$</span><span class="n">i</span><span class="p">:</span><span class="mi">1</span><span class="cp">}</span>&quot;
+
+<span class="w">        </span>case<span class="w"> </span>&quot;<span class="nv">$opt</span>&quot;<span class="w"> </span>in
+<span class="w">            </span>h)
+<span class="w">                </span>echo<span class="w"> </span>&quot;<span class="nv">$help_text</span>&quot;
+<span class="w">                </span>exit<span class="w"> </span>0
+<span class="w">                </span>;;
+<span class="w">            </span>d)
+<span class="w">                </span>debug=true
+<span class="w">                </span>;;
+<span class="w">            </span>f)
+<span class="w">                </span>#<span class="w"> </span>Option<span class="w"> </span>with<span class="w"> </span>argument:<span class="w"> </span>-f<span class="w"> </span>filename
+<span class="w">                </span>if<span class="w"> </span>((<span class="w"> </span>i<span class="w"> </span><span class="nt">&lt; </span><span class="cp">${</span><span class="c1">#opts</span><span class="cp">}</span><span class="nt">-1</span><span class="w"> </span><span class="err">));</span><span class="w"> </span><span class="err">then</span>
+<span class="w">                    </span><span class="err">arg_err</span><span class="w"> </span><span class="err">&quot;-</span><span class="nv">$opt</span><span class="w"> </span><span class="err">requires</span><span class="w"> </span><span class="err">an</span><span class="w"> </span><span class="err">argument</span><span class="w"> </span><span class="err">and</span><span class="w"> </span><span class="err">cannot</span><span class="w"> </span><span class="err">be</span><span class="w"> </span><span class="err">grouped&quot;</span>
+<span class="w">                </span><span class="err">fi</span>
+<span class="w">                </span><span class="err">if</span><span class="w"> </span><span class="err">[[</span><span class="w"> </span><span class="err">-z</span><span class="w"> </span><span class="err">&quot;$2&quot;</span><span class="w"> </span><span class="err">]];</span><span class="w"> </span><span class="err">then</span>
+<span class="w">                    </span><span class="err">arg_err</span><span class="w"> </span><span class="err">&quot;-</span><span class="nv">$opt</span><span class="w"> </span><span class="err">requires</span><span class="w"> </span><span class="err">an</span><span class="w"> </span><span class="err">argument&quot;</span>
+<span class="w">                </span><span class="err">fi</span>
+<span class="w">                </span><span class="na">file=</span><span class="s">&quot;$2&quot;</span>
+<span class="w">                </span><span class="err">shift</span>
+<span class="w">                </span><span class="err">;;</span>
+<span class="w">            </span><span class="err">*)</span>
+<span class="w">                </span><span class="err">arg_err</span><span class="w"> </span><span class="err">&quot;Unknown</span><span class="w"> </span><span class="err">option:</span><span class="w"> </span><span class="err">-</span><span class="nv">$opt</span><span class="err">&quot;</span>
+<span class="w">                </span><span class="err">;;</span>
+<span class="w">        </span><span class="err">esac</span>
+<span class="w">    </span><span class="err">done</span>
+<span class="w">    </span><span class="err">shift</span>
+<span class="err">fi</span>
+<span class="err">break</span>
+</code></pre></div>
+
+<p>done</p>
+<p>echo "debug: $debug"
+echo "File: $file"```</p>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: January 02, 2026</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>
