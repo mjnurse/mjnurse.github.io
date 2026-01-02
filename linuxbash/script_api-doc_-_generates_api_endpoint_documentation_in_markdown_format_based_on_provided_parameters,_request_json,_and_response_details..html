@@ -91,7 +91,18 @@
       <article class="article">
         <div class="article-body">
           <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script_api-doc_-_Generates_API_endpoint_documentation_in_markdown_format_based_on_provided_parameters,_request_JSON,_and_response_detailscode ~/mjnursemd">api-doc - Generates API endpoint documentation in markdown format based on provided parameters, request JSON, and response details.</a></h1>
-<div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
+<span class="s2">Generate API endpoint documentation in markdown format</span>
+
+<span class="s2">Options:</span>
+<span class="s2">    -e|--example      Show an example of how to use the api-doc command</span>
+<span class="s2">    -n &lt;api-name&gt;     Name of the API endpoint (e.g., example-api)</span>
+<span class="s2">    -d &lt;description&gt;  Description of the API endpoint</span>
+<span class="s2">    -p &lt;param&gt;        Parameter in the format &#39;name|type|description&#39; (can be used multiple times)</span>
+<span class="s2">    -j &lt;request-json&gt; JSON string representing the request body</span>
+<span class="s2">    -r &lt;response&gt;     Response in the format &#39;CODE - Description|Action description|&lt;optional response json&gt;&#39; (can be used multiple times)</span>
+<span class="s2">&quot;</span>
 
 <span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Generate API endpoint documentation in markdown format&quot;</span>
 <span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Generates API endpoint documentation in markdown format based on provided parameters, request JSON, and response details.&quot;</span>
@@ -125,15 +136,7 @@
 <span class="w">    </span>-h<span class="p">|</span>--help<span class="o">)</span>
 <span class="w">        </span>usage
 <span class="w">        </span><span class="nb">echo</span>
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_line</span><span class="s2">&quot;</span>
-<span class="w">        </span><span class="nb">echo</span>
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Options:&quot;</span>
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;  -e|--example      Show an example of how to use the api-doc command&quot;</span>
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;  -n &lt;api-name&gt;     Name of the API endpoint (e.g., example-api)&quot;</span>
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;  -d &lt;description&gt;  Description of the API endpoint&quot;</span>
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;  -p &lt;param&gt;        Parameter in the format &#39;name|type|description&#39; (can be used multiple times)&quot;</span>
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;  -j &lt;request-json&gt; JSON string representing the request body&quot;</span>
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;  -r &lt;response&gt;     Response in the format &#39;CODE - Description|Action description|&lt;optional response json&gt;&#39; (can be used multiple times)&quot;</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
 <span class="w">        </span><span class="nb">echo</span>
 <span class="w">        </span>example_desc
 

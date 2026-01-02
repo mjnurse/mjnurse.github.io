@@ -91,16 +91,15 @@
       <article class="article">
         <div class="article-body">
           <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script_gen-bash_-_Generates_a_bash_script_from_a_template.md">gen-bash - Generates a bash script from a template</a></h1>
-<div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
-
-<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Generates a bash script from a template&quot;</span>
-<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Generates a bash script from a template&quot;</span>
-
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 <span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
 <span class="s2">usage: gen_bash [options] &lt;filename&gt;</span>
 <span class="s2">-h : This help text.</span>
 <span class="s2">-b : Basic bash script only.</span>
 <span class="s2">&quot;</span>
+
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Generates a bash script from a template&quot;</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Generates a bash script from a template&quot;</span>
 
 <span class="nv">basic_yn</span><span class="o">=</span>n
 <span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>

@@ -91,7 +91,7 @@
       <article class="article">
         <div class="article-body">
           <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script_tidy_-_Tidies_filenames_and_fixes_issues_such_as_permission_issues_with_files_in_the_specified_directory.md">tidy - Tidies filenames and fixes issues such as permission issues with files in the specified directory</a></h1>
-<div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 <span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
 <span class="s2">NAME</span>
 <span class="s2">    tidy - Tidies filenames and fixes issues such as permission issues with files in the specified directory.</span>
@@ -181,7 +181,7 @@ cecho<span class="w"> </span><span class="nv">gre</span><span class="w"> </span>
 <span class="s1">                s/__*/_/g; </span>
 <span class="s1">                s/--*/-/g; </span>
 <span class="s1">        &#39;</span><span class="k">)</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$newname</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$newname</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;README.md&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">            </span><span class="nb">echo</span><span class="w"> </span>--------------------------------------------------------------------------------
 <span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;FILE:      </span><span class="nv">$f</span><span class="s2">&quot;</span>
 <span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Rename as: </span><span class="nv">$newname</span><span class="s2">&quot;</span>
@@ -214,47 +214,54 @@ cecho<span class="w"> </span><span class="nv">gre</span><span class="w"> </span>
 <span class="k">fi</span>
 
 cecho<span class="w"> </span><span class="nv">gre</span><span class="w"> </span><span class="o">================================================================================</span>
-cecho<span class="w"> </span>gre<span class="w"> </span>Executable<span class="w"> </span>but<span class="w"> </span>not<span class="w"> </span><span class="s1">&#39;#!/bin/bash&#39;</span>
+cecho<span class="w"> </span>gre<span class="w"> </span>Executable<span class="w"> </span>but<span class="w"> </span>not<span class="w"> </span><span class="s1">&#39;#!/usr/bin/env&#39;</span>
 cecho<span class="w"> </span><span class="nv">gre</span><span class="w"> </span><span class="o">================================================================================</span>
 
 <span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>find<span class="w"> </span>.<span class="w"> </span>-maxdepth<span class="w"> </span><span class="m">1</span><span class="w"> </span>-executable<span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
 
-<span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-f<span class="w"> </span><span class="nv">$f</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>!<span class="w"> </span>-L<span class="w"> </span><span class="nv">$f</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">      </span><span class="nv">line1</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>head<span class="w"> </span>-1<span class="w"> </span><span class="nv">$f</span><span class="k">)</span><span class="s2">&quot;</span>
-<span class="w">      </span><span class="nv">line1</span><span class="o">=</span><span class="si">${</span><span class="nv">line1</span><span class="p">//[</span><span class="s1">$&#39; \t\r\n&#39;</span><span class="p">]</span><span class="si">}</span>
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$line1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;#!/bin/bash&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">         </span><span class="nb">echo</span><span class="w"> </span>--------------------------------------------------------------------------------
-<span class="w">         </span><span class="nb">echo</span><span class="w"> </span>FILE:<span class="w"> </span><span class="nv">$f</span>
-<span class="w">         </span><span class="nb">echo</span><span class="w"> </span>--------------------------------------------------------------------------------
-<span class="w">         </span><span class="nb">echo</span><span class="w"> </span>First<span class="w"> </span><span class="m">5</span><span class="w"> </span>lines:
-<span class="w">         </span><span class="nb">echo</span><span class="w"> </span>--------------
-<span class="w">         </span>head<span class="w"> </span>-5<span class="w"> </span><span class="nv">$f</span>
-<span class="w">         </span><span class="nb">echo</span>
-<span class="w">         </span><span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">clblu</span><span class="si">}</span><span class="s2">[i]gnore rule, [r]emove exec, [a]dd &#39;#!/bin/bash&#39;, [s]kip, q[uit]. [iraSq]?: </span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">         </span><span class="nb">read</span><span class="w"> </span>opt
-<span class="w">         </span><span class="k">case</span><span class="w"> </span><span class="nv">$opt</span><span class="w"> </span><span class="k">in</span>
-<span class="w">            </span>r<span class="p">|</span>R<span class="o">)</span>
-<span class="w">               </span>chmod<span class="w"> </span>a-x<span class="w"> </span><span class="nv">$f</span><span class="p">;;</span>
-<span class="w">            </span>a<span class="p">|</span>A<span class="o">)</span>
-<span class="w">               </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;1i#!/bin/bash&#39;</span><span class="w"> </span><span class="nv">$f</span><span class="p">;;</span>
-<span class="w">            </span>i<span class="p">|</span>I<span class="o">)</span>
-<span class="w">               </span><span class="k">break</span><span class="p">;;</span>
-<span class="w">            </span>q<span class="p">|</span>Q<span class="o">)</span>
-<span class="w">               </span>exit<span class="p">;;</span>
-<span class="w">         </span><span class="k">esac</span>
-<span class="w">      </span><span class="k">fi</span><span class="w"> </span>
-<span class="w">   </span><span class="k">fi</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-f<span class="w"> </span><span class="nv">$f</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>!<span class="w"> </span>-L<span class="w"> </span><span class="nv">$f</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nv">line1</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>head<span class="w"> </span>-1<span class="w"> </span><span class="nv">$f</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">line1</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">14</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;#!/usr/bin/env&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span>--------------------------------------------------------------------------------
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span>FILE:<span class="w"> </span><span class="nv">$f</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span>--------------------------------------------------------------------------------
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span>First<span class="w"> </span><span class="m">5</span><span class="w"> </span>lines:
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span>--------------
+<span class="w">            </span>head<span class="w"> </span>-5<span class="w"> </span><span class="nv">$f</span>
+<span class="w">            </span><span class="nb">echo</span>
+<span class="w">            </span><span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">clblu</span><span class="si">}</span><span class="s2">[i]gnore rule, [r]emove exec, add [b]ash, add [p]ython3, [s]kip, q[uit]. [irbpSq]?: </span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="nb">read</span><span class="w"> </span>opt
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="nv">$opt</span><span class="w"> </span><span class="k">in</span>
+<span class="w">                </span>r<span class="p">|</span>R<span class="o">)</span>
+<span class="w">                    </span>chmod<span class="w"> </span>a-x<span class="w"> </span><span class="nv">$f</span>
+<span class="w">                    </span><span class="p">;;</span>
+<span class="w">                </span>b<span class="p">|</span>B<span class="o">)</span>
+<span class="w">                    </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;/^#!\/bin\/bash/d&#39;</span><span class="w"> </span><span class="nv">$f</span>
+<span class="w">                    </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;1i#!/usr/bin/env bash&#39;</span><span class="w"> </span><span class="nv">$f</span>
+<span class="w">                    </span><span class="p">;;</span>
+<span class="w">                </span>p<span class="p">|</span>P<span class="o">)</span>
+<span class="w">                    </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;1i#!/usr/bin/env python3&#39;</span><span class="w"> </span><span class="nv">$f</span>
+<span class="w">                    </span><span class="p">;;</span>
+<span class="w">                </span>i<span class="p">|</span>I<span class="o">)</span>
+<span class="w">                    </span><span class="k">break</span>
+<span class="w">                    </span><span class="p">;;</span>
+<span class="w">                </span>q<span class="p">|</span>Q<span class="o">)</span>
+<span class="w">                    </span><span class="nb">exit</span>
+<span class="w">                    </span><span class="p">;;</span>
+<span class="w">            </span><span class="k">esac</span>
+<span class="w">        </span><span class="k">fi</span><span class="w"> </span>
+<span class="w">    </span><span class="k">fi</span>
 <span class="k">done</span>
 
 cecho<span class="w"> </span><span class="nv">gre</span><span class="w"> </span><span class="o">================================================================================</span>
-cecho<span class="w"> </span>gre<span class="w"> </span><span class="s1">&#39;#!/bin/bash&#39;</span><span class="w"> </span>but<span class="w"> </span>not<span class="w"> </span>Executable
+cecho<span class="w"> </span>gre<span class="w"> </span><span class="s1">&#39;#!/usr/bin/env&#39;</span><span class="w"> </span>but<span class="w"> </span>not<span class="w"> </span>Executable
 cecho<span class="w"> </span><span class="nv">gre</span><span class="w"> </span><span class="o">================================================================================</span>
 
 <span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>find<span class="w"> </span>.<span class="w"> </span>-maxdepth<span class="w"> </span><span class="m">1</span><span class="w"> </span>!<span class="w"> </span>-executable<span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-f<span class="w"> </span><span class="nv">$f</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>!<span class="w"> </span>-L<span class="w"> </span><span class="nv">$f</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">      </span><span class="nv">line1</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>head<span class="w"> </span>-1<span class="w"> </span><span class="nv">$f</span><span class="k">)</span><span class="s2">&quot;</span>
 <span class="w">      </span><span class="nv">line1</span><span class="o">=</span><span class="si">${</span><span class="nv">line1</span><span class="p">//[</span><span class="s1">$&#39; \t\r\n&#39;</span><span class="p">]</span><span class="si">}</span>
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$line1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;#!/bin/bash&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$line1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;#!/usr/bin/env&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">         </span><span class="nb">echo</span><span class="w"> </span>--------------------------------------------------------------------------------
 <span class="w">         </span><span class="nb">echo</span><span class="w"> </span>FILE:<span class="w"> </span><span class="nv">$f</span>
 <span class="w">         </span><span class="nb">echo</span><span class="w"> </span>--------------------------------------------------------------------------------
@@ -262,7 +269,7 @@ cecho<span class="w"> </span><span class="nv">gre</span><span class="w"> </span>
 <span class="w">            </span><span class="nb">echo</span><span class="w"> </span>--------------
 <span class="w">         </span>head<span class="w"> </span>-5<span class="w"> </span><span class="nv">$f</span>
 <span class="w">         </span><span class="nb">echo</span>
-<span class="w">         </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;[i]gnore rule, [d]elete &#39;#!/bin/bash&#39;, [m]ake exec, [s]kip, q[uit]. [idmSq]?: &quot;</span><span class="w"> </span>opt
+<span class="w">         </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;[i]gnore rule, [d]elete &#39;#!/usr/bin/env&#39;, [m]ake exec, [s]kip, q[uit]. [idmSq]?: &quot;</span><span class="w"> </span>opt
 <span class="w">         </span><span class="k">case</span><span class="w"> </span><span class="nv">$opt</span><span class="w"> </span><span class="k">in</span>
 <span class="w">            </span>d<span class="p">|</span>D<span class="o">)</span>
 <span class="w">               </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;1d&#39;</span><span class="w"> </span><span class="nv">$f</span><span class="p">;;</span>
@@ -367,35 +374,38 @@ cecho<span class="w"> </span><span class="nv">gre</span><span class="w"> </span>
 
 <span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>find<span class="w"> </span>.<span class="w"> </span>-maxdepth<span class="w"> </span><span class="m">1</span><span class="w"> </span>-executable<span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-f<span class="w"> </span><span class="nv">$f</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>!<span class="w"> </span>-L<span class="w"> </span><span class="nv">$f</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">      </span><span class="nv">l1</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>cat<span class="w"> </span><span class="nv">$f</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;1p&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
 <span class="w">      </span><span class="nv">l2</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>cat<span class="w"> </span><span class="nv">$f</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;2p&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
-<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">l2</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">10</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;help_text=&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$l1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;#!/usr/bin/env bash&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">l2</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">10</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;help_text=&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">         </span><span class="nb">echo</span><span class="w"> </span>--------------------------------------------------------------------------------
 <span class="w">         </span>ls<span class="w"> </span>-al<span class="w"> </span><span class="nv">$f</span>
 <span class="w">         </span><span class="nb">echo</span>
-<span class="w">         </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;[i]gnore , [a]dd header, [s]kip, q[uit]. [iaSq]?: &quot;</span><span class="w"> </span>opt
+<span class="w">         </span>head<span class="w"> </span>-15<span class="w"> </span><span class="nv">$f</span>
+<span class="w">         </span><span class="nb">echo</span>
+<span class="w">         </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;[i]gnore rule, [a]dd header, edit [v]im, edit [c]ode, [s]kip, q[uit]. [iavcSq]?: &quot;</span><span class="w"> </span>opt
 <span class="w">         </span><span class="k">case</span><span class="w"> </span><span class="nv">$opt</span><span class="w"> </span><span class="k">in</span>
 <span class="w">            </span>a<span class="p">|</span>A<span class="o">)</span>
 <span class="w">               </span><span class="nv">tidytmp</span><span class="o">=</span><span class="s2">&quot;/tmp/tidy.tmp&quot;</span>
-<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;#!/bin/bash</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;#!/usr/bin/env</span>
 <span class="s1">help_text=&quot;</span>
 <span class="s1">NAME</span>
-<span class="s1">   &#39;</span><span class="si">${</span><span class="nv">f</span><span class="p">:</span><span class="nv">2</span><span class="si">}</span><span class="s1">&#39; - One line description.</span>
+<span class="s1">    &#39;</span><span class="si">${</span><span class="nv">f</span><span class="p">:</span><span class="nv">2</span><span class="si">}</span><span class="s1">&#39; - One line description.</span>
 
 <span class="s1">USAGE</span>
-<span class="s1">   &#39;</span><span class="si">${</span><span class="nv">f</span><span class="p">:</span><span class="nv">2</span><span class="si">}</span><span class="s1">&#39; [options] &lt;parameters&gt;</span>
+<span class="s1">    &#39;</span><span class="si">${</span><span class="nv">f</span><span class="p">:</span><span class="nv">2</span><span class="si">}</span><span class="s1">&#39; [options] &lt;parameters&gt;</span>
 
 <span class="s1">OPTIONS</span>
-<span class="s1">   -x</span>
-<span class="s1">      Description...</span>
+<span class="s1">    -x</span>
+<span class="s1">        Description...</span>
 
-<span class="s1">   -h|--help</span>
-<span class="s1">      Show help text.</span>
+<span class="s1">    -h|--help</span>
+<span class="s1">        Show help text.</span>
 
 <span class="s1">DESCRIPTION</span>
-<span class="s1">   Description description description description.</span>
+<span class="s1">    Description description description description.</span>
 
 <span class="s1">AUTHOR</span>
-<span class="s1">  mjnurse.github.io - 2025</span>
+<span class="s1">    mjnurse.github.io - 2025</span>
 <span class="s1">&quot;</span>
 <span class="s1">help_line=&quot;&#39;</span>tbc<span class="s1">&#39;&quot;</span>
 <span class="s1">web_desc_line=&quot;&#39;</span>tbc<span class="s1">&#39;&quot;</span>
@@ -405,24 +415,33 @@ cecho<span class="w"> </span><span class="nv">gre</span><span class="w"> </span>
 <span class="s1">usage=$(echo &quot;Usage: ${tmp%%OPTIONS*}&quot; | tr -d &quot;\n&quot; | sed &quot;s/  */ /g&quot;)</span>
 
 <span class="s1">if [[ &quot;$1&quot; == &quot;&quot; ]]; then</span>
-<span class="s1">  echo &quot;${usage}&quot;</span>
-<span class="s1">  echo &quot;${try}&quot;</span>
-<span class="s1">  exit 1</span>
+<span class="s1">    echo &quot;${usage}&quot;</span>
+<span class="s1">    echo &quot;${try}&quot;</span>
+<span class="s1">    exit 1</span>
 <span class="s1">fi</span>
 
-<span class="s1">if [[ &quot;$1&quot; == &quot;--help&quot; || &quot;$1&quot; == &quot;-h&quot; || &quot;$1&quot; == &quot;?&quot; ]]; then</span>
-<span class="s1">   echo &quot;$help_text&quot;</span>
-<span class="s1">   exit</span>
-<span class="s1">fi</span>
+<span class="s1">case $1 in</span>
+<span class="s1">    -h|--help)</span>
+<span class="s1">        echo &quot;$help_text&quot;</span>
+<span class="s1">        exit</span>
+<span class="s1">        ;;</span>
+<span class="s1">esac</span>
 <span class="s1">&#39;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$tidytmp</span>
 <span class="w">               </span>tail<span class="w"> </span>+2<span class="w"> </span><span class="nv">$f</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$tidytmp</span>
 <span class="w">               </span>cp<span class="w"> </span>-f<span class="w"> </span><span class="nv">$tidytmp</span><span class="w"> </span><span class="nv">$f</span>
-<span class="w">               </span>gvim<span class="w"> </span><span class="nv">$f</span>
+<span class="w">               </span><span class="p">;;</span>
+<span class="w">            </span>v<span class="p">|</span>V<span class="o">)</span>
+<span class="w">               </span>vgim<span class="w"> </span><span class="nv">$f</span>
+<span class="w">               </span><span class="p">;;</span>
+<span class="w">            </span>c<span class="p">|</span>C<span class="o">)</span>
+<span class="w">               </span>code<span class="w"> </span><span class="nv">$f</span>
 <span class="w">               </span><span class="p">;;</span>
 <span class="w">            </span>i<span class="p">|</span>I<span class="o">)</span>
-<span class="w">               </span><span class="k">break</span><span class="p">;;</span>
+<span class="w">               </span><span class="k">break</span>
+<span class="w">               </span><span class="p">;;</span>
 <span class="w">            </span>q<span class="p">|</span>Q<span class="o">)</span>
-<span class="w">               </span>exit<span class="p">;;</span>
+<span class="w">               </span><span class="nb">exit</span>
+<span class="w">               </span><span class="p">;;</span>
 <span class="w">         </span><span class="k">esac</span>
 <span class="w">      </span><span class="k">fi</span>
 <span class="w">   </span><span class="k">fi</span>
@@ -445,7 +464,7 @@ cecho<span class="w"> </span><span class="nv">gre</span><span class="w"> </span>
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: December 16, 2025</p>
+      <p>Last updated: January 02, 2026</p>
     </footer>
 
     <div class="scroll-container">
