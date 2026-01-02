@@ -1130,7 +1130,7 @@
     "id": "161",
     "title": "api-doc - Generates API endpoint documentation in markdown format based on provided parameters, request JSON, and response details.",
     "url": "/linuxbash/script_api-doc_-_generates_api_endpoint_documentation_in_markdown_format_based_on_provided_parameters,_request_json,_and_response_details..html",
-    "content": "```bash !/bin/bash help_line=\"Generate API endpoint documentation in markdown format\" web_desc_line=\"Generates API endpoint documentation in markdown format based on provided parameters, request JSON, and response details.\" function example_desc() { echo \"Example:\" echo echo \"api-doc -n example-api \\\" echo \" -d \\\"This is an API endpoint document generation example.\\\" \\\" echo \" -p \\\"id|UUID|Example id parameter\\\" \\\" echo \" -p \\\"param name|PARAM TYPE|Parameter description\\\" \\\" echo \" -j '{\\\"desc\\\"",
+    "content": "#!/bin/bash help_line=&quot;Generate API endpoint documentation in markdown format&quot; web_desc_line=&quot;Generates API endpoint documentation in markdown format based on provided parameters, request JSON, and response details.&quot; function example_desc() { echo &quot;Example:&quot; echo echo &quot;api-doc -n example-api \\\\&quot; echo &quot; -d \\&quot;This is an API endpoint document generation example.\\&quot; \\\\&quot; echo &quot; -p \\&quot;id|UUID|Example id parameter\\&quot; \\\\&quot; echo ",
     "type": "page"
   },
   {
@@ -1151,7 +1151,7 @@
     "id": "164",
     "title": "bash-opts-example - Example Bash script processing short and long command-line options, including grouped short options.",
     "url": "/linuxbash/script_bash-opts-example_-_example_bash_script_processing_short_and_long_command-line_options,_including_grouped_short_options..html",
-    "content": "```bash !/usr/bin/env bash help_line=\"Example Bash script processing short and long command-line options, including grouped short options.\" web_desc_line=\"Example Bash script processing short and long command-line options, including grouped short options.\" help_text=\"Usage: ${0#*/} [options] Options: -h Show this help message -d Enable debug mode -f FILENAME Specify a file --debug Enable debug mode --help Show this help message --file=FILENAME Specify a file\" function arg_err { echo \"Error: $1\" ",
+    "content": "#!/usr/bin/env bash help_line=&quot;Example Bash script processing short and long command-line options, including grouped short options.&quot; web_desc_line=&quot;Example Bash script processing short and long command-line options, including grouped short options.&quot; help_text=&quot;Usage: ${0#*/} [options] &lt;arguments&gt; Options: -h Show this help message -d Enable debug mode -f FILENAME Specify a file --debug Enable debug mode --help Show this help message --file=FILENAME Specify a file&q",
     "type": "page"
   },
   {
@@ -1312,7 +1312,7 @@
     "id": "187",
     "title": "pwd-gen - Random Password Generator",
     "url": "/linuxbash/script_pwd-gen_-_random_password_generator.html",
-    "content": "```bash !/bin/bash help_text=\" NAME gen-pwd - Random Password Generator using OpenSSL USAGE gen-pwd [options] OPTIONS -l|--length Specify the length of the generated password. Default is 16. -h|--help Show help text. DESCRIPTION This script generates a random password of specified length using OpenSSL. The password includes a mix of uppercase, lowercase, digits, and special characters. AUTHOR Martin N 2025 \" help_line=\"Random Password Generator\" web_desc_line=\"Random Password Generator\" Default ",
+    "content": "#!/bin/bash help_text=&quot; NAME gen-pwd - Random Password Generator using OpenSSL USAGE gen-pwd [options] OPTIONS -l|--length &lt;number&gt; Specify the length of the generated password. Default is 16. -h|--help Show help text. DESCRIPTION This script generates a random password of specified length using OpenSSL. The password includes a mix of uppercase, lowercase, digits, and special characters. AUTHOR Martin N 2025 &quot; help_line=&quot;Random Password Generator&quot; web_desc_line=&quot;Ra",
     "type": "page"
   },
   {

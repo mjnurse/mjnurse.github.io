@@ -91,167 +91,173 @@
       <article class="article">
         <div class="article-body">
           <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script_api-doc_-_Generates_API_endpoint_documentation_in_markdown_format_based_on_provided_parameters,_request_JSON,_and_response_detailscode ~/mjnursemd">api-doc - Generates API endpoint documentation in markdown format based on provided parameters, request JSON, and response details.</a></h1>
-<p>```bash</p>
-<h1 id="binbash">!/bin/bash</h1>
-<p>help_line="Generate API endpoint documentation in markdown format"
-web_desc_line="Generates API endpoint documentation in markdown format based on provided parameters, request JSON, and response details."</p>
-<p>function example_desc() {
-    echo "Example:"
-    echo
-    echo "api-doc -n example-api \"
-    echo "    -d \"This is an API endpoint document generation example.\" \"
-    echo "    -p \"id|UUID|Example id parameter\" \"
-    echo "    -p \"param name|PARAM TYPE|Parameter description\" \"
-    echo "    -j '{\"desc\": \"example request json\", \"value\": 1234}' \"
-    echo "    -r 'CODE - Code Description|Action description' \"
-    echo "    -r '200 - Success|Record created|{\"desc\": \"example response json\", \"value\": 1234}'"
-}
-function usage() {
-    echo "Usage: api-doc -n <api-name> \"
-    echo "               -d <description> \"
-    echo "               [-p <param1>] [-p <param2>] ... \"
-    echo "               [-j <request-json>] \"
-    echo "               [-r <response1>] [-r <response2>] ..."
-}</p>
-<p>if [[ $# == 0 ]]; then
-    usage
-    echo "Try api-doc -h for more information"
-    exit 1
-fi</p>
-<p>case "$1" in
-    -h|--help)
-        usage
-        echo
-        echo "$help_line"
-        echo
-        echo "Options:"
-        echo "  -e|--example      Show an example of how to use the api-doc command"
-        echo "  -n <api-name>     Name of the API endpoint (e.g., example-api)"
-        echo "  -d <description>  Description of the API endpoint"
-        echo "  -p <param>        Parameter in the format 'name|type|description' (can be used multiple times)"
-        echo "  -j <request-json> JSON string representing the request body"
-        echo "  -r <response>     Response in the format 'CODE - Description|Action description|<optional response json>' (can be used multiple times)"
-        echo
-        example_desc</p>
-<div class="codehilite"><pre><span></span><code>    exit
-    ;;
--e|--example)
-    example_desc
-    echo
-    api-doc \
-        -n example-api \
-        -d &quot;This is an API endpoint document generation example.&quot; \
-        -p &quot;id|UUID|Example id parameter&quot; \
-        -p &quot;param name|PARAM TYPE|Parameter description&quot; \
-        -j &#39;{&quot;desc&quot;: &quot;example request json&quot;, &quot;value&quot;: 1234}&#39; \
-        -r &#39;CODE - Code Description|Action description&#39; \
-        -r &#39;200 - Success|Record created|{&quot;desc&quot;: &quot;example response json&quot;, &quot;value&quot;: 1234}&#39;
-    exit
-    ;;
-*)
-    ;;
-</code></pre></div>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 
-<p>esac</p>
-<h1 id="initialize-variables">Initialize variables</h1>
-<p>params=()
-request=""
-responses=()
-desc=""
-name=""</p>
-<h1 id="parse-remaining-command-line-arguments">Parse remaining command-line arguments</h1>
-<p>while [[ $# -gt 0 ]]; do
-    case "$1" in
-        -d)
-            shift
-            if [[ $# -gt 0 ]]; then
-                desc="$1"
-                shift
-            fi
-            ;;
-        -n)
-            shift
-            if [[ $# -gt 0 ]]; then
-                name="$1"
-                shift
-            fi
-            ;;
-        -p)
-            shift
-            if [[ $# -gt 0 ]]; then
-                params+=("$1")
-                shift
-            fi
-            ;;
-        -j)
-            shift
-            if [[ $# -gt 0 ]]; then
-                request="$1"
-                shift
-            fi
-            ;;
-        -r)
-            shift
-            if [[ $# -gt 0 ]]; then
-                responses+=("$1")
-                shift
-            fi
-            ;;
-        *)
-            echo "Unknown option: $1"
-            exit 1
-            ;;
-    esac
-done</p>
-<h1 id="output-parsed-values">Output parsed values</h1>
-<p>echo
-echo "${name}" | sed "s/-/ /g; s/\b(.)/\U\1/g; s/^/## API: /; s/$/: `${name}`  →  `JSON`/"
-echo
-echo "$desc"
-echo
-echo "### Request"
-echo
-if [[ "$params" != "" ]]; then
-    for p in "${params[@]}"; do
-        echo "$p" | sed "s/|/:/; s/|/` - /; s/^/- `/"
-        echo
-    done
-fi
-if [[ "$request" != "" ]]; then
-    echo "```json"
-    echo "$request" | jq
-    echo "```"
-    echo
-fi
-echo "### Response"
-echo
-if [[ "$responses" != "" ]]; then
-    for r in "${responses[@]}"; do
-        echo "$r" | sed "s/|/` - /; s/^/- `/; s/|.<em>//"
-        json="$(echo $r | sed 's/.</em>|//')"
-        if [[ "${json:0:1}" == "{" ]]; then
-            echo "$json" | jq
-        fi
-        echo
-    done
-fi
-echo "## Exceptions"
-echo
-if [[ "$params" != "" ]]; then
-    for param in "${params[@]}"; do
-        p="$(echo $param | sed 's/|.*//')"
-        if [[ "$p" == "id" ]]; then
-            echo "- If `$p` is passed and does not exist, return `404 - Not Found`: No record found for id: <id>."
-            echo
-        fi
-        echo "- If $p is passed "
-        echo
-    done
-fi
-if [[ "$request" != "" ]]; then
-    echo "- If the request contains a `???` which already exists for the specified ???, return: `409 - Conflict`: ????: <value> already exists."
-fi
-echo```</p>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Generate API endpoint documentation in markdown format&quot;</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Generates API endpoint documentation in markdown format based on provided parameters, request JSON, and response details.&quot;</span>
+
+<span class="k">function</span><span class="w"> </span>example_desc<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Example:&quot;</span>
+<span class="w">    </span><span class="nb">echo</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;api-doc -n example-api \\&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;    -d \&quot;This is an API endpoint document generation example.\&quot; \\&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;    -p \&quot;id|UUID|Example id parameter\&quot; \\&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;    -p \&quot;param name|PARAM TYPE|Parameter description\&quot; \\&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;    -j &#39;{\&quot;desc\&quot;: \&quot;example request json\&quot;, \&quot;value\&quot;: 1234}&#39; \\&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;    -r &#39;CODE - Code Description|Action description&#39; \\&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;    -r &#39;200 - Success|Record created|{\&quot;desc\&quot;: \&quot;example response json\&quot;, \&quot;value\&quot;: 1234}&#39;&quot;</span>
+<span class="o">}</span>
+<span class="k">function</span><span class="w"> </span>usage<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Usage: api-doc -n &lt;api-name&gt; \\&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;               -d &lt;description&gt; \\&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;               [-p &lt;param1&gt;] [-p &lt;param2&gt;] ... \\&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;               [-j &lt;request-json&gt;] \\&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;               [-r &lt;response1&gt;] [-r &lt;response2&gt;] ...&quot;</span>
+<span class="o">}</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span>usage
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Try api-doc -h for more information&quot;</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="k">case</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="k">in</span>
+<span class="w">    </span>-h<span class="p">|</span>--help<span class="o">)</span>
+<span class="w">        </span>usage
+<span class="w">        </span><span class="nb">echo</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_line</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="nb">echo</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Options:&quot;</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;  -e|--example      Show an example of how to use the api-doc command&quot;</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;  -n &lt;api-name&gt;     Name of the API endpoint (e.g., example-api)&quot;</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;  -d &lt;description&gt;  Description of the API endpoint&quot;</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;  -p &lt;param&gt;        Parameter in the format &#39;name|type|description&#39; (can be used multiple times)&quot;</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;  -j &lt;request-json&gt; JSON string representing the request body&quot;</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;  -r &lt;response&gt;     Response in the format &#39;CODE - Description|Action description|&lt;optional response json&gt;&#39; (can be used multiple times)&quot;</span>
+<span class="w">        </span><span class="nb">echo</span>
+<span class="w">        </span>example_desc
+
+<span class="w">        </span><span class="nb">exit</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="w">    </span>-e<span class="p">|</span>--example<span class="o">)</span>
+<span class="w">        </span>example_desc
+<span class="w">        </span><span class="nb">echo</span>
+<span class="w">        </span>api-doc<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>-n<span class="w"> </span>example-api<span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>-d<span class="w"> </span><span class="s2">&quot;This is an API endpoint document generation example.&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>-p<span class="w"> </span><span class="s2">&quot;id|UUID|Example id parameter&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>-p<span class="w"> </span><span class="s2">&quot;param name|PARAM TYPE|Parameter description&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>-j<span class="w"> </span><span class="s1">&#39;{&quot;desc&quot;: &quot;example request json&quot;, &quot;value&quot;: 1234}&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>-r<span class="w"> </span><span class="s1">&#39;CODE - Code Description|Action description&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>-r<span class="w"> </span><span class="s1">&#39;200 - Success|Record created|{&quot;desc&quot;: &quot;example response json&quot;, &quot;value&quot;: 1234}&#39;</span>
+<span class="w">        </span><span class="nb">exit</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="w">    </span>*<span class="o">)</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="k">esac</span>
+
+<span class="c1"># Initialize variables</span>
+<span class="nv">params</span><span class="o">=()</span>
+<span class="nv">request</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="nv">responses</span><span class="o">=()</span>
+<span class="nv">desc</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="nv">name</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+
+<span class="c1"># Parse remaining command-line arguments</span>
+<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="k">in</span>
+<span class="w">        </span>-d<span class="o">)</span>
+<span class="w">            </span><span class="nb">shift</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                </span><span class="nv">desc</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="w">                </span><span class="nb">shift</span>
+<span class="w">            </span><span class="k">fi</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>-n<span class="o">)</span>
+<span class="w">            </span><span class="nb">shift</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="w">                </span><span class="nb">shift</span>
+<span class="w">            </span><span class="k">fi</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>-p<span class="o">)</span>
+<span class="w">            </span><span class="nb">shift</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                </span><span class="nv">params</span><span class="o">+=(</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="o">)</span>
+<span class="w">                </span><span class="nb">shift</span>
+<span class="w">            </span><span class="k">fi</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>-j<span class="o">)</span>
+<span class="w">            </span><span class="nb">shift</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                </span><span class="nv">request</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="w">                </span><span class="nb">shift</span>
+<span class="w">            </span><span class="k">fi</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>-r<span class="o">)</span>
+<span class="w">            </span><span class="nb">shift</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                </span><span class="nv">responses</span><span class="o">+=(</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="o">)</span>
+<span class="w">                </span><span class="nb">shift</span>
+<span class="w">            </span><span class="k">fi</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>*<span class="o">)</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Unknown option: </span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">    </span><span class="k">esac</span>
+<span class="k">done</span>
+
+<span class="c1"># Output parsed values</span>
+<span class="nb">echo</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/-/ /g; s/\b\(.\)/\U\1/g; s/^/## API: /; s/</span>$<span class="s2">/: \`</span><span class="si">${</span><span class="nv">name</span><span class="si">}</span><span class="s2">\`  →  \`JSON\`/&quot;</span>
+<span class="nb">echo</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$desc</span><span class="s2">&quot;</span>
+<span class="nb">echo</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;### Request&quot;</span>
+<span class="nb">echo</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$params</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>p<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">params</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$p</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/|/:/; s/|/\` - /; s/^/- \`/&quot;</span>
+<span class="w">        </span><span class="nb">echo</span>
+<span class="w">    </span><span class="k">done</span>
+<span class="k">fi</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$request</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;\`\`\`json&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$request</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;\`\`\`&quot;</span>
+<span class="w">    </span><span class="nb">echo</span>
+<span class="k">fi</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;### Response&quot;</span>
+<span class="nb">echo</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$responses</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>r<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">responses</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$r</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/|/\` - /; s/^/- \`/; s/|.*//&quot;</span>
+<span class="w">        </span><span class="nv">json</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$r</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/.*|//&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">json</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;{&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$json</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq
+<span class="w">        </span><span class="k">fi</span>
+<span class="w">        </span><span class="nb">echo</span>
+<span class="w">    </span><span class="k">done</span>
+<span class="k">fi</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;## Exceptions&quot;</span>
+<span class="nb">echo</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$params</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>param<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">params</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">        </span><span class="nv">p</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$param</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/|.*//&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$p</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;id&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;- If \`</span><span class="nv">$p</span><span class="s2">\` is passed and does not exist, return \`404 - Not Found\`: No record found for id: &lt;id&gt;.&quot;</span>
+<span class="w">            </span><span class="nb">echo</span>
+<span class="w">        </span><span class="k">fi</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;- If </span><span class="nv">$p</span><span class="s2"> is passed &quot;</span>
+<span class="w">        </span><span class="nb">echo</span>
+<span class="w">    </span><span class="k">done</span>
+<span class="k">fi</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$request</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;- If the request contains a \`???\` which already exists for the specified ???, return: \`409 - Conflict\`: ????: &lt;value&gt; already exists.&quot;</span>
+<span class="k">fi</span>
+<span class="nb">echo</span>
+</code></pre></div>
         </div>
       </article>
     </main>
