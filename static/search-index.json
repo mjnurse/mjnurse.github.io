@@ -148,9 +148,9 @@
   },
   {
     "id": "21",
-    "title": "Notes",
+    "title": "Miscellaneous Notes",
     "url": "/notes/miscellaneous_notes.html",
-    "content": "Notes The notes captured in the Linux notes tool = n. @esql &#39;SELECT id.value FROM &quot;quantexa-mdm-example-entity-store-business-all-data&quot;&#39; # Elasticsearch Excel: Open Dropdown in Cell - ALT-DOWN_ARROW code: Enable word wrap - ALT+Z code: Open Settings - CTRL+, find . -name &quot;*.jar&quot; -exec du -h {} \\; find . -type f -mtime +90 # Find files last modified at least 90 days ago git checkout tags/&lt;tag name&gt; # checkout a git tag. postgres: ALTER ROLE &lt;username&gt; SET s",
+    "content": "Miscellaneous Notes The notes captured in the Linux notes tool = n. @esql &#39;SELECT id.value FROM &quot;quantexa-mdm-example-entity-store-business-all-data&quot;&#39; # Elasticsearch Excel: Open Dropdown in Cell - ALT-DOWN_ARROW code: Enable word wrap - ALT+Z code: Open Settings - CTRL+, find . -name &quot;*.jar&quot; -exec du -h {} \\; find . -type f -mtime +90 # Find files last modified at least 90 days ago git checkout tags/&lt;tag name&gt; # checkout a git tag. postgres: ALTER ROLE &lt;user",
     "type": "page"
   },
   {
