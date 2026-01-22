@@ -149,12 +149,14 @@
 <span class="w">  </span>*<span class="o">)</span>
 <span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;NOTES&quot;</span>
 <span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;-----&quot;</span>
-<span class="w">    </span>grep<span class="w"> </span>--color<span class="o">=</span>auto<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$nf</span><span class="s2">&quot;</span>
+<span class="w">    </span>grep<span class="w">  </span>--ignore-case<span class="w"> </span>--color<span class="o">=</span>auto<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$nf</span><span class="s2">&quot;</span>
 <span class="w">    </span><span class="nb">exit</span>
 <span class="w">    </span><span class="p">;;</span>
 <span class="k">esac</span>
 
 sort<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$nf</span><span class="s2">&quot;</span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;/^$/d&#39;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$nf</span><span class="s2">&quot;</span>.tmp
+
+<span class="c1"># Group lines by their first word, inserting a blank line whenever the first word changes.</span>
 awk<span class="w"> </span><span class="s1">&#39;</span>
 <span class="s1">    {</span>
 <span class="s1">        split($0, words, &quot; &quot;)</span>
@@ -169,7 +171,7 @@ awk<span class="w"> </span><span class="s1">&#39;</span>
 <span class="s1">            print</span>
 <span class="s1">        }</span>
 <span class="s1">    }&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$nf</span><span class="s2">&quot;</span>.tmp<span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$nf</span><span class="s2">&quot;</span>
-<span class="w">    </span>rm<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$nf</span><span class="s2">&quot;</span>.tmp
+rm<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$nf</span><span class="s2">&quot;</span>.tmp
 </code></pre></div>
         </div>
       </article>
@@ -188,7 +190,7 @@ awk<span class="w"> </span><span class="s1">&#39;</span>
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: January 02, 2026</p>
+      <p>Last updated: January 12, 2026</p>
     </footer>
 
     <div class="scroll-container">

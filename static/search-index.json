@@ -505,163 +505,163 @@
   },
   {
     "id": "72",
+    "title": "Shortcut Keys",
+    "url": "/other/shortcut_keys.html",
+    "content": "Note: This page is automatically generated using sck Bash ! | !! | Run last command | | !$ | The last word of the previous command (same as ALT+.) | | !$:p | Print out the word that !$ would substitute | | !* | The previous command except for the first word (e.g., if you type find some_file.txt /, then ! would give you some_file.txt /) | | !*:p | Print out what ! would substitute | | !blah | Run the most recent command that starts with blah | | !blah:p | Print out the command that !blah would ru",
+    "type": "page"
+  },
+  {
+    "id": "73",
     "title": "What Is Kafka?",
     "url": "/other/kafka.html",
     "content": "Overview \"A distributed event streaming platform capable of handling trillions of events a day. Initially conceived as a messaging queue, Kafka is based on an abstraction of a distributed commit log. Since being created and open sourced by LinkedIn in 2011, Kafka has quickly evolved from messaging queue to a full-fledged event streaming platform.\" Topic A Topic is a collection of related messages / events. Reading from a Topic does not remove / delete the message from he Topic. Think of a Topic ",
     "type": "page"
   },
   {
-    "id": "73",
+    "id": "74",
     "title": "Anonymous Functions - Functions as a Parameter",
     "url": "/other/scala/anonymous_functions_-_functions_as_a_parameter.html",
     "content": "Anonymous Functions def sum(f: Int =&gt; Int, a: Int, b: Int): Int = if (a == b) f(a) else f(a) + sum(f, a+1, b) Currying is defining a function piecewise one parameter section after another. def sum(f: Int =&gt; Int)(a: Int, b: Int): Int = if (a &gt; b) 0 else f(a) + sum(f)(a+1, b) Passing a function into a function scala&gt; def head(word: String, length: Int): String = {word.substring(0, length)} head: (word: String, length: Int)String scala&gt; // Define a function which returns a function w",
     "type": "page"
   },
   {
-    "id": "74",
+    "id": "75",
     "title": "Tail Recursion",
     "url": "/other/scala/tail_recursion.html",
     "content": "A tail recursive function can reuse the stack frame - ie reuse the same area of memory to hold its current state for each recursive call. A non tail recursive function needs to use additional memory for each recursive call. A non tail recursive function applies logic to the result returned from each recursive iteration. This means that the state of every iteration need to be maintained. A non tail recursive function should be avoided where the number of recursive iterations is large. Not Tail Re",
     "type": "page"
   },
   {
-    "id": "75",
+    "id": "76",
     "title": "Set Default User For WSL Ubuntu",
     "url": "/other/wsl/reset_user_password_for_wsl_ubuntu.html",
     "content": "To do this you need to switch the default user for WSL Ubuntu to root. WSL will not promot for a root password. Run WSL, update the user password and then reset the default user back to your username. The command depend on the version of Ubuntu you have installed. Press the windows key and type \"Ubuntu\" and you should see the Unbuntu app listed which may include a version number. If so, add this to the end on the ubuntu command. Step 1 - Update WSL Ubuntu Default User to Root In a windows cmd sh",
     "type": "page"
   },
   {
-    "id": "76",
+    "id": "77",
     "title": "Set Default User For WSL Ubuntu",
     "url": "/other/wsl/set_default_user_for_wsl_ubuntu.html",
     "content": "Useful if WSL switches to root as the default user. The command depend on the version of Ubuntu you have installed. Press the windows key and type \"Ubuntu\" and you should see the Unbuntu app listed which may include a version number. If so, add this to the end on the ubuntu command. ubuntu config --default-user martin # Or for, for example, version 22.04: ubuntu2204 -- default-user martin",
     "type": "page"
   },
   {
-    "id": "77",
+    "id": "78",
     "title": "Shrink WSL Virtual Disk",
     "url": "/other/wsl/shrink_wsl_virtual_disk.html",
     "content": "I noticed a very large (32GB) file: C:\\Users\\...\\AppData\\Local\\Docker\\wsl\\data\\ext4.vhdx Before doing anything it might be sensible to back the disk etc. up. 1. First check is WSL is running and if so ternimate it Using Windows Powershell: &gt; wsl.exe --list --verbose NAME STATE VERSION * Ubuntu Running 1 docker-desktop-data Running 2 docker-desktop Running 2 Terminate the running WSL(s): &gt; wsl.exe --terminate Ubuntu 2. Use diskpart to shrink the disk partition Using Windows Powershell: DISK",
     "type": "page"
   },
   {
-    "id": "78",
+    "id": "79",
     "title": "Silence the Bell in Bash",
     "url": "/other/wsl/silence_the_bell_in_bash.html",
     "content": "Running Ubuntu / bash in WSL. Every time I TAB to auto-complete the Bell rings. Very annoying. To disable the Bell in bash you need to uncomment (or add if not already there) the line set bell-style none in the file /etc/inputrc.",
     "type": "page"
   },
   {
-    "id": "79",
+    "id": "80",
     "title": "WSL Allow chmod On Windows Folders",
     "url": "/other/wsl/wsl_allow_chmod_on_windows_folders.html",
     "content": "Create or edit a file named /etc/wsl.conf and edit it to contain the following. Note I also move the mount point of the windows C drive from /mnt/c to /c. [automount] enabled = true root = / options = &quot;metadata,umask=22,fmask=11&quot; Reboot WSL wsl.exe --shutdown",
     "type": "page"
   },
   {
-    "id": "80",
+    "id": "81",
     "title": "WSL Move C Drive to Root Directory",
     "url": "/other/wsl/wsl_move_c_drive_to_root_directory.html",
     "content": "sudo mkdir -p /c Update /etc/fstab; requires su. sudo sh -c \"echo '/mnt/c /c none bind' &gt;&gt; /etc/fstab\" Reload fstab; requires su. sudo mount -a",
     "type": "page"
   },
   {
-    "id": "81",
+    "id": "82",
     "title": "Window WSL Change Password",
     "url": "/other/wsl/window_wsl_change_password.html",
     "content": "Close any Ubuntu windows. Open a cmd window - run as administrator. Run: ubuntu config --default-user root. Open Ubuntu. Will be logged in as root. To change root password: passwd. To change password of another user passwd martin. Close Ubuntu window. Run: ubuntu config --default-user martin.",
     "type": "page"
   },
   {
-    "id": "82",
+    "id": "83",
     "title": "Oracle",
     "url": "/other/oracle/dbms_metadata.get_ddl.html",
     "content": "DBMS_METADATA.get_ddl Defaults -- -------------------------------------------------------------------------------------------------------------- -- Paramtr: BODY -- Objects: PACKAGE: If TRUE, output the package body. -- Objects: TYPE: If TRUE, output the type body. -- Default: TRUE. -- -------------------------------------------------------------------------------------------------------------- exec dbms_metadata.set_transform_param(dbms_metadata.session_transform, &#39;BODY&#39;, TRUE); -- ----",
     "type": "page"
   },
   {
-    "id": "83",
+    "id": "84",
     "title": "Oracle",
     "url": "/other/oracle/dynamic_sql_for_loop.html",
     "content": "A Dynamic SQL For Loop DECLARE TYPE name_salary_rt IS RECORD ( ( name VARCHAR2 (1000) , salary NUMBER ); TYPE name_salary_aat IS TABLE OF name_salary_rt INDEX BY PLS_INTEGER; l_employees name_salary_aat; BEGIN EXECUTE IMMEDIATE q&#39;[SELECT first_name || &#39; &#39; || last_name, salary FROM hr.employees ORDER BY salary desc]&#39; BULK COLLECT INTO l_employees; FOR indx IN 1 .. l_employees.COUNT LOOP DBMS_OUTPUT.put_line (l_employees (indx).name); END LOOP; END;",
     "type": "page"
   },
   {
-    "id": "84",
+    "id": "85",
     "title": "Oracle",
     "url": "/other/oracle/oracle_cheat_sheet.html",
     "content": "Oracle Cheat Sheet Redirect Multiple Lines To SQLPLUS sqlplus -s /NOLOG &lt;&lt;EOF CONN user/pwd@//0.0.0.0.0:1521/ORCL SELECT 1 FROM dual; EOF Create a User With DBA Role &gt; create user mjn identified by mjn; User created. &gt; GRANT CONNECT, RESOURCE, DBA TO mjn; Grant succeeded. &gt; GRANT CREATE SESSION TO mjn; Grant succeeded. &gt; GRANT UNLIMITED TABLESPACE TO mjn; Grant succeeded. SQLPLUS Variables Using Substitution Variables A character substitution variable can be up to 240 bytes lon",
     "type": "page"
   },
   {
-    "id": "85",
+    "id": "86",
     "title": "Oracle Pivot Column to String",
     "url": "/other/oracle/oracle_pivot_column_to_string.html",
     "content": "SELECT dept_num , LISTAGG( emp_name, &#39;,&#39; ) WITHIN GROUP (ORDER BY emp_name) AS emps FROM emp GROUP BY dept_num ;",
     "type": "page"
   },
   {
-    "id": "86",
+    "id": "87",
     "title": "Oracle Window Function",
     "url": "/other/oracle/oracle_window_functions.html",
     "content": "CREATE TABLE mjn (g NUMBER, n NUMBER, v VARCHAR2(8)); INSERT INTO mjn VALUES (1, 1, &#39;a&#39;); INSERT INTO mjn VALUES (1, 2, &#39;b&#39;); INSERT INTO mjn VALUES (1, 6, &#39;c&#39;); INSERT INTO mjn VALUES (1, 7, &#39;d&#39;); INSERT INTO mjn VALUES (1, 9, &#39;e&#39;); INSERT INTO mjn VALUES (2, 3, &#39;a&#39;); INSERT INTO mjn VALUES (2, 4, &#39;b&#39;); INSERT INTO mjn VALUES (2, 8, &#39;c&#39;); INSERT INTO mjn VALUES (2, 8, &#39;d&#39;); SELECT N , LAG(N,1,NULL) OVER (PARTITION BY g ORDE",
     "type": "page"
   },
   {
-    "id": "87",
+    "id": "88",
     "title": "Oracle and Postgres Schema Copy Process",
     "url": "/other/oracle/oracle_and_postgres_schema_copy_process.html",
     "content": "I liked these diagrams (drawn in DrawIO). First time I've used the 'sketch' look. Oracle Specific Solution The limitations on access and control for the Oracle Databases mean that using the Oracle 'export' and 'import' (database dump) utility is not practical. Oracle provides a data dictionary and stored procedure which will generate the DDL needed to create database objects. However, [this company] does not allow access to the \"all database\" data dictionary views, they only allow access to the ",
     "type": "page"
   },
   {
-    "id": "88",
+    "id": "89",
     "title": "Quick and Easy Creation of an Oracle Database in Docker",
     "url": "/other/oracle/quick_and_easy_creation_of_an_oracle_database_in_docker.html",
     "content": "I needed an Oracle database to demonstrate to someone that Oracle does not lock a table for read. A container is an ideal place to do this. Google led me to a container image alexeiled/docker-oracle-xe-11g. An old version but, xe is light weight, and does what I need. For a full set of Oracle containers Oracle has a GitHub repository: github:oracle. I'm running Docker Desktop on Windows 10. Get the Image &gt; docker pull alexeiled/docker-oracle-xe-11g Create a Container Open two network ports, o",
     "type": "page"
   },
   {
-    "id": "89",
+    "id": "90",
     "title": "Oracle",
     "url": "/other/oracle/using_a_recursive_query_to_determine_correct_order_to_drop_tables.html",
     "content": "Using A Recursive Query To Determine Correct Order To Drop Tables Also relevant for creating tables (but reverse the order). SELECT child_table , MAX(level) as lowest_depth FROM ( SELECT child.table_name AS child_table , parent.table_name AS parent_table FROM user_constraints child LEFT JOIN user_constraints parent ON ( parent.r_constraint_name = child.constraint_name ) ) CONNECT BY PRIOR child_table = parent_table GROUP BY child_table ORDER BY lowest_depth;",
     "type": "page"
   },
   {
-    "id": "90",
+    "id": "91",
     "title": "One Liner to Run SQL Over a CSV File Using Sqlite",
     "url": "/other/sqlite/one_liner_to_run_sql_over_a_csv_file_using_sqlite.html",
     "content": "Assume we have a cvs file people.csv: &gt; cat people.csv name,sex,age martin,m,21 paul,m,50 dave,m,58 sarah,f,33 anna,f,53 We can run a SQL command on this file using a single line (Linux) sqlite3 command: &gt; sqlite3 :memory: \\ # Use an in memory database -cmd &#39;.mode csv&#39; \\ # Switch to csv mode for import -cmd &#39;.import &lt;filename&gt; &lt;tablename&gt;&#39; \\ # Import file as csv -cmd &#39;.mode column&#39; # Switch to column mode for output -header \\ # Show header for output &#3",
     "type": "page"
   },
   {
-    "id": "91",
+    "id": "92",
     "title": "Recursive Query to Navigate a Tree",
     "url": "/other/sqlite/recursive_query_to_navigate_a_tree.html",
     "content": "An example of a recursive query to navigate a tree. For the tree I chose a small part of the Royal Family Tree. Step 1 - Create the parent child records in a table: CREATE TABLE family(child, parent); INSERT INTO family VALUES (&#39;ElizabethI&#39;, &#39;&#39;); INSERT INTO family VALUES (&#39;ElizabethII&#39;, &#39;ElizabethI&#39;); INSERT INTO family VALUES (&#39;Charles&#39;, &#39;ElizabethII&#39;); INSERT INTO family VALUES (&#39;Anne&#39;, &#39;ElizabethII&#39;); INSERT INTO family VALUES (",
     "type": "page"
   },
   {
-    "id": "92",
+    "id": "93",
     "title": "sqlite Generate Data using a Recursive Query",
     "url": "/other/sqlite/sqlite_generate_data_using_a_recursive_query.html",
     "content": "A query to return 100 records. WITH RECURSIVE rec(x) AS (VALUES(1) UNION ALL SELECT x+1 FROM rec WHERE x&lt;100) SELECT x, ABS(RANDOM()) % 1000 FROM rec; A more complex example using two record generators. WITH RECURSIVE ent(e) AS (VALUES(1) UNION ALL SELECT e+1 FROM ent WHERE e&lt;10), rec(r) AS (VALUES(1) UNION ALL SELECT r+1 FROM rec WHERE r&lt;100) SELECT e, r FROM ent JOIN rec;",
     "type": "page"
   },
   {
-    "id": "93",
+    "id": "94",
     "title": "sqlite Pivot Columns to a String",
     "url": "/other/sqlite/sqlite_pivot_columns_to_a_string.html",
     "content": "An example of the sqlite GROUP_CONCAT function to pivot column values to a string. .headers on .mode columns CREATE TABLE t (c1 INT, c2 INT); INSERT INTO t VALUES (1, &#39;a&#39;); INSERT INTO t VALUES (1, &#39;b&#39;); INSERT INTO t VALUES (2, &#39;a&#39;); INSERT INTO t VALUES (2, &#39;b&#39;); INSERT INTO t VALUES (2, &#39;c&#39;); SELECT c1 , GROUP_CONCAT(c2) AS str FROM t GROUP BY c1; results ======= c1 str ---------- ---------- 1 a,b 2 a,b,c Note: This is the same as the Oracle LISTAGG fun",
-    "type": "page"
-  },
-  {
-    "id": "94",
-    "title": "Shortcut Keys",
-    "url": "/other/shortcutkeys/shortcut_keys.html",
-    "content": "Note: This page is automatically generated using sck Bash ! | !! | Run last command | | !$ | The last word of the previous command (same as ALT+.) | | !$:p | Print out the word that !$ would substitute | | !* | The previous command except for the first word (e.g., if you type find some_file.txt /, then ! would give you some_file.txt /) | | !*:p | Print out what ! would substitute | | !blah | Run the most recent command that starts with blah | | !blah:p | Print out the command that !blah would ru",
     "type": "page"
   },
   {
@@ -1254,251 +1254,265 @@
   },
   {
     "id": "179",
+    "title": "imp - Improve text using Claude AI",
+    "url": "/linuxbash/script_imp_-_improve_text_using_claude_ai.html",
+    "content": "#!/usr/bin/env bash help_text=&quot; NAME imp - Improve text using Claude AI. USAGE imp [options] [text] OPTIONS -h|--help Show help text. DESCRIPTION A text improvement tool that uses Claude AI to enhance clarity, tone, grammar, and flow while preserving the original meaning. If text is provided as an argument, it will be improved and the result copied to the clipboard, then the script exits. If no text is provided, the script enters interactive mode, repeatedly prompting for text to improve un",
+    "type": "page"
+  },
+  {
+    "id": "180",
     "title": "lf - A script to recursively list folders and show folder details",
     "url": "/linuxbash/script_lf_-_a_script_to_recursively_list_folders_and_show_folder_details.html",
     "content": "#!/usr/bin/env bash help_text=&quot; NAME lf - A script to recursively list folders and show folder details. USAGE lf [options] &lt;directory (. for current directory)&gt; OPTIONS -m|maxdepth &lt;number&gt; Max directory depth. -t|--filetypecount Show a count of files by file type. -h|--help Show help text. DESCRIPTION A script to recursively list folders, show folder details (size and number of files) and optionally a count of files by file size. AUTHOR mjnurse.github.io - 2020 &quot; help_line",
     "type": "page"
   },
   {
-    "id": "180",
+    "id": "181",
     "title": "n - Record and query notes",
     "url": "/linuxbash/script_n_-_record_and_query_notes.html",
     "content": "#!/usr/bin/env bash help_text=&quot; NAME n - Notes USAGE n [options] &lt;text - consider wrapping in quotes&gt; OPTIONS -h|--help Show this help message. -a|--add Add the &lt;text&gt; as a new note. -e|--edit Edit the notes text file. DESCRIPTION Record and query notes. AUTHOR mjnurse.github.io - 2023 &quot; help_line=&quot;Record and query notes&quot; web_desc_line=&quot;Record and query notes&quot; nf=~/.notes.txt if [[ &quot;$1&quot; == &quot;&quot; ]]; then echo &#39; _ _ _&#39; echo &#39;|",
     "type": "page"
   },
   {
-    "id": "181",
+    "id": "182",
     "title": "optional-step-run - A script which prompts a user to decide if a step should be run",
     "url": "/linuxbash/script_optional-step-run_-_a_script_which_prompts_a_user_to_decide_if_a_step_should_be_run.html",
     "content": "#!/usr/bin/env bash help_text=&quot; NAME optional-step-run - A template script which prompts a user to decide if steps should be run. USAGE optional-step-run [options] [&lt;start step number&gt;] OPTIONS -l|--list List the steps only. -h|--help Show help text. DESCRIPTION A template script which prompts a user to decide if steps should be run. An optional start step number can be passed in and all steps before this are automatically skipped. AUTHOR mjnurse.github.io - 2023 &quot; help_line=&quo",
     "type": "page"
   },
   {
-    "id": "182",
+    "id": "183",
     "title": "or - Connect to oracle using sqlplus",
     "url": "/linuxbash/script_or_-_connect_to_oracle_using_sqlplus.html",
     "content": "#!/usr/bin/env bash help_text=&quot; NAME or - Connect to oracle using sqlplus. USAGE or DESCRIPTION Connect to oracle using sqlplus. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;Connect to oracle using sqlplus&quot; web_desc_line=&quot;Connect to oracle using sqlplus&quot; export ORACLE_PATH=.:/home/martin/code/oracle:/home/martin/code/private/oracle rlwrap /home/martin/oracle_client/product/11.2.0/client_1/bin/sqlplus.exe /NOLOG #rlwrap sqlplus /NOLOG",
     "type": "page"
   },
   {
-    "id": "183",
+    "id": "184",
     "title": "pack - Compresses and converts files base64 to copy and paste into a command line session",
     "url": "/linuxbash/script_pack_-_compresses_and_converts_files_base64_to_copy_and_paste_into_a_command_line_session.html",
     "content": "#!/usr/bin/env bash help_text=&quot; NAME pack - Compresses and converts files base64 to copy / paste into a command line session. USAGE pack [options] &lt;filename(s)&gt; OPTIONS -h|--help Show help text. -n|--name Specify a name from the pack file. -s|--silent Suppress terminal output. DESCRIPTION Compresses one or more files and converts these to base64 to copy and paste into a command line session with commands to convert these back to the original file. The output is also written to a file,",
     "type": "page"
   },
   {
-    "id": "184",
+    "id": "185",
     "title": "parameters-function - Contains a function to parse and print details about script parameters",
     "url": "/linuxbash/script_parameters-function_-_contains_a_function_to_parse_and_print_details_about_script_parameters.html",
     "content": "#!/usr/bin/env bash help_text=&quot; NAME parameters-function USAGE print_parameters DESCRIPTION A function to parse and print details about script parameters. AUTHOR mjnurse.github.io - 2022 &quot; help_line=&quot;Contains a function to parse and print details about script parameters&quot; web_desc_line=&quot;Contains a function to parse and print details about script parameters&quot; # Parses and prints script parameter details between two comments: # &quot;# Start Parse Script Parameters&quot",
     "type": "page"
   },
   {
-    "id": "185",
+    "id": "186",
     "title": "parq-to-json - Example Bash Script",
     "url": "/linuxbash/script_parq-to-json_-_example_bash_script.html",
     "content": "#!/usr/bin/env bash help_text=&quot; NAME bash-func - One line description. USAGE bash-func [options] &lt;parameters&gt; OPTIONS -x Description... -h|--help Show help text. DESCRIPTION Description description description description. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;tbc&quot; web_desc_line=&quot;Example Bash Script&quot; try=&quot;Try ${0##*/} -h for more information&quot; tmp=&quot;${help_text##*USAGE}&quot; usage=$(echo &quot;Usage: ${tmp%%OPTIONS*}&quot; | tr -d &quot;\\n",
     "type": "page"
   },
   {
-    "id": "186",
+    "id": "187",
     "title": "parq - A bash utility for viewing Apache Parquet files in JSON, CSV, or schema format",
     "url": "/linuxbash/script_parq_-_a_bash_utility_for_viewing_apache_parquet_files_in_json,_csv,_or_schema_format.html",
     "content": "#!/usr/bin/env bash help_text=&quot; NAME parq - Read and display parquet files in various formats. USAGE parq [options] &lt;parquet-file&gt; OPTIONS -a|--all Display all records (default shows 10 records). -c|--csv Output data in CSV format (default is JSON). -h|--help Show help text. -n|--num &lt;number&gt; Specify number of records to display. -s|--schema Display the parquet file schema only. DESCRIPTION parq is a utility for reading Apache Parquet files and displaying their contents in diffe",
     "type": "page"
   },
   {
-    "id": "187",
+    "id": "188",
     "title": "pwd-gen - Random Password Generator",
     "url": "/linuxbash/script_pwd-gen_-_random_password_generator.html",
     "content": "#!/usr/bin/env bash help_text=&quot; NAME gen-pwd - Random Password Generator using OpenSSL USAGE gen-pwd [options] OPTIONS -l|--length &lt;number&gt; Specify the length of the generated password. Default is 16. -h|--help Show help text. DESCRIPTION This script generates a random password of specified length using OpenSSL. The password includes a mix of uppercase, lowercase, digits, and special characters. AUTHOR Martin N 2025 &quot; help_line=&quot;Random Password Generator&quot; web_desc_line=",
     "type": "page"
   },
   {
-    "id": "188",
+    "id": "189",
+    "title": "q-wbs - Create a new WBS from a template",
+    "url": "/linuxbash/script_q-wbs_-_create_a_new_wbs_from_a_template.html",
+    "content": "#!/usr/bin/env bash help_text=&quot; usage: q-wbs [options] &lt;wbs_filename&gt; -h : This help text. Creates a new WBS in the current directory with the given filename. &quot; help_line=&quot;Create a new WBS from a template&quot; web_desc_line=&quot;Create a new WBS from a template&quot; case $1 in -h|--help) echo &quot;$help_text&quot; exit ;; esac if [[ &quot;$1&quot; == &quot;&quot; ]]; then echo &quot;$help_text&quot; exit 1 fi new_file=&quot;$1&quot; if [[ &quot;$new_file&quot; =~ [^a-zA-",
+    "type": "page"
+  },
+  {
+    "id": "190",
     "title": "rep - Repeats a command each time you press return",
     "url": "/linuxbash/script_rep_-_repeats_a_command_each_time_you_press_return.html",
     "content": "#!/usr/bin/env bash help_text=&quot; usage: rep [options] &lt;command&gt; -h : This help text. &quot; help_line=&quot;Repeats a command each time you press return&quot; web_desc_line=&quot;Repeats a command each time you press return&quot; case $1 in -h|--help) echo &quot;$help_text&quot; exit ;; esac if [[ &quot;$1&quot; == &quot;&quot; ]]; then echo &quot;Error: no command provided&quot; echo &quot;$help_text&quot; exit 1 fi while [[ 1 ]]; do $* echo echo &quot;--------------------------------",
     "type": "page"
   },
   {
-    "id": "189",
+    "id": "191",
     "title": "sl - An interactive SQLite shell wrapper with enhanced CLI features",
     "url": "/linuxbash/script_sl_-_an_interactive_sqlite_shell_wrapper_with_enhanced_cli_features.html",
     "content": "#!/usr/bin/env bash help_text=&quot; NAME sl - SQLite interactive command-line shell wrapper. USAGE sl [options] [database] OPTIONS -d|--debug Run in debug mode. -h|--help Show help text. COMMANDS a Append to buffer (continue multi-line SQL). c Clear the buffer. cls Clear the screen. g &lt;file&gt; Load file contents into the buffer. l List (display) the current buffer. ls List files in the current directory. ll List files with details (ls -al). o &lt;db&gt; Open a database. q|x|quit|exit Quit t",
     "type": "page"
   },
   {
-    "id": "190",
+    "id": "192",
     "title": "sqlite-load-csv - Load a csv file into a sqlite3 database",
     "url": "/linuxbash/script_sqlite-load-csv_-_load_a_csv_file_into_a_sqlite3_database.html",
     "content": "#!/usr/bin/env bash help_text=&quot; NAME sqlite-load-csv - Load a csv file into a sqlite3 database. USAGE sqlite-load-csv [options] &lt;csv_filename&gt; [&lt;database_name&gt;] OPTIONS -h|--help Show help text. -t|--table &lt;table name&gt; Specify the name of the table created. DESCRIPTION Loads a csv file into a table with the same name as the file (or passed in as an option t|table) into a database the name of which is passed as a parameter or if no database name is specified, a database wit",
     "type": "page"
   },
   {
-    "id": "191",
+    "id": "193",
     "title": "tidy - Tidies filenames and fixes issues such as permission issues with files in the specified directory",
     "url": "/linuxbash/script_tidy_-_tidies_filenames_and_fixes_issues_such_as_permission_issues_with_files_in_the_specified_directory.html",
     "content": "#!/usr/bin/env bash help_text=&quot; NAME tidy - Tidies filenames and fixes issues such as permission issues with files in the specified directory. USAGE tidy [&lt;folder&gt;] OPTIONS -n|--name Only tidy filenames - do not check permissions etc. -fn|-nf Force rename of filenames without prompting. Implies -n. -h|--help Show help text. DESCRIPTION Tidies filenames and fixes issues such as permission issues with files in the specified directory. AUTHORS mjnurse.github.io - 2020 &quot; help_line=&q",
     "type": "page"
   },
   {
-    "id": "192",
+    "id": "194",
     "title": "utils - Some bash Utility Functions",
     "url": "/linuxbash/script_utils_-_some_bash_utility_functions.html",
     "content": "#!/usr/bin/env bash help_text=&quot; NAME utils - One line description. USAGE utils [options] &lt;parameters&gt; OPTIONS -x Description... -h|--help Show help text. DESCRIPTION Description description description description. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;Some bash Utility Functions&quot; web_desc_line=&quot;Some bash Utility Functions&quot; colour_default=&quot;\\e[39m&quot; colour_black=&quot;\\e[30m&quot; colour_red=&quot;\\e[31m&quot; colour_green=&quot;\\e[32m&quot; col",
     "type": "page"
   },
   {
-    "id": "193",
+    "id": "195",
     "title": "Setting Prompt Colour In bash and Putty",
     "url": "/linuxbash/setting-prompt-colour-in_bash_and-putty.html",
     "content": "I want a different colour prompt for different machines. The following script gives colour names to the various escape sequences. Can put this in (for example) .bashrc file. # Regular Text Colours txtblk=&#39;\\e[0;30m&#39; # Black txtred=&#39;\\e[0;31m&#39; # Red txtgrn=&#39;\\e[0;32m&#39; # Green txtylw=&#39;\\e[0;33m&#39; # Yellow txtblu=&#39;\\e[0;34m&#39; # Blue txtpur=&#39;\\e[0;35m&#39; # Purple txtcyn=&#39;\\e[0;36m&#39; # Cyan txtwht=&#39;\\e[0;37m&#39; # White # Bold Text Colours bldblk=&#39;\\",
     "type": "page"
   },
   {
-    "id": "194",
+    "id": "196",
     "title": "SSH Login Without Password",
     "url": "/linuxbash/ssh-login-without-password.html",
     "content": "ssh Command Line Create public and private keys using ssh-key-gen on local machine. $&gt; ssh-keygen Generating public/private rsa key pair. Enter file in which to save the key (/home/martin/.ssh/id_rsa): Enter passphrase (empty for no passphrase): Enter same passphrase again: Your identification has been saved in /home/martin/.ssh/id_rsa. Your public key has been saved in /home/martin/.ssh/id_rsa.pub. The key fingerprint is: SHA256:sfuidygosifudyosiduygosidfuygosiduygisdyuiy martin@local Copy t",
     "type": "page"
   },
   {
-    "id": "195",
+    "id": "197",
     "title": "sudo Without Password",
     "url": "/linuxbash/sudo-without-password.html",
     "content": "To stop being prompted for a password when running sudo commands. Open the sudoers file whist ensuring you don\u2019t lock yourself out due to syntax errors: sudo visudo Add the following rule for Your user (add this line at the end of the file): &lt;username&gt; ALL=(ALL) NOPASSWD: ALL eg. martin ALL=(ALL) NOPASSWD: ALL",
     "type": "page"
   },
   {
-    "id": "196",
+    "id": "198",
     "title": "Waiting On Background Processes",
     "url": "/linuxbash/waiting-on-background-processes.html",
     "content": "The wait command waits for all background processes start in the current session to end. Example: #!/bin/bash function f1() { echo &quot;process 1, sleeping 3s&quot; sleep 3 echo &quot;process 1 complete&quot; } function f2() { echo &quot;process 2, sleeping 2s&quot; sleep 2 echo &quot;process 2 complete&quot; } f1 &amp; f2 &amp; wait echo &quot;all done&quot; Output: $ xxx process 1, sleeping 3s process 2, sleeping 2s process 2 complete process 1 complete all done $",
     "type": "page"
   },
   {
-    "id": "197",
+    "id": "199",
     "title": "WSL - Hadoop 3.0",
     "url": "/linuxbash/wsl-hadoop_3.0.html",
     "content": "HDFS Config Datanode and Namenode directories default to /tmp - these didn't work for me (and not really a ideal location...). /c/MJN/wsl-hadoop-3.3.0/etc/hadoop/hdfs-site.xml &lt;configuration&gt; &lt;property&gt; &lt;name&gt;dfs.replication&lt;/name&gt; &lt;value&gt;1&lt;/value&gt; &lt;/property&gt; &lt;property&gt; &lt;name&gt;dfs.datanode.data.dir&lt;/name&gt; &lt;value&gt;/c/MJN/hdfs-data/datanode&lt;/value&gt; &lt;/property&gt; &lt;property&gt; &lt;name&gt;dfs.namenode.name.dir&lt;/name&gt",
     "type": "page"
   },
   {
-    "id": "198",
+    "id": "200",
     "title": "Azure AD - Find My AD Group Memberships",
     "url": "/misc/azure-ad.html",
     "content": "First authenticate - this command will pop up a window to sign in. &gt; Connect-AzureAD Account Environment TenantId TenantDomain AccountType ------- ----------- -------- ------------ ----------- martinnurse@demo.com AzureCloud c780234d-ed5b-4ccd demo.com User Get my AD group memberships. &gt; Get-AzureADUser -SearchString martinnurse@demo.com ` | Get-AzureADUserMembership ` | % {Get-AzureADObjectByObjectId -ObjectId $_.ObjectId ` | select DisplayName,ObjectType,MailEnabled,SecurityEnabled,Objec",
     "type": "page"
   },
   {
-    "id": "199",
+    "id": "201",
     "title": "BMI Calculator",
     "url": "/misc/bmi-calculator.html",
     "content": "Weight St Lb lbs Kg Height Ft In m Target Weight Current BMI: 0 Target Weight (BMI 20 - 25) BMI 20 weight (lose/gain)BMI 25 weight (lose/gain) Kg00 Lbs00 St Lb00 Notes: BMI for adults only. Doesn't account for body / bone structure, other formulae exist. BMI &lt;20: Underweight. BMI 20-25: Healthy weight. BMI 25-30: Over Weight. BMI 30-35: Obese. BMI&gt;35 very/morbidly obese. function getFloat(id) { return parseFloat(document.getElementById(id).value) || 0; } function setValue(id, value) { docu",
     "type": "page"
   },
   {
-    "id": "200",
+    "id": "202",
     "title": "Dashboard Design Principles",
     "url": "/misc/dashboard-design-principles.html",
     "content": "'The greatest value of a picture is when it forces us to notice what we never expected to see'John Tukey, 'Exploratory Data Analysis', 1977 'A picture is worth a thousand words. An interface is worth a thousand pictures'Ben Shneiderman, 2003 'Data becomes useful knowledge of something that matters when it builds a bridge between a question and an answer. This connection is the signal.' Stephen Few, 'Signal: Understanding What Matters in a World of Noise, 2015 'Graphical excellence is that which ",
     "type": "page"
   },
   {
-    "id": "201",
+    "id": "203",
     "title": "Generating a Bookmarks Page From a Chrome Bookmarks Folder",
     "url": "/misc/generating_a-bookmarks-page-from_a-chrome-bookmarks-folder.html",
     "content": "I wanted a bookmark web page I could switch to (using CTRL-&lt;Tab Number&gt;) and then quickly open a bookmarked site. I created a bash script to read the bookmarks from a folder in the Chrome bookmark bar (folder name: Page) and create a web page. I added Javascript (from this site) that allows me to go to a bookmark (link) by typing in the associated number. I can also search the bookmarks by typing / and then entering part of the name. Pressing Return opens the first matching bookmark. All b",
     "type": "page"
   },
   {
-    "id": "202",
+    "id": "204",
     "title": "Google Charts",
     "url": "/misc/google-charts.html",
     "content": "Google Charts function toggle_yn(obj) { if (obj.value == 'Yes') obj.value = 'No'; else obj.value = 'Yes' } Chart Data Chart Options Redraw | Pivot | Column Headings | Row Headings | Chart Type | &nbsp;Line&nbsp;&nbsp;&nbsp;Column&nbsp;&nbsp;&nbsp;Bar&nbsp;&nbsp;&nbsp;Area&nbsp;&nbsp;&nbsp;Pie",
     "type": "page"
   },
   {
-    "id": "203",
+    "id": "205",
     "title": "History Of My Cars",
     "url": "/misc/history_of_my_cars.html",
     "content": "This perhaps the oldest page on this website and its predecessors. It is, as it says, a history of the cars I've owned. Best Car Audi S5 Quattro 354bhp, 369lb-ft, 0-60mph: 4.7s, Top Speed: 155mph. A great car, very quick, accelerates hard in any gear. The exhaust growls in sports mode. The 8 speed auto gearbox changes very quickly - gear change let down my A5 V6 TDi Quattro, and this was the first thing I checked on the test drive. Came with almost every extra including massaging heated front se",
     "type": "page"
   },
   {
-    "id": "204",
+    "id": "206",
     "title": "HTML Colour Converter",
     "url": "/misc/html-colour-converter.html",
     "content": "RGB: HEX: I've found rotating the RGB values around can give some colours that work well together. Not sure if this has a name... function setColors() { let h = document.getElementById('h'); let rh = h.value.slice(0,2); let gh = h.value.slice(2,4); let bh = h.value.slice(4,6); color = rh + gh + bh; document.getElementById('c1').style.backgroundColor = '#' + color; document.getElementById('c1').innerHTML = '#' + color + '&nbsp;#' + color + ''; color = bh + rh + gh; document.getElementById('c2').s",
     "type": "page"
   },
   {
-    "id": "205",
+    "id": "207",
     "title": "JWT - JSON Web Tokens",
     "url": "/misc/jwt-json-web-tokens.html",
     "content": "Today I was looking at authentication for a web-service. It was using JSON Web Tokens. What are JWTs? How do they work? A JWT is a cryptographically signed JSON token used to authenticate users making calls to an application. A JWT is sent to a user when they authenticate with an authentication Service. The user can send this token with requests to an application (web-service or other) as proof of identity. The application talks to the authentication server and is told the how the token was cryp",
     "type": "page"
   },
   {
-    "id": "206",
+    "id": "208",
     "title": "Public Key Encryption Analogy",
     "url": "/misc/public-key-encryption-analogy.html",
     "content": "What is Public Private Key Encryption? This process uses an algorithm that can encrypt data using a public key however, the data can only be decrypted using a private key. I share my public key with everyone and they use it to encrypt data they send to me. Only I can decrypt and read that data. The Analogy As an analogy to public, private key encryption, consider a secure, locked post-box which contains a slot through which notes can be posted. Notes posted in to the post-box cannot be read (as ",
     "type": "page"
   },
   {
-    "id": "207",
+    "id": "209",
     "title": "Read Aloud In MS Word",
     "url": "/misc/read-aloud-in-ms-word.html",
     "content": "To activate: [Alt][Ctrl][Space]. Cursor at a specific point in the text: The document will be read aloud from here on. Text selected: The selected text will be read aloud. [Ctrl][Space] - Play or pause. [Ctrl][Left arrow] - Jump to the previous paragraph. [Ctrl][Right arrow] - Jump to the next paragraph. [Alt][Left arrow] - Slower reading speed. [Alt][Arrow right] - Faster reading speed.",
     "type": "page"
   },
   {
-    "id": "208",
+    "id": "210",
     "title": "Running Spark on YARN - Cluster or Client Mode",
     "url": "/misc/running-spark_on-yarn-cluster_or-client-mode.html",
     "content": "Spark jobs can run on YARN in two modes: cluster mode and client mode. Understanding the difference between the two modes is important for choosing an appropriate memory allocation configuration, and to submit jobs as expected. A Spark job consists of two parts: Spark Executors that run the actual tasks, and a Spark Driver that schedules the Executors. Cluster Mode Everything runs inside the cluster. You can start a job from your laptop and the job will continue running even if you close your co",
     "type": "page"
   },
   {
-    "id": "209",
+    "id": "211",
     "title": "Shortcut Keys",
     "url": "/misc/shortcut-keys.html",
     "content": "Note: This page is automatically generated using sck Confluence | // | Opens the date picker | | Alt +SHIFT+DOWN | Insert table row after | | Alt +SHIFT+UP | Insert table row before | | CTRL+0 | Set paragraph style | | CTRL+1-6 | Set as heading 1-6 | | CTRL+7 | Preformatted | | CTRL+8 | Quote | | CTRL+ENTER | Publish page | | CTRL+ENTER | Publish | | CTRL+SHIFT+I | Insert table | | CTRL+SHIFT+a | Insert macro | | CTRL+SHIFT+b | Bulleted list | | CTRL+SHIFT+d | Insert markup | | CTRL+SHIFT+e | Pr",
     "type": "page"
   },
   {
-    "id": "210",
+    "id": "212",
     "title": "ssh",
     "url": "/misc/ssh.html",
     "content": "Storing SSH Connection / Config details Store SSH connection details in a config file in the .ssh directory. File ~/.ssh/config Contents Host dev HostName dev.example.com Port 22 User martin Host test HostName test.example.com Port 22 User martin SSH Login Without Password 1) Generate a public/private RSA key pair. Save this to default location /home/&lt;username&gt;/.ssh/id_rsa $ ssh-keygen Your public key will be saved in /home/user/.ssh/id_rsa.pub 2) Copy the SSH Public Key to the Remote Host",
     "type": "page"
   },
   {
-    "id": "211",
+    "id": "213",
     "title": "Statistical Testing",
     "url": "/misc/statistical-testing.html",
     "content": "For a long time I've wanted to explore using statistics to determine how many tests are needed to test for errors. The question I have is that, for a set of n records, if we want to be say 99.9% sure none contain an error, how many would be need to test at random to reach a point where we can be statistically, say, 99.9% sure there are no errors. The Basics Tests with a fixed number of options / records to test If I have a die and there is a chance the number has not been printed on one side, ho",
     "type": "page"
   },
   {
-    "id": "212",
+    "id": "214",
     "title": "Text To Speech - Clipboard",
     "url": "/misc/text-to-speech-clipboard.html",
     "content": "I've been using the Microsoft Word text-to-speech function for a while to proof read text. Works great but the text needs to be a Word document or I need to copy and paste it there first. I've been looking online for an application to read aloud the clipboard. It's surprisingly difficult to find an application. I then thought about AHK and (convinced it would be far to complex for AHK) I ran a search. I was wrong, a very simple AHK script now means I can read aloud the contents of the clipboard ",
     "type": "page"
   },
   {
-    "id": "213",
+    "id": "215",
     "title": "This Sites Markdown",
     "url": "/misc/this-sites-markdown.html",
     "content": "Heading 1 # Heading 1 Heading 2 ## Heading 2 Heading 3 ### Heading 3 Heading 4 #### Heading 4 Heading 5 ##### Heading 5 Heading 6 ###### Heading 6 Horizontal Line: --- Bold: **Bold** Italic: *Italic* Bold Italic: ***Bold Italic*** ~~Strikethrough~~: ~~Strikethrough~~ Links I'm an inline-style link [I'm an inline-style link](https://www.google.com) I'm an inline-style link with title [I'm an inline-style link with title](https://www.google.com \"Google's Homepage\") Simple Lists Single spacing: Sim",
     "type": "page"
   },
   {
-    "id": "214",
+    "id": "216",
     "title": "Using Git and GitHub - A Walk-through",
     "url": "/misc/using-git_and-git-hub-a-walkthrough.html",
     "content": "In the following walk-through we use Git and GitHub from the view point of two 'users' in parallel and look at the workflow and interaction between the two. Simulate two users - each has a home directory Create two 'user home' directories: &gt; ~/git-test$ mkdir user1 &gt; ~/git-test$ mkdir user2 Use User1 to create a file, add this to Git and push the local Git repo up and into GitHub Go to User1 home directory and initialise local Git: &gt; ~/git-test$ cd user1 &gt; ~/git-test/user1$ git init ",

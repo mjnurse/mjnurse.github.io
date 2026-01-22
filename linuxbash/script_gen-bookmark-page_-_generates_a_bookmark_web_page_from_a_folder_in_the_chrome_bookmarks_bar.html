@@ -141,7 +141,7 @@
 <span class="s1">&lt;head&gt;</span>
 <span class="s1">&lt;TITLE&gt;Bookmarks&lt;/TITLE&gt;</span>
 
-<span class="s1">&lt;link rel=&quot;icon&quot; type=&quot;image/x-icon&quot; href=&quot;&#39;</span><span class="s2">&quot;</span><span class="nv">$winroot</span><span class="s2">&quot;</span><span class="s1">&#39;\MJN\github\mjnurse-github-io\images\Star.png&quot;&gt;</span>
+<span class="s1">&lt;link rel=&quot;icon&quot; type=&quot;image/x-icon&quot; href=&quot;&#39;</span><span class="s2">&quot;</span><span class="nv">$winroot</span><span class="s2">&quot;</span><span class="s1">&#39;\Pictures\Star.png&quot;&gt;</span>
 
 <span class="s1">&lt;style&gt;</span>
 <span class="s1">  h3, p {</span>
@@ -205,6 +205,7 @@ cat<span class="w"> </span><span class="nv">$bm_file</span><span class="w"> </sp
 <span class="w">  </span><span class="k">fi</span>
 <span class="w">  </span><span class="nb">let</span><span class="w"> </span><span class="nv">c</span><span class="o">=</span>c+1
 <span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{s:&quot;&#39;</span><span class="nv">$f</span><span class="s1">&#39;&quot;},&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_page</span><span class="s2">&quot;</span>
+
 <span class="w">  </span>cat<span class="w"> </span><span class="nv">$bm_file</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.roots.bookmark_bar.children[] | </span>
 <span class="s1">    select(.name == &quot;Page&quot;).children[] | </span>
 <span class="s1">    select (.name == &quot;&#39;</span><span class="nv">$f</span><span class="s1">&#39;&quot;).children[] | </span>
@@ -387,7 +388,7 @@ rm<span class="w"> </span>-f<span class="w"> </span><span class="nv">$tmp_file</
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: January 02, 2026</p>
+      <p>Last updated: January 12, 2026</p>
     </footer>
 
     <div class="scroll-container">
