@@ -505,9 +505,9 @@
   },
   {
     "id": "72",
-    "title": "Shortcut Keys",
+    "title": "Bash",
     "url": "/other/shortcut_keys.html",
-    "content": "Note: This page is automatically generated using sck Bash ! | !! | Run last command | | !$ | The last word of the previous command (same as ALT+.) | | !$:p | Print out the word that !$ would substitute | | !* | The previous command except for the first word (e.g., if you type find some_file.txt /, then ! would give you some_file.txt /) | | !*:p | Print out what ! would substitute | | !blah | Run the most recent command that starts with blah | | !blah:p | Print out the command that !blah would ru",
+    "content": "Bash ! | !! | Run last command | | !$ | The last word of the previous command (same as ALT+.) | | !$:p | Print out the word that !$ would substitute | | !* | The previous command except for the first word (e.g., if you type find some_file.txt /, then ! would give you some_file.txt /) | | !*:p | Print out what ! would substitute | | !blah | Run the most recent command that starts with blah | | !blah:p | Print out the command that !blah would run (also adds it as the latest command in the command ",
     "type": "page"
   },
   {
