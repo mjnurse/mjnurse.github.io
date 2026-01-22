@@ -109,6 +109,9 @@
 <span class="s2">  -e|--edit</span>
 <span class="s2">    Edit the notes text file.</span>
 
+<span class="s2">  -m|--markdown</span>
+<span class="s2">    Generate a markdown version of the notes file.</span>
+
 <span class="s2">DESCRIPTION</span>
 <span class="s2">  Record and query notes.</span>
 
@@ -141,6 +144,16 @@
 <span class="w">    </span><span class="p">;;</span>
 <span class="w">  </span>-e<span class="p">|</span>--edit<span class="o">)</span>
 <span class="w">    </span>vi<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$nf</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="p">;;</span>
+<span class="w">  </span>-m<span class="p">|</span>--markdown<span class="o">)</span>
+<span class="w">    </span><span class="c1"># Generate a markdown version of the notes file</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;# Notes&quot;</span>
+<span class="w">    </span><span class="nb">echo</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;The notes captured in the Linux notes tool = \`n\`.&quot;</span>
+<span class="w">    </span><span class="nb">echo</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;\`\`\`&quot;</span>
+<span class="w">    </span>cat<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$nf</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;\`\`\`&quot;</span>
 <span class="w">    </span><span class="p">;;</span>
 <span class="w">  </span>-h<span class="p">|</span>--help<span class="o">)</span>
 <span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
@@ -190,7 +203,7 @@ rm<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</spa
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: January 12, 2026</p>
+      <p>Last updated: January 22, 2026</p>
     </footer>
 
     <div class="scroll-container">
