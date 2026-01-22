@@ -507,7 +507,7 @@
     "id": "72",
     "title": "Bash",
     "url": "/other/shortcut_keys.html",
-    "content": "Bash ! | !! | Run last command | | !$ | The last word of the previous command (same as ALT+.) | | !$:p | Print out the word that !$ would substitute | | !* | The previous command except for the first word (e.g., if you type find some_file.txt /, then ! would give you some_file.txt /) | | !*:p | Print out what ! would substitute | | !blah | Run the most recent command that starts with blah | | !blah:p | Print out the command that !blah would run (also adds it as the latest command in the command ",
+    "content": "Bash ! | !! | Run last command | Bash ! | !$ | The last word of the previous command (same as ALT+.) | Bash ! | !$:p | Print out the word that !$ would substitute | Bash ! | !* | The previous command except for the first word (e.g., if you type find some_file.txt /, then ! would give you some_file.txt /) | Bash ! | !*:p | Print out what ! would substitute | Bash ! | !blah | Run the most recent command that starts with blah | Bash ! | !blah:p | Print out the command that !blah would run (also add",
     "type": "page"
   },
   {
