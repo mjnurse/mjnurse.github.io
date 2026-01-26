@@ -759,12 +759,12 @@
     "id": "108",
     "title": "Load CSV File Into Postgres",
     "url": "/other/postgres/load_csv_file_into_postgres.html",
-    "content": "Load CSV File Into Postgres Create your table CREATE TABLE zip_codes ( zip CHAR(5) , latitude DOUBLE PRECISION , longitude DOUBLE PRECISION , city VARCHAR , state CHAR(2) , county VARCHAR , zip_class VARCHAR ); Copy data from your CSV file to the table: \\copy zip_codes FROM &#39;/path/to/csv/ZIP_CODES.txt&#39; DELIMITER &#39;,&#39; CSV You can also specify the columns to read: \\copy zip_codes(ZIP,CITY,STATE) FROM &#39;/path/to/csv/ZIP_CODES.txt&#39; DELIMITER &#39;,&#39; CSV",
+    "content": "Create your table CREATE TABLE zip_codes ( zip CHAR(5) , latitude DOUBLE PRECISION , longitude DOUBLE PRECISION , city VARCHAR , state CHAR(2) , county VARCHAR , zip_class VARCHAR ); Copy data from your CSV file to the table: \\copy zip_codes FROM &#39;/path/to/csv/ZIP_CODES.txt&#39; DELIMITER &#39;,&#39; CSV You can also specify the columns to read: \\copy zip_codes(ZIP,CITY,STATE) FROM &#39;/path/to/csv/ZIP_CODES.txt&#39; DELIMITER &#39;,&#39; CSV",
     "type": "page"
   },
   {
     "id": "109",
-    "title": "PostgreSQL",
+    "title": "Resetting the PostgreSQL Password",
     "url": "/other/postgres/postgres_-_reset_password.html",
     "content": "Resetting the PostgreSQL Password Find the file pg_hba.conf - it may be located in /etc/postgresql-9.1/pg_hba.conf or /var/lib/pgsql/data/pg_hba.conf (back it up). Place the following line (as either the first uncommented line, or as the only one): local all all trust Restart your PostgreSQL server, e.g., on Linux: sudo /etc/init.d/postgresql restart or (for systemd) sudo service postgresql restart If the service (daemon) doesn't start reporting in log file: local connections are not supported b",
     "type": "page"
