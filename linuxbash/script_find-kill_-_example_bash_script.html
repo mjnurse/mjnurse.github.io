@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="bash-script-example - Example Bash Script" />
+    <meta name="description" content="find-kill - Example Bash Script" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>bash-script-example - Example Bash Script</title>
+    <title>find-kill - Example Bash Script</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
@@ -90,7 +90,7 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script_bash-script-example_-_Example_Bash_Script.md">bash-script-example - Example Bash Script</a></h1>
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script_find-kill_-_Example_Bash_Script.md">find-kill - Example Bash Script</a></h1>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 <span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
 <span class="s2">NAME</span>
@@ -152,6 +152,28 @@
 <span class="w">    </span><span class="k">esac</span>
 <span class="w">    </span><span class="nb">shift</span>
 <span class="k">done</span>
+
+ps<span class="w"> </span>-edf<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span>grep<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$0</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/tmp/<span class="nv">$$</span>.lst
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-s<span class="w"> </span>/tmp/<span class="nv">$$</span>.lst<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span>cecho<span class="w"> </span>red<span class="w"> </span><span class="s2">&quot;No processes found matching &#39;</span><span class="nv">$1</span><span class="s2">&#39;&quot;</span>
+<span class="w">    </span>rm<span class="w"> </span>/tmp/<span class="nv">$$</span>.lst
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+cecho<span class="w"> </span>cya<span class="w"> </span><span class="s2">&quot;Processes matching &#39;</span><span class="nv">$1</span><span class="s2">&#39;:&quot;</span>
+cat<span class="w"> </span>/tmp/<span class="nv">$$</span>.lst<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{printf &quot;  PID: %s  CMD: %s\n&quot;, $2, $8}&#39;</span>
+<span class="nb">echo</span>
+<span class="k">while</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>line<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nv">pid</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$line</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $2}&#39;</span><span class="k">)</span>
+<span class="w">    </span><span class="nv">pname</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$line</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $8}&#39;</span><span class="k">)</span>
+<span class="w">    </span><span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;Kill PID </span><span class="si">${</span><span class="nv">pid</span><span class="si">}</span><span class="s2"> (</span><span class="si">${</span><span class="nv">pname</span><span class="si">}</span><span class="s2">) [yN]? &quot;</span>
+<span class="w">    </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>yn<span class="w"> </span>&lt;/dev/tty
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">yn</span><span class="p">^</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;Y&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span>cecho<span class="w"> </span>yel<span class="w"> </span><span class="s2">&quot;Killing PID </span><span class="si">${</span><span class="nv">pid</span><span class="si">}</span><span class="s2"> (</span><span class="si">${</span><span class="nv">pname</span><span class="si">}</span><span class="s2">)&quot;</span><span class="w"> </span>
+<span class="w">        </span><span class="nb">kill</span><span class="w"> </span>-9<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$pid</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="k">done</span><span class="w"> </span>&lt;<span class="w"> </span>/tmp/<span class="nv">$$</span>.lst
+
+rm<span class="w"> </span>/tmp/<span class="nv">$$</span>.lst
 </code></pre></div>
         </div>
       </article>
