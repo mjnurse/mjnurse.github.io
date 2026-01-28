@@ -108,18 +108,23 @@
 <li><code>%sql</code> magic command establishes a connection to the Postgres database running in a Docker container named <code>db</code>.</li>
 </ul>
 <p>You can then run SQL queries directly in your notebook cells using the <code>%%sql</code> cell magic, or <code>%sql</code> for single-line queries. For example:</p>
-<div style="border:1px solid #222; padding:10px; border-radius:4px">
+<div style="border:1px solid #222; border-radius:4px">
 
-<div class="codehilite"><pre><span></span><code><span class="c">%%sql</span>
-<span class="n">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">FROM</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="n">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<div class="codehilite"><pre><span></span><code><span class="o">%%</span><span class="k">sql</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
 </code></pre></div>
 
 
 </div>
 
 <p>To run a Postgres magic command, you can use the <code>%sql</code> prefix. For example:</p>
-<div class="codehilite"><pre><span></span><code><span class="nf">%sql</span><span class="w"> </span><span class="err">\</span><span class="n">di</span><span class="o">+</span>
+<div style="border:1px solid #222; border-radius:4px">
+
+<div class="codehilite"><pre><span></span><code><span class="o">%</span><span class="k">sql</span><span class="w"> </span><span class="err">\</span><span class="n">di</span><span class="o">+</span>
 </code></pre></div>
+
+
+</div>
 
 <p>You cannot use <code>%%sql</code> for magic commands; they must be prefixed with <code>%sql</code>.</p>
         </div>
