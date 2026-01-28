@@ -780,7 +780,7 @@
     "id": "111",
     "title": "Postgres and Jupyter",
     "url": "/other/postgres/postgres-and-jupyter.html",
-    "content": "To use Postgres with Jupyter notebooks, you can connect to a Postgres database from within a Jupyter notebook as follows: Add the following code snippet to a Jupyter notebook: %%capture %pip install -U jupysql pgspecial &quot;psycopg[binary,pool]&quot; %load_ext sql %sql postgresql+psycopg://postgres:postgres@db:5432/postgres %config SqlMagic.displaylimit = 200 The psycopg library is used to connect to Postgres. The jupysql extension allows you to run SQL queries directly in your notebook cells.",
+    "content": "Initializing Postgres with Jupyter To use Postgres with Jupyter notebooks, you can connect to a Postgres database from within a Jupyter notebook as follows: Add the following code snippet to a Jupyter notebook: %%capture %pip install -U jupysql pgspecial &quot;psycopg[binary,pool]&quot; %load_ext sql %sql postgresql+psycopg://postgres:postgres@db:5432/postgres %config SqlMagic.displaylimit = 200 The psycopg library is used to connect to Postgres. The jupysql extension allows you to run SQL queri",
     "type": "page"
   },
   {
