@@ -141,9 +141,15 @@
 <p>You cannot use <code>%%sql</code> for magic commands; they must be prefixed with <code>%sql</code>.</p>
 <h2 id="formatting-explain-plans">Formatting Explain Plans</h2>
 <p>If you run an <code>EXPLAIN</code> command the output will be right-aligned and hard to read. You can format it using the following code snippet:</p>
-<p><code>%%sql
-result = %sql EXPLAIN (ANALYZE, BUFFERS) SELECT * FROM test WHERE name = 'Alice Smith';
-print("\n".join(row[0] for row in result))</code></p>
+<div style="border:1px solid #222; border-radius:4px">
+
+<div class="codehilite"><pre><span></span><code><span class="c">%%sql</span>
+<span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="c">%sql EXPLAIN (ANALYZE, BUFFERS) SELECT * FROM test WHERE name = &#39;Alice Smith&#39;;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s">&quot;\n&quot;</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">result</span><span class="p">))</span>
+</code></pre></div>
+
+
+</div>
         </div>
       </article>
     </main>

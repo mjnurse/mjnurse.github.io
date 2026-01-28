@@ -1235,7 +1235,7 @@
     "id": "176",
     "title": "file-watch-do - Watch a file or directory and each time it or a member is modified run a command",
     "url": "/linuxbash/script_file-watch-do_-_watch_a_file_or_directory_and_each_time_it_or_a_member_is_modified_run_a_command.html",
-    "content": "#!/usr/bin/env bash help_text=&quot; NAME file-watch-do - Watch a file (or directory) and each time it is modified run a command. USAGE file-watch-do &lt;file name&gt; &lt;command&gt; [&lt;command parameters&gt;] DESCRIPTION Watch a file (or directory) and each time the file or a file within the directory is modified run a command. AUTHOR mjnurse.github.io - 2019 &quot; help_line=&quot;Watch a file or directory and each time it or a member is modified run a command&quot; web_desc_line=&quot;Watc",
+    "content": "#!/usr/bin/env bash help_text=&quot; NAME file-watch-do - Watch a file (or directory) and each time it is modified run a command. USAGE file-watch-do [options] &lt;file name&gt; &lt;command&gt; [&lt;command parameters&gt;] OPTIONS -f|--frequency &lt;seconds&gt; Set the frequency of checks in seconds. Default is 1 second. DESCRIPTION Watch a file (or directory) and each time the file or a file within the directory is modified run a command. AUTHOR mjnurse.github.io - 2019 &quot; help_line=&quot;W",
     "type": "page"
   },
   {

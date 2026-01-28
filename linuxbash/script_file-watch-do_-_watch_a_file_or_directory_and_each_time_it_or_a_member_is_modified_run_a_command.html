@@ -94,17 +94,22 @@
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 <span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
 <span class="s2">NAME</span>
-<span class="s2">  file-watch-do - Watch a file (or directory) and each time it is modified run a command.</span>
+<span class="s2">    file-watch-do - Watch a file (or directory) and each time it is modified run a command.</span>
 
 <span class="s2">USAGE</span>
-<span class="s2">  file-watch-do &lt;file name&gt; &lt;command&gt; [&lt;command parameters&gt;]</span>
+<span class="s2">    file-watch-do [options] &lt;file name&gt; &lt;command&gt; [&lt;command parameters&gt;]</span>
+
+<span class="s2">OPTIONS</span>
+
+<span class="s2">    -f|--frequency &lt;seconds&gt;</span>
+<span class="s2">        Set the frequency of checks in seconds. Default is 1 second.</span>
 
 <span class="s2">DESCRIPTION</span>
-<span class="s2">  Watch a file (or directory) and each time the file or a file within the directory is </span>
-<span class="s2">  modified run a command.</span>
+<span class="s2">    Watch a file (or directory) and each time the file or a file within the directory is </span>
+<span class="s2">    modified run a command.</span>
 
 <span class="s2">AUTHOR</span>
-<span class="s2">  mjnurse.github.io - 2019</span>
+<span class="s2">    mjnurse.github.io - 2019</span>
 <span class="s2">&quot;</span>
 <span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Watch a file or directory and each time it or a member is modified run a command&quot;</span>
 <span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Watch a file or directory and each time it or a member is modified run a command&quot;</span>
@@ -121,6 +126,14 @@
 <span class="nv">usage</span><span class="o">=</span><span class="si">${</span><span class="nv">usage</span><span class="p">//[</span><span class="s1">$&#39;\n\r&#39;</span><span class="p">]</span><span class="si">}</span>
 <span class="nv">usage</span><span class="o">=</span><span class="si">${</span><span class="nv">usage</span><span class="p">##*   </span><span class="si">}</span>
 <span class="nv">usage</span><span class="o">=</span><span class="s2">&quot;Usage: </span><span class="si">${</span><span class="nv">usage</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;-f&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;--frequency&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">shift</span>
+<span class="w">    </span><span class="nv">SLEEP_TIME</span><span class="o">=</span><span class="nv">$1</span>
+<span class="w">    </span><span class="nb">shift</span>
+<span class="k">else</span>
+<span class="w">    </span><span class="nv">SLEEP_TIME</span><span class="o">=</span><span class="m">1</span>
+<span class="k">fi</span>
 
 <span class="nv">FD</span><span class="o">=</span><span class="s2">&quot;f&quot;</span><span class="w">  </span><span class="c1"># File or directory flag</span>
 
@@ -168,7 +181,7 @@
 <span class="nv">file_date</span><span class="o">=</span><span class="nv">$prev_file_date</span>
 <span class="k">while</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file_date</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$prev_file_date</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="w">        </span>sleep<span class="w"> </span><span class="m">1</span>
+<span class="w">        </span>sleep<span class="w"> </span><span class="nv">$SLEEP_TIME</span>
 <span class="w">        </span><span class="nv">file_date</span><span class="o">=</span><span class="k">$(</span>get_date<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file_name</span><span class="s2">&quot;</span><span class="k">)</span>
 <span class="w">    </span><span class="k">done</span>
 <span class="w">    </span><span class="nv">prev_file_date</span><span class="o">=</span><span class="nv">$file_date</span>
@@ -200,7 +213,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: January 02, 2026</p>
+      <p>Last updated: January 28, 2026</p>
     </footer>
 
     <div class="scroll-container">
