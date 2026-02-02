@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="find-kill - Example Bash Script" />
+    <meta name="description" content="find-kill - Find and kill processes interactively" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>find-kill - Example Bash Script</title>
+    <title>find-kill - Find and kill processes interactively</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
@@ -90,30 +90,28 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script_find-kill_-_Example_Bash_Script.md">find-kill - Example Bash Script</a></h1>
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script_find-kill_-_Find_and_kill_processes_interactively.md">find-kill - Find and kill processes interactively</a></h1>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 <span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
 <span class="s2">NAME</span>
-<span class="s2">    bash-func - One line description.</span>
+<span class="s2">    find-kill - Find and kill processes interactively</span>
 
 <span class="s2">USAGE</span>
-<span class="s2">    bash-func [options] &lt;parameters&gt;</span>
+<span class="s2">    find-kill [options] &lt;parameters&gt;</span>
 
 <span class="s2">OPTIONS</span>
-<span class="s2">    -x</span>
-<span class="s2">        Description...</span>
-
 <span class="s2">    -h|--help</span>
 <span class="s2">        Show help text.</span>
 
 <span class="s2">DESCRIPTION</span>
-<span class="s2">    Description description description description.</span>
+<span class="s2">    This script finds processes matching a given name or pattern</span>
+<span class="s2">    and prompts the user to kill each one individually.</span>
 
 <span class="s2">AUTHOR</span>
 <span class="s2">    mjnurse.github.io - 2026</span>
 <span class="s2">&quot;</span>
-<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;tbc&quot;</span>
-<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Example Bash Script&quot;</span>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Find and kill processes interactively&quot;</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Find and kill processes interactively&quot;</span>
 
 <span class="c1"># set -x # for debugging</span>
 
@@ -160,13 +158,19 @@ ps<span class="w"> </span>-edf<span class="w"> </span><span class="p">|</span><s
 <span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 <span class="k">fi</span>
 cecho<span class="w"> </span>cya<span class="w"> </span><span class="s2">&quot;Processes matching &#39;</span><span class="nv">$1</span><span class="s2">&#39;:&quot;</span>
-cat<span class="w"> </span>/tmp/<span class="nv">$$</span>.lst<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{printf &quot;  PID: %s  CMD: %s\n&quot;, $2, $8}&#39;</span>
+cat<span class="w"> </span>/tmp/<span class="nv">$$</span>.lst<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>sed<span class="w"> </span><span class="s1">&#39;s/^\([^ ]* *[^ ]*\) *[^ ]* *[^ ]* *[^ ]* *[^ ]* *[^ ]* *\([^ ]*\).*/  \1 \2/&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>grep<span class="w"> </span>--color<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
 <span class="nb">echo</span>
 <span class="k">while</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>line<span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">    </span><span class="nv">pid</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$line</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $2}&#39;</span><span class="k">)</span>
 <span class="w">    </span><span class="nv">pname</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$line</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $8}&#39;</span><span class="k">)</span>
-<span class="w">    </span><span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;Kill PID </span><span class="si">${</span><span class="nv">pid</span><span class="si">}</span><span class="s2"> (</span><span class="si">${</span><span class="nv">pname</span><span class="si">}</span><span class="s2">) [yN]? &quot;</span>
+<span class="w">    </span><span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;Kill PID </span><span class="si">${</span><span class="nv">pid</span><span class="si">}</span><span class="s2"> (</span><span class="si">${</span><span class="nv">pname</span><span class="si">}</span><span class="s2">) [yNq]? &quot;</span>
 <span class="w">    </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>yn<span class="w"> </span>&lt;/dev/tty
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">yn</span><span class="p">^</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;Q&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span>cecho<span class="w"> </span>yel<span class="w"> </span><span class="s2">&quot;Quitting&quot;</span>
+<span class="w">        </span><span class="k">break</span>
+<span class="w">    </span><span class="k">fi</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">yn</span><span class="p">^</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;Y&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">        </span>cecho<span class="w"> </span>yel<span class="w"> </span><span class="s2">&quot;Killing PID </span><span class="si">${</span><span class="nv">pid</span><span class="si">}</span><span class="s2"> (</span><span class="si">${</span><span class="nv">pname</span><span class="si">}</span><span class="s2">)&quot;</span><span class="w"> </span>
 <span class="w">        </span><span class="nb">kill</span><span class="w"> </span>-9<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$pid</span><span class="s2">&quot;</span>
@@ -192,7 +196,7 @@ rm<span class="w"> </span>/tmp/<span class="nv">$$</span>.lst
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: January 23, 2026</p>
+      <p>Last updated: February 02, 2026</p>
     </footer>
 
     <div class="scroll-container">

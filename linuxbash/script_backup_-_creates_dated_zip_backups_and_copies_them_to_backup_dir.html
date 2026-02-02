@@ -94,24 +94,33 @@
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 <span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
 <span class="s2">NAME</span>
-<span class="s2">  backup - Create a dated zip archive of files and directories.</span>
+<span class="s2">    backup - Create a dated zip archive of files and directories.</span>
 
 <span class="s2">USAGE</span>
-<span class="s2">  backup [options] &lt;backup_name&gt; &lt;file_or_directory&gt; [...]</span>
+<span class="s2">    backup [options] [&lt;backup_name&gt;] [&lt;file_or_directory&gt;] [...]</span>
 
 <span class="s2">OPTIONS</span>
-<span class="s2">  -h|--help</span>
-<span class="s2">    Show help text.</span>
+<span class="s2">    -h|--help</span>
+<span class="s2">        Show help text.</span>
+
+<span class="s2">    -f|--force</span>
+<span class="s2">        Force the backup without prompting.</span>
 
 <span class="s2">DESCRIPTION</span>
-<span class="s2">  Creates a zip archive with the format &lt;backup_name&gt;_YYMMDD.zip containing</span>
-<span class="s2">  the specified files and directories, then copies it to \$BACKUP_DIR.</span>
+<span class="s2">    Creates a zip archive with the format &lt;backup_name&gt;_YYMMDD.zip containing</span>
+<span class="s2">    the specified files and directories, then copies it to \$BACKUP_DIR.</span>
 
-<span class="s2">  Requires the BACKUP_DIR environment variable to be set.</span>
-<span class="s2">  Prompts for confirmation before creating the backup.</span>
+<span class="s2">    Requires the BACKUP_DIR environment variable to be set.</span>
+
+<span class="s2">    If no parameters are passed in, then the contents of the </span><span class="nv">$BACKUP_DIR</span><span class="s2"> are</span>
+<span class="s2">    shown.</span>
+
+<span class="s2">    If a single parameter &lt;backup_name&gt; is passed, then all backups in the</span>
+<span class="s2">    </span><span class="nv">$BACKUP_DIR</span><span class="s2"> which match the backup_name are shown.  Wildcards can be</span>
+<span class="s2">    used but must be passed inside quotes.</span>
 
 <span class="s2">AUTHOR</span>
-<span class="s2">  Martin N 2025  </span>
+<span class="s2">    Martin N 2025  </span>
 <span class="s2">&quot;</span>
 <span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Create a dated zip archive of files and directories.&quot;</span>
 <span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Creates dated zip backups and copies them to BACKUP_DIR&quot;</span>
@@ -121,37 +130,41 @@
 <span class="nv">usage</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%OPTIONS*</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span>
 <span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/  */ /g&quot;</span><span class="k">)</span>
 
-<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">usage</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">try</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
-<span class="k">fi</span>
+<span class="nv">FORCE_YN</span><span class="o">=</span>n
 
 <span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
-<span class="w">    </span>-h<span class="p">|</span>--help<span class="o">)</span>
-<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
-<span class="w">      </span><span class="nb">exit</span>
-<span class="w">      </span><span class="p">;;</span>
-<span class="w">    </span>?*<span class="o">)</span>
-<span class="w">      </span><span class="k">break</span>
-<span class="w">      </span><span class="p">;;</span>
-<span class="w">  </span><span class="k">esac</span>
-<span class="w">  </span><span class="nb">shift</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
+<span class="w">        </span>-h<span class="p">|</span>--help<span class="o">)</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="nb">exit</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>-f<span class="p">|</span>--forced<span class="o">)</span>
+<span class="w">            </span><span class="nv">FORCE_YN</span><span class="o">=</span>y
+<span class="w">            </span><span class="p">;;</span><span class="w">    </span>
+<span class="w">        </span>?*<span class="o">)</span>
+<span class="w">            </span><span class="k">break</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">    </span><span class="k">esac</span>
+<span class="w">    </span><span class="nb">shift</span>
 <span class="k">done</span>
 
 <span class="nb">set</span><span class="w"> </span>-e
 
-<span class="c1"># Check arguments</span>
-<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span>-lt<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="nv">$0</span><span class="s2"> &lt;backup_name&gt; &lt;file_or_directory&gt; [...]&quot;</span>
-<span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
-<span class="k">fi</span>
-
 <span class="c1"># Ensure BACKUP_DIR is set</span>
 <span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BACKUP_DIR</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Error: BACKUP_DIR environment variable is not set.&quot;</span>
-<span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Error: BACKUP_DIR environment variable is not set.&quot;</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span>ls<span class="w"> </span>-ltr<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BACKUP_DIR</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span>
+<span class="k">fi</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">cd</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BACKUP_DIR</span><span class="s2">&quot;</span>
+<span class="w">    </span>ls<span class="w"> </span>-ltr<span class="w"> </span><span class="nv">$1</span>_??????.zip
+<span class="w">    </span><span class="nb">exit</span>
 <span class="k">fi</span>
 
 <span class="c1"># First argument is the NAME</span>
@@ -168,12 +181,22 @@
 mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BACKUP_DIR</span><span class="s2">&quot;</span>
 
 <span class="c1"># Confirm request</span>
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Creating backup: </span><span class="nv">$ZIPFILE</span><span class="s2">&quot;</span>
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Including files/directories: </span><span class="nv">$*</span><span class="s2">&quot;</span>
-<span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Proceed? [yN]: &quot;</span><span class="w"> </span>CONFIRM
-<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$CONFIRM</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">=</span>~<span class="w"> </span>^<span class="o">[</span>Yy<span class="o">]</span>$<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Backup cancelled.&quot;</span>
-<span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">0</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$FORCE_YN</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>n<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BACKUP_DIR</span><span class="s2">/</span><span class="nv">$ZIPFILE</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Backup dated today already exists, overwrite [yN]: &quot;</span><span class="w"> </span>CONFIRM
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$CONFIRM</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">=</span>~<span class="w"> </span>^<span class="o">[</span>Yy<span class="o">]</span>$<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Backup cancelled.&quot;</span>
+<span class="w">            </span><span class="nb">exit</span><span class="w"> </span><span class="m">0</span>
+<span class="w">        </span><span class="k">fi</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Creating backup: </span><span class="nv">$ZIPFILE</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Including files/directories: </span><span class="nv">$*</span><span class="s2">&quot;</span>
+<span class="w">    </span>ls<span class="w"> </span><span class="nv">$*</span>
+<span class="w">    </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Proceed? [yN]: &quot;</span><span class="w"> </span>CONFIRM
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$CONFIRM</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">=</span>~<span class="w"> </span>^<span class="o">[</span>Yy<span class="o">]</span>$<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Backup cancelled.&quot;</span>
+<span class="w">        </span><span class="nb">exit</span><span class="w"> </span><span class="m">0</span>
+<span class="w">    </span><span class="k">fi</span>
 <span class="k">fi</span>
 
 <span class="c1"># Create the zip archive</span>
@@ -182,7 +205,8 @@ zip<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;</sp
 <span class="c1"># Move to BACKUP_DIR</span>
 mv<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ZIPFILE</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BACKUP_DIR</span><span class="s2">/&quot;</span>
 
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Backup complete: </span><span class="nv">$BACKUP_DIR</span><span class="s2">/</span><span class="nv">$ZIPFILE</span><span class="s2">&quot;</span>
+<span class="nb">echo</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Backup complete: </span><span class="k">$(</span>du<span class="w"> </span>-h<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BACKUP_DIR</span><span class="s2">/</span><span class="nv">$ZIPFILE</span><span class="s2">&quot;</span><span class="k">)</span><span class="s2">&quot;</span>
 </code></pre></div>
         </div>
       </article>
@@ -201,7 +225,7 @@ mv<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ZIPFIL
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: January 21, 2026</p>
+      <p>Last updated: February 02, 2026</p>
     </footer>
 
     <div class="scroll-container">
