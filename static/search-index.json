@@ -1375,7 +1375,7 @@
     "id": "196",
     "title": "python-script-example - Example Python Script",
     "url": "/linuxbash/script_python-script-example_-_example_python_script.html",
-    "content": "#!/usr/bin/env python3 DESCRIPTION=&quot;&quot;&quot; Description description description description. Description description description description. Description description description description. &quot;&quot;&quot; ARGS= [ {&quot;name&quot;: &quot;-d&quot;, &quot;name2&quot;: &quot;--debug&quot;, &quot;action&quot;: &quot;store_true&quot;, &quot;help&quot;: &quot;Enable debug mode.&quot;}, {&quot;name&quot;: &quot;-m&quot;, &quot;name2&quot;: &quot;--max-size&quot;, &quot;type&quot;: int, &",
+    "content": "#!/usr/bin/env python3 DESCRIPTION=&quot;&quot;&quot; Description description description description. Description description description description. Description description description description. &quot;&quot;&quot; ARGS= [ {&quot;name&quot;: &quot;-f&quot;, &quot;name2&quot;: &quot;--flag&quot;, &quot;action&quot;: &quot;store_true&quot;, &quot;help&quot;: &quot;Flag desc.&quot;}, {&quot;name&quot;: &quot;-m&quot;, &quot;name2&quot;: &quot;--metric-optional&quot;, &quot;type&quot;: int, &qu",
     "type": "page"
   },
   {
