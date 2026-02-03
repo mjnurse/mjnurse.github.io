@@ -179,11 +179,11 @@
 
 <span class="nv">prev_char</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
 
-grep<span class="w"> </span>-H<span class="w"> </span>-s<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;^help_line=&quot;</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;^-- help_line:&quot;</span><span class="w"> </span><span class="nv">$files</span><span class="w">  </span>&gt;<span class="w"> </span>/tmp/h.tmp
+grep<span class="w"> </span>-H<span class="w"> </span>-s<span class="w"> </span>-i<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;^help_line=&quot;</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;^-- help_line:&quot;</span><span class="w"> </span><span class="nv">$files</span><span class="w">  </span>&gt;<span class="w"> </span>/tmp/h.tmp
 cat<span class="w"> </span>/tmp/h.tmp<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
 sed<span class="w"> </span><span class="s1">&#39; </span>
 <span class="s1">    /help_line=.*tbc.*/d</span>
-<span class="s1">    /^h:/d; s/help_line=//; s/-- help_line://; s/&quot;/ /g;</span>
+<span class="s1">    /^h:/d; s/help_line=//I; s/-- help_line://I; s/&quot;/ /g;</span>
 <span class="s1">    /tidy:.*echo/d; /^README.*md/d;</span>
 <span class="s1">    s/:[0-9][0-9]*:/:/;</span>
 <span class="s1">    &#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
@@ -196,8 +196,8 @@ sort<span class="w"> </span><span class="p">|</span><span class="w"> </span><spa
 <span class="w">         </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;    </span><span class="nv">$line</span><span class="s2">&quot;</span><span class="w"> </span>
 <span class="w">    </span><span class="k">fi</span>
 <span class="w">  </span><span class="k">done</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w">  </span><span class="s1">&#39;</span>
-<span class="s1">    s/: /:                        /;</span>
-<span class="s1">    s/\(.........................\) *\(.*\)/\1\2/; /tidy:.*echo/d&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>/tmp/h.out<span class="w"> </span>
+<span class="s1">    s/: /:                          /;</span>
+<span class="s1">    s/\(...........................\) *\(.*\)/\1\2/; /tidy:.*echo/d&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>/tmp/h.out<span class="w"> </span>
 cat<span class="w"> </span>/tmp/h.out
 rm<span class="w"> </span>-f<span class="w"> </span>/tmp/h.out<span class="w"> </span>/tmp/h.tmp
 </code></pre></div>
@@ -218,7 +218,7 @@ rm<span class="w"> </span>-f<span class="w"> </span>/tmp/h.out<span class="w"> <
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: January 02, 2026</p>
+      <p>Last updated: February 03, 2026</p>
     </footer>
 
     <div class="scroll-container">
