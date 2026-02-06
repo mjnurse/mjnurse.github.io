@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="es-import - Import bulk-compatible JSONL format into Elasticsearch index" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>es-import - Import bulk-compatible JSONL format into Elasticsearch index</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script_es-import_-_Import_bulk-compatible_JSONL_format_into_Elasticsearch_index.md">es-import - Import bulk-compatible JSONL format into Elasticsearch index</a></h1>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python3</span>
+<span class="nv">DESCRIPTION</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Import bulk-compatible JSONL format into Elasticsearch index.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="nv">ARGS</span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
+<span class="w">    </span><span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="w"> </span><span class="s2">&quot;--host&quot;</span>,<span class="w"> </span><span class="s2">&quot;type&quot;</span>:<span class="w"> </span>str,<span class="w"> </span><span class="s2">&quot;default&quot;</span>:<span class="w"> </span><span class="s2">&quot;localhost&quot;</span>,<span class="w"> </span><span class="s2">&quot;help&quot;</span>:<span class="w"> </span><span class="s2">&quot;Elasticsearch host URL (default: localhost)&quot;</span><span class="o">}</span>,
+<span class="w">    </span><span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="w"> </span><span class="s2">&quot;--port&quot;</span>,<span class="w"> </span><span class="s2">&quot;type&quot;</span>:<span class="w"> </span>str,<span class="w"> </span><span class="s2">&quot;default&quot;</span>:<span class="w"> </span><span class="s2">&quot;9200&quot;</span>,<span class="w"> </span><span class="s2">&quot;help&quot;</span>:<span class="w"> </span><span class="s2">&quot;Elasticsearch port (default: 9200)&quot;</span><span class="o">}</span>,
+<span class="w">    </span><span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="w"> </span><span class="s2">&quot;file_name&quot;</span>,<span class="w"> </span><span class="s2">&quot;type&quot;</span>:<span class="w"> </span>str,<span class="w"> </span><span class="s2">&quot;help&quot;</span>:<span class="w"> </span><span class="s2">&quot;Name of the JSONL file to import&quot;</span><span class="o">}</span>
+<span class="o">]</span>
+<span class="nv">AUTHOR</span><span class="o">=</span><span class="s2">&quot;mjnurse.github.io - 2026&quot;</span>
+
+<span class="nv">HELP_LINE</span><span class="o">=</span><span class="s2">&quot;Import bulk-compatible JSONL format into Elasticsearch index&quot;</span>
+<span class="nv">WEB_DESC_LINE</span><span class="o">=</span><span class="s2">&quot;Import bulk-compatible JSONL format into Elasticsearch index&quot;</span>
+
+import<span class="w"> </span>argparse
+import<span class="w"> </span>json
+import<span class="w"> </span>sys
+from<span class="w"> </span>elasticsearch<span class="w"> </span>import<span class="w"> </span>Elasticsearch
+from<span class="w"> </span>elasticsearch.helpers<span class="w"> </span>import<span class="w"> </span>streaming_bulk
+
+def<span class="w"> </span>parse_args<span class="o">()</span>:
+<span class="w">    </span><span class="nv">parser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>argparse.ArgumentParser<span class="o">(</span>
+<span class="w">        </span><span class="nv">description</span><span class="o">=</span><span class="s2">&quot;description:&quot;</span><span class="w"> </span>+<span class="w"> </span>DESCRIPTION.replace<span class="o">(</span><span class="s2">&quot;\n&quot;</span>,<span class="w"> </span><span class="s2">&quot;\n  &quot;</span><span class="o">)[</span>:-2<span class="o">]</span>,
+<span class="w">        </span><span class="nv">epilog</span><span class="o">=</span><span class="s2">&quot;author:\n  &quot;</span><span class="w"> </span>+<span class="w"> </span>AUTHOR,
+<span class="w">        </span><span class="nv">formatter_class</span><span class="o">=</span>argparse.RawDescriptionHelpFormatter<span class="o">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>arg<span class="w"> </span><span class="k">in</span><span class="w"> </span>ARGS:
+<span class="w">        </span><span class="nv">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>arg<span class="o">[</span><span class="s2">&quot;name&quot;</span><span class="o">]]</span><span class="w"> </span>+<span class="w"> </span><span class="o">([</span>arg<span class="o">[</span><span class="s2">&quot;name2&quot;</span><span class="o">]]</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="s2">&quot;name2&quot;</span><span class="w"> </span><span class="k">in</span><span class="w"> </span>arg<span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="o">[])</span>
+<span class="w">        </span><span class="nv">kwargs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span>k:<span class="w"> </span>v<span class="w"> </span><span class="k">for</span><span class="w"> </span>k,<span class="w"> </span>v<span class="w"> </span><span class="k">in</span><span class="w"> </span>arg.items<span class="o">()</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>k<span class="w"> </span>not<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">(</span><span class="s2">&quot;name&quot;</span>,<span class="w"> </span><span class="s2">&quot;name2&quot;</span><span class="o">)</span><span class="w"> </span>and<span class="w"> </span>v<span class="w"> </span>is<span class="w"> </span>not<span class="w"> </span>None<span class="o">}</span>
+<span class="w">        </span>parser.add_argument<span class="o">(</span>*names,<span class="w"> </span>**kwargs<span class="o">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>parser.parse_args<span class="o">()</span>
+
+def<span class="w"> </span>import_jsonl<span class="o">(</span>jsonl_path,<span class="w"> </span>es_host,<span class="w"> </span>es_port<span class="o">)</span>:
+<span class="w">    </span><span class="nv">es</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Elasticsearch<span class="o">(</span>f<span class="s2">&quot;http://{es_host}:{es_port}&quot;</span><span class="o">)</span>
+
+<span class="w">    </span>try:
+<span class="w">        </span>es.info<span class="o">()</span>
+<span class="w">    </span>except<span class="w"> </span>Exception<span class="w"> </span>as<span class="w"> </span>e:
+<span class="w">        </span>print<span class="o">(</span>f<span class="s2">&quot;ERROR: Could not connect to Elasticsearch at {es_host}:{es_port}.\n\nException: {e}&quot;</span><span class="o">)</span>
+<span class="w">        </span>sys.exit<span class="o">(</span><span class="m">1</span><span class="o">)</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>jsonl_path.endswith<span class="o">(</span><span class="s2">&quot;.jsonl&quot;</span><span class="o">)</span>:
+<span class="w">        </span><span class="nv">jsonl_path</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;.jsonl&quot;</span>
+
+<span class="w">    </span>def<span class="w"> </span>generate_actions<span class="o">()</span>:
+<span class="w">        </span>with<span class="w"> </span>open<span class="o">(</span>jsonl_path,<span class="w"> </span><span class="s2">&quot;r&quot;</span>,<span class="w"> </span><span class="nv">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="o">)</span><span class="w"> </span>as<span class="w"> </span>f:
+<span class="w">            </span><span class="k">while</span><span class="w"> </span>True:
+<span class="w">                </span><span class="nv">meta_line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>f.readline<span class="o">()</span>
+<span class="w">                </span><span class="nv">doc_line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>f.readline<span class="o">()</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>meta_line<span class="w"> </span>or<span class="w"> </span>not<span class="w"> </span>doc_line:
+<span class="w">                    </span><span class="k">break</span>
+<span class="w">                </span><span class="nv">meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>json.loads<span class="o">(</span>meta_line<span class="o">)</span>
+<span class="w">                </span><span class="nv">doc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>json.loads<span class="o">(</span>doc_line<span class="o">)</span>
+<span class="w">                </span><span class="nv">action</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span>
+<span class="w">                    </span><span class="s2">&quot;_op_type&quot;</span>:<span class="w"> </span><span class="s2">&quot;index&quot;</span>,
+<span class="w">                    </span><span class="s2">&quot;_index&quot;</span>:<span class="w"> </span>meta<span class="o">[</span><span class="s2">&quot;index&quot;</span><span class="o">][</span><span class="s2">&quot;_index&quot;</span><span class="o">]</span>,
+<span class="w">                    </span><span class="s2">&quot;_id&quot;</span>:<span class="w"> </span>meta<span class="o">[</span><span class="s2">&quot;index&quot;</span><span class="o">]</span>.get<span class="o">(</span><span class="s2">&quot;_id&quot;</span><span class="o">)</span>,
+<span class="w">                    </span><span class="s2">&quot;_source&quot;</span>:<span class="w"> </span>doc
+<span class="w">                </span><span class="o">}</span>
+<span class="w">                </span>yield<span class="w"> </span>action
+
+<span class="w">    </span>success,<span class="w"> </span><span class="nv">failed</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>,<span class="w"> </span><span class="m">0</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>ok,<span class="w"> </span>result<span class="w"> </span><span class="k">in</span><span class="w"> </span>streaming_bulk<span class="o">(</span>es,<span class="w"> </span>generate_actions<span class="o">()</span>,<span class="w"> </span><span class="nv">raise_on_error</span><span class="o">=</span>False<span class="o">)</span>:
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>ok:
+<span class="w">            </span><span class="nv">success</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="m">1</span>
+<span class="w">        </span><span class="k">else</span>:
+<span class="w">            </span><span class="nv">failed</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="m">1</span>
+
+<span class="w">    </span>print<span class="o">(</span>f<span class="s2">&quot;Imported: {success} documents&quot;</span><span class="o">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>failed:
+<span class="w">        </span>print<span class="o">(</span>f<span class="s2">&quot;WARNING: Failed: {failed} documents&quot;</span><span class="o">)</span>
+
+def<span class="w"> </span>main<span class="o">()</span>:
+<span class="w">    </span><span class="nv">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>parse_args<span class="o">()</span>
+
+<span class="w">    </span>try:
+<span class="w">        </span>import_jsonl<span class="o">(</span>args.file_name,<span class="w"> </span>args.host,<span class="w"> </span>args.port<span class="o">)</span>
+<span class="w">    </span>except<span class="w"> </span>Exception<span class="w"> </span>as<span class="w"> </span>e:
+<span class="w">        </span>print<span class="o">(</span>f<span class="s2">&quot;ERROR: {e}&quot;</span><span class="o">)</span>
+<span class="w">        </span>sys.exit<span class="o">(</span><span class="m">1</span><span class="o">)</span>
+
+<span class="k">if</span><span class="w"> </span><span class="nv">__name__</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;__main__&quot;</span>:
+<span class="w">    </span>main<span class="o">()</span>
+</code></pre></div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: February 03, 2026</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

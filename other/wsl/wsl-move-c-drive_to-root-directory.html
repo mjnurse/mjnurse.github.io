@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Set Default User For WSL Ubuntu" />
+    <meta name="description" content="WSL Move C Drive to Root Directory" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>Set Default User For WSL Ubuntu</title>
+    <title>WSL Move C Drive to Root Directory</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
@@ -90,32 +90,13 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/other/wsl/Reset_User_Password_For_WSL_Ubuntu.md">Set Default User For WSL Ubuntu</a></h1>
-<p>To do this you need to switch the default user for WSL Ubuntu to root.  WSL will not promot for a root password.  Run WSL, update the user password and then reset the default user back to your username.</p>
-<p>The command depend on the version of Ubuntu you have installed.  Press the windows key and type "Ubuntu" and you should see the Unbuntu app listed which may include a version number.  If so, add this to the end on the <code>ubuntu</code> command.</p>
-<h3 id="step-1-update-wsl-ubuntu-default-user-to-root">Step 1 - Update WSL Ubuntu Default User to Root</h3>
-<p>In a windows <code>cmd</code> shell.</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="nv">ubuntu</span><span class="w"> </span><span class="nv">config</span><span class="w"> </span><span class="o">--</span><span class="nv">default</span><span class="o">-</span><span class="nv">user</span><span class="w"> </span><span class="nv">root</span>
-
-#<span class="w"> </span><span class="nv">Or</span><span class="w"> </span><span class="k">for</span>,<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nv">example</span>,<span class="w"> </span><span class="nv">version</span><span class="w"> </span><span class="mi">22</span>.<span class="mi">04</span>:
-
-<span class="o">&gt;</span><span class="w"> </span><span class="nv">ubuntu2204</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nv">default</span><span class="o">-</span><span class="nv">user</span><span class="w"> </span><span class="nv">root</span>
-</code></pre></div>
-
-<h3 id="step-2-reset-password">Step 2 - Reset Password</h3>
-<p>Run WSL Ubuntu password command.</p>
-<p>In a windows <code>cmd</code> shell.</p>
-<div class="codehilite"><pre><span></span><code>&gt; wsl passwd martin
-</code></pre></div>
-
-<h3 id="step-3-reset-wsl-ubuntu-default-user-back-to-your-username">Step 3 - Reset WSL Ubuntu Default User Back to Your Username</h3>
-<p>In a windows <code>cmd</code> shell.</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="nv">ubuntu</span><span class="w"> </span><span class="nv">config</span><span class="w"> </span><span class="o">--</span><span class="nv">default</span><span class="o">-</span><span class="nv">user</span><span class="w"> </span><span class="nv">martin</span><span class="w"> </span>
-
-#<span class="w"> </span><span class="nv">Or</span><span class="w"> </span><span class="k">for</span>,<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="nv">example</span>,<span class="w"> </span><span class="nv">version</span><span class="w"> </span><span class="mi">22</span>.<span class="mi">04</span>:
-
-<span class="o">&gt;</span><span class="w"> </span><span class="nv">ubuntu2204</span><span class="w"> </span><span class="o">--</span><span class="w"> </span><span class="nv">default</span><span class="o">-</span><span class="nv">user</span><span class="w"> </span><span class="nv">martin</span>
-</code></pre></div>
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/other/wsl/wsl-move-c-drive_to-root-directory.md">WSL Move C Drive to Root Directory</a></h1>
+<p><code>sudo mkdir -p /c</code> </p>
+<p>Update /etc/fstab; requires su.</p>
+<p><code>sudo sh -c "echo '/mnt/c /c none bind' &gt;&gt; /etc/fstab"</code></p>
+<p>Reload fstab; requires su.</p>
+<p><code>sudo mount -a</code></p>
+<hr>
         </div>
       </article>
     </main>

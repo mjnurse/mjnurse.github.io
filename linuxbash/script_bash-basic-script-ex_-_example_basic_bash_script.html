@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="wsl" />
+    <meta name="description" content="bash-basic-script-ex - Example Basic Bash Script" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>wsl</title>
+    <title>bash-basic-script-ex - Example Basic Bash Script</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
@@ -90,18 +90,28 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1>wsl</h1>
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script_bash-basic-script-ex_-_Example_Basic_Bash_Script.md">bash-basic-script-ex - Example Basic Bash Script</a></h1>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
+<span class="s2">usage: &lt;&lt;FILENAME&gt;&gt; [options] &lt;filename&gt;</span>
+<span class="s2">-h : This help text.</span>
+<span class="s2">&quot;</span>
 
-<ul class="page-list">
-  <li><a href="/other/wsl/reset-user-password-for-wsl-ubuntu.html" data-number="1"><span class="page-number">1</span>Set Default User For WSL Ubuntu</a></li>
-  <li><a href="/other/wsl/set-default-user-for-wsl-ubuntu.html" data-number="2"><span class="page-number">2</span>Set Default User For WSL Ubuntu</a></li>
-  <li><a href="/other/wsl/shrink-wsl-virtual-disk.html" data-number="3"><span class="page-number">3</span>Shrink WSL Virtual Disk</a></li>
-  <li><a href="/other/wsl/silence_the-bell_in-bash.html" data-number="4"><span class="page-number">4</span>Silence the Bell in Bash</a></li>
-  <li><a href="/other/wsl/window-wsl-change-password.html" data-number="5"><span class="page-number">5</span>Window WSL Change Password</a></li>
-  <li><a href="/other/wsl/wsl-allow_chmod-on-windows-folders.html" data-number="6"><span class="page-number">6</span>WSL Allow chmod On Windows Folders</a></li>
-  <li><a href="/other/wsl/wsl-move-c-drive_to-root-directory.html" data-number="7"><span class="page-number">7</span>WSL Move C Drive to Root Directory</a></li>
-</ul>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Example Basic Bash Script&quot;</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Example Basic Bash Script&quot;</span>
 
+<span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
+<span class="w">    </span>-h<span class="p">|</span>--help<span class="o">)</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="nb">exit</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="k">esac</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+</code></pre></div>
         </div>
       </article>
     </main>
@@ -119,7 +129,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: </p>
+      <p>Last updated: February 03, 2026</p>
     </footer>
 
     <div class="scroll-container">

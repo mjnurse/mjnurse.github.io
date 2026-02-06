@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Window WSL Change Password" />
+    <meta name="description" content="Silence the Bell in Bash" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>Window WSL Change Password</title>
+    <title>Silence the Bell in Bash</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
@@ -90,15 +90,10 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/other/wsl/Window_WSL_Change_Password.md">Window WSL Change Password</a></h1>
-<p>Close any Ubuntu windows.</p>
-<p>Open a cmd window - run as administrator.</p>
-<p>Run: <code>ubuntu config --default-user root</code>.</p>
-<p>Open Ubuntu.  Will be logged in as root.</p>
-<p>To change root password: <code>passwd</code>.</p>
-<p>To change password of another user <code>passwd martin</code>.</p>
-<p>Close Ubuntu window.</p>
-<p>Run: <code>ubuntu config --default-user martin</code>.</p>
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/other/wsl/silence_the-bell_in-bash.md">Silence the Bell in Bash</a></h1>
+<p>Running Ubuntu / bash in WSL.  Every time I TAB to auto-complete the Bell rings.  Very annoying.</p>
+<p>To disable the Bell in bash you need to uncomment (or add if not already there) the line set <code>bell-style none</code> in the file <code>/etc/inputrc</code>.</p>
+<hr>
         </div>
       </article>
     </main>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="bash-basic-script-example - Example Bash Script" />
+    <meta name="description" content="gen-python - Generates a python script from a template" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>bash-basic-script-example - Example Bash Script</title>
+    <title>gen-python - Generates a python script from a template</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
@@ -90,16 +90,17 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script_bash-basic-script-example_-_Example_Bash_Script.md">bash-basic-script-example - Example Bash Script</a></h1>
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script_gen-python_-_Generates_a_python_script_from_a_template.md">gen-python - Generates a python script from a template</a></h1>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 <span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
-<span class="s2">usage: &lt;&lt;FILENAME&gt;&gt; [options] &lt;filename&gt;</span>
+<span class="s2">usage: gen_python [options] &lt;filename&gt;</span>
 <span class="s2">-h : This help text.</span>
 <span class="s2">&quot;</span>
 
-<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;tbc&quot;</span>
-<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Example Bash Script&quot;</span>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Generates a python script from a template&quot;</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Generates a python script from a template&quot;</span>
 
+<span class="nv">basic_yn</span><span class="o">=</span>n
 <span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
 <span class="w">    </span>-h<span class="p">|</span>--help<span class="o">)</span>
 <span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
@@ -107,10 +108,33 @@
 <span class="w">        </span><span class="p">;;</span>
 <span class="k">esac</span>
 
+<span class="nv">new_file</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Error: no filename provided&quot;</span>
 <span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
 <span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 <span class="k">fi</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$new_file</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Error: file: </span><span class="nv">$1</span><span class="s2"> already exists&quot;</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+
+cat<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$B</span><span class="s2">/python-script-example&quot;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$new_file</span><span class="s2">&quot;</span>
+
+chmod<span class="w"> </span>+x<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$new_file</span><span class="s2">&quot;</span>
+
+<span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Edit </span><span class="nv">$1</span><span class="s2">? c - code, g - gvim, n - No [cgN]: &quot;</span><span class="w"> </span>cgn
+
+<span class="k">case</span><span class="w"> </span><span class="si">${</span><span class="nv">cgn</span><span class="p">^</span><span class="si">}</span><span class="w"> </span><span class="k">in</span>
+<span class="w">    </span>C<span class="o">)</span>
+<span class="w">        </span>code<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$new_file</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="w">    </span>G<span class="o">)</span>
+<span class="w">        </span>gvim<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$new_file</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="k">esac</span>
 </code></pre></div>
         </div>
       </article>
@@ -129,7 +153,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: January 02, 2026</p>
+      <p>Last updated: February 03, 2026</p>
     </footer>
 
     <div class="scroll-container">
