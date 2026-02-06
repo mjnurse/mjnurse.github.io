@@ -540,9 +540,9 @@
   },
   {
     "id": "77",
-    "title": "Set Default User For WSL Ubuntu",
+    "title": "Reset User Password for Default User in WSL",
     "url": "/other/wsl/reset-user-password-for-wsl-ubuntu.html",
-    "content": "To do this you need to switch the default user for WSL Ubuntu to root. WSL will not promot for a root password. Run WSL, update the user password and then reset the default user back to your username. The command depend on the version of Ubuntu you have installed. Press the windows key and type \"Ubuntu\" and you should see the Unbuntu app listed which may include a version number. If so, add this to the end on the ubuntu command. Step 1 - Update WSL Ubuntu Default User to Root In a windows cmd sh",
+    "content": "To do this you need to switch the default user for WSL Ubuntu to root. WSL will not prompt for a root password. Run WSL, update the user password and then reset the default user back to your username. The command depend on the version of Ubuntu you have installed. Press the windows key and type \"Ubuntu\" and you should see the Ubuntu app listed which may include a version number. If so, add this to the end on the ubuntu command. Step 1 - Update WSL Ubuntu Default User to Root In a windows cmd she",
     "type": "page"
   },
   {
