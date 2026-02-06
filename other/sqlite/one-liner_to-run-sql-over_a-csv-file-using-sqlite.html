@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="One Liner to Run SQL Over a CSV File Using Sqlite" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>One Liner to Run SQL Over a CSV File Using Sqlite</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/other/sqlite/one-liner_to-run-sql-over_a-csv-file-using-sqlite.md">One Liner to Run SQL Over a CSV File Using Sqlite</a></h1>
+<p>Assume we have a cvs file <code>people.csv</code>:</p>
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>cat<span class="w"> </span>people.csv
+name,sex,age
+martin,m,21
+paul,m,50
+dave,m,58
+sarah,f,33
+anna,f,53
+</code></pre></div>
+
+<p>We can run a SQL command on this file using a single line (Linux) <code>sqlite3</code> command:</p>
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>sqlite3<span class="w"> </span>:memory:<span class="w"> </span><span class="se">\ </span><span class="w">                            </span><span class="c1"># Use an in memory database</span>
+<span class="w">         </span>-cmd<span class="w"> </span><span class="s1">&#39;.mode csv&#39;</span><span class="w"> </span><span class="se">\ </span><span class="w">                     </span><span class="c1"># Switch to csv mode for import</span>
+<span class="w">         </span>-cmd<span class="w"> </span><span class="s1">&#39;.import &lt;filename&gt; &lt;tablename&gt;&#39;</span><span class="w"> </span><span class="se">\ </span><span class="c1"># Import file as csv</span>
+<span class="w">         </span>-cmd<span class="w"> </span><span class="s1">&#39;.mode column&#39;</span><span class="w">                     </span><span class="c1"># Switch to column mode for output</span>
+<span class="w">         </span>-header<span class="w"> </span><span class="se">\ </span><span class="w">                              </span><span class="c1"># Show header for output</span>
+<span class="w">         </span><span class="s1">&#39;&lt;sql_statement&gt;&#39;</span>
+</code></pre></div>
+
+<p>An example over <code>people.csv</code>:</p>
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>sqlite3<span class="w"> </span>:memory:<span class="w"> </span>-cmd<span class="w"> </span><span class="s1">&#39;.mode csv&#39;</span><span class="w"> </span>-cmd<span class="w"> </span><span class="s1">&#39;.import people.csv people&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">          </span>-cmd<span class="w"> </span><span class="s1">&#39;.mode column&#39;</span><span class="w"> </span>-header<span class="w"> </span><span class="se">\</span>
+<span class="w">          </span><span class="s1">&#39;SELECT sex, COUNT(*), AVG(age) FROM people GROUP BY sex&#39;</span>
+
+sex<span class="w">         </span>COUNT<span class="o">(</span>*<span class="o">)</span><span class="w">    </span>AVG<span class="o">(</span>age<span class="o">)</span>
+----------<span class="w">  </span>----------<span class="w">  </span>----------
+f<span class="w">           </span><span class="m">2</span><span class="w">           </span><span class="m">43</span>.0
+m<span class="w">           </span><span class="m">3</span><span class="w">           </span><span class="m">43</span>.0
+</code></pre></div>
+
+<hr />
+<p>How well does it perform?  Let's run over 500,000 records:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Create a 500,000 record file.  Take 5 rows (no header) from people.csv and write it</span>
+<span class="c1"># 100 times to people2.csv</span>
+
+&gt;<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="o">((</span><span class="nv">i</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="w"> </span>i&lt;<span class="m">100</span><span class="p">;</span><span class="w"> </span>i++<span class="o">))</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>tail<span class="w"> </span>-5<span class="w"> </span>people.csv<span class="w"> </span>&gt;&gt;<span class="w"> </span>people2.csv<span class="p">;</span><span class="w"> </span><span class="k">done</span>
+
+<span class="c1"># Write people2.csv 1000 times into people3.csv</span>
+
+&gt;<span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="o">((</span><span class="nv">i</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="w"> </span>i&lt;<span class="m">1000</span><span class="p">;</span><span class="w"> </span>i++<span class="o">))</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>cat<span class="w"> </span>people2.csv<span class="w"> </span>&gt;&gt;<span class="w"> </span>people3.csv<span class="p">;</span><span class="w"> </span><span class="k">done</span>
+
+<span class="c1"># Add the header and 500,000 lines to people4.csv</span>
+
+&gt;<span class="w"> </span>head<span class="w"> </span>-1<span class="w"> </span>people.csv<span class="w"> </span>&gt;<span class="w"> </span>people4.csv<span class="p">;</span><span class="w"> </span>cat<span class="w"> </span>people3.csv<span class="w"> </span>&gt;&gt;<span class="w"> </span>people4.csv
+
+<span class="c1"># Check we have 500,000 records and 1 line header</span>
+
+&gt;<span class="w"> </span>wc<span class="w"> </span>-l<span class="w"> </span>people4.csv
+<span class="m">500001</span><span class="w"> </span>people4.csv
+
+<span class="c1"># Run the SQL query over people4.csv</span>
+
+&gt;<span class="w"> </span><span class="nb">time</span><span class="w"> </span>sqlite3<span class="w"> </span>:memory:<span class="w"> </span>-cmd<span class="w"> </span><span class="s1">&#39;.mode csv&#39;</span><span class="w"> </span>-cmd<span class="w"> </span><span class="s1">&#39;.import people4.csv people&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>-cmd<span class="w"> </span><span class="s1">&#39;.mode column&#39;</span><span class="w"> </span>-header<span class="w"> </span><span class="se">\</span>
+<span class="w">       </span><span class="s1">&#39;SELECT sex, COUNT(*), AVG(age) FROM people GROUP BY sex&#39;</span>
+
+sex<span class="w">         </span>COUNT<span class="o">(</span>*<span class="o">)</span><span class="w">    </span>AVG<span class="o">(</span>age<span class="o">)</span>
+----------<span class="w">  </span>----------<span class="w">  </span>----------
+f<span class="w">           </span><span class="m">200000</span><span class="w">      </span><span class="m">43</span>.0
+m<span class="w">           </span><span class="m">300000</span><span class="w">      </span><span class="m">43</span>.0
+
+real<span class="w">    </span>0m0.924s
+user<span class="w">    </span>0m0.641s
+sys<span class="w">     </span>0m0.188s
+</code></pre></div>
+
+<p>Roughly 1 second.  Not bad.</p>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: December 11, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>
