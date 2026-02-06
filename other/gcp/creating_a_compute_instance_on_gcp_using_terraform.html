@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Google Cloud Platform" />
+    <meta name="description" content="Creating a Compute Instance on GCP Using Terraform" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>Google Cloud Platform</title>
+    <title>Creating a Compute Instance on GCP Using Terraform</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
@@ -90,9 +90,8 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/other/gcp/Creating_a_Compute_Instance_on_GCP_Using_Terraform.md">Google Cloud Platform</a></h1>
-<h1 id="creating-a-compute-instance-on-gcp-using-terraform">Creating a Compute Instance on GCP Using Terraform</h1>
-<h3 id="download-and-install-terraform">Download and Install terraform</h3>
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/other/gcp/Creating_a_Compute_Instance_on_GCP_Using_Terraform.md">Creating a Compute Instance on GCP Using Terraform</a></h1>
+<h2 id="download-and-install-terraform">Download and Install terraform</h2>
 <p>Download the most recent version of Terraform.  No install, its just an executable.  Move it to an accessible location.</p>
 <div class="codehilite"><pre><span></span><code><span class="k">&gt; </span><span class="ge">wget https://releases.hashicorp.com/terraform/0.11.11/terraform_0.11.11_linux_amd64.zip</span>
 ...
@@ -104,7 +103,7 @@
 Terraform v0.11.11
 </code></pre></div>
 
-<h3 id="create-a-terraform-config-file">Create a terraform Config File</h3>
+<h2 id="create-a-terraform-config-file">Create a terraform Config File</h2>
 <p>Create a provider config file: <code>main.tf</code></p>
 <div class="codehilite"><pre><span></span><code>provider<span class="w"> </span>&quot;google&quot;<span class="w"> </span>{
 <span class="w">  </span>project<span class="w"> </span>=<span class="w"> </span>&quot;mjnurse-terraform&quot;
@@ -137,14 +136,14 @@ resource<span class="w"> </span>&quot;google_compute_network&quot;<span class="w
 }
 </code></pre></div>
 
-<h3 id="set-up-the-required-credentials">Set Up the Required Credentials</h3>
+<h2 id="set-up-the-required-credentials">Set Up the Required Credentials</h2>
 <p>From the Navigation Menu, select APIs &amp; Services, Credentials.  From the Create credentials drop down, select 'Service account key'.  ENsure that the JSON option is selected amd choose the 'Compute Engine default service account' from the drop down.  Click create and a JSON document will be downloaded by the browser.</p>
 <p>Copy the contents of the JSON download in to a file called google_cloud_keyfile.json.</p>
 <p>create and environment variavle to point to this file:</p>
 <div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="k">export</span><span class="w"> </span><span class="n">GOOGLE_CLOUD_KEYFILE_JSON</span><span class="o">=</span><span class="n">google_cloud_keyfile</span><span class="o">.</span><span class="n">json</span>
 </code></pre></div>
 
-<h3 id="run-the-terraform-script-to-create-the-compute-instance">Run the terraform Script to Create the Compute Instance</h3>
+<h2 id="run-the-terraform-script-to-create-the-compute-instance">Run the terraform Script to Create the Compute Instance</h2>
 <p>Run terraform init:</p>
 <div class="codehilite"><pre><span></span><code><span class="k">&gt; </span><span class="ge">terraform init</span>
 
@@ -180,7 +179,7 @@ Terraform has been successfully initialized!
 <span class="n">Apply</span><span class="w"> </span><span class="n">complete</span><span class="err">!</span><span class="w"> </span><span class="nl">Resources</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">added</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">changed</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">destroyed</span><span class="p">.</span>
 </code></pre></div>
 
-<h3 id="removing-the-compute-instance">Removing the Compute Instance</h3>
+<h2 id="removing-the-compute-instance">Removing the Compute Instance</h2>
 <div class="codehilite"><pre><span></span><code><span class="k">&gt; </span><span class="ge">terraform destroy</span>
 
 google_compute_network.vpc_network: Refreshing state... (ID: terraform-network)
@@ -229,7 +228,7 @@ Destroy complete! Resources: 2 destroyed.
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: December 11, 2025</p>
+      <p>Last updated: February 06, 2026</p>
     </footer>
 
     <div class="scroll-container">
