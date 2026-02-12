@@ -116,8 +116,27 @@
 <span class="s2">AUTHOR</span>
 <span class="s2">    mjnurse.github.io - 2025</span>
 <span class="s2">&quot;</span>
+
 <span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Improve text using Claude AI&quot;</span>
 <span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Improve text using Claude AI&quot;</span>
+
+<span class="c1"># Terminal Colours</span>
+<span class="nv">cdef</span><span class="o">=</span><span class="s2">&quot;\e[39m&quot;</span><span class="w"> </span><span class="c1"># default colour</span>
+<span class="nv">cbla</span><span class="o">=</span><span class="s2">&quot;\e[30m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cgra</span><span class="o">=</span><span class="s2">&quot;\e[90m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clgra</span><span class="o">=</span><span class="s2">&quot;\e[37m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cwhi</span><span class="o">=</span><span class="s2">&quot;\e[97m&quot;</span>
+<span class="nv">cred</span><span class="o">=</span><span class="s2">&quot;\e[31m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cgre</span><span class="o">=</span><span class="s2">&quot;\e[32m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cyel</span><span class="o">=</span><span class="s2">&quot;\e[33m&quot;</span><span class="w"> </span>
+<span class="nv">cblu</span><span class="o">=</span><span class="s2">&quot;\e[34m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cmag</span><span class="o">=</span><span class="s2">&quot;\e[35m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">ccya</span><span class="o">=</span><span class="s2">&quot;\e[36m&quot;</span><span class="p">;</span>
+<span class="nv">clred</span><span class="o">=</span><span class="s2">&quot;\e[91m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clgre</span><span class="o">=</span><span class="s2">&quot;\e[92m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clyel</span><span class="o">=</span><span class="s2">&quot;\e[93m&quot;</span>
+<span class="nv">clblu</span><span class="o">=</span><span class="s2">&quot;\e[94m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clmag</span><span class="o">=</span><span class="s2">&quot;\e[95m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clcya</span><span class="o">=</span><span class="s2">&quot;\e[96m&quot;</span>
+
+<span class="k">function</span><span class="w"> </span>cecho<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nv">color</span><span class="o">=</span>c<span class="nv">$1</span><span class="p">;</span><span class="w"> </span><span class="nb">shift</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="p">!color</span><span class="si">}</span><span class="nv">$*</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="o">}</span>
+
+<span class="k">function</span><span class="w"> </span>cpf<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nv">color</span><span class="o">=</span>c<span class="nv">$1</span><span class="p">;</span><span class="w"> </span><span class="nb">shift</span>
+<span class="w">    </span><span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="p">!color</span><span class="si">}</span><span class="nv">$*</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="o">}</span>
 
 <span class="nv">try</span><span class="o">=</span><span class="s2">&quot;Try </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h for more information&quot;</span>
 <span class="nv">tmp</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">help_text</span><span class="p">##*USAGE</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -148,23 +167,31 @@
 <span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
 
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$request</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">        </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Text to improve: &quot;</span><span class="w"> </span>input_text
+<span class="w">        </span>cpf<span class="w"> </span>lcya<span class="w"> </span><span class="s2">&quot;Text to improve (CTRL-D to end input): &quot;</span>
+<span class="w">        </span><span class="nv">tmp</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>cat<span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="nv">input_text</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmp</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;\r&quot;</span><span class="k">)</span><span class="s2">&quot;</span>
 <span class="w">    </span><span class="k">else</span>
 <span class="w">        </span><span class="nv">input_text</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$request</span><span class="s2">&quot;</span>
 <span class="w">    </span><span class="k">fi</span>
 
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$input_text</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Exiting.&quot;</span>
-<span class="w">        </span><span class="nb">exit</span><span class="w"> </span><span class="m">0</span>
+<span class="w">        </span><span class="nv">input_text</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>powershell.exe<span class="w"> </span>-NoProfile<span class="w"> </span>-Command<span class="w"> </span>Get-Clipboard<span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$input_text</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span>cecho<span class="w"> </span>lcya<span class="w"> </span><span class="s2">&quot;Using clipboard content as input:&quot;</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$input_text</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Exiting.&quot;</span>
+<span class="w">            </span><span class="nb">exit</span><span class="w"> </span><span class="m">0</span>
+<span class="w">        </span><span class="k">fi</span>
 <span class="w">    </span><span class="k">fi</span>
 
 <span class="w">    </span><span class="nb">echo</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Generating improved text...&quot;</span>
+<span class="w">    </span>cecho<span class="w"> </span>lcya<span class="w"> </span><span class="s2">&quot;Generating improved text...&quot;</span>
 
 <span class="w">    </span><span class="nv">response</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>improve<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">input_text</span><span class="si">}</span><span class="s2">&quot;</span><span class="k">)</span><span class="s2">&quot;</span>
 
 <span class="w">    </span><span class="nb">echo</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Response (copied to clipboard):&quot;</span>
+<span class="w">    </span>cecho<span class="w"> </span>lcya<span class="w"> </span><span class="s2">&quot;Response (copied to clipboard):&quot;</span>
 <span class="w">    </span><span class="nb">echo</span>
 <span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$response</span><span class="s2">&quot;</span>
 <span class="w">    </span><span class="nb">echo</span>
@@ -194,7 +221,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: January 20, 2026</p>
+      <p>Last updated: February 10, 2026</p>
     </footer>
 
     <div class="scroll-container">

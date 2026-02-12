@@ -170,11 +170,17 @@ which<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$nam
 <span class="k">fi</span>
 
 <span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Searching ./* ...&quot;</span>
-find<span class="w"> </span>.<span class="w"> </span>-iname<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$name</span><span class="s2">&quot;</span><span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-exec<span class="w"> </span>realpath<span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="se">\;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$tmp</span>
+find<span class="w"> </span>.<span class="w"> </span>-iname<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$name</span><span class="s2">&quot;</span><span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-not<span class="w"> </span>-path<span class="w"> </span><span class="s1">&#39;*/.*&#39;</span><span class="w"> </span>-not<span class="w"> </span>-name<span class="w"> </span><span class="s1">&#39;.*&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-exec<span class="w"> </span>realpath<span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="se">\;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$tmp</span>
 <span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Searching MJN/* ...&quot;</span>
-find<span class="w"> </span><span class="s2">&quot;/c/Users/MartinNurse/OneDrive - Quantexa Ltd/MJN&quot;</span><span class="w"> </span>-iname<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$name</span><span class="s2">&quot;</span><span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-exec<span class="w"> </span>realpath<span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="se">\;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$tmp</span>
+find<span class="w"> </span><span class="s2">&quot;/c/Users/MartinNurse/OneDrive - Quantexa Ltd/MJN&quot;</span><span class="w"> </span>-iname<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$name</span><span class="s2">&quot;</span><span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-not<span class="w"> </span>-path<span class="w"> </span><span class="s1">&#39;*/.*&#39;</span><span class="w"> </span>-not<span class="w"> </span>-name<span class="w"> </span><span class="s1">&#39;.*&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-exec<span class="w"> </span>realpath<span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="se">\;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$tmp</span>
 <span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Searching ~/mjnurse&quot;</span>
-find<span class="w"> </span>~/mjnurse<span class="w"> </span>-iname<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$name</span><span class="s2">&quot;</span><span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-exec<span class="w"> </span>realpath<span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="se">\;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$tmp</span>
+find<span class="w"> </span>~/mjnurse<span class="w"> </span>-iname<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$name</span><span class="s2">&quot;</span><span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-not<span class="w"> </span>-path<span class="w"> </span><span class="s1">&#39;*/.*&#39;</span><span class="w"> </span>-not<span class="w"> </span>-name<span class="w"> </span><span class="s1">&#39;.*&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-exec<span class="w"> </span>realpath<span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="se">\;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$tmp</span>
 sort<span class="w"> </span>-u<span class="w"> </span><span class="nv">$tmp</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;/mjnurse\.github\.io/d&quot;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$tmp2</span>
 mv<span class="w"> </span>-f<span class="w"> </span><span class="nv">$tmp2</span><span class="w"> </span><span class="nv">$tmp</span>
 
@@ -227,7 +233,7 @@ mv<span class="w"> </span>-f<span class="w"> </span><span class="nv">$tmp2</span
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: February 03, 2026</p>
+      <p>Last updated: February 10, 2026</p>
     </footer>
 
     <div class="scroll-container">
