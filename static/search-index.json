@@ -1324,9 +1324,9 @@
   },
   {
     "id": "189",
-    "title": "goto - Example Bash Script",
+    "title": "goto - Quickly navigate to frequently used directories",
     "url": "/linuxbash/script-goto.html",
-    "content": "#!/usr/bin/env bash help_text=&quot; NAME bash-func - One line description. USAGE bash-func [options] &lt;parameters&gt; OPTIONS -x Description... -h|--help Show help text. DESCRIPTION Description description description description. AUTHOR mjnurse.github.io - 2026 &quot; help_line=&quot;Example Bash Script&quot; web_desc_line=&quot;Example Bash Script&quot; # set -x # for debugging # Terminal Colours cdef=&quot;\\e[39m&quot; # default colour cbla=&quot;\\e[30m&quot;; cgra=&quot;\\e[90m&quot;; clgr",
+    "content": "#!/usr/bin/env bash help_text=&#39; NAME goto - quickly navigate to frequently used directories USAGE goto [options] [&lt;directory-name-details&gt;] OPTIONS -a|--add &lt;directory-name-details&gt; Add directory(s) to the list of saved directories. All directories which have a name which starts with the provided details will be added. -r|--redirection Output the commands to change the current directory to the a directory selected in the previous run of goto, and list its contents. -h|--help Show",
     "type": "page"
   },
   {

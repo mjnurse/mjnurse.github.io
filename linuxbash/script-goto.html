@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="goto - Example Bash Script" />
+    <meta name="description" content="goto - Quickly navigate to frequently used directories" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>goto - Example Bash Script</title>
+    <title>goto - Quickly navigate to frequently used directories</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
@@ -90,30 +90,53 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-goto.md">goto - Example Bash Script</a></h1>
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-goto.md">goto - Quickly navigate to frequently used directories</a></h1>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
-<span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
-<span class="s2">NAME</span>
-<span class="s2">    bash-func - One line description.</span>
+<span class="nv">help_text</span><span class="o">=</span><span class="s1">&#39;</span>
+<span class="s1">NAME</span>
+<span class="s1">    goto - quickly navigate to frequently used directories</span>
 
-<span class="s2">USAGE</span>
-<span class="s2">    bash-func [options] &lt;parameters&gt;</span>
+<span class="s1">USAGE</span>
+<span class="s1">    goto [options] [&lt;directory-name-details&gt;]</span>
 
-<span class="s2">OPTIONS</span>
-<span class="s2">    -x</span>
-<span class="s2">        Description...</span>
+<span class="s1">OPTIONS</span>
+<span class="s1">    -a|--add &lt;directory-name-details&gt;</span>
+<span class="s1">        Add directory(s) to the list of saved directories. All directories which have a name which starts</span>
+<span class="s1">        with the provided details will be added.</span>
 
-<span class="s2">    -h|--help</span>
-<span class="s2">        Show help text.</span>
+<span class="s1">    -r|--redirection</span>
+<span class="s1">        Output the commands to change the current directory to the a directory selected in the previous</span>
+<span class="s1">        run of goto, and list its contents.</span>
 
-<span class="s2">DESCRIPTION</span>
-<span class="s2">    Description description description description.</span>
+<span class="s1">    -h|--help</span>
+<span class="s1">        Show help text.</span>
 
-<span class="s2">AUTHOR</span>
-<span class="s2">    mjnurse.github.io - 2026</span>
-<span class="s2">&quot;</span>
-<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Example Bash Script&quot;</span>
-<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Example Bash Script&quot;</span>
+<span class="s1">DESCRIPTION</span>
+<span class="s1">    Navigate to frequently used directories by matching the provided directory name details against a list</span>
+<span class="s1">    of saved directories. The list of saved directories is stored in a file named goto.dat in the same</span>
+<span class="s1">    directory as the goto script. Each line in the file should contain a directory name and its corresponding</span>
+<span class="s1">    path, separated by a comma.</span>
+
+<span class="s1">    Calling goto without any arguments will display the contents of goto.dat. </span>
+
+<span class="s1">    When the script is run with a directory name details argument, it searches the goto.dat file for matches.</span>
+<span class="s1">    If there is a single match, it outputs the corresponding path. If there are multiple matches, it lists</span>
+<span class="s1">    them and prompts the user to select one.</span>
+
+<span class="s1">    As you cannot change the current directory of a parent process, this script needs to be called from a</span>
+<span class="s1">    function. The function is called in two parts: the first part calls goto with the directory name details,</span>
+<span class="s1">    and the second part evaluates the output of goto -r to change the current directory.</span>
+
+<span class="s1">    g () {</span>
+<span class="s1">        goto &quot;$1&quot;</span>
+<span class="s1">        eval &quot;$(goto -r)&quot;</span>
+<span class="s1">    }</span>
+
+<span class="s1">AUTHOR</span>
+<span class="s1">    mjnurse.github.io - 2026</span>
+<span class="s1">&#39;</span>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Quickly navigate to frequently used directories&quot;</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Quickly navigate to frequently used directories&quot;</span>
 
 <span class="c1"># set -x # for debugging</span>
 
@@ -144,7 +167,7 @@
 <span class="w">        </span>-a<span class="p">|</span>--add<span class="o">)</span>
 <span class="w">            </span><span class="nb">shift</span>
 <span class="w">            </span>ls<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>*<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/\(^.*\/\)\(.*\)/\2, \1\2/&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$0</span>.dat
-<span class="w">            </span>cat<span class="w"> </span><span class="nv">$0</span>.dat<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;/^ *$/d;</span>
+<span class="w">                </span>cat<span class="w"> </span><span class="nv">$0</span>.dat<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;/^ *$/d;</span>
 <span class="s1">                              s/,/                                            /; </span>
 <span class="s1">                              s/\(^................\)[^ ]*   *\(.*\)/\1, \2/&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-u<span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$0</span>.tmp
 <span class="w">            </span>mv<span class="w"> </span><span class="nv">$0</span>.tmp<span class="w"> </span><span class="nv">$0</span>.dat
@@ -154,7 +177,7 @@
 <span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
 <span class="w">            </span><span class="nb">exit</span>
 <span class="w">            </span><span class="p">;;</span>
-<span class="w">        </span>-r<span class="o">)</span>
+<span class="w">        </span>-r<span class="p">|</span>--redirection<span class="o">)</span>
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$0</span><span class="s2">.tmp&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">                </span><span class="nv">dest</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>cat<span class="w"> </span><span class="nv">$0</span>.tmp<span class="k">)</span><span class="s2">&quot;</span>
 <span class="w">                </span>rm<span class="w"> </span><span class="nv">$0</span>.tmp
