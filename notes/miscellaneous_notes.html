@@ -94,11 +94,15 @@
 <p>The notes captured in the Linux notes tool = <code>n</code>.</p>
 <div class="codehilite"><pre><span></span><code><span class="err">@</span><span class="n">esql</span><span class="w"> </span><span class="s1">&#39;SELECT id.value FROM &quot;quantexa-mdm-example-entity-store-business-all-data&quot;&#39;</span><span class="w"> </span><span class="c1"># Elasticsearch</span>
 
-<span class="n">Excel</span><span class="p">:</span><span class="w"> </span><span class="n">Open</span><span class="w"> </span><span class="n">Dropdown</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">Cell</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ALT</span><span class="o">-</span><span class="n">DOWN_ARROW</span>
+<span class="n">Excel</span><span class="p">:</span><span class="w"> </span><span class="n">Open</span><span class="w"> </span><span class="n">Drop</span><span class="o">-</span><span class="n">down</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">Cell</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ALT</span><span class="o">-</span><span class="n">DOWN_ARROW</span>
+
+<span class="n">Windows</span><span class="p">:</span><span class="w"> </span><span class="n">WIN</span><span class="o">-</span><span class="n">H</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">turn</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">dictation</span>
 
 <span class="n">apt</span><span class="p">:</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="n">autoclean</span><span class="w"> </span><span class="c1"># tidy the package cache</span>
 <span class="n">apt</span><span class="p">:</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="n">autoremove</span><span class="w"> </span><span class="c1"># remove unrequired dependencies</span>
 <span class="n">apt</span><span class="p">:</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="o">./</span><span class="n">download</span><span class="o">/</span><span class="n">apt</span><span class="o">.</span><span class="n">deb</span><span class="w"> </span><span class="c1"># install deb files</span>
+
+<span class="n">bash</span><span class="p">:</span><span class="w"> </span><span class="c1">#!/usr/bin/env bash</span>
 
 <span class="n">code</span><span class="p">:</span><span class="w"> </span><span class="n">ALT</span><span class="o">+</span><span class="n">z</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Enable</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="n">wrap</span>
 <span class="n">code</span><span class="p">:</span><span class="w"> </span><span class="n">CTRL</span><span class="o">+</span><span class="p">,</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Open</span><span class="w"> </span><span class="n">Settings</span>
@@ -112,6 +116,8 @@
 <span class="n">find</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">-</span><span class="n">type</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">-</span><span class="n">mtime</span><span class="w"> </span><span class="o">+</span><span class="mi">90</span><span class="w"> </span><span class="c1"># Find files last modified at least 90 days ago</span>
 
 <span class="n">git</span><span class="w"> </span><span class="n">checkout</span><span class="w"> </span><span class="n">tags</span><span class="o">/&lt;</span><span class="n">tag</span><span class="w"> </span><span class="n">name</span><span class="o">&gt;</span><span class="w"> </span><span class="c1"># checkout a git tag.</span>
+
+<span class="n">ln</span><span class="w"> </span><span class="o">-</span><span class="n">s</span><span class="w"> </span><span class="o">&lt;</span><span class="n">target_file_or_dir</span><span class="o">&gt;</span><span class="w"> </span><span class="p">[</span><span class="o">&lt;</span><span class="n">link_name</span><span class="o">&gt;</span><span class="p">]</span><span class="w"> </span><span class="c1"># -s symbolic link (ie a pointer), hard link is same item two names</span>
 
 <span class="n">postgres</span><span class="p">:</span><span class="w"> </span><span class="n">ALTER</span><span class="w"> </span><span class="n">ROLE</span><span class="w"> </span><span class="o">&lt;</span><span class="n">username</span><span class="o">&gt;</span><span class="w"> </span><span class="n">SET</span><span class="w"> </span><span class="n">search_path</span><span class="w"> </span><span class="n">TO</span><span class="w"> </span><span class="o">&lt;</span><span class="n">schema</span><span class="w"> </span><span class="n">name</span><span class="o">&gt;</span><span class="p">;</span><span class="w"> </span><span class="c1"># Permanently alter search_path.</span>
 <span class="n">postgres</span><span class="p">:</span><span class="w"> </span><span class="n">SET</span><span class="w"> </span><span class="n">search_path</span><span class="w"> </span><span class="n">TO</span><span class="w"> </span><span class="o">&lt;</span><span class="n">schema</span><span class="w"> </span><span class="n">name</span><span class="o">&gt;</span><span class="p">;</span><span class="w"> </span><span class="c1"># Alter the schema searched.</span>
@@ -154,7 +160,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: February 19, 2026</p>
+      <p>Last updated: February 23, 2026</p>
     </footer>
 
     <div class="scroll-container">

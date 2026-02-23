@@ -150,7 +150,7 @@
     "id": "21",
     "title": "Miscellaneous Notes",
     "url": "/notes/miscellaneous_notes.html",
-    "content": "Miscellaneous Notes The notes captured in the Linux notes tool = n. @esql &#39;SELECT id.value FROM &quot;quantexa-mdm-example-entity-store-business-all-data&quot;&#39; # Elasticsearch Excel: Open Dropdown in Cell - ALT-DOWN_ARROW apt: sudo apt autoclean # tidy the package cache apt: sudo apt autoremove # remove unrequired dependencies apt: sudo apt install ./download/apt.deb # install deb files code: ALT+z - Enable word wrap code: CTRL+, - Open Settings code: CTRL+. - Fix problem code: CTRL+; -",
+    "content": "Miscellaneous Notes The notes captured in the Linux notes tool = n. @esql &#39;SELECT id.value FROM &quot;quantexa-mdm-example-entity-store-business-all-data&quot;&#39; # Elasticsearch Excel: Open Drop-down in Cell - ALT-DOWN_ARROW Windows: WIN-H - turn on dictation apt: sudo apt autoclean # tidy the package cache apt: sudo apt autoremove # remove unrequired dependencies apt: sudo apt install ./download/apt.deb # install deb files bash: #!/usr/bin/env bash code: ALT+z - Enable word wrap code: CT",
     "type": "page"
   },
   {
