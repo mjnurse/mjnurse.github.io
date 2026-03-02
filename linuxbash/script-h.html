@@ -186,7 +186,7 @@
 <span class="w">        </span>cecho<span class="w"> </span>lmag<span class="w"> </span>-------------
 <span class="w">        </span>cecho<span class="w"> </span>lmag<span class="w"> </span>No<span class="w"> </span>help_line:
 <span class="w">        </span>cecho<span class="w"> </span>lmag<span class="w"> </span>-------------
-<span class="w">        </span>cat<span class="w"> </span>/tmp/h.tmp
+<span class="w">        </span>cat<span class="w"> </span>/tmp/h.tmp<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;/\.dat</span>$<span class="s2">/d; /^vimspell/d;&quot;</span>
 <span class="w">    </span><span class="k">fi</span>
 <span class="w">    </span><span class="c1"># Create a file so that the grep command never fails</span>
 <span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;help_line=&quot;tbc&quot;&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>/tmp/h.tmp0
