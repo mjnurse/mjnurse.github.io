@@ -127,6 +127,17 @@
 <span class="w">    </span><span class="c1"># set -o xtrace</span>
 <span class="c1"># fi</span>
 
+<span class="c1"># Terminal Colours</span>
+<span class="nv">cdef</span><span class="o">=</span><span class="s2">&quot;\e[39m&quot;</span><span class="w"> </span><span class="c1"># default colour</span>
+<span class="nv">cbla</span><span class="o">=</span><span class="s2">&quot;\e[30m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cgra</span><span class="o">=</span><span class="s2">&quot;\e[90m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clgra</span><span class="o">=</span><span class="s2">&quot;\e[37m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cwhi</span><span class="o">=</span><span class="s2">&quot;\e[97m&quot;</span>
+<span class="nv">cred</span><span class="o">=</span><span class="s2">&quot;\e[31m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cgre</span><span class="o">=</span><span class="s2">&quot;\e[32m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cyel</span><span class="o">=</span><span class="s2">&quot;\e[33m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cblu</span><span class="o">=</span><span class="s2">&quot;\e[34m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cmag</span><span class="o">=</span><span class="s2">&quot;\e[35m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">ccya</span><span class="o">=</span><span class="s2">&quot;\e[36m&quot;</span><span class="p">;</span>
+<span class="nv">clred</span><span class="o">=</span><span class="s2">&quot;\e[91m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clgre</span><span class="o">=</span><span class="s2">&quot;\e[92m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clyel</span><span class="o">=</span><span class="s2">&quot;\e[93m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clblu</span><span class="o">=</span><span class="s2">&quot;\e[94m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clmag</span><span class="o">=</span><span class="s2">&quot;\e[95m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clcya</span><span class="o">=</span><span class="s2">&quot;\e[96m&quot;</span>
+
+<span class="k">function</span><span class="w"> </span>cecho<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nv">color</span><span class="o">=</span>c<span class="nv">$1</span><span class="p">;</span><span class="w"> </span><span class="nb">shift</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="p">!color</span><span class="si">}</span><span class="nv">$*</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="o">}</span>
+
 <span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Extracts and displays the help_lines&quot;</span>
 <span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Extracts and displays the help_lines&quot;</span>
 
@@ -155,10 +166,10 @@
 <span class="nb">cd</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">location</span><span class="p">:</span><span class="nv">0</span><span class="k">:-</span><span class="nv">2</span><span class="si">}</span><span class="s2">&quot;</span>
 
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="nv">HIGHLIGHT_STR</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nv">filter</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
 <span class="k">else</span>
 <span class="w">    </span><span class="c1"># Default highlight string unlikely to be in any help_line</span>
-<span class="w">    </span><span class="nv">HIGHLIGHT_STR</span><span class="o">=</span><span class="s2">&quot;-=-=-=-==-=&quot;</span>
+<span class="w">    </span><span class="nv">filter</span><span class="o">=</span><span class="s2">&quot;.*&quot;</span>
 <span class="k">fi</span>
 
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$matches_only_yn</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>n<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
@@ -171,11 +182,11 @@
 <span class="w">      </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;/README.*.md/d; /^h:/d; /tmp0/d&#39;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">      </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-f<span class="w"> </span>&gt;<span class="w"> </span>/tmp/h.tmp
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="k">$(</span>cat<span class="w"> </span>/tmp/h.tmp<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l<span class="k">)</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span>-------------
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span>No<span class="w"> </span>help_line:
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span>-------------
-<span class="w">        </span>cat<span class="w"> </span>/tmp/h.tmp<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/</span><span class="nv">$HIGHLIGHT_STR</span><span class="s2">/\x1b[31m&amp;\x1b[0m/I&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="k">$(</span>cat<span class="w"> </span>/tmp/h.tmp<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l<span class="k">)</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$filter</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;.*&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span>cecho<span class="w"> </span>lmag<span class="w"> </span>-------------
+<span class="w">        </span>cecho<span class="w"> </span>lmag<span class="w"> </span>No<span class="w"> </span>help_line:
+<span class="w">        </span>cecho<span class="w"> </span>lmag<span class="w"> </span>-------------
+<span class="w">        </span>cat<span class="w"> </span>/tmp/h.tmp
 <span class="w">    </span><span class="k">fi</span>
 <span class="w">    </span><span class="c1"># Create a file so that the grep command never fails</span>
 <span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;help_line=&quot;tbc&quot;&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>/tmp/h.tmp0
@@ -184,18 +195,18 @@
 <span class="w">      </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;/README.*.md/d; /^h$/d; /tmp0/d&#39;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">      </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-f<span class="w"> </span>&gt;<span class="w"> </span>/tmp/h.tmp
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="k">$(</span>cat<span class="w"> </span>/tmp/h.tmp<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l<span class="k">)</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span>--------------
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span>help_line:<span class="w"> </span>tbc
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span>--------------
-<span class="w">        </span>cat<span class="w"> </span>/tmp/h.tmp<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;/tidy/d&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/</span><span class="nv">$HIGHLIGHT_STR</span><span class="s2">/\x1b[31m&amp;\x1b[0m/I&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="k">$(</span>cat<span class="w"> </span>/tmp/h.tmp<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l<span class="k">)</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$filter</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;.*&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span>cecho<span class="w"> </span>lmag<span class="w"> </span>--------------
+<span class="w">        </span>cecho<span class="w"> </span>lmag<span class="w"> </span>help_line:<span class="w"> </span>tbc
+<span class="w">        </span>cecho<span class="w"> </span>lmag<span class="w"> </span>--------------
+<span class="w">        </span>cat<span class="w"> </span>/tmp/h.tmp<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;/tidy/d&quot;</span>
 <span class="w">    </span><span class="k">fi</span>
 <span class="w">    </span>rm<span class="w"> </span>-f<span class="w"> </span>/tmp/h.tmp0
 
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$issues_only_yn</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>n<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span>-----------
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span>help_lines:
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span>-----------
+<span class="w">        </span>cecho<span class="w"> </span>lmag<span class="w"> </span>-----------
+<span class="w">        </span>cecho<span class="w"> </span>lmag<span class="w"> </span>help_lines:
+<span class="w">        </span>cecho<span class="w"> </span>lmag<span class="w"> </span>-----------
 <span class="w">    </span><span class="k">fi</span>
 <span class="k">fi</span>
 
@@ -205,7 +216,7 @@
 
 <span class="nv">prev_char</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
 
-grep<span class="w"> </span>-H<span class="w"> </span>-s<span class="w"> </span>-i<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;^help_line=&quot;</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;^-- help_line:&quot;</span><span class="w"> </span>*<span class="w"> </span>&gt;<span class="w"> </span>/tmp/h.tmp
+grep<span class="w"> </span>-H<span class="w"> </span>-s<span class="w"> </span>-i<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;^help_line=&quot;</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;^-- help_line:&quot;</span><span class="w"> </span>*<span class="w"> </span><span class="p">|</span><span class="w"> </span>egrep<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$filter</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/tmp/h.tmp
 
 cat<span class="w"> </span>/tmp/h.tmp<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
 sed<span class="w"> </span><span class="s1">&#39; </span>
@@ -218,15 +229,15 @@ sort<span class="w"> </span><span class="p">|</span><span class="w"> </span><spa
 <span class="w">    </span><span class="nv">curr_char</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">line</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$curr_char</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$prev_char</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">         </span><span class="nv">prev_char</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$curr_char</span><span class="s2">&quot;</span>
-<span class="w">         </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$curr_char</span><span class="s2"> - </span><span class="nv">$line</span><span class="s2">&quot;</span>
+<span class="w">         </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">clmag</span><span class="si">}${</span><span class="nv">curr_char</span><span class="si">}${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2"> - </span><span class="si">${</span><span class="nv">clcya</span><span class="si">}</span><span class="nv">$line</span><span class="s2">&quot;</span>
 <span class="w">    </span><span class="k">else</span>
-<span class="w">         </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;    </span><span class="nv">$line</span><span class="s2">&quot;</span><span class="w"> </span>
+<span class="w">         </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">    </span><span class="si">${</span><span class="nv">clcya</span><span class="si">}</span><span class="nv">$line</span><span class="s2">&quot;</span><span class="w"> </span>
 <span class="w">    </span><span class="k">fi</span>
-<span class="k">done</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w">  </span><span class="s1">&#39;</span>
-<span class="s1">    s/: /:                          /;</span>
-<span class="s1">    s/\(...........................\) *\(.*\)/\1\2/; /tidy:.*echo/d&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>/tmp/h.out<span class="w"> </span>
+<span class="k">done</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w">  </span><span class="s2">&quot;</span>
+<span class="s2">     s/: /:\x1b[37m                                                     /;</span>
+<span class="s2">     s/\(...............................................\) *\(.*\)/\1\2/; /tidy:.*echo/d&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/tmp/h.out<span class="w"> </span>
 
-cat<span class="w"> </span>/tmp/h.out<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/</span><span class="nv">$HIGHLIGHT_STR</span><span class="s2">/\x1b[31m&amp;\x1b[0m/I&quot;</span>
+cat<span class="w"> </span>/tmp/h.out
 rm<span class="w"> </span>-f<span class="w"> </span>/tmp/h.out<span class="w"> </span>/tmp/h.tmp
 </code></pre></div>
         </div>
@@ -246,7 +257,7 @@ rm<span class="w"> </span>-f<span class="w"> </span>/tmp/h.out<span class="w"> <
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: February 03, 2026</p>
+      <p>Last updated: March 02, 2026</p>
     </footer>
 
     <div class="scroll-container">
