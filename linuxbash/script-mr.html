@@ -94,20 +94,25 @@
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 <span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
 <span class="s2">NAME</span>
-<span class="s2">    bash-func - One line description.</span>
+<span class="s2">    mr - Find most recent files matching a pattern.</span>
 
 <span class="s2">USAGE</span>
-<span class="s2">    bash-func [options] &lt;parameters&gt;</span>
+<span class="s2">    mr [options] &lt;pattern&gt;</span>
 
 <span class="s2">OPTIONS</span>
-<span class="s2">    -x</span>
-<span class="s2">        Description...</span>
+<span class="s2">    -n N</span>
+<span class="s2">        Number of results to show (default: 20).</span>
+
+<span class="s2">    -i</span>
+<span class="s2">        Case-insensitive matching.</span>
 
 <span class="s2">    -h|--help</span>
-<span class="s2">        Show help text.</span>
+<span class="s2">        Show this help text.</span>
 
 <span class="s2">DESCRIPTION</span>
-<span class="s2">    Description description description description.</span>
+<span class="s2">    This script searches for files matching a shell pattern in the current</span>
+<span class="s2">    directory and its subdirectories. It then sorts the results by</span>
+<span class="s2">    modification time and displays the most recent ones.</span>
 
 <span class="s2">AUTHOR</span>
 <span class="s2">    mjnurse.github.io - 2026</span>
@@ -153,20 +158,10 @@
 
 <span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
 
-<span class="c1"># recent-matching.sh</span>
-<span class="c1"># Find the N most recent files matching a pattern under the current directory.</span>
-<span class="c1"># Usage:</span>
-<span class="c1">#   recent-matching.sh [-n N] [-i] &quot;pattern&quot;</span>
-<span class="c1">#</span>
-<span class="c1"># Examples:</span>
-<span class="c1">#   recent-matching.sh &quot;martin*.py&quot;</span>
-<span class="c1">#   recent-matching.sh -n 25 &quot;*.log&quot;</span>
-<span class="c1">#   recent-matching.sh -i &quot;*report*.pdf&quot;     # case-insensitive match</span>
-
 usage<span class="o">()</span><span class="w"> </span><span class="o">{</span>
 <span class="w">  </span>cat<span class="w"> </span><span class="s">&lt;&lt;&#39;EOF&#39;</span>
 <span class="s">Usage: recent-matching.sh [-n N] [-i] &quot;pattern&quot;</span>
-<span class="s">  -n N   number of results to show (default: 10)</span>
+<span class="s">  -n N   number of results to show (default: 20)</span>
 <span class="s">  -i     case-insensitive matching (uses find -iname)</span>
 <span class="s">  pattern is a shell pattern (as used by find -name/-iname), e.g. &quot;martin*.py&quot;</span>
 <span class="s">Search starts at the current directory and recurses into subdirectories.</span>
@@ -174,7 +169,7 @@ usage<span class="o">()</span><span class="w"> </span><span class="o">{</span>
 <span class="o">}</span>
 
 <span class="c1"># Defaults</span>
-<span class="nv">COUNT</span><span class="o">=</span><span class="m">10</span>
+<span class="nv">COUNT</span><span class="o">=</span><span class="m">20</span>
 <span class="nv">CASE_INSENSITIVE</span><span class="o">=</span><span class="m">0</span>
 
 <span class="c1"># Parse options</span>
@@ -197,17 +192,6 @@ usage<span class="o">()</span><span class="w"> </span><span class="o">{</span>
 <span class="k">fi</span>
 <span class="nv">PATTERN</span><span class="o">=</span><span class="nv">$1</span>
 
-<span class="c1"># Detect a compatible &#39;stat&#39; command format string</span>
-<span class="c1"># Linux (GNU coreutils):   stat -c &#39;%Y %n&#39; file</span>
-<span class="c1"># macOS/BSD:               stat -f &#39;%m %N&#39; file</span>
-<span class="k">if</span><span class="w"> </span>stat<span class="w"> </span>--version<span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">  </span><span class="c1"># GNU stat</span>
-<span class="w">  </span><span class="nv">STAT_FMT</span><span class="o">=(</span>-c<span class="w"> </span><span class="s1">&#39;%Y %n&#39;</span><span class="o">)</span>
-<span class="k">else</span>
-<span class="w">  </span><span class="c1"># BSD/macOS stat</span>
-<span class="w">  </span><span class="nv">STAT_FMT</span><span class="o">=(</span>-f<span class="w"> </span><span class="s1">&#39;%m %N&#39;</span><span class="o">)</span>
-<span class="k">fi</span>
-
 <span class="c1"># Choose find name flag based on case sensitivity</span>
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$CASE_INSENSITIVE</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">  </span><span class="nv">NAMEFLAG</span><span class="o">=(</span>-iname<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PATTERN</span><span class="s2">&quot;</span><span class="o">)</span>
@@ -228,17 +212,17 @@ usage<span class="o">()</span><span class="w"> </span><span class="o">{</span>
 <span class="c1"># Note: Using while-read loop to handle arbitrary filenames safely.</span>
 <span class="k">while</span><span class="w"> </span><span class="nv">IFS</span><span class="o">=</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w"> </span>f<span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">  </span><span class="c1"># If file was deleted between find and stat, skip errors</span>
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="nv">out</span><span class="o">=</span><span class="k">$(</span>stat<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">STAT_FMT</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="nv">out</span><span class="o">=</span><span class="k">$(</span>stat<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;%y&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">    </span><span class="c1"># &#39;out&#39; is &quot;mtime path&quot;; convert first space to tab for robust sort/cut</span>
 <span class="w">    </span><span class="c1"># (path itself may contain spaces)</span>
-<span class="w">    </span><span class="nv">mtime</span><span class="o">=</span><span class="si">${</span><span class="nv">out</span><span class="p">%% *</span><span class="si">}</span>
-<span class="w">    </span><span class="nv">path</span><span class="o">=</span><span class="si">${</span><span class="nv">out</span><span class="p">#* </span><span class="si">}</span>
-<span class="w">    </span><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;%s\t%s\n&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$mtime</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$path</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nv">mtime</span><span class="o">=</span><span class="si">${</span><span class="nv">out</span><span class="p">:</span><span class="nv">2</span><span class="p">:</span><span class="nv">14</span><span class="si">}</span><span class="w"> </span><span class="c1"># &quot;YYYY-MM-DD HH:MM:SS&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">mtime</span><span class="p">// /-</span><span class="si">}</span><span class="s2"> </span><span class="nv">$f</span><span class="s2">&quot;</span>
 <span class="w">  </span><span class="k">fi</span>
 <span class="k">done</span><span class="w"> </span>&lt;<span class="w"> </span>&lt;<span class="o">(</span>find<span class="w"> </span>.<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">NAMEFLAG</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>-print0<span class="o">)</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmpfile</span><span class="s2">&quot;</span>
 
 <span class="c1"># Show the N most recent</span>
 <span class="c1"># If you want the timestamp alongside, remove the &#39;cut&#39; and keep the full line.</span>
+<span class="c1"># cat &quot;$tmpfile&quot;</span>
 sort<span class="w"> </span>-r<span class="w"> </span>-n<span class="w"> </span>-k1,1<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmpfile</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$COUNT</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-f2-
 </code></pre></div>
         </div>

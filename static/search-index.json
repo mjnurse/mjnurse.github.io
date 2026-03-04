@@ -1093,7 +1093,7 @@
   },
   {
     "id": "156",
-    "title": "Create Use and Delete Temp File",
+    "title": "26-03-04 - Create Use and Delete Temp File",
     "url": "/blog/26-03-04-create-use_and-delete-temp-file.html",
     "content": "How have I only just learnt about mktemp? It's a great way to create a temporary file, and trap means that it is automatically cleaned up when the script exits. tmpfile=$(mktemp) trap &#39;rm -f &quot;$tmpfile&quot;&#39; EXIT",
     "type": "page"
@@ -1389,7 +1389,7 @@
     "id": "198",
     "title": "mr - Example Bash Script",
     "url": "/linuxbash/script-mr.html",
-    "content": "#!/usr/bin/env bash help_text=&quot; NAME bash-func - One line description. USAGE bash-func [options] &lt;parameters&gt; OPTIONS -x Description... -h|--help Show help text. DESCRIPTION Description description description description. AUTHOR mjnurse.github.io - 2026 &quot; help_line=&quot;Example Bash Script&quot; web_desc_line=&quot;Example Bash Script&quot; # set -x # for debugging # Terminal Colours cdef=&quot;\\e[39m&quot; # default colour cbla=&quot;\\e[30m&quot;; cgra=&quot;\\e[90m&quot;; clgr",
+    "content": "#!/usr/bin/env bash help_text=&quot; NAME mr - Find most recent files matching a pattern. USAGE mr [options] &lt;pattern&gt; OPTIONS -n N Number of results to show (default: 20). -i Case-insensitive matching. -h|--help Show this help text. DESCRIPTION This script searches for files matching a shell pattern in the current directory and its subdirectories. It then sorts the results by modification time and displays the most recent ones. AUTHOR mjnurse.github.io - 2026 &quot; help_line=&quot;Exampl",
     "type": "page"
   },
   {
