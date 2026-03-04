@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Home" />
+    <meta name="description" content="Create Use and Delete Temp File" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>Home</title>
+    <title>Create Use and Delete Temp File</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
@@ -90,58 +90,11 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1 class="text-center">I am <span class="highlight">Martin.</span></h1>
-
-<h3 class="text-center">I wanted a website so I built one...</h3>
-
-<p class="text-center">Some stuff that interests me or made me smile. The scripts I write. 
-Elasticsearch, SQL, Oracle, PostgreSQL, sqlite, bash scripts, Python, GCP, Spark...
-OK, I’m a geek - an Entrprenerd. Only good is good enough. “I’ll format it later” - no you won’t - find a new job.</p><div class="tiles-container">
-  <div class="tile">
-    <a href="misc/history_of_my_cars.html">
-      <h3 class="tile-title">History Of My Cars</h3>
-      <div class="tile-content"><p>The oldest page on this website and it predecessors.</p></div>
-    </a>
-  </div>
-  <div class="tile">
-    <a href="elasticsearch/useful-elasticsearch_c-urls.html">
-      <h3 class="tile-title">Useful Elasticsearch cURLs</h3>
-      <div class="tile-content"><p>Some useful cURLs for interacting with Elasticsearch. Look at my cli for Elastic for more.</p></div>
-    </a>
-  </div>
-  <div class="tile">
-    <a href="cheatsheets/english.html">
-      <h3 class="tile-title">English Cheatsheet</h3>
-      <div class="tile-content"><p>A practical collection of English language rules and quirks.</p></div>
-    </a>
-  </div>
-</div>
-
-
-<h2>Recently Updated</h2>
-<ul class="page-list">
-  <li><a href="/notes/miscellaneous_notes.html" data-number="1"><span class="page-number">1</span>Miscellaneous Notes</a></li>
-  <li><a href="/other/shortcut_keys.html" data-number="2"><span class="page-number">2</span>Shortcut Keys</a></li>
-  <li><a href="/linuxbash/linux_bash_default_pack.html" data-number="3"><span class="page-number">3</span>Linux bash default Pack</a></li>
-  <li><a href="/blog/26-03-04-create-use_and-delete-temp-file.html" data-number="4"><span class="page-number">4</span>Create Use and Delete Temp File</a></li>
-  <li><a href="/linuxbash/script-mr.html" data-number="5"><span class="page-number">5</span>mr - Example Bash Script</a></li>
-  <li><a href="/linuxbash/script-gen-bash.html" data-number="6"><span class="page-number">6</span>gen-bash - Generates a bash script from a template</a></li>
-  <li><a href="/linuxbash/linux_bash_default_pack.html" data-number="7"><span class="page-number">7</span>Linux bash default Pack</a></li>
-  <li><a href="/linuxbash/script-h.html" data-number="8"><span class="page-number">8</span>h - Extracts and displays the help_lines</a></li>
-  <li><a href="/linuxbash/script-jsonl-json.html" data-number="9"><span class="page-number">9</span>jsonl-json - Convert between JSON and JSONL formats</a></li>
-  <li><a href="/linuxbash/script-edge.html" data-number="10"><span class="page-number">10</span>edge - Launches the Microsoft Edge browser with the specified path or URL</a></li>
-  <li><a href="/linuxbash/script-drawio.html" data-number="11"><span class="page-number">11</span>drawio - Launch Draw.io application with specified file or URL</a></li>
-  <li><a href="/linuxbash/script-fe.html" data-number="12"><span class="page-number">12</span>fe - Search for a file and edit</a></li>
-  <li><a href="/linuxbash/script-backup.html" data-number="13"><span class="page-number">13</span>backup - Creates dated zip backups and copies them to BACKUP_DIR</a></li>
-  <li><a href="/linuxbash/script-bash-script-example.html" data-number="14"><span class="page-number">14</span>bash-script-example - Example Bash Script</a></li>
-  <li><a href="/linuxbash/script-goto.html" data-number="15"><span class="page-number">15</span>goto - Quickly navigate to frequently used directories</a></li>
-  <li><a href="/linuxbash/script-imp.html" data-number="16"><span class="page-number">16</span>imp - Improve text using Claude AI</a></li>
-  <li><a href="/notes/miscellaneous-notes.html" data-number="17"><span class="page-number">17</span>Miscellaneous Notes</a></li>
-  <li><a href="/other/shortcut-keys.html" data-number="18"><span class="page-number">18</span>Shortcut Keys</a></li>
-  <li><a href="/other/gcp/big-query-performance.html" data-number="19"><span class="page-number">19</span>GCP BigQuery Performance</a></li>
-  <li><a href="/other/gcp/virtual-private-cloud-vpc-networking.html" data-number="20"><span class="page-number">20</span>GCP VPC Networks</a></li>
-</ul>
-
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/blog/26-03-04-create-use_and-delete-temp-file.md">Create Use and Delete Temp File</a></h1>
+<p>How have I only just learnt about <code>mktemp</code>? It's a great way to create a temporary file, and trap means that it is automatically cleaned up when the script exits.</p>
+<div class="codehilite"><pre><span></span><code><span class="nv">tmpfile</span><span class="o">=</span><span class="k">$(</span>mktemp<span class="k">)</span>
+<span class="nb">trap</span><span class="w"> </span><span class="s1">&#39;rm -f &quot;$tmpfile&quot;&#39;</span><span class="w"> </span>EXIT
+</code></pre></div>
         </div>
       </article>
     </main>

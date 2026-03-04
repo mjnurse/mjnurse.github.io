@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="mr - Example Bash Script" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>mr - Example Bash Script</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-mr.md">mr - Example Bash Script</a></h1>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
+<span class="s2">NAME</span>
+<span class="s2">    bash-func - One line description.</span>
+
+<span class="s2">USAGE</span>
+<span class="s2">    bash-func [options] &lt;parameters&gt;</span>
+
+<span class="s2">OPTIONS</span>
+<span class="s2">    -x</span>
+<span class="s2">        Description...</span>
+
+<span class="s2">    -h|--help</span>
+<span class="s2">        Show help text.</span>
+
+<span class="s2">DESCRIPTION</span>
+<span class="s2">    Description description description description.</span>
+
+<span class="s2">AUTHOR</span>
+<span class="s2">    mjnurse.github.io - 2026</span>
+<span class="s2">&quot;</span>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Example Bash Script&quot;</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Example Bash Script&quot;</span>
+
+<span class="c1"># set -x # for debugging</span>
+
+<span class="c1"># Terminal Colours</span>
+<span class="nv">cdef</span><span class="o">=</span><span class="s2">&quot;\e[39m&quot;</span><span class="w"> </span><span class="c1"># default colour</span>
+<span class="nv">cbla</span><span class="o">=</span><span class="s2">&quot;\e[30m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cgra</span><span class="o">=</span><span class="s2">&quot;\e[90m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clgra</span><span class="o">=</span><span class="s2">&quot;\e[37m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cwhi</span><span class="o">=</span><span class="s2">&quot;\e[97m&quot;</span>
+<span class="nv">cred</span><span class="o">=</span><span class="s2">&quot;\e[31m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cgre</span><span class="o">=</span><span class="s2">&quot;\e[32m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cyel</span><span class="o">=</span><span class="s2">&quot;\e[33m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cblu</span><span class="o">=</span><span class="s2">&quot;\e[34m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cmag</span><span class="o">=</span><span class="s2">&quot;\e[35m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">ccya</span><span class="o">=</span><span class="s2">&quot;\e[36m&quot;</span><span class="p">;</span>
+<span class="nv">clred</span><span class="o">=</span><span class="s2">&quot;\e[91m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clgre</span><span class="o">=</span><span class="s2">&quot;\e[92m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clyel</span><span class="o">=</span><span class="s2">&quot;\e[93m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clblu</span><span class="o">=</span><span class="s2">&quot;\e[94m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clmag</span><span class="o">=</span><span class="s2">&quot;\e[95m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clcya</span><span class="o">=</span><span class="s2">&quot;\e[96m&quot;</span>
+
+<span class="k">function</span><span class="w"> </span>cecho<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nv">color</span><span class="o">=</span>c<span class="nv">$1</span><span class="p">;</span><span class="w"> </span><span class="nb">shift</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="p">!color</span><span class="si">}</span><span class="nv">$*</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="o">}</span>
+
+<span class="nv">try</span><span class="o">=</span><span class="s2">&quot;Try </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h for more information&quot;</span>
+<span class="nv">tmp</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">help_text</span><span class="p">##*USAGE</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nv">usage</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%OPTIONS*</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;\n&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/  */ /g&quot;</span><span class="k">)</span>
+
+<span class="c1"># if [[ &quot;$1&quot; == &quot;&quot; ]]; then</span>
+<span class="c1">#     echo &quot;${usage}&quot;</span>
+<span class="c1">#     echo &quot;${try}&quot;</span>
+<span class="c1">#     exit 1</span>
+<span class="c1"># fi</span>
+
+<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
+<span class="w">        </span>-h<span class="p">|</span>--help<span class="o">)</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="nb">exit</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>?*<span class="o">)</span>
+<span class="w">            </span><span class="k">break</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">    </span><span class="k">esac</span>
+<span class="w">    </span><span class="nb">shift</span>
+<span class="k">done</span>
+
+<span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
+
+<span class="c1"># recent-matching.sh</span>
+<span class="c1"># Find the N most recent files matching a pattern under the current directory.</span>
+<span class="c1"># Usage:</span>
+<span class="c1">#   recent-matching.sh [-n N] [-i] &quot;pattern&quot;</span>
+<span class="c1">#</span>
+<span class="c1"># Examples:</span>
+<span class="c1">#   recent-matching.sh &quot;martin*.py&quot;</span>
+<span class="c1">#   recent-matching.sh -n 25 &quot;*.log&quot;</span>
+<span class="c1">#   recent-matching.sh -i &quot;*report*.pdf&quot;     # case-insensitive match</span>
+
+usage<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">  </span>cat<span class="w"> </span><span class="s">&lt;&lt;&#39;EOF&#39;</span>
+<span class="s">Usage: recent-matching.sh [-n N] [-i] &quot;pattern&quot;</span>
+<span class="s">  -n N   number of results to show (default: 10)</span>
+<span class="s">  -i     case-insensitive matching (uses find -iname)</span>
+<span class="s">  pattern is a shell pattern (as used by find -name/-iname), e.g. &quot;martin*.py&quot;</span>
+<span class="s">Search starts at the current directory and recurses into subdirectories.</span>
+<span class="s">EOF</span>
+<span class="o">}</span>
+
+<span class="c1"># Defaults</span>
+<span class="nv">COUNT</span><span class="o">=</span><span class="m">10</span>
+<span class="nv">CASE_INSENSITIVE</span><span class="o">=</span><span class="m">0</span>
+
+<span class="c1"># Parse options</span>
+<span class="k">while</span><span class="w"> </span><span class="nb">getopts</span><span class="w"> </span><span class="s2">&quot;:n:ih&quot;</span><span class="w"> </span>opt<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$opt</span><span class="s2">&quot;</span><span class="w"> </span><span class="k">in</span>
+<span class="w">    </span>n<span class="o">)</span><span class="w"> </span><span class="nv">COUNT</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$OPTARG</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">    </span>i<span class="o">)</span><span class="w"> </span><span class="nv">CASE_INSENSITIVE</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">    </span>h<span class="o">)</span><span class="w"> </span>usage<span class="p">;</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">    </span><span class="se">\?</span><span class="o">)</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Unknown option: -</span><span class="nv">$OPTARG</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span><span class="p">;</span><span class="w"> </span>usage<span class="p">;</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">    </span>:<span class="o">)</span><span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Option -</span><span class="nv">$OPTARG</span><span class="s2"> requires an argument.&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span><span class="p">;</span><span class="w"> </span>usage<span class="p">;</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">  </span><span class="k">esac</span>
+<span class="k">done</span>
+<span class="nb">shift</span><span class="w"> </span><span class="k">$((</span><span class="nv">OPTIND</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="k">))</span>
+
+<span class="c1"># Require a pattern</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span>-lt<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Error: missing pattern.&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+<span class="w">  </span>usage
+<span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">2</span>
+<span class="k">fi</span>
+<span class="nv">PATTERN</span><span class="o">=</span><span class="nv">$1</span>
+
+<span class="c1"># Detect a compatible &#39;stat&#39; command format string</span>
+<span class="c1"># Linux (GNU coreutils):   stat -c &#39;%Y %n&#39; file</span>
+<span class="c1"># macOS/BSD:               stat -f &#39;%m %N&#39; file</span>
+<span class="k">if</span><span class="w"> </span>stat<span class="w"> </span>--version<span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="c1"># GNU stat</span>
+<span class="w">  </span><span class="nv">STAT_FMT</span><span class="o">=(</span>-c<span class="w"> </span><span class="s1">&#39;%Y %n&#39;</span><span class="o">)</span>
+<span class="k">else</span>
+<span class="w">  </span><span class="c1"># BSD/macOS stat</span>
+<span class="w">  </span><span class="nv">STAT_FMT</span><span class="o">=(</span>-f<span class="w"> </span><span class="s1">&#39;%m %N&#39;</span><span class="o">)</span>
+<span class="k">fi</span>
+
+<span class="c1"># Choose find name flag based on case sensitivity</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$CASE_INSENSITIVE</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nv">NAMEFLAG</span><span class="o">=(</span>-iname<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PATTERN</span><span class="s2">&quot;</span><span class="o">)</span>
+<span class="k">else</span>
+<span class="w">  </span><span class="nv">NAMEFLAG</span><span class="o">=(</span>-name<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PATTERN</span><span class="s2">&quot;</span><span class="o">)</span>
+<span class="k">fi</span>
+
+<span class="c1"># We will:</span>
+<span class="c1">#  1) find matching regular files, null-delimited (safe for odd filenames)</span>
+<span class="c1">#  2) for each file, print &quot;epoch_mtime&lt;TAB&gt;path&quot;</span>
+<span class="c1">#  3) sort numerically by mtime desc</span>
+<span class="c1">#  4) take top N</span>
+<span class="c1">#  5) print paths</span>
+<span class="nv">tmpfile</span><span class="o">=</span><span class="k">$(</span>mktemp<span class="k">)</span>
+<span class="nb">trap</span><span class="w"> </span><span class="s1">&#39;rm -f &quot;$tmpfile&quot;&#39;</span><span class="w"> </span>EXIT
+
+<span class="c1"># Collect &quot;mtime&lt;tab&gt;path&quot; lines</span>
+<span class="c1"># Note: Using while-read loop to handle arbitrary filenames safely.</span>
+<span class="k">while</span><span class="w"> </span><span class="nv">IFS</span><span class="o">=</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w"> </span>f<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="c1"># If file was deleted between find and stat, skip errors</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="nv">out</span><span class="o">=</span><span class="k">$(</span>stat<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">STAT_FMT</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="c1"># &#39;out&#39; is &quot;mtime path&quot;; convert first space to tab for robust sort/cut</span>
+<span class="w">    </span><span class="c1"># (path itself may contain spaces)</span>
+<span class="w">    </span><span class="nv">mtime</span><span class="o">=</span><span class="si">${</span><span class="nv">out</span><span class="p">%% *</span><span class="si">}</span>
+<span class="w">    </span><span class="nv">path</span><span class="o">=</span><span class="si">${</span><span class="nv">out</span><span class="p">#* </span><span class="si">}</span>
+<span class="w">    </span><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;%s\t%s\n&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$mtime</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$path</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="k">fi</span>
+<span class="k">done</span><span class="w"> </span>&lt;<span class="w"> </span>&lt;<span class="o">(</span>find<span class="w"> </span>.<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">NAMEFLAG</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>-print0<span class="o">)</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmpfile</span><span class="s2">&quot;</span>
+
+<span class="c1"># Show the N most recent</span>
+<span class="c1"># If you want the timestamp alongside, remove the &#39;cut&#39; and keep the full line.</span>
+sort<span class="w"> </span>-r<span class="w"> </span>-n<span class="w"> </span>-k1,1<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmpfile</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$COUNT</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-f2-
+</code></pre></div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: March 04, 2026</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>
