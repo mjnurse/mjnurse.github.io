@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="mr - Example Bash Script" />
+    <meta name="description" content="mr - Find most recent files matching a pattern" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>mr - Example Bash Script</title>
+    <title>mr - Find most recent files matching a pattern</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
@@ -90,7 +90,7 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-mr.md">mr - Example Bash Script</a></h1>
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-mr.md">mr - Find most recent files matching a pattern</a></h1>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 <span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
 <span class="s2">NAME</span>
@@ -100,10 +100,10 @@
 <span class="s2">    mr [options] &lt;pattern&gt;</span>
 
 <span class="s2">OPTIONS</span>
-<span class="s2">    -n N</span>
+<span class="s2">    -n|--number N</span>
 <span class="s2">        Number of results to show (default: 20).</span>
 
-<span class="s2">    -i</span>
+<span class="s2">    -i|--ignore-case</span>
 <span class="s2">        Case-insensitive matching.</span>
 
 <span class="s2">    -h|--help</span>
@@ -117,8 +117,8 @@
 <span class="s2">AUTHOR</span>
 <span class="s2">    mjnurse.github.io - 2026</span>
 <span class="s2">&quot;</span>
-<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Example Bash Script&quot;</span>
-<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Example Bash Script&quot;</span>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Find most recent files matching a pattern&quot;</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Find most recent files matching a pattern&quot;</span>
 
 <span class="c1"># set -x # for debugging</span>
 
@@ -133,56 +133,74 @@
 <span class="w">    </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="p">!color</span><span class="si">}</span><span class="nv">$*</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="o">}</span>
 
-<span class="nv">try</span><span class="o">=</span><span class="s2">&quot;Try </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h for more information&quot;</span>
-<span class="nv">tmp</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">help_text</span><span class="p">##*USAGE</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="nv">usage</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%OPTIONS*</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;\n&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/  */ /g&quot;</span><span class="k">)</span>
+<span class="c1"># Defaults</span>
+<span class="nv">COUNT</span><span class="o">=</span><span class="m">20</span>
+<span class="nv">CASE_INSENSITIVE</span><span class="o">=</span><span class="m">0</span>
 
-<span class="c1"># if [[ &quot;$1&quot; == &quot;&quot; ]]; then</span>
-<span class="c1">#     echo &quot;${usage}&quot;</span>
-<span class="c1">#     echo &quot;${try}&quot;</span>
-<span class="c1">#     exit 1</span>
-<span class="c1"># fi</span>
+<span class="nv">debug</span><span class="o">=</span><span class="nb">false</span>
 
+usage<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> [options] &lt;pattern&gt;&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Options:&quot;</span>
+<span class="w">    </span>grep<span class="w"> </span><span class="s2">&quot;# arg:&quot;</span><span class="w"> </span><span class="nv">$0</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span><span class="s2">&quot;grep&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/^ *//; s/).*# *arg://&#39;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Try </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h for more information&quot;</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="o">}</span>
+
+<span class="c1"># Split combined short arguments (eg -abc) into individual arguments (-a -b -c). Remove = symbols.</span>
+<span class="nv">new_args</span><span class="o">=()</span>
 <span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
-<span class="w">        </span>-h<span class="p">|</span>--help<span class="o">)</span>
-<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
-<span class="w">            </span><span class="nb">exit</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>-*<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span>--*<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="si">${#</span><span class="nv">1</span><span class="si">}</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="o">((</span><span class="nv">i</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="w"> </span>i&lt;<span class="si">${#</span><span class="nv">1</span><span class="si">}</span><span class="p">;</span><span class="w"> </span>i++<span class="o">))</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">            </span><span class="nv">arg</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">1</span><span class="p">:</span><span class="nv">i</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$arg</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;=&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nv">new_args</span><span class="o">+=(</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">1</span><span class="p">:</span><span class="nv">i</span><span class="p">+1</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">)</span><span class="p">;</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$arg</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;d&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nv">debug</span><span class="o">=</span>true<span class="p">;</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="nv">new_args</span><span class="o">+=(</span><span class="s2">&quot;-</span><span class="nv">$arg</span><span class="s2">&quot;</span><span class="o">)</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
+<span class="w">        </span><span class="k">done</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>--*<span class="o">=</span>*<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="nv">new_args</span><span class="o">+=(</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">1</span><span class="p">%%=*</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">)</span><span class="p">;</span><span class="w"> </span><span class="nv">new_args</span><span class="o">+=(</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">1</span><span class="p">##*=</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">)</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;-d&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;--debug&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nv">debug</span><span class="o">=</span>true<span class="p">;</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="nv">new_args</span><span class="o">+=(</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="o">)</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
+<span class="w">        </span><span class="k">fi</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="w">    </span><span class="nb">shift</span>
+<span class="k">done</span>
+
+<span class="k">if</span><span class="w"> </span><span class="nv">$debug</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;DEBUG ENABLED&quot;</span>
+<span class="w">    </span><span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;args: &quot;</span><span class="p">;</span><span class="w"> </span><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;%s &#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">new_args</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="nb">echo</span>
+<span class="w">    </span><span class="c1"># set -x</span>
+<span class="k">fi</span>
+
+<span class="c1"># Process the arguments</span>
+<span class="nb">set</span><span class="w"> </span>--<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">new_args</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="k">in</span>
+<span class="w">        </span>-n<span class="p">|</span>--number<span class="o">)</span><span class="w"> </span><span class="c1"># arg: &lt;number&gt;     Number of results to show</span>
+<span class="w">            </span><span class="nv">COUNT</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$COUNT</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$COUNT</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>-*<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Error: Missing value for </span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="w">                </span>usage
+<span class="w">            </span><span class="k">fi</span>
+<span class="w">            </span><span class="nb">shift</span>
 <span class="w">            </span><span class="p">;;</span>
-<span class="w">        </span>?*<span class="o">)</span>
+<span class="w">        </span>-h<span class="p">|</span>--help<span class="o">)</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="nb">exit</span><span class="w"> </span><span class="m">0</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>-i<span class="p">|</span>--ignore-case<span class="o">)</span><span class="w"> </span><span class="c1"># arg:         Set a flag</span>
+<span class="w">            </span><span class="nv">CASE_INSENSITIVE</span><span class="o">=</span><span class="m">1</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>-*<span class="p">|</span>--*<span class="o">)</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Unknown option: </span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="w">            </span>usage
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>*<span class="o">)</span>
 <span class="w">            </span><span class="k">break</span>
 <span class="w">            </span><span class="p">;;</span>
 <span class="w">    </span><span class="k">esac</span>
 <span class="w">    </span><span class="nb">shift</span>
 <span class="k">done</span>
-
-<span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
-
-usage<span class="o">()</span><span class="w"> </span><span class="o">{</span>
-<span class="w">  </span>cat<span class="w"> </span><span class="s">&lt;&lt;&#39;EOF&#39;</span>
-<span class="s">Usage: mr [-n N] [-i] &quot;pattern&quot;</span>
-<span class="s">  -n N   number of results to show (default: 20)</span>
-<span class="s">  -i     case-insensitive matching</span>
-<span class="s">  pattern is a shell pattern, e.g. &quot;martin*.py&quot;</span>
-<span class="s">Search starts at the current directory and recurses into subdirectories.</span>
-<span class="s">EOF</span>
-<span class="o">}</span>
-
-<span class="c1"># Defaults</span>
-<span class="nv">COUNT</span><span class="o">=</span><span class="m">20</span>
-<span class="nv">CASE_INSENSITIVE</span><span class="o">=</span><span class="m">0</span>
-
-<span class="c1"># Parse options</span>
-<span class="k">while</span><span class="w"> </span><span class="nb">getopts</span><span class="w"> </span><span class="s2">&quot;:n:ih&quot;</span><span class="w"> </span>opt<span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$opt</span><span class="s2">&quot;</span><span class="w"> </span><span class="k">in</span>
-<span class="w">    </span>n<span class="o">)</span><span class="w"> </span><span class="nv">COUNT</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$OPTARG</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">;;</span>
-<span class="w">    </span>i<span class="o">)</span><span class="w"> </span><span class="nv">CASE_INSENSITIVE</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="p">;;</span>
-<span class="w">    </span>h<span class="o">)</span><span class="w"> </span>usage<span class="p">;</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="p">;;</span>
-<span class="w">    </span><span class="se">\?</span><span class="o">)</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Unknown option: -</span><span class="nv">$OPTARG</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span><span class="p">;</span><span class="w"> </span>usage<span class="p">;</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="p">;;</span>
-<span class="w">    </span>:<span class="o">)</span><span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Option -</span><span class="nv">$OPTARG</span><span class="s2"> requires an argument.&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span><span class="p">;</span><span class="w"> </span>usage<span class="p">;</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="p">;;</span>
-<span class="w">  </span><span class="k">esac</span>
-<span class="k">done</span>
-<span class="nb">shift</span><span class="w"> </span><span class="k">$((</span><span class="nv">OPTIND</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="k">))</span>
 
 <span class="c1"># Require a pattern</span>
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span>-lt<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
@@ -190,39 +208,31 @@ usage<span class="o">()</span><span class="w"> </span><span class="o">{</span>
 <span class="w">  </span>usage
 <span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">2</span>
 <span class="k">fi</span>
-<span class="nv">PATTERN</span><span class="o">=</span><span class="nv">$1</span>
+<span class="nv">PATTERN</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
 
 <span class="c1"># Choose find name flag based on case sensitivity</span>
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$CASE_INSENSITIVE</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">  </span><span class="nv">NAMEFLAG</span><span class="o">=(</span>-iname<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PATTERN</span><span class="s2">&quot;</span><span class="o">)</span>
+<span class="w">  </span><span class="nv">NAMEFLAG</span><span class="o">=</span><span class="s2">&quot;-iname&quot;</span>
 <span class="k">else</span>
-<span class="w">  </span><span class="nv">NAMEFLAG</span><span class="o">=(</span>-name<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PATTERN</span><span class="s2">&quot;</span><span class="o">)</span>
+<span class="w">  </span><span class="nv">NAMEFLAG</span><span class="o">=</span><span class="s2">&quot;-name&quot;</span>
 <span class="k">fi</span>
 
-<span class="c1"># We will:</span>
-<span class="c1">#  1) find matching regular files, null-delimited (safe for odd filenames)</span>
-<span class="c1">#  2) for each file, print &quot;epoch_mtime&lt;TAB&gt;path&quot;</span>
-<span class="c1">#  3) sort numerically by mtime desc</span>
-<span class="c1">#  4) take top N</span>
-<span class="c1">#  5) print paths</span>
 <span class="nv">tmpfile</span><span class="o">=</span><span class="k">$(</span>mktemp<span class="k">)</span>
 <span class="nb">trap</span><span class="w"> </span><span class="s1">&#39;rm -f &quot;$tmpfile&quot;&#39;</span><span class="w"> </span>EXIT
 
-<span class="c1"># Collect &quot;mtime&lt;tab&gt;path&quot; lines</span>
 <span class="c1"># Note: Using while-read loop to handle arbitrary filenames safely.</span>
 <span class="k">while</span><span class="w"> </span><span class="nv">IFS</span><span class="o">=</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w"> </span>f<span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">  </span><span class="c1"># If file was deleted between find and stat, skip errors</span>
 <span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="nv">out</span><span class="o">=</span><span class="k">$(</span>stat<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;%y&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="c1"># &#39;out&#39; is &quot;mtime path&quot;; convert first space to tab for robust sort/cut</span>
-<span class="w">    </span><span class="c1"># (path itself may contain spaces)</span>
 <span class="w">    </span><span class="nv">mtime</span><span class="o">=</span><span class="si">${</span><span class="nv">out</span><span class="p">:</span><span class="nv">2</span><span class="p">:</span><span class="nv">14</span><span class="si">}</span><span class="w"> </span><span class="c1"># &quot;YYYY-MM-DD HH:MM:SS&quot;</span>
 <span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">mtime</span><span class="p">// /-</span><span class="si">}</span><span class="s2"> </span><span class="nv">$f</span><span class="s2">&quot;</span>
 <span class="w">  </span><span class="k">fi</span>
-<span class="k">done</span><span class="w"> </span>&lt;<span class="w"> </span>&lt;<span class="o">(</span>find<span class="w"> </span>.<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">NAMEFLAG</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>-print0<span class="o">)</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmpfile</span><span class="s2">&quot;</span>
+<span class="k">done</span><span class="w"> </span>&lt;<span class="w"> </span>&lt;<span class="o">(</span>find<span class="w"> </span>.<span class="w"> </span>-type<span class="w"> </span>d<span class="w"> </span>-name<span class="w"> </span>.git<span class="w"> </span>-prune<span class="w"> </span>-o<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span><span class="nv">$NAMEFLAG</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PATTERN</span><span class="s2">&quot;</span><span class="w"> </span>-print0<span class="o">)</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmpfile</span><span class="s2">&quot;</span>
 
 <span class="c1"># Show the N most recent</span>
-<span class="c1"># If you want the timestamp alongside, remove the &#39;cut&#39; and keep the full line.</span>
-<span class="c1"># cat &quot;$tmpfile&quot;</span>
+<span class="nv">msg</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$COUNT</span><span class="s2"> most recent files matching &#39;</span><span class="nv">$PATTERN</span><span class="s2">&#39;:&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$msg</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">msg</span><span class="p">//?/-</span><span class="si">}</span><span class="s2">&quot;</span>
 sort<span class="w"> </span>-r<span class="w"> </span>-n<span class="w"> </span>-k1,1<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmpfile</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$COUNT</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-f2-
 </code></pre></div>
         </div>
@@ -242,7 +252,7 @@ sort<span class="w"> </span>-r<span class="w"> </span>-n<span class="w"> </span>
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: March 05, 2026</p>
+      <p>Last updated: March 09, 2026</p>
     </footer>
 
     <div class="scroll-container">

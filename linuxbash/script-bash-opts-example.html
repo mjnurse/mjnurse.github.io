@@ -92,102 +92,68 @@
         <div class="article-body">
           <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-bash-opts-example.md">bash-opts-example - Example Bash script processing short and long command-line options, including grouped short options</a></h1>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
-<span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;Usage: </span><span class="si">${</span><span class="nv">0</span><span class="p">#*/</span><span class="si">}</span><span class="s2"> [options] &lt;arguments&gt;</span>
-<span class="s2">Options:</span>
-<span class="s2">  -h               Show this help message</span>
-<span class="s2">  -d               Enable debug mode</span>
-<span class="s2">  -f FILENAME      Specify a file</span>
-<span class="s2">  --debug          Enable debug mode</span>
-<span class="s2">  --help           Show this help message</span>
-<span class="s2">  --file=FILENAME  Specify a file&quot;</span>
 
 <span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Example Bash script processing short and long command-line options, including grouped short options&quot;</span>
 <span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Example Bash script processing short and long command-line options, including grouped short options&quot;</span>
 
+<span class="nv">debug</span><span class="o">=</span><span class="nb">false</span>
 
-<span class="k">function</span><span class="w"> </span>arg_err<span class="w"> </span><span class="o">{</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Error: </span><span class="nv">$1</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Try </span><span class="si">${</span><span class="nv">0</span><span class="p">#*/</span><span class="si">}</span><span class="s2"> -h for more information&quot;</span>
+usage<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="nv">$0</span><span class="s2"> [options]&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Options:&quot;</span>
+<span class="w">    </span>grep<span class="w"> </span><span class="s2">&quot;# arg:&quot;</span><span class="w"> </span><span class="nv">$0</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span><span class="s2">&quot;grep&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/^ *//; s/).*# *arg://&#39;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Try </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h for more information&quot;</span>
 <span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 <span class="o">}</span>
 
-<span class="nv">file</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
-<span class="nv">debug</span><span class="o">=</span><span class="nb">false</span>
-
-<span class="c1"># --- Parse arguments ---</span>
-<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="w">    </span><span class="nv">arg</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
-
-<span class="w">    </span><span class="c1"># --- Long options ---</span>
-<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$arg</span><span class="s2">&quot;</span><span class="w"> </span><span class="k">in</span>
-<span class="w">        </span>--help<span class="o">)</span>
-<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
-<span class="w">            </span><span class="nb">exit</span><span class="w"> </span><span class="m">0</span>
-<span class="w">            </span><span class="p">;;</span>
-<span class="w">        </span>--debug<span class="o">)</span>
-<span class="w">            </span><span class="nv">debug</span><span class="o">=</span><span class="nb">true</span>
-<span class="w">            </span><span class="nb">shift</span>
-<span class="w">            </span><span class="p">;;</span>
-<span class="w">        </span>--file<span class="o">=</span>*<span class="p">|</span>-f<span class="o">=</span>*<span class="o">)</span>
-<span class="w">            </span><span class="c1"># Treat -f= as a long option for simplicity</span>
-<span class="w">            </span><span class="nv">file</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">arg</span><span class="p">#*=</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">                </span>arg_err<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$arg</span><span class="s2"> requires an argument&quot;</span>
-<span class="w">            </span><span class="k">fi</span>
-<span class="w">            </span><span class="nb">shift</span>
-<span class="w">            </span><span class="p">;;</span>
-<span class="w">        </span>--file<span class="o">)</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">                </span>arg_err<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$arg</span><span class="s2"> requires an argument&quot;</span>
-<span class="w">            </span><span class="k">fi</span>
-<span class="w">            </span><span class="nv">file</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span>
-<span class="w">            </span><span class="nb">shift</span><span class="w"> </span><span class="m">2</span>
-<span class="w">            </span><span class="p">;;</span>
-<span class="w">        </span>--*<span class="o">)</span>
-<span class="w">            </span>arg_err<span class="w"> </span><span class="s2">&quot;Unknown option: </span><span class="nv">$arg</span><span class="s2">&quot;</span>
-<span class="w">            </span><span class="p">;;</span>
-<span class="w">    </span><span class="k">esac</span>
-
-<span class="w">    </span><span class="nv">arg</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="c1"># Get $1 again in case it was shifted</span>
-
-<span class="w">    </span><span class="c1"># --- Short options (grouped or single) ---</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$arg</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>-*<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">        </span><span class="nv">opts</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">arg</span><span class="p">#-</span><span class="si">}</span><span class="s2">&quot;</span>
-
-<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="o">((</span><span class="w"> </span><span class="nv">i</span><span class="o">=</span><span class="m">0</span><span class="p">;</span><span class="w"> </span>i&lt;<span class="si">${#</span><span class="nv">opts</span><span class="si">}</span><span class="p">;</span><span class="w"> </span>i++<span class="w"> </span><span class="o">))</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="w">            </span><span class="nv">opt</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">opts</span><span class="p">:</span><span class="nv">$i</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span>
-
-<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$opt</span><span class="s2">&quot;</span><span class="w"> </span><span class="k">in</span>
-<span class="w">                </span>h<span class="o">)</span>
-<span class="w">                    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
-<span class="w">                    </span><span class="nb">exit</span><span class="w"> </span><span class="m">0</span>
-<span class="w">                    </span><span class="p">;;</span>
-<span class="w">                </span>d<span class="o">)</span>
-<span class="w">                    </span><span class="nv">debug</span><span class="o">=</span><span class="nb">true</span>
-<span class="w">                    </span><span class="p">;;</span>
-<span class="w">                </span>f<span class="o">)</span>
-<span class="w">                    </span><span class="c1"># Option with argument: -f filename</span>
-<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="o">((</span><span class="w"> </span>i<span class="w"> </span>&lt;<span class="w"> </span><span class="si">${#</span><span class="nv">opts</span><span class="si">}</span>-1<span class="w"> </span><span class="o">))</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">                        </span>arg_err<span class="w"> </span><span class="s2">&quot;-</span><span class="nv">$opt</span><span class="s2"> requires an argument and cannot be grouped&quot;</span>
-<span class="w">                    </span><span class="k">fi</span>
-<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">                        </span>arg_err<span class="w"> </span><span class="s2">&quot;-</span><span class="nv">$opt</span><span class="s2"> requires an argument&quot;</span>
-<span class="w">                    </span><span class="k">fi</span>
-<span class="w">                    </span><span class="nv">file</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span>
-<span class="w">                    </span><span class="nb">shift</span>
-<span class="w">                    </span><span class="p">;;</span>
-<span class="w">                </span>*<span class="o">)</span>
-<span class="w">                    </span>arg_err<span class="w"> </span><span class="s2">&quot;Unknown option: -</span><span class="nv">$opt</span><span class="s2">&quot;</span>
-<span class="w">                    </span><span class="p">;;</span>
-<span class="w">            </span><span class="k">esac</span>
+<span class="c1"># Split combined short arguments (eg -abc) into individual arguments (-a -b -c). Remove = symbols.</span>
+<span class="nv">new_args</span><span class="o">=()</span>
+<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>-*<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span>--*<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="si">${#</span><span class="nv">1</span><span class="si">}</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="o">((</span><span class="nv">i</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="w"> </span>i&lt;<span class="si">${#</span><span class="nv">1</span><span class="si">}</span><span class="p">;</span><span class="w"> </span>i++<span class="o">))</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">            </span><span class="nv">arg</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">1</span><span class="p">:</span><span class="nv">i</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$arg</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;=&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nv">new_args</span><span class="o">+=(</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">1</span><span class="p">:</span><span class="nv">i</span><span class="p">+1</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">)</span><span class="p">;</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$arg</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;d&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nv">debug</span><span class="o">=</span>true<span class="p">;</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="nv">new_args</span><span class="o">+=(</span><span class="s2">&quot;-</span><span class="nv">$arg</span><span class="s2">&quot;</span><span class="o">)</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
 <span class="w">        </span><span class="k">done</span>
-<span class="w">        </span><span class="nb">shift</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>--*<span class="o">=</span>*<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nv">new_args</span><span class="o">+=(</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">1</span><span class="p">%%=*</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">)</span><span class="p">;</span><span class="w"> </span><span class="nv">new_args</span><span class="o">+=(</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">1</span><span class="p">##*=</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">)</span>
+<span class="w">        </span><span class="k">elif</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;-d&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;--debug&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nv">debug</span><span class="o">=</span>true<span class="p">;</span><span class="w"> </span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="nv">new_args</span><span class="o">+=(</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="o">)</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
 <span class="w">    </span><span class="k">fi</span>
-<span class="w">    </span><span class="k">break</span>
+<span class="w">    </span><span class="nb">shift</span>
 <span class="k">done</span>
 
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;debug: </span><span class="nv">$debug</span><span class="s2">&quot;</span>
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;File: </span><span class="nv">$file</span><span class="s2">&quot;</span>
+<span class="k">if</span><span class="w"> </span><span class="nv">$debug</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;DEBUG ENABLED&quot;</span>
+<span class="w">    </span><span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;args: &quot;</span><span class="p">;</span><span class="w"> </span><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;%s &#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">new_args</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="nb">echo</span>
+<span class="w">    </span><span class="c1"># set -x</span>
+<span class="k">fi</span>
+
+<span class="c1"># Process the arguments</span>
+<span class="nb">set</span><span class="w"> </span>--<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">new_args</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="k">in</span>
+<span class="w">        </span>-v<span class="p">|</span>--value<span class="o">)</span><span class="w"> </span><span class="c1"># arg: &lt;value&gt; Set a value.</span>
+<span class="w">            </span><span class="nv">value</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$value</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$value</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>-*<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Error: Missing value for </span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="w">                </span>usage
+<span class="w">            </span><span class="k">fi</span>
+<span class="w">            </span><span class="nb">shift</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>-f<span class="p">|</span>--flag<span class="o">)</span><span class="w"> </span><span class="c1"># arg:          Set a flag</span>
+<span class="w">            </span><span class="nv">flag</span><span class="o">=</span><span class="nb">true</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>-*<span class="p">|</span>--*<span class="o">)</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Unknown option: </span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="w">            </span>usage
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>*<span class="o">)</span>
+<span class="w">            </span><span class="k">break</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">    </span><span class="k">esac</span>
+<span class="w">    </span><span class="nb">shift</span>
+<span class="k">done</span>
 </code></pre></div>
         </div>
       </article>
@@ -206,7 +172,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: February 03, 2026</p>
+      <p>Last updated: March 09, 2026</p>
     </footer>
 
     <div class="scroll-container">

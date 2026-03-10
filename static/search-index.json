@@ -1179,14 +1179,14 @@
     "id": "168",
     "title": "bash-opts-example - Example Bash script processing short and long command-line options, including grouped short options",
     "url": "/linuxbash/script-bash-opts-example.html",
-    "content": "#!/usr/bin/env bash help_text=&quot;Usage: ${0#*/} [options] &lt;arguments&gt; Options: -h Show this help message -d Enable debug mode -f FILENAME Specify a file --debug Enable debug mode --help Show this help message --file=FILENAME Specify a file&quot; help_line=&quot;Example Bash script processing short and long command-line options, including grouped short options&quot; web_desc_line=&quot;Example Bash script processing short and long command-line options, including grouped short options&quo",
+    "content": "#!/usr/bin/env bash help_line=&quot;Example Bash script processing short and long command-line options, including grouped short options&quot; web_desc_line=&quot;Example Bash script processing short and long command-line options, including grouped short options&quot; debug=false usage() { echo &quot;Usage: $0 [options]&quot; echo &quot;Options:&quot; grep &quot;# arg:&quot; $0 | grep -v &quot;grep&quot; | sed &#39;s/^ *//; s/).*# *arg://&#39; echo &quot;Try ${0##*/} -h for more information&quot;",
     "type": "page"
   },
   {
     "id": "169",
     "title": "bash-script-example - Example Bash Script",
     "url": "/linuxbash/script-bash-script-example.html",
-    "content": "#!/usr/bin/env bash help_text=&quot; NAME bash-func - One line description. USAGE bash-func [options] &lt;parameters&gt; OPTIONS -x Description... -h|--help Show help text. DESCRIPTION Description description description description. AUTHOR mjnurse.github.io - 2026 &quot; help_line=&quot;Example Bash Script&quot; web_desc_line=&quot;Example Bash Script&quot; # set -x # for debugging # Terminal Colours cdef=&quot;\\e[39m&quot; # default colour cbla=&quot;\\e[30m&quot;; cgra=&quot;\\e[90m&quot;; clgr",
+    "content": "#!/usr/bin/env bash help_text=&quot; NAME bash-func - One line description. USAGE bash-func [options] &lt;parameters&gt; OPTIONS -x Description... -h|--help Show help text. DESCRIPTION Description description description description. AUTHOR mjnurse.github.io - 2026 &quot; help_line=&quot;Example Bash Script&quot; web_desc_line=&quot;Example Bash Script&quot; tmpfile=$(mktemp) trap &#39;rm -f &quot;$tmpfile&quot;&#39; EXIT # set -x # for debugging # Terminal Colours cdef=&quot;\\e[39m&quot; # defa",
     "type": "page"
   },
   {
@@ -1387,9 +1387,9 @@
   },
   {
     "id": "198",
-    "title": "mr - Example Bash Script",
+    "title": "mr - Find most recent files matching a pattern",
     "url": "/linuxbash/script-mr.html",
-    "content": "#!/usr/bin/env bash help_text=&quot; NAME mr - Find most recent files matching a pattern. USAGE mr [options] &lt;pattern&gt; OPTIONS -n N Number of results to show (default: 20). -i Case-insensitive matching. -h|--help Show this help text. DESCRIPTION This script searches for files matching a shell pattern in the current directory and its subdirectories. It then sorts the results by modification time and displays the most recent ones. AUTHOR mjnurse.github.io - 2026 &quot; help_line=&quot;Exampl",
+    "content": "#!/usr/bin/env bash help_text=&quot; NAME mr - Find most recent files matching a pattern. USAGE mr [options] &lt;pattern&gt; OPTIONS -n|--number N Number of results to show (default: 20). -i|--ignore-case Case-insensitive matching. -h|--help Show this help text. DESCRIPTION This script searches for files matching a shell pattern in the current directory and its subdirectories. It then sorts the results by modification time and displays the most recent ones. AUTHOR mjnurse.github.io - 2026 &quot;",
     "type": "page"
   },
   {
