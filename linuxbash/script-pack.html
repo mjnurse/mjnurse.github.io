@@ -100,14 +100,17 @@
 <span class="s2">  pack [options] &lt;filename(s)&gt;</span>
 
 <span class="s2">OPTIONS</span>
-<span class="s2">  -h|--help</span>
-<span class="s2">    Show help text.</span>
+<span class="s2">    -f|--force</span>
+<span class="s2">        Overwrite existing pack if one already exists.</span>
 
-<span class="s2">  -n|--name</span>
-<span class="s2">    Specify a name from the pack file.</span>
+<span class="s2">    -h|--help</span>
+<span class="s2">        Show help text.</span>
 
-<span class="s2">  -s|--silent</span>
-<span class="s2">    Suppress terminal output.</span>
+<span class="s2">    -n|--name &lt;name&gt;</span>
+<span class="s2">        Specify a name from the pack file.</span>
+
+<span class="s2">    -s|--silent</span>
+<span class="s2">        Suppress terminal output.</span>
 
 <span class="s2">DESCRIPTION</span>
 <span class="s2">  Compresses one or more files and converts these to base64 to copy and paste into a command</span>
@@ -138,18 +141,18 @@
 
 <span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
-<span class="w">    </span>-f<span class="p">|</span>--force<span class="o">)</span>
+<span class="w">    </span>-f<span class="p">|</span>--force<span class="o">)</span><span class="w"> </span><span class="c1"># arg: Overwrite existing pack if one already exists.</span>
 <span class="w">      </span><span class="nv">force_yn</span><span class="o">=</span>y
 <span class="w">      </span><span class="p">;;</span>
-<span class="w">    </span>-h<span class="p">|</span>--help<span class="o">)</span>
+<span class="w">    </span>-h<span class="p">|</span>--help<span class="o">)</span><span class="w"> </span><span class="c1"># arg: Show help text.</span>
 <span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
 <span class="w">      </span><span class="nb">exit</span>
 <span class="w">      </span><span class="p">;;</span>
-<span class="w">    </span>-n<span class="p">|</span>--name<span class="o">)</span>
+<span class="w">    </span>-n<span class="p">|</span>--name<span class="o">)</span><span class="w"> </span><span class="c1"># arg: &lt;name&gt; Specify a name from the pack file.</span>
 <span class="w">      </span><span class="nb">shift</span>
 <span class="w">      </span><span class="nv">pack_name</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
 <span class="w">      </span><span class="p">;;</span>
-<span class="w">    </span>-s<span class="p">|</span>--silent<span class="o">)</span>
+<span class="w">    </span>-s<span class="p">|</span>--silent<span class="o">)</span><span class="w"> </span><span class="c1"># arg: Suppress terminal output.</span>
 <span class="w">      </span><span class="nv">silent_yn</span><span class="o">=</span>y
 <span class="w">      </span><span class="p">;;</span>
 <span class="w">    </span>?*<span class="o">)</span>
@@ -217,7 +220,7 @@ rm<span class="w"> </span>-f<span class="w"> </span><span class="nv">$pack_name<
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: January 02, 2026</p>
+      <p>Last updated: March 11, 2026</p>
     </footer>
 
     <div class="scroll-container">

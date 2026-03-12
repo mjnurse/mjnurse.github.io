@@ -1389,7 +1389,7 @@
     "id": "198",
     "title": "mr - Find most recent files matching a pattern",
     "url": "/linuxbash/script-mr.html",
-    "content": "#!/usr/bin/env bash help_text=&quot; NAME mr - Find most recent files matching a pattern. USAGE mr [options] &lt;pattern&gt; OPTIONS -n|--number N Number of results to show (default: 20). -i|--ignore-case Case-insensitive matching. -h|--help Show this help text. DESCRIPTION This script searches for files matching a shell pattern in the current directory and its subdirectories. It then sorts the results by modification time and displays the most recent ones. AUTHOR mjnurse.github.io - 2026 &quot;",
+    "content": "#!/usr/bin/env bash help_text=&quot; NAME mr - Find most recent files matching a pattern. USAGE mr [options] &lt;pattern&gt; OPTIONS -n|--number &lt;number&gt; Number of results to show. -i|--ignore-case Set a flag. DESCRIPTION This script searches for files matching a shell pattern in the current directory and its subdirectories. It then sorts the results by modification time and displays the most recent ones. AUTHOR mjnurse.github.io - 2026 &quot; help_line=&quot;Find most recent files matchin",
     "type": "page"
   },
   {
@@ -1417,7 +1417,7 @@
     "id": "202",
     "title": "pack - Compresses and converts files base64 to copy and paste into a command line session",
     "url": "/linuxbash/script-pack.html",
-    "content": "#!/usr/bin/env bash help_text=&quot; NAME pack - Compresses and converts files base64 to copy / paste into a command line session. USAGE pack [options] &lt;filename(s)&gt; OPTIONS -h|--help Show help text. -n|--name Specify a name from the pack file. -s|--silent Suppress terminal output. DESCRIPTION Compresses one or more files and converts these to base64 to copy and paste into a command line session with commands to convert these back to the original file. The output is also written to a file,",
+    "content": "#!/usr/bin/env bash help_text=&quot; NAME pack - Compresses and converts files base64 to copy / paste into a command line session. USAGE pack [options] &lt;filename(s)&gt; OPTIONS -f|--force Overwrite existing pack if one already exists. -h|--help Show help text. -n|--name &lt;name&gt; Specify a name from the pack file. -s|--silent Suppress terminal output. DESCRIPTION Compresses one or more files and converts these to base64 to copy and paste into a command line session with commands to convert",
     "type": "page"
   },
   {

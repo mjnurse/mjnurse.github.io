@@ -129,7 +129,7 @@
 <span class="s1">    and the second part evaluates the output of goto -r to change the current directory.</span>
 
 <span class="s1">    g () {</span>
-<span class="s1">        goto &quot;$1&quot;</span>
+<span class="s1">        goto -s &quot;$1&quot;</span>
 <span class="s1">        eval &quot;$(goto -r)&quot;</span>
 <span class="s1">    }</span>
 
@@ -155,6 +155,8 @@
 <span class="nv">try</span><span class="o">=</span><span class="s2">&quot;Try </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h for more information&quot;</span>
 <span class="nv">tmp</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">help_text</span><span class="p">##*USAGE</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="nv">usage</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%OPTIONS*</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;\n&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/  */ /g&quot;</span><span class="k">)</span>
+
+<span class="nv">SUPPRESS_WARNING</span><span class="o">=</span><span class="nb">false</span>
 
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="nv">IFS</span><span class="o">=</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>line<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$line</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
@@ -191,6 +193,9 @@
 <span class="w">            </span><span class="k">fi</span>
 <span class="w">            </span><span class="nb">exit</span>
 <span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>-s<span class="p">|</span>--suppress-warning<span class="o">)</span>
+<span class="w">            </span><span class="nv">SUPPRESS_WARNING</span><span class="o">=</span><span class="nb">true</span>
+<span class="w">            </span><span class="p">;;</span>
 <span class="w">        </span>?*<span class="o">)</span>
 <span class="w">            </span><span class="k">break</span>
 <span class="w">            </span><span class="p">;;</span>
@@ -199,6 +204,10 @@
 <span class="k">done</span>
 
 <span class="nv">tf</span><span class="o">=</span>/tmp/g-<span class="nv">$$</span>.tmp
+
+<span class="k">if</span><span class="w"> </span>!<span class="w"> </span><span class="nv">$SUPPRESS_WARNING</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Warning - this execution will not change directory - check help for details&quot;</span>
+<span class="k">fi</span>
 
 egrep<span class="w"> </span><span class="s2">&quot;.*</span><span class="nv">$1</span><span class="s2">.*,&quot;</span><span class="w"> </span><span class="nv">$0</span>.dat<span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$tf</span>
 
@@ -237,7 +246,7 @@ rm<span class="w"> </span><span class="nv">$tf</span>
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: February 17, 2026</p>
+      <p>Last updated: March 11, 2026</p>
     </footer>
 
     <div class="scroll-container">
