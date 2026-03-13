@@ -99,16 +99,16 @@
 <span class="s2">USAGE</span>
 <span class="s2">    es-cp &lt;source_index&gt; &lt;destination_index&gt;</span>
 
-<span class="s2">OPTIONS</span>
-<span class="s2">    -h|--help</span>
-<span class="s2">        Show help text.</span>
-
 <span class="s2">ENVIRONMENT VARIABLES</span>
 <span class="s2">    QES_HOST</span>
 <span class="s2">        Elasticsearch host (default: localhost)</span>
 
 <span class="s2">    QES_PORT</span>
 <span class="s2">        Elasticsearch port (default: 9200)</span>
+
+<span class="s2">OPTIONS</span>
+<span class="s2">    -h|--help</span>
+<span class="s2">        Show help text.</span>
 
 <span class="s2">DESCRIPTION</span>
 <span class="s2">    Copies an Elasticsearch index to a new index with the same settings and mappings.</span>
@@ -137,7 +137,7 @@
 
 <span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
-<span class="w">        </span>-h<span class="p">|</span>--help<span class="o">)</span>
+<span class="w">        </span>-h<span class="p">|</span>--help<span class="o">)</span><span class="w"> </span><span class="c1"># arg: Show help text.</span>
 <span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
 <span class="w">            </span><span class="nb">exit</span>
 <span class="w">            </span><span class="p">;;</span>
@@ -205,7 +205,7 @@ curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </spa
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: February 03, 2026</p>
+      <p>Last updated: March 12, 2026</p>
     </footer>
 
     <div class="scroll-container">
