@@ -1193,7 +1193,7 @@
     "id": "170",
     "title": "calc - Command line calculator",
     "url": "/linuxbash/script-calc.html",
-    "content": "#!/usr/bin/env bash help_text=&quot; NAME calc - Command line calculator USAGE calc [options] &lt;calculation&gt; OPTIONS -h|--help Show help text. -i|--interactive Launch an interactive (bc) calculator. -s|--sizes Convert number to KB, MB, GB, TB, PB. DESCRIPTION In the calculation us &#39;x&#39; for multiply, use &#39;r&#39; for the previous result. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;Command line calculator&quot; web_desc_line=&quot;Command line calculator&quot; pack_member",
+    "content": "#!/usr/bin/env bash help_text=&quot; NAME calc - Command line calculator USAGE calc [options] &lt;calculation&gt; OPTIONS -h|--help Show help text. -i|--interactive Launch an interactive (bc) calculator. -s|--sizes &lt;value&gt; Convert &lt;value&gt; to KB, MB, GB, TB, PB. DESCRIPTION In the calculation use &#39;x&#39; for multiply, use &#39;r&#39; for the previous result. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;Command line calculator&quot; web_desc_line=&quot;Command line calcul",
     "type": "page"
   },
   {
@@ -1277,7 +1277,7 @@
     "id": "182",
     "title": "fe - Search for a file and edit",
     "url": "/linuxbash/script-fe.html",
-    "content": "#!/usr/bin/env bash help_text=&quot; NAME fe - Search for a file and edit in gvim or VSCode. USAGE fe &lt;search words&gt; OPTIONS -h|--help Show help text. -f|--fuzzy Run a fuzzy search - adds wildcards before and after each word. -g Run grep - search content of files instead of filename. DESCRIPTION Search for a file and edit in gvim or VSCode. A list of matching files will be shown with the option to select one for edit. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;Search for a file",
+    "content": "#!/usr/bin/env bash help_text=&quot; NAME fe - Search for a file and edit in gvim or VSCode. USAGE fe &lt;search words&gt; OPTIONS -h|--help Show help text. -f|--fuzzy Run a fuzzy search - adds wildcards before and after each word. -g|--use-grep Run grep - search content of files instead of filename. DESCRIPTION Search for a file and edit in gvim or VSCode. A list of matching files will be shown with the option to select one for edit. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;Search",
     "type": "page"
   },
   {

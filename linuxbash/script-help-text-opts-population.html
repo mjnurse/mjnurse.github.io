@@ -158,7 +158,7 @@
 <span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">0</span>
 <span class="k">fi</span>
 
-<span class="nv">options</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>grep<span class="w"> </span><span class="s1">&#39;# arg&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span><span class="s1">&#39;grep&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/^ */    /; s/) *# *arg: *\(&lt;[^&gt;]*&gt;\)/ \1\n       /; s/) *# *arg: */\n        /; s/$/\.\n/; s/\.\.\n/\.\n/&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="nv">options</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>grep<span class="w"> </span><span class="s1">&#39;# arg&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span><span class="s1">&#39;^ *grep&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/^ */    /; s/) *# *arg: *\(&lt;[^&gt;]*&gt;\)/ \1\n       /; s/) *# *arg: */\n        /; s/$/\.\n/; s/\.\.\n/\.\n/&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
 
 <span class="nv">safe_options</span><span class="o">=</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;%s&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$options</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/[&amp;]/\\&amp;/g; :a;N;$!ba;s/\n/#NL#/g&#39;</span><span class="k">)</span>
 
@@ -189,7 +189,7 @@ sed<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;/^OP
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: March 12, 2026</p>
+      <p>Last updated: March 13, 2026</p>
     </footer>
 
     <div class="scroll-container">
