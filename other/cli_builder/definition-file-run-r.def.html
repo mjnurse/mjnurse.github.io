@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="cli_builder" />
+    <meta name="description" content="r.def" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>cli_builder</title>
+    <title>r.def</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
@@ -90,19 +90,44 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1>cli builder</h1>
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/other/cli_builder/definition-file-Run-r.def.md">r.def</a></h1>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Run</span>
 
-<ul class="page-list">
-  <li><a href="/other/cli_builder/cli-builder-script.html" data-number="1"><span class="page-number">1</span>CLI builder</a></li>
-  <li><a href="/other/cli_builder/cli-builder_script.html" data-number="2"><span class="page-number">2</span>CLI builder</a></li>
-  <li><a href="/other/cli_builder/definition-file-docker-dc.def.html" data-number="3"><span class="page-number">3</span>dc.def</a></li>
-  <li><a href="/other/cli_builder/definition-file-elasticsearch-es.def.html" data-number="4"><span class="page-number">4</span>es.def</a></li>
-  <li><a href="/other/cli_builder/definition-file-git-gi.def.html" data-number="5"><span class="page-number">5</span>gi.def</a></li>
-  <li><a href="/other/cli_builder/definition-file-kubectl-kc.def.html" data-number="6"><span class="page-number">6</span>kc.def</a></li>
-  <li><a href="/other/cli_builder/definition-file-postgres-psql-pg.def.html" data-number="7"><span class="page-number">7</span>pg.def</a></li>
-  <li><a href="/other/cli_builder/definition-file-run-r.def.html" data-number="8"><span class="page-number">8</span>r.def</a></li>
-</ul>
+<span class="c1"># ------------------------------------------------------------------------------------------------------------</span>
+<span class="o">=</span><span class="w"> </span>MDM
+<span class="c1"># ------------------------------------------------------------------------------------------------------------</span>
 
+start<span class="w"> </span>mdm<span class="w"> </span><span class="o">(</span>sm<span class="o">)</span><span class="w"> </span><span class="o">[</span>&lt;streaming<span class="p">|</span>ui<span class="p">|</span>all<span class="p">|</span>k<span class="o">(</span>afka<span class="o">)</span>&gt;<span class="p">|</span>kapp&gt;<span class="p">|</span>shaper<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>mjn-start-mdm<span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="c1">## kapp starts kafka streaming for the application data source</span>
+
+restart<span class="w"> </span>mdm<span class="w"> </span><span class="o">(</span>rm<span class="o">)</span><span class="w"> </span><span class="o">[</span>&lt;streaming<span class="p">|</span>ui<span class="p">|</span>all<span class="p">|</span>k<span class="o">(</span>afka<span class="o">)</span>&gt;<span class="p">|</span>kapp<span class="p">|</span>shaper&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>mjn-stop-mdm<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>mjn-start-mdm<span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="c1">## kapp starts kafka streaming for the application data source</span>
+
+halt<span class="w"> </span>mdm<span class="w"> </span><span class="o">(</span>hm<span class="o">)</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>mjn-stop-mdm
+
+<span class="c1"># ------------------------------------------------------------------------------------------------------------</span>
+<span class="o">=</span><span class="w"> </span>ES<span class="w"> </span>/<span class="w"> </span>Postgres
+<span class="c1"># ------------------------------------------------------------------------------------------------------------</span>
+
+start<span class="w"> </span>es<span class="w"> </span><span class="o">(</span>se<span class="o">)</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>mjn-start-es-pg<span class="w"> </span>es
+
+start<span class="w"> </span>postgres<span class="w"> </span><span class="o">(</span>sp<span class="o">)</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>mjn-start-es-pg<span class="w"> </span>pg
+
+
+<span class="c1"># ------------------------------------------------------------------------------------------------------------</span>
+<span class="o">=</span><span class="w"> </span>CLI-BUILDER
+<span class="c1"># ------------------------------------------------------------------------------------------------------------</span>
+
+cli<span class="w"> </span>build<span class="w"> </span>all<span class="w"> </span><span class="o">(</span>cba<span class="o">)</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nb">cd</span><span class="w"> </span>~/mjnurse/cli-builder<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>cli-builder<span class="w"> </span>*.def
+</code></pre></div>
         </div>
       </article>
     </main>

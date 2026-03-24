@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="CLI builder" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>CLI builder</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/other/cli_builder/cli-builder-script.md">CLI builder</a></h1>
+<p>This bash script generates a cli (command line interface) bash script from a
+definition file.  The structure of the definition file is code header below. 
+This script also generates an alias file which contains a set of alias
+commands which run each command in the definition file using the associated
+shortcut prepended with an '@'.</p>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python3</span>
+<span class="s2">&quot;&quot;&quot;CLI Builder - Generate bash CLI scripts from definition files&quot;&quot;&quot;</span>
+from<span class="w"> </span>datetime<span class="w"> </span>import<span class="w"> </span>datetime
+import<span class="w"> </span>re,<span class="w"> </span>sys,<span class="w"> </span>os
+from<span class="w"> </span>dataclasses<span class="w"> </span>import<span class="w"> </span>dataclass
+from<span class="w"> </span>typing<span class="w"> </span>import<span class="w"> </span>List,<span class="w"> </span>Optional
+
+<span class="nv">C_CYA</span><span class="o">=</span><span class="s2">&quot;\\x1b[96m&quot;</span><span class="w"> </span>
+<span class="nv">C_GRE</span><span class="o">=</span><span class="s2">&quot;\\x1b[92m&quot;</span><span class="w"> </span>
+<span class="nv">C_MAG</span><span class="o">=</span><span class="s2">&quot;\\x1b[95m&quot;</span>
+<span class="nv">C_WHI</span><span class="o">=</span><span class="s2">&quot;\\x1b[97m&quot;</span><span class="w"> </span>
+<span class="nv">C_DEF</span><span class="o">=</span><span class="s2">&quot;\\x1b[0m&quot;</span>
+
+<span class="nv">HELP_TEXT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>r<span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">NAME</span>
+<span class="s2">  cli-builder - Generate CLI bash scripts from definition files.</span>
+
+<span class="s2">USAGE</span>
+<span class="s2">  cli-builder [-d] &lt;definition_filename&gt;</span>
+
+<span class="s2">OPTIONS</span>
+<span class="s2">  -d          Run in debug mode</span>
+<span class="s2">  -h, --help  Show this help</span>
+
+<span class="s2">DESCRIPTION</span>
+<span class="s2">  This python script generates a cli (command line interface) bash script from a definition file.</span>
+<span class="s2">  The structure of the definition file is described below.  This script also generates an alias</span>
+<span class="s2">  file which contains a set of alias commands which run each command in the definition file using</span>
+<span class="s2">  the associated shortcut prepended with an &#39;@&#39;.</span>
+
+<span class="s2">  Definition File Structure</span>
+<span class="s2">  -------------------------</span>
+
+<span class="s2">  # - a line starting with a # is a comment</span>
+
+<span class="s2">  = - a line starting with a = is a group description for the set of commands following this</span>
+<span class="s2">      line up until the next line starting with a = or the end of the file.</span>
+
+<span class="s2">  !! - commands following !! are command line completion commands.  The command must return a list of</span>
+<span class="s2">        words which are used to complete the command.  The command is run when the current or</span>
+<span class="s2">        previous word matches the command name or shortcut.</span>
+
+<span class="s2">  ## - text following ## is a help description for the command.  This text is shown when</span>
+<span class="s2">        the help command is run.</span>
+
+<span class="s2">  ( \ - is the line continuation character.  Any line ending \ is joined to the next line. )</span>
+
+<span class="s2">  All other lines in the file are command definitions.  These lines are structured as follows:</span>
+
+<span class="s2">  name-1..name-n (shortcut) &lt;param&gt; [&lt;opt_param] :: command \$1 \$2</span>
+
+<span class="s2">  Where:</span>
+
+<span class="s2">  name-1..name-n</span>
+<span class="s2">    A list of words which describe the command and which are typed to run the command.</span>
+
+<span class="s2">  shortcut</span>
+<span class="s2">    A single word which can also be typed to run the command.  If the aliases are created</span>
+<span class="s2">    then the alias can also be run direct from the command as @alias.</span>
+
+<span class="s2">  param</span>
+<span class="s2">    A mandatory parameter.  There can be 0 or more mandatory parameters.</span>
+
+<span class="s2">  opt_param</span>
+<span class="s2">    A optional parameter.  There can me 0 or more optional parameters.  The must always follow</span>
+<span class="s2">    the mandatory parameters and there can be no gaps.  This means if optional parameter 3 is</span>
+<span class="s2">    passed in so must optional parameters 1 and 2.</span>
+
+<span class="s2">  ::</span>
+<span class="s2">    Separates the command definition with the Linux command that is run.</span>
+
+<span class="s2">  command</span>
+<span class="s2">    Is an Linux command.  Parameter values entered after the command are specified using there</span>
+<span class="s2">    position preceded by a \$.  e.g \$1, \$2.</span>
+
+<span class="s2">  Example</span>
+
+<span class="s2">  sort_cli.def:</span>
+<span class="s2">  ----------------------------------------------------------------</span>
+<span class="s2">  # FILE OPTIONS</span>
+<span class="s2">  sort file (sf) &lt;filename&gt; &lt;sort_parameter&gt; :: cat \$1 | sort \$2</span>
+<span class="s2">  ----------------------------------------------------------------</span>
+
+<span class="s2">  This example sorts a file specified by a mandatory filename.  An optional sort parameter can</span>
+<span class="s2">  be passed to modify the sort order.  Once the cli is built the command can be run as follows.</span>
+<span class="s2">  Note: the name of the cli command is the same as the name of the definition file</span>
+<span class="s2">  (without the .def).</span>
+
+<span class="s2">  &gt; sort_cli sort file my_file</span>
+
+<span class="s2">  &gt; sort_cli sf my_file --ignore_case</span>
+
+<span class="s2">  &gt; @sf my_file</span>
+
+<span class="s2">AUTHOR</span>
+<span class="s2">  mjnurse - 2025</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+@dataclass
+class<span class="w"> </span>Cmd:
+<span class="w">    </span><span class="s2">&quot;&quot;&quot;Represents a CLI command&quot;&quot;&quot;</span>
+<span class="w">    </span>keys:<span class="w"> </span>List<span class="o">[</span>str<span class="o">]</span>
+<span class="w">    </span>shortcut:<span class="w"> </span>str
+<span class="w">    </span>params:<span class="w"> </span>List<span class="o">[</span>tuple<span class="o">[</span>str,<span class="w"> </span>bool<span class="o">]]</span><span class="w">  </span><span class="c1"># (name, is_optional)</span>
+<span class="w">    </span>cmd:<span class="w"> </span>str
+<span class="w">    </span>help:<span class="w"> </span>str
+<span class="w">    </span>comp:<span class="w"> </span>str
+
+<span class="w">    </span>@property
+<span class="w">    </span>def<span class="w"> </span>all_keys<span class="o">(</span>self<span class="o">)</span>:<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39; &#39;</span>.join<span class="o">(</span>self.keys<span class="o">)</span>
+
+<span class="w">    </span>@property
+<span class="w">    </span>def<span class="w"> </span>num_mandatory<span class="o">(</span>self<span class="o">)</span>:<span class="w"> </span><span class="k">return</span><span class="w"> </span>sum<span class="o">(</span><span class="m">1</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>_,<span class="w"> </span>opt<span class="w"> </span><span class="k">in</span><span class="w"> </span>self.params<span class="w"> </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>opt<span class="o">)</span>
+
+<span class="w">    </span>@property
+<span class="w">    </span>def<span class="w"> </span>usage_str<span class="o">(</span>self<span class="o">)</span>:
+<span class="w">        </span><span class="nv">params_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39; &#39;</span>.join<span class="o">(</span>f<span class="s1">&#39;[{p}]&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>opt<span class="w"> </span><span class="k">else</span><span class="w"> </span>f<span class="s1">&#39;&lt;{p}&gt;&#39;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>p,<span class="w"> </span>opt<span class="w"> </span><span class="k">in</span><span class="w"> </span>self.params<span class="o">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span>f<span class="s2">&quot;{self.all_keys} ({self.shortcut}) {params_str}&quot;</span>.strip<span class="o">()</span>
+
+<span class="w">    </span>@property
+<span class="w">    </span>def<span class="w"> </span>opt_params<span class="o">(</span>self<span class="o">)</span>:
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">[</span>p<span class="w"> </span><span class="k">for</span><span class="w"> </span>p,<span class="w"> </span>opt<span class="w"> </span><span class="k">in</span><span class="w"> </span>self.params<span class="w"> </span><span class="k">if</span><span class="w"> </span>opt<span class="o">]</span>
+
+def<span class="w"> </span>parse_def<span class="o">(</span>lines,<span class="w"> </span>title,<span class="w"> </span>cli_name<span class="o">)</span>:
+<span class="w">    </span><span class="s2">&quot;&quot;&quot;Parse definition file into commands and groups&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="nv">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="nv">cmds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
+<span class="w">    </span><span class="nv">title_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>title:
+<span class="w">        </span><span class="nv">title_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>f<span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">echo -e &quot;{C_GRE}{&quot;-&quot;*len(title)}{C_DEF}&quot;</span>
+<span class="s1">echo -e &quot;{C_GRE}{title}{C_DEF}&quot;</span>
+<span class="s1">echo -e &quot;{C_GRE}{&quot;-&quot;*len(title)}{C_DEF}&quot;</span>
+<span class="s1">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="nv">title_str</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">echo -e &quot;{C_GRE}gen:{datetime.now().strftime(&#39;</span>%Y-%m-%d<span class="w"> </span>%H:%M<span class="s1">&#39;)}{C_DEF}&quot;</span>
+<span class="s1">echo</span>
+<span class="s1">&#39;&#39;&#39;</span>
+
+<span class="w">    </span>cmds.append<span class="o">((</span><span class="s1">&#39;cmd&#39;</span>,<span class="w"> </span>Cmd<span class="o">(</span>
+<span class="w">            </span><span class="nv">keys</span><span class="o">=[</span><span class="s1">&#39;help&#39;</span><span class="o">]</span>,
+<span class="w">            </span><span class="nv">shortcut</span><span class="o">=</span>cli_name<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span>+<span class="w"> </span><span class="s1">&#39;he&#39;</span>,
+<span class="w">            </span><span class="nv">params</span><span class="o">=[]</span>,
+<span class="w">            </span><span class="nv">cmd</span><span class="o">=</span>title_str<span class="w"> </span>+<span class="w"> </span>f<span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">            while IFS= read -r line; do echo -e &quot;${{line}}${{CRESET}}&quot;; done &lt; &lt;(egrep &quot;usage=|section=&quot; &quot;$0&quot; | grep -v &quot;grep&quot; | sed &quot;s/.*usage=/   /; s/.*section=/\\x1b[92m/; s/\\&quot;//g&quot;)&#39;&#39;&#39;</span>,
+<span class="w">            </span><span class="nv">help</span><span class="o">=</span><span class="s1">&#39;&#39;</span>,
+<span class="w">            </span><span class="nv">comp</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+<span class="w">        </span><span class="o">)</span>,<span class="w"> </span><span class="s1">&#39;HELP&#39;</span><span class="o">))</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>line<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">(</span>l.strip<span class="o">()</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>l<span class="w"> </span><span class="k">in</span><span class="w"> </span>lines<span class="o">)</span>:
+<span class="w">        </span><span class="c1"># Skip comments and empty lines</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>line<span class="w"> </span>or<span class="w"> </span>line.startswith<span class="o">(</span><span class="s1">&#39;#&#39;</span><span class="o">)</span>:
+<span class="w">            </span><span class="k">continue</span>
+
+<span class="w">        </span><span class="c1"># Group description</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>line.startswith<span class="o">(</span><span class="s1">&#39;=&#39;</span><span class="o">)</span>:
+<span class="w">            </span><span class="nv">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>line<span class="o">[</span><span class="m">2</span>:<span class="o">]</span>
+<span class="w">            </span><span class="k">continue</span>
+
+<span class="w">        </span><span class="c1"># Direct command insertion</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>line.startswith<span class="o">(</span><span class="s1">&#39;cmd &#39;</span><span class="o">)</span>:
+<span class="w">            </span>cmds.append<span class="o">((</span><span class="s1">&#39;raw&#39;</span>,<span class="w"> </span>line<span class="o">[</span><span class="m">4</span>:<span class="o">]))</span>
+<span class="w">            </span><span class="k">continue</span>
+
+<span class="w">        </span><span class="c1"># Command definition</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="s1">&#39;::&#39;</span><span class="w"> </span>not<span class="w"> </span><span class="k">in</span><span class="w"> </span>line:
+<span class="w">            </span><span class="k">continue</span>
+
+<span class="w">        </span><span class="c1"># Extract parts</span>
+<span class="w">        </span><span class="nv">help_txt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>re.search<span class="o">(</span>r<span class="s1">&#39;##\s*(.+)&#39;</span>,<span class="w"> </span>line<span class="o">)</span>
+<span class="w">        </span><span class="nv">comp_cmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>re.search<span class="o">(</span>r<span class="s1">&#39;!!\s*([^#]+)&#39;</span>,<span class="w"> </span>line<span class="o">)</span>
+<span class="w">        </span><span class="nv">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>re.sub<span class="o">(</span>r<span class="s1">&#39;##.*|!!.*&#39;</span>,<span class="w"> </span><span class="s1">&#39;&#39;</span>,<span class="w"> </span>line<span class="o">)</span>
+
+<span class="w">        </span>defn,<span class="w"> </span><span class="nv">cmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>s.strip<span class="o">()</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>s<span class="w"> </span><span class="k">in</span><span class="w"> </span>line.split<span class="o">(</span><span class="s1">&#39;::&#39;</span>,<span class="w"> </span><span class="m">1</span><span class="o">))</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nv">cmd</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;&#39;</span>:
+<span class="w">            </span>print<span class="o">(</span>f<span class="s1">&#39;Warning: Command missing for definition: {defn}\n&#39;</span><span class="o">)</span>
+
+<span class="w">        </span><span class="c1"># Parse command definition</span>
+<span class="w">        </span><span class="nv">tokens</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>re.findall<span class="o">(</span>r<span class="s1">&#39;\w+|\([^)]+\)|&lt;[^&gt;]+&gt;|\[[^\]]+\]&#39;</span>,<span class="w"> </span>defn<span class="o">)</span>
+<span class="w">        </span>keys,<span class="w"> </span>params,<span class="w"> </span><span class="nv">shortcut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>,<span class="w"> </span><span class="o">[]</span>,<span class="w"> </span><span class="s1">&#39;&#39;</span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span>tok<span class="w"> </span><span class="k">in</span><span class="w"> </span>tokens:
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>tok.startswith<span class="o">(</span><span class="s1">&#39;(&#39;</span><span class="o">)</span>:
+<span class="w">                </span><span class="nv">shortcut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>cli_name<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span>+<span class="w"> </span>tok.strip<span class="o">(</span><span class="s1">&#39;()&#39;</span><span class="o">)</span>
+<span class="w">            </span><span class="k">elif</span><span class="w"> </span>tok.startswith<span class="o">(</span><span class="s1">&#39;[&#39;</span><span class="o">)</span>:
+<span class="w">                </span>params.append<span class="o">((</span>tok.strip<span class="o">(</span><span class="s1">&#39;[]&lt;&gt;&#39;</span><span class="o">)</span>,<span class="w"> </span>True<span class="o">))</span>
+<span class="w">            </span><span class="k">elif</span><span class="w"> </span>tok.startswith<span class="o">(</span><span class="s1">&#39;&lt;&#39;</span><span class="o">)</span>:
+<span class="w">                </span>params.append<span class="o">((</span>tok.strip<span class="o">(</span><span class="s1">&#39;&lt;&gt;&#39;</span><span class="o">)</span>,<span class="w"> </span>False<span class="o">))</span>
+<span class="w">            </span><span class="k">else</span>:
+<span class="w">                </span>keys.append<span class="o">(</span>tok<span class="o">)</span>
+
+<span class="w">        </span><span class="c1"># Auto-generate shortcut if not provided</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>shortcut:
+<span class="w">            </span><span class="nv">shortcut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>cli_name<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span>+<span class="w"> </span><span class="s1">&#39;&#39;</span>.join<span class="o">(</span>k<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>k<span class="w"> </span><span class="k">in</span><span class="w"> </span>keys<span class="o">[</span>:2<span class="o">])</span>
+
+<span class="w">        </span>cmds.append<span class="o">((</span><span class="s1">&#39;cmd&#39;</span>,<span class="w"> </span>Cmd<span class="o">(</span>
+<span class="w">            </span><span class="nv">keys</span><span class="o">=</span>keys,
+<span class="w">            </span><span class="nv">shortcut</span><span class="o">=</span>shortcut,
+<span class="w">            </span><span class="nv">params</span><span class="o">=</span>params,
+<span class="w">            </span><span class="nv">cmd</span><span class="o">=</span>cmd,
+<span class="w">            </span><span class="nv">help</span><span class="o">=</span>help_txt.group<span class="o">(</span><span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>help_txt<span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;&#39;</span>,
+<span class="w">            </span><span class="nv">comp</span><span class="o">=</span>comp_cmd.group<span class="o">(</span><span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>comp_cmd<span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
+<span class="w">        </span><span class="o">)</span>,<span class="w"> </span>group<span class="o">))</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>cmds
+
+def<span class="w"> </span>gen_script<span class="o">(</span>cli_name,<span class="w"> </span>cmds,<span class="w"> </span><span class="nv">debug</span><span class="o">=</span>False<span class="o">)</span>:
+<span class="w">    </span><span class="s2">&quot;&quot;&quot;Generate bash CLI script&quot;&quot;&quot;</span>
+
+<span class="w">    </span><span class="nv">script</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>f<span class="s1">&#39;&#39;&#39;#!/usr/bin/env bash</span>
+<span class="s1">debug_yn=n</span>
+<span class="s1">[[ &quot;$1&quot; == &quot;-d&quot; ]] &amp;&amp; {{ debug_yn=y; shift; }}</span>
+<span class="s1">[[ &quot;${{CLI_DEBUG^^}}&quot; == &quot;TRUE&quot; ]] &amp;&amp; debug_yn=y</span>
+
+<span class="s1">C_CYA=&quot;{C_CYA}&quot; C_GRE=&quot;{C_GRE}&quot; C_MAG=&quot;{C_MAG}&quot; C_WHI=&quot;{C_WHI}&quot; C_DEF=&quot;{C_DEF}&quot;</span>
+
+<span class="s1"># param 1 - actual number of parameters</span>
+<span class="s1"># param 2 - required number of parameters</span>
+<span class="s1"># param 3 - incorrect parameters message</span>
+<span class="s1">check_params() {{</span>
+<span class="s1">  [[ &quot;$1&quot; &lt; &quot;$2&quot; ]] &amp;&amp; {{ echo -e &quot;$3&quot;; exit; }}</span>
+<span class="s1">}}</span>
+
+<span class="s1">print_command() {{</span>
+<span class="s1">  [[ $debug_yn == y ]] &amp;&amp; {{ echo &quot;COMMAND: $*&quot; | sed &#39;</span>s/<span class="s2">&quot;/\\&quot;</span>/g<span class="s1">&#39;; echo &quot;COMMAND: $*&quot; | sed &#39;</span>s/./-/g<span class="s1">&#39;; }}</span>
+<span class="s1">}}</span>
+<span class="s1">&#39;&#39;&#39;</span>
+
+<span class="w">    </span>aliases,<span class="w"> </span><span class="nv">comp_opts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>,<span class="w"> </span><span class="o">[]</span>
+<span class="w">    </span><span class="nv">current_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>item<span class="w"> </span><span class="k">in</span><span class="w"> </span>cmds:
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>item<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;raw&#39;</span>:
+<span class="w">            </span><span class="nv">script</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>item<span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="w"> </span>+<span class="w"> </span><span class="s1">&#39;\n&#39;</span>
+<span class="w">            </span><span class="k">continue</span>
+
+<span class="w">        </span>cmd,<span class="w"> </span><span class="nv">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>item<span class="o">[</span><span class="m">1</span><span class="o">]</span>,<span class="w"> </span>item<span class="o">[</span><span class="m">2</span><span class="o">]</span>
+
+<span class="w">        </span><span class="c1"># Add group header if changed</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>group<span class="w"> </span>!<span class="o">=</span><span class="w"> </span>current_group:
+<span class="w">            </span><span class="nv">script</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s1">&#39;section=&quot;{group}&quot;\n&#39;</span>
+<span class="w">            </span><span class="nv">current_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>group
+
+<span class="w">        </span><span class="c1"># Generate command check</span>
+<span class="w">        </span><span class="nv">keys_template</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39; &#39;</span>.join<span class="o">(</span>f<span class="s1">&#39;${i+1}&#39;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span>range<span class="o">(</span>len<span class="o">(</span>cmd.keys<span class="o">)))</span>
+<span class="w">        </span><span class="nv">usage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>f<span class="s2">&quot;{C_MAG}{cmd.all_keys} {C_CYA}({cmd.shortcut}){C_WHI}&quot;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span>p,<span class="w"> </span>opt<span class="w"> </span><span class="k">in</span><span class="w"> </span>cmd.params:
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>opt:
+<span class="w">                </span><span class="nv">usage</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s2">&quot; [{p}]&quot;</span>
+<span class="w">            </span><span class="k">else</span>:
+<span class="w">                </span><span class="nv">usage</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s2">&quot; &lt;{p}&gt;&quot;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>cmd.help:
+<span class="w">            </span><span class="nv">usage</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s2">&quot;{C_GRE} # {cmd.help}&quot;</span>
+<span class="w">        </span><span class="nv">usage</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s2">&quot;{C_DEF}&quot;</span>
+
+<span class="w">        </span><span class="nv">script</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">if [[ &quot;{keys_template}&quot; == &quot;{cmd.all_keys}&quot; || &quot;$1&quot; == &quot;{cmd.shortcut}&quot; ]]; then</span>
+<span class="s1">   [[ &quot;$1&quot; == &quot;{cmd.shortcut}&quot; ]] &amp;&amp; shift || shift {len(cmd.keys)}</span>
+<span class="s1">   usage=&quot;{usage}&quot;</span>
+<span class="s1">   check_params $# {cmd.num_mandatory} &quot;Usage: $usage&quot;</span>
+<span class="s1">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>cmd.all_keys<span class="w"> </span>not<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;h&#39;</span>,<span class="w"> </span><span class="s1">&#39;help&#39;</span><span class="o">]</span>:
+<span class="w">            </span><span class="nv">escaped_cmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>cmd.cmd.replace<span class="o">(</span><span class="s1">&#39;&quot;&#39;</span>,<span class="w"> </span><span class="s1">&#39;\\&quot;&#39;</span><span class="o">)</span>
+<span class="w">            </span><span class="nv">script</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s1">&#39;&#39;&#39;   print_command &quot; {escaped_cmd}&quot;\n&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="nv">script</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s1">&#39;   {cmd.cmd}\n   exit\nfi\n&#39;</span>
+
+<span class="w">        </span><span class="c1"># Add alias</span>
+<span class="w">        </span>aliases.append<span class="o">(</span>f<span class="s2">&quot;alias @{cmd.shortcut}=&#39;{cli_name} {cmd.shortcut}&#39;&quot;</span><span class="o">)</span>
+
+<span class="w">        </span><span class="c1"># Add completion</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>cmd.comp:
+<span class="w">            </span>comp_opts.append<span class="o">(</span>f<span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">        if [[ &quot;$all&quot; == &quot;{cmd.all_keys}&quot; || &quot;$prev&quot; == &quot;{cmd.shortcut}&quot; || &quot;$prev&quot; == &quot;@{cmd.shortcut}&quot; ]]; then</span>
+<span class="s1">            COMPREPLY=( $(compgen -W &quot;$({cmd.comp})&quot; -- &quot;$cur&quot;) )</span>
+<span class="s1">        fi&#39;&#39;&#39;</span><span class="o">)</span>
+
+<span class="w">    </span><span class="c1"># Add help command</span>
+<span class="w">    </span><span class="nv">script</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">if [[ &quot;$1&quot; == &quot;&quot; ]]; then</span>
+<span class="s1">  echo &quot;No option passed&quot;</span>
+<span class="s1">else</span>
+<span class="s1">  echo &quot;$*: invalid option&quot;</span>
+<span class="s1">fi</span>
+<span class="s1">echo &quot;Try \&quot;{cli_name} help\&quot; for more information.&quot;</span>
+<span class="s1">&#39;&#39;&#39;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>script,<span class="w"> </span>aliases,<span class="w"> </span>comp_opts
+
+def<span class="w"> </span>gen_alias_file<span class="o">(</span>cli_name,<span class="w"> </span>aliases,<span class="w"> </span>comp_opts<span class="o">)</span>:
+<span class="w">    </span><span class="s2">&quot;&quot;&quot;Generate alias and completion file&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="nv">alias_names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39; &#39;</span>.join<span class="o">(</span>a.split<span class="o">(</span><span class="s1">&#39;=&#39;</span><span class="o">)[</span><span class="m">0</span><span class="o">][</span><span class="m">6</span>:<span class="o">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>a<span class="w"> </span><span class="k">in</span><span class="w"> </span>aliases<span class="o">)</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>f<span class="s1">&#39;&#39;&#39;# Completion function</span>
+<span class="s1">_{cli_name}_complete() {{</span>
+<span class="s1">    local cur prev all</span>
+<span class="s1">    all=&quot;&quot;</span>
+<span class="s1">    for ((i = 1; i &lt; ${{#COMP_WORDS[@]}}; i++)); do</span>
+<span class="s1">        word=&quot;${{COMP_WORDS[i]}}&quot;</span>
+<span class="s1">        [[ $word != -* ]] &amp;&amp; all+=&quot;$word &quot;</span>
+<span class="s1">    done</span>
+<span class="s1">    all=&quot;$(echo $all | xargs)&quot;</span>
+<span class="s1">    cur=&quot;${{COMP_WORDS[COMP_CWORD]}}&quot;</span>
+<span class="s1">    prev_step=1</span>
+<span class="s1">    prev=&quot;${{COMP_WORDS[COMP_CWORD-$prev_step]}}&quot;</span>
+<span class="s1">    while [[ &quot;${{prev:0:1}}&quot; == &quot;-&quot; ]]; do</span>
+<span class="s1">        let prev_step=prev_step+1</span>
+<span class="s1">        prev=&quot;${{COMP_WORDS[COMP_CWORD-$prev_step]}}&quot;</span>
+<span class="s1">    done</span>
+<span class="s1">{&#39;&#39;.join(comp_opts)}</span>
+<span class="s1">}}</span>
+<span class="s1">complete -F _{cli_name}_complete {cli_name} {alias_names}</span>
+
+<span class="s1"># Shortcut aliases</span>
+<span class="s1">{chr(10).join(aliases)}</span>
+<span class="s1">&#39;&#39;&#39;</span>
+
+def<span class="w"> </span>gen_markdown_file<span class="o">(</span>cli_name,<span class="w"> </span>cmds,<span class="w"> </span>title<span class="o">)</span>:
+<span class="w">    </span><span class="s2">&quot;&quot;&quot;Generate markdown documentation file&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="nv">md_content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>f<span class="s2">&quot;# {title if title else cli_name.upper()}\n\n&quot;</span>
+<span class="w">    </span><span class="nv">md_content</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s2">&quot;*Generated: {datetime.now().strftime(&#39;%Y-%m-%d %H:%M&#39;)}*\n\n&quot;</span>
+
+<span class="w">    </span><span class="nv">current_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>item<span class="w"> </span><span class="k">in</span><span class="w"> </span>cmds:
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>item<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;raw&#39;</span>:
+<span class="w">            </span><span class="k">continue</span>
+
+<span class="w">        </span>cmd,<span class="w"> </span><span class="nv">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>item<span class="o">[</span><span class="m">1</span><span class="o">]</span>,<span class="w"> </span>item<span class="o">[</span><span class="m">2</span><span class="o">]</span>
+
+<span class="w">        </span><span class="c1"># Add group header if changed</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>group<span class="w"> </span>!<span class="o">=</span><span class="w"> </span>current_group<span class="w"> </span>and<span class="w"> </span>group:
+<span class="w">            </span><span class="nv">md_content</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s2">&quot;\n## {group}\n\n&quot;</span>
+<span class="w">            </span><span class="nv">current_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>group
+<span class="w">        </span><span class="k">elif</span><span class="w"> </span>group<span class="w"> </span>!<span class="o">=</span><span class="w"> </span>current_group<span class="w"> </span>and<span class="w"> </span>not<span class="w"> </span>group:
+<span class="w">            </span><span class="nv">current_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>group
+
+<span class="w">        </span><span class="c1"># Format command usage</span>
+<span class="w">        </span><span class="nv">usage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>f<span class="s2">&quot;{cmd.all_keys} ({cmd.shortcut})&quot;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span>p,<span class="w"> </span>opt<span class="w"> </span><span class="k">in</span><span class="w"> </span>cmd.params:
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>opt:
+<span class="w">                </span><span class="nv">usage</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s2">&quot; [{p}]&quot;</span>
+<span class="w">            </span><span class="k">else</span>:
+<span class="w">                </span><span class="nv">usage</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s2">&quot; &lt;{p}&gt;&quot;</span>
+
+<span class="w">        </span><span class="c1"># Add command entry</span>
+<span class="w">        </span><span class="nv">md_content</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s2">&quot;**`{usage}`**&quot;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>cmd.help:
+<span class="w">            </span><span class="nv">md_content</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s2">&quot; - {cmd.help}&quot;</span>
+<span class="w">        </span><span class="nv">md_content</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;\n\n&quot;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>md_content
+
+def<span class="w"> </span>main<span class="o">()</span>:
+<span class="w">    </span><span class="nv">debug</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;-d&#39;</span><span class="w"> </span><span class="k">in</span><span class="w"> </span>sys.argv
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>debug:
+<span class="w">        </span>sys.argv.remove<span class="o">(</span><span class="s1">&#39;-d&#39;</span><span class="o">)</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>len<span class="o">(</span>sys.argv<span class="o">)</span><span class="w"> </span>&lt;<span class="w"> </span><span class="m">2</span><span class="w"> </span>or<span class="w"> </span>sys.argv<span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;-h&#39;</span>,<span class="w"> </span><span class="s1">&#39;--help&#39;</span><span class="o">]</span>:
+<span class="w">        </span>print<span class="o">(</span>HELP_TEXT<span class="o">)</span>
+<span class="w">        </span><span class="k">return</span>
+
+<span class="w">    </span>print<span class="o">(</span>f<span class="s2">&quot;CLI Builder - Generating CLI scripts\n&quot;</span><span class="o">)</span>
+<span class="w">    </span>print<span class="o">(</span>f<span class="s2">&quot;Processing: {&#39;, &#39;.join(sys.argv[1:])}\n&quot;</span><span class="o">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>arg<span class="w"> </span><span class="k">in</span><span class="w"> </span>sys.argv<span class="o">[</span><span class="m">1</span>:<span class="o">]</span>:
+<span class="w">        </span><span class="nv">def_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>arg.replace<span class="o">(</span><span class="s1">&#39;.def&#39;</span>,<span class="w"> </span><span class="s1">&#39;&#39;</span><span class="o">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>os.path.exists<span class="o">(</span>f<span class="s1">&#39;{def_file}.def&#39;</span><span class="o">)</span>:
+<span class="w">            </span>print<span class="o">(</span>f<span class="s1">&#39;Error: Definition file &quot;{def_file}.def&quot; missing&#39;</span><span class="o">)</span>
+<span class="w">            </span><span class="k">return</span>
+
+<span class="w">        </span><span class="nv">cli_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>def_file
+
+<span class="w">        </span><span class="c1"># Parse definition file</span>
+<span class="w">        </span>with<span class="w"> </span>open<span class="o">(</span>f<span class="s1">&#39;{def_file}.def&#39;</span><span class="o">)</span><span class="w"> </span>as<span class="w"> </span>f:
+<span class="w">            </span><span class="nv">lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>l.rstrip<span class="o">()</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>l<span class="w"> </span><span class="k">in</span><span class="w"> </span>f<span class="o">]</span>
+
+<span class="w">        </span><span class="c1"># Handle line continuations, extract title</span>
+<span class="w">        </span><span class="nv">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+<span class="w">        </span><span class="nv">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span>i<span class="w"> </span>&lt;<span class="w"> </span>len<span class="o">(</span>lines<span class="o">)</span>:
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>lines<span class="o">[</span>i<span class="o">]</span>.startswith<span class="o">(</span><span class="s1">&#39;@ &#39;</span><span class="o">)</span>:
+<span class="w">                </span><span class="nv">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>lines<span class="o">[</span>i<span class="o">][</span><span class="m">2</span>:<span class="o">]</span>.strip<span class="o">()</span>
+<span class="w">                </span>del<span class="w"> </span>lines<span class="o">[</span>i<span class="o">]</span>
+<span class="w">                </span><span class="k">continue</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>lines<span class="o">[</span>i<span class="o">]</span>.endswith<span class="o">(</span><span class="s1">&#39;\\&#39;</span><span class="o">)</span>:
+<span class="w">                </span>lines<span class="o">[</span>i<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>lines<span class="o">[</span>i<span class="o">][</span>:-1<span class="o">]</span><span class="w"> </span>+<span class="w"> </span>lines<span class="o">[</span>i+1<span class="o">]</span>.lstrip<span class="o">()</span>
+<span class="w">                </span>del<span class="w"> </span>lines<span class="o">[</span>i+1<span class="o">]</span>
+<span class="w">            </span><span class="k">else</span>:
+<span class="w">                </span><span class="nv">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="m">1</span>
+
+<span class="w">        </span><span class="nv">cmds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>parse_def<span class="o">(</span>lines,<span class="w"> </span>title,cli_name<span class="o">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>debug:
+<span class="w">            </span>print<span class="o">(</span><span class="s2">&quot;Commands&quot;</span><span class="o">)</span>
+<span class="w">            </span>print<span class="o">(</span><span class="s2">&quot;--------&quot;</span><span class="o">)</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span>item<span class="w"> </span><span class="k">in</span><span class="w"> </span>cmds:
+<span class="w">                </span><span class="k">if</span><span class="w"> </span>item<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;cmd&#39;</span>:
+<span class="w">                    </span>print<span class="o">(</span>f<span class="s2">&quot;- {item[1].all_keys} ({item[1].shortcut})&quot;</span><span class="o">)</span>
+
+<span class="w">        </span><span class="c1"># Generate files</span>
+<span class="w">        </span>script,<span class="w"> </span>aliases,<span class="w"> </span><span class="nv">comp_opts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>gen_script<span class="o">(</span>cli_name,<span class="w"> </span>cmds,<span class="w"> </span>debug<span class="o">)</span>
+<span class="w">        </span><span class="nv">alias_content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>gen_alias_file<span class="o">(</span>cli_name,<span class="w"> </span>aliases,<span class="w"> </span>comp_opts<span class="o">)</span>
+<span class="w">        </span><span class="nv">markdown_content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>gen_markdown_file<span class="o">(</span>cli_name,<span class="w"> </span>cmds,<span class="w"> </span>title<span class="o">)</span>
+
+<span class="w">        </span>with<span class="w"> </span>open<span class="o">(</span>cli_name,<span class="w"> </span><span class="s1">&#39;w&#39;</span><span class="o">)</span><span class="w"> </span>as<span class="w"> </span>f:
+<span class="w">            </span>f.write<span class="o">(</span>script<span class="o">)</span>
+<span class="w">        </span>os.chmod<span class="o">(</span>cli_name,<span class="w"> </span>0o755<span class="o">)</span>
+
+<span class="w">        </span>with<span class="w"> </span>open<span class="o">(</span>f<span class="s1">&#39;{cli_name}.alias&#39;</span>,<span class="w"> </span><span class="s1">&#39;w&#39;</span><span class="o">)</span><span class="w"> </span>as<span class="w"> </span>f:
+<span class="w">            </span>f.write<span class="o">(</span>alias_content<span class="o">)</span>
+
+<span class="w">        </span>with<span class="w"> </span>open<span class="o">(</span>f<span class="s1">&#39;{cli_name}.md&#39;</span>,<span class="w"> </span><span class="s1">&#39;w&#39;</span><span class="o">)</span><span class="w"> </span>as<span class="w"> </span>f:
+<span class="w">            </span>f.write<span class="o">(</span>markdown_content<span class="o">)</span>
+
+<span class="w">        </span>print<span class="o">(</span>f<span class="s2">&quot;Generated {cli_name}, {cli_name}.alias, and {cli_name}.md&quot;</span><span class="o">)</span>
+
+<span class="k">if</span><span class="w"> </span><span class="nv">__name__</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;__main__&#39;</span>:
+<span class="w">    </span>main<span class="o">()</span>
+</code></pre></div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: March 18, 2026</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

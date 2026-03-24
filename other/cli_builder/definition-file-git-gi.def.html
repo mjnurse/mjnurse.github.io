@@ -90,37 +90,14 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/other/cli_builder/definition-file-git-gi.def.md">gi.def</a></h1>
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/other/cli_builder/definition-file-GIT-gi.def.md">gi.def</a></h1>
 <div class="codehilite"><pre><span></span><code><span class="c1"># GIT</span>
 
 <span class="c1"># ---------------------------------------------------------------------------------------</span>
-<span class="o">=</span><span class="w"> </span>HISTORY
+<span class="o">=</span><span class="w"> </span>GENERAL
 <span class="c1"># ---------------------------------------------------------------------------------------</span>
 
-<span class="nb">history</span><span class="w"> </span><span class="o">(</span>h<span class="o">)</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>git<span class="w"> </span>log<span class="w"> </span>&gt;<span class="w"> </span>/tmp/gi1<span class="p">;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>line<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$line</span><span class="p">;</span><span class="w"> </span><span class="se">\ </span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="si">${</span><span class="nv">line</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">6</span><span class="si">}</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>commit<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="se">\</span>
-<span class="w">            </span>git<span class="w"> </span>diff-tree<span class="w"> </span>--no-commit-id<span class="w"> </span>--name-only<span class="w"> </span>-r<span class="w"> </span><span class="si">${</span><span class="nv">line</span><span class="p">:</span><span class="nv">7</span><span class="p">:</span><span class="nv">99</span><span class="si">}</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
-<span class="w">            </span>tr<span class="w"> </span><span class="s2">&quot;\n&quot;</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>fold<span class="w"> </span>-s<span class="w"> </span>-w<span class="w"> </span><span class="m">100</span><span class="p">;</span><span class="w"> </span>echo<span class="p">;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">        </span><span class="k">fi</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span><span class="k">done</span><span class="w"> </span>&lt;<span class="w"> </span>/tmp/gi1<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>sed<span class="w"> </span><span class="s2">&quot;s/^  *//; /^</span>$<span class="s2">/d; s/^commit/</span><span class="si">${</span><span class="nv">l80</span><span class="si">}</span><span class="s2">\n</span><span class="si">${</span><span class="nv">c_yel</span><span class="si">}</span><span class="s2">Commit:/&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>sed<span class="w"> </span><span class="s2">&quot;s/^Author/</span><span class="si">${</span><span class="nv">c_lcya</span><span class="si">}</span><span class="s2">Author/; s/^Date/</span><span class="si">${</span><span class="nv">c_lgre</span><span class="si">}</span><span class="s2">Date/; s/</span>$<span class="s2">/</span><span class="si">${</span><span class="nv">c_whi</span><span class="si">}</span><span class="s2">/&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/tmp/gi2<span class="p">;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>cat<span class="w"> </span>/tmp/gi2<span class="k">)</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>rm<span class="w"> </span>-f<span class="w"> </span>/tmp/gi1<span class="w"> </span>/tmp/gi2
-
-<span class="c1"># ---------------------------------------------------------------------------------------</span>
-<span class="o">=</span><span class="w"> </span>STATUS
-<span class="c1"># ---------------------------------------------------------------------------------------</span>
-
-status<span class="w"> </span><span class="o">(</span>s<span class="o">)</span><span class="w"> </span>::<span class="w"> </span>git<span class="w"> </span>status
-
-<span class="c1"># ---------------------------------------------------------------------------------------</span>
-<span class="o">=</span><span class="w"> </span>ADD/COMMIT
-<span class="c1"># ---------------------------------------------------------------------------------------</span>
-
-push<span class="w"> </span><span class="o">(</span>p<span class="o">)</span><span class="w"> </span><span class="o">[</span>&lt;-f<span class="p">|</span>--force&gt;<span class="o">]</span><span class="w"> </span><span class="o">[</span>&lt;message&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+add<span class="w"> </span>commit<span class="w"> </span>push<span class="w"> </span><span class="o">(</span>acp<span class="o">)</span><span class="w"> </span><span class="o">[</span>&lt;-f<span class="p">|</span>--force&gt;<span class="o">]</span><span class="w"> </span><span class="o">[</span>&lt;message&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="nv">force_yn</span><span class="o">=</span>n<span class="p">;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>-f<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>--force<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="se">\</span>
 <span class="w">        </span><span class="nv">force_yn</span><span class="o">=</span>y<span class="p">;</span><span class="w"> </span><span class="se">\</span>
@@ -139,6 +116,40 @@ push<span class="w"> </span><span class="o">(</span>p<span class="o">)</span><sp
 <span class="w">    </span><span class="k">fi</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s1">&#39;Various&#39;</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>git<span class="w"> </span>push<span class="w"> </span>origin
+
+list<span class="w"> </span>branches<span class="w"> </span><span class="nb">local</span><span class="w"> </span><span class="o">(</span>lbl<span class="o">)</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>git<span class="w"> </span>branch
+
+list<span class="w"> </span>branches<span class="w"> </span>remote<span class="w"> </span><span class="o">(</span>lbr<span class="o">)</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>git<span class="w"> </span>branch<span class="w"> </span>-r
+
+clone<span class="w"> </span><span class="o">(</span>c<span class="o">)</span><span class="w"> </span>&lt;url&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>git<span class="w"> </span>clone<span class="w"> </span><span class="nv">$1</span>
+
+fetch<span class="w"> </span><span class="o">(</span>f<span class="o">)</span><span class="w"> </span>::<span class="w"> </span>git<span class="w"> </span>fetch
+
+<span class="nb">history</span><span class="w"> </span><span class="o">(</span>h<span class="o">)</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>git<span class="w"> </span>log<span class="w"> </span>&gt;<span class="w"> </span>/tmp/gi1<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>line<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$line</span><span class="p">;</span><span class="w"> </span><span class="se">\ </span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="si">${</span><span class="nv">line</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">6</span><span class="si">}</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>commit<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>git<span class="w"> </span>diff-tree<span class="w"> </span>--no-commit-id<span class="w"> </span>--name-only<span class="w"> </span>-r<span class="w"> </span><span class="si">${</span><span class="nv">line</span><span class="p">:</span><span class="nv">7</span><span class="p">:</span><span class="nv">99</span><span class="si">}</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>tr<span class="w"> </span><span class="s2">&quot;\n&quot;</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>fold<span class="w"> </span>-s<span class="w"> </span>-w<span class="w"> </span><span class="m">100</span><span class="p">;</span><span class="w"> </span>echo<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="k">fi</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">done</span><span class="w"> </span>&lt;<span class="w"> </span>/tmp/gi1<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>sed<span class="w"> </span><span class="s2">&quot;s/^  *//; /^</span>$<span class="s2">/d; s/^commit/</span><span class="si">${</span><span class="nv">l80</span><span class="si">}</span><span class="s2">\n</span><span class="si">${</span><span class="nv">c_yel</span><span class="si">}</span><span class="s2">Commit:/&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>sed<span class="w"> </span><span class="s2">&quot;s/^Author/</span><span class="si">${</span><span class="nv">c_lcya</span><span class="si">}</span><span class="s2">Author/; s/^Date/</span><span class="si">${</span><span class="nv">c_lgre</span><span class="si">}</span><span class="s2">Date/; s/</span>$<span class="s2">/</span><span class="si">${</span><span class="nv">c_whi</span><span class="si">}</span><span class="s2">/&quot;</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>rm<span class="w"> </span>-f<span class="w"> </span>/tmp/gi1<span class="w"> </span>/tmp/gi2
+
+pull<span class="w"> </span><span class="o">(</span>pu<span class="o">)</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>git<span class="w"> </span>pull
+
+push<span class="w"> </span>origin<span class="w"> </span><span class="o">(</span>po<span class="o">)</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>git<span class="w"> </span>push<span class="w"> </span>origin
+
+status<span class="w"> </span><span class="o">(</span>s<span class="o">)</span><span class="w"> </span>::<span class="w"> </span>git<span class="w"> </span>status
+
+switch<span class="w"> </span>branch<span class="w"> </span><span class="o">(</span>sb<span class="o">)</span><span class="w"> </span>&lt;branch-name&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>git<span class="w"> </span>checkout<span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="c1">## (git checkout)</span>
 </code></pre></div>
         </div>
       </article>
@@ -157,7 +168,7 @@ push<span class="w"> </span><span class="o">(</span>p<span class="o">)</span><sp
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: December 11, 2025</p>
+      <p>Last updated: March 06, 2026</p>
     </footer>
 
     <div class="scroll-container">
