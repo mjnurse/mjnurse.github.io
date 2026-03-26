@@ -95,11 +95,31 @@
 <h2>Contents</h2>
 <ul>
 <li class="toc-h2"><a href="#generating-data">Generating Data</a></li>
+<li class="toc-h2"><a href="#selecting-n-random-rows-from-a-table">Selecting 'n' Random Rows From a Table</a></li>
 </ul>
 </div>
 <h2 id="generating-data">Generating Data</h2>
-<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">NOW</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">RANDOM</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">INTERVAL</span><span class="w"> </span><span class="s1">&#39;5 years&#39;</span><span class="p">)</span><span class="w"> </span>
-<span class="k">FROM</span><span class="w">   </span><span class="n">generate_series</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1000</span><span class="p">);</span>
+<p>Generate 10 random timestamps within the last 5 years.</p>
+<div class="codehilite"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">NOW</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="p">(</span><span class="n">RANDOM</span><span class="p">()</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="nb">INTERVAL</span><span class="w"> </span><span class="s1">&#39;5 years&#39;</span><span class="p">)</span><span class="w"> </span>
+<span class="k">FROM</span><span class="w">   </span><span class="n">generate_series</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">gs</span><span class="p">(</span><span class="n">i</span><span class="p">);</span><span class="w"> </span><span class="c1">-- alias as gs, alias column as i.</span>
+</code></pre></div>
+
+<h2 id="selecting-n-random-rows-from-a-table">Selecting 'n' Random Rows From a Table</h2>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Create a temporary table and insert some data.</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="n">TEMP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">tmp</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span><span class="w"> </span><span class="n">txt</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">);</span>
+<span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">tmp</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">txt</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;foo&#39;</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;bar&#39;</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;baz&#39;</span><span class="p">);</span>
+
+<span class="c1">-- Select 10 random rows from the &#39;tmp&#39; table.</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="o">*</span>
+<span class="k">FROM</span><span class="w">   </span><span class="n">generate_series</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">gs</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="c1">-- alias as gs, alias column as i.</span>
+<span class="k">CROSS</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="k">LATERAL</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="k">SELECT</span><span class="w">   </span><span class="o">*</span>
+<span class="w">    </span><span class="k">FROM</span><span class="w">     </span><span class="n">tmp</span>
+<span class="w">    </span><span class="c1">-- Order by referencing &#39;i&#39; is required to ensure Postgres does not optimize the query</span>
+<span class="w">    </span><span class="c1">-- and runs the CROSS JOIN LATERAL rather than switching to a simple join.</span>
+<span class="w">    </span><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">random</span><span class="p">()</span>
+<span class="w">    </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">1</span>
+<span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="n">t</span><span class="p">;</span>
 </code></pre></div>
         </div>
       </article>
@@ -118,7 +138,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: March 24, 2026</p>
+      <p>Last updated: March 25, 2026</p>
     </footer>
 
     <div class="scroll-container">
