@@ -465,7 +465,7 @@
     "id": "66",
     "title": "Postgres",
     "url": "/cheatsheets/postgres.html",
-    "content": "Generating Data Generate 10 random timestamps within the last 5 years. SELECT i, NOW() - (RANDOM() * INTERVAL &#39;5 years&#39;) FROM generate_series(1, 10) AS gs(i); -- alias as gs, alias column as i. Selecting 'n' Random Rows From a Table -- Create a temporary table and insert some data. CREATE TEMP TABLE tmp (id INT, txt TEXT); INSERT INTO tmp (id, txt) VALUES (1, &#39;foo&#39;), (2, &#39;bar&#39;), (3, &#39;baz&#39;); -- Select 10 random rows from the &#39;tmp&#39; table. SELECT i, t.* FROM ",
+    "content": "Generating Data Generate 10 random timestamps within the last 5 years. SELECT i, NOW() - (RANDOM() * INTERVAL &#39;5 years&#39;) FROM generate_series(1, 10) AS gs(i); -- alias as gs, alias column as i. Selecting 'n' Random Rows From a Table Select 10 random rows from the 'tmp' table. The query uses a CROSS JOIN LATERAL to select a random row for each iteration of the generate_series, ensuring that the random selection is performed for each row generated. -- Create a temporary table and insert so",
     "type": "page"
   },
   {

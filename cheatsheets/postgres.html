@@ -105,6 +105,7 @@
 </code></pre></div>
 
 <h2 id="selecting-n-random-rows-from-a-table">Selecting 'n' Random Rows From a Table</h2>
+<p>Select 10 random rows from the 'tmp' table. The query uses a CROSS JOIN LATERAL to select a random row for each iteration of the generate_series, ensuring that the random selection is performed for each row generated.</p>
 <div class="codehilite"><pre><span></span><code><span class="c1">-- Create a temporary table and insert some data.</span>
 <span class="k">CREATE</span><span class="w"> </span><span class="n">TEMP</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">tmp</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span><span class="w"> </span><span class="n">txt</span><span class="w"> </span><span class="nb">TEXT</span><span class="p">);</span>
 <span class="k">INSERT</span><span class="w"> </span><span class="k">INTO</span><span class="w"> </span><span class="n">tmp</span><span class="w"> </span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">txt</span><span class="p">)</span><span class="w"> </span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;foo&#39;</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;bar&#39;</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;baz&#39;</span><span class="p">);</span>
@@ -138,7 +139,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: March 25, 2026</p>
+      <p>Last updated: March 26, 2026</p>
     </footer>
 
     <div class="scroll-container">
