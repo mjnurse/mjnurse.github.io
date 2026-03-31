@@ -1382,7 +1382,7 @@
     "id": "197",
     "title": "imp - Improve text using Claude AI",
     "url": "/linuxbash/script-imp.html",
-    "content": "#!/usr/bin/env bash help_text=&quot; NAME imp - Improve text using Claude AI. USAGE imp [options] [text] OPTIONS -h|--help Show help text. DESCRIPTION A text improvement tool that uses Claude AI to enhance clarity, tone, grammar, and flow while preserving the original meaning. If text is provided as an argument, it will be improved and the result copied to the clipboard, then the script exits. If no text is provided, the script enters interactive mode, repeatedly prompting for text to improve un",
+    "content": "#!/usr/bin/env bash help_text=&quot; NAME imp - Improve text using Claude AI. USAGE imp [options] [text string or filename] OPTIONS -h|--help Show help text. -f|--file &lt;file&gt; Use the content of the specified file as input text. -s|--silent Suppress all output except the improved text. -u|--update If a file is provided as input, append the improved text to the file instead of printing to console. DESCRIPTION A text improvement tool that uses Claude AI to enhance clarity, tone, grammar, and ",
     "type": "page"
   },
   {
