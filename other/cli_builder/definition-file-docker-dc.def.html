@@ -119,6 +119,18 @@ logs<span class="w"> </span><span class="o">(</span>lo<span class="o">)</span><s
 <span class="w">    </span>!!<span class="w"> </span>docker<span class="w"> </span>ps<span class="w"> </span>--all<span class="w"> </span>--format<span class="w"> </span><span class="s1">&#39;{{.Names}}&#39;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="c1">## -f: follow log</span>
 
+errs<span class="w"> </span><span class="o">(</span>er<span class="o">)</span><span class="w"> </span><span class="o">[</span>&lt;-f&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/tmp/docker_err_p<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span>c<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>docker<span class="w"> </span>ps<span class="w"> </span>--format<span class="w"> </span><span class="s1">&#39;{{.Names}}&#39;</span><span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>docker<span class="w"> </span>logs<span class="w"> </span><span class="nv">$c</span><span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;ERROR:&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/^/</span><span class="nv">$c</span><span class="s2">: /&quot;</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="k">done</span><span class="w"> </span>&gt;<span class="w"> </span>/tmp/docker_err_c<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>grep<span class="w"> </span>-Fxvf<span class="w"> </span>/tmp/docker_err_p<span class="w"> </span>/tmp/docker_err_c<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>mv<span class="w"> </span>-f<span class="w"> </span>/tmp/docker_err_c<span class="w"> </span>/tmp/docker_err_p<span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span>-f<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>sleep<span class="w"> </span><span class="m">2</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">done</span>
+
 pull<span class="w"> </span>container<span class="w"> </span><span class="o">(</span>pu<span class="o">)</span><span class="w"> </span>&lt;container_name&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>docker<span class="w"> </span>pull<span class="w"> </span><span class="nv">$1</span>
 
@@ -262,7 +274,7 @@ volume<span class="w"> </span>ls<span class="w"> </span><span class="o">(</span>
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: March 11, 2026</p>
+      <p>Last updated: March 31, 2026</p>
     </footer>
 
     <div class="scroll-container">
