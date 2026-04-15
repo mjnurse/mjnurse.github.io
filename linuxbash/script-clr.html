@@ -198,8 +198,13 @@ cecho<span class="w"> </span>lgre<span class="w"> </span><span class="s2">&quot;
 <span class="w">        </span>cecho<span class="w"> </span>lmag<span class="w"> </span><span class="s2">&quot;------------------------------------------------------------&quot;</span>
 <span class="w">        </span>git<span class="w"> </span>status
 <span class="w">        </span><span class="nb">echo</span>
-<span class="w">        </span><span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">clcya</span><span class="si">}</span><span class="s2">Commit and Push changes in repo [yN]? </span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">clcya</span><span class="si">}</span><span class="s2">Commit and Push changes in repo (Y/N) or view diff (D) [dyN]? </span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="w">        </span><span class="nb">read</span><span class="w"> </span>yn
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">yn</span><span class="p">^</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;D&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span>git<span class="w"> </span>diff
+<span class="w">            </span><span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">clcya</span><span class="si">}</span><span class="s2">Commit and Push changes in repo [yN]? </span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="nb">read</span><span class="w"> </span>yn
+<span class="w">        </span><span class="k">fi</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">yn</span><span class="p">^</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;Y&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">            </span><span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">clcya</span><span class="si">}</span><span class="s2">Commit Message (Blank to use &#39;Various&#39;): </span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>
 <span class="w">            </span><span class="nb">read</span><span class="w"> </span>cm
@@ -230,7 +235,7 @@ cecho<span class="w"> </span>lgre<span class="w"> </span><span class="s2">&quot;
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: January 23, 2026</p>
+      <p>Last updated: April 14, 2026</p>
     </footer>
 
     <div class="scroll-container">
