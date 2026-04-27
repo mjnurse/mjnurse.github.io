@@ -955,7 +955,7 @@
     "id": "136",
     "title": "gvim - Runs windows gvim and fixes file paths",
     "url": "/linuxbash/script-gvim.html",
-    "content": "#!/usr/bin/env bash help_text=&quot; NAME gvim - Runs windows gvim and fixes files paths USAGE gvim &lt;filename(s)&gt; DESCRIPTION Runs windows gvim and fixes files paths. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;Runs windows gvim and fixes file paths&quot; web_desc_line=&quot;Runs windows gvim and fixes file paths&quot; files=&quot;$*&quot; fixed_files=&quot;$(echo $files | sed &#39;s/\\/c\\//C:\\//g&#39;)&quot; /c/Program\\ Files\\ \\(x86\\)/Vim/vim90/gvim.exe &quot;$fixed_files&quot; ",
+    "content": "#!/usr/bin/env bash help_text=&quot; NAME gvim - Runs windows gvim and fixes files paths USAGE gvim &lt;filename(s)&gt; DESCRIPTION Runs windows gvim and fixes files paths. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;Runs windows gvim and fixes file paths&quot; web_desc_line=&quot;Runs windows gvim and fixes file paths&quot; files=&quot;$*&quot; fixed_files=&quot;$(echo $files | sed &#39;s/\\/c\\//C:\\//g&#39;)&quot; /c/Program\\ Files/Vim/vim92/gvim.exe &quot;$fixed_files&quot; &amp;",
     "type": "page"
   },
   {
