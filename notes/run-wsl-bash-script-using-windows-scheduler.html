@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="notes" />
+    <meta name="description" content="Run WSL Bash Script using Windows Scheduler" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>notes</title>
+    <title>Run WSL Bash Script using Windows Scheduler</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
@@ -90,32 +90,31 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1>notes</h1>
-
-<ul class="page-list">
-  <li><a href="/notes/miscellaneous_notes.html" data-number="1"><span class="page-number">1</span>Miscellaneous Notes</a></li>
-  <li><a href="/notes/adding_git-bash-command-line-options.html" data-number="2"><span class="page-number">2</span>Adding git-bash Command Line Options</a></li>
-  <li><a href="/notes/ascii-art-text.html" data-number="3"><span class="page-number">3</span>ASCII Art Text</a></li>
-  <li><a href="/notes/ascii_table.html" data-number="4"><span class="page-number">4</span>ASCII Table</a></li>
-  <li><a href="/notes/associating_a-new-file-extension-with_an-application.html" data-number="5"><span class="page-number">5</span>Associating a New File Extension With an Application</a></li>
-  <li><a href="/notes/bullet-journal.html" data-number="6"><span class="page-number">6</span>Bullet Journal</a></li>
-  <li><a href="/notes/cron.html" data-number="7"><span class="page-number">7</span>CRON</a></li>
-  <li><a href="/notes/emulating_sudo_in_dos_cmd.html" data-number="8"><span class="page-number">8</span>Emulating sudo in dos cmd</a></li>
-  <li><a href="/notes/grep.html" data-number="9"><span class="page-number">9</span>grep</a></li>
-  <li><a href="/notes/hash-value-clash-probability.html" data-number="10"><span class="page-number">10</span>Hash Value Clash Probability</a></li>
-  <li><a href="/notes/html-character-codes.html" data-number="11"><span class="page-number">11</span>HTML Character Codes</a></li>
-  <li><a href="/notes/ip-address-subnet-ranges.html" data-number="12"><span class="page-number">12</span>IP Address Subnet Ranges</a></li>
-  <li><a href="/notes/jsdoc.html" data-number="13"><span class="page-number">13</span>JSDoc - Documenting Javascript</a></li>
-  <li><a href="/notes/miscellaneous-notes.html" data-number="14"><span class="page-number">14</span>Miscellaneous Notes</a></li>
-  <li><a href="/notes/paa-s-saa-s-iaa-s_etc.html" data-number="15"><span class="page-number">15</span>PaaS SaaS IaaS etc</a></li>
-  <li><a href="/notes/print-screen.html" data-number="16"><span class="page-number">16</span>PrintScreen</a></li>
-  <li><a href="/notes/rest-api-response-codes.html" data-number="17"><span class="page-number">17</span>REST API Response Codes</a></li>
-  <li><a href="/notes/run-wsl-bash-script-using-windows-scheduler.html" data-number="18"><span class="page-number">18</span>Run WSL Bash Script using Windows Scheduler</a></li>
-  <li><a href="/notes/simplified-backus-naur-form-bnf.html" data-number="19"><span class="page-number">19</span>Simplified Backus-Naur Form - BNF</a></li>
-  <li><a href="/notes/slack-shortcut-keys.html" data-number="20"><span class="page-number">20</span>Slack Shortcut Keys</a></li>
-  <li><a href="/notes/snake_case.html" data-number="21"><span class="page-number">21</span>snake case</a></li>
-</ul>
-
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/notes/run-wsl-bash-script-using-windows-scheduler.md">Run WSL Bash Script using Windows Scheduler</a></h1>
+<ol>
+<li>
+<p>Open Task Scheduler (taskschd.msc from Run or Start menu)</p>
+</li>
+<li>
+<p>Click Create Basic Task (or Create Task for more options)</p>
+</li>
+<li>
+<p>Set your trigger (schedule)</p>
+</li>
+<li>
+<p>For the Action, choose Start a program:</p>
+</li>
+<li>
+<p>Program/script: C:\Windows\System32\cmd.exe</p>
+</li>
+<li>
+<p>Arguments: /c wsl -d Ubuntu -u martin -- /home/martin/your-script.sh</p>
+</li>
+</ol>
+<p>note /c closes the window when the scvript completes, /k would keep it open.</p>
+<ol>
+<li>Make sure your script is executable (chmod +x script.sh) and has a shebang (#!/bin/bash)</li>
+</ol>
         </div>
       </article>
     </main>
