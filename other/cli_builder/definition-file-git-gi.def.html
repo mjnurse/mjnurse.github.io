@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="GIT" />
+    <meta name="description" content="GIT CLI" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>GIT</title>
+    <title>GIT CLI</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
@@ -90,8 +90,8 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/other/cli_builder/definition-file-GIT-gi.def.md">GIT</a></h1>
-<h1 id="definition-file-gidef">Definition file <code>gi.def</code></h1>
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/other/cli_builder/definition-file-GIT-gi.def.md">GIT CLI</a></h1>
+<h2 id="definition-file-gidef">Definition file <code>gi.def</code></h2>
 <div class="codehilite"><pre><span></span><code><span class="c1"># GIT</span>
 
 <span class="c1"># ---------------------------------------------------------------------------------------</span>
@@ -190,7 +190,7 @@ status<span class="w"> </span><span class="o">(</span>s<span class="o">)</span><
 switch<span class="w"> </span>branch<span class="w"> </span><span class="o">(</span>sb<span class="o">)</span><span class="w"> </span>&lt;branch-name&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>git<span class="w"> </span>checkout<span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="c1">## (git checkout)```</span>
 
-<span class="c1"># Alias file</span>
+<span class="c1">## Alias file</span>
 
 <span class="sb">```</span>bash
 <span class="c1"># Completion function</span>
@@ -228,7 +228,7 @@ _gi_complete<span class="o">()</span><span class="w"> </span><span class="o">{</
 <span class="nb">alias</span><span class="w"> </span>@gsb<span class="o">=</span><span class="s1">&#39;gi gsb&#39;</span>
 </code></pre></div>
 
-<h1 id="bash-script">Bash script</h1>
+<h2 id="bash-script">Bash script</h2>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 <span class="nv">debug_yn</span><span class="o">=</span>n
 <span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;-d&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nv">debug_yn</span><span class="o">=</span>y<span class="p">;</span><span class="w"> </span>shift<span class="p">;</span><span class="w"> </span><span class="o">}</span>

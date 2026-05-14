@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Elasticsearch" />
+    <meta name="description" content="Elasticsearch CLI" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>Elasticsearch</title>
+    <title>Elasticsearch CLI</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
@@ -90,8 +90,8 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/other/cli_builder/definition-file-Elasticsearch-es.def.md">Elasticsearch</a></h1>
-<h1 id="definition-file-esdef">Definition file <code>es.def</code></h1>
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/other/cli_builder/definition-file-Elasticsearch-es.def.md">Elasticsearch CLI</a></h1>
+<h2 id="definition-file-esdef">Definition file <code>es.def</code></h2>
 <div class="codehilite"><pre><span></span><code><span class="c1"># Elasticsearch</span>
 
 cmd<span class="w"> </span><span class="nv">ES_AUTH</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
@@ -476,7 +476,7 @@ query-es<span class="w"> </span>settings<span class="w"> </span><span class="o">
 <span class="c1"># }</span>
 </code></pre></div>
 
-<h1 id="alias-file">Alias file</h1>
+<h2 id="alias-file">Alias file</h2>
 <div class="codehilite"><pre><span></span><code><span class="c1"># Completion function</span>
 _es_complete<span class="o">()</span><span class="w"> </span><span class="o">{</span>
 <span class="w">    </span><span class="nb">local</span><span class="w"> </span>cur<span class="w"> </span>prev<span class="w"> </span>all
@@ -666,7 +666,7 @@ _es_complete<span class="o">()</span><span class="w"> </span><span class="o">{</
 <span class="nb">alias</span><span class="w"> </span>@eqes<span class="o">=</span><span class="s1">&#39;es eqes&#39;</span>
 </code></pre></div>
 
-<h1 id="bash-script">Bash script</h1>
+<h2 id="bash-script">Bash script</h2>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 <span class="nv">debug_yn</span><span class="o">=</span>n
 <span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;-d&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nv">debug_yn</span><span class="o">=</span>y<span class="p">;</span><span class="w"> </span>shift<span class="p">;</span><span class="w"> </span><span class="o">}</span>

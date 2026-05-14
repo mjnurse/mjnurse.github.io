@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Kubectl" />
+    <meta name="description" content="Kubectl CLI" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>Kubectl</title>
+    <title>Kubectl CLI</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
@@ -90,8 +90,8 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/other/cli_builder/definition-file-Kubectl-kc.def.md">Kubectl</a></h1>
-<h1 id="definition-file-kcdef">Definition file <code>kc.def</code></h1>
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/other/cli_builder/definition-file-Kubectl-kc.def.md">Kubectl CLI</a></h1>
+<h2 id="definition-file-kcdef">Definition file <code>kc.def</code></h2>
 <div class="codehilite"><pre><span></span><code><span class="c1"># Kubectl</span>
 
 <span class="c1"># -------------------------------------------------------------------------------------------------</span>
@@ -179,7 +179,7 @@ delete<span class="w"> </span>statefulset<span class="w"> </span><span class="o"
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span>kubectl<span class="w"> </span>delete<span class="w"> </span>statefulset<span class="w"> </span><span class="nv">$1</span><span class="w"> </span>-n<span class="w"> </span><span class="nv">$2</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="k">else</span><span class="w"> </span>kubectl<span class="w"> </span>delete<span class="w"> </span>statefulset<span class="w"> </span><span class="nv">$1</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span><span class="sb">```</span>
 
-<span class="c1"># Alias file</span>
+<span class="c1">## Alias file</span>
 
 <span class="sb">```</span>bash
 <span class="c1"># Completion function</span>
@@ -220,7 +220,7 @@ _kc_complete<span class="o">()</span><span class="w"> </span><span class="o">{</
 <span class="nb">alias</span><span class="w"> </span>@kdss<span class="o">=</span><span class="s1">&#39;kc kdss&#39;</span>
 </code></pre></div>
 
-<h1 id="bash-script">Bash script</h1>
+<h2 id="bash-script">Bash script</h2>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 <span class="nv">debug_yn</span><span class="o">=</span>n
 <span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;-d&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nv">debug_yn</span><span class="o">=</span>y<span class="p">;</span><span class="w"> </span>shift<span class="p">;</span><span class="w"> </span><span class="o">}</span>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Run" />
+    <meta name="description" content="Run CLI" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>Run</title>
+    <title>Run CLI</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
@@ -90,8 +90,8 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/other/cli_builder/definition-file-Run-r.def.md">Run</a></h1>
-<h1 id="definition-file-rdef">Definition file <code>r.def</code></h1>
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/other/cli_builder/definition-file-Run-r.def.md">Run CLI</a></h1>
+<h2 id="definition-file-rdef">Definition file <code>r.def</code></h2>
 <div class="codehilite"><pre><span></span><code><span class="c1"># Run</span>
 
 <span class="c1"># ------------------------------------------------------------------------------------------------------------</span>
@@ -130,7 +130,7 @@ cli<span class="w"> </span>build<span class="w"> </span>all<span class="w"> </sp
 <span class="w">    </span>cli-builder<span class="w"> </span>*.def
 </code></pre></div>
 
-<h1 id="alias-file">Alias file</h1>
+<h2 id="alias-file">Alias file</h2>
 <div class="codehilite"><pre><span></span><code><span class="c1"># Completion function</span>
 _r_complete<span class="o">()</span><span class="w"> </span><span class="o">{</span>
 <span class="w">    </span><span class="nb">local</span><span class="w"> </span>cur<span class="w"> </span>prev<span class="w"> </span>all
@@ -161,7 +161,7 @@ _r_complete<span class="o">()</span><span class="w"> </span><span class="o">{</s
 <span class="nb">alias</span><span class="w"> </span>@rcba<span class="o">=</span><span class="s1">&#39;r rcba&#39;</span>
 </code></pre></div>
 
-<h1 id="bash-script">Bash script</h1>
+<h2 id="bash-script">Bash script</h2>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 <span class="nv">debug_yn</span><span class="o">=</span>n
 <span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;-d&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nv">debug_yn</span><span class="o">=</span>y<span class="p">;</span><span class="w"> </span>shift<span class="p">;</span><span class="w"> </span><span class="o">}</span>
