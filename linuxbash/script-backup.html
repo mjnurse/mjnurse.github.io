@@ -112,11 +112,11 @@
 
 <span class="s2">    Requires the BACKUP_DIR environment variable to be set.</span>
 
-<span class="s2">    If no parameters are passed in, then the contents of the </span><span class="nv">$BACKUP_DIR</span><span class="s2"> are</span>
+<span class="s2">    If no parameters are passed in, then the contents of the \$BACKUP_DIR are</span>
 <span class="s2">    shown.</span>
 
 <span class="s2">    If a single parameter &lt;backup_name&gt; is passed, then all backups in the</span>
-<span class="s2">    </span><span class="nv">$BACKUP_DIR</span><span class="s2"> which match the backup_name are shown.  Wildcards can be</span>
+<span class="s2">    \$BACKUP_DIR which match the backup_name are shown.  Wildcards can be</span>
 <span class="s2">    used but must be passed inside quotes.</span>
 
 <span class="s2">AUTHOR</span>
@@ -142,14 +142,18 @@
 <span class="o">}</span>
 
 <span class="nv">FORCE_YN</span><span class="o">=</span>n
+<span class="nv">DOTFILES_YN</span><span class="o">=</span>n
 
 <span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
+<span class="w">        </span>-d<span class="p">|</span>--dotfiles<span class="o">)</span>
+<span class="w">            </span><span class="nv">DOTFILES_YN</span><span class="o">=</span>y
+<span class="w">            </span><span class="p">;;</span>
 <span class="w">        </span>-h<span class="p">|</span>--help<span class="o">)</span>
 <span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
 <span class="w">            </span><span class="nb">exit</span>
 <span class="w">            </span><span class="p">;;</span>
-<span class="w">        </span>-f<span class="p">|</span>--forced<span class="o">)</span>
+<span class="w">        </span>-f<span class="p">|</span>--force<span class="o">)</span>
 <span class="w">            </span><span class="nv">FORCE_YN</span><span class="o">=</span>y
 <span class="w">            </span><span class="p">;;</span><span class="w">    </span>
 <span class="w">        </span>?*<span class="o">)</span>
@@ -169,14 +173,14 @@
 
 <span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">    </span>cecho<span class="w"> </span>lcya<span class="w"> </span><span class="s2">&quot;BACKUP_DIR Contents:&quot;</span>
-<span class="w">    </span>ls<span class="w"> </span>-ltr<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BACKUP_DIR</span><span class="s2">&quot;</span>
+<span class="w">    </span>ls<span class="w"> </span>-ltrh<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BACKUP_DIR</span><span class="s2">&quot;</span>
 <span class="w">    </span><span class="nb">exit</span><span class="w"> </span>
 <span class="k">fi</span>
 
 <span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">    </span>cecho<span class="w"> </span>lcya<span class="w"> </span><span class="s2">&quot;Looking for </span><span class="nv">$1</span><span class="s2"> in BACKUP_DIR:&quot;</span>
 <span class="w">    </span><span class="nb">cd</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BACKUP_DIR</span><span class="s2">&quot;</span>
-<span class="w">    </span>ls<span class="w"> </span>-ltr<span class="w"> </span><span class="nv">$1</span>*.zip<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>--color<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot; </span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>
+<span class="w">    </span>ls<span class="w"> </span>-ltrh<span class="w"> </span><span class="nv">$1</span>*.zip<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>--color<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot; </span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>
 <span class="w">    </span><span class="nb">exit</span>
 <span class="k">fi</span>
 
@@ -213,12 +217,15 @@ mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</
 <span class="k">fi</span>
 
 <span class="c1"># Create the zip archive</span>
-zip<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ZIPFILE</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span><span class="w"> </span>-x<span class="w"> </span><span class="s2">&quot;*/.*&quot;</span><span class="w"> </span>-x<span class="w"> </span><span class="s2">&quot;__pycache__/*&quot;</span><span class="w"> </span>-x<span class="w"> </span><span class="s2">&quot;venv/*&quot;</span><span class="w"> </span>-x<span class="w"> </span><span class="s2">&quot;.git/*&quot;</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$DOTFILES_YN</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>y<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span>zip<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ZIPFILE</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span><span class="w"> </span>-x<span class="w"> </span><span class="s2">&quot;__pycache__/*&quot;</span><span class="w"> </span>-x<span class="w"> </span><span class="s2">&quot;venv/*&quot;</span><span class="w"> </span>-x<span class="w"> </span><span class="s2">&quot;.git/*&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/dev/null
+<span class="k">else</span>
+<span class="w">    </span>zip<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ZIPFILE</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span><span class="w"> </span>-x<span class="w"> </span><span class="s2">&quot;*/.*&quot;</span><span class="w"> </span>-x<span class="w"> </span><span class="s2">&quot;__pycache__/*&quot;</span><span class="w"> </span>-x<span class="w"> </span><span class="s2">&quot;venv/*&quot;</span><span class="w"> </span>-x<span class="w"> </span><span class="s2">&quot;.git/*&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/dev/null
+<span class="k">fi</span>
 
 <span class="c1"># Move to BACKUP_DIR</span>
 mv<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ZIPFILE</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BACKUP_DIR</span><span class="s2">/&quot;</span>
 
-<span class="nb">echo</span>
 <span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Backup complete: </span><span class="k">$(</span>du<span class="w"> </span>-h<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$BACKUP_DIR</span><span class="s2">/</span><span class="nv">$ZIPFILE</span><span class="s2">&quot;</span><span class="k">)</span><span class="s2">&quot;</span>
 </code></pre></div>
         </div>
@@ -238,7 +245,7 @@ mv<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ZIPFIL
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: February 24, 2026</p>
+      <p>Last updated: May 13, 2026</p>
     </footer>
 
     <div class="scroll-container">
