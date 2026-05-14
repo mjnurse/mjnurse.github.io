@@ -1478,44 +1478,44 @@
   },
   {
     "id": "211",
-    "title": "dc.def",
+    "title": "Docker",
     "url": "/other/cli_builder/definition-file-docker-dc.def.html",
-    "content": "# Docker # ------------------------------------------------------------------------------------------------- = CONTAINERS # ------------------------------------------------------------------------------------------------- delete container (rm) &lt;container_name&gt; :: \\ read -p &quot;Are you sure [yN]? &quot; yn; \\ if [[ ${yn^} == Y ]]; then \\ docker rm $1; \\ fi \\ !! docker ps --all --format &#39;{{.Names}}&#39; \\ list containers (ps) [&lt;-d&gt;] :: \\ if [[ $1 == -d ]]; then docker ps --all; \\",
+    "content": "Definition file dc.def # Docker # ------------------------------------------------------------------------------------------------- = CONTAINERS # ------------------------------------------------------------------------------------------------- delete container (rm) &lt;container_name&gt; :: \\ read -p &quot;Are you sure [yN]? &quot; yn; \\ if [[ ${yn^} == Y ]]; then \\ docker rm $1; \\ fi \\ !! docker ps --all --format &#39;{{.Names}}&#39; \\ list containers (ps) [&lt;-d&gt;] :: \\ if [[ $1 == -d ]]; ",
     "type": "page"
   },
   {
     "id": "212",
-    "title": "es.def",
+    "title": "Elasticsearch",
     "url": "/other/cli_builder/definition-file-elasticsearch-es.def.html",
-    "content": "# Elasticsearch cmd ES_AUTH=&quot;&quot; cmd ES_HOST=&quot;${ES_HOST:-localhost}&quot; cmd ES_PORT=&quot;${ES_PORT:-9200}&quot; cmd pj() { if command -v jq &gt;/dev/null 2&gt;&amp;1; then jq .; else cat; fi; } cmd cols() { python3 -c &#39;import sys,json;f=lambda d,p=&quot;&quot;:[f(v[&quot;properties&quot;],p+k+&quot;.&quot;) if isinstance(v,dict) and &quot;properties&quot; in v else print(p+k) for k,v in d.items()];[f(i[&quot;mappings&quot;][&quot;properties&quot;]) for i in json.load(sys.stdi",
+    "content": "Definition file es.def # Elasticsearch cmd ES_AUTH=&quot;&quot; cmd ES_HOST=&quot;${ES_HOST:-localhost}&quot; cmd ES_PORT=&quot;${ES_PORT:-9200}&quot; cmd pj() { if command -v jq &gt;/dev/null 2&gt;&amp;1; then jq .; else cat; fi; } cmd cols() { python3 -c &#39;import sys,json;f=lambda d,p=&quot;&quot;:[f(v[&quot;properties&quot;],p+k+&quot;.&quot;) if isinstance(v,dict) and &quot;properties&quot; in v else print(p+k) for k,v in d.items()];[f(i[&quot;mappings&quot;][&quot;properties&quot;]) for ",
     "type": "page"
   },
   {
     "id": "213",
-    "title": "gi.def",
+    "title": "GIT",
     "url": "/other/cli_builder/definition-file-git-gi.def.html",
-    "content": "# GIT # --------------------------------------------------------------------------------------- = GENERAL # --------------------------------------------------------------------------------------- add commit push (acp) [&lt;-f|--force&gt;] [&lt;message&gt;] :: \\ force_yn=n; \\ if [[ $1 == -f || $1 == --force ]]; then \\ force_yn=y; \\ shift; \\ fi; \\ if [[ &quot;$1&quot; == &quot;&quot; ]]; then \\ message=&quot;Various&quot;; \\ else \\ message=&quot;$1&quot;; \\ fi; \\ [ -f ./gen-readme ] &amp;&amp; ./g",
+    "content": "Definition file gi.def # GIT # --------------------------------------------------------------------------------------- = GENERAL # --------------------------------------------------------------------------------------- add commit push (acp) [&lt;-f|--force&gt;] [&lt;message&gt;] :: \\ force_yn=n; \\ if [[ $1 == -f || $1 == --force ]]; then \\ force_yn=y; \\ shift; \\ fi; \\ if [[ &quot;$1&quot; == &quot;&quot; ]]; then \\ message=&quot;Various&quot;; \\ else \\ message=&quot;$1&quot;; \\ fi; \\ [ -f ./gen-",
     "type": "page"
   },
   {
     "id": "214",
-    "title": "kc.def",
+    "title": "Kubectl",
     "url": "/other/cli_builder/definition-file-kubectl-kc.def.html",
-    "content": "# Kubectl # ------------------------------------------------------------------------------------------------- = ALL # ------------------------------------------------------------------------------------------------- get all (ga) [&lt;namespace&gt;] :: \\ if [[ &quot;$1&quot; == &quot;&quot; ]]; then kubectl get all -A; else kubectl get all -n $1; fi get (g) &lt;item&gt; :: kubectl get $1 # ------------------------------------------------------------------------------------------------- = LOGS # -",
+    "content": "Definition file kc.def # Kubectl # ------------------------------------------------------------------------------------------------- = ALL # ------------------------------------------------------------------------------------------------- get all (ga) [&lt;namespace&gt;] :: \\ if [[ &quot;$1&quot; == &quot;&quot; ]]; then kubectl get all -A; else kubectl get all -n $1; fi get (g) &lt;item&gt; :: kubectl get $1 # -------------------------------------------------------------------------------------",
     "type": "page"
   },
   {
     "id": "215",
-    "title": "pg.def",
+    "title": "Postgres PSQL",
     "url": "/other/cli_builder/definition-file-postgres-psql-pg.def.html",
-    "content": "# Postgres PSQL cmd [ -f ./pg_conn_defaults ] &amp;&amp; source ./pg_conn_defaults cmd PG_HOST=&quot;${PG_HOST:-127.0.0.1}&quot; cmd PG_PORT=&quot;${PG_PORT:-5431}&quot; cmd PG_DB=&quot;${PG_DB:-postgres}&quot; cmd PG_USER=&quot;${PG_NAME:-postgres}&quot; cmd PG_PASSWORD=&quot;${PG_PASSWORD:-postgres}&quot; cmd export PGPASSWORD=&quot;$PG_PASSWORD&quot; cmd export PAGER=cat # ------------------------------------------------------------------------------------------------- = SESSION # -----------",
+    "content": "Definition file pg.def # Postgres PSQL cmd [ -f ./pg_conn_defaults ] &amp;&amp; source ./pg_conn_defaults cmd PG_HOST=&quot;${PG_HOST:-127.0.0.1}&quot; cmd PG_PORT=&quot;${PG_PORT:-5431}&quot; cmd PG_DB=&quot;${PG_DB:-postgres}&quot; cmd PG_USER=&quot;${PG_NAME:-postgres}&quot; cmd PG_PASSWORD=&quot;${PG_PASSWORD:-postgres}&quot; cmd export PGPASSWORD=&quot;$PG_PASSWORD&quot; cmd export PAGER=cat # ------------------------------------------------------------------------------------------------- ",
     "type": "page"
   },
   {
     "id": "216",
-    "title": "r.def",
+    "title": "Run",
     "url": "/other/cli_builder/definition-file-run-r.def.html",
-    "content": "# Run # ------------------------------------------------------------------------------------------------------------ = MDM # ------------------------------------------------------------------------------------------------------------ start mdm (sm) [&lt;streaming|ui|all|k(afka)&gt;|kapp&gt;|shaper] :: \\ mjn-start-mdm $1 \\ ## kapp starts kafka streaming for the application data source restart mdm (rm) [&lt;streaming|ui|all|k(afka)&gt;|kapp|shaper&gt;] :: \\ mjn-stop-mdm; \\ mjn-start-mdm $1 \\ ## ka",
+    "content": "Definition file r.def # Run # ------------------------------------------------------------------------------------------------------------ = MDM # ------------------------------------------------------------------------------------------------------------ start mdm (sm) [&lt;streaming|ui|all|k(afka)&gt;|kapp&gt;|shaper] :: \\ mjn-start-mdm $1 \\ ## kapp starts kafka streaming for the application data source restart mdm (rm) [&lt;streaming|ui|all|k(afka)&gt;|kapp|shaper&gt;] :: \\ mjn-stop-mdm; \\ mj",
     "type": "page"
   },
   {

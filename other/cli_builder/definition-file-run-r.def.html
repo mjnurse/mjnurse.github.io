@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="r.def" />
+    <meta name="description" content="Run" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>r.def</title>
+    <title>Run</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
@@ -90,7 +90,8 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/other/cli_builder/definition-file-Run-r.def.md">r.def</a></h1>
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/other/cli_builder/definition-file-Run-r.def.md">Run</a></h1>
+<h1 id="definition-file-rdef">Definition file <code>r.def</code></h1>
 <div class="codehilite"><pre><span></span><code><span class="c1"># Run</span>
 
 <span class="c1"># ------------------------------------------------------------------------------------------------------------</span>
@@ -127,6 +128,134 @@ start<span class="w"> </span>postgres<span class="w"> </span><span class="o">(</
 cli<span class="w"> </span>build<span class="w"> </span>all<span class="w"> </span><span class="o">(</span>cba<span class="o">)</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="nb">cd</span><span class="w"> </span>~/mjnurse/cli-builder<span class="p">;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>cli-builder<span class="w"> </span>*.def
+</code></pre></div>
+
+<h1 id="alias-file">Alias file</h1>
+<div class="codehilite"><pre><span></span><code><span class="c1"># Completion function</span>
+_r_complete<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span>cur<span class="w"> </span>prev<span class="w"> </span>all
+<span class="w">    </span><span class="nv">all</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="o">((</span><span class="nv">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"> </span>i<span class="w"> </span>&lt;<span class="w"> </span><span class="si">${#</span><span class="nv">COMP_WORDS</span><span class="p">[@]</span><span class="si">}</span><span class="p">;</span><span class="w"> </span>i++<span class="o">))</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">        </span><span class="nv">word</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">COMP_WORDS</span><span class="p">[i]</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="o">[[</span><span class="w"> </span><span class="nv">$word</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span>-*<span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nv">all</span><span class="o">+=</span><span class="s2">&quot;</span><span class="nv">$word</span><span class="s2"> &quot;</span>
+<span class="w">    </span><span class="k">done</span>
+<span class="w">    </span><span class="nv">all</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$all</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nv">cur</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">COMP_WORDS</span><span class="p">[COMP_CWORD]</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nv">prev_step</span><span class="o">=</span><span class="m">1</span>
+<span class="w">    </span><span class="nv">prev</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">COMP_WORDS</span><span class="p">[COMP_CWORD-</span><span class="nv">$prev_step</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">prev</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;-&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">        </span><span class="nb">let</span><span class="w"> </span><span class="nv">prev_step</span><span class="o">=</span>prev_step+1
+<span class="w">        </span><span class="nv">prev</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">COMP_WORDS</span><span class="p">[COMP_CWORD-</span><span class="nv">$prev_step</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">done</span>
+
+<span class="o">}</span>
+<span class="nb">complete</span><span class="w"> </span>-F<span class="w"> </span>_r_complete<span class="w"> </span>r<span class="w"> </span>@rhe<span class="w"> </span>@rsm<span class="w"> </span>@rrm<span class="w"> </span>@rhm<span class="w"> </span>@rse<span class="w"> </span>@rsp<span class="w"> </span>@rcba
+
+<span class="c1"># Shortcut aliases</span>
+<span class="nb">alias</span><span class="w"> </span>@rhe<span class="o">=</span><span class="s1">&#39;r rhe&#39;</span>
+<span class="nb">alias</span><span class="w"> </span>@rsm<span class="o">=</span><span class="s1">&#39;r rsm&#39;</span>
+<span class="nb">alias</span><span class="w"> </span>@rrm<span class="o">=</span><span class="s1">&#39;r rrm&#39;</span>
+<span class="nb">alias</span><span class="w"> </span>@rhm<span class="o">=</span><span class="s1">&#39;r rhm&#39;</span>
+<span class="nb">alias</span><span class="w"> </span>@rse<span class="o">=</span><span class="s1">&#39;r rse&#39;</span>
+<span class="nb">alias</span><span class="w"> </span>@rsp<span class="o">=</span><span class="s1">&#39;r rsp&#39;</span>
+<span class="nb">alias</span><span class="w"> </span>@rcba<span class="o">=</span><span class="s1">&#39;r rcba&#39;</span>
+</code></pre></div>
+
+<h1 id="bash-script">Bash script</h1>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<span class="nv">debug_yn</span><span class="o">=</span>n
+<span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;-d&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nv">debug_yn</span><span class="o">=</span>y<span class="p">;</span><span class="w"> </span>shift<span class="p">;</span><span class="w"> </span><span class="o">}</span>
+<span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CLI_DEBUG</span><span class="p">^^</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;TRUE&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nv">debug_yn</span><span class="o">=</span>y
+
+<span class="nv">C_CYA</span><span class="o">=</span><span class="s2">&quot;\x1b[96m&quot;</span><span class="w"> </span><span class="nv">C_GRE</span><span class="o">=</span><span class="s2">&quot;\x1b[92m&quot;</span><span class="w"> </span><span class="nv">C_MAG</span><span class="o">=</span><span class="s2">&quot;\x1b[95m&quot;</span><span class="w"> </span><span class="nv">C_WHI</span><span class="o">=</span><span class="s2">&quot;\x1b[97m&quot;</span><span class="w"> </span><span class="nv">C_DEF</span><span class="o">=</span><span class="s2">&quot;\x1b[0m&quot;</span>
+
+<span class="c1"># param 1 - actual number of parameters</span>
+<span class="c1"># param 2 - required number of parameters</span>
+<span class="c1"># param 3 - incorrect parameters message</span>
+check_params<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">  </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>&lt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$3</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span>exit<span class="p">;</span><span class="w"> </span><span class="o">}</span>
+<span class="o">}</span>
+
+print_command<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">  </span><span class="o">[[</span><span class="w"> </span><span class="nv">$debug_yn</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>y<span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;COMMAND: </span><span class="nv">$*</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/&quot;/\&quot;/g&#39;</span><span class="p">;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;COMMAND: </span><span class="nv">$*</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/./-/g&#39;</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
+<span class="o">}</span>
+<span class="nv">section</span><span class="o">=</span><span class="s2">&quot;HELP&quot;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;help&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;rhe&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">   </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;rhe&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="m">1</span>
+<span class="w">   </span><span class="nv">usage</span><span class="o">=</span><span class="s2">&quot;\x1b[95mhelp \x1b[96m(rhe)\x1b[97m\x1b[0m&quot;</span>
+<span class="w">   </span>check_params<span class="w"> </span><span class="nv">$#</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="nv">$usage</span><span class="s2">&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;\x1b[92mgen:2026-05-14 16:27\x1b[0m&quot;</span>
+<span class="nb">echo</span>
+
+<span class="w">            </span><span class="k">while</span><span class="w"> </span><span class="nv">IFS</span><span class="o">=</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>line<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">line</span><span class="si">}${</span><span class="nv">CRESET</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">done</span><span class="w"> </span>&lt;<span class="w"> </span>&lt;<span class="o">(</span>egrep<span class="w"> </span><span class="s2">&quot;usage=|section=&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$0</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span><span class="s2">&quot;grep&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/.*usage=/   /; s/.*section=/\x1b[92m/; s/\&quot;//g&quot;</span><span class="o">)</span>
+<span class="w">   </span><span class="nb">exit</span>
+<span class="k">fi</span>
+<span class="nv">section</span><span class="o">=</span><span class="s2">&quot;MDM&quot;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2"> </span><span class="nv">$2</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;start mdm&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;rsm&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">   </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;rsm&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="m">2</span>
+<span class="w">   </span><span class="nv">usage</span><span class="o">=</span><span class="s2">&quot;\x1b[95mstart mdm \x1b[96m(rsm)\x1b[97m [streaming|ui|all|k(afka)&gt;|kapp&gt;|shaper]\x1b[92m # kapp starts kafka streaming for the application data source\x1b[0m&quot;</span>
+<span class="w">   </span>check_params<span class="w"> </span><span class="nv">$#</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="nv">$usage</span><span class="s2">&quot;</span>
+<span class="w">   </span>print_command<span class="w"> </span><span class="s2">&quot; mjn-start-mdm </span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="w">   </span>mjn-start-mdm<span class="w"> </span><span class="nv">$1</span>
+<span class="w">   </span><span class="nb">exit</span>
+<span class="k">fi</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2"> </span><span class="nv">$2</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;restart mdm&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;rrm&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">   </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;rrm&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="m">2</span>
+<span class="w">   </span><span class="nv">usage</span><span class="o">=</span><span class="s2">&quot;\x1b[95mrestart mdm \x1b[96m(rrm)\x1b[97m [streaming|ui|all|k(afka)&gt;|kapp|shaper]\x1b[92m # kapp starts kafka streaming for the application data source\x1b[0m&quot;</span>
+<span class="w">   </span>check_params<span class="w"> </span><span class="nv">$#</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="nv">$usage</span><span class="s2">&quot;</span>
+<span class="w">   </span>print_command<span class="w"> </span><span class="s2">&quot; mjn-stop-mdm; mjn-start-mdm </span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="w">   </span>mjn-stop-mdm<span class="p">;</span><span class="w"> </span>mjn-start-mdm<span class="w"> </span><span class="nv">$1</span>
+<span class="w">   </span><span class="nb">exit</span>
+<span class="k">fi</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2"> </span><span class="nv">$2</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;halt mdm&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;rhm&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">   </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;rhm&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="m">2</span>
+<span class="w">   </span><span class="nv">usage</span><span class="o">=</span><span class="s2">&quot;\x1b[95mhalt mdm \x1b[96m(rhm)\x1b[97m\x1b[0m&quot;</span>
+<span class="w">   </span>check_params<span class="w"> </span><span class="nv">$#</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="nv">$usage</span><span class="s2">&quot;</span>
+<span class="w">   </span>print_command<span class="w"> </span><span class="s2">&quot; mjn-stop-mdm&quot;</span>
+<span class="w">   </span>mjn-stop-mdm
+<span class="w">   </span><span class="nb">exit</span>
+<span class="k">fi</span>
+<span class="nv">section</span><span class="o">=</span><span class="s2">&quot;ES / Postgres&quot;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2"> </span><span class="nv">$2</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;start es&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;rse&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">   </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;rse&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="m">2</span>
+<span class="w">   </span><span class="nv">usage</span><span class="o">=</span><span class="s2">&quot;\x1b[95mstart es \x1b[96m(rse)\x1b[97m\x1b[0m&quot;</span>
+<span class="w">   </span>check_params<span class="w"> </span><span class="nv">$#</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="nv">$usage</span><span class="s2">&quot;</span>
+<span class="w">   </span>print_command<span class="w"> </span><span class="s2">&quot; mjn-start-es-pg es&quot;</span>
+<span class="w">   </span>mjn-start-es-pg<span class="w"> </span>es
+<span class="w">   </span><span class="nb">exit</span>
+<span class="k">fi</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2"> </span><span class="nv">$2</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;start postgres&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;rsp&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">   </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;rsp&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="m">2</span>
+<span class="w">   </span><span class="nv">usage</span><span class="o">=</span><span class="s2">&quot;\x1b[95mstart postgres \x1b[96m(rsp)\x1b[97m\x1b[0m&quot;</span>
+<span class="w">   </span>check_params<span class="w"> </span><span class="nv">$#</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="nv">$usage</span><span class="s2">&quot;</span>
+<span class="w">   </span>print_command<span class="w"> </span><span class="s2">&quot; mjn-start-es-pg pg&quot;</span>
+<span class="w">   </span>mjn-start-es-pg<span class="w"> </span>pg
+<span class="w">   </span><span class="nb">exit</span>
+<span class="k">fi</span>
+<span class="nv">section</span><span class="o">=</span><span class="s2">&quot;CLI-BUILDER&quot;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2"> </span><span class="nv">$2</span><span class="s2"> </span><span class="nv">$3</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;cli build all&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;rcba&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">   </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;rcba&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="m">3</span>
+<span class="w">   </span><span class="nv">usage</span><span class="o">=</span><span class="s2">&quot;\x1b[95mcli build all \x1b[96m(rcba)\x1b[97m\x1b[0m&quot;</span>
+<span class="w">   </span>check_params<span class="w"> </span><span class="nv">$#</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="nv">$usage</span><span class="s2">&quot;</span>
+<span class="w">   </span>print_command<span class="w"> </span><span class="s2">&quot; cd ~/mjnurse/cli-builder; cli-builder *.def&quot;</span>
+<span class="w">   </span><span class="nb">cd</span><span class="w"> </span>~/mjnurse/cli-builder<span class="p">;</span><span class="w"> </span>cli-builder<span class="w"> </span>*.def
+<span class="w">   </span><span class="nb">exit</span>
+<span class="k">fi</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;No option passed&quot;</span>
+<span class="k">else</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$*</span><span class="s2">: invalid option&quot;</span>
+<span class="k">fi</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Try &quot;</span>r<span class="w"> </span>help<span class="s2">&quot; for more information.&quot;</span>
 </code></pre></div>
         </div>
       </article>
