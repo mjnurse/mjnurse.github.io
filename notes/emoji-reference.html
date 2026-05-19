@@ -1,0 +1,1222 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Emoji Reference for Windows Terminal (Unicode Escapes)" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>Emoji Reference for Windows Terminal (Unicode Escapes)</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/notes/emoji-reference.md">Emoji Reference for Windows Terminal (Unicode Escapes)</a></h1>
+<p>Usage: <code>printf '\033]0;\U0001F680 Title\007'</code></p>
+<h2 id="smileys-people">Smileys &amp; People</h2>
+<table>
+<thead>
+<tr>
+<th>Emoji</th>
+<th>Name</th>
+<th>Unicode Escape</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>😀</td>
+<td>Grinning Face</td>
+<td><code>\U0001F600</code></td>
+</tr>
+<tr>
+<td>😃</td>
+<td>Grinning Face with Big Eyes</td>
+<td><code>\U0001F603</code></td>
+</tr>
+<tr>
+<td>😄</td>
+<td>Grinning Face with Smiling Eyes</td>
+<td><code>\U0001F604</code></td>
+</tr>
+<tr>
+<td>😁</td>
+<td>Beaming Face</td>
+<td><code>\U0001F601</code></td>
+</tr>
+<tr>
+<td>😆</td>
+<td>Grinning Squinting Face</td>
+<td><code>\U0001F606</code></td>
+</tr>
+<tr>
+<td>😅</td>
+<td>Grinning Face with Sweat</td>
+<td><code>\U0001F605</code></td>
+</tr>
+<tr>
+<td>🤣</td>
+<td>Rolling on the Floor Laughing</td>
+<td><code>\U0001F923</code></td>
+</tr>
+<tr>
+<td>😂</td>
+<td>Face with Tears of Joy</td>
+<td><code>\U0001F602</code></td>
+</tr>
+<tr>
+<td>😊</td>
+<td>Smiling Face with Smiling Eyes</td>
+<td><code>\U0001F60A</code></td>
+</tr>
+<tr>
+<td>😇</td>
+<td>Smiling Face with Halo</td>
+<td><code>\U0001F607</code></td>
+</tr>
+<tr>
+<td>😍</td>
+<td>Heart Eyes</td>
+<td><code>\U0001F60D</code></td>
+</tr>
+<tr>
+<td>🤩</td>
+<td>Star-Struck</td>
+<td><code>\U0001F929</code></td>
+</tr>
+<tr>
+<td>😎</td>
+<td>Smiling Face with Sunglasses</td>
+<td><code>\U0001F60E</code></td>
+</tr>
+<tr>
+<td>🤔</td>
+<td>Thinking Face</td>
+<td><code>\U0001F914</code></td>
+</tr>
+<tr>
+<td>😴</td>
+<td>Sleeping Face</td>
+<td><code>\U0001F634</code></td>
+</tr>
+<tr>
+<td>😱</td>
+<td>Face Screaming in Fear</td>
+<td><code>\U0001F631</code></td>
+</tr>
+<tr>
+<td>🤯</td>
+<td>Exploding Head</td>
+<td><code>\U0001F92F</code></td>
+</tr>
+<tr>
+<td>🥳</td>
+<td>Partying Face</td>
+<td><code>\U0001F973</code></td>
+</tr>
+<tr>
+<td>😈</td>
+<td>Smiling Face with Horns</td>
+<td><code>\U0001F608</code></td>
+</tr>
+<tr>
+<td>💀</td>
+<td>Skull</td>
+<td><code>\U0001F480</code></td>
+</tr>
+<tr>
+<td>👻</td>
+<td>Ghost</td>
+<td><code>\U0001F47B</code></td>
+</tr>
+<tr>
+<td>🤖</td>
+<td>Robot</td>
+<td><code>\U0001F916</code></td>
+</tr>
+<tr>
+<td>👍</td>
+<td>Thumbs Up</td>
+<td><code>\U0001F44D</code></td>
+</tr>
+<tr>
+<td>👎</td>
+<td>Thumbs Down</td>
+<td><code>\U0001F44E</code></td>
+</tr>
+<tr>
+<td>👋</td>
+<td>Waving Hand</td>
+<td><code>\U0001F44B</code></td>
+</tr>
+<tr>
+<td>👏</td>
+<td>Clapping Hands</td>
+<td><code>\U0001F44F</code></td>
+</tr>
+<tr>
+<td>🙌</td>
+<td>Raising Hands</td>
+<td><code>\U0001F64C</code></td>
+</tr>
+<tr>
+<td>🤝</td>
+<td>Handshake</td>
+<td><code>\U0001F91D</code></td>
+</tr>
+<tr>
+<td>✌️</td>
+<td>Victory Hand</td>
+<td><code>\u270C</code></td>
+</tr>
+<tr>
+<td>💪</td>
+<td>Flexed Biceps</td>
+<td><code>\U0001F4AA</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="hearts-symbols">Hearts &amp; Symbols</h2>
+<table>
+<thead>
+<tr>
+<th>Emoji</th>
+<th>Name</th>
+<th>Unicode Escape</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>❤️</td>
+<td>Red Heart</td>
+<td><code>\u2764</code></td>
+</tr>
+<tr>
+<td>🧡</td>
+<td>Orange Heart</td>
+<td><code>\U0001F9E1</code></td>
+</tr>
+<tr>
+<td>💛</td>
+<td>Yellow Heart</td>
+<td><code>\U0001F49B</code></td>
+</tr>
+<tr>
+<td>💚</td>
+<td>Green Heart</td>
+<td><code>\U0001F49A</code></td>
+</tr>
+<tr>
+<td>💙</td>
+<td>Blue Heart</td>
+<td><code>\U0001F499</code></td>
+</tr>
+<tr>
+<td>💜</td>
+<td>Purple Heart</td>
+<td><code>\U0001F49C</code></td>
+</tr>
+<tr>
+<td>🖤</td>
+<td>Black Heart</td>
+<td><code>\U0001F5A4</code></td>
+</tr>
+<tr>
+<td>💔</td>
+<td>Broken Heart</td>
+<td><code>\U0001F494</code></td>
+</tr>
+<tr>
+<td>💯</td>
+<td>Hundred Points</td>
+<td><code>\U0001F4AF</code></td>
+</tr>
+<tr>
+<td>💥</td>
+<td>Collision</td>
+<td><code>\U0001F4A5</code></td>
+</tr>
+<tr>
+<td>💫</td>
+<td>Dizzy</td>
+<td><code>\U0001F4AB</code></td>
+</tr>
+<tr>
+<td>💦</td>
+<td>Sweat Droplets</td>
+<td><code>\U0001F4A6</code></td>
+</tr>
+<tr>
+<td>🔥</td>
+<td>Fire</td>
+<td><code>\U0001F525</code></td>
+</tr>
+<tr>
+<td>✨</td>
+<td>Sparkles</td>
+<td><code>\u2728</code></td>
+</tr>
+<tr>
+<td>⭐</td>
+<td>Star</td>
+<td><code>\u2B50</code></td>
+</tr>
+<tr>
+<td>🌟</td>
+<td>Glowing Star</td>
+<td><code>\U0001F31F</code></td>
+</tr>
+<tr>
+<td>💡</td>
+<td>Light Bulb</td>
+<td><code>\U0001F4A1</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="animals-nature">Animals &amp; Nature</h2>
+<table>
+<thead>
+<tr>
+<th>Emoji</th>
+<th>Name</th>
+<th>Unicode Escape</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🐶</td>
+<td>Dog Face</td>
+<td><code>\U0001F436</code></td>
+</tr>
+<tr>
+<td>🐱</td>
+<td>Cat Face</td>
+<td><code>\U0001F431</code></td>
+</tr>
+<tr>
+<td>🐭</td>
+<td>Mouse Face</td>
+<td><code>\U0001F42D</code></td>
+</tr>
+<tr>
+<td>🐻</td>
+<td>Bear</td>
+<td><code>\U0001F43B</code></td>
+</tr>
+<tr>
+<td>🦊</td>
+<td>Fox</td>
+<td><code>\U0001F98A</code></td>
+</tr>
+<tr>
+<td>🐧</td>
+<td>Penguin</td>
+<td><code>\U0001F427</code></td>
+</tr>
+<tr>
+<td>🦄</td>
+<td>Unicorn</td>
+<td><code>\U0001F984</code></td>
+</tr>
+<tr>
+<td>🐍</td>
+<td>Snake</td>
+<td><code>\U0001F40D</code></td>
+</tr>
+<tr>
+<td>🐢</td>
+<td>Turtle</td>
+<td><code>\U0001F422</code></td>
+</tr>
+<tr>
+<td>🐝</td>
+<td>Honeybee</td>
+<td><code>\U0001F41D</code></td>
+</tr>
+<tr>
+<td>🦋</td>
+<td>Butterfly</td>
+<td><code>\U0001F98B</code></td>
+</tr>
+<tr>
+<td>🌸</td>
+<td>Cherry Blossom</td>
+<td><code>\U0001F338</code></td>
+</tr>
+<tr>
+<td>🌹</td>
+<td>Rose</td>
+<td><code>\U0001F339</code></td>
+</tr>
+<tr>
+<td>🌻</td>
+<td>Sunflower</td>
+<td><code>\U0001F33B</code></td>
+</tr>
+<tr>
+<td>🌲</td>
+<td>Evergreen Tree</td>
+<td><code>\U0001F332</code></td>
+</tr>
+<tr>
+<td>🌈</td>
+<td>Rainbow</td>
+<td><code>\U0001F308</code></td>
+</tr>
+<tr>
+<td>☀️</td>
+<td>Sun</td>
+<td><code>\u2600</code></td>
+</tr>
+<tr>
+<td>🌙</td>
+<td>Crescent Moon</td>
+<td><code>\U0001F319</code></td>
+</tr>
+<tr>
+<td>⚡</td>
+<td>High Voltage</td>
+<td><code>\u26A1</code></td>
+</tr>
+<tr>
+<td>❄️</td>
+<td>Snowflake</td>
+<td><code>\u2744</code></td>
+</tr>
+<tr>
+<td>🌊</td>
+<td>Water Wave</td>
+<td><code>\U0001F30A</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="food-drink">Food &amp; Drink</h2>
+<table>
+<thead>
+<tr>
+<th>Emoji</th>
+<th>Name</th>
+<th>Unicode Escape</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🍎</td>
+<td>Red Apple</td>
+<td><code>\U0001F34E</code></td>
+</tr>
+<tr>
+<td>🍕</td>
+<td>Pizza</td>
+<td><code>\U0001F355</code></td>
+</tr>
+<tr>
+<td>🍔</td>
+<td>Hamburger</td>
+<td><code>\U0001F354</code></td>
+</tr>
+<tr>
+<td>🍺</td>
+<td>Beer Mug</td>
+<td><code>\U0001F37A</code></td>
+</tr>
+<tr>
+<td>☕</td>
+<td>Hot Beverage</td>
+<td><code>\u2615</code></td>
+</tr>
+<tr>
+<td>🍩</td>
+<td>Doughnut</td>
+<td><code>\U0001F369</code></td>
+</tr>
+<tr>
+<td>🎂</td>
+<td>Birthday Cake</td>
+<td><code>\U0001F382</code></td>
+</tr>
+<tr>
+<td>🍿</td>
+<td>Popcorn</td>
+<td><code>\U0001F37F</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="travel-transport">Travel &amp; Transport</h2>
+<table>
+<thead>
+<tr>
+<th>Emoji</th>
+<th>Name</th>
+<th>Unicode Escape</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🚀</td>
+<td>Rocket</td>
+<td><code>\U0001F680</code></td>
+</tr>
+<tr>
+<td>✈️</td>
+<td>Airplane</td>
+<td><code>\u2708</code></td>
+</tr>
+<tr>
+<td>🚗</td>
+<td>Car</td>
+<td><code>\U0001F697</code></td>
+</tr>
+<tr>
+<td>🚂</td>
+<td>Locomotive</td>
+<td><code>\U0001F682</code></td>
+</tr>
+<tr>
+<td>🚢</td>
+<td>Ship</td>
+<td><code>\U0001F6A2</code></td>
+</tr>
+<tr>
+<td>🏠</td>
+<td>House</td>
+<td><code>\U0001F3E0</code></td>
+</tr>
+<tr>
+<td>🏢</td>
+<td>Office Building</td>
+<td><code>\U0001F3E2</code></td>
+</tr>
+<tr>
+<td>🏭</td>
+<td>Factory</td>
+<td><code>\U0001F3ED</code></td>
+</tr>
+<tr>
+<td>🌍</td>
+<td>Globe (Europe-Africa)</td>
+<td><code>\U0001F30D</code></td>
+</tr>
+<tr>
+<td>🌎</td>
+<td>Globe (Americas)</td>
+<td><code>\U0001F30E</code></td>
+</tr>
+<tr>
+<td>🌏</td>
+<td>Globe (Asia-Australia)</td>
+<td><code>\U0001F30F</code></td>
+</tr>
+<tr>
+<td>🗺️</td>
+<td>World Map</td>
+<td><code>\U0001F5FA</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="developer-tech-favourites">Developer &amp; Tech Favourites</h2>
+<table>
+<thead>
+<tr>
+<th>Emoji</th>
+<th>Name</th>
+<th>Unicode Escape</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>💻</td>
+<td>Laptop</td>
+<td><code>\U0001F4BB</code></td>
+</tr>
+<tr>
+<td>🖥️</td>
+<td>Desktop Computer</td>
+<td><code>\U0001F5A5</code></td>
+</tr>
+<tr>
+<td>⌨️</td>
+<td>Keyboard</td>
+<td><code>\u2328</code></td>
+</tr>
+<tr>
+<td>🖱️</td>
+<td>Computer Mouse</td>
+<td><code>\U0001F5B1</code></td>
+</tr>
+<tr>
+<td>📱</td>
+<td>Mobile Phone</td>
+<td><code>\U0001F4F1</code></td>
+</tr>
+<tr>
+<td>🔧</td>
+<td>Wrench</td>
+<td><code>\U0001F527</code></td>
+</tr>
+<tr>
+<td>🔨</td>
+<td>Hammer</td>
+<td><code>\U0001F528</code></td>
+</tr>
+<tr>
+<td>⚙️</td>
+<td>Gear</td>
+<td><code>\u2699</code></td>
+</tr>
+<tr>
+<td>🛠️</td>
+<td>Hammer and Wrench</td>
+<td><code>\U0001F6E0</code></td>
+</tr>
+<tr>
+<td>🔑</td>
+<td>Key</td>
+<td><code>\U0001F511</code></td>
+</tr>
+<tr>
+<td>🔒</td>
+<td>Locked</td>
+<td><code>\U0001F512</code></td>
+</tr>
+<tr>
+<td>🔓</td>
+<td>Unlocked</td>
+<td><code>\U0001F513</code></td>
+</tr>
+<tr>
+<td>🐛</td>
+<td>Bug</td>
+<td><code>\U0001F41B</code></td>
+</tr>
+<tr>
+<td>🧪</td>
+<td>Test Tube</td>
+<td><code>\U0001F9EA</code></td>
+</tr>
+<tr>
+<td>🧬</td>
+<td>DNA</td>
+<td><code>\U0001F9EC</code></td>
+</tr>
+<tr>
+<td>📡</td>
+<td>Satellite Antenna</td>
+<td><code>\U0001F4E1</code></td>
+</tr>
+<tr>
+<td>🔌</td>
+<td>Electric Plug</td>
+<td><code>\U0001F50C</code></td>
+</tr>
+<tr>
+<td>🔋</td>
+<td>Battery</td>
+<td><code>\U0001F50B</code></td>
+</tr>
+<tr>
+<td>💾</td>
+<td>Floppy Disk</td>
+<td><code>\U0001F4BE</code></td>
+</tr>
+<tr>
+<td>📀</td>
+<td>DVD</td>
+<td><code>\U0001F4C0</code></td>
+</tr>
+<tr>
+<td>🧲</td>
+<td>Magnet</td>
+<td><code>\U0001F9F2</code></td>
+</tr>
+<tr>
+<td>🔬</td>
+<td>Microscope</td>
+<td><code>\U0001F52C</code></td>
+</tr>
+<tr>
+<td>🔭</td>
+<td>Telescope</td>
+<td><code>\U0001F52D</code></td>
+</tr>
+<tr>
+<td>🏗️</td>
+<td>Building Construction</td>
+<td><code>\U0001F3D7</code></td>
+</tr>
+<tr>
+<td>📦</td>
+<td>Package</td>
+<td><code>\U0001F4E6</code></td>
+</tr>
+<tr>
+<td>🗂️</td>
+<td>Card Index Dividers</td>
+<td><code>\U0001F5C2</code></td>
+</tr>
+<tr>
+<td>📋</td>
+<td>Clipboard</td>
+<td><code>\U0001F4CB</code></td>
+</tr>
+<tr>
+<td>📝</td>
+<td>Memo</td>
+<td><code>\U0001F4DD</code></td>
+</tr>
+<tr>
+<td>📊</td>
+<td>Bar Chart</td>
+<td><code>\U0001F4CA</code></td>
+</tr>
+<tr>
+<td>📈</td>
+<td>Chart Increasing</td>
+<td><code>\U0001F4C8</code></td>
+</tr>
+<tr>
+<td>📉</td>
+<td>Chart Decreasing</td>
+<td><code>\U0001F4C9</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="status-indicators">Status &amp; Indicators</h2>
+<table>
+<thead>
+<tr>
+<th>Emoji</th>
+<th>Name</th>
+<th>Unicode Escape</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>✅</td>
+<td>Check Mark</td>
+<td><code>\u2705</code></td>
+</tr>
+<tr>
+<td>❌</td>
+<td>Cross Mark</td>
+<td><code>\u274C</code></td>
+</tr>
+<tr>
+<td>⚠️</td>
+<td>Warning</td>
+<td><code>\u26A0</code></td>
+</tr>
+<tr>
+<td>🚫</td>
+<td>Prohibited</td>
+<td><code>\U0001F6AB</code></td>
+</tr>
+<tr>
+<td>❓</td>
+<td>Question Mark</td>
+<td><code>\u2753</code></td>
+</tr>
+<tr>
+<td>❗</td>
+<td>Exclamation Mark</td>
+<td><code>\u2757</code></td>
+</tr>
+<tr>
+<td>🔴</td>
+<td>Red Circle</td>
+<td><code>\U0001F534</code></td>
+</tr>
+<tr>
+<td>🟠</td>
+<td>Orange Circle</td>
+<td><code>\U0001F7E0</code></td>
+</tr>
+<tr>
+<td>🟡</td>
+<td>Yellow Circle</td>
+<td><code>\U0001F7E1</code></td>
+</tr>
+<tr>
+<td>🟢</td>
+<td>Green Circle</td>
+<td><code>\U0001F7E2</code></td>
+</tr>
+<tr>
+<td>🔵</td>
+<td>Blue Circle</td>
+<td><code>\U0001F535</code></td>
+</tr>
+<tr>
+<td>🟣</td>
+<td>Purple Circle</td>
+<td><code>\U0001F7E3</code></td>
+</tr>
+<tr>
+<td>⚪</td>
+<td>White Circle</td>
+<td><code>\u26AA</code></td>
+</tr>
+<tr>
+<td>⚫</td>
+<td>Black Circle</td>
+<td><code>\u26AB</code></td>
+</tr>
+<tr>
+<td>🟥</td>
+<td>Red Square</td>
+<td><code>\U0001F7E5</code></td>
+</tr>
+<tr>
+<td>🟧</td>
+<td>Orange Square</td>
+<td><code>\U0001F7E7</code></td>
+</tr>
+<tr>
+<td>🟨</td>
+<td>Yellow Square</td>
+<td><code>\U0001F7E8</code></td>
+</tr>
+<tr>
+<td>🟩</td>
+<td>Green Square</td>
+<td><code>\U0001F7E9</code></td>
+</tr>
+<tr>
+<td>🟦</td>
+<td>Blue Square</td>
+<td><code>\U0001F7E6</code></td>
+</tr>
+<tr>
+<td>🟪</td>
+<td>Purple Square</td>
+<td><code>\U0001F7EA</code></td>
+</tr>
+<tr>
+<td>⬛</td>
+<td>Black Large Square</td>
+<td><code>\u2B1B</code></td>
+</tr>
+<tr>
+<td>⬜</td>
+<td>White Large Square</td>
+<td><code>\u2B1C</code></td>
+</tr>
+<tr>
+<td>▶️</td>
+<td>Play Button</td>
+<td><code>\u25B6</code></td>
+</tr>
+<tr>
+<td>⏸️</td>
+<td>Pause Button</td>
+<td><code>\u23F8</code></td>
+</tr>
+<tr>
+<td>⏹️</td>
+<td>Stop Button</td>
+<td><code>\u23F9</code></td>
+</tr>
+<tr>
+<td>🔄</td>
+<td>Counterclockwise Arrows</td>
+<td><code>\U0001F504</code></td>
+</tr>
+<tr>
+<td>♻️</td>
+<td>Recycling Symbol</td>
+<td><code>\u267B</code></td>
+</tr>
+<tr>
+<td>🏁</td>
+<td>Chequered Flag</td>
+<td><code>\U0001F3C1</code></td>
+</tr>
+<tr>
+<td>🚩</td>
+<td>Triangular Flag</td>
+<td><code>\U0001F6A9</code></td>
+</tr>
+<tr>
+<td>🎯</td>
+<td>Bullseye</td>
+<td><code>\U0001F3AF</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="time-calendar">Time &amp; Calendar</h2>
+<table>
+<thead>
+<tr>
+<th>Emoji</th>
+<th>Name</th>
+<th>Unicode Escape</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>⏰</td>
+<td>Alarm Clock</td>
+<td><code>\u23F0</code></td>
+</tr>
+<tr>
+<td>⏱️</td>
+<td>Stopwatch</td>
+<td><code>\u23F1</code></td>
+</tr>
+<tr>
+<td>⏳</td>
+<td>Hourglass</td>
+<td><code>\u23F3</code></td>
+</tr>
+<tr>
+<td>📅</td>
+<td>Calendar</td>
+<td><code>\U0001F4C5</code></td>
+</tr>
+<tr>
+<td>🕐</td>
+<td>One O'Clock</td>
+<td><code>\U0001F550</code></td>
+</tr>
+<tr>
+<td>🕑</td>
+<td>Two O'Clock</td>
+<td><code>\U0001F551</code></td>
+</tr>
+<tr>
+<td>🕒</td>
+<td>Three O'Clock</td>
+<td><code>\U0001F552</code></td>
+</tr>
+<tr>
+<td>🕓</td>
+<td>Four O'Clock</td>
+<td><code>\U0001F553</code></td>
+</tr>
+<tr>
+<td>🕔</td>
+<td>Five O'Clock</td>
+<td><code>\U0001F554</code></td>
+</tr>
+<tr>
+<td>🕕</td>
+<td>Six O'Clock</td>
+<td><code>\U0001F555</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="arrows-directions">Arrows &amp; Directions</h2>
+<table>
+<thead>
+<tr>
+<th>Emoji</th>
+<th>Name</th>
+<th>Unicode Escape</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>⬆️</td>
+<td>Up Arrow</td>
+<td><code>\u2B06</code></td>
+</tr>
+<tr>
+<td>⬇️</td>
+<td>Down Arrow</td>
+<td><code>\u2B07</code></td>
+</tr>
+<tr>
+<td>⬅️</td>
+<td>Left Arrow</td>
+<td><code>\u2B05</code></td>
+</tr>
+<tr>
+<td>➡️</td>
+<td>Right Arrow</td>
+<td><code>\u27A1</code></td>
+</tr>
+<tr>
+<td>↗️</td>
+<td>Up-Right Arrow</td>
+<td><code>\u2197</code></td>
+</tr>
+<tr>
+<td>↘️</td>
+<td>Down-Right Arrow</td>
+<td><code>\u2198</code></td>
+</tr>
+<tr>
+<td>↙️</td>
+<td>Down-Left Arrow</td>
+<td><code>\u2199</code></td>
+</tr>
+<tr>
+<td>↖️</td>
+<td>Up-Left Arrow</td>
+<td><code>\u2196</code></td>
+</tr>
+<tr>
+<td>↩️</td>
+<td>Right Arrow Curving Left</td>
+<td><code>\u21A9</code></td>
+</tr>
+<tr>
+<td>↪️</td>
+<td>Left Arrow Curving Right</td>
+<td><code>\u21AA</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="celebration-objects">Celebration &amp; Objects</h2>
+<table>
+<thead>
+<tr>
+<th>Emoji</th>
+<th>Name</th>
+<th>Unicode Escape</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>🎉</td>
+<td>Party Popper</td>
+<td><code>\U0001F389</code></td>
+</tr>
+<tr>
+<td>🎊</td>
+<td>Confetti Ball</td>
+<td><code>\U0001F38A</code></td>
+</tr>
+<tr>
+<td>🎈</td>
+<td>Balloon</td>
+<td><code>\U0001F388</code></td>
+</tr>
+<tr>
+<td>🏆</td>
+<td>Trophy</td>
+<td><code>\U0001F3C6</code></td>
+</tr>
+<tr>
+<td>🥇</td>
+<td>Gold Medal</td>
+<td><code>\U0001F947</code></td>
+</tr>
+<tr>
+<td>🥈</td>
+<td>Silver Medal</td>
+<td><code>\U0001F948</code></td>
+</tr>
+<tr>
+<td>🥉</td>
+<td>Bronze Medal</td>
+<td><code>\U0001F949</code></td>
+</tr>
+<tr>
+<td>🎵</td>
+<td>Musical Note</td>
+<td><code>\U0001F3B5</code></td>
+</tr>
+<tr>
+<td>🎶</td>
+<td>Musical Notes</td>
+<td><code>\U0001F3B6</code></td>
+</tr>
+<tr>
+<td>🎮</td>
+<td>Video Game</td>
+<td><code>\U0001F3AE</code></td>
+</tr>
+<tr>
+<td>🎲</td>
+<td>Game Die</td>
+<td><code>\U0001F3B2</code></td>
+</tr>
+<tr>
+<td>🧩</td>
+<td>Puzzle Piece</td>
+<td><code>\U0001F9E9</code></td>
+</tr>
+<tr>
+<td>📌</td>
+<td>Pushpin</td>
+<td><code>\U0001F4CC</code></td>
+</tr>
+<tr>
+<td>📎</td>
+<td>Paperclip</td>
+<td><code>\U0001F4CE</code></td>
+</tr>
+<tr>
+<td>✏️</td>
+<td>Pencil</td>
+<td><code>\u270F</code></td>
+</tr>
+<tr>
+<td>🖊️</td>
+<td>Pen</td>
+<td><code>\U0001F58A</code></td>
+</tr>
+<tr>
+<td>📚</td>
+<td>Books</td>
+<td><code>\U0001F4DA</code></td>
+</tr>
+<tr>
+<td>📖</td>
+<td>Open Book</td>
+<td><code>\U0001F4D6</code></td>
+</tr>
+<tr>
+<td>💰</td>
+<td>Money Bag</td>
+<td><code>\U0001F4B0</code></td>
+</tr>
+<tr>
+<td>💳</td>
+<td>Credit Card</td>
+<td><code>\U0001F4B3</code></td>
+</tr>
+<tr>
+<td>📧</td>
+<td>Email</td>
+<td><code>\U0001F4E7</code></td>
+</tr>
+<tr>
+<td>📞</td>
+<td>Telephone Receiver</td>
+<td><code>\U0001F4DE</code></td>
+</tr>
+<tr>
+<td>🔔</td>
+<td>Bell</td>
+<td><code>\U0001F514</code></td>
+</tr>
+<tr>
+<td>🔕</td>
+<td>Bell with Slash</td>
+<td><code>\U0001F515</code></td>
+</tr>
+<tr>
+<td>🔊</td>
+<td>Speaker High Volume</td>
+<td><code>\U0001F50A</code></td>
+</tr>
+<tr>
+<td>🔇</td>
+<td>Muted Speaker</td>
+<td><code>\U0001F507</code></td>
+</tr>
+</tbody>
+</table>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: May 19, 2026</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>
