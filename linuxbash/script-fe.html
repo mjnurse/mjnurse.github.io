@@ -201,14 +201,13 @@ mv<span class="w"> </span>-f<span class="w"> </span><span class="nv">$tmp2</span
 <span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;NOTE: No grep run.  Use -g to run a grep&quot;</span>
 <span class="k">fi</span>
 <span class="nb">echo</span>
-<span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Enter Number (# or v# - Vim, c# - MS Code): &quot;</span><span class="w"> </span>n
+<span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Enter Number (# or c# - MS Code, v# - Vim): &quot;</span><span class="w"> </span>n
 
 <span class="nv">editor</span><span class="o">=</span><span class="s2">&quot;code&quot;</span>
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">n</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;v&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">    </span><span class="nv">editor</span><span class="o">=</span><span class="s2">&quot;gvim&quot;</span>
 <span class="w">    </span><span class="nv">n</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">n</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="k">elif</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">n</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;c&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="nv">editor</span><span class="o">=</span><span class="s2">&quot;code&quot;</span>
 <span class="w">    </span><span class="nv">n</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">n</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="k">fi</span>
 
@@ -237,7 +236,7 @@ mv<span class="w"> </span>-f<span class="w"> </span><span class="nv">$tmp2</span
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: March 26, 2026</p>
+      <p>Last updated: May 15, 2026</p>
     </footer>
 
     <div class="scroll-container">
