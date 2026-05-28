@@ -130,6 +130,8 @@
 <span class="n">postgres</span><span class="p">:</span><span class="w"> </span><span class="k">export</span><span class="w"> </span><span class="n">PGPASSWORD</span><span class="o">=</span><span class="n">postgres</span>
 <span class="n">postgres</span><span class="p">:</span><span class="w"> </span><span class="k">export</span><span class="w"> </span><span class="n">PGPASSWORD</span><span class="o">=</span><span class="n">postgres</span><span class="p">;</span><span class="w"> </span><span class="n">cat</span><span class="w"> </span><span class="n">my</span><span class="o">.</span><span class="n">sql</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">psql</span><span class="w"> </span><span class="o">-</span><span class="n">h</span><span class="w"> </span><span class="n">localhost</span><span class="w"> </span><span class="o">-</span><span class="n">U</span><span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="n">postgres</span>
 
+<span class="n">ps</span><span class="w"> </span><span class="n">auxww</span><span class="w"> </span><span class="c1"># list linux processes, ww - show full command, do not truncate</span>
+
 <span class="n">psql</span><span class="p">:</span><span class="w"> </span><span class="n">SET</span><span class="w"> </span><span class="n">search_path</span><span class="o">=&lt;</span><span class="n">schema</span><span class="o">&gt;</span><span class="p">[,</span><span class="o">&lt;</span><span class="n">schema</span><span class="o">&gt;</span><span class="p">];</span><span class="w"> </span><span class="c1"># set current schema(s)</span>
 <span class="n">psql</span><span class="p">:</span><span class="w"> </span><span class="n">SHOW</span><span class="w"> </span><span class="n">search_path</span><span class="p">;</span><span class="w"> </span><span class="c1"># show current schema(s)</span>
 <span class="n">psql</span><span class="p">:</span><span class="w"> </span>\<span class="n">c</span><span class="w"> </span><span class="o">&lt;</span><span class="n">db</span><span class="o">&gt;</span><span class="w"> </span><span class="c1"># connect to database</span>
@@ -143,8 +145,8 @@
 <span class="n">tar</span><span class="w"> </span><span class="o">-</span><span class="n">cvzf</span><span class="w"> </span><span class="n">filename</span><span class="w"> </span><span class="n">sourcedir</span><span class="w"> </span><span class="c1"># Create tarball.</span>
 <span class="n">tar</span><span class="w"> </span><span class="o">-</span><span class="n">xvzf</span><span class="w"> </span><span class="o">&lt;</span><span class="n">filename</span><span class="o">&gt;</span><span class="w"> </span><span class="c1"># Extract zipped tarball.</span>
 
-<span class="n">tr</span><span class="w"> </span><span class="n">A</span><span class="o">-</span><span class="n">Z</span><span class="w"> </span><span class="n">a</span><span class="o">-</span><span class="n">z</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">lowercase</span>
-<span class="n">tr</span><span class="w"> </span><span class="n">a</span><span class="o">-</span><span class="n">z</span><span class="w"> </span><span class="n">A</span><span class="o">-</span><span class="n">Z</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">uppercase</span>
+<span class="n">tr</span><span class="w"> </span><span class="n">A</span><span class="o">-</span><span class="n">Z</span><span class="w"> </span><span class="n">a</span><span class="o">-</span><span class="n">z</span><span class="w"> </span><span class="c1"># lowercase</span>
+<span class="n">tr</span><span class="w"> </span><span class="n">a</span><span class="o">-</span><span class="n">z</span><span class="w"> </span><span class="n">A</span><span class="o">-</span><span class="n">Z</span><span class="w"> </span><span class="c1"># uppercase</span>
 
 <span class="n">wsl</span><span class="p">:</span><span class="w"> </span><span class="n">Config</span><span class="w"> </span><span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">/.</span><span class="n">wslconfig</span>
 </code></pre></div>
@@ -165,7 +167,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: May 12, 2026</p>
+      <p>Last updated: May 28, 2026</p>
     </footer>
 
     <div class="scroll-container">
