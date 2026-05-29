@@ -850,7 +850,7 @@
     "id": "121",
     "title": "csvsql - Run a SQL query over a csv file",
     "url": "/linuxbash/script-csvsql.html",
-    "content": "#!/usr/bin/env bash help_text=&quot; NAME csvsql - Run a SQL query over a csv file USAGE csvsql &lt;csv-filename&gt; &lt;sql-query: in quotes&gt; DESCRIPTION A script to run a SQL query over data in a csv file using sqlite3. The table to query has the same name as the csv file (with the file extension - anything after a &#39;.&#39; removed). AUTHOR mjnurse.github.io - 2022 &quot; help_line=&quot;Run a SQL query over a csv file&quot; web_desc_line=&quot;Run a SQL query over a csv file&quot; if [ ",
+    "content": "#!/usr/bin/env bash help_text=&quot; NAME csvsql - Run a SQL query over a csv file USAGE csvsql &lt;csv-filename&gt; &lt;sql-query: in quotes&gt; DESCRIPTION A script to run a SQL query over data in a csv file using sqlite3. The table to query has the name &#39;t&#39; AUTHOR mjnurse.github.io - 2022 &quot; help_line=&quot;Run a SQL query over a csv file&quot; web_desc_line=&quot;Run a SQL query over a csv file&quot; if [ &quot;$1&quot; == &quot;-h&quot; ] || [ &quot;$1&quot; == &quot;--help&quot",
     "type": "page"
   },
   {

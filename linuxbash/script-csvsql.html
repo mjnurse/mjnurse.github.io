@@ -102,8 +102,7 @@
 <span class="s2">DESCRIPTION</span>
 <span class="s2">  A script to run a SQL query over data in a csv file using sqlite3.</span>
 
-<span class="s2">  The table to query has the same name as the csv file (with the file extension - </span>
-<span class="s2">  anything after a &#39;.&#39; removed).</span>
+<span class="s2">  The table to query has the name &#39;t&#39;</span>
 
 <span class="s2">AUTHOR</span>
 <span class="s2">  mjnurse.github.io - 2022</span>
@@ -123,7 +122,7 @@
 <span class="w">  </span><span class="nb">exit</span>
 <span class="k">fi</span>
 
-sqlite3<span class="w"> </span>:memory:<span class="w"> </span>-cmd<span class="w"> </span><span class="s2">&quot;.mode csv&quot;</span><span class="w"> </span>-cmd<span class="w"> </span><span class="s2">&quot;.import </span><span class="nv">$1</span><span class="s2"> </span><span class="si">${</span><span class="nv">1</span><span class="p">//.*/</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+sqlite3<span class="w"> </span>:memory:<span class="w"> </span>-cmd<span class="w"> </span><span class="s2">&quot;.mode csv&quot;</span><span class="w"> </span>-cmd<span class="w"> </span><span class="s2">&quot;.import </span><span class="nv">$1</span><span class="s2"> t&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">        </span>-cmd<span class="w"> </span><span class="s2">&quot;.mode column&quot;</span><span class="w"> </span>-header<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span>
 </code></pre></div>
         </div>
@@ -143,7 +142,7 @@ sqlite3<span class="w"> </span>:memory:<span class="w"> </span>-cmd<span class="
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: January 02, 2026</p>
+      <p>Last updated: May 28, 2026</p>
     </footer>
 
     <div class="scroll-container">
