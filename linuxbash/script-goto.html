@@ -103,6 +103,8 @@
 <span class="s1">    -a|--add &lt;directory-name-details&gt;</span>
 <span class="s1">        Add directory(s) to the list of saved directories. All directories which have a name which starts</span>
 <span class="s1">        with the provided details will be added.</span>
+<span class="s1">    -e|--edit</span>
+<span class="s1">        Edit the list of save directories.</span>
 
 <span class="s1">    -r|--redirection</span>
 <span class="s1">        Output the commands to change the current directory to the a directory selected in the previous</span>
@@ -181,6 +183,10 @@
 <span class="w">            </span>mv<span class="w"> </span><span class="nv">$0</span>.tmp<span class="w"> </span><span class="nv">$0</span>.dat
 <span class="w">            </span><span class="nb">exit</span>
 <span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>-e<span class="p">|</span>--edit<span class="o">)</span>
+<span class="w">            </span>vi<span class="w"> </span><span class="nv">$0</span>.dat
+<span class="w">            </span><span class="nb">exit</span>
+<span class="w">            </span><span class="p">;;</span>
 <span class="w">        </span>-h<span class="p">|</span>--help<span class="o">)</span>
 <span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
 <span class="w">            </span><span class="nb">exit</span>
@@ -246,7 +252,7 @@ rm<span class="w"> </span><span class="nv">$tf</span>
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: March 11, 2026</p>
+      <p>Last updated: May 29, 2026</p>
     </footer>
 
     <div class="scroll-container">

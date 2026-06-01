@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="tot - Sum, average, min, max calculator with size unit support" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>tot - Sum, average, min, max calculator with size unit support</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-tot.md">tot - Sum, average, min, max calculator with size unit support</a></h1>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
+<span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
+<span class="s2">NAME</span>
+<span class="s2">    tot - Sum, average, min, max for a list of values with optional size units.</span>
+
+<span class="s2">USAGE</span>
+<span class="s2">    tot [options] [values...]</span>
+
+<span class="s2">OPTIONS</span>
+<span class="s2">    -h|--help</span>
+<span class="s2">        Show help text.</span>
+
+<span class="s2">DESCRIPTION</span>
+<span class="s2">    Calculates sum, average, min and max for a list of numeric values.</span>
+<span class="s2">    Values can include size units: b, kb, mb, gb, tb (e.g. 2.5gb, 300kb).</span>
+<span class="s2">    Values without a unit are treated as plain numbers.</span>
+
+<span class="s2">    If values are passed as arguments they are used directly.  Otherwise</span>
+<span class="s2">    an interactive prompt reads values (one or many per line) until Ctrl-D.</span>
+
+<span class="s2">AUTHOR</span>
+<span class="s2">    mjnurse.github.io - 2026</span>
+<span class="s2">&quot;</span>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Sum, average, min, max calculator with size unit support&quot;</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Sum, average, min, max calculator with size unit support&quot;</span>
+
+<span class="nv">tmp</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">help_text</span><span class="p">##*USAGE</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nv">usage</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%OPTIONS*</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;\n&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/  */ /g&quot;</span><span class="k">)</span>
+
+<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
+<span class="w">        </span>-h<span class="p">|</span>--help<span class="o">)</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="nb">exit</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>*<span class="o">)</span>
+<span class="w">            </span><span class="k">break</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">    </span><span class="k">esac</span>
+<span class="w">    </span><span class="nb">shift</span>
+<span class="k">done</span>
+
+parse_token<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">  </span><span class="nb">local</span><span class="w"> </span><span class="nv">token</span><span class="o">=</span><span class="nv">$1</span>
+<span class="w">  </span><span class="nb">local</span><span class="w"> </span><span class="nv">val</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$token</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-oiE<span class="w"> </span><span class="s1">&#39;^[0-9]*\.?[0-9]+&#39;</span><span class="k">)</span>
+<span class="w">  </span><span class="nb">local</span><span class="w"> </span><span class="nv">unit</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$token</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-oiE<span class="w"> </span><span class="s1">&#39;[a-z]+$&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span><span class="s1">&#39;[:upper:]&#39;</span><span class="w"> </span><span class="s1">&#39;[:lower:]&#39;</span><span class="k">)</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$val</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Skipping invalid: </span><span class="nv">$token</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+<span class="w">    </span><span class="k">return</span>
+<span class="w">  </span><span class="k">fi</span>
+
+<span class="w">  </span><span class="nb">local</span><span class="w"> </span>bytes
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$unit</span><span class="s2">&quot;</span><span class="w"> </span><span class="k">in</span>
+<span class="w">    </span>b<span class="o">)</span><span class="w">  </span><span class="nv">bytes</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$val</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{printf &quot;%.0f&quot;, $1}&#39;</span><span class="k">)</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">    </span>kb<span class="o">)</span><span class="w"> </span><span class="nv">bytes</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$val</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{printf &quot;%.0f&quot;, $1 * 1024}&#39;</span><span class="k">)</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">    </span>mb<span class="o">)</span><span class="w"> </span><span class="nv">bytes</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$val</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{printf &quot;%.0f&quot;, $1 * 1024 * 1024}&#39;</span><span class="k">)</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">    </span>gb<span class="o">)</span><span class="w"> </span><span class="nv">bytes</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$val</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{printf &quot;%.0f&quot;, $1 * 1024 * 1024 * 1024}&#39;</span><span class="k">)</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">    </span>tb<span class="o">)</span><span class="w"> </span><span class="nv">bytes</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$val</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{printf &quot;%.0f&quot;, $1 * 1024 * 1024 * 1024 * 1024}&#39;</span><span class="k">)</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">    </span><span class="s2">&quot;&quot;</span><span class="o">)</span><span class="w"> </span><span class="nv">bytes</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$val</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{printf &quot;%.0f&quot;, $1}&#39;</span><span class="k">)</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">    </span>*<span class="o">)</span><span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Unknown unit &#39;</span><span class="nv">$unit</span><span class="s2">&#39; in: </span><span class="nv">$token</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span><span class="p">;</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">  </span><span class="k">esac</span>
+
+<span class="w">  </span><span class="nv">values</span><span class="o">+=(</span><span class="s2">&quot;</span><span class="nv">$bytes</span><span class="s2">&quot;</span><span class="o">)</span>
+<span class="o">}</span>
+
+<span class="nv">values</span><span class="o">=()</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span>token<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span>parse_token<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$token</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="k">done</span>
+<span class="k">else</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Enter values (e.g. 100 2.5gb 300kb), Ctrl-D to finish:&quot;</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="nv">IFS</span><span class="o">=</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>line<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$line</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>token<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nv">$line</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">      </span>parse_token<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$token</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">done</span>
+<span class="w">  </span><span class="k">done</span>
+<span class="k">fi</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="si">${#</span><span class="nv">values</span><span class="p">[@]</span><span class="si">}</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;No values entered.&quot;</span>
+<span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+
+fmt_size<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">  </span><span class="nb">local</span><span class="w"> </span><span class="nv">commas</span><span class="o">=</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;%0.f&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;:a;s/\B[0-9]\{3\}\&gt;/,&amp;/;ta&#39;</span><span class="k">)</span>
+<span class="w">  </span><span class="nb">local</span><span class="w"> </span><span class="nv">human</span><span class="o">=</span><span class="k">$(</span>awk<span class="w"> </span>-v<span class="w"> </span><span class="nv">b</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="s1">&#39;BEGIN {</span>
+<span class="s1">    if (b &gt;= 1024^4)      printf &quot;%.2f tb&quot;, b / 1024^4</span>
+<span class="s1">    else if (b &gt;= 1024^3) printf &quot;%.2f gb&quot;, b / 1024^3</span>
+<span class="s1">    else if (b &gt;= 1024^2) printf &quot;%.2f mb&quot;, b / 1024^2</span>
+<span class="s1">    else if (b &gt;= 1024)   printf &quot;%.2f kb&quot;, b / 1024</span>
+<span class="s1">    else                  printf &quot;%.0f b&quot;, b</span>
+<span class="s1">  }&#39;</span><span class="k">)</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$commas</span><span class="s2"> (</span><span class="nv">$human</span><span class="s2">)&quot;</span>
+<span class="o">}</span>
+
+<span class="nv">sum</span><span class="o">=</span><span class="m">0</span>
+<span class="nv">min</span><span class="o">=</span><span class="si">${</span><span class="nv">values</span><span class="p">[0]</span><span class="si">}</span>
+<span class="nv">max</span><span class="o">=</span><span class="si">${</span><span class="nv">values</span><span class="p">[0]</span><span class="si">}</span>
+
+<span class="k">for</span><span class="w"> </span>v<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">values</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="nv">sum</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$sum</span><span class="s2"> + </span><span class="nv">$v</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>bc<span class="k">)</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">((</span><span class="w"> </span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$v</span><span class="s2"> &lt; </span><span class="nv">$min</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>bc<span class="w"> </span>-l<span class="k">)</span><span class="w"> </span><span class="o">))</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nv">min</span><span class="o">=</span><span class="nv">$v</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">((</span><span class="w"> </span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$v</span><span class="s2"> &gt; </span><span class="nv">$max</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>bc<span class="w"> </span>-l<span class="k">)</span><span class="w"> </span><span class="o">))</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nv">max</span><span class="o">=</span><span class="nv">$v</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
+<span class="k">done</span>
+
+<span class="nv">avg</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;scale=0; </span><span class="nv">$sum</span><span class="s2"> / </span><span class="si">${#</span><span class="nv">values</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>bc<span class="k">)</span>
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Count: </span><span class="si">${#</span><span class="nv">values</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Sum:   </span><span class="k">$(</span>fmt_size<span class="w"> </span><span class="nv">$sum</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Avg:   </span><span class="k">$(</span>fmt_size<span class="w"> </span><span class="nv">$avg</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Min:   </span><span class="k">$(</span>fmt_size<span class="w"> </span><span class="nv">$min</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Max:   </span><span class="k">$(</span>fmt_size<span class="w"> </span><span class="nv">$max</span><span class="k">)</span><span class="s2">&quot;</span>
+</code></pre></div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: June 01, 2026</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>
