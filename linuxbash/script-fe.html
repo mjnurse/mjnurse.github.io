@@ -169,22 +169,13 @@ which<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$nam
 <span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;--------------------------------------------------------------------------------&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$tmp</span>
 <span class="k">fi</span>
 
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Searching ./* ...&quot;</span>
-find<span class="w"> </span>.<span class="w"> </span>-iname<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$name</span><span class="s2">&quot;</span><span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-not<span class="w"> </span>-path<span class="w"> </span><span class="s1">&#39;*/.*&#39;</span><span class="w"> </span>-not<span class="w"> </span>-name<span class="w"> </span><span class="s1">&#39;.*&#39;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-exec<span class="w"> </span>realpath<span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="se">\;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$tmp</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Searching MJN/* ...&quot;</span>
-find<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$MJNWINROOT</span><span class="s2">/MJN&quot;</span><span class="w"> </span>-iname<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$name</span><span class="s2">&quot;</span><span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-not<span class="w"> </span>-path<span class="w"> </span><span class="s1">&#39;*/.*&#39;</span><span class="w"> </span>-not<span class="w"> </span>-name<span class="w"> </span><span class="s1">&#39;.*&#39;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-exec<span class="w"> </span>realpath<span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="se">\;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$tmp</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Searching Documents/* ...&quot;</span>
-find<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$MJNWINROOT</span><span class="s2">/Documents&quot;</span><span class="w"> </span>-iname<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$name</span><span class="s2">&quot;</span><span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-not<span class="w"> </span>-path<span class="w"> </span><span class="s1">&#39;*/.*&#39;</span><span class="w"> </span>-not<span class="w"> </span>-name<span class="w"> </span><span class="s1">&#39;.*&#39;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-exec<span class="w"> </span>realpath<span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="se">\;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$tmp</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Searching ~/mjnurse&quot;</span>
-find<span class="w"> </span>~/mjnurse<span class="w"> </span>-iname<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$name</span><span class="s2">&quot;</span><span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-not<span class="w"> </span>-path<span class="w"> </span><span class="s1">&#39;*/.*&#39;</span><span class="w"> </span>-not<span class="w"> </span>-name<span class="w"> </span><span class="s1">&#39;.*&#39;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-exec<span class="w"> </span>realpath<span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="se">\;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$tmp</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null
+<span class="k">for</span><span class="w"> </span>loc<span class="w"> </span><span class="k">in</span><span class="w"> </span>.<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$MJNWINROOT</span><span class="s2">/MJN&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$MJNWINROOT</span><span class="s2">/Documents&quot;</span><span class="w"> </span>~/mjnurse<span class="w"> </span>~/bin<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Searching </span><span class="nv">$loc</span><span class="s2">&quot;</span>
+<span class="w">    </span>find<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$loc</span><span class="s2">&quot;</span><span class="w"> </span>-iname<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$name</span><span class="s2">&quot;</span><span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>-not<span class="w"> </span>-path<span class="w"> </span><span class="s1">&#39;*/.*&#39;</span><span class="w"> </span>-not<span class="w"> </span>-name<span class="w"> </span><span class="s1">&#39;.*&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>-exec<span class="w"> </span>realpath<span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="se">\;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$tmp</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null
+<span class="k">done</span>
+
 sort<span class="w"> </span>-u<span class="w"> </span><span class="nv">$tmp</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;/mjnurse\.github\.io/d&quot;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$tmp2</span>
 mv<span class="w"> </span>-f<span class="w"> </span><span class="nv">$tmp2</span><span class="w"> </span><span class="nv">$tmp</span>
 
@@ -236,7 +227,7 @@ mv<span class="w"> </span>-f<span class="w"> </span><span class="nv">$tmp2</span
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: May 15, 2026</p>
+      <p>Last updated: June 04, 2026</p>
     </footer>
 
     <div class="scroll-container">

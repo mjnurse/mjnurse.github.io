@@ -1501,7 +1501,7 @@
     "id": "214",
     "title": "Docker CLI",
     "url": "/other/cli_builder/definition-file-docker-dc.def.html",
-    "content": "Definition file dc.def # Docker # ------------------------------------------------------------------------------------------------- = CONTAINERS # ------------------------------------------------------------------------------------------------- delete container (rm) &lt;container_name&gt; :: \\ read -p &quot;Are you sure [yN]? &quot; yn; \\ if [[ ${yn^} == Y ]]; then \\ docker rm $1; \\ fi \\ !! docker ps --all --format &#39;{{.Names}}&#39; \\ list containers (ps) [&lt;-d&gt;] :: \\ if [[ $1 == -d ]]; ",
+    "content": "Definition file dc.def # Docker # ------------------------------------------------------------------------------------------------- = IMAGES # ------------------------------------------------------------------------------------------------- list images (li) [&lt;name&gt;] :: \\ if [[ &quot;$1&quot; == &quot;&quot; ]]; then \\ docker images; \\ else \\ filter=&quot;${1//\\*/.\\*}&quot;; \\ filter=&quot;${filter//%/.\\*}&quot;; \\ docker images 2&gt;/dev/null | egrep &quot;^$filter .*|IMAGE&quot;; \\ fi \\ #",
     "type": "page"
   },
   {
