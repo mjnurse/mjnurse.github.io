@@ -144,6 +144,15 @@ usage<span class="o">()</span><span class="w"> </span><span class="o">{</span>
 <span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 <span class="o">}</span>
 
+<span class="nv">all_files</span><span class="o">=</span><span class="nb">true</span>
+<span class="k">for</span><span class="w"> </span>arg<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="o">[</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$arg</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nv">all_files</span><span class="o">=</span>false<span class="p">;</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
+<span class="k">done</span>
+
+<span class="k">if</span><span class="w"> </span><span class="nv">$all_files</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$#</span><span class="s2">&quot;</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Warning: did you pass and mean to pass &#39;*&#39;? Quote it to avoid glob expansion.&quot;</span>
+<span class="k">fi</span>
+
 <span class="c1"># Split combined short arguments (eg -abc) into individual arguments (-a -b -c). Remove = symbols.</span>
 <span class="nv">new_args</span><span class="o">=()</span>
 <span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
@@ -168,6 +177,7 @@ usage<span class="o">()</span><span class="w"> </span><span class="o">{</span>
 <span class="w">    </span><span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;args: &quot;</span><span class="p">;</span><span class="w"> </span><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;%s &#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">new_args</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="nb">echo</span>
 <span class="w">    </span><span class="c1"># set -x</span>
 <span class="k">fi</span>
+
 
 <span class="c1"># Process the arguments</span>
 <span class="nb">set</span><span class="w"> </span>--<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">new_args</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -205,6 +215,12 @@ usage<span class="o">()</span><span class="w"> </span><span class="o">{</span>
 <span class="w">  </span>usage
 <span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">2</span>
 <span class="k">fi</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Error: please pass in a single pattern.&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+<span class="w">  </span><span class="nb">echo</span>
+<span class="w">  </span>usage
+<span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">2</span>
+<span class="k">fi</span>
 <span class="nv">PATTERN</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
 
 <span class="c1"># Choose find name flag based on case sensitivity</span>
@@ -221,7 +237,7 @@ usage<span class="o">()</span><span class="w"> </span><span class="o">{</span>
 <span class="k">while</span><span class="w"> </span><span class="nv">IFS</span><span class="o">=</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;&#39;</span><span class="w"> </span>f<span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">  </span><span class="c1"># If file was deleted between find and stat, skip errors</span>
 <span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="nv">out</span><span class="o">=</span><span class="k">$(</span>stat<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;%y&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="nv">mtime</span><span class="o">=</span><span class="si">${</span><span class="nv">out</span><span class="p">:</span><span class="nv">2</span><span class="p">:</span><span class="nv">14</span><span class="si">}</span><span class="w"> </span><span class="c1"># &quot;YYYY-MM-DD HH:MM:SS&quot;</span>
+<span class="w">    </span><span class="nv">mtime</span><span class="o">=</span><span class="si">${</span><span class="nv">out</span><span class="si">}</span><span class="w"> </span><span class="c1"># &quot;YYYY-MM-DD HH:MM:SS&quot;</span>
 <span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">mtime</span><span class="p">// /-</span><span class="si">}</span><span class="s2"> </span><span class="nv">$f</span><span class="s2">&quot;</span>
 <span class="w">  </span><span class="k">fi</span>
 <span class="k">done</span><span class="w"> </span>&lt;<span class="w"> </span>&lt;<span class="o">(</span>find<span class="w"> </span>.<span class="w"> </span>-type<span class="w"> </span>d<span class="w"> </span>-name<span class="w"> </span>.git<span class="w"> </span>-prune<span class="w"> </span>-o<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span><span class="nv">$NAMEFLAG</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PATTERN</span><span class="s2">&quot;</span><span class="w"> </span>-print0<span class="o">)</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmpfile</span><span class="s2">&quot;</span>
@@ -249,7 +265,7 @@ sort<span class="w"> </span>-r<span class="w"> </span>-n<span class="w"> </span>
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: March 11, 2026</p>
+      <p>Last updated: June 09, 2026</p>
     </footer>
 
     <div class="scroll-container">
