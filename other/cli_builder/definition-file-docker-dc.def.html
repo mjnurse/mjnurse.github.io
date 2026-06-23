@@ -372,7 +372,7 @@ print_command<span class="o">()</span><span class="w"> </span><span class="o">{<
 <span class="w">   </span><span class="nv">usage</span><span class="o">=</span><span class="s2">&quot;\x1b[95mhelp \x1b[96m(dhe)\x1b[97m\x1b[0m&quot;</span>
 <span class="w">   </span>check_params<span class="w"> </span><span class="nv">$#</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="nv">$usage</span><span class="s2">&quot;</span>
 
-<span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;\x1b[92mgen:2026-06-05 11:54\x1b[0m&quot;</span>
+<span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;\x1b[95mgenerated:2026-06-11 13:33\x1b[0m&quot;</span>
 <span class="nb">echo</span>
 
 <span class="w">            </span><span class="k">while</span><span class="w"> </span><span class="nv">IFS</span><span class="o">=</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>line<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">line</span><span class="si">}${</span><span class="nv">CRESET</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">done</span><span class="w"> </span>&lt;<span class="w"> </span>&lt;<span class="o">(</span>egrep<span class="w"> </span><span class="s2">&quot;usage=|section=&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$0</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span><span class="s2">&quot;grep&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/.*usage=/   /; s/.*section=/\x1b[92m/; s/\&quot;//g&quot;</span><span class="o">)</span>
@@ -634,7 +634,7 @@ print_command<span class="o">()</span><span class="w"> </span><span class="o">{<
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: June 05, 2026</p>
+      <p>Last updated: June 09, 2026</p>
     </footer>
 
     <div class="scroll-container">

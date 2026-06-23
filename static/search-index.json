@@ -1506,209 +1506,216 @@
   },
   {
     "id": "215",
+    "title": "@ Elasticsearch CLI",
+    "url": "/other/cli_builder/definition-file-@-elasticsearch-es.def.html",
+    "content": "Definition file es.def @ Elasticsearch cmd ES_HOST=&quot;${ES_HOST:-localhost}&quot; cmd ES_PORT=&quot;${ES_PORT:-9200}&quot; cmd if [[ &quot;${ES_PATH%/}&quot; != &quot;&quot; ]]; then ES_PATH=&quot;/${ES_PATH%/}&quot;; fi cmd ES_PROTOCOL=&quot;${ES_PROTOCOL:-http}&quot; @@ CLI uses environment variables: @@ - ES_PROTOCOL (default: http), @@ - ES_HOST (default: localhost) @@ - ES_PORT (default: 9200), @@ - ES_PATH (default: &lt;blank&gt;), and @@ - ES_AUTH (default: &lt;blank&gt; - no auth requ",
+    "type": "page"
+  },
+  {
+    "id": "216",
+    "title": "@ GCloud (GCP) CLI",
+    "url": "/other/cli_builder/definition-file-@-gcloud-(gcp)-gc.def.html",
+    "content": "Definition file gc.def @ GCloud (GCP) cmd if [[ &quot;$GCP_PROJECT&quot; != &quot;&quot; ]]; then GCP_PROJECT=&quot;--project $GCP_PROJECT&quot;; fi cmd gc() { \\ echo PROJ: $GCP_PROJECT; \\ gcloud &quot;$@&quot; $GCP_PROJECT; \\ } # -------------------------------------------------------------------------------- = Config # -------------------------------------------------------------------------------- config list (cl) :: gcloud config list # -------------------------------------------------------",
+    "type": "page"
+  },
+  {
+    "id": "217",
+    "title": "@ GIT CLI",
+    "url": "/other/cli_builder/definition-file-@-git-gi.def.html",
+    "content": "Definition file gi.def @ GIT aliasLeadChars: gi # --------------------------------------------------------------------------------------- = GENERAL # --------------------------------------------------------------------------------------- add commit push (acp) [&lt;-f|--force&gt;] [&lt;message&gt;] :: \\ force_yn=n; \\ if [[ $1 == -f || $1 == --force ]]; then \\ force_yn=y; \\ shift; \\ fi; \\ if [[ &quot;$1&quot; == &quot;&quot; ]]; then \\ message=&quot;Various&quot;; \\ else \\ message=&quot;$1&quot;; ",
+    "type": "page"
+  },
+  {
+    "id": "218",
     "title": "Docker CLI",
     "url": "/other/cli_builder/definition-file-docker-dc.def.html",
     "content": "Definition file dc.def # Docker # ------------------------------------------------------------------------------------------------- = IMAGES # ------------------------------------------------------------------------------------------------- list images (li) [&lt;name&gt;] :: \\ if [[ &quot;$1&quot; == &quot;&quot; ]]; then \\ docker images; \\ else \\ filter=&quot;${1//\\*/.\\*}&quot;; \\ filter=&quot;${filter//%/.\\*}&quot;; \\ docker images 2&gt;/dev/null | egrep &quot;^$filter .*|IMAGE&quot;; \\ fi \\ #",
     "type": "page"
   },
   {
-    "id": "216",
-    "title": "Elasticsearch CLI",
-    "url": "/other/cli_builder/definition-file-elasticsearch-es.def.html",
-    "content": "Definition file es.def # Elasticsearch cmd ES_AUTH=&quot;&quot; cmd ES_HOST=&quot;${ES_HOST:-localhost}&quot; cmd ES_PORT=&quot;${ES_PORT:-9200}&quot; cmd pj() { if command -v jq &gt;/dev/null 2&gt;&amp;1; then jq .; else cat; fi; } cmd cols() { python3 -c &#39;import sys,json;f=lambda d,p=&quot;&quot;:[f(v[&quot;properties&quot;],p+k+&quot;.&quot;) if isinstance(v,dict) and &quot;properties&quot; in v else print(p+k) for k,v in d.items()];[f(i[&quot;mappings&quot;][&quot;properties&quot;]) for ",
-    "type": "page"
-  },
-  {
-    "id": "217",
-    "title": "GIT CLI",
-    "url": "/other/cli_builder/definition-file-git-gi.def.html",
-    "content": "Definition file gi.def # GIT # --------------------------------------------------------------------------------------- = GENERAL # --------------------------------------------------------------------------------------- add commit push (acp) [&lt;-f|--force&gt;] [&lt;message&gt;] :: \\ force_yn=n; \\ if [[ $1 == -f || $1 == --force ]]; then \\ force_yn=y; \\ shift; \\ fi; \\ if [[ &quot;$1&quot; == &quot;&quot; ]]; then \\ message=&quot;Various&quot;; \\ else \\ message=&quot;$1&quot;; \\ fi; \\ [ -f ./gen-",
-    "type": "page"
-  },
-  {
-    "id": "218",
+    "id": "219",
     "title": "Kubectl CLI",
     "url": "/other/cli_builder/definition-file-kubectl-kc.def.html",
     "content": "Definition file kc.def # Kubectl # ------------------------------------------------------------------------------------------------- = ALL # ------------------------------------------------------------------------------------------------- get all (ga) [&lt;namespace&gt;] :: \\ if [[ &quot;$1&quot; == &quot;&quot; ]]; then kubectl get all -A; else kubectl get all -n $1; fi get (g) &lt;item&gt; :: kubectl get $1 # -------------------------------------------------------------------------------------",
     "type": "page"
   },
   {
-    "id": "219",
+    "id": "220",
     "title": "Postgres PSQL CLI",
     "url": "/other/cli_builder/definition-file-postgres-psql-pg.def.html",
     "content": "Definition file pg.def # Postgres PSQL cmd [ -f ./pg_conn_defaults ] &amp;&amp; source ./pg_conn_defaults cmd PG_HOST=&quot;${PG_HOST:-127.0.0.1}&quot; cmd PG_PORT=&quot;${PG_PORT:-5431}&quot; cmd PG_DB=&quot;${PG_DB:-postgres}&quot; cmd PG_USER=&quot;${PG_NAME:-postgres}&quot; cmd PG_PASSWORD=&quot;${PG_PASSWORD:-postgres}&quot; cmd export PGPASSWORD=&quot;$PG_PASSWORD&quot; cmd export PAGER=cat # ------------------------------------------------------------------------------------------------- ",
     "type": "page"
   },
   {
-    "id": "220",
+    "id": "221",
     "title": "Run CLI",
     "url": "/other/cli_builder/definition-file-run-r.def.html",
     "content": "Definition file r.def # Run # ------------------------------------------------------------------------------------------------------------ = MDM # ------------------------------------------------------------------------------------------------------------ start mdm (sm) [&lt;streaming|ui|all|k(afka)&gt;|kapp&gt;|shaper] :: \\ mjn-start-mdm $1 \\ ## kapp starts kafka streaming for the application data source restart mdm (rm) [&lt;streaming|ui|all|k(afka)&gt;|kapp|shaper&gt;] :: \\ mjn-stop-mdm; \\ mj",
     "type": "page"
   },
   {
-    "id": "221",
+    "id": "222",
     "title": "Anonymous Functions - Functions as a Parameter",
     "url": "/other/scala/anonymous-functions-functions_as_a-parameter.html",
     "content": "Anonymous Functions def sum(f: Int =&gt; Int, a: Int, b: Int): Int = if (a == b) f(a) else f(a) + sum(f, a+1, b) Currying is defining a function piecewise one parameter section after another. def sum(f: Int =&gt; Int)(a: Int, b: Int): Int = if (a &gt; b) 0 else f(a) + sum(f)(a+1, b) Passing a function into a function scala&gt; def head(word: String, length: Int): String = {word.substring(0, length)} head: (word: String, length: Int)String scala&gt; // Define a function which returns a function w",
     "type": "page"
   },
   {
-    "id": "222",
+    "id": "223",
     "title": "Tail Recursion",
     "url": "/other/scala/tail-recursion.html",
     "content": "A tail recursive function can reuse the stack frame - ie reuse the same area of memory to hold its current state for each recursive call. A non tail recursive function needs to use additional memory for each recursive call. A non tail recursive function applies logic to the result returned from each recursive iteration. This means that the state of every iteration need to be maintained. A non tail recursive function should be avoided where the number of recursive iterations is large. Not Tail Re",
     "type": "page"
   },
   {
-    "id": "223",
+    "id": "224",
     "title": "Install Spark 3.2.x On Windows 10",
     "url": "/other/spark_and_hadoop_hdfs/install-spark_3.2.x-on-windows_10.html",
     "content": "Ensure you have Java 8 installed. &gt; java - version openjdk version &quot;1.8.0_382&quot; OpenJDK Runtime Environment (Temurin)(build 1.8.0_382-b05) OpenJDK 64-Bit Server VM (Temurin)(build 25.382-b05, mixed mode) Navigate to https://spark.apache.org/downloads.html",
     "type": "page"
   },
   {
-    "id": "224",
+    "id": "225",
     "title": "PySpark Create a DataFrame",
     "url": "/other/spark_and_hadoop_hdfs/py-spark-create_a-data-frame.html",
     "content": "File: test.json. &gt; echo &#39;{&quot;name&quot;:&quot;martin&quot;, &quot;status&quot;:&quot;cool&quot;}&#39; &gt; test.json &gt; echo &#39;{&quot;name&quot;:&quot;phil&quot;, &quot;status&quot;:&quot;dull&quot;}&#39; &gt;&gt; test.json Copy file into hdfs. &gt; hdfs dfs -mkdir hdfs://localhost:9000/user/martin/ &gt; hdfs dfs -put test.json hdfs://localhost:9000/user/martin/test.json Start PySpark &gt; PySpark Load file into dataframe. &gt;&gt;&gt; df = spark.read.json(&quot;test.json&quot;) &",
     "type": "page"
   },
   {
-    "id": "225",
+    "id": "226",
     "title": "Read and Query a Parquet File in a Spark Shell",
     "url": "/other/spark_and_hadoop_hdfs/read_and-query_a-parquet-file_in_a-spark-shell.html",
     "content": "Basic Read and Query // Read in file to a data frame. &gt; val df = spark.read.parquet(&quot;filename.parquet&quot;) // Print the data frame schema. &gt; df.printSchema() // Show the data. &gt; df.show() // Number of records. &gt; df.count() Spark SQL // Read in file to a data frame. &gt; val df = spark.read.parquet(&quot;filename.parquet&quot;) // Create a temporary view over the dataframe &gt; df.createOrReplaceTempView(&quot;dfv&quot;) // dfv - data frame view // Run SQL Select query &gt; val",
     "type": "page"
   },
   {
-    "id": "226",
+    "id": "227",
     "title": "Recursive HDFS Directory Sizes Script",
     "url": "/other/spark_and_hadoop_hdfs/recursive-hdfs-directory-sizes-script.html",
     "content": "#!/usr/bin/env bash max_depth=8 largest_root_dirs=$(hdfs dfs -du -s &#39;/*&#39; | sort -nr | perl -ane &#39;print &quot;$F[2] &quot;&#39;) printf &quot;%15s %s\\n&quot; &quot;bytes&quot; &quot;directory&quot; for ld in $largest_root_dirs; do printf &quot;%15.0f %s\\n&quot; $(hdfs dfs -du -s $ld| cut -d&#39; &#39; -f1) $ld all_dirs=$(hdfs dfs -ls -R $ld | egrep &#39;^dr........&#39; | \\ perl -ane &quot;scalar(split(&#39;/&#39;,\\$_)) &lt;= $max_depth &amp;&amp; print \\&quot;\\$F[7]\\n\\&quot;&quot; ) ",
     "type": "page"
   },
   {
-    "id": "227",
+    "id": "228",
     "title": "Spark Write DataFrame Different Compression Codecs",
     "url": "/other/spark_and_hadoop_hdfs/spark-write-data-frame-different-compression-codecs.html",
     "content": "Load large(ish) csv. &gt; hdfs dfs -put spotify_millsongdata.csv &gt; hdfs dfs -ls /user/martin/ Found 1 items -rw-r--r-- 1 martin supergroup 71.4 M 2022-12-01 15:44 /user/martin/spotify_millsongdata.csv scala&gt; val df = spark.read.csv(&quot;spotify_millsongdata.csv&quot;) Write parquet file with different compression codec's. scala&gt; df.write.option(&quot;compression&quot;,&quot;none&quot;).save(&quot;spotify-none&quot;) scala&gt; df.write.option(&quot;compression&quot;,&quot;snappy&quot;).",
     "type": "page"
   },
   {
-    "id": "228",
+    "id": "229",
     "title": "Azure AD - Find My AD Group Memberships",
     "url": "/misc/azure-ad.html",
     "content": "First authenticate - this command will pop up a window to sign in. &gt; Connect-AzureAD Account Environment TenantId TenantDomain AccountType ------- ----------- -------- ------------ ----------- martinnurse@demo.com AzureCloud c780234d-ed5b-4ccd demo.com User Get my AD group memberships. &gt; Get-AzureADUser -SearchString martinnurse@demo.com ` | Get-AzureADUserMembership ` | % {Get-AzureADObjectByObjectId -ObjectId $_.ObjectId ` | select DisplayName,ObjectType,MailEnabled,SecurityEnabled,Objec",
     "type": "page"
   },
   {
-    "id": "229",
+    "id": "230",
     "title": "BMI Calculator",
     "url": "/misc/bmi-calculator.html",
     "content": "Weight St Lb lbs Kg Height Ft In m Target Weight Current BMI: 0 Target Weight (BMI 20 - 25) BMI 20 weight (lose/gain)BMI 25 weight (lose/gain) Kg00 Lbs00 St Lb00 Notes: BMI for adults only. Doesn't account for body / bone structure, other formulae exist. BMI &lt;20: Underweight. BMI 20-25: Healthy weight. BMI 25-30: Over Weight. BMI 30-35: Obese. BMI&gt;35 very/morbidly obese. function getFloat(id) { return parseFloat(document.getElementById(id).value) || 0; } function setValue(id, value) { docu",
     "type": "page"
   },
   {
-    "id": "230",
+    "id": "231",
     "title": "Dashboard Design Principles",
     "url": "/misc/dashboard-design-principles.html",
     "content": "'The greatest value of a picture is when it forces us to notice what we never expected to see'John Tukey, 'Exploratory Data Analysis', 1977 'A picture is worth a thousand words. An interface is worth a thousand pictures'Ben Shneiderman, 2003 'Data becomes useful knowledge of something that matters when it builds a bridge between a question and an answer. This connection is the signal.' Stephen Few, 'Signal: Understanding What Matters in a World of Noise, 2015 'Graphical excellence is that which ",
     "type": "page"
   },
   {
-    "id": "231",
+    "id": "232",
     "title": "Generating a Bookmarks Page From a Chrome Bookmarks Folder",
     "url": "/misc/generating_a-bookmarks-page-from_a-chrome-bookmarks-folder.html",
     "content": "I wanted a bookmark web page I could switch to (using CTRL-&lt;Tab Number&gt;) and then quickly open a bookmarked site. I created a bash script to read the bookmarks from a folder in the Chrome bookmark bar (folder name: Page) and create a web page. I added Javascript (from this site) that allows me to go to a bookmark (link) by typing in the associated number. I can also search the bookmarks by typing / and then entering part of the name. Pressing Return opens the first matching bookmark. All b",
     "type": "page"
   },
   {
-    "id": "232",
+    "id": "233",
     "title": "Google Charts",
     "url": "/misc/google-charts.html",
     "content": "Google Charts function toggle_yn(obj) { if (obj.value == 'Yes') obj.value = 'No'; else obj.value = 'Yes' } Chart Data Chart Options Redraw | Pivot | Column Headings | Row Headings | Chart Type | &nbsp;Line&nbsp;&nbsp;&nbsp;Column&nbsp;&nbsp;&nbsp;Bar&nbsp;&nbsp;&nbsp;Area&nbsp;&nbsp;&nbsp;Pie",
     "type": "page"
   },
   {
-    "id": "233",
+    "id": "234",
     "title": "History Of My Cars",
     "url": "/misc/history_of_my_cars.html",
     "content": "This perhaps the oldest page on this website and its predecessors. It is, as it says, a history of the cars I've owned. Best Car Audi S5 Quattro 354bhp, 369lb-ft, 0-60mph: 4.7s, Top Speed: 155mph. A great car, very quick, accelerates hard in any gear. The exhaust growls in sports mode. The 8 speed auto gearbox changes very quickly - gear change let down my A5 V6 TDi Quattro, and this was the first thing I checked on the test drive. Came with almost every extra including massaging heated front se",
     "type": "page"
   },
   {
-    "id": "234",
+    "id": "235",
     "title": "HTML Colour Converter",
     "url": "/misc/html-colour-converter.html",
     "content": "RGB: HEX: I've found rotating the RGB values around can give some colours that work well together. Not sure if this has a name... function setColors() { let h = document.getElementById('h'); let rh = h.value.slice(0,2); let gh = h.value.slice(2,4); let bh = h.value.slice(4,6); color = rh + gh + bh; document.getElementById('c1').style.backgroundColor = '#' + color; document.getElementById('c1').innerHTML = '#' + color + '&nbsp;#' + color + ''; color = bh + rh + gh; document.getElementById('c2').s",
     "type": "page"
   },
   {
-    "id": "235",
+    "id": "236",
     "title": "JWT - JSON Web Tokens",
     "url": "/misc/jwt-json-web-tokens.html",
     "content": "Today I was looking at authentication for a web-service. It was using JSON Web Tokens. What are JWTs? How do they work? A JWT is a cryptographically signed JSON token used to authenticate users making calls to an application. A JWT is sent to a user when they authenticate with an authentication Service. The user can send this token with requests to an application (web-service or other) as proof of identity. The application talks to the authentication server and is told the how the token was cryp",
     "type": "page"
   },
   {
-    "id": "236",
+    "id": "237",
     "title": "Public Key Encryption Analogy",
     "url": "/misc/public-key-encryption-analogy.html",
     "content": "What is Public Private Key Encryption? This process uses an algorithm that can encrypt data using a public key however, the data can only be decrypted using a private key. I share my public key with everyone and they use it to encrypt data they send to me. Only I can decrypt and read that data. The Analogy As an analogy to public, private key encryption, consider a secure, locked post-box which contains a slot through which notes can be posted. Notes posted in to the post-box cannot be read (as ",
     "type": "page"
   },
   {
-    "id": "237",
+    "id": "238",
     "title": "Read Aloud In MS Word",
     "url": "/misc/read-aloud-in-ms-word.html",
     "content": "To activate: [Alt][Ctrl][Space]. Cursor at a specific point in the text: The document will be read aloud from here on. Text selected: The selected text will be read aloud. [Ctrl][Space] - Play or pause. [Ctrl][Left arrow] - Jump to the previous paragraph. [Ctrl][Right arrow] - Jump to the next paragraph. [Alt][Left arrow] - Slower reading speed. [Alt][Arrow right] - Faster reading speed.",
     "type": "page"
   },
   {
-    "id": "238",
+    "id": "239",
     "title": "Running Spark on YARN - Cluster or Client Mode",
     "url": "/misc/running-spark_on-yarn-cluster_or-client-mode.html",
     "content": "Spark jobs can run on YARN in two modes: cluster mode and client mode. Understanding the difference between the two modes is important for choosing an appropriate memory allocation configuration, and to submit jobs as expected. A Spark job consists of two parts: Spark Executors that run the actual tasks, and a Spark Driver that schedules the Executors. Cluster Mode Everything runs inside the cluster. You can start a job from your laptop and the job will continue running even if you close your co",
     "type": "page"
   },
   {
-    "id": "239",
+    "id": "240",
     "title": "Shortcut Keys",
     "url": "/misc/shortcut-keys.html",
     "content": "Note: This page is automatically generated using sck Confluence | // | Opens the date picker | | Alt +SHIFT+DOWN | Insert table row after | | Alt +SHIFT+UP | Insert table row before | | CTRL+0 | Set paragraph style | | CTRL+1-6 | Set as heading 1-6 | | CTRL+7 | Preformatted | | CTRL+8 | Quote | | CTRL+ENTER | Publish page | | CTRL+ENTER | Publish | | CTRL+SHIFT+I | Insert table | | CTRL+SHIFT+a | Insert macro | | CTRL+SHIFT+b | Bulleted list | | CTRL+SHIFT+d | Insert markup | | CTRL+SHIFT+e | Pr",
     "type": "page"
   },
   {
-    "id": "240",
+    "id": "241",
     "title": "ssh",
     "url": "/misc/ssh.html",
     "content": "Storing SSH Connection / Config details Store SSH connection details in a config file in the .ssh directory. File ~/.ssh/config Contents Host dev HostName dev.example.com Port 22 User martin Host test HostName test.example.com Port 22 User martin SSH Login Without Password 1) Generate a public/private RSA key pair. Save this to default location /home/&lt;username&gt;/.ssh/id_rsa $ ssh-keygen Your public key will be saved in /home/user/.ssh/id_rsa.pub 2) Copy the SSH Public Key to the Remote Host",
     "type": "page"
   },
   {
-    "id": "241",
+    "id": "242",
     "title": "Statistical Testing",
     "url": "/misc/statistical-testing.html",
     "content": "For a long time I've wanted to explore using statistics to determine how many tests are needed to test for errors. The question I have is that, for a set of n records, if we want to be say 99.9% sure none contain an error, how many would be need to test at random to reach a point where we can be statistically, say, 99.9% sure there are no errors. The Basics Tests with a fixed number of options / records to test If I have a die and there is a chance the number has not been printed on one side, ho",
     "type": "page"
   },
   {
-    "id": "242",
+    "id": "243",
     "title": "Text To Speech - Clipboard",
     "url": "/misc/text-to-speech-clipboard.html",
     "content": "I've been using the Microsoft Word text-to-speech function for a while to proof read text. Works great but the text needs to be a Word document or I need to copy and paste it there first. I've been looking online for an application to read aloud the clipboard. It's surprisingly difficult to find an application. I then thought about AHK and (convinced it would be far to complex for AHK) I ran a search. I was wrong, a very simple AHK script now means I can read aloud the contents of the clipboard ",
     "type": "page"
   },
   {
-    "id": "243",
+    "id": "244",
     "title": "This Sites Markdown",
     "url": "/misc/this-sites-markdown.html",
     "content": "Heading 1 # Heading 1 Heading 2 ## Heading 2 Heading 3 ### Heading 3 Heading 4 #### Heading 4 Heading 5 ##### Heading 5 Heading 6 ###### Heading 6 Horizontal Line: --- Bold: **Bold** Italic: *Italic* Bold Italic: ***Bold Italic*** ~~Strikethrough~~: ~~Strikethrough~~ Links I'm an inline-style link [I'm an inline-style link](https://www.google.com) I'm an inline-style link with title [I'm an inline-style link with title](https://www.google.com \"Google's Homepage\") Simple Lists Single spacing: Sim",
     "type": "page"
   },
   {
-    "id": "244",
+    "id": "245",
     "title": "Using Git and GitHub - A Walk-through",
     "url": "/misc/using-git_and-git-hub-a-walkthrough.html",
     "content": "In the following walk-through we use Git and GitHub from the view point of two 'users' in parallel and look at the workflow and interaction between the two. Simulate two users - each has a home directory Create two 'user home' directories: &gt; ~/git-test$ mkdir user1 &gt; ~/git-test$ mkdir user2 Use User1 to create a file, add this to Git and push the local Git repo up and into GitHub Go to User1 home directory and initialise local Git: &gt; ~/git-test$ cd user1 &gt; ~/git-test/user1$ git init ",

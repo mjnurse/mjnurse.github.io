@@ -141,6 +141,17 @@ from<span class="w"> </span>typing<span class="w"> </span>import<span class="w">
 <span class="s2">  ## - text following ## is a help description for the command.  This text is shown when</span>
 <span class="s2">        the help command is run.</span>
 
+<span class="s2">  @ - a line starting with @ followed by a space sets the title for the cli.  The title is shown</span>
+<span class="s2">      at the top of the help output.</span>
+
+<span class="s2">  @@ - a line starting with @@ followed by a space is a description for the cli.  If the</span>
+<span class="s2">       description spans multiple lines, each line must start with @@.  The description is shown</span>
+<span class="s2">       below the title in the help output.</span>
+
+<span class="s2">  aliasLeadChars: - sets the leading character(s) for generated aliases (default: first char of</span>
+<span class="s2">                    definition filename).  For example, &#39;aliasLeadChars: es&#39; will generate aliases</span>
+<span class="s2">                    like @esli, @essi instead of @eli, @esi.</span>
+
 <span class="s2">  ( \ - is the line continuation character.  Any line ending \ is joined to the next line. )</span>
 
 <span class="s2">  All other lines in the file are command definitions.  These lines are structured as follows:</span>
@@ -219,7 +230,7 @@ class<span class="w"> </span>Cmd:
 <span class="w">    </span>def<span class="w"> </span>opt_params<span class="o">(</span>self<span class="o">)</span>:
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">[</span>p<span class="w"> </span><span class="k">for</span><span class="w"> </span>p,<span class="w"> </span>opt<span class="w"> </span><span class="k">in</span><span class="w"> </span>self.params<span class="w"> </span><span class="k">if</span><span class="w"> </span>opt<span class="o">]</span>
 
-def<span class="w"> </span>parse_def<span class="o">(</span>lines,<span class="w"> </span>title,<span class="w"> </span>cli_name<span class="o">)</span>:
+def<span class="w"> </span>parse_def<span class="o">(</span>lines,<span class="w"> </span>title,<span class="w"> </span>description,<span class="w"> </span>cli_name,<span class="w"> </span>alias_lead_chars<span class="o">)</span>:
 <span class="w">    </span><span class="s2">&quot;&quot;&quot;Parse definition file into commands and groups&quot;&quot;&quot;</span>
 <span class="w">    </span><span class="nv">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
 <span class="w">    </span><span class="nv">cmds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
@@ -231,14 +242,19 @@ def<span class="w"> </span>parse_def<span class="o">(</span>lines,<span class="w
 <span class="s1">echo -e &quot;{C_GRE}{title}{C_DEF}&quot;</span>
 <span class="s1">echo -e &quot;{C_GRE}{&quot;-&quot;*len(title)}{C_DEF}&quot;</span>
 <span class="s1">&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>description:
+<span class="w">        </span><span class="nv">desc_lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;\n&#39;</span>.join<span class="o">(</span>f<span class="s1">&#39;echo -e &quot;{C_WHI}{line}{C_DEF}&quot;&#39;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>line<span class="w"> </span><span class="k">in</span><span class="w"> </span>description<span class="o">)</span>
+<span class="w">        </span><span class="nv">title_str</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">{desc_lines}</span>
+<span class="s1">&#39;&#39;&#39;</span>
 <span class="w">    </span><span class="nv">title_str</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">echo -e &quot;{C_GRE}gen:{datetime.now().strftime(&#39;</span>%Y-%m-%d<span class="w"> </span>%H:%M<span class="s1">&#39;)}{C_DEF}&quot;</span>
+<span class="s1">echo -e &quot;{C_MAG}generated:{datetime.now().strftime(&#39;</span>%Y-%m-%d<span class="w"> </span>%H:%M<span class="s1">&#39;)}{C_DEF}&quot;</span>
 <span class="s1">echo</span>
 <span class="s1">&#39;&#39;&#39;</span>
 
 <span class="w">    </span>cmds.append<span class="o">((</span><span class="s1">&#39;cmd&#39;</span>,<span class="w"> </span>Cmd<span class="o">(</span>
 <span class="w">            </span><span class="nv">keys</span><span class="o">=[</span><span class="s1">&#39;help&#39;</span><span class="o">]</span>,
-<span class="w">            </span><span class="nv">shortcut</span><span class="o">=</span>cli_name<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span>+<span class="w"> </span><span class="s1">&#39;he&#39;</span>,
+<span class="w">            </span><span class="nv">shortcut</span><span class="o">=</span>alias_lead_chars<span class="w"> </span>+<span class="w"> </span><span class="s1">&#39;he&#39;</span>,
 <span class="w">            </span><span class="nv">params</span><span class="o">=[]</span>,
 <span class="w">            </span><span class="nv">cmd</span><span class="o">=</span>title_str<span class="w"> </span>+<span class="w"> </span>f<span class="s1">&#39;&#39;&#39;</span>
 <span class="s1">            while IFS= read -r line; do echo -e &quot;${{line}}${{CRESET}}&quot;; done &lt; &lt;(egrep &quot;usage=|section=&quot; &quot;$0&quot; | grep -v &quot;grep&quot; | sed &quot;s/.*usage=/   /; s/.*section=/\\x1b[92m/; s/\\&quot;//g&quot;)&#39;&#39;&#39;</span>,
@@ -281,7 +297,7 @@ def<span class="w"> </span>parse_def<span class="o">(</span>lines,<span class="w
 
 <span class="w">        </span><span class="k">for</span><span class="w"> </span>tok<span class="w"> </span><span class="k">in</span><span class="w"> </span>tokens:
 <span class="w">            </span><span class="k">if</span><span class="w"> </span>tok.startswith<span class="o">(</span><span class="s1">&#39;(&#39;</span><span class="o">)</span>:
-<span class="w">                </span><span class="nv">shortcut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>cli_name<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span>+<span class="w"> </span>tok.strip<span class="o">(</span><span class="s1">&#39;()&#39;</span><span class="o">)</span>
+<span class="w">                </span><span class="nv">shortcut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>alias_lead_chars<span class="w"> </span>+<span class="w"> </span>tok.strip<span class="o">(</span><span class="s1">&#39;()&#39;</span><span class="o">)</span>
 <span class="w">            </span><span class="k">elif</span><span class="w"> </span>tok.startswith<span class="o">(</span><span class="s1">&#39;[&#39;</span><span class="o">)</span>:
 <span class="w">                </span>params.append<span class="o">((</span>tok.strip<span class="o">(</span><span class="s1">&#39;[]&lt;&gt;&#39;</span><span class="o">)</span>,<span class="w"> </span>True<span class="o">))</span>
 <span class="w">            </span><span class="k">elif</span><span class="w"> </span>tok.startswith<span class="o">(</span><span class="s1">&#39;&lt;&#39;</span><span class="o">)</span>:
@@ -291,7 +307,7 @@ def<span class="w"> </span>parse_def<span class="o">(</span>lines,<span class="w
 
 <span class="w">        </span><span class="c1"># Auto-generate shortcut if not provided</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>shortcut:
-<span class="w">            </span><span class="nv">shortcut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>cli_name<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span>+<span class="w"> </span><span class="s1">&#39;&#39;</span>.join<span class="o">(</span>k<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>k<span class="w"> </span><span class="k">in</span><span class="w"> </span>keys<span class="o">[</span>:2<span class="o">])</span>
+<span class="w">            </span><span class="nv">shortcut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>alias_lead_chars<span class="w"> </span>+<span class="w"> </span><span class="s1">&#39;&#39;</span>.join<span class="o">(</span>k<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>k<span class="w"> </span><span class="k">in</span><span class="w"> </span>keys<span class="o">[</span>:2<span class="o">])</span>
 
 <span class="w">        </span>cmds.append<span class="o">((</span><span class="s1">&#39;cmd&#39;</span>,<span class="w"> </span>Cmd<span class="o">(</span>
 <span class="w">            </span><span class="nv">keys</span><span class="o">=</span>keys,
@@ -414,9 +430,11 @@ def<span class="w"> </span>gen_alias_file<span class="o">(</span>cli_name,<span 
 <span class="s1">{chr(10).join(aliases)}</span>
 <span class="s1">&#39;&#39;&#39;</span>
 
-def<span class="w"> </span>gen_markdown_file<span class="o">(</span>cli_name,<span class="w"> </span>cmds,<span class="w"> </span>title<span class="o">)</span>:
+def<span class="w"> </span>gen_markdown_file<span class="o">(</span>cli_name,<span class="w"> </span>cmds,<span class="w"> </span>title,<span class="w"> </span>description<span class="o">)</span>:
 <span class="w">    </span><span class="s2">&quot;&quot;&quot;Generate markdown documentation file&quot;&quot;&quot;</span>
 <span class="w">    </span><span class="nv">md_content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>f<span class="s2">&quot;# {title if title else cli_name.upper()}\n\n&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>description:
+<span class="w">        </span><span class="nv">md_content</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s1">&#39;\n&#39;</span>.join<span class="o">(</span>description<span class="o">)</span><span class="w"> </span>+<span class="w"> </span><span class="s1">&#39;\n\n&#39;</span>
 <span class="w">    </span><span class="nv">md_content</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s2">&quot;*Generated: {datetime.now().strftime(&#39;%Y-%m-%d %H:%M&#39;)}*\n\n&quot;</span>
 
 <span class="w">    </span><span class="nv">current_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
@@ -474,12 +492,22 @@ def<span class="w"> </span>main<span class="o">()</span>:
 <span class="w">        </span>with<span class="w"> </span>open<span class="o">(</span>f<span class="s1">&#39;{def_file}.def&#39;</span><span class="o">)</span><span class="w"> </span>as<span class="w"> </span>f:
 <span class="w">            </span><span class="nv">lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>l.rstrip<span class="o">()</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>l<span class="w"> </span><span class="k">in</span><span class="w"> </span>f<span class="o">]</span>
 
-<span class="w">        </span><span class="c1"># Handle line continuations, extract title</span>
+<span class="w">        </span><span class="c1"># Handle line continuations, extract title, description, and aliasLeadChars</span>
 <span class="w">        </span><span class="nv">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
 <span class="w">        </span><span class="nv">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">        </span><span class="nv">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
+<span class="w">        </span><span class="nv">alias_lead_chars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>cli_name<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w">  </span><span class="c1"># Default to first char of filename</span>
 <span class="w">        </span><span class="k">while</span><span class="w"> </span>i<span class="w"> </span>&lt;<span class="w"> </span>len<span class="o">(</span>lines<span class="o">)</span>:
-<span class="w">            </span><span class="k">if</span><span class="w"> </span>lines<span class="o">[</span>i<span class="o">]</span>.startswith<span class="o">(</span><span class="s1">&#39;@ &#39;</span><span class="o">)</span>:
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>lines<span class="o">[</span>i<span class="o">]</span>.startswith<span class="o">(</span><span class="s1">&#39;@ &#39;</span><span class="o">)</span><span class="w"> </span>and<span class="w"> </span>not<span class="w"> </span>lines<span class="o">[</span>i<span class="o">]</span>.startswith<span class="o">(</span><span class="s1">&#39;@@ &#39;</span><span class="o">)</span>:
 <span class="w">                </span><span class="nv">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>lines<span class="o">[</span>i<span class="o">][</span><span class="m">2</span>:<span class="o">]</span>.strip<span class="o">()</span>
+<span class="w">                </span>del<span class="w"> </span>lines<span class="o">[</span>i<span class="o">]</span>
+<span class="w">                </span><span class="k">continue</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>lines<span class="o">[</span>i<span class="o">]</span>.startswith<span class="o">(</span><span class="s1">&#39;@@ &#39;</span><span class="o">)</span>:
+<span class="w">                </span>description.append<span class="o">(</span>lines<span class="o">[</span>i<span class="o">][</span><span class="m">3</span>:<span class="o">]</span>.strip<span class="o">())</span>
+<span class="w">                </span>del<span class="w"> </span>lines<span class="o">[</span>i<span class="o">]</span>
+<span class="w">                </span><span class="k">continue</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>lines<span class="o">[</span>i<span class="o">]</span>.startswith<span class="o">(</span><span class="s1">&#39;aliasLeadChars:&#39;</span><span class="o">)</span>:
+<span class="w">                </span><span class="nv">alias_lead_chars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>lines<span class="o">[</span>i<span class="o">]</span>.split<span class="o">(</span><span class="s1">&#39;:&#39;</span>,<span class="w"> </span><span class="m">1</span><span class="o">)[</span><span class="m">1</span><span class="o">]</span>.strip<span class="o">()</span>
 <span class="w">                </span>del<span class="w"> </span>lines<span class="o">[</span>i<span class="o">]</span>
 <span class="w">                </span><span class="k">continue</span>
 <span class="w">            </span><span class="k">if</span><span class="w"> </span>lines<span class="o">[</span>i<span class="o">]</span>.endswith<span class="o">(</span><span class="s1">&#39;\\&#39;</span><span class="o">)</span>:
@@ -488,7 +516,7 @@ def<span class="w"> </span>main<span class="o">()</span>:
 <span class="w">            </span><span class="k">else</span>:
 <span class="w">                </span><span class="nv">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="m">1</span>
 
-<span class="w">        </span><span class="nv">cmds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>parse_def<span class="o">(</span>lines,<span class="w"> </span>title,cli_name<span class="o">)</span>
+<span class="w">        </span><span class="nv">cmds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>parse_def<span class="o">(</span>lines,<span class="w"> </span>title,<span class="w"> </span>description,<span class="w"> </span>cli_name,<span class="w"> </span>alias_lead_chars<span class="o">)</span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span>debug:
 <span class="w">            </span>print<span class="o">(</span><span class="s2">&quot;Commands&quot;</span><span class="o">)</span>
@@ -500,7 +528,7 @@ def<span class="w"> </span>main<span class="o">()</span>:
 <span class="w">        </span><span class="c1"># Generate files</span>
 <span class="w">        </span>script,<span class="w"> </span>aliases,<span class="w"> </span><span class="nv">comp_opts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>gen_script<span class="o">(</span>cli_name,<span class="w"> </span>cmds,<span class="w"> </span>debug<span class="o">)</span>
 <span class="w">        </span><span class="nv">alias_content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>gen_alias_file<span class="o">(</span>cli_name,<span class="w"> </span>aliases,<span class="w"> </span>comp_opts<span class="o">)</span>
-<span class="w">        </span><span class="nv">markdown_content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>gen_markdown_file<span class="o">(</span>cli_name,<span class="w"> </span>cmds,<span class="w"> </span>title<span class="o">)</span>
+<span class="w">        </span><span class="nv">markdown_content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>gen_markdown_file<span class="o">(</span>cli_name,<span class="w"> </span>cmds,<span class="w"> </span>title,<span class="w"> </span>description<span class="o">)</span>
 
 <span class="w">        </span>with<span class="w"> </span>open<span class="o">(</span>cli_name,<span class="w"> </span><span class="s1">&#39;w&#39;</span><span class="o">)</span><span class="w"> </span>as<span class="w"> </span>f:
 <span class="w">            </span>f.write<span class="o">(</span>script<span class="o">)</span>
@@ -534,7 +562,7 @@ def<span class="w"> </span>main<span class="o">()</span>:
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: March 18, 2026</p>
+      <p>Last updated: June 11, 2026</p>
     </footer>
 
     <div class="scroll-container">

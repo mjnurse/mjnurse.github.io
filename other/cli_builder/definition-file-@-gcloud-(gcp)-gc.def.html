@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="@ GCloud (GCP) CLI" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>@ GCloud (GCP) CLI</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/other/cli_builder/definition-file-@-GCloud-(GCP)-gc.def.md">@ GCloud (GCP) CLI</a></h1>
+<h2 id="definition-file-gcdef">Definition file <code>gc.def</code></h2>
+<div class="codehilite"><pre><span></span><code>@<span class="w"> </span>GCloud<span class="w"> </span><span class="o">(</span>GCP<span class="o">)</span>
+
+cmd<span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$GCP_PROJECT</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nv">GCP_PROJECT</span><span class="o">=</span><span class="s2">&quot;--project </span><span class="nv">$GCP_PROJECT</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
+
+cmd<span class="w"> </span>gc<span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span>PROJ:<span class="w"> </span><span class="nv">$GCP_PROJECT</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>gcloud<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span><span class="w"> </span><span class="nv">$GCP_PROJECT</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="o">}</span>
+
+<span class="c1"># --------------------------------------------------------------------------------</span>
+<span class="o">=</span><span class="w"> </span>Config
+<span class="c1"># --------------------------------------------------------------------------------</span>
+
+config<span class="w"> </span>list<span class="w"> </span><span class="o">(</span>cl<span class="o">)</span><span class="w"> </span>::<span class="w"> </span>gcloud<span class="w"> </span>config<span class="w"> </span>list
+
+<span class="c1"># --------------------------------------------------------------------------------</span>
+<span class="o">=</span><span class="w"> </span>Projects
+<span class="c1"># --------------------------------------------------------------------------------</span>
+
+project<span class="w"> </span>get<span class="w"> </span><span class="o">(</span>pg<span class="o">)</span><span class="w"> </span>::<span class="w"> </span>gcloud<span class="w"> </span>config<span class="w"> </span>get<span class="w"> </span>project
+
+project<span class="w"> </span>list<span class="w"> </span><span class="o">(</span>pl<span class="o">)</span><span class="w"> </span>::<span class="w"> </span>gcloud<span class="w"> </span>projects<span class="w"> </span>list
+
+project<span class="w"> </span><span class="nb">set</span><span class="w"> </span><span class="o">(</span>ps<span class="o">)</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Available GCP Projects:&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>gcloud<span class="w"> </span>projects<span class="w"> </span>list<span class="w"> </span>--format<span class="o">=</span><span class="s2">&quot;table[no-heading](projectId,name)&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>awk<span class="w"> </span><span class="s1">&#39;{printf &quot;%d. %s (%s)\n&quot;, NR, $1, substr($0, index($0,$2))}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>tee<span class="w"> </span>/tmp/projects.txt<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s1">$&#39;\nEnter project number: &#39;</span><span class="w"> </span>num<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">project</span><span class="o">=</span><span class="k">$(</span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">num</span><span class="si">}</span><span class="s2">p&quot;</span><span class="w"> </span>/tmp/projects.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $2}&#39;</span><span class="k">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>gcloud<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>project<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$project</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Project set to: </span><span class="nv">$project</span><span class="s2">&quot;</span>
+
+<span class="c1"># --------------------------------------------------------------------------------</span>
+<span class="o">=</span><span class="w"> </span>Compute<span class="w"> </span>Engine<span class="w"> </span><span class="o">(</span>GCE<span class="o">)</span>
+<span class="c1"># --------------------------------------------------------------------------------</span>
+
+compute<span class="w"> </span>instances<span class="w"> </span>list<span class="w"> </span><span class="o">(</span>cil<span class="o">)</span><span class="w"> </span>::<span class="w"> </span>gc<span class="w"> </span>compute<span class="w"> </span>instances<span class="w"> </span>list<span class="w"> </span>
+
+<span class="c1"># --------------------------------------------------------------------------------</span>
+<span class="o">=</span><span class="w"> </span>Kubernetes/Containers
+<span class="c1"># --------------------------------------------------------------------------------</span>
+
+kube<span class="w"> </span>clusters<span class="w"> </span>list<span class="w"> </span><span class="o">(</span>kcl<span class="o">)</span><span class="w"> </span>::<span class="w"> </span>gcloud<span class="w"> </span>container<span class="w"> </span>clusters<span class="w"> </span>list<span class="sb">```</span>
+
+<span class="c1">## Alias file</span>
+
+<span class="sb">```</span>bash
+<span class="c1"># Completion function</span>
+_gc_complete<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span>cur<span class="w"> </span>prev<span class="w"> </span>all
+<span class="w">    </span><span class="nv">all</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="o">((</span><span class="nv">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"> </span>i<span class="w"> </span>&lt;<span class="w"> </span><span class="si">${#</span><span class="nv">COMP_WORDS</span><span class="p">[@]</span><span class="si">}</span><span class="p">;</span><span class="w"> </span>i++<span class="o">))</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">        </span><span class="nv">word</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">COMP_WORDS</span><span class="p">[i]</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="o">[[</span><span class="w"> </span><span class="nv">$word</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span>-*<span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nv">all</span><span class="o">+=</span><span class="s2">&quot;</span><span class="nv">$word</span><span class="s2"> &quot;</span>
+<span class="w">    </span><span class="k">done</span>
+<span class="w">    </span><span class="nv">all</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$all</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nv">cur</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">COMP_WORDS</span><span class="p">[COMP_CWORD]</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nv">prev_step</span><span class="o">=</span><span class="m">1</span>
+<span class="w">    </span><span class="nv">prev</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">COMP_WORDS</span><span class="p">[COMP_CWORD-</span><span class="nv">$prev_step</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">prev</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;-&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">        </span><span class="nb">let</span><span class="w"> </span><span class="nv">prev_step</span><span class="o">=</span>prev_step+1
+<span class="w">        </span><span class="nv">prev</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">COMP_WORDS</span><span class="p">[COMP_CWORD-</span><span class="nv">$prev_step</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">done</span>
+
+<span class="o">}</span>
+<span class="nb">complete</span><span class="w"> </span>-F<span class="w"> </span>_gc_complete<span class="w"> </span>gc<span class="w"> </span>@ghe<span class="w"> </span>@gcl<span class="w"> </span>@gpg<span class="w"> </span>@gpl<span class="w"> </span>@gps<span class="w"> </span>@gcil<span class="w"> </span>@gkcl
+
+<span class="c1"># Shortcut aliases</span>
+<span class="nb">alias</span><span class="w"> </span>@ghe<span class="o">=</span><span class="s1">&#39;gc ghe&#39;</span>
+<span class="nb">alias</span><span class="w"> </span>@gcl<span class="o">=</span><span class="s1">&#39;gc gcl&#39;</span>
+<span class="nb">alias</span><span class="w"> </span>@gpg<span class="o">=</span><span class="s1">&#39;gc gpg&#39;</span>
+<span class="nb">alias</span><span class="w"> </span>@gpl<span class="o">=</span><span class="s1">&#39;gc gpl&#39;</span>
+<span class="nb">alias</span><span class="w"> </span>@gps<span class="o">=</span><span class="s1">&#39;gc gps&#39;</span>
+<span class="nb">alias</span><span class="w"> </span>@gcil<span class="o">=</span><span class="s1">&#39;gc gcil&#39;</span>
+<span class="nb">alias</span><span class="w"> </span>@gkcl<span class="o">=</span><span class="s1">&#39;gc gkcl&#39;</span>
+</code></pre></div>
+
+<h2 id="bash-script">Bash script</h2>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<span class="nv">debug_yn</span><span class="o">=</span>n
+<span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;-d&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nv">debug_yn</span><span class="o">=</span>y<span class="p">;</span><span class="w"> </span>shift<span class="p">;</span><span class="w"> </span><span class="o">}</span>
+<span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CLI_DEBUG</span><span class="p">^^</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;TRUE&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nv">debug_yn</span><span class="o">=</span>y
+
+<span class="nv">C_CYA</span><span class="o">=</span><span class="s2">&quot;\x1b[96m&quot;</span><span class="w"> </span><span class="nv">C_GRE</span><span class="o">=</span><span class="s2">&quot;\x1b[92m&quot;</span><span class="w"> </span><span class="nv">C_MAG</span><span class="o">=</span><span class="s2">&quot;\x1b[95m&quot;</span><span class="w"> </span><span class="nv">C_WHI</span><span class="o">=</span><span class="s2">&quot;\x1b[97m&quot;</span><span class="w"> </span><span class="nv">C_DEF</span><span class="o">=</span><span class="s2">&quot;\x1b[0m&quot;</span>
+
+<span class="c1"># param 1 - actual number of parameters</span>
+<span class="c1"># param 2 - required number of parameters</span>
+<span class="c1"># param 3 - incorrect parameters message</span>
+check_params<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">  </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>&lt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$3</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span>exit<span class="p">;</span><span class="w"> </span><span class="o">}</span>
+<span class="o">}</span>
+
+print_command<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">  </span><span class="o">[[</span><span class="w"> </span><span class="nv">$debug_yn</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>y<span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;COMMAND: </span><span class="nv">$*</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/&quot;/\&quot;/g&#39;</span><span class="p">;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;COMMAND: </span><span class="nv">$*</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/./-/g&#39;</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
+<span class="o">}</span>
+<span class="nv">section</span><span class="o">=</span><span class="s2">&quot;HELP&quot;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;help&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;ghe&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">   </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;ghe&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="m">1</span>
+<span class="w">   </span><span class="nv">usage</span><span class="o">=</span><span class="s2">&quot;\x1b[95mhelp \x1b[96m(ghe)\x1b[97m\x1b[0m&quot;</span>
+<span class="w">   </span>check_params<span class="w"> </span><span class="nv">$#</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="nv">$usage</span><span class="s2">&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;\x1b[92m------------\x1b[0m&quot;</span>
+<span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;\x1b[92mGCloud (GCP)\x1b[0m&quot;</span>
+<span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;\x1b[92m------------\x1b[0m&quot;</span>
+
+<span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;\x1b[95mgenerated:2026-06-11 15:19\x1b[0m&quot;</span>
+<span class="nb">echo</span>
+
+<span class="w">            </span><span class="k">while</span><span class="w"> </span><span class="nv">IFS</span><span class="o">=</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>line<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">line</span><span class="si">}${</span><span class="nv">CRESET</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">done</span><span class="w"> </span>&lt;<span class="w"> </span>&lt;<span class="o">(</span>egrep<span class="w"> </span><span class="s2">&quot;usage=|section=&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$0</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span><span class="s2">&quot;grep&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/.*usage=/   /; s/.*section=/\x1b[92m/; s/\&quot;//g&quot;</span><span class="o">)</span>
+<span class="w">   </span><span class="nb">exit</span>
+<span class="k">fi</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$GCP_PROJECT</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nv">GCP_PROJECT</span><span class="o">=</span><span class="s2">&quot;--project </span><span class="nv">$GCP_PROJECT</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
+gc<span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span>PROJ:<span class="w"> </span><span class="nv">$GCP_PROJECT</span><span class="p">;</span><span class="w"> </span>gcloud<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span><span class="w"> </span><span class="nv">$GCP_PROJECT</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
+<span class="nv">section</span><span class="o">=</span><span class="s2">&quot;Config&quot;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2"> </span><span class="nv">$2</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;config list&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;gcl&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">   </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;gcl&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="m">2</span>
+<span class="w">   </span><span class="nv">usage</span><span class="o">=</span><span class="s2">&quot;\x1b[95mconfig list \x1b[96m(gcl)\x1b[97m\x1b[0m&quot;</span>
+<span class="w">   </span>check_params<span class="w"> </span><span class="nv">$#</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="nv">$usage</span><span class="s2">&quot;</span>
+<span class="w">   </span>print_command<span class="w"> </span><span class="s2">&quot; gcloud config list&quot;</span>
+<span class="w">   </span>gcloud<span class="w"> </span>config<span class="w"> </span>list
+<span class="w">   </span><span class="nb">exit</span>
+<span class="k">fi</span>
+<span class="nv">section</span><span class="o">=</span><span class="s2">&quot;Projects&quot;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2"> </span><span class="nv">$2</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;project get&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;gpg&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">   </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;gpg&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="m">2</span>
+<span class="w">   </span><span class="nv">usage</span><span class="o">=</span><span class="s2">&quot;\x1b[95mproject get \x1b[96m(gpg)\x1b[97m\x1b[0m&quot;</span>
+<span class="w">   </span>check_params<span class="w"> </span><span class="nv">$#</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="nv">$usage</span><span class="s2">&quot;</span>
+<span class="w">   </span>print_command<span class="w"> </span><span class="s2">&quot; gcloud config get project&quot;</span>
+<span class="w">   </span>gcloud<span class="w"> </span>config<span class="w"> </span>get<span class="w"> </span>project
+<span class="w">   </span><span class="nb">exit</span>
+<span class="k">fi</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2"> </span><span class="nv">$2</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;project list&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;gpl&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">   </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;gpl&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="m">2</span>
+<span class="w">   </span><span class="nv">usage</span><span class="o">=</span><span class="s2">&quot;\x1b[95mproject list \x1b[96m(gpl)\x1b[97m\x1b[0m&quot;</span>
+<span class="w">   </span>check_params<span class="w"> </span><span class="nv">$#</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="nv">$usage</span><span class="s2">&quot;</span>
+<span class="w">   </span>print_command<span class="w"> </span><span class="s2">&quot; gcloud projects list&quot;</span>
+<span class="w">   </span>gcloud<span class="w"> </span>projects<span class="w"> </span>list
+<span class="w">   </span><span class="nb">exit</span>
+<span class="k">fi</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2"> </span><span class="nv">$2</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;project set&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;gps&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">   </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;gps&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="m">2</span>
+<span class="w">   </span><span class="nv">usage</span><span class="o">=</span><span class="s2">&quot;\x1b[95mproject set \x1b[96m(gps)\x1b[97m\x1b[0m&quot;</span>
+<span class="w">   </span>check_params<span class="w"> </span><span class="nv">$#</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="nv">$usage</span><span class="s2">&quot;</span>
+<span class="w">   </span>print_command<span class="w"> </span><span class="s2">&quot; echo \&quot;Available GCP Projects:\&quot; &amp;&amp; gcloud projects list --format=\&quot;table[no-heading](projectId,name)\&quot; | awk &#39;{printf \&quot;%d. %s (%s)\n\&quot;, NR, </span><span class="nv">$1</span><span class="s2">, substr(</span><span class="nv">$0</span><span class="s2">, index(</span><span class="nv">$0</span><span class="s2">,</span><span class="nv">$2</span><span class="s2">))}&#39; | tee /tmp/projects.txt &amp;&amp; read -p </span>$<span class="s2">&#39;\nEnter project number: &#39; num &amp;&amp; project=</span><span class="k">$(</span>sed<span class="w"> </span>-n<span class="w"> </span><span class="se">\&quot;</span><span class="si">${</span><span class="nv">num</span><span class="si">}</span>p<span class="se">\&quot;</span><span class="w"> </span>/tmp/projects.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $2}&#39;</span><span class="k">)</span><span class="s2"> &amp;&amp; gcloud config set project \&quot;</span><span class="nv">$project</span><span class="s2">\&quot; &amp;&amp; echo \&quot;Project set to: </span><span class="nv">$project</span><span class="s2">\&quot;&quot;</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Available GCP Projects:&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>gcloud<span class="w"> </span>projects<span class="w"> </span>list<span class="w"> </span>--format<span class="o">=</span><span class="s2">&quot;table[no-heading](projectId,name)&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{printf &quot;%d. %s (%s)\n&quot;, NR, $1, substr($0, index($0,$2))}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tee<span class="w"> </span>/tmp/projects.txt<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s1">$&#39;\nEnter project number: &#39;</span><span class="w"> </span>num<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nv">project</span><span class="o">=</span><span class="k">$(</span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">num</span><span class="si">}</span><span class="s2">p&quot;</span><span class="w"> </span>/tmp/projects.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $2}&#39;</span><span class="k">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>gcloud<span class="w"> </span>config<span class="w"> </span><span class="nb">set</span><span class="w"> </span>project<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$project</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Project set to: </span><span class="nv">$project</span><span class="s2">&quot;</span>
+<span class="w">   </span><span class="nb">exit</span>
+<span class="k">fi</span>
+<span class="nv">section</span><span class="o">=</span><span class="s2">&quot;Compute Engine (GCE)&quot;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2"> </span><span class="nv">$2</span><span class="s2"> </span><span class="nv">$3</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;compute instances list&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;gcil&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">   </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;gcil&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="m">3</span>
+<span class="w">   </span><span class="nv">usage</span><span class="o">=</span><span class="s2">&quot;\x1b[95mcompute instances list \x1b[96m(gcil)\x1b[97m\x1b[0m&quot;</span>
+<span class="w">   </span>check_params<span class="w"> </span><span class="nv">$#</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="nv">$usage</span><span class="s2">&quot;</span>
+<span class="w">   </span>print_command<span class="w"> </span><span class="s2">&quot; gc compute instances list&quot;</span>
+<span class="w">   </span>gc<span class="w"> </span>compute<span class="w"> </span>instances<span class="w"> </span>list
+<span class="w">   </span><span class="nb">exit</span>
+<span class="k">fi</span>
+<span class="nv">section</span><span class="o">=</span><span class="s2">&quot;Kubernetes/Containers&quot;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2"> </span><span class="nv">$2</span><span class="s2"> </span><span class="nv">$3</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;kube clusters list&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;gkcl&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">   </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;gkcl&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="m">3</span>
+<span class="w">   </span><span class="nv">usage</span><span class="o">=</span><span class="s2">&quot;\x1b[95mkube clusters list \x1b[96m(gkcl)\x1b[97m\x1b[0m&quot;</span>
+<span class="w">   </span>check_params<span class="w"> </span><span class="nv">$#</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="nv">$usage</span><span class="s2">&quot;</span>
+<span class="w">   </span>print_command<span class="w"> </span><span class="s2">&quot; gcloud container clusters list&quot;</span>
+<span class="w">   </span>gcloud<span class="w"> </span>container<span class="w"> </span>clusters<span class="w"> </span>list
+<span class="w">   </span><span class="nb">exit</span>
+<span class="k">fi</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;No option passed&quot;</span>
+<span class="k">else</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$*</span><span class="s2">: invalid option&quot;</span>
+<span class="k">fi</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Try &quot;</span>gc<span class="w"> </span>help<span class="s2">&quot; for more information.&quot;</span>
+</code></pre></div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: June 11, 2026</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>
