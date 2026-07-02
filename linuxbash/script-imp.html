@@ -103,6 +103,9 @@
 <span class="s2">    -h|--help</span>
 <span class="s2">        Show help text.</span>
 
+<span class="s2">    -c|--clipboard</span>
+<span class="s2">        Read text from clipboard, improve it, put result on clipboard, and exit.</span>
+
 <span class="s2">    -f|--file &lt;file&gt;</span>
 <span class="s2">        Use the content of the specified file as input text.</span>
 
@@ -110,7 +113,7 @@
 <span class="s2">        Suppress all output except the improved text.</span>
 
 <span class="s2">    -u|--update</span>
-<span class="s2">        If a file is provided as input, append the improved text to the file </span>
+<span class="s2">        If a file is provided as input, append the improved text to the file</span>
 <span class="s2">        instead of printing to console.</span>
 
 <span class="s2">DESCRIPTION</span>
@@ -139,6 +142,7 @@
 <span class="nv">clblu</span><span class="o">=</span><span class="s2">&quot;\e[94m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clmag</span><span class="o">=</span><span class="s2">&quot;\e[95m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clcya</span><span class="o">=</span><span class="s2">&quot;\e[96m&quot;</span>
 
 <span class="nv">silent_yn</span><span class="o">=</span>n
+<span class="nv">clipboard_yn</span><span class="o">=</span>n
 
 <span class="k">function</span><span class="w"> </span>cecho<span class="w"> </span><span class="o">{</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$silent_yn</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;y&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
@@ -175,6 +179,9 @@
 <span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
 <span class="w">            </span><span class="nb">exit</span>
 <span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>-c<span class="p">|</span>--clipboard<span class="o">)</span>
+<span class="w">            </span><span class="nv">clipboard_yn</span><span class="o">=</span>y
+<span class="w">            </span><span class="p">;;</span>
 <span class="w">        </span>-f<span class="p">|</span>--file<span class="o">)</span>
 <span class="w">            </span><span class="nb">shift</span>
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
@@ -203,7 +210,7 @@
 <span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">text</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>sed<span class="w"> </span><span class="s1">&#39;s/(/\\(/g; s/)/\\)/g&#39;</span><span class="w"> </span><span class="o">&lt;&lt;&lt;</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="k">)</span><span class="s2">&quot;</span>
 <span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">instruction</span><span class="o">=</span><span class="s2">&quot;You are a concise senior technical editor. Improve clarity, tone, grammar, and flow; preserve meaning; Improve the following text and return only the improved text&quot;</span>
 
-<span class="w">    </span>claude<span class="w"> </span>--print<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">instruction</span><span class="si">}</span><span class="s2">: </span><span class="si">${</span><span class="nv">text</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span>/home/martin/.local/bin/claude<span class="w"> </span>--print<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">instruction</span><span class="si">}</span><span class="s2">: </span><span class="si">${</span><span class="nv">text</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="o">}</span>
 
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
@@ -220,6 +227,14 @@
 
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$request</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">    </span><span class="nv">request</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$*</span><span class="s2">&quot;</span>
+<span class="k">fi</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$clipboard_yn</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;y&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nv">request</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>powershell.exe<span class="w"> </span>-NoProfile<span class="w"> </span>-Command<span class="w"> </span>Get-Clipboard<span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$request</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span>cecho<span class="w"> </span>cred<span class="w"> </span><span class="s2">&quot;Clipboard is empty.&quot;</span>
+<span class="w">        </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="w">    </span><span class="k">fi</span>
 <span class="k">fi</span>
 
 <span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
@@ -286,7 +301,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: May 15, 2026</p>
+      <p>Last updated: July 02, 2026</p>
     </footer>
 
     <div class="scroll-container">
