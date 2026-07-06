@@ -410,8 +410,8 @@ list<span class="w"> </span>tasks<span class="w"> </span>detail<span class="w"> 
 <span class="o">=</span><span class="w"> </span>REPOS<span class="w"> </span>/<span class="w"> </span>SNAPSHOTS
 <span class="c1"># ----------------------------------------------------------------------------------------------------------------------------------</span>
 
-add<span class="w"> </span>repo<span class="w"> </span><span class="o">(</span>are<span class="o">)</span><span class="w"> </span>&lt;repo_name&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>q<span class="w"> </span>PUT<span class="w"> </span><span class="s2">&quot;_snapshot/</span><span class="nv">$1</span><span class="s2">?pretty&quot;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{ &quot;type&quot;: &quot;fs&quot;, &quot;settings&quot;: { &quot;location&quot;: &quot;&#39;</span><span class="nv">$1</span><span class="s1">&#39;&quot; } } &#39;</span>
+add<span class="w"> </span>repo<span class="w"> </span><span class="o">(</span>are<span class="o">)</span><span class="w"> </span>&lt;repo_name&gt;<span class="w"> </span>&lt;repo_location&gt;<span class="w"> </span><span class="o">[</span>&lt;base_path&gt;<span class="o">]</span><span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>q<span class="w"> </span>PUT<span class="w"> </span><span class="s2">&quot;_snapshot/</span><span class="nv">$1</span><span class="s2">?pretty&quot;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;{ &quot;type&quot;: &quot;fs&quot;, &quot;settings&quot;: { &quot;location&quot;: &quot;&#39;</span><span class="nv">$2</span><span class="s1">&#39;&quot;, &quot;base_path&quot;: &quot;&#39;</span><span class="nv">$3</span><span class="s1">&#39;&quot; } } &#39;</span>
 
 delete<span class="w"> </span>repo<span class="w"> </span><span class="o">(</span>dre<span class="o">)</span><span class="w"> </span>&lt;repo_name&gt;<span class="w"> </span>::<span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Are you sure [yN]? &quot;</span><span class="w"> </span>yn<span class="p">;</span><span class="w"> </span><span class="se">\</span>
@@ -1374,7 +1374,7 @@ q<span class="o">()</span><span class="w"> </span><span class="o">{</span><span 
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: June 23, 2026</p>
+      <p>Last updated: July 02, 2026</p>
     </footer>
 
     <div class="scroll-container">
