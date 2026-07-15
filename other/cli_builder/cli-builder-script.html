@@ -255,16 +255,33 @@ def<span class="w"> </span>parse_def<span class="o">(</span>lines,<span class="w
 <span class="w">    </span>cmds.append<span class="o">((</span><span class="s1">&#39;cmd&#39;</span>,<span class="w"> </span>Cmd<span class="o">(</span>
 <span class="w">            </span><span class="nv">keys</span><span class="o">=[</span><span class="s1">&#39;help&#39;</span><span class="o">]</span>,
 <span class="w">            </span><span class="nv">shortcut</span><span class="o">=</span>alias_lead_chars<span class="w"> </span>+<span class="w"> </span><span class="s1">&#39;he&#39;</span>,
-<span class="w">            </span><span class="nv">params</span><span class="o">=[]</span>,
-<span class="w">            </span><span class="nv">cmd</span><span class="o">=</span>title_str<span class="w"> </span>+<span class="w"> </span>f<span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">            while IFS= read -r line; do echo -e &quot;${{line}}${{CRESET}}&quot;; done &lt; &lt;(egrep &quot;usage=|section=&quot; &quot;$0&quot; | grep -v &quot;grep&quot; | sed &quot;s/.*usage=/   /; s/.*section=/\\x1b[92m/; s/\\&quot;//g&quot;)&#39;&#39;&#39;</span>,
-<span class="w">            </span><span class="nv">help</span><span class="o">=</span><span class="s1">&#39;&#39;</span>,
-<span class="w">            </span><span class="nv">comp</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
-<span class="w">        </span><span class="o">)</span>,<span class="w"> </span><span class="s1">&#39;HELP&#39;</span><span class="o">))</span>
+<span class="w">            </span><span class="nv">params</span><span class="o">=[(</span><span class="s1">&#39;filter&#39;</span>,<span class="w"> </span>True<span class="o">)]</span>,
+<span class="w">            </span><span class="nv">cmd</span><span class="o">=</span>title_str<span class="w"> </span>+<span class="w"> </span>f<span class="s1">&#39;&#39;&#39;filter=&quot;$1&quot;</span>
+<span class="s1">if [[ -n &quot;$filter&quot; ]]; then</span>
+<span class="s1">  # Show all section headers but only matching commands</span>
+<span class="s1">  while IFS= read -r line; do</span>
+<span class="s1">    if [[ &quot;$line&quot; =~ ^section= ]]; then</span>
+<span class="s1">      # Always show section headers</span>
+<span class="s1">      echo -e &quot;\\x1b[92m${{line#section=}}\\x1b[0m&quot;</span>
+<span class="s1">    elif [[ &quot;$line&quot; =~ usage= ]]; then</span>
+<span class="s1">      # Show command if it matches the filter</span>
+<span class="s1">      cmd_line=&quot;${{line#*usage=}}&quot;</span>
+<span class="s1">      if echo &quot;$cmd_line&quot; | grep -iq &quot;$filter&quot;; then</span>
+<span class="s1">        echo -e &quot;   $cmd_line&quot;</span>
+<span class="s1">      fi</span>
+<span class="s1">    fi</span>
+<span class="s1">  done &lt; &lt;(egrep &quot;^section=|^   usage=&quot; &quot;$0&quot; | sed &#39;</span>s/<span class="se">\\</span><span class="s2">&quot;//g&#39;)</span>
+<span class="s2">else</span>
+<span class="s2">  # Show everything</span>
+<span class="s2">  while IFS= read -r line; do echo -e &quot;</span><span class="si">${</span><span class="p">{line</span><span class="si">}</span><span class="o">}</span><span class="si">${</span><span class="p">{CRESET</span><span class="si">}</span><span class="o">}</span><span class="s2">&quot;; done &lt; &lt;(egrep &quot;</span>^section<span class="o">=</span><span class="p">|</span>^<span class="w">   </span><span class="nv">usage</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="nv">$0</span><span class="s2">&quot; | sed &quot;</span>s/.*usage<span class="o">=</span>/<span class="w">   </span>/<span class="p">;</span><span class="w"> </span>s/.*section<span class="o">=</span>/<span class="se">\\</span>x1b<span class="o">[</span>92m/<span class="p">;</span><span class="w"> </span>s/<span class="se">\\</span><span class="s2">&quot;//g&quot;</span><span class="o">)</span>
+<span class="k">fi</span><span class="s1">&#39;&#39;&#39;,</span>
+<span class="s1">            help=&#39;</span>Show<span class="w"> </span>help,<span class="w"> </span>optionally<span class="w"> </span>filtered<span class="w"> </span>by<span class="w"> </span>pattern<span class="s1">&#39;,</span>
+<span class="s1">            comp=&#39;&#39;</span>
+<span class="s1">        ), &#39;</span>HELP<span class="s1">&#39;))</span>
 
-<span class="w">    </span><span class="k">for</span><span class="w"> </span>line<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">(</span>l.strip<span class="o">()</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>l<span class="w"> </span><span class="k">in</span><span class="w"> </span>lines<span class="o">)</span>:
-<span class="w">        </span><span class="c1"># Skip comments and empty lines</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>line<span class="w"> </span>or<span class="w"> </span>line.startswith<span class="o">(</span><span class="s1">&#39;#&#39;</span><span class="o">)</span>:
+<span class="s1">    for line in (l.strip() for l in lines):</span>
+<span class="s1">        # Skip comments and empty lines</span>
+<span class="s1">        if not line or line.startswith(&#39;</span><span class="c1">#&#39;):</span>
 <span class="w">            </span><span class="k">continue</span>
 
 <span class="w">        </span><span class="c1"># Group description</span>
@@ -562,7 +579,7 @@ def<span class="w"> </span>main<span class="o">()</span>:
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: June 11, 2026</p>
+      <p>Last updated: July 14, 2026</p>
     </footer>
 
     <div class="scroll-container">
