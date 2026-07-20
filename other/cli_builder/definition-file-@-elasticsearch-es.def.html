@@ -117,7 +117,7 @@ cmd<span class="w"> </span>q<span class="o">()</span><span class="w"> </span><sp
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ES_AUTH</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="se">\</span>
 <span class="w">        </span><span class="nv">ES_AUTH</span><span class="o">=</span><span class="s2">&quot;-u </span><span class="nv">$ES_AUTH</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="k">fi</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span><span class="nv">$method</span><span class="w"> </span><span class="nv">$ES_AUTH</span><span class="w"> </span><span class="nv">$ES_PROTOCOL</span>://<span class="nv">$ES_HOST</span>:<span class="nv">$ES_PORT$ES_PATH</span>/<span class="nv">$@</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span><span class="nv">$method</span><span class="w"> </span><span class="nv">$ES_AUTH</span><span class="w"> </span><span class="nv">$ES_PROTOCOL</span>://<span class="nv">$ES_HOST</span>:<span class="nv">$ES_PORT$ES_PATH</span>/<span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="se">\</span>
 <span class="o">}</span>
 
 <span class="c1"># ----------------------------------------------------------------------------------------------------------------------------------</span>
@@ -1391,7 +1391,7 @@ q<span class="o">()</span><span class="w"> </span><span class="o">{</span><span 
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: July 02, 2026</p>
+      <p>Last updated: July 16, 2026</p>
     </footer>
 
     <div class="scroll-container">
