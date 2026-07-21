@@ -145,6 +145,10 @@
 <span class="n">psql</span><span class="p">:</span><span class="w"> </span>\<span class="n">dt</span><span class="w"> </span><span class="c1"># list tables</span>
 <span class="n">psql</span><span class="p">:</span><span class="w"> </span>\<span class="n">l</span><span class="w"> </span><span class="c1"># list databases</span>
 
+<span class="n">sed</span><span class="p">:</span><span class="w"> </span><span class="n">sed</span><span class="w"> </span><span class="o">-</span><span class="n">E</span><span class="w"> </span><span class="c1"># Extended - can use &#39;s/a+/b/&#39; rathen than &#39;s/a\+/b/&#39;</span>
+<span class="n">sed</span><span class="p">:</span><span class="w"> </span><span class="n">sed</span><span class="w"> </span><span class="o">-</span><span class="n">E</span><span class="w"> </span><span class="s1">&#39;s/a+/b/&#39;</span><span class="w"> </span><span class="c1"># one or more a&#39;s.</span>
+<span class="n">sed</span><span class="p">:</span><span class="w"> </span><span class="n">sed</span><span class="w"> </span><span class="o">-</span><span class="n">E</span><span class="w"> </span><span class="s1">&#39;s/a{2,5}/b/&#39;</span><span class="w"> </span><span class="c1"># between 2 and 5 a&#39;s</span>
+
 <span class="n">sort</span><span class="w"> </span><span class="o">-</span><span class="n">h</span><span class="w"> </span><span class="c1"># Sort human readable numbers eg 1.2GB, 9KB</span>
 
 <span class="n">tar</span><span class="w"> </span><span class="o">-</span><span class="n">cvzf</span><span class="w"> </span><span class="n">filename</span><span class="w"> </span><span class="n">sourcedir</span><span class="w"> </span><span class="c1"># Create tarball.</span>
@@ -152,6 +156,9 @@
 
 <span class="n">tr</span><span class="w"> </span><span class="n">A</span><span class="o">-</span><span class="n">Z</span><span class="w"> </span><span class="n">a</span><span class="o">-</span><span class="n">z</span><span class="w"> </span><span class="c1"># lowercase</span>
 <span class="n">tr</span><span class="w"> </span><span class="n">a</span><span class="o">-</span><span class="n">z</span><span class="w"> </span><span class="n">A</span><span class="o">-</span><span class="n">Z</span><span class="w"> </span><span class="c1"># uppercase</span>
+
+<span class="n">vim</span><span class="p">:</span><span class="w"> </span><span class="o">/</span><span class="n">lala</span>\<span class="n">C</span><span class="w"> </span><span class="c1"># Make search case sensitive (..\c - insensitive)</span>
+<span class="n">vim</span><span class="p">:</span><span class="w"> </span><span class="p">:</span><span class="o">%!</span><span class="n">sort</span><span class="w"> </span><span class="o">-</span><span class="n">R</span><span class="w"> </span><span class="c1"># Random order - calling external app to order</span>
 
 <span class="n">wsl</span><span class="p">:</span><span class="w"> </span><span class="n">Config</span><span class="w"> </span><span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="p">[</span><span class="n">name</span><span class="p">]</span><span class="o">/.</span><span class="n">wslconfig</span>
 </code></pre></div>
@@ -172,7 +179,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: July 13, 2026</p>
+      <p>Last updated: July 21, 2026</p>
     </footer>
 
     <div class="scroll-container">
