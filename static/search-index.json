@@ -549,7 +549,7 @@
     "id": "78",
     "title": "Arrows",
     "url": "/notes/extended_ascii_table.html",
-    "content": ".sm { font-size: small } .lg { font-size: x-large } Arrows \\u2190: \u2190left-arrow \\u2191: \u2191up-arrow \\u2192: \u2192right-arrow \\u2193: \u2193down-arrow \\u2194: \u2194left-right-arrow \\u2195: \u2195up-down-arrow \\u2196: \u2196up-left-arrow \\u2197: \u2197up-right-arrow \\u2198: \u2198down-right-arrow \\u2199: \u2199down-left-arrow \\u219A: \u219aleft-arrow-stroke \\u219B: \u219bright-arrow-stroke \\u219C: \u219cleft-wave-arrow \\u219D: \u219dright-wave-arrow \\u219E: \u219eleft-two-head-arrow \\u219F: \u219fup-two-head-arrow \\u21A0: \u21a0right-two-head-arrow \\u21A1: \u21a1down-two-head-",
+    "content": ".s { font-size: x-small } .l { font-size: xx-large } Arrows \u2190\\u2190left-arrow \u2191\\u2191up-arrow \u2192\\u2192right-arrow \u2193\\u2193down-arrow \u2194\\u2194left-right-arrow \u2195\\u2195up-down-arrow \u2196\\u2196up-left-arrow \u2197\\u2197up-right-arrow \u2198\\u2198down-right-arrow \u2199\\u2199down-left-arrow \u219a\\u219Aleft-arrow-stroke \u219b\\u219Bright-arrow-stroke \u219c\\u219Cleft-wave-arrow \u219d\\u219Dright-wave-arrow \u219e\\u219Eleft-two-head-arrow \u219f\\u219Fup-two-head-arrow \u21a0\\u21A0right-two-head-arrow \u21a1\\u21A1down-two-head-arrow \u21a2\\u21A2left-arrow-tail \u21a3\\u21A",
     "type": "page"
   },
   {
