@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Arrows" />
+    <meta name="description" content="search-box { width: 300px; padding: 6px 10px; font-size: 16px; margin-bottom: 10px }" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>Arrows</title>
+    <title>search-box { width: 300px; padding: 6px 10px; font-size: 16px; margin-bottom: 10px }</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
@@ -93,7 +93,49 @@
           <style>
     .s { font-size: x-small }
     .l { font-size: xx-large }
+    td { text-align: center }
+    #search-box { width: 300px; padding: 6px 10px; font-size: 16px; margin-bottom: 10px }
+    #search-results { margin-bottom: 20px }
+    #search-results table { border-collapse: collapse }
+    #search-results td { border: 1px solid #ccc; padding: 8px; text-align: center }
 </style>
+
+<p><input type="text" id="search-box" placeholder="Search symbols..." oninput="searchSymbols(this.value)"></p>
+<div id="search-results"></div>
+
+<script>
+var symbolData = [];
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('table td').forEach(function(td) {
+        var lgSpan = td.querySelector('.l');
+        var sSpan = td.querySelector('.s');
+        var codeMatch = td.textContent.match(/\\u[0-9A-Fa-f]{4}/);
+        if (lgSpan && sSpan && codeMatch) {
+            symbolData.push({
+                symbol: lgSpan.textContent,
+                code: codeMatch[0],
+                desc: sSpan.textContent
+            });
+        }
+    });
+});
+function searchSymbols(query) {
+    var results = document.getElementById('search-results');
+    if (query.length < 2) { results.innerHTML = ''; return; }
+    query = query.toLowerCase();
+    var matches = symbolData.filter(function(s) {
+        return s.desc.toLowerCase().indexOf(query) !== -1 || s.code.toLowerCase().indexOf(query) !== -1;
+    });
+    if (matches.length === 0) { results.innerHTML = '<p>No matches found.</p>'; return; }
+    var html = '<table><tr>';
+    for (var i = 0; i < matches.length; i++) {
+        html += '<td><span class="l">' + matches[i].symbol + '</span><br><code>' + matches[i].code + '</code><br><span class="s">' + matches[i].desc + '</span></td>';
+        if ((i + 1) % 8 === 0 && i + 1 < matches.length) html += '</tr><tr>';
+    }
+    html += '</tr></table>';
+    results.innerHTML = html;
+}
+</script>
 
 <h2 id="arrows">Arrows</h2>
 <table>
