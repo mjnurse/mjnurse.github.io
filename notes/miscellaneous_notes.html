@@ -121,8 +121,9 @@ find . -type d -name &quot;.git&quot; # Find directories
 find . -type d -name .git -prune -o -type f -name *.py -print # exclude .git directories
 find . -type f -mtime +90 # Find files last modified at least 90 days ago
 
-git checkout tags/&lt;tag name&gt; # checkout a git tag.
+gcp: gcloud auth login --no-launch-browser
 
+git: git checkout tags/&lt;tag name&gt; # checkout a git tag.
 git: git push --set-upstream origin main # set main as default origin branch
 
 grep -v ... # to invert the match
@@ -182,7 +183,7 @@ wsl: Config /c/Users/[name]/.wslconfig
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: July 22, 2026</p>
+      <p>Last updated: July 23, 2026</p>
     </footer>
 
     <div class="scroll-container">
