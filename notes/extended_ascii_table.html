@@ -98,10 +98,19 @@
     #search-results { margin-bottom: 20px }
     #search-results table { border-collapse: collapse }
     #search-results td { border: 1px solid #ccc; padding: 8px; text-align: center }
+    .sb {
+        background-color: #2978b5;
+        color: white;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-radius: 4px;
+    }
 </style>
 
 <p><input type="text" id="search-box" placeholder="Search symbols..." onkeydown="if(event.key==='Enter')doSearch()">
-<button onclick="doSearch()" class="btn">Search</button></p>
+<button onclick="doSearch()" class="sb">Search</button></p>
 <div id="search-results"></div>
 
 <script>
