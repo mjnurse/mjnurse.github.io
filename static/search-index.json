@@ -547,8 +547,8 @@
   },
   {
     "id": "78",
-    "title": "search-box { width: 300px; padding: 6px 10px; font-size: 16px; margin-bottom: 10px }",
-    "url": "/notes/extended_ascii_table.html",
+    "title": "Extended ASCII Characters",
+    "url": "/notes/extended_ascii_characters.html",
     "content": ".s { font-size: x-small } .l { font-size: xx-large } td { text-align: center; line-height: 1.5 } #search-box { width: 300px; padding: 6px 10px; font-size: 16px; margin-bottom: 10px } #search-results { margin-bottom: 20px } #search-results table { border-collapse: collapse } #search-results td { border: 1px solid #ccc; padding: 8px; text-align: center } .sb { background-color: #2978b5; color: white; padding-top: 4px; padding-bottom: 4px; padding-left: 10px; padding-right: 10px; border-radius: 4px",
     "type": "page"
   },
