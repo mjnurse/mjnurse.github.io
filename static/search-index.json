@@ -857,7 +857,7 @@
     "id": "122",
     "title": "csvsql - Run a SQL query over a csv file",
     "url": "/linuxbash/script-csvsql.html",
-    "content": "#!/usr/bin/env bash help_text=&quot; NAME csvsql - Run a SQL query over a csv file USAGE csvsql &lt;csv-filename&gt; &lt;sql-query: in quotes&gt; DESCRIPTION A script to run a SQL query over data in a csv file using sqlite3. The table to query has the name &#39;t&#39; AUTHOR mjnurse.github.io - 2022 &quot; help_line=&quot;Run a SQL query over a csv file&quot; web_desc_line=&quot;Run a SQL query over a csv file&quot; if [ &quot;$1&quot; == &quot;-h&quot; ] || [ &quot;$1&quot; == &quot;--help&quot",
+    "content": "#!/usr/bin/env bash help_text=&quot; NAME csvsql - Run a SQL query over a csv file USAGE csvsql &lt;csv_filename&gt; [&lt;sql_query (in quotes)&gt;] OPTIONS -h, --help Show this help message and exit -f, --file Specify a file containing a SQL query to run over the csv file. DESCRIPTION A script to run a SQL query over data in a csv file using sqlite3. If no SQL query is provided, Sqlite3 will be run in interactive mode. The table to query has the name &#39;t&#39; AUTHOR mjnurse.github.io - 2022 ",
     "type": "page"
   },
   {
@@ -1522,7 +1522,7 @@
     "id": "217",
     "title": "@ GCloud (GCP) CLI",
     "url": "/other/cli_builder/definition-file-@-gcloud-(gcp)-gc.def.html",
-    "content": "Definition file gc.def @ GCloud (GCP) cmd if [[ &quot;$GCP_PROJECT&quot; != &quot;&quot; ]]; then GCP_PROJECT=&quot;--project $GCP_PROJECT&quot;; fi cmd gc() { \\ echo PROJ: $GCP_PROJECT; \\ gcloud &quot;$@&quot; $GCP_PROJECT; \\ } # -------------------------------------------------------------------------------- = Config # -------------------------------------------------------------------------------- config list (cl) :: gcloud config list # -------------------------------------------------------",
+    "content": "Definition file gc.def @ GCloud (GCP) cmd if [[ &quot;$GCP_PROJECT&quot; != &quot;&quot; ]]; then GCP_PROJECT=&quot;--project $GCP_PROJECT&quot;; fi cmd gc() { \\ echo PROJ: $GCP_PROJECT; \\ gcloud &quot;$@&quot; $GCP_PROJECT; \\ } # -------------------------------------------------------------------------------- = Config # -------------------------------------------------------------------------------- auth login (al) :: gcloud auth login --no-launch-browser \\ ## auth login with --no-launch-browse",
     "type": "page"
   },
   {
@@ -1660,69 +1660,76 @@
   },
   {
     "id": "237",
+    "title": "HTTP Status Codes",
+    "url": "/misc/http-status-codes.html",
+    "content": "1xx Informational Response An informational response indicates that the request was received and understood and is being processed. It alerts the client to wait for a final response. Code Name Description 100 Continue The server has received the request headers and the client should proceed to send the request body. 101 Switching Protocols The requester has asked the server to switch protocols and the server has agreed to do so. 102 Processing A WebDAV request may contain many sub-requests invol",
+    "type": "page"
+  },
+  {
+    "id": "238",
     "title": "JWT - JSON Web Tokens",
     "url": "/misc/jwt-json-web-tokens.html",
     "content": "Today I was looking at authentication for a web-service. It was using JSON Web Tokens. What are JWTs? How do they work? A JWT is a cryptographically signed JSON token used to authenticate users making calls to an application. A JWT is sent to a user when they authenticate with an authentication Service. The user can send this token with requests to an application (web-service or other) as proof of identity. The application talks to the authentication server and is told the how the token was cryp",
     "type": "page"
   },
   {
-    "id": "238",
+    "id": "239",
     "title": "Public Key Encryption Analogy",
     "url": "/misc/public-key-encryption-analogy.html",
     "content": "What is Public Private Key Encryption? This process uses an algorithm that can encrypt data using a public key however, the data can only be decrypted using a private key. I share my public key with everyone and they use it to encrypt data they send to me. Only I can decrypt and read that data. The Analogy As an analogy to public, private key encryption, consider a secure, locked post-box which contains a slot through which notes can be posted. Notes posted in to the post-box cannot be read (as ",
     "type": "page"
   },
   {
-    "id": "239",
+    "id": "240",
     "title": "Read Aloud In MS Word",
     "url": "/misc/read-aloud-in-ms-word.html",
     "content": "To activate: [Alt][Ctrl][Space]. Cursor at a specific point in the text: The document will be read aloud from here on. Text selected: The selected text will be read aloud. [Ctrl][Space] - Play or pause. [Ctrl][Left arrow] - Jump to the previous paragraph. [Ctrl][Right arrow] - Jump to the next paragraph. [Alt][Left arrow] - Slower reading speed. [Alt][Arrow right] - Faster reading speed.",
     "type": "page"
   },
   {
-    "id": "240",
+    "id": "241",
     "title": "Running Spark on YARN - Cluster or Client Mode",
     "url": "/misc/running-spark_on-yarn-cluster_or-client-mode.html",
     "content": "Spark jobs can run on YARN in two modes: cluster mode and client mode. Understanding the difference between the two modes is important for choosing an appropriate memory allocation configuration, and to submit jobs as expected. A Spark job consists of two parts: Spark Executors that run the actual tasks, and a Spark Driver that schedules the Executors. Cluster Mode Everything runs inside the cluster. You can start a job from your laptop and the job will continue running even if you close your co",
     "type": "page"
   },
   {
-    "id": "241",
+    "id": "242",
     "title": "Shortcut Keys",
     "url": "/misc/shortcut-keys.html",
     "content": "Note: This page is automatically generated using sck Confluence | // | Opens the date picker | | Alt +SHIFT+DOWN | Insert table row after | | Alt +SHIFT+UP | Insert table row before | | CTRL+0 | Set paragraph style | | CTRL+1-6 | Set as heading 1-6 | | CTRL+7 | Preformatted | | CTRL+8 | Quote | | CTRL+ENTER | Publish page | | CTRL+ENTER | Publish | | CTRL+SHIFT+I | Insert table | | CTRL+SHIFT+a | Insert macro | | CTRL+SHIFT+b | Bulleted list | | CTRL+SHIFT+d | Insert markup | | CTRL+SHIFT+e | Pr",
     "type": "page"
   },
   {
-    "id": "242",
+    "id": "243",
     "title": "ssh",
     "url": "/misc/ssh.html",
     "content": "Storing SSH Connection / Config details Store SSH connection details in a config file in the .ssh directory. File ~/.ssh/config Contents Host dev HostName dev.example.com Port 22 User martin Host test HostName test.example.com Port 22 User martin SSH Login Without Password 1) Generate a public/private RSA key pair. Save this to default location /home/&lt;username&gt;/.ssh/id_rsa $ ssh-keygen Your public key will be saved in /home/user/.ssh/id_rsa.pub 2) Copy the SSH Public Key to the Remote Host",
     "type": "page"
   },
   {
-    "id": "243",
+    "id": "244",
     "title": "Statistical Testing",
     "url": "/misc/statistical-testing.html",
     "content": "For a long time I've wanted to explore using statistics to determine how many tests are needed to test for errors. The question I have is that, for a set of n records, if we want to be say 99.9% sure none contain an error, how many would be need to test at random to reach a point where we can be statistically, say, 99.9% sure there are no errors. The Basics Tests with a fixed number of options / records to test If I have a die and there is a chance the number has not been printed on one side, ho",
     "type": "page"
   },
   {
-    "id": "244",
+    "id": "245",
     "title": "Text To Speech - Clipboard",
     "url": "/misc/text-to-speech-clipboard.html",
     "content": "I've been using the Microsoft Word text-to-speech function for a while to proof read text. Works great but the text needs to be a Word document or I need to copy and paste it there first. I've been looking online for an application to read aloud the clipboard. It's surprisingly difficult to find an application. I then thought about AHK and (convinced it would be far to complex for AHK) I ran a search. I was wrong, a very simple AHK script now means I can read aloud the contents of the clipboard ",
     "type": "page"
   },
   {
-    "id": "245",
+    "id": "246",
     "title": "This Sites Markdown",
     "url": "/misc/this-sites-markdown.html",
     "content": "Heading 1 # Heading 1 Heading 2 ## Heading 2 Heading 3 ### Heading 3 Heading 4 #### Heading 4 Heading 5 ##### Heading 5 Heading 6 ###### Heading 6 Horizontal Line: --- Bold: **Bold** Italic: *Italic* Bold Italic: ***Bold Italic*** ~~Strikethrough~~: ~~Strikethrough~~ Links I'm an inline-style link [I'm an inline-style link](https://www.google.com) I'm an inline-style link with title [I'm an inline-style link with title](https://www.google.com \"Google's Homepage\") Simple Lists Single spacing: Sim",
     "type": "page"
   },
   {
-    "id": "246",
+    "id": "247",
     "title": "Using Git and GitHub - A Walk-through",
     "url": "/misc/using-git_and-git-hub-a-walkthrough.html",
     "content": "In the following walk-through we use Git and GitHub from the view point of two 'users' in parallel and look at the workflow and interaction between the two. Simulate two users - each has a home directory Create two 'user home' directories: &gt; ~/git-test$ mkdir user1 &gt; ~/git-test$ mkdir user2 Use User1 to create a file, add this to Git and push the local Git repo up and into GitHub Go to User1 home directory and initialise local Git: &gt; ~/git-test$ cd user1 &gt; ~/git-test/user1$ git init ",

@@ -105,6 +105,9 @@ cmd<span class="w"> </span>gc<span class="o">()</span><span class="w"> </span><s
 <span class="o">=</span><span class="w"> </span>Config
 <span class="c1"># --------------------------------------------------------------------------------</span>
 
+auth<span class="w"> </span>login<span class="w"> </span><span class="o">(</span>al<span class="o">)</span><span class="w"> </span>::<span class="w"> </span>gcloud<span class="w"> </span>auth<span class="w"> </span>login<span class="w"> </span>--no-launch-browser<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="c1">## auth login with --no-launch-browser</span>
+
 config<span class="w"> </span>list<span class="w"> </span><span class="o">(</span>cl<span class="o">)</span><span class="w"> </span>::<span class="w"> </span>gcloud<span class="w"> </span>config<span class="w"> </span>list
 
 <span class="c1"># --------------------------------------------------------------------------------</span>
@@ -158,10 +161,11 @@ _gc_complete<span class="o">()</span><span class="w"> </span><span class="o">{</
 <span class="w">    </span><span class="k">done</span>
 
 <span class="o">}</span>
-<span class="nb">complete</span><span class="w"> </span>-F<span class="w"> </span>_gc_complete<span class="w"> </span>gc<span class="w"> </span>@ghe<span class="w"> </span>@gcl<span class="w"> </span>@gpg<span class="w"> </span>@gpl<span class="w"> </span>@gps<span class="w"> </span>@gcil<span class="w"> </span>@gkcl
+<span class="nb">complete</span><span class="w"> </span>-F<span class="w"> </span>_gc_complete<span class="w"> </span>gc<span class="w"> </span>@ghe<span class="w"> </span>@gal<span class="w"> </span>@gcl<span class="w"> </span>@gpg<span class="w"> </span>@gpl<span class="w"> </span>@gps<span class="w"> </span>@gcil<span class="w"> </span>@gkcl
 
 <span class="c1"># Shortcut aliases</span>
 <span class="nb">alias</span><span class="w"> </span>@ghe<span class="o">=</span><span class="s1">&#39;gc ghe&#39;</span>
+<span class="nb">alias</span><span class="w"> </span>@gal<span class="o">=</span><span class="s1">&#39;gc gal&#39;</span>
 <span class="nb">alias</span><span class="w"> </span>@gcl<span class="o">=</span><span class="s1">&#39;gc gcl&#39;</span>
 <span class="nb">alias</span><span class="w"> </span>@gpg<span class="o">=</span><span class="s1">&#39;gc gpg&#39;</span>
 <span class="nb">alias</span><span class="w"> </span>@gpl<span class="o">=</span><span class="s1">&#39;gc gpl&#39;</span>
@@ -199,7 +203,7 @@ print_command<span class="o">()</span><span class="w"> </span><span class="o">{<
 <span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;\x1b[92mGCloud (GCP)\x1b[0m&quot;</span>
 <span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;\x1b[92m------------\x1b[0m&quot;</span>
 
-<span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;\x1b[95mgenerated:2026-07-14 10:39\x1b[0m&quot;</span>
+<span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;\x1b[95mgenerated:2026-07-29 09:22\x1b[0m&quot;</span>
 <span class="nb">echo</span>
 <span class="nv">filter</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$filter</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
@@ -225,6 +229,15 @@ print_command<span class="o">()</span><span class="w"> </span><span class="o">{<
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$GCP_PROJECT</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nv">GCP_PROJECT</span><span class="o">=</span><span class="s2">&quot;--project </span><span class="nv">$GCP_PROJECT</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
 gc<span class="o">()</span><span class="w"> </span><span class="o">{</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span>PROJ:<span class="w"> </span><span class="nv">$GCP_PROJECT</span><span class="p">;</span><span class="w"> </span>gcloud<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span><span class="w"> </span><span class="nv">$GCP_PROJECT</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
 <span class="nv">section</span><span class="o">=</span><span class="s2">&quot;Config&quot;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2"> </span><span class="nv">$2</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;auth login&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;gal&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">   </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;gal&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="m">2</span>
+<span class="w">   </span><span class="nv">usage</span><span class="o">=</span><span class="s2">&quot;\x1b[95mauth login \x1b[96m(gal)\x1b[97m\x1b[92m # auth login with --no-launch-browser\x1b[0m&quot;</span>
+<span class="w">   </span>check_params<span class="w"> </span><span class="nv">$#</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="nv">$usage</span><span class="s2">&quot;</span>
+<span class="w">   </span>print_command<span class="w"> </span><span class="s2">&quot; gcloud auth login --no-launch-browser&quot;</span>
+<span class="w">   </span>gcloud<span class="w"> </span>auth<span class="w"> </span>login<span class="w"> </span>--no-launch-browser
+<span class="w">   </span><span class="nb">exit</span>
+<span class="k">fi</span>
 
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2"> </span><span class="nv">$2</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;config list&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;gcl&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">   </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;gcl&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="m">2</span>
@@ -307,7 +320,7 @@ gc<span class="o">()</span><span class="w"> </span><span class="o">{</span><span
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: June 11, 2026</p>
+      <p>Last updated: July 29, 2026</p>
     </footer>
 
     <div class="scroll-container">

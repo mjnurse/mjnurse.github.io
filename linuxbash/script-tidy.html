@@ -168,29 +168,37 @@ cecho<span class="w"> </span><span class="nv">gre</span><span class="w"> </span>
 
 <span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span>*<span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>!<span class="w"> </span>-L<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">        </span><span class="nv">newname</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
-<span class="w">            </span>sed<span class="w"> </span><span class="s1">&#39;s/[^a-zA-Z0-9._-]/_/g; </span>
-<span class="s1">                    s/\([A-Z]\)\([A-Z][A-Z]*\)/\1\L\2/g;</span>
-<span class="s1">                s/^\([A-Z]\)/\L\1/;</span>
-<span class="s1">                s/\([A-Z]\)/-\L\1/g;</span>
-<span class="s1">                s/__*/_/g; </span>
-<span class="s1">                s/--*/-/g; </span>
-<span class="s1">                s/_\./\./g;</span>
-<span class="s1">                s/_-/-/g;</span>
-<span class="s1">                s/-_/-/g;</span>
-<span class="s1">                s/__*/_/g; </span>
-<span class="s1">                s/--*/-/g; </span>
-<span class="s1">        &#39;</span><span class="k">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-x<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="nv">link_char</span><span class="o">=</span><span class="s2">&quot;-&quot;</span>
+<span class="w">            </span><span class="nv">exec_message</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">cgre</span><span class="si">}</span><span class="s2">(Executable)</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span><span class="nv">link_char</span><span class="o">=</span><span class="s2">&quot;_&quot;</span>
+<span class="w">            </span><span class="nv">exec_message</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="w">        </span><span class="k">fi</span>
+<span class="w">        </span><span class="nv">newname</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;</span>
+<span class="s2">            s/[^a-zA-Z0-9._-]/</span><span class="si">${</span><span class="nv">link_char</span><span class="si">}</span><span class="s2">/g;</span>
+<span class="s2">            s/\([a-z]\)\([A-Z]\)/\1-\L\2/g;</span>
+<span class="s2">            s/\(.*[a-z].*[A-Z].*\)\(\.[^\.]\+\)/\L\1\2/g;</span>
+<span class="s2">            s/\(.*[A-Z].*[a-z].*\)\(\.[^\.]\+\)/\L\1\2/g;</span>
+<span class="s2">            s/\([^\.]*[A-Z][^\.]*[a-z][^\.]*\)/\L\1/g;</span>
+<span class="s2">            s/\([^\.]*[a-z][^\.]*[A-Z][^\.]*\)/\L\1/g;</span>
+<span class="s2">            s/[-_][-_]*/</span><span class="si">${</span><span class="nv">link_char</span><span class="si">}</span><span class="s2">/g; </span>
+<span class="s2">        &quot;</span><span class="k">)</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$newname</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;README.md&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">            </span><span class="nb">echo</span><span class="w"> </span>--------------------------------------------------------------------------------
-<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;FILE:      </span><span class="nv">$f</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;FILE:      </span><span class="nv">$f</span><span class="s2"> </span><span class="nv">$exec_message</span><span class="s2">&quot;</span>
 <span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Rename as: </span><span class="nv">$newname</span><span class="s2">&quot;</span>
 <span class="w">            </span><span class="nb">echo</span><span class="w"> </span>--------------------------------------------------------------------------------
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$force</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>y<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">                </span><span class="nv">opt</span><span class="o">=</span><span class="s2">&quot;r&quot;</span>
 <span class="w">            </span><span class="k">else</span>
-<span class="w">                </span><span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">clblu</span><span class="si">}</span><span class="s2">[i]gnore rule, [r]ename, [s]kip, q[uit]. [irSq]?: </span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">                </span><span class="nb">read</span><span class="w"> </span>opt
+<span class="w">                </span><span class="nv">opt</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="w">                </span><span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">opt</span><span class="p">^</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">=</span>~<span class="w"> </span>^<span class="o">[</span>IRSQ<span class="o">]</span>$<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">                    </span><span class="o">[[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$opt</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Invalid option: </span><span class="nv">$opt</span><span class="s2">&quot;</span>
+<span class="w">                    </span><span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">clblu</span><span class="si">}</span><span class="s2">[i]gnore rule, [r]ename, [s]kip, q[uit]. [irSq]?: </span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">                    </span><span class="nb">read</span><span class="w"> </span>opt
+<span class="w">                    </span><span class="o">[[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$opt</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nv">opt</span><span class="o">=</span><span class="s2">&quot;S&quot;</span>
+<span class="w">                </span><span class="k">done</span>
 <span class="w">            </span><span class="k">fi</span>
 <span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="nv">$opt</span><span class="w"> </span><span class="k">in</span>
 <span class="w">                </span>r<span class="p">|</span>R<span class="o">)</span>
@@ -464,7 +472,7 @@ cecho<span class="w"> </span><span class="nv">gre</span><span class="w"> </span>
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: January 02, 2026</p>
+      <p>Last updated: July 30, 2026</p>
     </footer>
 
     <div class="scroll-container">
