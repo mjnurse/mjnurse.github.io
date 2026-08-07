@@ -722,9 +722,9 @@
   },
   {
     "id": "103",
-    "title": "Elasticsearch",
+    "title": "Using Kibana With 2 Or More Elasticsearch Clusters",
     "url": "/elasticsearch/using-kibana-with_2-or-more-elasticsearch-clusters.html",
-    "content": "Using Kibana With 2 Or More Elasticsearch Clusters Create 2 Elasticsearch Clusters and a Kibana Instance Using docker containers, I created 2 ES clusters, each with 2 nodes - 4 containers in total. I created a 5th container for Kibana. &gt; docker ps -a CONTAINER ID IMAGE COMMAND PORTS NAMES 0cd08909c412 elasticsearch:6.8.7 &quot;/usr/local/bin/dock&quot; 0.0.0.0:9200-&gt;9200/tcp, 0.0.0.0:9300-&gt;9300/tcp esc1n1 b30174d5bd04 elasticsearch:6.8.7 &quot;/usr/local/bin/dock&quot; 0.0.0.0:9201-&gt;",
+    "content": "Create 2 Elasticsearch Clusters and a Kibana Instance Using docker containers, I created 2 ES clusters, each with 2 nodes - 4 containers in total. I created a 5th container for Kibana. &gt; docker ps -a CONTAINER ID IMAGE COMMAND PORTS NAMES 0cd08909c412 elasticsearch:6.8.7 &quot;/usr/local/bin/dock&quot; 0.0.0.0:9200-&gt;9200/tcp, 0.0.0.0:9300-&gt;9300/tcp esc1n1 b30174d5bd04 elasticsearch:6.8.7 &quot;/usr/local/bin/dock&quot; 0.0.0.0:9201-&gt;9201/tcp, 0.0.0.0:9301-&gt;9301/tcp esc1n2 5fce5511",
     "type": "page"
   },
   {

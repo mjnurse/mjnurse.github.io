@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Elasticsearch" />
+    <meta name="description" content="Using Kibana With 2 Or More Elasticsearch Clusters" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>Elasticsearch</title>
+    <title>Using Kibana With 2 Or More Elasticsearch Clusters</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
@@ -90,9 +90,8 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/elasticsearch/using-kibana-with_2-or-more-elasticsearch-clusters.md">Elasticsearch</a></h1>
-<h1 id="using-kibana-with-2-or-more-elasticsearch-clusters">Using Kibana With 2 Or More Elasticsearch Clusters</h1>
-<h2 id="create-2-elasticsearch-clusters-and-a-kibana-instance">Create 2 Elasticsearch Clusters and a Kibana Instance</h2>
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/elasticsearch/using-kibana-with_2-or-more-elasticsearch-clusters.md">Using Kibana With 2 Or More Elasticsearch Clusters</a></h1>
+<h1 id="create-2-elasticsearch-clusters-and-a-kibana-instance">Create 2 Elasticsearch Clusters and a Kibana Instance</h1>
 <p>Using docker containers, I created 2 ES clusters, each with 2 nodes - 4 containers in total.  I created a 5th container for Kibana.</p>
 <div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">ps</span><span class="w"> </span><span class="o">-</span><span class="n">a</span>
 
@@ -106,9 +105,9 @@
 
 <p><code>esc1n1 = elasticsearch, cluster 1, node 1.</code></p>
 <p>See below for the Docker Compose script for creating these containers.</p>
-<h2 id="adding-some-data">Adding Some Data</h2>
+<h1 id="adding-some-data">Adding Some Data</h1>
 <p>I created an index in each cluster and added some accurate data.  (I have a utility script <code>es</code> - the operations are fairly clear).</p>
-<h3 id="cluster-1">Cluster 1</h3>
+<h2 id="cluster-1">Cluster 1</h2>
 <div class="codehilite"><pre><span></span><code><span class="k">&gt; </span><span class="ge">es createindex c1ind 2 0</span>
 (done)
 <span class="k">&gt; </span><span class="ge">es addentry c1ind &#39;{&quot;name&quot;:&quot;martin&quot;,&quot;age&quot;:&quot;21&quot;}&#39;</span>
@@ -123,7 +122,7 @@ green  open   c1ind                  2   0          4            0       12kb   
 (3 lines)
 </code></pre></div>
 
-<h3 id="cluster-2">Cluster 2</h3>
+<h2 id="cluster-2">Cluster 2</h2>
 <div class="codehilite"><pre><span></span><code>&gt; es createindex c2ind 2 0
 (done)
 &gt; es addentry c2ind &#39;{&quot;name&quot;:&quot;leo&quot;,&quot;age&quot;:&quot;18&quot;}&#39;
@@ -136,18 +135,18 @@ green  open   c2ind   2   0          2            0        8kb            8kb
 (1 lines)
 </code></pre></div>
 
-<h2 id="configure-cross-cluster-search">Configure Cross Cluster Search</h2>
+<h1 id="configure-cross-cluster-search">Configure Cross Cluster Search</h1>
 <p>Next I configure cross cluster search.  Kibana connects to cluster 1 so I add cluster 2 as a remote cluster to cluster 1.</p>
-<h3 id="cluster-1_1">Cluster 1</h3>
+<h2 id="cluster-1_1">Cluster 1</h2>
 <p>The remote cluster is given the label <strong>c2</strong>.</p>
 <div class="codehilite"><pre><span></span><code><span class="k">&gt; </span><span class="ge">es generic &#39;_cluster/settings { &quot;persistent&quot;:{&quot;cluster&quot;:{&quot;remote&quot;:{&quot;c2&quot;:{ &quot;seeds&quot;:[&quot;esc2n1:9350&quot;]}}}}}&#39;</span>
 (done)
 </code></pre></div>
 
-<h2 id="run-a-cross-cluster-search-from-kibana">Run a Cross Cluster Search From Kibana</h2>
+<h1 id="run-a-cross-cluster-search-from-kibana">Run a Cross Cluster Search From Kibana</h1>
 <p>Next I switch to Kibana and run a cross cluster query.  To query an index on the remote cluster we prefix it with the cluster label <code>c2</code>.  To query the index <code>c2ind</code> I use <code>c2:c2ind</code>.  </p>
 <p><img alt="" src="images/TwoESOneKibana.png" /></p>
-<h2 id="docker-compose-elasticsearch-and-kibana-creation-script">Docker Compose - Elasticsearch and Kibana Creation Script</h2>
+<h1 id="docker-compose-elasticsearch-and-kibana-creation-script">Docker Compose - Elasticsearch and Kibana Creation Script</h1>
 <div class="codehilite"><pre><span></span><code>version: &#39;2.2&#39;
 services:
   esc1n1:
@@ -258,7 +257,7 @@ networks:
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: December 11, 2025</p>
+      <p>Last updated: August 07, 2026</p>
     </footer>
 
     <div class="scroll-container">
