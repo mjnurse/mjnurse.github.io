@@ -486,7 +486,7 @@
     "id": "69",
     "title": "Miscellaneous Notes",
     "url": "/notes/miscellaneous_notes.html",
-    "content": "Miscellaneous Notes The notes captured in the Linux notes tool = n. 7zip: 7z a -p -mhe=on archive.7z &lt;files_or_folders&gt; # -mhe=on - encrypt file contents and filenames/headers. ES ES: @esql &#39;SELECT id.value FROM &quot;quantexa-mdm-example-entity-store-business-all-data&quot;&#39; # Elasticsearch Excel Excel: Open Drop-down in Cell - ALT-DOWN_ARROW Windows Windows: WIN-H - turn on dictation apt apt: sudo apt autoclean # tidy the package cache apt: sudo apt autoremove # remove unrequired",
+    "content": "Miscellaneous Notes The notes captured in the Linux notes tool = n. 7zip 7zip: 7z a -p -mhe=on archive.7z &lt;files_or_folders&gt; # -mhe=on - encrypt file contents and filenames/headers. ES ES: @esql &#39;SELECT id.value FROM &quot;quantexa-mdm-example-entity-store-business-all-data&quot;&#39; # Elasticsearch Excel Excel: Open Drop-down in Cell - ALT-DOWN_ARROW Windows Windows: WIN-H - turn on dictation apt apt: sudo apt autoclean # tidy the package cache apt: sudo apt autoremove # remove unreq",
     "type": "page"
   },
   {

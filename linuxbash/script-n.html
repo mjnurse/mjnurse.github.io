@@ -167,8 +167,10 @@
 <span class="w">    </span><span class="nb">echo</span>
 <span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;The notes captured in the Linux notes tool = \`n\`.&quot;</span>
 <span class="w">    </span><span class="nb">echo</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;\`\`\`text&quot;</span>
-<span class="w">    </span>cat<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$nf</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;/^$/{ N; s/\n\([^ \t][^ \t]*\)/```\n\n### \1\n\n```\n\1/ }&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/^\(###.*\):/\1/&#39;</span>
+<span class="w">    </span>cat<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$nf</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;1s/^/\n/&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;/^$/{ N; s/\n\([^ \t][^ \t]*\)/```\n\n### \1\n\n```text\n\1/ }&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;1,2d; s/^\(###.*\):/\1/&#39;</span>
 <span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;\`\`\`&quot;</span>
 <span class="w">    </span><span class="p">;;</span>
 <span class="w">  </span>-h<span class="p">|</span>--help<span class="o">)</span>
