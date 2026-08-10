@@ -92,82 +92,134 @@
         <div class="article-body">
           <h1 id="miscellaneous-notes">Miscellaneous Notes</h1>
 <p>The notes captured in the Linux notes tool = <code>n</code>.</p>
-<div class="codehilite"><pre><span></span><code>@esql &#39;SELECT id.value FROM &quot;quantexa-mdm-example-entity-store-business-all-data&quot;&#39; # Elasticsearch
+<div class="codehilite"><pre><span></span><code>7zip: 7z a -p -mhe=on archive.7z &lt;files_or_folders&gt; # -mhe=on - encrypt file contents and filenames/headers.
+</code></pre></div>
 
-Excel: Open Drop-down in Cell - ALT-DOWN_ARROW
+<h3 id="es">ES</h3>
+<div class="codehilite"><pre><span></span><code><span class="nl">ES</span><span class="p">:</span><span class="w"> </span><span class="nv">@esql</span><span class="w"> </span><span class="s1">&#39;SELECT id.value FROM &quot;quantexa-mdm-example-entity-store-business-all-data&quot;&#39;</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">Elasticsearch</span>
+</code></pre></div>
 
-Windows: WIN-H - turn on dictation
+<h3 id="excel">Excel</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">Excel</span><span class="o">:</span><span class="w"> </span><span class="n">Open</span><span class="w"> </span><span class="n">Drop</span><span class="o">-</span><span class="n">down</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="n">Cell</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">ALT</span><span class="o">-</span><span class="n">DOWN_ARROW</span>
+</code></pre></div>
 
-apt: sudo apt autoclean # tidy the package cache
-apt: sudo apt autoremove # remove unrequired dependencies
-apt: sudo apt install ./download/apt.deb # install deb files
+<h3 id="windows">Windows</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">Windows</span><span class="o">:</span><span class="w"> </span><span class="n">WIN</span><span class="o">-</span><span class="n">H</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">turn</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">dictation</span>
+</code></pre></div>
 
-bash: #!/usr/bin/env bash
-bash: cp file.txt{,.bak} # cp file.txt file.txt.bak
-bash: echo {0..10..2} # 0 -&gt; 10 in steps of 2: 0 2 4 6 8 10
-bash: echo {1,2}{a..e} # 1a 1b 1c 1d 1e 2a 2b 2c 2d 2e
+<h3 id="apt">apt</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">apt</span><span class="p">:</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="n">autoclean</span><span class="w"> </span><span class="c1"># tidy the package cache</span>
+<span class="n">apt</span><span class="p">:</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="n">autoremove</span><span class="w"> </span><span class="c1"># remove unrequired dependencies</span>
+<span class="n">apt</span><span class="p">:</span><span class="w"> </span><span class="n">sudo</span><span class="w"> </span><span class="n">apt</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="o">./</span><span class="n">download</span><span class="o">/</span><span class="n">apt</span><span class="o">.</span><span class="n">deb</span><span class="w"> </span><span class="c1"># install deb files</span>
+</code></pre></div>
 
-claude: Quick/simple → Haiku; Everything else → Sonnet; Hard problems → Opus
+<h3 id="bash">bash</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">bash</span><span class="o">:</span><span class="w"> </span><span class="err">#</span><span class="o">!/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">env</span><span class="w"> </span><span class="n">bash</span>
+<span class="n">bash</span><span class="o">:</span><span class="w"> </span><span class="n">cp</span><span class="w"> </span><span class="n">file</span><span class="p">.</span><span class="n">txt</span><span class="p">{,.</span><span class="n">bak</span><span class="p">}</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">cp</span><span class="w"> </span><span class="n">file</span><span class="p">.</span><span class="n">txt</span><span class="w"> </span><span class="n">file</span><span class="p">.</span><span class="n">txt</span><span class="p">.</span><span class="n">bak</span>
+<span class="n">bash</span><span class="o">:</span><span class="w"> </span><span class="n">echo</span><span class="w"> </span><span class="p">{</span><span class="mf">0..10</span><span class="p">.</span><span class="mf">.2</span><span class="p">}</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="n">steps</span><span class="w"> </span><span class="kr">of</span><span class="w"> </span><span class="mi">2</span><span class="o">:</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="mi">10</span>
+<span class="n">bash</span><span class="o">:</span><span class="w"> </span><span class="n">echo</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">}{</span><span class="n">a</span><span class="p">..</span><span class="n">e</span><span class="p">}</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="mi">1</span><span class="n">a</span><span class="w"> </span><span class="mi">1</span><span class="n">b</span><span class="w"> </span><span class="mi">1</span><span class="n">c</span><span class="w"> </span><span class="mi">1</span><span class="n">d</span><span class="w"> </span><span class="mi">1</span><span class="n">e</span><span class="w"> </span><span class="mi">2</span><span class="n">a</span><span class="w"> </span><span class="mi">2</span><span class="n">b</span><span class="w"> </span><span class="mi">2</span><span class="n">c</span><span class="w"> </span><span class="mi">2</span><span class="n">d</span><span class="w"> </span><span class="mi">2</span><span class="n">e</span>
+</code></pre></div>
 
-code: ALT+z - Enable word wrap
-code: CTRL+, - Open Settings
-code: CTRL+. - Fix problem
-code: CTRL+; - Find next problem (I added this shortcut)
-code: CTRL+k CTRL+s - Open Keyboard Shortcuts
-code: CTRL-k v - View markdown and markdown preview side by side
+<h3 id="claude">claude</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">claude</span><span class="o">:</span><span class="w"> </span><span class="n">Quick</span><span class="o">/</span><span class="n">simple</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">Haiku</span><span class="o">;</span><span class="w"> </span><span class="n">Everything</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">Sonnet</span><span class="o">;</span><span class="w"> </span><span class="n">Hard</span><span class="w"> </span><span class="n">problems</span><span class="w"> </span><span class="err">→</span><span class="w"> </span><span class="n">Opus</span>
+</code></pre></div>
 
-column: column -J -s&quot;,&quot; -N col1,col2 # format csv as JSON with attribute names col1, col2
-column: column -t -s&quot;,&quot; -N col1,col2 # format csv as a table with headings col1, col2
+<h3 id="code">code</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">code</span><span class="o">:</span><span class="w"> </span><span class="n">ALT</span><span class="o">+</span><span class="n">z</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Enable</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="n">wrap</span>
+<span class="n">code</span><span class="o">:</span><span class="w"> </span><span class="n">CTRL</span><span class="o">+,</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Open</span><span class="w"> </span><span class="n">Settings</span>
+<span class="n">code</span><span class="o">:</span><span class="w"> </span><span class="n">CTRL</span><span class="o">+.</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Fix</span><span class="w"> </span><span class="n">problem</span>
+<span class="n">code</span><span class="o">:</span><span class="w"> </span><span class="n">CTRL</span><span class="o">+;</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Find</span><span class="w"> </span><span class="n">next</span><span class="w"> </span><span class="n">problem</span><span class="w"> </span><span class="o">(</span><span class="n">I</span><span class="w"> </span><span class="n">added</span><span class="w"> </span><span class="k">this</span><span class="w"> </span><span class="n">shortcut</span><span class="o">)</span>
+<span class="n">code</span><span class="o">:</span><span class="w"> </span><span class="n">CTRL</span><span class="o">+</span><span class="n">k</span><span class="w"> </span><span class="n">CTRL</span><span class="o">+</span><span class="n">s</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Open</span><span class="w"> </span><span class="n">Keyboard</span><span class="w"> </span><span class="n">Shortcuts</span>
+<span class="n">code</span><span class="o">:</span><span class="w"> </span><span class="n">CTRL</span><span class="o">-</span><span class="n">k</span><span class="w"> </span><span class="n">v</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">View</span><span class="w"> </span><span class="n">markdown</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">markdown</span><span class="w"> </span><span class="n">preview</span><span class="w"> </span><span class="n">side</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">side</span>
+</code></pre></div>
 
-find . -name &quot;*.jar&quot; -exec du -h {} \;
-find . -type d -name &quot;.git&quot; # Find directories
-find . -type d -name .git -prune -o -type f -name *.py -print # exclude .git directories
-find . -type f -mtime +90 # Find files last modified at least 90 days ago
+<h3 id="column">column</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">column</span><span class="o">:</span><span class="w"> </span><span class="n">column</span><span class="w"> </span><span class="o">-</span><span class="n">J</span><span class="w"> </span><span class="o">-</span><span class="n">s</span><span class="s2">&quot;,&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">N</span><span class="w"> </span><span class="n">col1</span><span class="o">,</span><span class="n">col2</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">JSON</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="n">attribute</span><span class="w"> </span><span class="n">names</span><span class="w"> </span><span class="n">col1</span><span class="o">,</span><span class="w"> </span><span class="n">col2</span>
+<span class="n">column</span><span class="o">:</span><span class="w"> </span><span class="n">column</span><span class="w"> </span><span class="o">-</span><span class="n">t</span><span class="w"> </span><span class="o">-</span><span class="n">s</span><span class="s2">&quot;,&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">N</span><span class="w"> </span><span class="n">col1</span><span class="o">,</span><span class="n">col2</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="n">csv</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">table</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="n">headings</span><span class="w"> </span><span class="n">col1</span><span class="o">,</span><span class="w"> </span><span class="n">col2</span>
+</code></pre></div>
 
-gcp: gcloud auth login --no-launch-browser
+<h3 id="find">find</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">find</span><span class="o">:</span><span class="w"> </span><span class="n">find</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">-</span><span class="n">name</span><span class="w"> </span><span class="s2">&quot;*.jar&quot;</span><span class="w"> </span><span class="o">-</span><span class="n">exec</span><span class="w"> </span><span class="n">du</span><span class="w"> </span><span class="o">-</span><span class="n">h</span><span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="o">\;</span>
+<span class="n">find</span><span class="o">:</span><span class="w"> </span><span class="n">find</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">-</span><span class="n">type</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">-</span><span class="n">name</span><span class="w"> </span><span class="s2">&quot;.git&quot;</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">Find</span><span class="w"> </span><span class="n">directories</span>
+<span class="n">find</span><span class="o">:</span><span class="w"> </span><span class="n">find</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">-</span><span class="n">type</span><span class="w"> </span><span class="n">d</span><span class="w"> </span><span class="o">-</span><span class="n">name</span><span class="w"> </span><span class="o">.</span><span class="na">git</span><span class="w"> </span><span class="o">-</span><span class="n">prune</span><span class="w"> </span><span class="o">-</span><span class="n">o</span><span class="w"> </span><span class="o">-</span><span class="n">type</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">-</span><span class="n">name</span><span class="w"> </span><span class="o">*.</span><span class="n">py</span><span class="w"> </span><span class="o">-</span><span class="n">print</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">exclude</span><span class="w"> </span><span class="o">.</span><span class="na">git</span><span class="w"> </span><span class="n">directories</span>
+<span class="n">find</span><span class="o">:</span><span class="w"> </span><span class="n">find</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">-</span><span class="n">type</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">-</span><span class="n">mtime</span><span class="w"> </span><span class="o">+</span><span class="mi">90</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">Find</span><span class="w"> </span><span class="n">files</span><span class="w"> </span><span class="n">last</span><span class="w"> </span><span class="n">modified</span><span class="w"> </span><span class="n">at</span><span class="w"> </span><span class="n">least</span><span class="w"> </span><span class="mi">90</span><span class="w"> </span><span class="n">days</span><span class="w"> </span><span class="n">ago</span>
+</code></pre></div>
 
-git: git checkout tags/&lt;tag name&gt; # checkout a git tag.
-git: git push --set-upstream origin main # set main as default origin branch
+<h3 id="gcp">gcp</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">gcp</span><span class="o">:</span><span class="w"> </span><span class="n">gcloud</span><span class="w"> </span><span class="n">auth</span><span class="w"> </span><span class="n">login</span><span class="w"> </span><span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">launch</span><span class="o">-</span><span class="n">browser</span>
+</code></pre></div>
 
-grep -v ... # to invert the match
+<h3 id="git">git</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">git</span><span class="o">:</span><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="n">checkout</span><span class="w"> </span><span class="n">tags</span><span class="o">/&lt;</span><span class="n">tag</span><span class="w"> </span><span class="n">name</span><span class="o">&gt;</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">checkout</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="n">tag</span><span class="o">.</span>
+<span class="n">git</span><span class="o">:</span><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="n">push</span><span class="w"> </span><span class="o">--</span><span class="kd">set</span><span class="o">-</span><span class="n">upstream</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="kd">set</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="n">branch</span>
+</code></pre></div>
 
-if [[ -n &quot;$var&quot; ]] # Non-zero length / not empty check
-if [[ -z &quot;$var&quot; ]] # Zero length / empty check
+<h3 id="grep">grep</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">grep</span><span class="o">:</span><span class="w"> </span><span class="n">grep</span><span class="w"> </span><span class="o">-</span><span class="n">v</span><span class="w"> </span><span class="o">...</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">invert</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">match</span>
+</code></pre></div>
 
-ln -s &lt;target_file_or_dir&gt; [&lt;link_name&gt;] # -s symbolic link (ie a pointer), hard link is same item two names
+<h3 id="if">if</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">if</span><span class="o">:</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="o">-</span><span class="n">n</span><span class="w"> </span><span class="s2">&quot;$var&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">Non</span><span class="o">-</span><span class="n">zero</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">not</span><span class="w"> </span><span class="n">empty</span><span class="w"> </span><span class="n">check</span>
+<span class="k">if</span><span class="o">:</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="o">-</span><span class="n">z</span><span class="w"> </span><span class="s2">&quot;$var&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">Zero</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">empty</span><span class="w"> </span><span class="n">check</span>
+</code></pre></div>
 
-postgres: ALTER ROLE &lt;username&gt; SET search_path TO &lt;schema name&gt;; # Permanently alter search_path.
-postgres: SET search_path TO &lt;schema name&gt;; # Alter the schema searched.
-postgres: SHOW search_path; # show the currently search schema.
-postgres: export PGPASSWORD=postgres
-postgres: export PGPASSWORD=postgres; cat my.sql | psql -h localhost -U postgres -d postgres
+<h3 id="ln">ln</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">ln</span><span class="o">:</span><span class="w"> </span><span class="n">ln</span><span class="w"> </span><span class="o">-</span><span class="n">s</span><span class="w"> </span><span class="o">&lt;</span><span class="n">target_file_or_dir</span><span class="o">&gt;</span><span class="w"> </span><span class="o">[&lt;</span><span class="n">link_name</span><span class="o">&gt;]</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="o">-</span><span class="n">s</span><span class="w"> </span><span class="n">symbolic</span><span class="w"> </span><span class="n">link</span><span class="w"> </span><span class="o">(</span><span class="n">ie</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">pointer</span><span class="o">),</span><span class="w"> </span><span class="n">hard</span><span class="w"> </span><span class="n">link</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">same</span><span class="w"> </span><span class="n">item</span><span class="w"> </span><span class="n">two</span><span class="w"> </span><span class="n">names</span>
+</code></pre></div>
 
-ps auxww # list linux processes, ww - show full command, do not truncate
+<h3 id="postgres">postgres</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">postgres</span><span class="o">:</span><span class="w"> </span><span class="n">ALTER</span><span class="w"> </span><span class="n">ROLE</span><span class="w"> </span><span class="o">&lt;</span><span class="n">username</span><span class="o">&gt;</span><span class="w"> </span><span class="n">SET</span><span class="w"> </span><span class="n">search_path</span><span class="w"> </span><span class="n">TO</span><span class="w"> </span><span class="o">&lt;</span><span class="n">schema</span><span class="w"> </span><span class="n">name</span><span class="o">&gt;;</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">Permanently</span><span class="w"> </span><span class="n">alter</span><span class="w"> </span><span class="n">search_path</span><span class="o">.</span>
+<span class="n">postgres</span><span class="o">:</span><span class="w"> </span><span class="n">SET</span><span class="w"> </span><span class="n">search_path</span><span class="w"> </span><span class="n">TO</span><span class="w"> </span><span class="o">&lt;</span><span class="n">schema</span><span class="w"> </span><span class="n">name</span><span class="o">&gt;;</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">Alter</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">schema</span><span class="w"> </span><span class="n">searched</span><span class="o">.</span>
+<span class="n">postgres</span><span class="o">:</span><span class="w"> </span><span class="n">SHOW</span><span class="w"> </span><span class="n">search_path</span><span class="o">;</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">show</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">currently</span><span class="w"> </span><span class="n">search</span><span class="w"> </span><span class="n">schema</span><span class="o">.</span>
+<span class="n">postgres</span><span class="o">:</span><span class="w"> </span><span class="n">export</span><span class="w"> </span><span class="n">PGPASSWORD</span><span class="o">=</span><span class="n">postgres</span>
+<span class="n">postgres</span><span class="o">:</span><span class="w"> </span><span class="n">export</span><span class="w"> </span><span class="n">PGPASSWORD</span><span class="o">=</span><span class="n">postgres</span><span class="o">;</span><span class="w"> </span><span class="n">cat</span><span class="w"> </span><span class="n">my</span><span class="o">.</span><span class="na">sql</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">psql</span><span class="w"> </span><span class="o">-</span><span class="n">h</span><span class="w"> </span><span class="n">localhost</span><span class="w"> </span><span class="o">-</span><span class="n">U</span><span class="w"> </span><span class="n">postgres</span><span class="w"> </span><span class="o">-</span><span class="n">d</span><span class="w"> </span><span class="n">postgres</span>
+</code></pre></div>
 
-psql: SET search_path=&lt;schema&gt;[,&lt;schema&gt;]; # set current schema(s)
-psql: SHOW search_path; # show current schema(s)
-psql: \c &lt;db&gt; # connect to database
-psql: \d &lt;table&gt; # describe table
-psql: \dn # list schemas
-psql: \dt # list tables
-psql: \l # list databases
+<h3 id="ps">ps</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">ps</span><span class="o">:</span><span class="w"> </span><span class="n">ps</span><span class="w"> </span><span class="n">auxww</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="n">linux</span><span class="w"> </span><span class="n">processes</span><span class="o">,</span><span class="w"> </span><span class="n">ww</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">show</span><span class="w"> </span><span class="n">full</span><span class="w"> </span><span class="n">command</span><span class="o">,</span><span class="w"> </span><span class="k">do</span><span class="w"> </span><span class="n">not</span><span class="w"> </span><span class="n">truncate</span>
+</code></pre></div>
 
-sed: sed -E # Extended - can use &#39;s/a+/b/&#39; rather than &#39;s/a\+/b/&#39;
-sed: sed -E &#39;s/a+/b/&#39; # one or more a&#39;s.
-sed: sed -E &#39;s/a{2,5}/b/&#39; # between 2 and 5 a&#39;s
+<h3 id="psql">psql</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">psql</span><span class="o">:</span><span class="w"> </span><span class="n">SET</span><span class="w"> </span><span class="n">search_path</span><span class="o">=&lt;</span><span class="n">schema</span><span class="o">&gt;[,&lt;</span><span class="n">schema</span><span class="o">&gt;];</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="kd">set</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="n">schema</span><span class="o">(</span><span class="n">s</span><span class="o">)</span>
+<span class="n">psql</span><span class="o">:</span><span class="w"> </span><span class="n">SHOW</span><span class="w"> </span><span class="n">search_path</span><span class="o">;</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">show</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="n">schema</span><span class="o">(</span><span class="n">s</span><span class="o">)</span>
+<span class="n">psql</span><span class="o">:</span><span class="w"> </span><span class="o">\</span><span class="n">c</span><span class="w"> </span><span class="o">&lt;</span><span class="n">db</span><span class="o">&gt;</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">connect</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">database</span>
+<span class="n">psql</span><span class="o">:</span><span class="w"> </span><span class="o">\</span><span class="n">d</span><span class="w"> </span><span class="o">&lt;</span><span class="n">table</span><span class="o">&gt;</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">describe</span><span class="w"> </span><span class="n">table</span>
+<span class="n">psql</span><span class="o">:</span><span class="w"> </span><span class="o">\</span><span class="n">dn</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="n">schemas</span>
+<span class="n">psql</span><span class="o">:</span><span class="w"> </span><span class="o">\</span><span class="n">dt</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="n">tables</span>
+<span class="n">psql</span><span class="o">:</span><span class="w"> </span><span class="o">\</span><span class="n">l</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="n">databases</span>
+</code></pre></div>
 
-sort -h # Sort human readable numbers eg 1.2GB, 9KB
+<h3 id="sed">sed</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">sed</span><span class="o">:</span><span class="w"> </span><span class="n">sed</span><span class="w"> </span><span class="o">-</span><span class="n">E</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">Extended</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="s1">&#39;s/a+/b/&#39;</span><span class="w"> </span><span class="n">rather</span><span class="w"> </span><span class="n">than</span><span class="w"> </span><span class="s1">&#39;s/a\+/b/&#39;</span>
+<span class="n">sed</span><span class="o">:</span><span class="w"> </span><span class="n">sed</span><span class="w"> </span><span class="o">-</span><span class="n">E</span><span class="w"> </span><span class="s1">&#39;s/a+/b/&#39;</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">one</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="n">more</span><span class="w"> </span><span class="n">a</span><span class="s1">&#39;s.</span>
+<span class="s1">sed: sed -E &#39;</span><span class="n">s</span><span class="sr">/a{2,5}/b/</span><span class="s1">&#39; # between 2 and 5 a&#39;</span><span class="n">s</span>
+</code></pre></div>
 
-tar -cvzf filename sourcedir # Create tarball.
-tar -xvzf &lt;filename&gt; # Extract zipped tarball.
+<h3 id="sort">sort</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">sort</span><span class="o">:</span><span class="w"> </span><span class="n">sort</span><span class="w"> </span><span class="o">-</span><span class="n">h</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">Sort</span><span class="w"> </span><span class="n">human</span><span class="w"> </span><span class="n">readable</span><span class="w"> </span><span class="n">numbers</span><span class="w"> </span><span class="n">eg</span><span class="w"> </span><span class="mf">1.2</span><span class="n">GB</span><span class="o">,</span><span class="w"> </span><span class="mi">9</span><span class="n">KB</span>
+</code></pre></div>
 
-tr A-Z a-z # lowercase
-tr a-z A-Z # uppercase
+<h3 id="tar">tar</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">tar</span><span class="o">:</span><span class="w"> </span><span class="n">tar</span><span class="w"> </span><span class="o">-</span><span class="n">cvzf</span><span class="w"> </span><span class="n">filename</span><span class="w"> </span><span class="n">sourcedir</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">Create</span><span class="w"> </span><span class="n">tarball</span><span class="o">.</span>
+<span class="n">tar</span><span class="o">:</span><span class="w"> </span><span class="n">tar</span><span class="w"> </span><span class="o">-</span><span class="n">xvzf</span><span class="w"> </span><span class="o">&lt;</span><span class="n">filename</span><span class="o">&gt;</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">Extract</span><span class="w"> </span><span class="n">zipped</span><span class="w"> </span><span class="n">tarball</span><span class="o">.</span>
+</code></pre></div>
 
-vim: /lala\C # Make search case sensitive (..\c - insensitive)
+<h3 id="tr">tr</h3>
+<div class="codehilite"><pre><span></span><code><span class="n">tr</span><span class="o">:</span><span class="w"> </span><span class="n">tr</span><span class="w"> </span><span class="n">A</span><span class="o">-</span><span class="n">Z</span><span class="w"> </span><span class="n">a</span><span class="o">-</span><span class="n">z</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">lowercase</span>
+<span class="n">tr</span><span class="o">:</span><span class="w"> </span><span class="n">tr</span><span class="w"> </span><span class="n">a</span><span class="o">-</span><span class="n">z</span><span class="w"> </span><span class="n">A</span><span class="o">-</span><span class="n">Z</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="n">uppercase</span>
+</code></pre></div>
+
+<h3 id="vim">vim</h3>
+<div class="codehilite"><pre><span></span><code>vim: /lala\C # Make search case sensitive (..\c - insensitive)
 vim: :%!sort -R # Random order - calling external app to order
+vim: \a (\A) # alphabetic character [A-Za-z]. Uppercase: non ...
+vim: \d \x (\D \X) # digit [0-9], hex digit [0-9A-Fa-f]. Uppercase: non...
+vim: \l \u # lowercase letter [a-z], uppercase letter
+vim: \w \s (\W \S) # word character [0-9A-Za-z_], whitespace char (space, tab). Uppercase: non...
+</code></pre></div>
 
-wsl: Config /c/Users/[name]/.wslconfig
+<h3 id="wsl">wsl</h3>
+<div class="codehilite"><pre><span></span><code><span class="nl">wsl</span><span class="p">:</span><span class="w"> </span><span class="n">Config</span><span class="w"> </span><span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">Users</span><span class="o">/[</span><span class="n">name</span><span class="o">]/</span><span class="p">.</span><span class="n">wslconfig</span>
 </code></pre></div>
         </div>
       </article>

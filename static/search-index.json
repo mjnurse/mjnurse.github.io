@@ -486,7 +486,7 @@
     "id": "69",
     "title": "Miscellaneous Notes",
     "url": "/notes/miscellaneous_notes.html",
-    "content": "Miscellaneous Notes The notes captured in the Linux notes tool = n. @esql &#39;SELECT id.value FROM &quot;quantexa-mdm-example-entity-store-business-all-data&quot;&#39; # Elasticsearch Excel: Open Drop-down in Cell - ALT-DOWN_ARROW Windows: WIN-H - turn on dictation apt: sudo apt autoclean # tidy the package cache apt: sudo apt autoremove # remove unrequired dependencies apt: sudo apt install ./download/apt.deb # install deb files bash: #!/usr/bin/env bash bash: cp file.txt{,.bak} # cp file.txt ",
+    "content": "Miscellaneous Notes The notes captured in the Linux notes tool = n. 7zip: 7z a -p -mhe=on archive.7z &lt;files_or_folders&gt; # -mhe=on - encrypt file contents and filenames/headers. ES ES: @esql &#39;SELECT id.value FROM &quot;quantexa-mdm-example-entity-store-business-all-data&quot;&#39; # Elasticsearch Excel Excel: Open Drop-down in Cell - ALT-DOWN_ARROW Windows Windows: WIN-H - turn on dictation apt apt: sudo apt autoclean # tidy the package cache apt: sudo apt autoremove # remove unrequired",
     "type": "page"
   },
   {
@@ -1046,7 +1046,7 @@
     "id": "149",
     "title": "n - Record and query notes",
     "url": "/linuxbash/script-n.html",
-    "content": "#!/usr/bin/env bash help_text=&quot; NAME n - Notes USAGE n [options] &lt;text - consider wrapping in quotes&gt; OPTIONS -h|--help Show this help message. -a|--add Add the &lt;text&gt; as a new note. -e|--edit Edit the notes text file. -m|--markdown Generate a markdown version of the notes file. DESCRIPTION Record and query notes. AUTHOR mjnurse.github.io - 2023 &quot; help_line=&quot;Record and query notes&quot; web_desc_line=&quot;Record and query notes&quot; nf=~/.notes.txt if [[ &quot;$1&quo",
+    "content": "#!/usr/bin/env bash help_text=&quot; NAME n - Notes USAGE n [options] &lt;text - consider wrapping in quotes&gt; OPTIONS -h|--help Show this help message. -a|--add Add the &lt;text&gt; as a new note. -e|--edit Edit the notes text file. -m|--markdown Generate a markdown version of the notes file. DESCRIPTION Record and query notes. AUTHOR mjnurse.github.io - 2026 &quot; help_line=&quot;Record and query notes&quot; web_desc_line=&quot;Record and query notes&quot; # Terminal Colours cdef=$&#39;\\e[3",
     "type": "page"
   },
   {
