@@ -103,6 +103,9 @@ apt: sudo apt autoremove # remove unrequired dependencies
 apt: sudo apt install ./download/apt.deb # install deb files
 
 bash: #!/usr/bin/env bash
+bash: cp file.txt{,.bak} # cp file.txt file.txt.bak
+bash: echo {0..10..2} # 0 -&gt; 10 in steps of 2: 0 2 4 6 8 10
+bash: echo {1,2}{a..e} # 1a 1b 1c 1d 1e 2a 2b 2c 2d 2e
 
 claude: Quick/simple → Haiku; Everything else → Sonnet; Hard problems → Opus
 
@@ -149,7 +152,7 @@ psql: \dn # list schemas
 psql: \dt # list tables
 psql: \l # list databases
 
-sed: sed -E # Extended - can use &#39;s/a+/b/&#39; rathen than &#39;s/a\+/b/&#39;
+sed: sed -E # Extended - can use &#39;s/a+/b/&#39; rather than &#39;s/a\+/b/&#39;
 sed: sed -E &#39;s/a+/b/&#39; # one or more a&#39;s.
 sed: sed -E &#39;s/a{2,5}/b/&#39; # between 2 and 5 a&#39;s
 
@@ -183,7 +186,7 @@ wsl: Config /c/Users/[name]/.wslconfig
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: July 23, 2026</p>
+      <p>Last updated: August 10, 2026</p>
     </footer>
 
     <div class="scroll-container">
