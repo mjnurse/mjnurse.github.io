@@ -167,11 +167,26 @@
 </tr>
 <tr>
 <td><code>sudo apt autoremove</code></td>
-<td>remove unrequired dependencies</td>
+<td>remove not required dependencies</td>
 </tr>
 <tr>
 <td><code>sudo apt install ./download/apt.deb</code></td>
 <td>install deb files</td>
+</tr>
+</tbody>
+</table>
+<h3 id="awk">awk</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cmd \|\| awk '{print $1, $3}'</code></td>
+<td>print 1st and 3rd space separated columns</td>
 </tr>
 </tbody>
 </table>
@@ -184,6 +199,14 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><code>!! !&lt;abc&gt; !!:p !&lt;abc&gt;:p</code></td>
+<td>Run last command (:p - print command)</td>
+</tr>
+<tr>
+<td><code>!^ !$ !:2 !:2-4</code></td>
+<td>First, Last, 2nd, 2nd to 4th arguments from prev command (!:0 is last command)</td>
+</tr>
 <tr>
 <td><code>#!/usr/bin/env bash</code></td>
 <td>First line bash script</td>
@@ -199,6 +222,10 @@
 <tr>
 <td><code>echo {1,2}{a..e}</code></td>
 <td>1a 1b 1c 1d 1e 2a 2b 2c 2d 2e</td>
+</tr>
+<tr>
+<td><code>o="$(!!)"</code></td>
+<td>Rerun last command and capture output eg. <code>which f.txt</code>, <code>o="$(!!)"</code>, <code>vi "$o"</code></td>
 </tr>
 </tbody>
 </table>
@@ -609,7 +636,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: August 10, 2026</p>
+      <p>Last updated: August 12, 2026</p>
     </footer>
 
     <div class="scroll-container">
