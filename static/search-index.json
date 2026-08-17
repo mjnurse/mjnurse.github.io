@@ -1046,7 +1046,7 @@
     "id": "149",
     "title": "n - Record and query notes",
     "url": "/linuxbash/script-n.html",
-    "content": "#!/usr/bin/env bash help_text=&quot; NAME n - Notes USAGE n [options] &lt;text - consider wrapping in quotes&gt; OPTIONS -h|--help Show this help message. -a|--add Add the &lt;text&gt; as a new note. -e|--edit Edit the notes text file. -m|--markdown Generate a markdown version of the notes file. DESCRIPTION Record and query notes. AUTHOR mjnurse.github.io - 2026 &quot; help_line=&quot;Record and query notes&quot; web_desc_line=&quot;Record and query notes&quot; # Terminal Colours cdef=$&#39;\\e[3",
+    "content": "#!/usr/bin/env bash help_text=&quot; NAME n - Notes USAGE n [options] &lt;text - consider wrapping in quotes&gt; OPTIONS -h|--help Show this help message. -a|--add Add the &lt;text&gt; as a new note. -e|--edit Edit the notes text file. -m|--markdown Generate a markdown version of the notes file. DESCRIPTION Record and query notes. Any note which contains the text &quot;[P]&quot; is a Private note. Private notes are not included in the markdown extract. AUTHOR mjnurse.github.io - 2026 &quot; help",
     "type": "page"
   },
   {
