@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="gen-bookmark-page - Generates a bookmark web page from a folder in the Chrome bookmarks bar" />
+    <meta name="description" content="gen-bookmark-page - Generates bookmark web pages from bookmarks JSON files" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>gen-bookmark-page - Generates a bookmark web page from a folder in the Chrome bookmarks bar</title>
+    <title>gen-bookmark-page - Generates bookmark web pages from bookmarks JSON files</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
@@ -90,65 +90,151 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-gen-bookmark-page.md">gen-bookmark-page - Generates a bookmark web page from a folder in the Chrome bookmarks bar</a></h1>
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-gen-bookmark-page.md">gen-bookmark-page - Generates bookmark web pages from bookmarks JSON files</a></h1>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 <span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
 <span class="s2">NAME</span>
-<span class="s2">  gen-bookmark-page - generates a bookmark web page from a folder in the Chrome bookmarks bar.</span>
+<span class="s2">  gen-bookmark-page - generates bookmark web pages from bookmarks JSON files.</span>
 
 <span class="s2">USAGE</span>
-<span class="s2">  gen-bookmark-page [options]</span>
+<span class="s2">  gen-bookmark-page [options] [filename]</span>
+<span class="s2">  gen-bookmark-page -a|--add &lt;page&gt; &lt;section&gt; &lt;title&gt; &lt;url&gt;</span>
+<span class="s2">  gen-bookmark-page -e|--edit &lt;page&gt;</span>
+
+<span class="s2">ARGUMENTS</span>
+<span class="s2">  filename</span>
+<span class="s2">    Optional JSON file to process. If not provided, processes all bookmarks-*.json files.</span>
 
 <span class="s2">OPTIONS</span>
+<span class="s2">  -a|--add &lt;page&gt; &lt;section&gt; &lt;title&gt; &lt;url&gt;</span>
+<span class="s2">    Add a new bookmark to the specified page. &lt;page&gt; is the page name after &#39;bookmarks-&#39;</span>
+<span class="s2">    in bookmarks-&lt;page&gt;.json (e.g., &#39;mjn&#39; for bookmarks-mjn.json, or leave</span>
+<span class="s2">    empty for bookmarks.json).</span>
+
+<span class="s2">  -e|--edit &lt;page&gt;</span>
+<span class="s2">    Open bookmarks-&lt;page&gt;.json in vi for editing. After saving, automatically</span>
+<span class="s2">    regenerates the HTML page.</span>
+
 <span class="s2">  -h|--help</span>
 <span class="s2">    Show help text.</span>
 
 <span class="s2">DESCRIPTION</span>
-<span class="s2">  Generates a bookmark web page from a folder in the Chrome bookmarks bar.</span>
+<span class="s2">  Generates HTML bookmark pages from JSON bookmark files. Output files have the same</span>
+<span class="s2">  base name as the input (e.g., bookmarks-mjn.json -&gt; bookmarks-mjn.html).</span>
+<span class="s2">  If no filename is provided, processes bookmarks.json and all bookmarks-*.json files</span>
+<span class="s2">  in the script directory.</span>
 
 <span class="s2">AUTHOR</span>
-<span class="s2">  mjnurse.github.io - 2022</span>
+<span class="s2">  mjnurse.github.io - 2026</span>
 <span class="s2">&quot;</span>
-<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Generates a bookmark web page from a folder in the Chrome bookmarks bar&quot;</span>
-<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Generates a bookmark web page from a folder in the Chrome bookmarks bar&quot;</span>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Generates bookmark web pages from bookmarks JSON files&quot;</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Generates bookmark web pages from bookmarks JSON files&quot;</span>
 
 <span class="nv">try</span><span class="o">=</span><span class="s2">&quot;Try </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h for more information&quot;</span>
 <span class="nv">tmp</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">help_text</span><span class="p">##*USAGE</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="nv">usage</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span>Usage:<span class="w"> </span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%OPTIONS*</span><span class="si">}</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="nv">usage</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span>Usage:<span class="w"> </span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%ARGUMENTS*</span><span class="si">}</span><span class="k">)</span><span class="s2">&quot;</span>
+
+<span class="nv">input_file</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="nv">add_mode</span><span class="o">=</span><span class="nb">false</span>
+<span class="nv">edit_mode</span><span class="o">=</span><span class="nb">false</span>
+<span class="nv">add_page</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="nv">add_section</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="nv">add_title</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="nv">add_url</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
 
 <span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span><span class="w"> </span>
+<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
 <span class="w">    </span>-h<span class="p">|</span>--help<span class="o">)</span>
 <span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
 <span class="w">      </span><span class="nb">exit</span>
 <span class="w">      </span><span class="p">;;</span>
-<span class="w">    </span>*<span class="o">)</span>
-<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">usage</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">try</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">      </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="w">    </span>-a<span class="p">|</span>--add<span class="o">)</span>
+<span class="w">      </span><span class="nv">add_mode</span><span class="o">=</span><span class="nb">true</span>
+<span class="w">      </span><span class="nb">shift</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span>-lt<span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Error: -a|--add requires 4 arguments: &lt;page&gt; &lt;section&gt; &lt;title&gt; &lt;url&gt;&quot;</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">try</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="w">      </span><span class="k">fi</span>
+<span class="w">      </span><span class="nv">add_page</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="w">      </span><span class="nv">add_section</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span>
+<span class="w">      </span><span class="nv">add_title</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$3</span><span class="s2">&quot;</span>
+<span class="w">      </span><span class="nv">add_url</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$4</span><span class="s2">&quot;</span>
+<span class="w">      </span><span class="nb">shift</span><span class="w"> </span><span class="m">3</span>
 <span class="w">      </span><span class="p">;;</span>
-<span class="w">  </span><span class="k">esac</span><span class="w"> </span>
+<span class="w">    </span>-e<span class="p">|</span>--edit<span class="o">)</span>
+<span class="w">      </span><span class="nv">edit_mode</span><span class="o">=</span><span class="nb">true</span>
+<span class="w">      </span><span class="nb">shift</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span>-lt<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Error: -e|--edit requires 1 argument: &lt;page&gt;&quot;</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">try</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="w">      </span><span class="k">fi</span>
+<span class="w">      </span><span class="nv">add_page</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="w">      </span><span class="p">;;</span>
+<span class="w">    </span>*<span class="o">)</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$input_file</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nv">input_file</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="w">      </span><span class="k">else</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">usage</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">try</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="w">      </span><span class="k">fi</span>
+<span class="w">      </span><span class="p">;;</span>
+<span class="w">  </span><span class="k">esac</span>
 <span class="w">  </span><span class="nb">shift</span>
-<span class="k">done</span><span class="w"> </span>
+<span class="k">done</span>
 
+<span class="nv">script_dir</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">cd</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>dirname<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">BASH_SOURCE</span><span class="p">[0]</span><span class="si">}</span><span class="s2">&quot;</span><span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">pwd</span><span class="k">)</span><span class="s2">&quot;</span>
 <span class="nv">winroot</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$MJNWINROOT</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/\//\\/g; s/\\c/C:/&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
 
-<span class="nv">bm_page</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$MJNWINROOT</span><span class="s2">/MJN/bookmarks.html&quot;</span>
-<span class="nv">bm_file</span><span class="o">=</span><span class="s2">&quot;/c/Users/MartinNurse/AppData/Local/Google/Chrome/User*Data/Default/Bookmarks&quot;</span>
-<span class="nv">tmp_file</span><span class="o">=</span><span class="s2">&quot;/tmp/bm.tmp&quot;</span>
+tidy<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">  </span><span class="nb">local</span><span class="w"> </span><span class="nv">bm_file</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="nb">local</span><span class="w"> </span><span class="nv">tmp_file</span><span class="o">=</span><span class="k">$(</span>mktemp<span class="k">)</span>
+<span class="w">  </span><span class="c1"># Sort sections and links alphabetically (case-insensitive), then apply standard formatting</span>
+<span class="w">  </span>jq<span class="w"> </span>-S<span class="w"> </span><span class="s1">&#39;</span>
+<span class="s1">    .sections |= (sort_by(.heading | ascii_downcase) |</span>
+<span class="s1">      map(.links |= sort_by(.title | ascii_downcase)))</span>
+<span class="s1">  &#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_file</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmp_file</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>mv<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmp_file</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_file</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="c1"># Compress JSON formatting to make file more concise to read.</span>
+<span class="w">  </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;</span>
+<span class="s1">    /{$/{N;s/\n */ /};</span>
+<span class="s1">    :a; N; s/\n *\(}[,]*$\)/ \1/; ta; P; D;</span>
+<span class="s1">  &#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_file</span><span class="s2">&quot;</span>
+<span class="w">  </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;</span>
+<span class="s1">    s/\(&quot;url&quot;:\)/\1  /;</span>
+<span class="s1">  &#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_file</span><span class="s2">&quot;</span>
+<span class="o">}</span>
 
-<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;&lt;META HTTP-EQUIV=&quot;Content-Type&quot; CONTENT=&quot;text/html; charset=UTF-8&quot;&gt;</span>
+<span class="c1"># Function to process a single bookmark file</span>
+process_bookmark_file<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">  </span><span class="nb">local</span><span class="w"> </span><span class="nv">bm_file</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+
+<span class="w">  </span><span class="c1"># Get the &quot;page&quot; field from JSON (mandatory)</span>
+<span class="w">  </span><span class="nb">local</span><span class="w"> </span><span class="nv">bm_page</span><span class="o">=</span><span class="k">$(</span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.page // empty&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_file</span><span class="s2">&quot;</span><span class="k">)</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_page</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Error: Missing required &#39;page&#39; field in </span><span class="nv">$bm_file</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="m">1</span>
+<span class="w">  </span><span class="k">fi</span>
+
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Processing: </span><span class="nv">$bm_file</span><span class="s2"> -&gt; </span><span class="nv">$bm_page</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="nv">tmp1</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">bm_file</span><span class="p">/.json/</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="nv">tmp2</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">tmp1</span><span class="p">/bookmarks-</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="nv">title</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">tmp2</span><span class="p">##*/</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;&lt;META HTTP-EQUIV=&quot;Content-Type&quot; CONTENT=&quot;text/html; charset=UTF-8&quot;&gt;</span>
 <span class="s1">&lt;head&gt;</span>
 <span class="s1">&lt;TITLE&gt;Bookmarks&lt;/TITLE&gt;</span>
 
 <span class="s1">&lt;link rel=&quot;icon&quot; type=&quot;image/x-icon&quot; href=&quot;&#39;</span><span class="s2">&quot;</span><span class="nv">$winroot</span><span class="s2">&quot;</span><span class="s1">&#39;\Pictures\Star.png&quot;&gt;</span>
 
 <span class="s1">&lt;style&gt;</span>
-<span class="s1">  h3, p {</span>
+<span class="s1">  h1,h3, p {</span>
 <span class="s1">    font-family: Arial, Helvetica, sans-serif;</span>
 <span class="s1">  }</span>
 <span class="s1">  p {</span>
-<span class="s1">    font-size: 12pt;</span>
+<span class="s1">    font-size: 11pt;</span>
 <span class="s1">  }</span>
 <span class="s1">  a {</span>
 <span class="s1">    color: #155799;</span>
@@ -157,8 +243,13 @@
 <span class="s1">  a:hover {</span>
 <span class="s1">    text-decoration: underline;</span>
 <span class="s1">  }</span>
+<span class="s1">  h1 {</span>
+<span class="s1">    font-size: 30pt;</span>
+<span class="s1">    text-align: center;</span>
+<span class="s1">    margin-top: 20px;</span>
+<span class="s1">  }</span>
 <span class="s1">  h3 {</span>
-<span class="s1">    font-size: 20pt;</span>
+<span class="s1">    font-size: 18pt;</span>
 <span class="s1">  }</span>
 <span class="s1">  table {</span>
 <span class="s1">    margin-left:auto;</span>
@@ -166,7 +257,7 @@
 <span class="s1">  }</span>
 <span class="s1">  table td  {</span>
 <span class="s1">    vertical-align: top;</span>
-<span class="s1">    width: 250px;</span>
+<span class="s1">    width: 300px;</span>
 <span class="s1">    border: 0px solid black;</span>
 <span class="s1">  }</span>
 <span class="s1">  .input {</span>
@@ -183,6 +274,7 @@
 <span class="s1">&lt;body scroll=&quot;no&quot; style=&quot;overflow: hidden&quot;&gt;</span>
 
 <span class="s1">&lt;div&gt;</span>
+<span class="s1">&lt;h1&gt;&#39;</span><span class="nv">$title</span><span class="s1">&#39;&lt;/h1&gt;</span>
 <span class="s1">&lt;div class=&quot;input&quot;&gt;</span>
 <span class="s1">  &lt;input type=&quot;text&quot; id=&quot;search&quot; onkeyup=&quot;search()&quot; style=&quot;visibility: hidden&quot;&gt;</span>
 <span class="s1">&lt;/div&gt;</span>
@@ -195,26 +287,29 @@
 <span class="s1">&lt;script&gt;</span>
 <span class="s1">  const l=[&#39;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_page</span><span class="s2">&quot;</span>
 
-cat<span class="w"> </span><span class="nv">$bm_file</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.roots.bookmark_bar.children[] |</span>
-<span class="s1">  select(.name == &quot;Page&quot;).children[] | .name&#39;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$tmp_file</span>
+<span class="w">  </span><span class="c1"># Read sections from bookmarks.json, sorted alphabetically by heading (case-insensitive)</span>
+<span class="w">  </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.sections | sort_by(.heading | ascii_downcase) | .[] | @base64&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_file</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="nv">IFS</span><span class="o">=</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>section<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="c1"># Decode section</span>
+<span class="w">    </span><span class="nv">section_data</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$section</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-d<span class="k">)</span>
 
-<span class="nb">let</span><span class="w"> </span><span class="nv">c</span><span class="o">=</span><span class="m">0</span>
-<span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>cat<span class="w"> </span><span class="nv">$tmp_file</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/&quot;//g&#39;</span><span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$c</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;{c:</span><span class="nv">$c</span><span class="s2">},&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_page</span><span class="s2">&quot;</span>
-<span class="w">  </span><span class="k">fi</span>
-<span class="w">  </span><span class="nb">let</span><span class="w"> </span><span class="nv">c</span><span class="o">=</span>c+1
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{s:&quot;&#39;</span><span class="nv">$f</span><span class="s1">&#39;&quot;},&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_page</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="c1"># Get heading</span>
+<span class="w">    </span><span class="nv">heading</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$section_data</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.heading&#39;</span><span class="k">)</span>
 
-<span class="w">  </span>cat<span class="w"> </span><span class="nv">$bm_file</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.roots.bookmark_bar.children[] | </span>
-<span class="s1">    select(.name == &quot;Page&quot;).children[] | </span>
-<span class="s1">    select (.name == &quot;&#39;</span><span class="nv">$f</span><span class="s1">&#39;&quot;).children[] | </span>
-<span class="s1">    &quot;{t:#&quot; + .name + &quot;#, h:#&quot; + .url + &quot;#},&quot;&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/&quot;//g; s/#/&quot;/g&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_page</span><span class="s2">&quot;</span>
-<span class="k">done</span>
+<span class="w">    </span><span class="c1"># Add column break if not first section</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_page</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s1">&#39;{s:&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_page</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">      </span><span class="c1"># Count existing sections to determine column breaks</span>
+<span class="w">      </span><span class="nv">section_count</span><span class="o">=</span><span class="k">$(</span>grep<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;{s:&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_page</span><span class="s2">&quot;</span><span class="k">)</span>
+<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;{c:</span><span class="nv">$section_count</span><span class="s2">},&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_page</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">fi</span>
 
-rm<span class="w"> </span>-f<span class="w"> </span><span class="nv">$tmp_file</span>
+<span class="w">    </span><span class="c1"># Add section heading</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{s:&quot;&#39;</span><span class="s2">&quot;</span><span class="nv">$heading</span><span class="s2">&quot;</span><span class="s1">&#39;&quot;},&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_page</span><span class="s2">&quot;</span>
 
-<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;  ]</span>
+<span class="w">    </span><span class="c1"># Add links, sorted alphabetically by title (case-insensitive)</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$section_data</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.links | sort_by(.title | ascii_downcase) | .[] | &quot;{t:\&quot;&quot; + .title + &quot;\&quot;, h:\&quot;&quot; + .url + &quot;\&quot;},&quot;&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_page</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="k">done</span>
+
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;  ]</span>
 <span class="s1">  let lDiv=document.getElementById(&quot;links&quot;);</span>
 <span class="s1">  let h=&quot;&lt;table&gt;&lt;tr&gt;&lt;td&gt;&quot;;</span>
 <span class="s1">  let s=&quot;&quot;;</span>
@@ -370,6 +465,130 @@ rm<span class="w"> </span>-f<span class="w"> </span><span class="nv">$tmp_file</
 
 <span class="s1">&lt;/script&gt;</span>
 <span class="s1">&lt;/body&gt;&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_page</span><span class="s2">&quot;</span>
+<span class="o">}</span>
+
+<span class="c1"># Main logic: edit, add bookmark, or process files</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$edit_mode</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="c1"># Edit mode</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$add_page</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Error: -e|--edit requires a page name&quot;</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="w">  </span><span class="k">fi</span>
+
+<span class="w">  </span><span class="nv">bm_file</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$script_dir</span><span class="s2">/bookmarks-</span><span class="si">${</span><span class="nv">add_page</span><span class="si">}</span><span class="s2">.json&quot;</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_file</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Error: File not found: </span><span class="nv">$bm_file</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="w">  </span><span class="k">fi</span>
+
+<span class="w">  </span><span class="c1"># Open in vi</span>
+<span class="w">  </span>vi<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_file</span><span class="s2">&quot;</span>
+
+<span class="w">  </span><span class="c1"># Regenerate the HTML page</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Regenerating HTML page...&quot;</span>
+<span class="w">  </span>process_bookmark_file<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_file</span><span class="s2">&quot;</span>
+<span class="w">  </span>tidy<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_file</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Done.&quot;</span>
+
+<span class="k">elif</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$add_mode</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="c1"># Add bookmark mode</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$add_page</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nv">bm_file</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$script_dir</span><span class="s2">/bookmarks.json&quot;</span>
+<span class="w">    </span><span class="nv">bm_page</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$MJNWINROOT</span><span class="s2">/MJN/bookmarks.html&quot;</span>
+<span class="w">  </span><span class="k">else</span>
+<span class="w">    </span><span class="nv">bm_file</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$script_dir</span><span class="s2">/bookmarks-</span><span class="si">${</span><span class="nv">add_page</span><span class="si">}</span><span class="s2">.json&quot;</span>
+<span class="w">    </span><span class="nv">bm_page</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$MJNWINROOT</span><span class="s2">/MJN/bookmarks-</span><span class="si">${</span><span class="nv">add_page</span><span class="si">}</span><span class="s2">.html&quot;</span>
+<span class="w">  </span><span class="k">fi</span>
+
+<span class="w">  </span><span class="c1"># Create file if it doesn&#39;t exist</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_file</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Creating new bookmark file: </span><span class="nv">$bm_file</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nv">tmp_file</span><span class="o">=</span><span class="k">$(</span>mktemp<span class="k">)</span>
+<span class="w">    </span>jq<span class="w"> </span>-n<span class="w"> </span>--arg<span class="w"> </span>page<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_page</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">          </span>--arg<span class="w"> </span>section<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$add_section</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">          </span>--arg<span class="w"> </span>title<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$add_title</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">          </span>--arg<span class="w"> </span>url<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$add_url</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">          </span><span class="s1">&#39;{</span>
+<span class="s1">            page: $page,</span>
+<span class="s1">            sections: [</span>
+<span class="s1">              {</span>
+<span class="s1">                heading: $section,</span>
+<span class="s1">                links: [</span>
+<span class="s1">                  {</span>
+<span class="s1">                    title: $title,</span>
+<span class="s1">                    url: $url</span>
+<span class="s1">                  }</span>
+<span class="s1">                ]</span>
+<span class="s1">              }</span>
+<span class="s1">            ]</span>
+<span class="s1">          }&#39;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmp_file</span><span class="s2">&quot;</span>
+<span class="w">    </span>mv<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmp_file</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_file</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Added bookmark &#39;</span><span class="nv">$add_title</span><span class="s2">&#39; to new section &#39;</span><span class="nv">$add_section</span><span class="s2">&#39; in </span><span class="nv">$bm_file</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="k">else</span>
+<span class="w">    </span><span class="c1"># File exists, check if section exists</span>
+<span class="w">    </span><span class="nv">section_exists</span><span class="o">=</span><span class="k">$(</span>jq<span class="w"> </span>--arg<span class="w"> </span>section<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$add_section</span><span class="s2">&quot;</span><span class="w"> </span><span class="s1">&#39;.sections[] | select(.heading == $section) | .heading&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_file</span><span class="s2">&quot;</span><span class="k">)</span>
+
+<span class="w">    </span><span class="nv">tmp_file</span><span class="o">=</span><span class="k">$(</span>mktemp<span class="k">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$section_exists</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">      </span><span class="c1"># Section doesn&#39;t exist, create it with the bookmark</span>
+<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Creating new section &#39;</span><span class="nv">$add_section</span><span class="s2">&#39; in </span><span class="nv">$bm_file</span><span class="s2">&quot;</span>
+<span class="w">      </span>jq<span class="w"> </span>--arg<span class="w"> </span>section<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$add_section</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">         </span>--arg<span class="w"> </span>title<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$add_title</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">         </span>--arg<span class="w"> </span>url<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$add_url</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">         </span><span class="s1">&#39;.sections += [{&quot;heading&quot;: $section, &quot;links&quot;: [{&quot;title&quot;: $title, &quot;url&quot;: $url}]}]&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">         </span><span class="s2">&quot;</span><span class="nv">$bm_file</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmp_file</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">      </span><span class="c1"># Section exists, add bookmark to it</span>
+<span class="w">      </span>jq<span class="w"> </span>--arg<span class="w"> </span>section<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$add_section</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">         </span>--arg<span class="w"> </span>title<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$add_title</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">         </span>--arg<span class="w"> </span>url<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$add_url</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">         </span><span class="s1">&#39;(.sections[] | select(.heading == $section).links) += [{&quot;title&quot;: $title, &quot;url&quot;: $url}]&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">         </span><span class="s2">&quot;</span><span class="nv">$bm_file</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmp_file</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">fi</span>
+
+<span class="w">    </span>mv<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmp_file</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_file</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Added bookmark &#39;</span><span class="nv">$add_title</span><span class="s2">&#39; to section &#39;</span><span class="nv">$add_section</span><span class="s2">&#39; in </span><span class="nv">$bm_file</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="k">fi</span>
+
+<span class="w">  </span><span class="c1"># Regenerate the HTML page</span>
+<span class="w">  </span>process_bookmark_file<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_file</span><span class="s2">&quot;</span>
+
+<span class="k">elif</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$input_file</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="c1"># Process single file</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$input_file</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="c1"># Try with script directory prefix</span>
+<span class="w">    </span><span class="nv">input_file</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$script_dir</span><span class="s2">/</span><span class="nv">$input_file</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$input_file</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Error: File not found: </span><span class="nv">$input_file</span><span class="s2">&quot;</span>
+<span class="w">      </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="w">  </span><span class="k">fi</span>
+<span class="w">  </span>process_bookmark_file<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$input_file</span><span class="s2">&quot;</span>
+<span class="k">else</span>
+<span class="w">  </span><span class="c1"># Process bookmarks.json and all bookmarks-*.json files</span>
+<span class="w">  </span><span class="nv">found</span><span class="o">=</span><span class="m">0</span>
+
+<span class="w">  </span><span class="c1"># Check for bookmarks.json first</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$script_dir</span><span class="s2">/bookmarks.json&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span>process_bookmark_file<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$script_dir</span><span class="s2">/bookmarks.json&quot;</span>
+<span class="w">    </span><span class="nv">found</span><span class="o">=</span><span class="m">1</span>
+<span class="w">  </span><span class="k">fi</span>
+
+<span class="w">  </span><span class="c1"># Then process all bookmarks-*.json files</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span>bm_file<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$script_dir</span><span class="s2">&quot;</span>/bookmarks-*.json<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_file</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">      </span>process_bookmark_file<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_file</span><span class="s2">&quot;</span>
+<span class="w">      </span>tidy<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_file</span><span class="s2">&quot;</span>
+<span class="w">      </span><span class="nv">found</span><span class="o">=</span><span class="m">1</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="w">  </span><span class="k">done</span>
+
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$found</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;No bookmarks.json or bookmarks-*.json files found in </span><span class="nv">$script_dir</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="w">  </span><span class="k">fi</span>
+<span class="k">fi</span>
 </code></pre></div>
         </div>
       </article>
@@ -388,7 +607,7 @@ rm<span class="w"> </span>-f<span class="w"> </span><span class="nv">$tmp_file</
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: January 12, 2026</p>
+      <p>Last updated: August 19, 2026</p>
     </footer>
 
     <div class="scroll-container">
