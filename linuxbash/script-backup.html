@@ -97,7 +97,7 @@
 <span class="s2">    backup - Create a dated zip archive of files and directories.</span>
 
 <span class="s2">USAGE</span>
-<span class="s2">    backup [options] [&lt;backup_name&gt;] [&lt;file_or_directory&gt;] [...]</span>
+<span class="s2">    backup [options] &lt;backup_name&gt; &lt;file_or_directory&gt; [&lt;file_or_directory&gt; ...]</span>
 
 <span class="s2">OPTIONS</span>
 <span class="s2">    -h|--help</span>
@@ -184,14 +184,9 @@
 <span class="w">    </span><span class="nb">exit</span>
 <span class="k">fi</span>
 
-<span class="c1"># First argument is the NAME</span>
 <span class="nv">NAME</span><span class="o">=</span><span class="nv">$1</span>
 <span class="nb">shift</span>
-
-<span class="c1"># Date in yymmdd format</span>
 <span class="nv">DATE</span><span class="o">=</span><span class="k">$(</span>date<span class="w"> </span>+%y%m%d<span class="k">)</span>
-
-<span class="c1"># Output zip filename</span>
 <span class="nv">ZIPFILE</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">NAME</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">DATE</span><span class="si">}</span><span class="s2">.zip&quot;</span>
 
 <span class="c1"># Ensure BACKUP_DIR exists</span>
@@ -245,7 +240,7 @@ mv<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ZIPFIL
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: May 13, 2026</p>
+      <p>Last updated: August 19, 2026</p>
     </footer>
 
     <div class="scroll-container">
