@@ -178,7 +178,7 @@
 <span class="s1">          &#39;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;/^$/{N;/^\n$/D;}&#39;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;/^$/{ N; </span>
-<span class="s1">           s/\n\([^ \t][^ \t]*\)/\n\n### \1\n\n|---|---|\n\1/ }&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="s1">           s/\n\([^ \t][^ \t]*\)/\n\n### \1\n\n|||\n|---|---|\n\1/ }&#39;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;1,2d;</span>
 <span class="s1">           s/^\(###.*\):/\1/;</span>
 <span class="s1">           s/^[^:]\+: *//;</span>

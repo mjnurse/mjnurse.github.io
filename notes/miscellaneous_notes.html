@@ -93,118 +93,532 @@
           <h1 id="miscellaneous-notes">Miscellaneous Notes</h1>
 <p>The notes captured in the Linux notes tool = <code>n</code>.</p>
 <h3 id="7zip">7zip</h3>
-<p>|---|---|
-|<code>7z a -p -mhe=on archive.7z &lt;files_or_folders&gt;</code>|-mhe=on - encrypt file contents and filenames/headers.|</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>7z a -p -mhe=on archive.7z &lt;files_or_folders&gt;</code></td>
+<td>-mhe=on - encrypt file contents and filenames/headers.</td>
+</tr>
+</tbody>
+</table>
 <h3 id="es">ES</h3>
-<p>|---|---|
-|<code>@esql 'SELECT id.value FROM "quantexa-mdm-example-entity-store-business-all-data"'</code>|Elasticsearch SQL|</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>@esql 'SELECT id.value FROM "quantexa-mdm-example-entity-store-business-all-data"'</code></td>
+<td>Elasticsearch SQL</td>
+</tr>
+</tbody>
+</table>
 <h3 id="excel">Excel</h3>
-<p>|---|---|
-|Open Drop-down in Cell - ALT-DOWN_ARROW||</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Open Drop-down in Cell - ALT-DOWN_ARROW</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h3 id="windows">Windows</h3>
-<p>|---|---|
-|WIN-H - turn on dictation||</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>WIN-H - turn on dictation</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h3 id="apt">apt</h3>
-<p>|---|---|
-|<code>sudo apt autoclean</code>|tidy the package cache|
-|<code>sudo apt autoremove</code>|remove not required dependencies|
-|<code>sudo apt install ./download/apt.deb</code>|install deb files|</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sudo apt autoclean</code></td>
+<td>tidy the package cache</td>
+</tr>
+<tr>
+<td><code>sudo apt autoremove</code></td>
+<td>remove not required dependencies</td>
+</tr>
+<tr>
+<td><code>sudo apt install ./download/apt.deb</code></td>
+<td>install deb files</td>
+</tr>
+</tbody>
+</table>
 <h3 id="awk">awk</h3>
-<p>|---|---|
-|<code>cmd \|\| awk '{print $1, $3}'</code>|print 1st and 3rd space separated columns|</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>cmd \|\| awk '{print $1, $3}'</code></td>
+<td>print 1st and 3rd space separated columns</td>
+</tr>
+</tbody>
+</table>
 <h3 id="bash">bash</h3>
-<p>|---|---|
-|<code>!! !&lt;abc&gt; !!:p !&lt;abc&gt;:p</code>|Run last command (:p - print command)|
-|<code>!^ !$ !:2 !:2-4</code>|First, Last, 2nd, 2nd to 4th arguments from prev command (!:0 is last command)|
-|<code>#!/usr/bin/env bash</code>|First line bash script|
-|<code>cp file.txt{,.bak}</code>|cp file.txt file.txt.bak|
-|<code>echo {0..10..2}</code>|0 -&gt; 10 in steps of 2: 0 2 4 6 8 10|
-|<code>echo {1,2}{a..e}</code>|1a 1b 1c 1d 1e 2a 2b 2c 2d 2e|
-|<code>o="$(!!)"</code>|Rerun last command and capture output eg. <code>which f.txt</code>, <code>o="$(!!)"</code>, <code>vi "$o"</code>|</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>!! !&lt;abc&gt; !!:p !&lt;abc&gt;:p</code></td>
+<td>Run last command (:p - print command)</td>
+</tr>
+<tr>
+<td><code>!^ !$ !:2 !:2-4</code></td>
+<td>First, Last, 2nd, 2nd to 4th arguments from prev command (!:0 is last command)</td>
+</tr>
+<tr>
+<td><code>#!/usr/bin/env bash</code></td>
+<td>First line bash script</td>
+</tr>
+<tr>
+<td><code>cp file.txt{,.bak}</code></td>
+<td>cp file.txt file.txt.bak</td>
+</tr>
+<tr>
+<td><code>echo {0..10..2}</code></td>
+<td>0 -&gt; 10 in steps of 2: 0 2 4 6 8 10</td>
+</tr>
+<tr>
+<td><code>echo {1,2}{a..e}</code></td>
+<td>1a 1b 1c 1d 1e 2a 2b 2c 2d 2e</td>
+</tr>
+<tr>
+<td><code>o="$(!!)"</code></td>
+<td>Rerun last command and capture output eg. <code>which f.txt</code>, <code>o="$(!!)"</code>, <code>vi "$o"</code></td>
+</tr>
+</tbody>
+</table>
 <h3 id="claude">claude</h3>
-<p>|---|---|
-|Quick/simple → Haiku; Everything else → Sonnet; Hard problems → Opus||</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Quick/simple → Haiku; Everything else → Sonnet; Hard problems → Opus</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h3 id="code">code</h3>
-<p>|---|---|
-|ALT+z - Enable word wrap||
-|CTRL+, - Open Settings||
-|CTRL+. - Fix problem||
-|CTRL+; - Find next problem (I added this shortcut)||
-|CTRL+k CTRL+s - Open Keyboard Shortcuts||
-|CTRL-k v - View markdown and markdown preview side by side||</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ALT+z - Enable word wrap</td>
+<td></td>
+</tr>
+<tr>
+<td>CTRL+, - Open Settings</td>
+<td></td>
+</tr>
+<tr>
+<td>CTRL+. - Fix problem</td>
+<td></td>
+</tr>
+<tr>
+<td>CTRL+; - Find next problem (I added this shortcut)</td>
+<td></td>
+</tr>
+<tr>
+<td>CTRL+k CTRL+s - Open Keyboard Shortcuts</td>
+<td></td>
+</tr>
+<tr>
+<td>CTRL-k v - View markdown and markdown preview side by side</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h3 id="column">column</h3>
-<p>|---|---|
-|<code>column -J -s"," -N col1,col2</code>|format csv as JSON with attribute names col1, col2|
-|<code>column -t -s"," -N col1,col2</code>|format csv as a table with headings col1, col2|</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>column -J -s"," -N col1,col2</code></td>
+<td>format csv as JSON with attribute names col1, col2</td>
+</tr>
+<tr>
+<td><code>column -t -s"," -N col1,col2</code></td>
+<td>format csv as a table with headings col1, col2</td>
+</tr>
+</tbody>
+</table>
 <h3 id="find">find</h3>
-<p>|---|---|
-|<code>find . -name "*.jar" -exec du -h {} \;</code>|Find the size of jar files|
-|<code>find . -type d -name ".git"</code>|Find directories|
-|<code>find . -type d -name .git -prune -o -type f -name *.py -print</code>|exclude .git directories|
-|<code>find . -type f -mtime +90</code>|Find files last modified at least 90 days ago|</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>find . -name "*.jar" -exec du -h {} \;</code></td>
+<td>Find the size of jar files</td>
+</tr>
+<tr>
+<td><code>find . -type d -name ".git"</code></td>
+<td>Find directories</td>
+</tr>
+<tr>
+<td><code>find . -type d -name .git -prune -o -type f -name *.py -print</code></td>
+<td>exclude .git directories</td>
+</tr>
+<tr>
+<td><code>find . -type f -mtime +90</code></td>
+<td>Find files last modified at least 90 days ago</td>
+</tr>
+</tbody>
+</table>
 <h3 id="gcp">gcp</h3>
-<p>|---|---|
-|gcloud auth login --no-launch-browser||</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>gcloud auth login --no-launch-browser</td>
+<td></td>
+</tr>
+</tbody>
+</table>
 <h3 id="git">git</h3>
-<p>|---|---|
-|<code>git checkout tags/&lt;tag name&gt;</code>|checkout a git tag.|
-|<code>git push --set-upstream origin main</code>|set main as default origin branch|</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>git checkout tags/&lt;tag name&gt;</code></td>
+<td>checkout a git tag.</td>
+</tr>
+<tr>
+<td><code>git push --set-upstream origin main</code></td>
+<td>set main as default origin branch</td>
+</tr>
+</tbody>
+</table>
 <h3 id="grep">grep</h3>
-<p>|---|---|
-|<code>grep -v ...</code>|to invert the match|</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>grep -v ...</code></td>
+<td>to invert the match</td>
+</tr>
+</tbody>
+</table>
 <h3 id="if">if</h3>
-<p>|---|---|
-|<code>if [[ -n "$var" ]]</code>|Non-zero length / not empty check|
-|<code>if [[ -z "$var" ]]</code>|Zero length / empty check|</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>if [[ -n "$var" ]]</code></td>
+<td>Non-zero length / not empty check</td>
+</tr>
+<tr>
+<td><code>if [[ -z "$var" ]]</code></td>
+<td>Zero length / empty check</td>
+</tr>
+</tbody>
+</table>
 <h3 id="ln">ln</h3>
-<p>|---|---|
-|<code>ln -s &lt;target_file_or_dir&gt; [&lt;link_name&gt;]</code>|-s symbolic link (ie a pointer), hard link is same item two names|</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ln -s &lt;target_file_or_dir&gt; [&lt;link_name&gt;]</code></td>
+<td>-s symbolic link (ie a pointer), hard link is same item two names</td>
+</tr>
+</tbody>
+</table>
 <h3 id="postgres">postgres</h3>
-<p>|---|---|
-|<code>ALTER ROLE &lt;username&gt; SET search_path TO &lt;schema name&gt;;</code>|Permanently alter search_path.|
-|<code>SET search_path TO &lt;schema name&gt;;</code>|Alter the schema searched.|
-|<code>SHOW search_path;</code>|show the currently search schema.|
-|<code>export PGPASSWORD=postgres</code>|Set password|
-|<code>export PGPASSWORD=postgres; cat my.sql \| psql -h localhost -U postgres -d postgres</code>|Run my.sql|</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ALTER ROLE &lt;username&gt; SET search_path TO &lt;schema name&gt;;</code></td>
+<td>Permanently alter search_path.</td>
+</tr>
+<tr>
+<td><code>SET search_path TO &lt;schema name&gt;;</code></td>
+<td>Alter the schema searched.</td>
+</tr>
+<tr>
+<td><code>SHOW search_path;</code></td>
+<td>show the currently search schema.</td>
+</tr>
+<tr>
+<td><code>export PGPASSWORD=postgres</code></td>
+<td>Set password</td>
+</tr>
+<tr>
+<td><code>export PGPASSWORD=postgres; cat my.sql \| psql -h localhost -U postgres -d postgres</code></td>
+<td>Run my.sql</td>
+</tr>
+</tbody>
+</table>
 <h3 id="ps">ps</h3>
-<p>|---|---|
-|<code>ps auxww</code>|list linux processes, ww - show full command, do not truncate|</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ps auxww</code></td>
+<td>list linux processes, ww - show full command, do not truncate</td>
+</tr>
+</tbody>
+</table>
 <h3 id="psql">psql</h3>
-<p>|---|---|
-|<code>SET search_path=&lt;schema&gt;[,&lt;schema&gt;];</code>|set current schema(s)|
-|<code>SHOW search_path;</code>|show current schema(s)|
-|<code>\c &lt;db&gt;</code>|connect to database|
-|<code>\d &lt;table&gt;</code>|describe table|
-|<code>\dn</code>|list schemas|
-|<code>\dt</code>|list tables|
-|<code>\l</code>|list databases|</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SET search_path=&lt;schema&gt;[,&lt;schema&gt;];</code></td>
+<td>set current schema(s)</td>
+</tr>
+<tr>
+<td><code>SHOW search_path;</code></td>
+<td>show current schema(s)</td>
+</tr>
+<tr>
+<td><code>\c &lt;db&gt;</code></td>
+<td>connect to database</td>
+</tr>
+<tr>
+<td><code>\d &lt;table&gt;</code></td>
+<td>describe table</td>
+</tr>
+<tr>
+<td><code>\dn</code></td>
+<td>list schemas</td>
+</tr>
+<tr>
+<td><code>\dt</code></td>
+<td>list tables</td>
+</tr>
+<tr>
+<td><code>\l</code></td>
+<td>list databases</td>
+</tr>
+</tbody>
+</table>
 <h3 id="sed">sed</h3>
-<p>|---|---|
-|<code>sed -E</code>|Extended - can use 's/a+/b/' rather than 's/a+/b/'|
-|<code>sed -E 's/a+/b/'</code>|one or more a's.|
-|<code>sed -E 's/a{2,5}/b/'</code>|between 2 and 5 a's|</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sed -E</code></td>
+<td>Extended - can use 's/a+/b/' rather than 's/a+/b/'</td>
+</tr>
+<tr>
+<td><code>sed -E 's/a+/b/'</code></td>
+<td>one or more a's.</td>
+</tr>
+<tr>
+<td><code>sed -E 's/a{2,5}/b/'</code></td>
+<td>between 2 and 5 a's</td>
+</tr>
+</tbody>
+</table>
 <h3 id="sort">sort</h3>
-<p>|---|---|
-|<code>sort -h</code>|Sort human readable numbers eg 1.2GB, 9KB|</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sort -h</code></td>
+<td>Sort human readable numbers eg 1.2GB, 9KB</td>
+</tr>
+</tbody>
+</table>
 <h3 id="tar">tar</h3>
-<p>|---|---|
-|<code>tar -cvzf filename sourcedir</code>|Create tarball.|
-|<code>tar -xvzf &lt;filename&gt;</code>|Extract zipped tarball.|</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tar -cvzf filename sourcedir</code></td>
+<td>Create tarball.</td>
+</tr>
+<tr>
+<td><code>tar -xvzf &lt;filename&gt;</code></td>
+<td>Extract zipped tarball.</td>
+</tr>
+</tbody>
+</table>
 <h3 id="tr">tr</h3>
-<p>|---|---|
-|<code>tr A-Z a-z</code>|lowercase|
-|<code>tr a-z A-Z</code>|uppercase|</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tr A-Z a-z</code></td>
+<td>lowercase</td>
+</tr>
+<tr>
+<td><code>tr a-z A-Z</code></td>
+<td>uppercase</td>
+</tr>
+</tbody>
+</table>
 <h3 id="vim">vim</h3>
-<p>|---|---|
-|<code>/lala\C # Make search case sensitive (..\c - insensitive)</code>|sed, regex|
-|<code>:%!sort -R # Random order - calling external app to order</code>|sed, regex|
-|<code>\a (\A) # alphabetic character [A-Za-z]. Uppercase: non ...</code>|sed, regex|
-|<code>\d \x (\D \X) # digit [0-9], hex digit [0-9A-Fa-f]. Uppercase: non...</code>|sed, regex|
-|<code>\l \u # lowercase letter [a-z], uppercase letter</code>|sed, regex|
-|<code>\w \s (\W \S) # word character [0-9A-Za-z_], whitespace char (space, tab). Uppercase: non...</code>|sed, regex|</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/lala\C # Make search case sensitive (..\c - insensitive)</code></td>
+<td>sed, regex</td>
+</tr>
+<tr>
+<td><code>:%!sort -R # Random order - calling external app to order</code></td>
+<td>sed, regex</td>
+</tr>
+<tr>
+<td><code>\a (\A) # alphabetic character [A-Za-z]. Uppercase: non ...</code></td>
+<td>sed, regex</td>
+</tr>
+<tr>
+<td><code>\d \x (\D \X) # digit [0-9], hex digit [0-9A-Fa-f]. Uppercase: non...</code></td>
+<td>sed, regex</td>
+</tr>
+<tr>
+<td><code>\l \u # lowercase letter [a-z], uppercase letter</code></td>
+<td>sed, regex</td>
+</tr>
+<tr>
+<td><code>\w \s (\W \S) # word character [0-9A-Za-z_], whitespace char (space, tab). Uppercase: non...</code></td>
+<td>sed, regex</td>
+</tr>
+</tbody>
+</table>
 <h3 id="wsl">wsl</h3>
-<p>|---|---|
-|<code>/c/Users/[name]/.wslconfig</code>|WSL Config|</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/c/Users/[name]/.wslconfig</code></td>
+<td>WSL Config</td>
+</tr>
+</tbody>
+</table>
         </div>
       </article>
     </main>
