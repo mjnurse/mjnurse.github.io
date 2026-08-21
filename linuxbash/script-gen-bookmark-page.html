@@ -256,14 +256,15 @@ process_bookmark_file<span class="o">()</span><span class="w"> </span><span clas
 <span class="s1">  h3 {</span>
 <span class="s1">    font-size: 18pt;</span>
 <span class="s1">  }</span>
-<span class="s1">  table {</span>
-<span class="s1">    margin-left:auto;</span>
-<span class="s1">    margin-right:auto;</span>
+<span class="s1">  .sections-container {</span>
+<span class="s1">    display: flex;</span>
+<span class="s1">    flex-wrap: wrap;</span>
+<span class="s1">    justify-content: center;</span>
 <span class="s1">  }</span>
-<span class="s1">  table td  {</span>
+<span class="s1">  .section {</span>
+<span class="s1">    min-width: 250px;</span>
 <span class="s1">    vertical-align: top;</span>
-<span class="s1">    width: 300px;</span>
-<span class="s1">    border: 0px solid black;</span>
+<span class="s1">    margin: 10px;</span>
 <span class="s1">  }</span>
 <span class="s1">  .input {</span>
 <span class="s1">    width: 300px;</span>
@@ -284,61 +285,44 @@ process_bookmark_file<span class="o">()</span><span class="w"> </span><span clas
 <span class="s1">&lt;div class=&quot;input&quot;&gt;</span>
 <span class="s1">  &lt;input type=&quot;text&quot; id=&quot;search&quot; onkeyup=&quot;search()&quot; style=&quot;visibility: hidden&quot;&gt;</span>
 <span class="s1">&lt;/div&gt;</span>
-<span class="s1">&lt;div id=&quot;links&quot;&gt;</span>
-<span class="s1">&lt;/div&gt;</span>
 
-<span class="s1">&lt;p style=&quot;text-align: center; color: #BBBBBB; font-size: 12px&quot;&gt;Last Updated: &#39;</span><span class="k">$(</span>date<span class="k">)</span><span class="s1">&#39;&lt;/p&gt;</span>
+<span class="s1">&lt;div class=&quot;sections-container&quot;&gt;</span>
+<span class="s1">&#39;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_page</span><span class="s2">&quot;</span>
 
-<span class="s1">&lt;/div&gt;</span>
-<span class="s1">&lt;script&gt;</span>
-<span class="s1">  const l=[&#39;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_page</span><span class="s2">&quot;</span>
-
-<span class="w">  </span><span class="c1"># Read sections from bookmarks.json, sorted alphabetically by heading (case-insensitive)</span>
-<span class="w">  </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.sections | sort_by(.heading | ascii_downcase) | .[] | @base64&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_file</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="nv">IFS</span><span class="o">=</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>section<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="c1"># Build all sections with continuous numbering</span>
+<span class="w">  </span><span class="c1"># Use process substitution to avoid subshell and maintain pos counter</span>
+<span class="w">  </span><span class="nv">pos</span><span class="o">=</span><span class="m">1</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="nv">IFS</span><span class="o">=</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>section<span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">    </span><span class="c1"># Decode section</span>
 <span class="w">    </span><span class="nv">section_data</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$section</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-d<span class="k">)</span>
 
 <span class="w">    </span><span class="c1"># Get heading</span>
 <span class="w">    </span><span class="nv">heading</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$section_data</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.heading&#39;</span><span class="k">)</span>
 
-<span class="w">    </span><span class="c1"># Add column break if not first section</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_page</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s1">&#39;{s:&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_page</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">      </span><span class="c1"># Count existing sections to determine column breaks</span>
-<span class="w">      </span><span class="nv">section_count</span><span class="o">=</span><span class="k">$(</span>grep<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;{s:&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_page</span><span class="s2">&quot;</span><span class="k">)</span>
-<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;{c:</span><span class="nv">$section_count</span><span class="s2">},&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_page</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="k">fi</span>
-
-<span class="w">    </span><span class="c1"># Add section heading</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;{s:&quot;&#39;</span><span class="s2">&quot;</span><span class="nv">$heading</span><span class="s2">&quot;</span><span class="s1">&#39;&quot;},&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_page</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="c1"># Start new section div</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;&lt;div class=&quot;section&quot;&gt;&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_page</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&lt;h3&gt;</span><span class="nv">$heading</span><span class="s2">&lt;/h3&gt;&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_page</span><span class="s2">&quot;</span>
 
 <span class="w">    </span><span class="c1"># Add links, sorted alphabetically by title (case-insensitive)</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$section_data</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.links | sort_by(.title | ascii_downcase) | .[] | &quot;{t:\&quot;&quot; + .title + &quot;\&quot;, h:\&quot;&quot; + .url + &quot;\&quot;},&quot;&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_page</span><span class="s2">&quot;</span>
-<span class="w">  </span><span class="k">done</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="nv">IFS</span><span class="o">=</span><span class="s1">$&#39;\t&#39;</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>link_title<span class="w"> </span>link_url<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&lt;p&gt;&lt;a id=\&quot;item</span><span class="nv">$pos</span><span class="s2">\&quot; href=\&quot;</span><span class="nv">$link_url</span><span class="s2">\&quot; target=\&quot;_blank\&quot;&gt;</span><span class="nv">$link_title</span><span class="s2"> (</span><span class="nv">$pos</span><span class="s2">)&lt;/a&gt;&lt;/p&gt;&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_page</span><span class="s2">&quot;</span>
+<span class="w">      </span><span class="o">((</span>pos++<span class="o">))</span>
+<span class="w">    </span><span class="k">done</span><span class="w"> </span>&lt;<span class="w"> </span>&lt;<span class="o">(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$section_data</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.links | sort_by(.title | ascii_downcase) | .[] | [.title, .url] | @tsv&#39;</span><span class="o">)</span>
 
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;  ]</span>
-<span class="s1">  let lDiv=document.getElementById(&quot;links&quot;);</span>
-<span class="s1">  let h=&quot;&lt;table&gt;&lt;tr&gt;&lt;td&gt;&quot;;</span>
-<span class="s1">  let s=&quot;&quot;;</span>
-<span class="s1">  let pos=1</span>
-<span class="s1">  for (i in l) {</span>
-<span class="s1">    const lk=l[i];</span>
-<span class="s1">    if (lk.c) {</span>
-<span class="s1">      h+= &quot;&lt;/td&gt;&lt;td&gt;&quot;;</span>
-<span class="s1">    }</span>
-<span class="s1">    if (lk.s &amp;&amp; s!=lk.s) {</span>
-<span class="s1">      s=lk.s;</span>
-<span class="s1">      h+=&quot;&lt;h3&gt;&quot;+s+&quot;&lt;/h3&gt;&quot;</span>
-<span class="s1">    }</span>
-<span class="s1">    if (lk.h) {</span>
-<span class="s1">      h += &quot;&lt;p&gt;&lt;a id=\&quot;item&quot;+pos+&quot;\&quot; href=\&quot;&quot;+lk.h+&quot;\&quot; target=\&quot;_blank\&quot;&gt;&quot;+lk.t+&quot; (&quot;+pos+&quot;)&lt;/a&gt;&lt;/p&gt;&quot;;</span>
-<span class="s1">      pos++;</span>
-<span class="s1">    }</span>
-<span class="s1">  }</span>
-<span class="s1">  lDiv.innerHTML = h + &quot;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&quot;;</span>
+<span class="w">    </span><span class="c1"># Close section div</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;&lt;/div&gt;&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_page</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="k">done</span><span class="w"> </span>&lt;<span class="w"> </span>&lt;<span class="o">(</span>jq<span class="w"> </span>-r<span class="w"> </span><span class="s1">&#39;.sections | sort_by(.heading | ascii_downcase) | .[] | @base64&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_file</span><span class="s2">&quot;</span><span class="o">)</span>
 
-<span class="s1">  numTyped = &quot;&quot;;</span>
-<span class="s1">  maxNum=pos-1;</span>
-<span class="s1">  lastKeyPress = Date.now();</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;&lt;/div&gt;</span>
+
+<span class="s1">&lt;p style=&quot;text-align: center; color: #BBBBBB; font-size: 12px&quot;&gt;Last Updated: &#39;</span><span class="k">$(</span>date<span class="k">)</span><span class="s1">&#39;&lt;/p&gt;</span>
+
+<span class="s1">&lt;/div&gt;</span>
+<span class="s1">&lt;script&gt;</span>
+<span class="s1">  const maxNum = document.querySelectorAll(&quot;[id^=\&quot;item\&quot;]&quot;).length;</span>
+
+<span class="s1">  let numTyped = &quot;&quot;;</span>
+<span class="s1">  let lastKeyPress = Date.now();</span>
 
 <span class="s1">  function highlightListItems() {</span>
 <span class="s1">    try {</span>
@@ -435,27 +419,25 @@ process_bookmark_file<span class="o">()</span><span class="w"> </span><span clas
 <span class="s1">  }</span>
 
 <span class="s1">  function search() {</span>
-<span class="s1">    let go = false;</span>
-<span class="s1">    let href;</span>
 <span class="s1">    const searchVal = document.getElementById(&quot;search&quot;).value.toUpperCase();</span>
+<span class="s1">    const go = event.code == &quot;Enter&quot;;</span>
+<span class="s1">    let firstMatchHref = null;</span>
 
-<span class="s1">    if (event.code == &quot;Enter&quot;) {</span>
-<span class="s1">      go = true;</span>
-<span class="s1">    }</span>
 <span class="s1">    for (let i = 1; i &lt;= maxNum; i++) {</span>
 <span class="s1">      const item = document.getElementById(&quot;item&quot;+i);</span>
 <span class="s1">      const itemVal = item.innerHTML;</span>
 <span class="s1">      if (itemVal.toUpperCase().indexOf(searchVal) &gt; -1) {</span>
-<span class="s1">        if (go) {</span>
-<span class="s1">          if (!href) href = item.href;</span>
-<span class="s1">        } else {</span>
-<span class="s1">          item.style.color = &quot;#155799&quot;;</span>
+<span class="s1">        item.style.color = &quot;#155799&quot;;</span>
+<span class="s1">        if (!firstMatchHref) {</span>
+<span class="s1">          firstMatchHref = item.href;</span>
 <span class="s1">        }</span>
 <span class="s1">      } else {</span>
 <span class="s1">        item.style.color = &quot;#DDDDDD&quot;;</span>
 <span class="s1">      }</span>
 <span class="s1">    }</span>
-<span class="s1">    if (go) {</span>
+
+<span class="s1">    if (go &amp;&amp; firstMatchHref) {</span>
+<span class="s1">      // Reset all colors</span>
 <span class="s1">      for (let i = 1; i &lt;= maxNum; i++) {</span>
 <span class="s1">        const item = document.getElementById(&quot;item&quot;+i);</span>
 <span class="s1">        item.style.background = &quot;transparent&quot;;</span>
@@ -464,7 +446,7 @@ process_bookmark_file<span class="o">()</span><span class="w"> </span><span clas
 <span class="s1">      document.getElementById(&quot;search&quot;).blur();</span>
 <span class="s1">      document.getElementById(&quot;search&quot;).value = &quot;&quot;;</span>
 <span class="s1">      document.getElementById(&quot;search&quot;).style.visibility = &quot;hidden&quot;;</span>
-<span class="s1">      window.open(href, &quot;_blank&quot;).focus();</span>
+<span class="s1">      window.open(firstMatchHref, &quot;_blank&quot;).focus();</span>
 <span class="s1">    }</span>
 <span class="s1">  }</span>
 <span class="s1">  addKeyListener();</span>
@@ -539,21 +521,29 @@ process_bookmark_file<span class="o">()</span><span class="w"> </span><span clas
 <span class="w">    </span><span class="nv">add_section</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$section_input</span><span class="s2">&quot;</span>
 <span class="w">  </span><span class="k">fi</span>
 
+<span class="w">  </span><span class="c1"># Show existing titles in the selected section (alphabetically)</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Existing titles in &#39;</span><span class="nv">$add_section</span><span class="s2">&#39;:&quot;</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="nv">IFS</span><span class="o">=</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>title<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;  - </span><span class="nv">$title</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="k">done</span><span class="w"> </span>&lt;<span class="w"> </span>&lt;<span class="o">(</span>jq<span class="w"> </span>-r<span class="w"> </span>--arg<span class="w"> </span>section<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$add_section</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="s1">&#39;.sections[] | select(.heading == $section) | .links[] | .title&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$bm_file</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-f<span class="o">)</span>
+
 <span class="w">  </span><span class="c1"># Prompt for title</span>
 <span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
-<span class="w">  </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Enter bookmark title: &quot;</span><span class="w"> </span>add_title
+<span class="w">  </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Enter bookmark title (blank to exit): &quot;</span><span class="w"> </span>add_title
 
 <span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$add_title</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Error: Title cannot be empty&quot;</span>
-<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Exiting...&quot;</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">0</span>
 <span class="w">  </span><span class="k">fi</span>
 
 <span class="w">  </span><span class="c1"># Prompt for URL</span>
-<span class="w">  </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Enter bookmark URL: &quot;</span><span class="w"> </span>add_url
+<span class="w">  </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Enter bookmark URL (blank to exit): &quot;</span><span class="w"> </span>add_url
 
 <span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$add_url</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Error: URL cannot be empty&quot;</span>
-<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Exiting...&quot;</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">0</span>
 <span class="w">  </span><span class="k">fi</span>
 <span class="k">fi</span>
 
@@ -697,7 +687,7 @@ process_bookmark_file<span class="o">()</span><span class="w"> </span><span clas
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: August 19, 2026</p>
+      <p>Last updated: August 21, 2026</p>
     </footer>
 
     <div class="scroll-container">
