@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="GCP Cloud Storage" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>GCP Cloud Storage</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/other/gcp/cloud-storage.md">GCP Cloud Storage</a></h1>
+<h2 id="overview">Overview</h2>
+<p>Binary Large Object Storage - Fully managed, scalable.</p>
+<ul>
+<li>Can be used to serve website content, archive data or content for download.</li>
+<li>Each object has a URL.</li>
+<li>Stored in buckets.</li>
+<li>Immutable.</li>
+<li>Can create ACLs (access control lists) - A scope (who) &amp; permission (what).</li>
+<li>New overwrites old but can keep previous versions (object versioning) - With rules on how many.</li>
+<li>Lifecycle management policies can delete old versions of objects or simply old object.</li>
+</ul>
+<h2 id="cloud-storage-classes">Cloud Storage Classes</h2>
+<ul>
+<li>Multi-regional - 99.95% - Frequent access.  Stored in 2 locations &gt; 160km apart. (6 copies of data round the world).</li>
+<li>Regional - 99.90% - Frequent access. (3 copies of data in a Region).</li>
+<li>Nearline - 99.00% - Access less than once a month.  A cost to access.</li>
+<li>Coldline - 99.00% - Access less than once a year.  A cost to access.  Quick (AWS Glacial is 4-6 hours).
+Costs per GB per Month stored.  For Nearline, Coldline also a cost to access.</li>
+</ul>
+<h2 id="upload-data-to-cloud-storage">Upload Data to Cloud Storage</h2>
+<ul>
+<li>Online Transfer - Command line, browser.</li>
+<li>Storage Transfer Service - Scheduled managed batch.</li>
+<li>Appliance (rackable).</li>
+<li>Import/Export BigQuery &amp; Cloud SQL.</li>
+<li>App Engine.  Eg. logs, backups.</li>
+<li>Compute Engine. eg. Startup scripts, images, large general object store.</li>
+</ul>
+<h2 id="structure">Structure</h2>
+<h3 id="buckets">Buckets</h3>
+<ul>
+<li>Projects own Buckets (the basic containers for all data).</li>
+<li>Buckets have a default storage class.</li>
+<li>Buckets cannot be nested.</li>
+<li>There are limits to Bucket creation and deletion so favor Object or Bucket operations.</li>
+<li>Have a globally unique name name, a geographical location and a default storage class (can override class though).</li>
+<li>Name and location are fixed.</li>
+<li>The existence of a bucket name can be globally tested so avoid usernames, email, PII etc.</li>
+<li>Max 63 characters unless include . (dots) then can be 222 but max 63 between dots.</li>
+<li>Name format: <code>[a-z][0-9][-_.]</code></li>
+<li>Bucket Labels: name:value pairs.</li>
+<li>IAM can be applied to Project or Folder.</li>
+</ul>
+<h3 id="objects">Objects</h3>
+<ul>
+<li>Names can contain any UTF-8 char.</li>
+<li>(obv) avoid characters like / in names.</li>
+<li>Every object has a generation number.  Incremented each time object overwritten.</li>
+<li>If object versioning enabled can refer to prev versions.</li>
+<li>Objects have two version numbers, one for content the other for metadata.</li>
+<li>Objects are opaque to GCP and immutable.</li>
+<li>Cloud storage does not support a hierarchy but tools like GCP console can operate as if in a hierarchy.</li>
+</ul>
+<h2 id="access-control">Access Control</h2>
+<ul>
+<li>IAM (Identity and Access Management) for Projects / Buckets. (Preferred).</li>
+<li>ACL (Access Control List) for individual Objects.</li>
+<li>Signed URLs - A unique URL giving access for a specified period of time.A</li>
+</ul>
+<h2 id="encryption">Encryption</h2>
+<ul>
+<li>Google-managed encryption keys: Google creates and manages.</li>
+<li>Customer-supplied encryption keys: Create and manage outside of google.</li>
+<li>Customer-managed encryption keys: Use Google tool to generate and manage keys.</li>
+</ul>
+<hr>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: February 06, 2026</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

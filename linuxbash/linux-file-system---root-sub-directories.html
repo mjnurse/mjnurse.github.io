@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Linux File System - root sub-directories" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>Linux File System - root sub-directories</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/linux-file-system---root-sub-directories.md">Linux File System - root sub-directories</a></h1>
+<h2 id="essential-system-directories">Essential System Directories</h2>
+<ul>
+<li><code>/bin</code> → symlink to <code>/usr/bin</code> - Essential user command binaries (ls, cat, cp, etc.)</li>
+<li><code>/sbin</code> → symlink to <code>/usr/sbin</code> - Essential system binaries (mount, ifconfig, shutdown, etc.) typically for root</li>
+<li><code>/lib</code> → symlink to <code>/usr/lib</code> - Essential shared libraries and kernel modules</li>
+<li><code>/lib64</code> → symlink to <code>/usr/lib64</code> - 64-bit libraries</li>
+</ul>
+<h2 id="boot-and-system-configuration">Boot and System Configuration</h2>
+<ul>
+<li><code>/boot</code> - Boot loader files, kernel images, initramfs</li>
+<li><code>/etc</code> - System-wide configuration files</li>
+</ul>
+<h2 id="user-and-runtime">User and Runtime</h2>
+<ul>
+<li><code>/home</code> - User home directories</li>
+<li><code>/root</code> - Root user's home directory</li>
+<li><code>/tmp</code> - Temporary files, cleared on reboot</li>
+<li><code>/run</code> - Runtime variable data (PIDs, sockets) since last boot</li>
+</ul>
+<h2 id="virtualspecial-filesystems">Virtual/Special Filesystems</h2>
+<ul>
+<li><code>/dev</code> - Device files (hard drives, terminals, null, random, etc.)</li>
+<li><code>/proc</code> - Virtual filesystem exposing kernel/process information</li>
+<li><code>/sys</code> - Virtual filesystem for kernel/hardware information</li>
+</ul>
+<h2 id="optionalvariable-data">Optional/Variable Data</h2>
+<ul>
+<li><code>/usr</code> - User programs, libraries, documentation (largest directory tree)</li>
+<li><code>/var</code> - Variable data (logs, databases, caches, mail spools)</li>
+<li><code>/opt</code> - Optional third-party software packages</li>
+<li><code>/srv</code> - Data served by the system (web, FTP, etc.)</li>
+<li><code>/media</code> - Mount points for removable media (USB, CD-ROM)</li>
+<li><code>/mnt</code> - Temporary mount points for filesystems</li>
+</ul>
+<h2 id="wslsystem-specific">WSL/System-Specific</h2>
+<ul>
+<li>`/lost+found - Filesystem recovery directory (ext4 fsck)</li>
+<li>`/snap - Snap package system files</li>
+</ul>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: August 25, 2026</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

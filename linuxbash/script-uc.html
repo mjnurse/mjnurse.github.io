@@ -1,0 +1,1590 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="uc - Search and find Unicode characters and icons" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>uc - Search and find Unicode characters and icons</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-uc.md">uc - Search and find Unicode characters and icons</a></h1>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
+<span class="s2">NAME</span>
+<span class="s2">    unicode - Search and find Unicode characters and icons.</span>
+
+<span class="s2">USAGE</span>
+<span class="s2">    unicode [options] &lt;search-terms&gt;</span>
+
+<span class="s2">OPTIONS</span>
+<span class="s2">    -e|--exact</span>
+<span class="s2">        Perform exact matching of search terms.</span>
+
+<span class="s2">    -h|--help</span>
+<span class="s2">        Show help text.</span>
+
+<span class="s2">DESCRIPTION</span>
+<span class="s2">    Search through Unicode character sets including arrows, mathematical operators,</span>
+<span class="s2">    miscellaneous technical symbols, box drawing, geometric shapes, miscellaneous</span>
+<span class="s2">    symbols, and dingbats. Provide one to three search terms to filter results.</span>
+
+<span class="s2">AUTHOR</span>
+<span class="s2">    mjnurse.github.io - 2026</span>
+<span class="s2">&quot;</span>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Search and find Unicode characters and icons&quot;</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Search and find Unicode characters and icons&quot;</span>
+
+<span class="nv">tmpfile</span><span class="o">=</span><span class="s2">&quot;/tmp/uc.tmp&quot;</span>
+rm<span class="w"> </span>-f<span class="w"> </span><span class="nv">$tmpfile</span>
+
+<span class="c1"># Terminal Colours</span>
+<span class="nv">cdef</span><span class="o">=</span><span class="s2">&quot;\x1b[39m&quot;</span><span class="w"> </span><span class="c1"># default colour</span>
+<span class="nv">cbla</span><span class="o">=</span><span class="s2">&quot;\x1b[30m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cgra</span><span class="o">=</span><span class="s2">&quot;\x1b[90m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clgra</span><span class="o">=</span><span class="s2">&quot;\x1b[37m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cwhi</span><span class="o">=</span><span class="s2">&quot;\x1b[97m&quot;</span>
+<span class="nv">cred</span><span class="o">=</span><span class="s2">&quot;\x1b[31m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cgre</span><span class="o">=</span><span class="s2">&quot;\x1b[32m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cyel</span><span class="o">=</span><span class="s2">&quot;\x1b[33m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cblu</span><span class="o">=</span><span class="s2">&quot;\x1b[34m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cmag</span><span class="o">=</span><span class="s2">&quot;\x1b[35m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">ccya</span><span class="o">=</span><span class="s2">&quot;\x1b[36m&quot;</span><span class="p">;</span>
+<span class="nv">clred</span><span class="o">=</span><span class="s2">&quot;\x1b[91m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clgre</span><span class="o">=</span><span class="s2">&quot;\x1b[92m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clyel</span><span class="o">=</span><span class="s2">&quot;\x1b[93m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clblu</span><span class="o">=</span><span class="s2">&quot;\x1b[94m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clmag</span><span class="o">=</span><span class="s2">&quot;\x1b[95m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clcya</span><span class="o">=</span><span class="s2">&quot;\x1b[96m&quot;</span>
+
+<span class="nv">try</span><span class="o">=</span><span class="s2">&quot;Try </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h for more information&quot;</span>
+<span class="nv">tmp</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">help_text</span><span class="p">##*USAGE</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nv">usage</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%OPTIONS*</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;\n&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/  */ /g&quot;</span><span class="k">)</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">usage</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">try</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="nv">exact</span><span class="o">=</span><span class="nb">false</span>
+<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
+<span class="w">        </span>-h<span class="p">|</span>--help<span class="o">)</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="nb">exit</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>-e<span class="p">|</span>--exact<span class="o">)</span>
+<span class="w">            </span><span class="nv">exact</span><span class="o">=</span><span class="nb">true</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>?*<span class="o">)</span>
+<span class="w">            </span><span class="k">break</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">    </span><span class="k">esac</span>
+<span class="w">    </span><span class="nb">shift</span>
+<span class="k">done</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$exact</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nv">sp</span><span class="o">=</span><span class="s2">&quot; &quot;</span>
+<span class="k">fi</span>
+<span class="nv">p1</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">sp</span><span class="si">}${</span><span class="nv">1</span><span class="si">}${</span><span class="nv">sp</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nv">p2</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">sp</span><span class="si">}${</span><span class="nv">2</span><span class="k">:-</span><span class="nv">$1</span><span class="si">}${</span><span class="nv">sp</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nv">p3</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">sp</span><span class="si">}${</span><span class="nv">3</span><span class="k">:-</span><span class="nv">$1</span><span class="si">}${</span><span class="nv">sp</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="nv">n</span><span class="o">=</span><span class="m">1</span>
+cat<span class="w"> </span><span class="nv">$0</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/$/ /; s/:/ : /&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>egrep<span class="w"> </span><span class="s2">&quot;^## |^# [^:]*:.*</span><span class="si">${</span><span class="nv">p1</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>egrep<span class="w"> </span><span class="s2">&quot;^## |.*:.*</span><span class="si">${</span><span class="nv">p2</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>egrep<span class="w"> </span><span class="s2">&quot;^## |.*:.*</span><span class="si">${</span><span class="nv">p3</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>sed<span class="w"> </span><span class="s1">&#39;/^##/{N;/\n# /!d}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>sed<span class="w"> </span><span class="s1">&#39;/^##/{$d;N;/\n#/!D}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>sed<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;</span>
+<span class="s2">        s/^# //; </span>
+<span class="s2">        s/^## (.*)</span>$<span class="s2">/#</span><span class="si">${</span><span class="nv">clcya</span><span class="si">}</span><span class="s2">\1</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">/; </span>
+<span class="s2">        s/(.*:.*)(</span><span class="si">${</span><span class="nv">p1</span><span class="si">}</span><span class="s2">)/\1</span><span class="si">${</span><span class="nv">clmag</span><span class="si">}</span><span class="s2">\2</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">/g;</span>
+<span class="s2">        s/(.*:.*)(</span><span class="si">${</span><span class="nv">p2</span><span class="si">}</span><span class="s2">)/\1</span><span class="si">${</span><span class="nv">clmag</span><span class="si">}</span><span class="s2">\2</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">/g;</span>
+<span class="s2">        s/(.*:.*)(</span><span class="si">${</span><span class="nv">p3</span><span class="si">}</span><span class="s2">)/\1</span><span class="si">${</span><span class="nv">clmag</span><span class="si">}</span><span class="s2">\2</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">/g;</span>
+<span class="s2">    &quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="k">while</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>line<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">line</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;#&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;\n</span><span class="si">${</span><span class="nv">line</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$n</span><span class="s2">) </span><span class="nv">$line</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="nv">tmp</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">line</span><span class="p">/ */</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">tmp</span><span class="k">:-</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmpfile</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="o">((</span>n++<span class="o">))</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="k">done</span>
+
+<span class="nb">echo</span>
+<span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">clcya</span><span class="si">}</span><span class="s2">Select a character by number of view enlarged/copy (blank to exit): </span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nb">read</span><span class="w"> </span>n
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$n</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">exit</span>
+<span class="k">fi</span>
+<span class="nb">echo</span>
+<span class="nv">char</span><span class="o">=</span><span class="k">$(</span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="k">$((</span><span class="nv">n</span><span class="k">))</span><span class="s2">p&quot;</span><span class="w"> </span><span class="nv">$tmpfile</span><span class="k">)</span>
+<span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$char</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>iconv<span class="w"> </span>-f<span class="w"> </span>UTF-8<span class="w"> </span>-t<span class="w"> </span>UTF-16LE<span class="w"> </span><span class="p">|</span><span class="w"> </span>clip.exe
+
+<span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;</span>
+<span class="s1">from PIL import Image, ImageDraw, ImageFont</span>
+<span class="s1">import sys</span>
+
+<span class="s1">char = &quot;&#39;</span><span class="nv">$char</span><span class="s1">&#39;&quot;</span>
+<span class="s1">size = 100</span>
+<span class="s1">img = Image.new(&quot;1&quot;, (size, size), 0)</span>
+<span class="s1">draw = ImageDraw.Draw(img)</span>
+<span class="s1">font = ImageFont.truetype(&quot;/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf&quot;, 40)</span>
+<span class="s1">draw.text((10, 0), char, 1, font=font)</span>
+
+<span class="s1">for y in range(0, int(size/2)-2, 2):  # Process two rows at a time</span>
+<span class="s1">    for x in range(0, int(size/2), 1):</span>
+<span class="s1">        top = img.getpixel((x, y))</span>
+<span class="s1">        bottom = img.getpixel((x, y+1)) if y+1 &lt; size else 0</span>
+<span class="s1">        if top and bottom: print(&quot;█&quot;, end=&quot;&quot;)</span>
+<span class="s1">        elif top: print(&quot;▀&quot;, end=&quot;&quot;)</span>
+<span class="s1">        elif bottom: print(&quot;▄&quot;, end=&quot;&quot;)</span>
+<span class="s1">        else: print(&quot;⋅&quot;, end=&quot;&quot;)</span>
+<span class="s1">    print()</span>
+<span class="s1">&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>python3
+
+<span class="nb">echo</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;(copied to clipboard)&quot;</span>
+
+<span class="c1">## Arrows</span>
+<span class="c1"># \u2190:left arrow</span>
+<span class="c1"># \u2191:up arrow</span>
+<span class="c1"># \u2192:right arrow</span>
+<span class="c1"># \u2193:down arrow</span>
+<span class="c1"># \u2194:left right arrow</span>
+<span class="c1"># \u2195:up down arrow</span>
+<span class="c1"># \u2196:up left arrow</span>
+<span class="c1"># \u2197:up right arrow</span>
+<span class="c1"># \u2198:down right arrow</span>
+<span class="c1"># \u2199:down left arrow</span>
+<span class="c1"># \u219A:left arrow stroke</span>
+<span class="c1"># \u219B:right arrow stroke</span>
+<span class="c1"># \u219C:left wave arrow</span>
+<span class="c1"># \u219D:right wave arrow</span>
+<span class="c1"># \u219E:left two head arrow</span>
+<span class="c1"># \u219F:up two head arrow</span>
+<span class="c1"># \u21A0:right two head arrow</span>
+<span class="c1"># \u21A1:down two head arrow</span>
+<span class="c1"># \u21A2:left arrow tail</span>
+<span class="c1"># \u21A3:right arrow tail</span>
+<span class="c1"># \u21A4:left arrow bar</span>
+<span class="c1"># \u21A5:up arrow bar</span>
+<span class="c1"># \u21A6:right arrow bar</span>
+<span class="c1"># \u21A7:down arrow bar</span>
+<span class="c1"># \u21A8:up down arrow base</span>
+<span class="c1"># \u21A9:left arrow hook</span>
+<span class="c1"># \u21AA:right arrow hook</span>
+<span class="c1"># \u21AB:left arrow loop</span>
+<span class="c1"># \u21AC:right arrow loop</span>
+<span class="c1"># \u21AD:left right wave arrow</span>
+<span class="c1"># \u21AE:left right arrow stroke</span>
+<span class="c1"># \u21AF:down zigzag arrow</span>
+<span class="c1"># \u21B0:up arrow corner left</span>
+<span class="c1"># \u21B1:up arrow corner right</span>
+<span class="c1"># \u21B2:down arrow corner left</span>
+<span class="c1"># \u21B3:down arrow corner right</span>
+<span class="c1"># \u21B4:right arrow corner down</span>
+<span class="c1"># \u21B5:down arrow corner left</span>
+<span class="c1"># \u21B6:anticlockwise top arc</span>
+<span class="c1"># \u21B7:clockwise top arc</span>
+<span class="c1"># \u21B8:nw arrow long bar</span>
+<span class="c1"># \u21B9:left right arrow bar</span>
+<span class="c1"># \u21BA:anticlockwise circle</span>
+<span class="c1"># \u21BB:clockwise circle</span>
+<span class="c1"># \u21BC:left harpoon up</span>
+<span class="c1"># \u21BD:left harpoon down</span>
+<span class="c1"># \u21BE:up harpoon right</span>
+<span class="c1"># \u21BF:up harpoon left</span>
+<span class="c1"># \u21C0:right harpoon up</span>
+<span class="c1"># \u21C1:right harpoon down</span>
+<span class="c1"># \u21C2:down harpoon right</span>
+<span class="c1"># \u21C3:down harpoon left</span>
+<span class="c1"># \u21C4:right arrow over left</span>
+<span class="c1"># \u21C5:up arrow beside down</span>
+<span class="c1"># \u21C6:left arrow over right</span>
+<span class="c1"># \u21C7:left paired arrows</span>
+<span class="c1"># \u21C8:up paired arrows</span>
+<span class="c1"># \u21C9:right paired arrows</span>
+<span class="c1"># \u21CA:down paired arrows</span>
+<span class="c1"># \u21CB:left harpoon over right</span>
+<span class="c1"># \u21CC:right harpoon over left</span>
+<span class="c1"># \u21CD:left dbl arrow stroke</span>
+<span class="c1"># \u21CE:left right dbl arrow stroke</span>
+<span class="c1"># \u21CF:right dbl arrow stroke</span>
+<span class="c1"># \u21D0:left double arrow</span>
+<span class="c1"># \u21D1:up double arrow</span>
+<span class="c1"># \u21D2:right double arrow</span>
+<span class="c1"># \u21D3:down double arrow</span>
+<span class="c1"># \u21D4:left right double arrow</span>
+<span class="c1"># \u21D5:up down double arrow</span>
+<span class="c1"># \u21D6:nw double arrow</span>
+<span class="c1"># \u21D7:ne double arrow</span>
+<span class="c1"># \u21D8:se double arrow</span>
+<span class="c1"># \u21D9:sw double arrow</span>
+<span class="c1"># \u21DA:left triple arrow</span>
+<span class="c1"># \u21DB:right triple arrow</span>
+<span class="c1"># \u21DC:left squiggle arrow</span>
+<span class="c1"># \u21DD:right squiggle arrow</span>
+<span class="c1"># \u21DE:up arrow dbl stroke</span>
+<span class="c1"># \u21DF:down arrow dbl stroke</span>
+<span class="c1"># \u21E0:left dashed arrow</span>
+<span class="c1"># \u21E1:up dashed arrow</span>
+<span class="c1"># \u21E2:right dashed arrow</span>
+<span class="c1"># \u21E3:down dashed arrow</span>
+<span class="c1"># \u21E4:left arrow to bar</span>
+<span class="c1"># \u21E5:right arrow to bar</span>
+<span class="c1"># \u21E6:left white arrow</span>
+<span class="c1"># \u21E7:up white arrow</span>
+<span class="c1"># \u21E8:right white arrow</span>
+<span class="c1"># \u21E9:down white arrow</span>
+<span class="c1"># \u21EA:up white arrow bar</span>
+<span class="c1"># \u21EB:up white arrow on bar</span>
+<span class="c1"># \u21EC:up white dbl arrow</span>
+<span class="c1"># \u21ED:up white arrow on bar dbl</span>
+<span class="c1"># \u21EE:up white dbl arrow 2</span>
+<span class="c1"># \u21EF:up white arrow dbl bar</span>
+<span class="c1"># \u21F0:right white arrow wall</span>
+<span class="c1"># \u21F1:nw arrow corner</span>
+<span class="c1"># \u21F2:se arrow corner</span>
+<span class="c1"># \u21F3:up down white arrow</span>
+<span class="c1"># \u21F4:right arrow small circle</span>
+<span class="c1"># \u21F5:down arrow beside up</span>
+<span class="c1"># \u21F6:three right arrows</span>
+<span class="c1"># \u21F7:left arrow vert stroke</span>
+<span class="c1"># \u21F8:right arrow vert stroke</span>
+<span class="c1"># \u21F9:left right arrow vert stroke</span>
+<span class="c1"># \u21FA:left arrow dbl vert stroke</span>
+<span class="c1"># \u21FB:right arrow dbl vert stroke</span>
+<span class="c1"># \u21FC:left right arrow dbl vert stroke</span>
+<span class="c1"># \u21FD:left open head arrow</span>
+<span class="c1"># \u21FE:right open head arrow</span>
+<span class="c1"># \u21FF:left right open head arrow</span>
+<span class="c1">## Mathematical Operators</span>
+<span class="c1"># \u2200:for all</span>
+<span class="c1"># \u2201:complement</span>
+<span class="c1"># \u2202:partial differential</span>
+<span class="c1"># \u2203:there exists</span>
+<span class="c1"># \u2204:not exists</span>
+<span class="c1"># \u2205:empty set</span>
+<span class="c1"># \u2206:increment</span>
+<span class="c1"># \u2207:nabla </span>
+<span class="c1"># \u2208:element of</span>
+<span class="c1"># \u2209:not element of</span>
+<span class="c1"># \u220A:small element of</span>
+<span class="c1"># \u220B:contains</span>
+<span class="c1"># \u220C:not contains</span>
+<span class="c1"># \u220D:small contains</span>
+<span class="c1"># \u220E:end of proof</span>
+<span class="c1"># \u220F:n ary product </span>
+<span class="c1"># \u2210:n ary coproduct</span>
+<span class="c1"># \u2211:n ary summation</span>
+<span class="c1"># \u2212:minus</span>
+<span class="c1"># \u2213:minus or plus</span>
+<span class="c1"># \u2214:dot plus</span>
+<span class="c1"># \u2215:division slash</span>
+<span class="c1"># \u2216:set minus</span>
+<span class="c1"># \u2217:asterisk operator </span>
+<span class="c1"># \u2218:ring operator</span>
+<span class="c1"># \u2219:bullet operator</span>
+<span class="c1"># \u221A:square root</span>
+<span class="c1"># \u221B:cube root</span>
+<span class="c1"># \u221C:fourth root</span>
+<span class="c1"># \u221D:proportional to</span>
+<span class="c1"># \u221E:infinity</span>
+<span class="c1"># \u221F:right angle </span>
+<span class="c1"># \u2220:angle</span>
+<span class="c1"># \u2221:measured angle</span>
+<span class="c1"># \u2222:spherical angle</span>
+<span class="c1"># \u2223:divides</span>
+<span class="c1"># \u2224:not divides</span>
+<span class="c1"># \u2225:parallel to</span>
+<span class="c1"># \u2226:not parallel to</span>
+<span class="c1"># \u2227:logical and </span>
+<span class="c1"># \u2228:logical or</span>
+<span class="c1"># \u2229:intersection</span>
+<span class="c1"># \u222A:union</span>
+<span class="c1"># \u222B:integral</span>
+<span class="c1"># \u222C:double integral</span>
+<span class="c1"># \u222D:triple integral</span>
+<span class="c1"># \u222E:contour integral</span>
+<span class="c1"># \u222F:surface integral </span>
+<span class="c1"># \u2230:volume integral</span>
+<span class="c1"># \u2231:clockwise integral</span>
+<span class="c1"># \u2232:clockwise contour integral</span>
+<span class="c1"># \u2233:anticlockwise contour integral</span>
+<span class="c1"># \u2234:therefore</span>
+<span class="c1"># \u2235:because</span>
+<span class="c1"># \u2236:ratio</span>
+<span class="c1"># \u2237:proportion </span>
+<span class="c1"># \u2238:dot minus</span>
+<span class="c1"># \u2239:excess</span>
+<span class="c1"># \u223A:geometric proportion</span>
+<span class="c1"># \u223B:homothetic</span>
+<span class="c1"># \u223C:tilde operator</span>
+<span class="c1"># \u223D:reversed tilde</span>
+<span class="c1"># \u223E:inverted lazy s</span>
+<span class="c1"># \u223F:sine wave </span>
+<span class="c1"># \u2240:wreath product</span>
+<span class="c1"># \u2241:not tilde</span>
+<span class="c1"># \u2242:minus tilde</span>
+<span class="c1"># \u2243:asymptotically equal</span>
+<span class="c1"># \u2244:not asymptotically equal</span>
+<span class="c1"># \u2245:approximately equal</span>
+<span class="c1"># \u2246:approx not equal</span>
+<span class="c1"># \u2247:not approx equal </span>
+<span class="c1"># \u2248:almost equal</span>
+<span class="c1"># \u2249:not almost equal</span>
+<span class="c1"># \u224A:almost equal or equal</span>
+<span class="c1"># \u224B:triple tilde</span>
+<span class="c1"># \u224C:all equal to</span>
+<span class="c1"># \u224D:equivalent to</span>
+<span class="c1"># \u224E:geometrically equivalent</span>
+<span class="c1"># \u224F:difference between </span>
+<span class="c1"># \u2250:approaches limit</span>
+<span class="c1"># \u2251:geometrically equal</span>
+<span class="c1"># \u2252:approximately equal or image</span>
+<span class="c1"># \u2253:image or approximately equal</span>
+<span class="c1"># \u2254:colon equals</span>
+<span class="c1"># \u2255:equals colon</span>
+<span class="c1"># \u2256:ring in equal</span>
+<span class="c1"># \u2257:ring equal </span>
+<span class="c1"># \u2258:corresponds to</span>
+<span class="c1"># \u2259:estimates</span>
+<span class="c1"># \u225A:equiangular</span>
+<span class="c1"># \u225B:star equals</span>
+<span class="c1"># \u225C:delta equal</span>
+<span class="c1"># \u225D:equal by definition</span>
+<span class="c1"># \u225E:measured by</span>
+<span class="c1"># \u225F:questioned equal </span>
+<span class="c1"># \u2260:not equal</span>
+<span class="c1"># \u2261:identical to</span>
+<span class="c1"># \u2262:not identical</span>
+<span class="c1"># \u2263:strictly equivalent</span>
+<span class="c1"># \u2264:less or equal</span>
+<span class="c1"># \u2265:greater or equal</span>
+<span class="c1"># \u2266:less over equal</span>
+<span class="c1"># \u2267:greater over equal </span>
+<span class="c1"># \u2268:less not equal</span>
+<span class="c1"># \u2269:greater not equal</span>
+<span class="c1"># \u226A:much less than</span>
+<span class="c1"># \u226B:much greater than</span>
+<span class="c1"># \u226C:between</span>
+<span class="c1"># \u226D:not equivalent</span>
+<span class="c1"># \u226E:not less than</span>
+<span class="c1"># \u226F:not greater than </span>
+<span class="c1"># \u2270:not less or equal</span>
+<span class="c1"># \u2271:not greater or equal</span>
+<span class="c1"># \u2272:less or equivalent</span>
+<span class="c1"># \u2273:greater or equivalent</span>
+<span class="c1"># \u2274:not less or equivalent</span>
+<span class="c1"># \u2275:not greater or equivalent</span>
+<span class="c1"># \u2276:less or greater</span>
+<span class="c1"># \u2277:greater or less </span>
+<span class="c1"># \u2278:not less or greater</span>
+<span class="c1"># \u2279:not greater or less</span>
+<span class="c1"># \u227A:precedes</span>
+<span class="c1"># \u227B:succeeds</span>
+<span class="c1"># \u227C:precedes or equal</span>
+<span class="c1"># \u227D:succeeds or equal</span>
+<span class="c1"># \u227E:precedes or equivalent</span>
+<span class="c1"># \u227F:succeeds or equivalent </span>
+<span class="c1"># \u2280:not precedes</span>
+<span class="c1"># \u2281:not succeeds</span>
+<span class="c1"># \u2282:subset of</span>
+<span class="c1"># \u2283:superset of</span>
+<span class="c1"># \u2284:not subset</span>
+<span class="c1"># \u2285:not superset</span>
+<span class="c1"># \u2286:subset or equal</span>
+<span class="c1"># \u2287:superset or equal </span>
+<span class="c1"># \u2288:not subset or equal</span>
+<span class="c1"># \u2289:not superset or equal</span>
+<span class="c1"># \u228A:subset not equal</span>
+<span class="c1"># \u228B:superset not equal</span>
+<span class="c1"># \u228C:multiset</span>
+<span class="c1"># \u228D:multiset multiply</span>
+<span class="c1"># \u228E:multiset union</span>
+<span class="c1"># \u228F:square image of </span>
+<span class="c1"># \u2290:square original of</span>
+<span class="c1"># \u2291:square image or equal</span>
+<span class="c1"># \u2292:square original or equal</span>
+<span class="c1"># \u2293:square cap</span>
+<span class="c1"># \u2294:square cup</span>
+<span class="c1"># \u2295:circled plus</span>
+<span class="c1"># \u2296:circled minus</span>
+<span class="c1"># \u2297:circled times </span>
+<span class="c1"># \u2298:circled division slash</span>
+<span class="c1"># \u2299:circled dot</span>
+<span class="c1"># \u229A:circled ring</span>
+<span class="c1"># \u229B:circled asterisk</span>
+<span class="c1"># \u229C:circled equals</span>
+<span class="c1"># \u229D:circled dash</span>
+<span class="c1"># \u229E:squared plus</span>
+<span class="c1"># \u229F:squared minus </span>
+<span class="c1"># \u22A0:squared times</span>
+<span class="c1"># \u22A1:squared dot</span>
+<span class="c1"># \u22A2:right tack</span>
+<span class="c1"># \u22A3:left tack</span>
+<span class="c1"># \u22A4:down tack</span>
+<span class="c1"># \u22A5:up tack/perpendicular</span>
+<span class="c1"># \u22A6:assertion</span>
+<span class="c1"># \u22A7:models </span>
+<span class="c1"># \u22A8:true</span>
+<span class="c1"># \u22A9:forces</span>
+<span class="c1"># \u22AA:triple vert right turnstile</span>
+<span class="c1"># \u22AB:dbl vert dbl right turnstile</span>
+<span class="c1"># \u22AC:not proves</span>
+<span class="c1"># \u22AD:not true</span>
+<span class="c1"># \u22AE:not forces</span>
+<span class="c1"># \u22AF:negated dbl vert dbl right </span>
+<span class="c1"># \u22B0:precedes under relation</span>
+<span class="c1"># \u22B1:succeeds under relation</span>
+<span class="c1"># \u22B2:normal subgroup</span>
+<span class="c1"># \u22B3:contains normal subgroup</span>
+<span class="c1"># \u22B4:normal subgroup or equal</span>
+<span class="c1"># \u22B5:contains normal subgroup or equal</span>
+<span class="c1"># \u22B6:original of</span>
+<span class="c1"># \u22B7:image of </span>
+<span class="c1"># \u22B8:multimap</span>
+<span class="c1"># \u22B9:hermitian conjugate</span>
+<span class="c1"># \u22BA:intercalate</span>
+<span class="c1"># \u22BB:xor</span>
+<span class="c1"># \u22BC:nand</span>
+<span class="c1"># \u22BD:nor</span>
+<span class="c1"># \u22BE:right angle arc</span>
+<span class="c1"># \u22BF:right triangle </span>
+<span class="c1"># \u22C0:n ary logical and</span>
+<span class="c1"># \u22C1:n ary logical or</span>
+<span class="c1"># \u22C2:n ary intersection</span>
+<span class="c1"># \u22C3:n ary union</span>
+<span class="c1"># \u22C4:diamond operator</span>
+<span class="c1"># \u22C5:dot operator</span>
+<span class="c1"># \u22C6:star operator</span>
+<span class="c1"># \u22C7:division times </span>
+<span class="c1"># \u22C8:bowtie</span>
+<span class="c1"># \u22C9:left normal factor</span>
+<span class="c1"># \u22CA:right normal factor</span>
+<span class="c1"># \u22CB:left semidirect product</span>
+<span class="c1"># \u22CC:right semidirect product</span>
+<span class="c1"># \u22CD:reversed tilde equals</span>
+<span class="c1"># \u22CE:curly logical or</span>
+<span class="c1"># \u22CF:curly logical and </span>
+<span class="c1"># \u22D0:double subset</span>
+<span class="c1"># \u22D1:double superset</span>
+<span class="c1"># \u22D2:double intersection</span>
+<span class="c1"># \u22D3:double union</span>
+<span class="c1"># \u22D4:pitchfork</span>
+<span class="c1"># \u22D5:equal and parallel</span>
+<span class="c1"># \u22D6:less than dot</span>
+<span class="c1"># \u22D7:greater than dot </span>
+<span class="c1"># \u22D8:very much less than</span>
+<span class="c1"># \u22D9:very much greater than</span>
+<span class="c1"># \u22DA:less equal or greater</span>
+<span class="c1"># \u22DB:greater equal or less</span>
+<span class="c1"># \u22DC:equal or less</span>
+<span class="c1"># \u22DD:equal or greater</span>
+<span class="c1"># \u22DE:equal or precedes</span>
+<span class="c1"># \u22DF:equal or succeeds </span>
+<span class="c1"># \u22E0:not precedes or equal</span>
+<span class="c1"># \u22E1:not succeeds or equal</span>
+<span class="c1"># \u22E2:not square image or equal</span>
+<span class="c1"># \u22E3:not square original or equal</span>
+<span class="c1"># \u22E4:square image not equal</span>
+<span class="c1"># \u22E5:square original not equal</span>
+<span class="c1"># \u22E6:less not equivalent</span>
+<span class="c1"># \u22E7:greater not equivalent </span>
+<span class="c1"># \u22E8:precedes not equivalent</span>
+<span class="c1"># \u22E9:succeeds not equivalent</span>
+<span class="c1"># \u22EA:not normal subgroup</span>
+<span class="c1"># \u22EB:not contains normal subgroup</span>
+<span class="c1"># \u22EC:not normal subgroup or equal</span>
+<span class="c1"># \u22ED:not contains normal or equal</span>
+<span class="c1"># \u22EE:vertical ellipsis</span>
+<span class="c1"># \u22EF:midline horizontal ellipsis </span>
+<span class="c1"># \u22F0:up right diagonal ellipsis</span>
+<span class="c1"># \u22F1:down right diagonal ellipsis</span>
+<span class="c1"># \u22F2:element of long horiz stroke</span>
+<span class="c1"># \u22F3:element of vert bar at end</span>
+<span class="c1"># \u22F4:small element of vert bar</span>
+<span class="c1"># \u22F5:element of dot above</span>
+<span class="c1"># \u22F6:element of overbar</span>
+<span class="c1"># \u22F7:small element of overbar </span>
+<span class="c1"># \u22F8:element of underbar</span>
+<span class="c1"># \u22F9:element of two horiz strokes</span>
+<span class="c1"># \u22FA:contains long horiz stroke</span>
+<span class="c1"># \u22FB:contains vert bar at end</span>
+<span class="c1"># \u22FC:small contains vert bar</span>
+<span class="c1"># \u22FD:contains overbar</span>
+<span class="c1"># \u22FE:small contains overbar</span>
+<span class="c1"># \u22FF:z notation bag </span>
+<span class="c1">## Miscellaneous Technical</span>
+<span class="c1"># \u2300:diameter</span>
+<span class="c1"># \u2301:electric arrow</span>
+<span class="c1"># \u2302:house</span>
+<span class="c1"># \u2303:up arrowhead</span>
+<span class="c1"># \u2304:down arrowhead</span>
+<span class="c1"># \u2305:projective</span>
+<span class="c1"># \u2306:perspective</span>
+<span class="c1"># \u2307:wavy line </span>
+<span class="c1"># \u2308:left ceiling</span>
+<span class="c1"># \u2309:right ceiling</span>
+<span class="c1"># \u230A:left floor</span>
+<span class="c1"># \u230B:right floor</span>
+<span class="c1"># \u230C:bottom right crop</span>
+<span class="c1"># \u230D:bottom left crop</span>
+<span class="c1"># \u230E:top right crop</span>
+<span class="c1"># \u230F:top left crop </span>
+<span class="c1"># \u2310:reversed not</span>
+<span class="c1"># \u2311:square lozenge</span>
+<span class="c1"># \u2312:arc</span>
+<span class="c1"># \u2313:segment</span>
+<span class="c1"># \u2314:sector</span>
+<span class="c1"># \u2315:telephone recorder</span>
+<span class="c1"># \u2316:position indicator</span>
+<span class="c1"># \u2317:viewdata square </span>
+<span class="c1"># \u2318:command key</span>
+<span class="c1"># \u2319:turned not</span>
+<span class="c1"># \u231A:watch</span>
+<span class="c1"># \u231B:hourglass</span>
+<span class="c1"># \u231C:top left corner</span>
+<span class="c1"># \u231D:top right corner</span>
+<span class="c1"># \u231E:bottom left corner</span>
+<span class="c1"># \u231F:bottom right corner </span>
+<span class="c1"># \u2320:top half integral</span>
+<span class="c1"># \u2321:bottom half integral</span>
+<span class="c1"># \u2322:frown</span>
+<span class="c1"># \u2323:smile</span>
+<span class="c1"># \u2324:up arrowhead between bars</span>
+<span class="c1"># \u2325:option key</span>
+<span class="c1"># \u2326:erase to right</span>
+<span class="c1"># \u2327:x in rectangle </span>
+<span class="c1"># \u2328:keyboard</span>
+<span class="c1"># \u232B:erase to left</span>
+<span class="c1"># \u232C:benzene ring</span>
+<span class="c1"># \u232D:cylindricity</span>
+<span class="c1"># \u232E:all around profile</span>
+<span class="c1"># \u232F:symmetry </span>
+<span class="c1"># \u2330:total runout</span>
+<span class="c1"># \u2331:dimension origin</span>
+<span class="c1"># \u2332:conical taper</span>
+<span class="c1"># \u2333:slope</span>
+<span class="c1"># \u2334:counterbore</span>
+<span class="c1"># \u2335:countersink</span>
+<span class="c1"># \u2336:apl i beam</span>
+<span class="c1"># \u2337:apl squish quad </span>
+<span class="c1"># \u2338:apl quad equal</span>
+<span class="c1"># \u2339:apl quad divide</span>
+<span class="c1"># \u233A:apl quad diamond</span>
+<span class="c1"># \u233B:apl quad jot</span>
+<span class="c1"># \u233C:apl quad circle</span>
+<span class="c1"># \u233D:apl circle stile</span>
+<span class="c1"># \u233E:apl circle jot</span>
+<span class="c1"># \u233F:apl slash bar </span>
+<span class="c1"># \u2340:apl backslash bar</span>
+<span class="c1"># \u2341:apl quad slash</span>
+<span class="c1"># \u2342:apl quad backslash</span>
+<span class="c1"># \u2343:apl quad less</span>
+<span class="c1"># \u2344:apl quad greater</span>
+<span class="c1"># \u2345:apl left vane</span>
+<span class="c1"># \u2346:apl right vane</span>
+<span class="c1"># \u2347:apl quad left arrow </span>
+<span class="c1"># \u2348:apl quad right arrow</span>
+<span class="c1"># \u2349:apl circle backslash</span>
+<span class="c1"># \u234A:apl down tack underbar</span>
+<span class="c1"># \u234B:apl delta stile</span>
+<span class="c1"># \u234C:apl quad down caret</span>
+<span class="c1"># \u234D:apl quad delta</span>
+<span class="c1"># \u234E:apl down tack jot</span>
+<span class="c1"># \u234F:apl upwards vane </span>
+<span class="c1"># \u2350:apl quad up arrow</span>
+<span class="c1"># \u2351:apl up tack overbar</span>
+<span class="c1"># \u2352:apl del stile</span>
+<span class="c1"># \u2353:apl quad up caret</span>
+<span class="c1"># \u2354:apl quad del</span>
+<span class="c1"># \u2355:apl up tack jot</span>
+<span class="c1"># \u2356:apl downwards vane</span>
+<span class="c1"># \u2357:apl quad down arrow </span>
+<span class="c1"># \u2358:apl quote underbar</span>
+<span class="c1"># \u2359:apl delta underbar</span>
+<span class="c1"># \u235A:apl diamond underbar</span>
+<span class="c1"># \u235B:apl jot underbar</span>
+<span class="c1"># \u235C:apl circle underbar</span>
+<span class="c1"># \u235D:apl up shoe jot</span>
+<span class="c1"># \u235E:apl quad quote</span>
+<span class="c1"># \u235F:apl circle star </span>
+<span class="c1"># \u2360:apl quad colon</span>
+<span class="c1"># \u2361:apl up tack diaeresis</span>
+<span class="c1"># \u2362:apl del diaeresis</span>
+<span class="c1"># \u2363:apl star diaeresis</span>
+<span class="c1"># \u2364:apl jot diaeresis</span>
+<span class="c1"># \u2365:apl circle diaeresis</span>
+<span class="c1"># \u2366:apl down shoe stile</span>
+<span class="c1"># \u2367:apl left shoe stile </span>
+<span class="c1"># \u2368:apl tilde diaeresis</span>
+<span class="c1"># \u2369:apl greater diaeresis</span>
+<span class="c1"># \u236A:apl comma bar</span>
+<span class="c1"># \u236B:apl del tilde</span>
+<span class="c1"># \u236C:apl zilde</span>
+<span class="c1"># \u236D:apl stile tilde</span>
+<span class="c1"># \u236E:apl semicolon underbar</span>
+<span class="c1"># \u236F:apl quad not equal </span>
+<span class="c1"># \u2370:apl quad question</span>
+<span class="c1"># \u2371:apl down caret tilde</span>
+<span class="c1"># \u2372:apl up caret tilde</span>
+<span class="c1"># \u2373:apl iota</span>
+<span class="c1"># \u2374:apl rho</span>
+<span class="c1"># \u2375:apl omega</span>
+<span class="c1"># \u2376:apl alpha underbar</span>
+<span class="c1"># \u2377:apl epsilon underbar </span>
+<span class="c1"># \u2378:apl iota underbar</span>
+<span class="c1"># \u2379:apl omega underbar</span>
+<span class="c1"># \u237A:apl alpha</span>
+<span class="c1"># \u237B:not check mark</span>
+<span class="c1"># \u237C:right angle with downward zigzag</span>
+<span class="c1"># \u237D:shouldered open box</span>
+<span class="c1"># \u237E:bell</span>
+<span class="c1"># \u237F:vertical line with middle dot </span>
+<span class="c1"># \u2380:insertion</span>
+<span class="c1"># \u2381:continuous underline</span>
+<span class="c1"># \u2382:discontinuous underline</span>
+<span class="c1"># \u2383:emphasis</span>
+<span class="c1"># \u2384:composition</span>
+<span class="c1"># \u2385:white square with centre dot</span>
+<span class="c1"># \u2386:enter</span>
+<span class="c1"># \u2387:alt key </span>
+<span class="c1"># \u2388:helm</span>
+<span class="c1"># \u2389:circled horizontal bar</span>
+<span class="c1"># \u238A:circled triangle down</span>
+<span class="c1"># \u238B:broken circle nw arrow</span>
+<span class="c1"># \u238C:undo</span>
+<span class="c1"># \u238D:monostable</span>
+<span class="c1"># \u238E:hysteresis</span>
+<span class="c1"># \u238F:open circuit output h type </span>
+<span class="c1"># \u2390:open circuit output l type</span>
+<span class="c1"># \u2391:passive pull down output</span>
+<span class="c1"># \u2392:passive pull up output</span>
+<span class="c1"># \u2393:direct current form two</span>
+<span class="c1"># \u2394:software function</span>
+<span class="c1"># \u2395:apl quad</span>
+<span class="c1"># \u2396:decimal separator</span>
+<span class="c1"># \u2397:previous page </span>
+<span class="c1"># \u2398:next page</span>
+<span class="c1"># \u2399:print screen</span>
+<span class="c1"># \u239A:clear screen</span>
+<span class="c1"># \u239B:left paren upper</span>
+<span class="c1"># \u239C:left paren extension</span>
+<span class="c1"># \u239D:left paren lower</span>
+<span class="c1"># \u239E:right paren upper</span>
+<span class="c1"># \u239F:right paren extension </span>
+<span class="c1"># \u23A0:right paren lower</span>
+<span class="c1"># \u23A1:left bracket upper</span>
+<span class="c1"># \u23A2:left bracket extension</span>
+<span class="c1"># \u23A3:left bracket lower</span>
+<span class="c1"># \u23A4:right bracket upper</span>
+<span class="c1"># \u23A5:right bracket extension</span>
+<span class="c1"># \u23A6:right bracket lower</span>
+<span class="c1"># \u23A7:left curly upper </span>
+<span class="c1"># \u23A8:left curly middle</span>
+<span class="c1"># \u23A9:left curly lower</span>
+<span class="c1"># \u23AA:curly bracket extension</span>
+<span class="c1"># \u23AB:right curly upper</span>
+<span class="c1"># \u23AC:right curly middle</span>
+<span class="c1"># \u23AD:right curly lower</span>
+<span class="c1"># \u23AE:integral extension</span>
+<span class="c1"># \u23AF:horizontal line extension </span>
+<span class="c1"># \u23B0:upper left curly</span>
+<span class="c1"># \u23B1:lower right curly</span>
+<span class="c1"># \u23B2:summation top</span>
+<span class="c1"># \u23B3:summation bottom</span>
+<span class="c1"># \u23B4:top square bracket</span>
+<span class="c1"># \u23B5:bottom square bracket</span>
+<span class="c1"># \u23B6:bottom square bracket over top</span>
+<span class="c1"># \u23B7:radical bottom </span>
+<span class="c1"># \u23B8:left vertical box line</span>
+<span class="c1"># \u23B9:right vertical box line</span>
+<span class="c1"># \u23BA:horizontal scan line 1</span>
+<span class="c1"># \u23BB:horizontal scan line 3</span>
+<span class="c1"># \u23BC:horizontal scan line 7</span>
+<span class="c1"># \u23BD:horizontal scan line 9</span>
+<span class="c1"># \u23BE:dentistry mirror</span>
+<span class="c1"># \u23BF:dentistry light vertical down </span>
+<span class="c1"># \u23C0:dentistry light down right</span>
+<span class="c1"># \u23C1:dentistry light down left</span>
+<span class="c1"># \u23C2:dentistry light vertical up</span>
+<span class="c1"># \u23C3:dentistry light up right</span>
+<span class="c1"># \u23C4:dentistry light up left</span>
+<span class="c1"># \u23C5:dentistry light down right left</span>
+<span class="c1"># \u23C6:dentistry light up right left</span>
+<span class="c1"># \u23C7:dentistry light wave </span>
+<span class="c1"># \u23C8:dentistry light vertical wave</span>
+<span class="c1"># \u23C9:top parenthesis</span>
+<span class="c1"># \u23CA:bottom parenthesis</span>
+<span class="c1"># \u23CB:top curly bracket</span>
+<span class="c1"># \u23CC:bottom curly bracket</span>
+<span class="c1"># \u23CD:square foot</span>
+<span class="c1"># \u23CE:return</span>
+<span class="c1"># \u23CF:eject </span>
+<span class="c1"># \u23D0:vertical line extension</span>
+<span class="c1"># \u23D1:metrical breve</span>
+<span class="c1"># \u23D2:metrical long over short</span>
+<span class="c1"># \u23D3:metrical short over long</span>
+<span class="c1"># \u23D4:metrical long over two shorts</span>
+<span class="c1"># \u23D5:metrical two shorts over long</span>
+<span class="c1"># \u23D6:metrical two shorts joined</span>
+<span class="c1"># \u23D7:metrical triseme </span>
+<span class="c1"># \u23D8:metrical tetraseme</span>
+<span class="c1"># \u23D9:metrical pentaseme</span>
+<span class="c1"># \u23DA:earth ground</span>
+<span class="c1"># \u23DB:fuse</span>
+<span class="c1"># \u23DC:top parenthesis ornament</span>
+<span class="c1"># \u23DD:bottom parenthesis ornament</span>
+<span class="c1"># \u23DE:top curly bracket ornament</span>
+<span class="c1"># \u23DF:bottom curly bracket ornament </span>
+<span class="c1"># \u23E0:top tortoise bracket</span>
+<span class="c1"># \u23E1:bottom tortoise bracket</span>
+<span class="c1"># \u23E2:white trapezium</span>
+<span class="c1"># \u23E3:benzene with circle</span>
+<span class="c1"># \u23E4:straightness</span>
+<span class="c1"># \u23E5:flatness</span>
+<span class="c1"># \u23E6:ac current</span>
+<span class="c1"># \u23E7:electrical intersection </span>
+<span class="c1"># \u23E8:decimal exponent</span>
+<span class="c1"># \u23E9:fast forward</span>
+<span class="c1"># \u23EA:rewind</span>
+<span class="c1"># \u23EB:fast up</span>
+<span class="c1"># \u23EC:fast down</span>
+<span class="c1"># \u23ED:next track</span>
+<span class="c1"># \u23EE:prev track</span>
+<span class="c1"># \u23EF:play or pause </span>
+<span class="c1"># \u23F0:alarm clock</span>
+<span class="c1"># \u23F1:stopwatch</span>
+<span class="c1"># \u23F2:timer clock</span>
+<span class="c1"># \u23F3:hourglass flowing</span>
+<span class="c1"># \u23F4:medium left triangle</span>
+<span class="c1"># \u23F5:medium right triangle</span>
+<span class="c1"># \u23F6:medium up triangle</span>
+<span class="c1"># \u23F7:medium down triangle </span>
+<span class="c1"># \u23F8:pause</span>
+<span class="c1"># \u23F9:stop</span>
+<span class="c1"># \u23FA:record</span>
+<span class="c1"># \u23FB:power</span>
+<span class="c1"># \u23FC:power on off</span>
+<span class="c1"># \u23FD:power on</span>
+<span class="c1"># \u23FE:sleep</span>
+<span class="c1"># \u23FF:observer eye </span>
+<span class="c1">## Box Drawing</span>
+<span class="c1"># \u2500:light horizontal</span>
+<span class="c1"># \u2501:heavy horizontal</span>
+<span class="c1"># \u2502:light vertical</span>
+<span class="c1"># \u2503:heavy vertical</span>
+<span class="c1"># \u2504:light triple dash horizontal</span>
+<span class="c1"># \u2505:heavy triple dash horizontal</span>
+<span class="c1"># \u2506:light triple dash vertical</span>
+<span class="c1"># \u2507:heavy triple dash vertical </span>
+<span class="c1"># \u2508:light quadruple dash horizontal</span>
+<span class="c1"># \u2509:heavy quadruple dash horizontal</span>
+<span class="c1"># \u250A:light quadruple dash vertical</span>
+<span class="c1"># \u250B:heavy quadruple dash vertical</span>
+<span class="c1"># \u250C:light down and right</span>
+<span class="c1"># \u250D:down light right heavy</span>
+<span class="c1"># \u250E:down heavy right light</span>
+<span class="c1"># \u250F:heavy down and right </span>
+<span class="c1"># \u2510:light down and left</span>
+<span class="c1"># \u2511:down light left heavy</span>
+<span class="c1"># \u2512:down heavy left light</span>
+<span class="c1"># \u2513:heavy down and left</span>
+<span class="c1"># \u2514:light up and right</span>
+<span class="c1"># \u2515:up light right heavy</span>
+<span class="c1"># \u2516:up heavy right light</span>
+<span class="c1"># \u2517:heavy up and right </span>
+<span class="c1"># \u2518:light up and left</span>
+<span class="c1"># \u2519:up light left heavy</span>
+<span class="c1"># \u251A:up heavy left light</span>
+<span class="c1"># \u251B:heavy up and left</span>
+<span class="c1"># \u251C:light vertical and right</span>
+<span class="c1"># \u251D:vertical light right heavy</span>
+<span class="c1"># \u251E:up heavy right down light</span>
+<span class="c1"># \u251F:down heavy right up light </span>
+<span class="c1"># \u2520:vertical heavy right light</span>
+<span class="c1"># \u2521:down light right up heavy</span>
+<span class="c1"># \u2522:up light right down heavy</span>
+<span class="c1"># \u2523:heavy vertical and right</span>
+<span class="c1"># \u2524:light vertical and left</span>
+<span class="c1"># \u2525:vertical light left heavy</span>
+<span class="c1"># \u2526:up heavy left down light</span>
+<span class="c1"># \u2527:down heavy left up light </span>
+<span class="c1"># \u2528:vertical heavy left light</span>
+<span class="c1"># \u2529:down light left up heavy</span>
+<span class="c1"># \u252A:up light left down heavy</span>
+<span class="c1"># \u252B:heavy vertical and left</span>
+<span class="c1"># \u252C:light down and horizontal</span>
+<span class="c1"># \u252D:left heavy right down light</span>
+<span class="c1"># \u252E:right heavy left down light</span>
+<span class="c1"># \u252F:down light horizontal heavy </span>
+<span class="c1"># \u2530:down heavy horizontal light</span>
+<span class="c1"># \u2531:right light left down heavy</span>
+<span class="c1"># \u2532:left light right down heavy</span>
+<span class="c1"># \u2533:heavy down and horizontal</span>
+<span class="c1"># \u2534:light up and horizontal</span>
+<span class="c1"># \u2535:left heavy right up light</span>
+<span class="c1"># \u2536:right heavy left up light</span>
+<span class="c1"># \u2537:up light horizontal heavy </span>
+<span class="c1"># \u2538:up heavy horizontal light</span>
+<span class="c1"># \u2539:right light left up heavy</span>
+<span class="c1"># \u253A:left light right up heavy</span>
+<span class="c1"># \u253B:heavy up and horizontal</span>
+<span class="c1"># \u253C:light vertical and horizontal</span>
+<span class="c1"># \u253D:left heavy right vertical light</span>
+<span class="c1"># \u253E:right heavy left vertical light</span>
+<span class="c1"># \u253F:vertical light horizontal heavy </span>
+<span class="c1"># \u2540:up heavy down horizontal light</span>
+<span class="c1"># \u2541:down heavy up horizontal light</span>
+<span class="c1"># \u2542:vertical heavy horizontal light</span>
+<span class="c1"># \u2543:left up heavy right down light</span>
+<span class="c1"># \u2544:right up heavy left down light</span>
+<span class="c1"># \u2545:left down heavy right up light</span>
+<span class="c1"># \u2546:right down heavy left up light</span>
+<span class="c1"># \u2547:down light up horizontal heavy </span>
+<span class="c1"># \u2548:up light down horizontal heavy</span>
+<span class="c1"># \u2549:right light left vertical heavy</span>
+<span class="c1"># \u254A:left light right vertical heavy</span>
+<span class="c1"># \u254B:heavy vertical and horizontal</span>
+<span class="c1"># \u254C:light double dash horizontal</span>
+<span class="c1"># \u254D:heavy double dash horizontal</span>
+<span class="c1"># \u254E:light double dash vertical</span>
+<span class="c1"># \u254F:heavy double dash vertical </span>
+<span class="c1"># \u2550:double horizontal</span>
+<span class="c1"># \u2551:double vertical</span>
+<span class="c1"># \u2552:down single right double</span>
+<span class="c1"># \u2553:down double right single</span>
+<span class="c1"># \u2554:double down and right</span>
+<span class="c1"># \u2555:down single left double</span>
+<span class="c1"># \u2556:down double left single</span>
+<span class="c1"># \u2557:double down and left </span>
+<span class="c1"># \u2558:up single right double</span>
+<span class="c1"># \u2559:up double right single</span>
+<span class="c1"># \u255A:double up and right</span>
+<span class="c1"># \u255B:up single left double</span>
+<span class="c1"># \u255C:up double left single</span>
+<span class="c1"># \u255D:double up and left</span>
+<span class="c1"># \u255E:vertical single right double</span>
+<span class="c1"># \u255F:vertical double right single </span>
+<span class="c1"># \u2560:double vertical and right</span>
+<span class="c1"># \u2561:vertical single left double</span>
+<span class="c1"># \u2562:vertical double left single</span>
+<span class="c1"># \u2563:double vertical and left</span>
+<span class="c1"># \u2564:down single horizontal double</span>
+<span class="c1"># \u2565:down double horizontal single</span>
+<span class="c1"># \u2566:double down and horizontal</span>
+<span class="c1"># \u2567:up single horizontal double </span>
+<span class="c1"># \u2568:up double horizontal single</span>
+<span class="c1"># \u2569:double up and horizontal</span>
+<span class="c1"># \u256A:vertical single horizontal double</span>
+<span class="c1"># \u256B:vertical double horizontal single</span>
+<span class="c1"># \u256C:double vertical and horizontal</span>
+<span class="c1"># \u256D:light arc down right</span>
+<span class="c1"># \u256E:light arc down left</span>
+<span class="c1"># \u256F:light arc up left </span>
+<span class="c1"># \u2570:light arc up right</span>
+<span class="c1"># \u2571:light diagonal upper right</span>
+<span class="c1"># \u2572:light diagonal upper left</span>
+<span class="c1"># \u2573:light diagonal cross</span>
+<span class="c1"># \u2574:light left</span>
+<span class="c1"># \u2575:light up</span>
+<span class="c1"># \u2576:light right</span>
+<span class="c1"># \u2577:light down </span>
+<span class="c1"># \u2578:heavy left</span>
+<span class="c1"># \u2579:heavy up</span>
+<span class="c1"># \u257A:heavy right</span>
+<span class="c1"># \u257B:heavy down</span>
+<span class="c1"># \u257C:light left heavy right</span>
+<span class="c1"># \u257D:light up heavy down</span>
+<span class="c1"># \u257E:heavy left light right</span>
+<span class="c1"># \u257F:heavy up light down </span>
+<span class="c1">## Block Elements</span>
+<span class="c1"># \u2580:upper half block</span>
+<span class="c1"># \u2581:lower one eighth block</span>
+<span class="c1"># \u2582:lower one quarter block</span>
+<span class="c1"># \u2583:lower three eighths block</span>
+<span class="c1"># \u2584:lower half block</span>
+<span class="c1"># \u2585:lower five eighths block</span>
+<span class="c1"># \u2586:lower three quarters block</span>
+<span class="c1"># \u2587:lower seven eighths block </span>
+<span class="c1"># \u2588:full block</span>
+<span class="c1"># \u2589:left seven eighths block</span>
+<span class="c1"># \u258A:left three quarters block</span>
+<span class="c1"># \u258B:left five eighths block</span>
+<span class="c1"># \u258C:left half block</span>
+<span class="c1"># \u258D:left three eighths block</span>
+<span class="c1"># \u258E:left one quarter block</span>
+<span class="c1"># \u258F:left one eighth block </span>
+<span class="c1"># \u2590:right half block</span>
+<span class="c1"># \u2591:light shade</span>
+<span class="c1"># \u2592:medium shade</span>
+<span class="c1"># \u2593:dark shade</span>
+<span class="c1"># \u2594:upper one eighth block</span>
+<span class="c1"># \u2595:right one eighth block</span>
+<span class="c1"># \u2596:quadrant lower left</span>
+<span class="c1"># \u2597:quadrant lower right </span>
+<span class="c1"># \u2598:quadrant upper left</span>
+<span class="c1"># \u2599:quadrant upper left lower left lower right</span>
+<span class="c1"># \u259A:quadrant upper left lower right</span>
+<span class="c1"># \u259B:quadrant upper left upper right lower left</span>
+<span class="c1"># \u259C:quadrant upper left upper right lower right</span>
+<span class="c1"># \u259D:quadrant upper right</span>
+<span class="c1"># \u259E:quadrant upper right lower left</span>
+<span class="c1"># \u259F:quadrant upper right lower left lower right </span>
+<span class="c1">## Geometric Shapes</span>
+<span class="c1"># \u25A0:black square</span>
+<span class="c1"># \u25A1:white square</span>
+<span class="c1"># \u25A2:white square rounded</span>
+<span class="c1"># \u25A3:white square containing black small</span>
+<span class="c1"># \u25A4:square horizontal fill</span>
+<span class="c1"># \u25A5:square vertical fill</span>
+<span class="c1"># \u25A6:square orthogonal crosshatch</span>
+<span class="c1"># \u25A7:square upper left diagonal </span>
+<span class="c1"># \u25A8:square upper right diagonal</span>
+<span class="c1"># \u25A9:square diagonal crosshatch</span>
+<span class="c1"># \u25AA:black small square</span>
+<span class="c1"># \u25AB:white small square</span>
+<span class="c1"># \u25AC:black rectangle</span>
+<span class="c1"># \u25AD:white rectangle</span>
+<span class="c1"># \u25AE:black vertical rectangle</span>
+<span class="c1"># \u25AF:white vertical rectangle </span>
+<span class="c1"># \u25B0:black parallelogram</span>
+<span class="c1"># \u25B1:white parallelogram</span>
+<span class="c1"># \u25B2:black up triangle</span>
+<span class="c1"># \u25B3:white up triangle</span>
+<span class="c1"># \u25B4:black up small triangle</span>
+<span class="c1"># \u25B5:white up small triangle</span>
+<span class="c1"># \u25B6:black right triangle</span>
+<span class="c1"># \u25B7:white right triangle </span>
+<span class="c1"># \u25B8:black right small triangle</span>
+<span class="c1"># \u25B9:white right small triangle</span>
+<span class="c1"># \u25BA:black right pointer</span>
+<span class="c1"># \u25BB:white right pointer</span>
+<span class="c1"># \u25BC:black down triangle</span>
+<span class="c1"># \u25BD:white down triangle</span>
+<span class="c1"># \u25BE:black down small triangle</span>
+<span class="c1"># \u25BF:white down small triangle </span>
+<span class="c1"># \u25C0:black left triangle</span>
+<span class="c1"># \u25C1:white left triangle</span>
+<span class="c1"># \u25C2:black left small triangle</span>
+<span class="c1"># \u25C3:white left small triangle</span>
+<span class="c1"># \u25C4:black left pointer</span>
+<span class="c1"># \u25C5:white left pointer</span>
+<span class="c1"># \u25C6:black diamond</span>
+<span class="c1"># \u25C7:white diamond </span>
+<span class="c1"># \u25C8:white diamond containing black small</span>
+<span class="c1"># \u25C9:fisheye</span>
+<span class="c1"># \u25CA:lozenge</span>
+<span class="c1"># \u25CB:white circle</span>
+<span class="c1"># \u25CC:dotted circle</span>
+<span class="c1"># \u25CD:circle vertical half fill</span>
+<span class="c1"># \u25CE:bullseye</span>
+<span class="c1"># \u25CF:black circle </span>
+<span class="c1"># \u25D0:circle left half black</span>
+<span class="c1"># \u25D1:circle right half black</span>
+<span class="c1"># \u25D2:circle bottom half black</span>
+<span class="c1"># \u25D3:circle top half black</span>
+<span class="c1"># \u25D4:circle upper right quadrant black</span>
+<span class="c1"># \u25D5:circle all but upper left quadrant</span>
+<span class="c1"># \u25D6:left half black circle</span>
+<span class="c1"># \u25D7:right half black circle </span>
+<span class="c1"># \u25D8:inverse bullet</span>
+<span class="c1"># \u25D9:inverse white circle</span>
+<span class="c1"># \u25DA:upper half inverse white circle</span>
+<span class="c1"># \u25DB:lower half inverse white circle</span>
+<span class="c1"># \u25DC:upper left quadrant arc</span>
+<span class="c1"># \u25DD:upper right quadrant arc</span>
+<span class="c1"># \u25DE:lower right quadrant arc</span>
+<span class="c1"># \u25DF:lower left quadrant arc </span>
+<span class="c1"># \u25E0:upper half circle</span>
+<span class="c1"># \u25E1:lower half circle</span>
+<span class="c1"># \u25E2:black lower right triangle</span>
+<span class="c1"># \u25E3:black lower left triangle</span>
+<span class="c1"># \u25E4:black upper left triangle</span>
+<span class="c1"># \u25E5:black upper right triangle</span>
+<span class="c1"># \u25E6:white bullet</span>
+<span class="c1"># \u25E7:square left half black </span>
+<span class="c1"># \u25E8:square right half black</span>
+<span class="c1"># \u25E9:square upper left diagonal half black</span>
+<span class="c1"># \u25EA:square lower right diagonal half black</span>
+<span class="c1"># \u25EB:white square vertical bisecting</span>
+<span class="c1"># \u25EC:white up triangle dot</span>
+<span class="c1"># \u25ED:up triangle left half black</span>
+<span class="c1"># \u25EE:up triangle right half black</span>
+<span class="c1"># \u25EF:large circle </span>
+<span class="c1"># \u25F0:white square upper left quadrant</span>
+<span class="c1"># \u25F1:white square lower left quadrant</span>
+<span class="c1"># \u25F2:white square lower right quadrant</span>
+<span class="c1"># \u25F3:white square upper right quadrant</span>
+<span class="c1"># \u25F4:white circle upper left quadrant</span>
+<span class="c1"># \u25F5:white circle lower left quadrant</span>
+<span class="c1"># \u25F6:white circle lower right quadrant</span>
+<span class="c1"># \u25F7:white circle upper right quadrant </span>
+<span class="c1"># \u25F8:upper left triangle</span>
+<span class="c1"># \u25F9:upper right triangle</span>
+<span class="c1"># \u25FA:lower left triangle</span>
+<span class="c1"># \u25FB:white medium square</span>
+<span class="c1"># \u25FC:black medium square</span>
+<span class="c1"># \u25FD:white medium small square</span>
+<span class="c1"># \u25FE:black medium small square</span>
+<span class="c1"># \u25FF:lower right triangle </span>
+<span class="c1">## Miscellaneous Symbols</span>
+<span class="c1"># \u2600:sun</span>
+<span class="c1"># \u2601:cloud</span>
+<span class="c1"># \u2602:umbrella</span>
+<span class="c1"># \u2603:snowman</span>
+<span class="c1"># \u2604:comet</span>
+<span class="c1"># \u2605:black star</span>
+<span class="c1"># \u2606:white star</span>
+<span class="c1"># \u2607:lightning </span>
+<span class="c1"># \u2608:thunderstorm</span>
+<span class="c1"># \u2609:sun symbol</span>
+<span class="c1"># \u260A:ascending node</span>
+<span class="c1"># \u260B:descending node</span>
+<span class="c1"># \u260C:conjunction</span>
+<span class="c1"># \u260D:opposition</span>
+<span class="c1"># \u260E:black telephone</span>
+<span class="c1"># \u260F:white telephone </span>
+<span class="c1"># \u2610:ballot box</span>
+<span class="c1"># \u2611:ballot box check</span>
+<span class="c1"># \u2612:ballot box x</span>
+<span class="c1"># \u2613:saltire</span>
+<span class="c1"># \u2614:umbrella rain</span>
+<span class="c1"># \u2615:hot beverage</span>
+<span class="c1"># \u2616:white shogi piece</span>
+<span class="c1"># \u2617:black shogi piece </span>
+<span class="c1"># \u2618:shamrock</span>
+<span class="c1"># \u2619:reversed rotated floral heart</span>
+<span class="c1"># \u261A:black left pointing index</span>
+<span class="c1"># \u261B:black right pointing index</span>
+<span class="c1"># \u261C:white left pointing index</span>
+<span class="c1"># \u261D:white up pointing index</span>
+<span class="c1"># \u261E:white right pointing index</span>
+<span class="c1"># \u261F:white down pointing index </span>
+<span class="c1"># \u2620:skull crossbones</span>
+<span class="c1"># \u2621:caution</span>
+<span class="c1"># \u2622:radioactive</span>
+<span class="c1"># \u2623:biohazard</span>
+<span class="c1"># \u2624:caduceus</span>
+<span class="c1"># \u2625:ankh</span>
+<span class="c1"># \u2626:orthodox cross</span>
+<span class="c1"># \u2627:chi rho </span>
+<span class="c1"># \u2628:cross of lorraine</span>
+<span class="c1"># \u2629:cross of jerusalem</span>
+<span class="c1"># \u262A:star and crescent</span>
+<span class="c1"># \u262B:farsi</span>
+<span class="c1"># \u262C:adi shakti</span>
+<span class="c1"># \u262D:hammer and sickle</span>
+<span class="c1"># \u262E:peace</span>
+<span class="c1"># \u262F:yin yang </span>
+<span class="c1"># \u2630:trigram heaven</span>
+<span class="c1"># \u2631:trigram lake</span>
+<span class="c1"># \u2632:trigram fire</span>
+<span class="c1"># \u2633:trigram thunder</span>
+<span class="c1"># \u2634:trigram wind</span>
+<span class="c1"># \u2635:trigram water</span>
+<span class="c1"># \u2636:trigram mountain</span>
+<span class="c1"># \u2637:trigram earth </span>
+<span class="c1"># \u2638:wheel of dharma</span>
+<span class="c1"># \u2639:frowning face</span>
+<span class="c1"># \u263A:smiling face</span>
+<span class="c1"># \u263B:black smiling face</span>
+<span class="c1"># \u263C:sun with rays</span>
+<span class="c1"># \u263D:first quarter moon</span>
+<span class="c1"># \u263E:last quarter moon</span>
+<span class="c1"># \u263F:mercury </span>
+<span class="c1"># \u2640:female</span>
+<span class="c1"># \u2641:earth</span>
+<span class="c1"># \u2642:male</span>
+<span class="c1"># \u2643:jupiter</span>
+<span class="c1"># \u2644:saturn</span>
+<span class="c1"># \u2645:uranus</span>
+<span class="c1"># \u2646:neptune</span>
+<span class="c1"># \u2647:pluto </span>
+<span class="c1"># \u2648:aries</span>
+<span class="c1"># \u2649:taurus</span>
+<span class="c1"># \u264A:gemini</span>
+<span class="c1"># \u264B:cancer</span>
+<span class="c1"># \u264C:leo</span>
+<span class="c1"># \u264D:virgo</span>
+<span class="c1"># \u264E:libra</span>
+<span class="c1"># \u264F:scorpius </span>
+<span class="c1"># \u2650:sagittarius</span>
+<span class="c1"># \u2651:capricorn</span>
+<span class="c1"># \u2652:aquarius</span>
+<span class="c1"># \u2653:pisces</span>
+<span class="c1"># \u2654:white chess king</span>
+<span class="c1"># \u2655:white chess queen</span>
+<span class="c1"># \u2656:white chess rook</span>
+<span class="c1"># \u2657:white chess bishop </span>
+<span class="c1"># \u2658:white chess knight</span>
+<span class="c1"># \u2659:white chess pawn</span>
+<span class="c1"># \u265A:black chess king</span>
+<span class="c1"># \u265B:black chess queen</span>
+<span class="c1"># \u265C:black chess rook</span>
+<span class="c1"># \u265D:black chess bishop</span>
+<span class="c1"># \u265E:black chess knight</span>
+<span class="c1"># \u265F:black chess pawn </span>
+<span class="c1"># \u2660:black spade</span>
+<span class="c1"># \u2661:white heart</span>
+<span class="c1"># \u2662:white diamond suit</span>
+<span class="c1"># \u2663:black club</span>
+<span class="c1"># \u2664:white spade</span>
+<span class="c1"># \u2665:black heart</span>
+<span class="c1"># \u2666:black diamond suit</span>
+<span class="c1"># \u2667:white club </span>
+<span class="c1"># \u2668:hot springs</span>
+<span class="c1"># \u2669:quarter note</span>
+<span class="c1"># \u266A:eighth note</span>
+<span class="c1"># \u266B:beamed eighth notes</span>
+<span class="c1"># \u266C:beamed sixteenth notes</span>
+<span class="c1"># \u266D:music flat</span>
+<span class="c1"># \u266E:music natural</span>
+<span class="c1"># \u266F:music sharp </span>
+<span class="c1"># \u2670:west syriac cross</span>
+<span class="c1"># \u2671:east syriac cross</span>
+<span class="c1"># \u2672:universal recycling</span>
+<span class="c1"># \u2673:recycling type 1</span>
+<span class="c1"># \u2674:recycling type 2</span>
+<span class="c1"># \u2675:recycling type 3</span>
+<span class="c1"># \u2676:recycling type 4</span>
+<span class="c1"># \u2677:recycling type 5 </span>
+<span class="c1"># \u2678:recycling type 6</span>
+<span class="c1"># \u2679:recycling type 7</span>
+<span class="c1"># \u267A:recycling generic</span>
+<span class="c1"># \u267B:black universal recycling</span>
+<span class="c1"># \u267C:recycled paper</span>
+<span class="c1"># \u267D:partially recycled paper</span>
+<span class="c1"># \u267E:permanent paper</span>
+<span class="c1"># \u267F:wheelchair </span>
+<span class="c1"># \u2680:die face 1</span>
+<span class="c1"># \u2681:die face 2</span>
+<span class="c1"># \u2682:die face 3</span>
+<span class="c1"># \u2683:die face 4</span>
+<span class="c1"># \u2684:die face 5</span>
+<span class="c1"># \u2685:die face 6</span>
+<span class="c1"># \u2686:white circle dot right</span>
+<span class="c1"># \u2687:white circle two dots </span>
+<span class="c1"># \u2688:black circle white dot right</span>
+<span class="c1"># \u2689:black circle two white dots</span>
+<span class="c1"># \u268A:monogram yang</span>
+<span class="c1"># \u268B:monogram yin</span>
+<span class="c1"># \u268C:digram greater yang</span>
+<span class="c1"># \u268D:digram lesser yin</span>
+<span class="c1"># \u268E:digram lesser yang</span>
+<span class="c1"># \u268F:digram greater yin </span>
+<span class="c1"># \u2690:white flag</span>
+<span class="c1"># \u2691:black flag</span>
+<span class="c1"># \u2692:hammer and pick</span>
+<span class="c1"># \u2693:anchor</span>
+<span class="c1"># \u2694:crossed swords</span>
+<span class="c1"># \u2695:staff of aesculapius</span>
+<span class="c1"># \u2696:scales</span>
+<span class="c1"># \u2697:alembic </span>
+<span class="c1"># \u2698:flower</span>
+<span class="c1"># \u2699:gear</span>
+<span class="c1"># \u269A:staff of hermes</span>
+<span class="c1"># \u269B:atom</span>
+<span class="c1"># \u269C:fleur de lis</span>
+<span class="c1"># \u269D:outlined white star</span>
+<span class="c1"># \u269E:three lines converging right</span>
+<span class="c1"># \u269F:three lines converging left </span>
+<span class="c1"># \u26A0:warning</span>
+<span class="c1"># \u26A1:high voltage</span>
+<span class="c1"># \u26A2:doubled female</span>
+<span class="c1"># \u26A3:doubled male</span>
+<span class="c1"># \u26A4:interlocked male female</span>
+<span class="c1"># \u26A5:male and female</span>
+<span class="c1"># \u26A6:male with stroke</span>
+<span class="c1"># \u26A7:transgender </span>
+<span class="c1"># \u26A8:vertical male with stroke</span>
+<span class="c1"># \u26A9:horizontal male with stroke</span>
+<span class="c1"># \u26AA:medium white circle</span>
+<span class="c1"># \u26AB:medium black circle</span>
+<span class="c1"># \u26AC:medium small white circle</span>
+<span class="c1"># \u26AD:marriage</span>
+<span class="c1"># \u26AE:divorce</span>
+<span class="c1"># \u26AF:unmarried partnership </span>
+<span class="c1"># \u26B0:coffin</span>
+<span class="c1"># \u26B1:funeral urn</span>
+<span class="c1"># \u26B2:neuter</span>
+<span class="c1"># \u26B3:ceres</span>
+<span class="c1"># \u26B4:pallas</span>
+<span class="c1"># \u26B5:juno</span>
+<span class="c1"># \u26B6:vesta</span>
+<span class="c1"># \u26B7:chiron </span>
+<span class="c1"># \u26B8:black moon lilith</span>
+<span class="c1"># \u26B9:sextile</span>
+<span class="c1"># \u26BA:semisextile</span>
+<span class="c1"># \u26BB:quincunx</span>
+<span class="c1"># \u26BC:sesquiquadrate</span>
+<span class="c1"># \u26BD:soccer ball</span>
+<span class="c1"># \u26BE:baseball</span>
+<span class="c1"># \u26BF:squared key </span>
+<span class="c1"># \u26C0:white draughts man</span>
+<span class="c1"># \u26C1:white draughts king</span>
+<span class="c1"># \u26C2:black draughts man</span>
+<span class="c1"># \u26C3:black draughts king</span>
+<span class="c1"># \u26C4:snowman without snow</span>
+<span class="c1"># \u26C5:sun behind cloud</span>
+<span class="c1"># \u26C6:rain</span>
+<span class="c1"># \u26C7:black snowman </span>
+<span class="c1"># \u26C8:thunder cloud rain</span>
+<span class="c1"># \u26C9:turned white shogi piece</span>
+<span class="c1"># \u26CA:turned black shogi piece</span>
+<span class="c1"># \u26CB:white diamond in square</span>
+<span class="c1"># \u26CC:crossing lanes</span>
+<span class="c1"># \u26CD:disabled car</span>
+<span class="c1"># \u26CE:ophiuchus</span>
+<span class="c1"># \u26CF:pick </span>
+<span class="c1"># \u26D0:car sliding</span>
+<span class="c1"># \u26D1:rescue worker helmet</span>
+<span class="c1"># \u26D2:circled crossing lanes</span>
+<span class="c1"># \u26D3:chains</span>
+<span class="c1"># \u26D4:no entry</span>
+<span class="c1"># \u26D5:alternate one way left</span>
+<span class="c1"># \u26D6:black two way left</span>
+<span class="c1"># \u26D7:white two way left </span>
+<span class="c1"># \u26D8:black left lane merge</span>
+<span class="c1"># \u26D9:white left lane merge</span>
+<span class="c1"># \u26DA:drive slow</span>
+<span class="c1"># \u26DB:heavy white down triangle</span>
+<span class="c1"># \u26DC:left closed entry</span>
+<span class="c1"># \u26DD:squared saltire</span>
+<span class="c1"># \u26DE:falling diagonal in white circle</span>
+<span class="c1"># \u26DF:black truck </span>
+<span class="c1"># \u26E0:restricted left entry 1</span>
+<span class="c1"># \u26E1:restricted left entry 2</span>
+<span class="c1"># \u26E2:astronomical uranus</span>
+<span class="c1"># \u26E3:heavy circle with stroke and two dots</span>
+<span class="c1"># \u26E4:pentagram</span>
+<span class="c1"># \u26E5:right handed pentagram</span>
+<span class="c1"># \u26E6:left handed pentagram</span>
+<span class="c1"># \u26E7:inverted pentagram </span>
+<span class="c1"># \u26E8:black cross on shield</span>
+<span class="c1"># \u26E9:shinto shrine</span>
+<span class="c1"># \u26EA:church</span>
+<span class="c1"># \u26EB:castle</span>
+<span class="c1"># \u26EC:historic site</span>
+<span class="c1"># \u26ED:gear without hub</span>
+<span class="c1"># \u26EE:gear with handles</span>
+<span class="c1"># \u26EF:map symbol lighthouse </span>
+<span class="c1"># \u26F0:mountain</span>
+<span class="c1"># \u26F1:umbrella on ground</span>
+<span class="c1"># \u26F2:fountain</span>
+<span class="c1"># \u26F3:flag in hole</span>
+<span class="c1"># \u26F4:ferry</span>
+<span class="c1"># \u26F5:sailboat</span>
+<span class="c1"># \u26F6:square four corners</span>
+<span class="c1"># \u26F7:skier </span>
+<span class="c1"># \u26F8:ice skate</span>
+<span class="c1"># \u26F9:person bouncing ball</span>
+<span class="c1"># \u26FA:tent</span>
+<span class="c1"># \u26FB:japanese bank</span>
+<span class="c1"># \u26FC:headstone graveyard</span>
+<span class="c1"># \u26FD:fuel pump</span>
+<span class="c1"># \u26FE:cup on black square</span>
+<span class="c1"># \u26FF:white flag with horizontal bar </span>
+<span class="c1">## Dingbats</span>
+<span class="c1"># \u2700:black safety scissors</span>
+<span class="c1"># \u2701:upper blade scissors</span>
+<span class="c1"># \u2702:black scissors</span>
+<span class="c1"># \u2703:lower blade scissors</span>
+<span class="c1"># \u2704:white scissors</span>
+<span class="c1"># \u2705:white heavy check mark</span>
+<span class="c1"># \u2706:telephone location</span>
+<span class="c1"># \u2707:tape drive </span>
+<span class="c1"># \u2708:airplane</span>
+<span class="c1"># \u2709:envelope</span>
+<span class="c1"># \u270A:raised fist</span>
+<span class="c1"># \u270B:raised hand</span>
+<span class="c1"># \u270C:victory hand</span>
+<span class="c1"># \u270D:writing hand</span>
+<span class="c1"># \u270E:lower right pencil</span>
+<span class="c1"># \u270F:pencil </span>
+<span class="c1"># \u2710:upper right pencil</span>
+<span class="c1"># \u2711:white nib</span>
+<span class="c1"># \u2712:black nib</span>
+<span class="c1"># \u2713:check mark</span>
+<span class="c1"># \u2714:heavy check mark</span>
+<span class="c1"># \u2715:multiplication x</span>
+<span class="c1"># \u2716:heavy multiplication x</span>
+<span class="c1"># \u2717:ballot x </span>
+<span class="c1"># \u2718:heavy ballot x</span>
+<span class="c1"># \u2719:outlined greek cross</span>
+<span class="c1"># \u271A:heavy greek cross</span>
+<span class="c1"># \u271B:open centre cross</span>
+<span class="c1"># \u271C:heavy open centre cross</span>
+<span class="c1"># \u271D:latin cross</span>
+<span class="c1"># \u271E:shadowed latin cross</span>
+<span class="c1"># \u271F:outlined latin cross </span>
+<span class="c1"># \u2720:maltese cross</span>
+<span class="c1"># \u2721:star of david</span>
+<span class="c1"># \u2722:four teardrop spoked asterisk</span>
+<span class="c1"># \u2723:four balloon spoked asterisk</span>
+<span class="c1"># \u2724:heavy four balloon spoked asterisk</span>
+<span class="c1"># \u2725:four club spoked asterisk</span>
+<span class="c1"># \u2726:black four pointed star</span>
+<span class="c1"># \u2727:white four pointed star </span>
+<span class="c1"># \u2728:sparkles</span>
+<span class="c1"># \u2729:stress outlined white star</span>
+<span class="c1"># \u272A:circled white star</span>
+<span class="c1"># \u272B:open centre black star</span>
+<span class="c1"># \u272C:black centre white star</span>
+<span class="c1"># \u272D:outlined black star</span>
+<span class="c1"># \u272E:heavy outlined black star</span>
+<span class="c1"># \u272F:pinwheel star </span>
+<span class="c1"># \u2730:shadowed white star</span>
+<span class="c1"># \u2731:heavy asterisk</span>
+<span class="c1"># \u2732:open centre asterisk</span>
+<span class="c1"># \u2733:eight spoked asterisk</span>
+<span class="c1"># \u2734:eight pointed black star</span>
+<span class="c1"># \u2735:eight pointed pinwheel star</span>
+<span class="c1"># \u2736:six pointed black star</span>
+<span class="c1"># \u2737:eight pointed rectilinear star </span>
+<span class="c1"># \u2738:heavy eight pointed rectilinear star</span>
+<span class="c1"># \u2739:twelve pointed black star</span>
+<span class="c1"># \u273A:sixteen pointed asterisk</span>
+<span class="c1"># \u273B:teardrop spoked asterisk</span>
+<span class="c1"># \u273C:open centre teardrop spoked asterisk</span>
+<span class="c1"># \u273D:heavy teardrop spoked asterisk</span>
+<span class="c1"># \u273E:six petalled black florette</span>
+<span class="c1"># \u273F:black florette </span>
+<span class="c1"># \u2740:white florette</span>
+<span class="c1"># \u2741:eight petalled outlined black florette</span>
+<span class="c1"># \u2742:circled open centre eight pointed star</span>
+<span class="c1"># \u2743:heavy teardrop spoked pinwheel asterisk</span>
+<span class="c1"># \u2744:snowflake</span>
+<span class="c1"># \u2745:tight trifoliate snowflake</span>
+<span class="c1"># \u2746:heavy chevron snowflake</span>
+<span class="c1"># \u2747:sparkle </span>
+<span class="c1"># \u2748:heavy sparkle</span>
+<span class="c1"># \u2749:balloon spoked asterisk</span>
+<span class="c1"># \u274A:eight teardrop spoked propeller asterisk</span>
+<span class="c1"># \u274B:heavy eight teardrop spoked propeller asterisk</span>
+<span class="c1"># \u274C:cross mark</span>
+<span class="c1"># \u274D:shadowed white circle</span>
+<span class="c1"># \u274E:negative squared cross mark</span>
+<span class="c1"># \u274F:lower right drop shadowed white square </span>
+<span class="c1"># \u2750:upper right drop shadowed white square</span>
+<span class="c1"># \u2751:lower right shadowed white square</span>
+<span class="c1"># \u2752:upper right shadowed white square</span>
+<span class="c1"># \u2753:black question mark ornament</span>
+<span class="c1"># \u2754:white question mark ornament</span>
+<span class="c1"># \u2755:white exclamation mark ornament</span>
+<span class="c1"># \u2756:black diamond minus white x</span>
+<span class="c1"># \u2757:heavy exclamation mark </span>
+<span class="c1"># \u2758:light vertical bar</span>
+<span class="c1"># \u2759:medium vertical bar</span>
+<span class="c1"># \u275A:heavy vertical bar</span>
+<span class="c1"># \u275B:heavy single turned comma quote</span>
+<span class="c1"># \u275C:heavy single comma quote</span>
+<span class="c1"># \u275D:heavy double turned comma quote</span>
+<span class="c1"># \u275E:heavy double comma quote</span>
+<span class="c1"># \u275F:heavy low single comma quote </span>
+<span class="c1"># \u2760:heavy low double comma quote</span>
+<span class="c1"># \u2761:curved stem paragraph</span>
+<span class="c1"># \u2762:heavy exclamation ornament</span>
+<span class="c1"># \u2763:heavy heart exclamation</span>
+<span class="c1"># \u2764:heavy black heart</span>
+<span class="c1"># \u2765:rotated heavy black heart bullet</span>
+<span class="c1"># \u2766:floral heart</span>
+<span class="c1"># \u2767:rotated floral heart bullet </span>
+<span class="c1"># \u2768:medium left parenthesis</span>
+<span class="c1"># \u2769:medium right parenthesis</span>
+<span class="c1"># \u276A:medium flattened left parenthesis</span>
+<span class="c1"># \u276B:medium flattened right parenthesis</span>
+<span class="c1"># \u276C:medium left angle bracket</span>
+<span class="c1"># \u276D:medium right angle bracket</span>
+<span class="c1"># \u276E:heavy left angle quote</span>
+<span class="c1"># \u276F:heavy right angle quote </span>
+<span class="c1"># \u2770:heavy left angle bracket</span>
+<span class="c1"># \u2771:heavy right angle bracket</span>
+<span class="c1"># \u2772:light left tortoise shell bracket</span>
+<span class="c1"># \u2773:light right tortoise shell bracket</span>
+<span class="c1"># \u2774:medium left curly bracket</span>
+<span class="c1"># \u2775:medium right curly bracket</span>
+<span class="c1"># \u2776:dingbat negative circled 1</span>
+<span class="c1"># \u2777:dingbat negative circled 2 </span>
+<span class="c1"># \u2778:dingbat negative circled 3</span>
+<span class="c1"># \u2779:dingbat negative circled 4</span>
+<span class="c1"># \u277A:dingbat negative circled 5</span>
+<span class="c1"># \u277B:dingbat negative circled 6</span>
+<span class="c1"># \u277C:dingbat negative circled 7</span>
+<span class="c1"># \u277D:dingbat negative circled 8</span>
+<span class="c1"># \u277E:dingbat negative circled 9</span>
+<span class="c1"># \u277F:dingbat negative circled 10 </span>
+<span class="c1"># \u2780:dingbat circled sans serif 1</span>
+<span class="c1"># \u2781:dingbat circled sans serif 2</span>
+<span class="c1"># \u2782:dingbat circled sans serif 3</span>
+<span class="c1"># \u2783:dingbat circled sans serif 4</span>
+<span class="c1"># \u2784:dingbat circled sans serif 5</span>
+<span class="c1"># \u2785:dingbat circled sans serif 6</span>
+<span class="c1"># \u2786:dingbat circled sans serif 7</span>
+<span class="c1"># \u2787:dingbat circled sans serif 8 </span>
+<span class="c1"># \u2788:dingbat circled sans serif 9</span>
+<span class="c1"># \u2789:dingbat circled sans serif 10</span>
+<span class="c1"># \u278A:dingbat negative circled sans serif 1</span>
+<span class="c1"># \u278B:dingbat negative circled sans serif 2</span>
+<span class="c1"># \u278C:dingbat negative circled sans serif 3</span>
+<span class="c1"># \u278D:dingbat negative circled sans serif 4</span>
+<span class="c1"># \u278E:dingbat negative circled sans serif 5</span>
+<span class="c1"># \u278F:dingbat negative circled sans serif 6 </span>
+<span class="c1"># \u2790:dingbat negative circled sans serif 7</span>
+<span class="c1"># \u2791:dingbat negative circled sans serif 8</span>
+<span class="c1"># \u2792:dingbat negative circled sans serif 9</span>
+<span class="c1"># \u2793:dingbat negative circled sans serif 10</span>
+<span class="c1"># \u2794:heavy wide headed right arrow</span>
+<span class="c1"># \u2795:heavy plus</span>
+<span class="c1"># \u2796:heavy minus</span>
+<span class="c1"># \u2797:heavy division </span>
+<span class="c1"># \u2798:heavy se arrow</span>
+<span class="c1"># \u2799:heavy right arrow</span>
+<span class="c1"># \u279A:heavy ne arrow</span>
+<span class="c1"># \u279B:drafting point right arrow</span>
+<span class="c1"># \u279C:heavy round tipped right arrow</span>
+<span class="c1"># \u279D:triangle headed right arrow</span>
+<span class="c1"># \u279E:heavy triangle headed right arrow</span>
+<span class="c1"># \u279F:dashed triangle headed right arrow </span>
+<span class="c1"># \u27A0:heavy dashed triangle headed right arrow</span>
+<span class="c1"># \u27A1:black right arrow</span>
+<span class="c1"># \u27A2:3d top lighted right arrowhead</span>
+<span class="c1"># \u27A3:3d bottom lighted right arrowhead</span>
+<span class="c1"># \u27A4:black right arrowhead</span>
+<span class="c1"># \u27A5:heavy black curved down right arrow</span>
+<span class="c1"># \u27A6:heavy black curved up right arrow</span>
+<span class="c1"># \u27A7:squat black right arrow </span>
+<span class="c1"># \u27A8:heavy concave pointed black right arrow</span>
+<span class="c1"># \u27A9:right shaded white right arrow</span>
+<span class="c1"># \u27AA:left shaded white right arrow</span>
+<span class="c1"># \u27AB:back tilted shadowed white right arrow</span>
+<span class="c1"># \u27AC:front tilted shadowed white right arrow</span>
+<span class="c1"># \u27AD:heavy lower right shadowed white right arrow</span>
+<span class="c1"># \u27AE:heavy upper right shadowed white right arrow</span>
+<span class="c1"># \u27AF:notched lower right shadowed white right arrow </span>
+<span class="c1"># \u27B0:curly loop</span>
+<span class="c1"># \u27B1:notched upper right shadowed white right arrow</span>
+<span class="c1"># \u27B2:circled heavy white right arrow</span>
+<span class="c1"># \u27B3:white feathered right arrow</span>
+<span class="c1"># \u27B4:black feathered se arrow</span>
+<span class="c1"># \u27B5:black feathered right arrow</span>
+<span class="c1"># \u27B6:black feathered ne arrow</span>
+<span class="c1"># \u27B7:heavy black feathered se arrow </span>
+<span class="c1"># \u27B8:heavy black feathered right arrow</span>
+<span class="c1"># \u27B9:heavy black feathered ne arrow</span>
+<span class="c1"># \u27BA:teardrop barbed right arrow</span>
+<span class="c1"># \u27BB:heavy teardrop shanked right arrow</span>
+<span class="c1"># \u27BC:wedge tailed right arrow</span>
+<span class="c1"># \u27BD:heavy wedge tailed right arrow</span>
+<span class="c1"># \u27BE:open outlined right arrow</span>
+<span class="c1"># \u27BF:double curly loop</span>
+</code></pre></div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: August 21, 2026</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

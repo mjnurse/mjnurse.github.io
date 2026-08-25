@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Section 1 - GCE - Compute Engine" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>Section 1 - GCE - Compute Engine</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/other/gcp/GCP_Training/section_1-gcs-compute-engine.md">Section 1 - GCE - Compute Engine</a></h1>
+<h1 id="regions-zones">Regions / Zones</h1>
+<p>Regions contain zones.</p>
+<h1 id="machine-families">Machine Families</h1>
+<p>Different Machine Families for Different Workloads:</p>
+<h3 id="general-purpose-e2-n2-n2d-n1-best-price-performance-ratio">General Purpose (E2, N2, N2D, N1) : Best price-performance ratio</h3>
+<p>Web and application servers, Small-medium databases, Dev environments</p>
+<h3 id="memory-optimized-m2-m1-ultra-high-memory-workloads">Memory Optimized (M2, M1): Ultra high memory workloads</h3>
+<p>Large in-memory databases and In-memory analytics</p>
+<h3 id="compute-optimized-c2-compute-intensive-workloads">Compute Optimized (C2): Compute intensive workloads</h3>
+<p>Gaming applications</p>
+<h1 id="machine-images">Machine Images</h1>
+<ul>
+<li>
+<p>Public images.</p>
+</li>
+<li>
+<p>Customer images.</p>
+</li>
+</ul>
+<h1 id="ip-addresses">IP Addresses</h1>
+<h2 id="external-ip-addresses">External IP Addresses</h2>
+<ul>
+<li>External IP addresses are lost when a machine is stopped.</li>
+</ul>
+<h2 id="static-ip-addresses-remember">Static IP Addresses - Remember</h2>
+<ul>
+<li>
+<p>Static IP can be switched to another VM instance in same project.  Use <code>External IP addresses</code> in the menu.</p>
+</li>
+<li>
+<p>Static IP remains attached even if you stop the instance. You have to manually detach it.</p>
+</li>
+<li>
+<p>Remember : You are billed for an Static IP when you are NOT using it! (You pay <strong>more</strong> if you are not using it!).A</p>
+</li>
+</ul>
+<h1 id="bootstrapping-startup-script">Bootstrapping - Startup Script</h1>
+<ul>
+<li>Available in the machine configuration.</li>
+</ul>
+<h1 id="instance-templates">Instance Templates</h1>
+<ul>
+<li>
+<p>Define machine type, image, labels, Startup script and other properties.</p>
+</li>
+<li>
+<p>Used to create VM instances and managed instance groups.</p>
+</li>
+<li>
+<p>(Optional) Image family can be specified (example - debian-9): Latest non-deprecated version of the family is used.</p>
+</li>
+</ul>
+<h1 id="custom-image">Custom Image</h1>
+<ul>
+<li>
+<p>Installing OS patches and software at launch of VM instances increases boot up time.  Prefer customer images.</p>
+</li>
+<li>
+<p>Image can be stored in Cloud Storage.</p>
+</li>
+<li>
+<p>Deprecate old images (&amp; specify replacement image).</p>
+</li>
+</ul>
+<h1 id="other">Other</h1>
+<ul>
+<li>
+<p>If you want dedicated hardware for your compliance, licensing, and management needs - use <code>Sole-tenant nodes</code>.</p>
+</li>
+<li>
+<p>To manage 1,000's nodes use <code>VM Manager</code>.</p>
+</li>
+</ul>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: December 11, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Postgres and Jupyter" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>Postgres and Jupyter</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/other/postgres/postgres-and-jupyter.md">Postgres and Jupyter</a></h1>
+<div class="table-of-contents">
+<h2>Contents</h2>
+<ul>
+<li class="toc-h2"><a href="#initializing-postgres-with-jupyter">Initializing Postgres with Jupyter</a></li>
+<li class="toc-h2"><a href="#running-sql-queries">Running SQL Queries</a></li>
+<li class="toc-h2"><a href="#using-postgres-magic-commands">Using Postgres Magic Commands</a></li>
+<li class="toc-h2"><a href="#formatting-explain-plans">Formatting Explain Plans</a></li>
+</ul>
+</div>
+<h2 id="initializing-postgres-with-jupyter">Initializing Postgres with Jupyter</h2>
+<p>To use Postgres with Jupyter notebooks, you can connect to a Postgres database from within a Jupyter notebook as follows:</p>
+<p>Add the following code snippet to a Jupyter notebook:</p>
+<div class="codehilite"><pre><span></span><code><span class="o">%</span><span class="nf">%capture</span>
+<span class="nf">%pip</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="o">-</span><span class="n">U</span><span class="w"> </span><span class="n">jupysql</span><span class="w"> </span><span class="n">pgspecial</span><span class="w"> </span><span class="s">&quot;psycopg[binary,pool]&quot;</span>
+<span class="nf">%load_ext</span><span class="w"> </span><span class="n">sql</span>
+<span class="nf">%sql</span><span class="w"> </span><span class="n">postgresql</span><span class="o">+</span><span class="n">psycopg</span><span class="o">:</span><span class="c1">//postgres:postgres@db:5432/postgres</span>
+<span class="nf">%config</span><span class="w"> </span><span class="n">SqlMagic</span><span class="p">.</span><span class="n">displaylimit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span>
+</code></pre></div>
+
+<ul>
+<li>The <code>psycopg</code> library is used to connect to Postgres.</li>
+<li>The <code>jupysql</code> extension allows you to run SQL queries directly in your notebook cells.</li>
+<li>The <code>pgspecial</code> package adds some useful magic commands for working with Postgres - for example <code>\di+</code> to list indexes.</li>
+<li><code>%%capture</code> is used to suppress the output of the pip install command.</li>
+<li><code>%sql</code> magic command establishes a connection to the Postgres database running in a Docker container named <code>db</code>.</li>
+</ul>
+<h2 id="running-sql-queries">Running SQL Queries</h2>
+<p>You can then run SQL queries directly in your notebook cells using the <code>%%sql</code> cell magic, or <code>%sql</code> for single-line queries. For example:</p>
+<div style="border:1px solid #222; border-radius:4px">
+
+<div class="codehilite"><pre><span></span><code><span class="o">%%</span><span class="k">sql</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="k">LIMIT</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+</code></pre></div>
+
+
+</div>
+
+<h2 id="using-postgres-magic-commands">Using Postgres Magic Commands</h2>
+<p>To run a Postgres magic command, you can use the <code>%sql</code> prefix. For example:</p>
+<div style="border:1px solid #222; border-radius:4px">
+
+<div class="codehilite"><pre><span></span><code><span class="o">%</span><span class="k">sql</span><span class="w"> </span><span class="err">\</span><span class="n">di</span><span class="o">+</span>
+</code></pre></div>
+
+
+</div>
+
+<p>You cannot use <code>%%sql</code> for magic commands; they must be prefixed with <code>%sql</code>.</p>
+<h2 id="formatting-explain-plans">Formatting Explain Plans</h2>
+<p>If you run an <code>EXPLAIN</code> command the output will be right-aligned and hard to read. You can format it using the following code snippet:</p>
+<div style="border:1px solid #222; border-radius:4px">
+
+<div class="codehilite"><pre><span></span><code><span class="c">%%sql</span>
+<span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="c">%sql EXPLAIN (ANALYZE, BUFFERS) SELECT * FROM test WHERE name = &#39;Alice Smith&#39;;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s">&quot;\n&quot;</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">result</span><span class="p">))</span>
+</code></pre></div>
+
+
+</div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: January 28, 2026</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Section 4 - App Engine" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>Section 4 - App Engine</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/other/gcp/GCP_Training/section_4-app-engine.md">Section 4 - App Engine</a></h1>
+<div class="table-of-contents">
+<h2>Contents</h2>
+<ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#app-engine-environments">App Engine Environments</a></li>
+<li class="toc-h2"><a href="#standard---applications-run-in-language-specific-sandboxes">Standard - Applications run in language specific sandboxes</a></li>
+<li class="toc-h2"><a href="#flexible---application-instances-run-within-docker-containers">Flexible - Application instances run within Docker containers</a></li>
+<li><a href="#application-hierarchy">Application Hierarchy</a></li>
+<li><a href="#standard-vs-flexible-environments">Standard vs Flexible Environments</a></li>
+<li><a href="#scaling-instances">Scaling Instances</a></li>
+<li class="toc-h2"><a href="#automatic-scaling">Automatic Scaling</a></li>
+<li class="toc-h2"><a href="#basic-scaling">Basic Scaling</a></li>
+<li class="toc-h2"><a href="#manual-scaling">Manual Scaling</a></li>
+</ul>
+</div>
+<h1 id="overview">Overview</h1>
+<p>Simple way to deploy and scale your applications in GCP.  Provides end-to-end application management.</p>
+<p>Supports:</p>
+<ul>
+<li>Go, Java, .NET, Node.js, PHP, Python, Ruby using pre-configured runtimes.</li>
+<li>Use custom run-time and write code in any language.</li>
+<li>Connect to variety of Google Cloud storage products (Cloud SQL etc).</li>
+</ul>
+<p>No usage charges - Pay for resources provisioned</p>
+<p>Features:</p>
+<ul>
+<li>Automatic load balancing &amp; Auto scaling.</li>
+<li>Managed platform updates &amp; Application health monitoring.</li>
+<li>Application versioning.</li>
+<li>Traffic splitting.</li>
+</ul>
+<h1 id="app-engine-environments">App Engine Environments</h1>
+<h2 id="standard-applications-run-in-language-specific-sandboxes">Standard - Applications run in language specific sandboxes</h2>
+<ul>
+<li>Complete isolation from OS/Disk/Other Apps.</li>
+<li>V1: Java, Python, PHP, Go (OLD Versions).</li>
+<li>ONLY for Python and PHP runtimes: Restricted network Access, Only white-listed extensions and libraries are allowed.</li>
+<li>No Restrictions for Java and Go runtimes.</li>
+<li>V2: Java, Python, PHP, Node.js, Ruby, Go (NEWER Versions).</li>
+<li>Full Network Access and No restrictions on Language Extensions.</li>
+</ul>
+<h2 id="flexible-application-instances-run-within-docker-containers">Flexible - Application instances run within Docker containers</h2>
+<ul>
+<li>Makes use of Compute Engine virtual machines.</li>
+<li>Support ANY runtime (with built-in support for Python, Java, Node.js, Go, Ruby, PHP, or .NET) so long as it can be made into a container.</li>
+<li>Provides access to background processes and local disks.</li>
+</ul>
+<h1 id="application-hierarchy">Application Hierarchy</h1>
+<p><strong>Application</strong> (one per project).</p>
+<p>Contains one or more:</p>
+<p><strong>Services</strong> (previously called modules.  Each service can have different settings).</p>
+<p>Contain one or more:</p>
+<p><strong>Versions</strong> (multiple versions of a service can be deployed with options to rollback and divide traffic).</p>
+<p>Contain one or more:</p>
+<p><strong>Instances</strong> (multiple instances of each service version can be deployed).</p>
+<h1 id="standard-vs-flexible-environments">Standard vs Flexible Environments</h1>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Standard</th>
+<th>Flexible</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pricing Factors</td>
+<td>Instance hours</td>
+<td>vCPU, Memory &amp; Persistent Disks</td>
+</tr>
+<tr>
+<td>Scaling</td>
+<td>Manual, Basic, Automatic</td>
+<td>Manual, Automatic</td>
+</tr>
+<tr>
+<td>Scaling to zero</td>
+<td>Yes</td>
+<td>No. Minimum one instance</td>
+</tr>
+<tr>
+<td>Instance startup time</td>
+<td>Seconds</td>
+<td>Minutes</td>
+</tr>
+<tr>
+<td>Rapid Scaling</td>
+<td>Yes</td>
+<td>No</td>
+</tr>
+<tr>
+<td>Maximum request timeout</td>
+<td>1 to 10 minutes</td>
+<td>60 minutes</td>
+</tr>
+<tr>
+<td>Local disk</td>
+<td>Yes (except for Python, PHP). Can write to /tmp.</td>
+<td>Yes. Ephemeral. New Disk on startup.</td>
+</tr>
+<tr>
+<td>SSH (for debugging)</td>
+<td>No</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<h1 id="scaling-instances">Scaling Instances</h1>
+<p>3 types of scaling:</p>
+<h2 id="automatic-scaling">Automatic Scaling</h2>
+<p>Recommended for Continuously Running Workloads.</p>
+<ul>
+<li>Auto scale based on:</li>
+<li>Target CPU Utilization - Configure a CPU usage threshold.</li>
+<li>Target Throughput Utilization - Configure a throughput threshold.</li>
+<li>Max Concurrent Requests - Configure max concurrent requests an instance can receive.</li>
+<li>Configure Max Instances and Min Instances.</li>
+</ul>
+<h2 id="basic-scaling">Basic Scaling</h2>
+<ul>
+<li>Instances are created as and when requests are received: Recommended for Adhoc Workloads.</li>
+<li>Instances are shutdown if ZERO requests (to keep costs low - high latency is possible).</li>
+<li>Configure Max Instances and Idle Timeout.</li>
+</ul>
+<p>(NOT supported by App Engine Flexible Environment).</p>
+<h2 id="manual-scaling">Manual Scaling</h2>
+<p>Configure specific number of instances to run. Adjust number of instances manually over time.</p>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: December 11, 2025</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>
