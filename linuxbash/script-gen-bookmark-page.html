@@ -423,10 +423,17 @@ process_bookmark_file<span class="o">()</span><span class="w"> </span><span clas
 <span class="s1">    const go = event.code == &quot;Enter&quot;;</span>
 <span class="s1">    let firstMatchHref = null;</span>
 
+<span class="s1">    // Split search string into individual words</span>
+<span class="s1">    const searchWords = searchVal.trim().split(/\s+/).filter(word =&gt; word.length &gt; 0);</span>
+
 <span class="s1">    for (let i = 1; i &lt;= maxNum; i++) {</span>
 <span class="s1">      const item = document.getElementById(&quot;item&quot;+i);</span>
-<span class="s1">      const itemVal = item.innerHTML;</span>
-<span class="s1">      if (itemVal.toUpperCase().indexOf(searchVal) &gt; -1) {</span>
+<span class="s1">      const itemVal = item.innerHTML.toUpperCase();</span>
+
+<span class="s1">      // Check if all search words are found in the item text (in any order)</span>
+<span class="s1">      const allWordsMatch = searchWords.every(word =&gt; itemVal.indexOf(word) &gt; -1);</span>
+
+<span class="s1">      if (allWordsMatch) {</span>
 <span class="s1">        item.style.color = &quot;#155799&quot;;</span>
 <span class="s1">        if (!firstMatchHref) {</span>
 <span class="s1">          firstMatchHref = item.href;</span>
@@ -687,7 +694,7 @@ process_bookmark_file<span class="o">()</span><span class="w"> </span><span clas
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: August 21, 2026</p>
+      <p>Last updated: August 27, 2026</p>
     </footer>
 
     <div class="scroll-container">

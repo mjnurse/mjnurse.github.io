@@ -1011,7 +1011,7 @@
     "id": "144",
     "title": "imp - Improve text using Claude AI",
     "url": "/linuxbash/script-imp.html",
-    "content": "#!/usr/bin/env bash help_text=&quot; NAME imp - Improve text using Claude AI. USAGE imp [options] [text string or filename] OPTIONS -h|--help Show help text. -c|--clipboard Read text from clipboard, improve it, put result on clipboard, and exit. -f|--file &lt;file&gt; Use the content of the specified file as input text. -s|--silent Suppress all output except the improved text. -u|--update If a file is provided as input, append the improved text to the file instead of printing to console. DESCRIP",
+    "content": "#!/usr/bin/env bash # Unset expired Google Application Default Credentials to prevent RAPT errors unset GOOGLE_APPLICATION_CREDENTIALS help_text=&quot; NAME imp - Improve text using Claude AI. USAGE imp [options] [text string or filename] OPTIONS -h|--help Show help text. -c|--clipboard Read text from clipboard, improve it, put result on clipboard, and exit. -f|--file &lt;file&gt; Use the content of the specified file as input text. -s|--silent Suppress all output except the improved text. -u|--",
     "type": "page"
   },
   {
