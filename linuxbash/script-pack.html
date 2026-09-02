@@ -94,10 +94,10 @@
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 <span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
 <span class="s2">NAME</span>
-<span class="s2">  pack - Compresses and converts files base64 to copy / paste into a command line session. </span>
+<span class="s2">    pack - Compresses and converts files base64 to copy / paste into a command line session. </span>
 
 <span class="s2">USAGE</span>
-<span class="s2">  pack [options] &lt;filename(s)&gt;</span>
+<span class="s2">    pack [options] &lt;filename(s)&gt;</span>
 
 <span class="s2">OPTIONS</span>
 <span class="s2">    -f|--force</span>
@@ -113,14 +113,14 @@
 <span class="s2">        Suppress terminal output.</span>
 
 <span class="s2">DESCRIPTION</span>
-<span class="s2">  Compresses one or more files and converts these to base64 to copy and paste into a command</span>
-<span class="s2">  line session with commands to convert these back to the original file.  The output is also</span>
-<span class="s2">  written to a file, the name of which can be specified using the -n option.  If no name is</span>
-<span class="s2">  specified, for a single file the output is written to &#39;&lt;filename&gt;.pack&#39;, for multiple files</span>
-<span class="s2">  the output is written to &#39;multi.pack&#39;.</span>
+<span class="s2">    Compresses one or more files and converts these to base64 to copy and paste into a command</span>
+<span class="s2">    line session with commands to convert these back to the original file.  The output is also</span>
+<span class="s2">    written to a file, the name of which can be specified using the -n option.  If no name is</span>
+<span class="s2">    specified, for a single file the output is written to &#39;&lt;filename&gt;.pack&#39;, for multiple files</span>
+<span class="s2">    the output is written to &#39;multi.pack&#39;.</span>
 
 <span class="s2">AUTHOR</span>
-<span class="s2">  mjnurse.github.io - 2020</span>
+<span class="s2">    mjnurse.github.io - 2020</span>
 <span class="s2">&quot;</span>
 <span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Compresses and converts files base64 to copy and paste into a command line session&quot;</span>
 <span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Compresses and converts files base64 to copy and paste into a command line session&quot;</span>
@@ -134,73 +134,80 @@
 <span class="nv">force_yn</span><span class="o">=</span>n
 
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">usage</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">try</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">usage</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">try</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 <span class="k">fi</span>
 
 <span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
-<span class="w">    </span>-f<span class="p">|</span>--force<span class="o">)</span><span class="w"> </span><span class="c1"># arg: Overwrite existing pack if one already exists.</span>
-<span class="w">      </span><span class="nv">force_yn</span><span class="o">=</span>y
-<span class="w">      </span><span class="p">;;</span>
-<span class="w">    </span>-h<span class="p">|</span>--help<span class="o">)</span><span class="w"> </span><span class="c1"># arg: Show help text.</span>
-<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
-<span class="w">      </span><span class="nb">exit</span>
-<span class="w">      </span><span class="p">;;</span>
-<span class="w">    </span>-n<span class="p">|</span>--name<span class="o">)</span><span class="w"> </span><span class="c1"># arg: &lt;name&gt; Specify a name from the pack file.</span>
-<span class="w">      </span><span class="nb">shift</span>
-<span class="w">      </span><span class="nv">pack_name</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
-<span class="w">      </span><span class="p">;;</span>
-<span class="w">    </span>-s<span class="p">|</span>--silent<span class="o">)</span><span class="w"> </span><span class="c1"># arg: Suppress terminal output.</span>
-<span class="w">      </span><span class="nv">silent_yn</span><span class="o">=</span>y
-<span class="w">      </span><span class="p">;;</span>
-<span class="w">    </span>?*<span class="o">)</span>
-<span class="w">      </span><span class="k">break</span>
-<span class="w">      </span><span class="p">;;</span>
-<span class="w">  </span><span class="k">esac</span>
-<span class="w">  </span><span class="nb">shift</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
+<span class="w">        </span>-f<span class="p">|</span>--force<span class="o">)</span><span class="w"> </span><span class="c1"># arg: Overwrite existing pack if one already exists.</span>
+<span class="w">            </span><span class="nv">force_yn</span><span class="o">=</span>y
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>-h<span class="p">|</span>--help<span class="o">)</span><span class="w"> </span><span class="c1"># arg: Show help text.</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="nb">exit</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>-n<span class="p">|</span>--name<span class="o">)</span><span class="w"> </span><span class="c1"># arg: &lt;name&gt; Specify a name from the pack file.</span>
+<span class="w">            </span><span class="nb">shift</span>
+<span class="w">            </span><span class="nv">pack_name</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>-s<span class="p">|</span>--silent<span class="o">)</span><span class="w"> </span><span class="c1"># arg: Suppress terminal output.</span>
+<span class="w">            </span><span class="nv">silent_yn</span><span class="o">=</span>y
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>?*<span class="o">)</span>
+<span class="w">            </span><span class="k">break</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">    </span><span class="k">esac</span>
+<span class="w">    </span><span class="nb">shift</span>
 <span class="k">done</span>
 
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">  </span><span class="nv">pack_name</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">pack_name</span><span class="k">:-</span><span class="si">${</span><span class="nv">1</span><span class="si">}}</span><span class="s2">.pack&quot;</span>
+<span class="w">    </span><span class="nv">pack_name</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">pack_name</span><span class="k">:-</span><span class="si">${</span><span class="nv">1</span><span class="si">}}</span><span class="s2">.pack&quot;</span>
 <span class="k">else</span>
-<span class="w">  </span><span class="nv">pack_name</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">pack_name</span><span class="k">:-</span><span class="nv">multi</span><span class="si">}</span><span class="s2">.pack&quot;</span>
+<span class="w">    </span><span class="nv">pack_name</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">pack_name</span><span class="k">:-</span><span class="nv">multi</span><span class="si">}</span><span class="s2">.pack&quot;</span>
 <span class="k">fi</span>
 
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-f<span class="w"> </span><span class="nv">$pack_name</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nv">$force_yn</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>n<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">  </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;File &#39;</span><span class="si">${</span><span class="nv">pack_name</span><span class="si">}</span><span class="s2">&#39; already exists.  Overwrite [yN]? &quot;</span><span class="w"> </span>yn
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">yn</span><span class="p">,,</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span>y<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="nb">exit</span>
-<span class="w">  </span><span class="k">fi</span>
+<span class="w">    </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;File &#39;</span><span class="si">${</span><span class="nv">pack_name</span><span class="si">}</span><span class="s2">&#39; already exists.  Overwrite [yN]? &quot;</span><span class="w"> </span>yn
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">yn</span><span class="p">,,</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span>y<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nb">exit</span>
+<span class="w">      </span><span class="k">fi</span>
 <span class="k">fi</span>
 
 rm<span class="w"> </span>-f<span class="w"> </span><span class="nv">$pack_name</span>
 
 <span class="nv">multi_yn</span><span class="o">=</span>n
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$line</span><span class="s2">&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$pack_name</span>
-<span class="w">  </span><span class="nv">files</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot; </span><span class="nv">$*</span><span class="s2"> &quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/ pack / /g; s/ [^ ]*\.pack / /g; s/^  *//; s/  *$//;&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">files</span><span class="p">// /, </span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>fold<span class="w"> </span>-w<span class="w"> </span><span class="m">88</span><span class="w"> </span>-s<span class="w"> </span><span class="se">\</span>
-<span class="w">      </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;1s/^/# CONTENTS: /; 2,99s/^/#           /&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$pack_name</span>
-<span class="w">  </span><span class="nv">multi_yn</span><span class="o">=</span>y
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$line</span><span class="s2">&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$pack_name</span>
+<span class="w">    </span><span class="nv">files</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot; </span><span class="nv">$*</span><span class="s2"> &quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/ pack / /g; s/ [^ ]*\.pack / /g; s/^  *//; s/  *$//;&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">files</span><span class="p">// /, </span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>fold<span class="w"> </span>-w<span class="w"> </span><span class="m">88</span><span class="w"> </span>-s<span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;1s/^/# CONTENTS: /; 2,99s/^/#           /&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$pack_name</span>
+<span class="w">    </span><span class="nv">multi_yn</span><span class="o">=</span>y
 <span class="k">fi</span>
 
 <span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nv">$*</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;pack&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>!<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">=</span>~<span class="w"> </span>.*pack<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$multi_yn</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>y<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">line</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$pack_name</span>
-<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;# FILE: </span><span class="nv">$f</span><span class="s2"> &quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$pack_name</span>
-<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">line</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$pack_name</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;pack&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>!<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">=</span>~<span class="w"> </span>.*pack<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$multi_yn</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>y<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">line</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$pack_name</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;# FILE: </span><span class="nv">$f</span><span class="s2"> &quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$pack_name</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">line</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$pack_name</span>
+<span class="w">        </span><span class="k">fi</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>cat<span class="w"> </span><span class="nv">$f</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gzip<span class="w"> </span>-f<span class="w"> </span>-9<span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-w<span class="w"> </span><span class="m">999999999</span><span class="w"> </span><span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/^/echo &#39;/&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span><span class="p">|</span><span class="w"> </span>fold<span class="w"> </span>-w<span class="w"> </span><span class="m">100</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$pack_name</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&#39; | base64 -d | gunzip &gt; </span><span class="nv">$f</span><span class="s2">; chmod u+x </span><span class="nv">$f</span><span class="s2">&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$pack_name</span>
 <span class="w">    </span><span class="k">fi</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>cat<span class="w"> </span><span class="nv">$f</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gzip<span class="w"> </span>-f<span class="w"> </span>-9<span class="w"> </span><span class="p">|</span><span class="w"> </span>base64<span class="w"> </span>-w<span class="w"> </span><span class="m">999999999</span><span class="w"> </span><span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/^/echo &#39;/&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">        </span><span class="p">|</span><span class="w"> </span>fold<span class="w"> </span>-w<span class="w"> </span><span class="m">100</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$pack_name</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&#39; | base64 -d | gunzip &gt; </span><span class="nv">$f</span><span class="s2">; chmod u+x </span><span class="nv">$f</span><span class="s2">&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$pack_name</span>
-<span class="w">  </span><span class="k">fi</span>
 <span class="k">done</span>
 
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$silent_yn</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>n<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">  </span>cat<span class="w"> </span><span class="nv">$pack_name</span>
+<span class="w">    </span>cat<span class="w"> </span><span class="nv">$pack_name</span>
+<span class="w">    </span><span class="nb">echo</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nb">command</span><span class="w"> </span>-v<span class="w"> </span>clip.exe<span class="w"> </span><span class="p">&amp;</span>&gt;<span class="w"> </span>/dev/null<span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span>
+<span class="w">        </span>cat<span class="w"> </span><span class="nv">$pack_name</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>clip.exe
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Copied to clipboard&quot;</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;clip.exe not found, not copied to clipboard&quot;</span>
+<span class="w">    </span><span class="k">fi</span>
 <span class="k">fi</span>
 </code></pre></div>
         </div>
@@ -220,7 +227,7 @@ rm<span class="w"> </span>-f<span class="w"> </span><span class="nv">$pack_name<
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: March 11, 2026</p>
+      <p>Last updated: September 01, 2026</p>
     </footer>
 
     <div class="scroll-container">

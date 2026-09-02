@@ -393,6 +393,49 @@
 </tr>
 </tbody>
 </table>
+<h3 id="jq">jq</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>jq '. \| length'</code></td>
+<td>Count</td>
+</tr>
+<tr>
+<td><code>jq '.[0]'</code></td>
+<td>Array item</td>
+</tr>
+<tr>
+<td><code>jq '.[] \| select(x == "y")'</code></td>
+<td>Filter</td>
+</tr>
+<tr>
+<td><code>jq '.[] \| {a, b}'</code></td>
+<td>Pick fields</td>
+</tr>
+<tr>
+<td><code>jq '.[]'</code></td>
+<td>Loop array</td>
+</tr>
+<tr>
+<td><code>jq '.a.b.c'</code></td>
+<td>Nested field</td>
+</tr>
+<tr>
+<td><code>jq '.field'</code></td>
+<td>Get a field</td>
+</tr>
+<tr>
+<td><code>jq -r '.field'</code></td>
+<td>Raw output</td>
+</tr>
+</tbody>
+</table>
 <h3 id="ln">ln</h3>
 <table>
 <thead>
@@ -651,7 +694,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: September 01, 2026</p>
+      <p>Last updated: September 02, 2026</p>
     </footer>
 
     <div class="scroll-container">

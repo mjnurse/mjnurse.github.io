@@ -171,12 +171,10 @@
 <span class="w">    </span><span class="nv">filter</span><span class="o">=</span><span class="s2">&quot;.*&quot;</span>
 <span class="k">fi</span>
 
-<span class="c1"># Create a file so that the grep command never fails</span>
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;x&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/tmp/h.tmp0
-
-grep<span class="w"> </span>--exclude<span class="o">=</span><span class="s2">&quot;*.pack&quot;</span><span class="w"> </span>--exclude<span class="o">=</span><span class="s2">&quot;*.tmp&quot;</span><span class="w"> </span>--exclude<span class="o">=</span><span class="s2">&quot;*.bkp&quot;</span><span class="w"> </span>--exclude<span class="o">=</span><span class="s2">&quot;*.json&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">     </span>--exclude<span class="o">=</span><span class="s2">&quot;*.bac&quot;</span><span class="w"> </span>--exclude<span class="o">=</span><span class="s2">&quot;mjn*rc&quot;</span><span class="w"> </span>--exclude-dir<span class="o">=</span><span class="s2">&quot;*&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">        </span>-s<span class="w"> </span>-L<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;^help_line=&quot;</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;^HELP_LINE=&quot;</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;^-- help_line:&quot;</span><span class="w"> </span>/tmp/h.tmp0<span class="w"> </span>*<span class="w"> </span><span class="se">\</span>
+find<span class="w"> </span>.<span class="w"> </span>-maxdepth<span class="w"> </span><span class="m">1</span><span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-executable<span class="w"> </span>-printf<span class="w"> </span><span class="s2">&quot;%f\n&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>grep<span class="w"> </span>--exclude<span class="o">=</span><span class="s2">&quot;*.pack&quot;</span><span class="w"> </span>--exclude<span class="o">=</span><span class="s2">&quot;*.tmp&quot;</span><span class="w"> </span>--exclude<span class="o">=</span><span class="s2">&quot;*.bkp&quot;</span><span class="w"> </span>--exclude<span class="o">=</span><span class="s2">&quot;*.json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>--exclude<span class="o">=</span><span class="s2">&quot;*.bac&quot;</span><span class="w"> </span>--exclude<span class="o">=</span><span class="s2">&quot;mjn*rc&quot;</span><span class="w"> </span>--exclude-dir<span class="o">=</span><span class="s2">&quot;*&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>-s<span class="w"> </span>-L<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;^help_line=&quot;</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;^HELP_LINE=&quot;</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;^-- help_line:&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;/README.*.md/d; /^h:/d; /tmp0/d&#39;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-f<span class="w"> </span>&gt;<span class="w"> </span>/tmp/h.tmp
 
@@ -192,12 +190,10 @@ grep<span class="w"> </span>--exclude<span class="o">=</span><span class="s2">&q
 <span class="s2">                 &quot;</span><span class="w"> </span>
 <span class="w">    </span><span class="k">fi</span>
 <span class="k">fi</span>
-<span class="c1"># Create a file so that the grep command never fails</span>
-<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;help_line=&quot;tbc&quot;&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>/tmp/h.tmp0
-
 
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$noissues_yn</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>n<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span>egrep<span class="w"> </span>-s<span class="w"> </span>-l<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;help_line=.*tbc.*&quot;</span><span class="w"> </span>/tmp/h.tmp0<span class="w"> </span>*<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>find<span class="w"> </span>.<span class="w"> </span>-maxdepth<span class="w"> </span><span class="m">1</span><span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-executable<span class="w"> </span>-printf<span class="w"> </span><span class="s2">&quot;%f\n&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>egrep<span class="w"> </span>-s<span class="w"> </span>-l<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;help_line=.*tbc.*&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">        </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">filter</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">        </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;/README.*.md/d; /^h</span>$<span class="s2">/d; /tmp0/d</span>
 <span class="s2">               s/</span><span class="si">${</span><span class="nv">filter</span><span class="p">//</span><span class="se">\.\*</span><span class="p">/</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">cyel</span><span class="si">}${</span><span class="nv">filter</span><span class="p">//</span><span class="se">\.\*</span><span class="p">/</span><span class="si">}${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">/g;</span>
@@ -211,7 +207,6 @@ grep<span class="w"> </span>--exclude<span class="o">=</span><span class="s2">&q
 <span class="w">        </span>cecho<span class="w"> </span>lmag<span class="w"> </span>--------------
 <span class="w">        </span>cat<span class="w"> </span>/tmp/h.tmp<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;/tidy/d&quot;</span>
 <span class="w">    </span><span class="k">fi</span>
-<span class="w">    </span>rm<span class="w"> </span>-f<span class="w"> </span>/tmp/h.tmp0
 <span class="k">fi</span>
 
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$issues_only_yn</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>n<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
@@ -232,11 +227,14 @@ grep<span class="w"> </span>--exclude<span class="o">=</span><span class="s2">&q
 
 <span class="nv">prev_char</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
 
-grep<span class="w"> </span>-H<span class="w"> </span>-s<span class="w"> </span>-i<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;^help_line=&quot;</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;^-- help_line:&quot;</span><span class="w"> </span>*<span class="w"> </span><span class="p">|</span><span class="w"> </span>egrep<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$filter</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/tmp/h.tmp
+find<span class="w"> </span>.<span class="w"> </span>-maxdepth<span class="w"> </span><span class="m">1</span><span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-executable<span class="w"> </span>-printf<span class="w"> </span><span class="s2">&quot;%f\n&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>grep<span class="w"> </span>-H<span class="w"> </span>-s<span class="w"> </span>-i<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;^help_line=&quot;</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;^-- help_line:&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>egrep<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$filter</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/tmp/h.tmp
 
-grep<span class="w"> </span>func:<span class="w"> </span>/home/martin/mjnurse/bash/mjn-bashrc<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>egrep<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$filter</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>sed<span class="w"> </span><span class="s1">&#39;s/ *# *func: *\([^ :]\+\): *\(.*\)$/\1:help_line=&quot;\2 BASHFUNC&quot;/&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/tmp/h.tmp
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-f<span class="w"> </span>/home/martin/mjnurse/bash/mjn-bashrc<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span>grep<span class="w"> </span>func:<span class="w"> </span>/home/martin/mjnurse/bash/mjn-bashrc<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>egrep<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$filter</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>sed<span class="w"> </span><span class="s1">&#39;s/ *# *func: *\([^ :]\+\): *\(.*\)$/\1:help_line=&quot;\2 BASHFUNC&quot;/&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/tmp/h.tmp
+<span class="k">fi</span>
 
 cat<span class="w"> </span>/tmp/h.tmp<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
 sed<span class="w"> </span><span class="s1">&#39; </span>
@@ -283,7 +281,7 @@ rm<span class="w"> </span>-f<span class="w"> </span>/tmp/h.out<span class="w"> <
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: August 24, 2026</p>
+      <p>Last updated: September 01, 2026</p>
     </footer>
 
     <div class="scroll-container">
