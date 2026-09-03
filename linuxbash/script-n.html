@@ -182,7 +182,7 @@
 <span class="w">    </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;1,2d;</span>
 <span class="s1">           s/^\(###.*\):/\1/;</span>
 <span class="s1">           s/^[^:]\+: *//;</span>
-<span class="s1">           s/^\(.*\) # \(.*\)$/&lt;tr&gt;&lt;td&gt;`\1`&lt;\/td&gt;&lt;td&gt;\2&lt;\/td&gt;&lt;\/tr&gt;/;</span>
+<span class="s1">           s/^\(.*\) # \(.*\)$/&lt;tr&gt;&lt;td&gt;&lt;code&gt;\1&lt;\/code&gt;&lt;\/td&gt;&lt;td&gt;\2&lt;\/td&gt;&lt;\/tr&gt;/;</span>
 <span class="s1">           $s/$/\n&lt;\/table&gt;/;</span>
 <span class="s1">           s/###BAR###/\\|/g;</span>
 <span class="s1">          &#39;</span>
