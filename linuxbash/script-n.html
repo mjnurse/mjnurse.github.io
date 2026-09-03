@@ -175,6 +175,8 @@
 <span class="w">    </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;1s/^/\n/;</span>
 <span class="s1">           /\[P\]/d;</span>
 <span class="s1">           s/|/###BAR###/g;</span>
+<span class="s1">           s/&lt;/\&amp;lt;/g;</span>
+<span class="s1">           s/&gt;/\&amp;gt;/g;</span>
 <span class="s1">          &#39;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;/^$/{N;/^\n$/D;}&#39;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;/^$/{ N; </span>
