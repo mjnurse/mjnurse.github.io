@@ -1,0 +1,819 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="table-filter - Python tool for filtering, grouping, and aggregating tabular data from stdinh" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>table-filter - Python tool for filtering, grouping, and aggregating tabular data from stdinh</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-table-filter.md">table-filter - Python tool for filtering, grouping, and aggregating tabular data from stdinh</a></h1>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python3</span>
+<span class="nv">DESCRIPTION</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">Python tool processing whitespace-separated tabular data from stdin, allowing:</span>
+<span class="s2">- Filter rows based on column values with various operators.</span>
+<span class="s2">- Group rows by one or more columns.</span>
+<span class="s2">- Aggregate data using functions like sum, average, min, max, and count.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="nv">AUTHOR</span><span class="o">=</span><span class="s2">&quot;mjnurse.github.io - 2026&quot;</span>
+
+<span class="nv">HELP_LINE</span><span class="o">=</span><span class="s2">&quot;Python tool for filtering, grouping, and aggregating tabular data from stdin&quot;</span>
+<span class="nv">WEB_DESC_LINE</span><span class="o">=</span><span class="s2">&quot;Python tool for filtering, grouping, and aggregating tabular data from stdinh&quot;</span>
+import<span class="w"> </span>sys
+import<span class="w"> </span>argparse
+import<span class="w"> </span>re
+import<span class="w"> </span>csv
+import<span class="w"> </span>json
+import<span class="w"> </span>tempfile
+import<span class="w"> </span>subprocess
+import<span class="w"> </span>os
+from<span class="w"> </span>collections<span class="w"> </span>import<span class="w"> </span>defaultdict
+from<span class="w"> </span>typing<span class="w"> </span>import<span class="w"> </span>List,<span class="w"> </span>Dict,<span class="w"> </span>Set
+
+
+def<span class="w"> </span>parse_numeric<span class="o">(</span>value:<span class="w"> </span>str<span class="o">)</span><span class="w"> </span>-&gt;<span class="w"> </span>tuple<span class="o">[</span>float,<span class="w"> </span>str<span class="o">]</span>:
+<span class="w">    </span><span class="s2">&quot;&quot;&quot;Parse numeric values with KB, MB, GB, TB, PB, or % suffixes.</span>
+
+<span class="s2">    Returns (numeric_value, format_type) where format_type is &#39;size&#39;, &#39;percent&#39;, or &#39;number&#39;</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>isinstance<span class="o">(</span>value,<span class="w"> </span><span class="o">(</span>int,<span class="w"> </span>float<span class="o">))</span>:
+<span class="w">        </span><span class="k">return</span><span class="w"> </span>float<span class="o">(</span>value<span class="o">)</span>,<span class="w"> </span><span class="s1">&#39;number&#39;</span>
+
+<span class="w">    </span><span class="nv">value_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>str<span class="o">(</span>value<span class="o">)</span>.strip<span class="o">()</span>
+
+<span class="w">    </span><span class="c1"># Check for percentage</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>value_str.endswith<span class="o">(</span><span class="s1">&#39;%&#39;</span><span class="o">)</span>:
+<span class="w">        </span>try:
+<span class="w">            </span><span class="nv">num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>float<span class="o">(</span>value_str<span class="o">[</span>:-1<span class="o">])</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span>num,<span class="w"> </span><span class="s1">&#39;percent&#39;</span>
+<span class="w">        </span>except<span class="w"> </span>ValueError:
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="m">0</span>.0,<span class="w"> </span><span class="s1">&#39;number&#39;</span>
+
+<span class="w">    </span><span class="nv">value_upper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>value_str.upper<span class="o">()</span>
+
+<span class="w">    </span><span class="c1"># Check for size units</span>
+<span class="w">    </span><span class="nv">units</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span>
+<span class="w">        </span><span class="s1">&#39;B&#39;</span>:<span class="w"> </span><span class="m">1</span>,
+<span class="w">        </span><span class="s1">&#39;KB&#39;</span>:<span class="w"> </span><span class="m">1024</span>,
+<span class="w">        </span><span class="s1">&#39;MB&#39;</span>:<span class="w"> </span><span class="m">1024</span><span class="w"> </span>**<span class="w"> </span><span class="m">2</span>,
+<span class="w">        </span><span class="s1">&#39;GB&#39;</span>:<span class="w"> </span><span class="m">1024</span><span class="w"> </span>**<span class="w"> </span><span class="m">3</span>,
+<span class="w">        </span><span class="s1">&#39;TB&#39;</span>:<span class="w"> </span><span class="m">1024</span><span class="w"> </span>**<span class="w"> </span><span class="m">4</span>,
+<span class="w">        </span><span class="s1">&#39;PB&#39;</span>:<span class="w"> </span><span class="m">1024</span><span class="w"> </span>**<span class="w"> </span><span class="m">5</span>,
+<span class="w">        </span><span class="s1">&#39;K&#39;</span>:<span class="w"> </span><span class="m">1024</span>,
+<span class="w">        </span><span class="s1">&#39;M&#39;</span>:<span class="w"> </span><span class="m">1024</span><span class="w"> </span>**<span class="w"> </span><span class="m">2</span>,
+<span class="w">        </span><span class="s1">&#39;G&#39;</span>:<span class="w"> </span><span class="m">1024</span><span class="w"> </span>**<span class="w"> </span><span class="m">3</span>,
+<span class="w">        </span><span class="s1">&#39;T&#39;</span>:<span class="w"> </span><span class="m">1024</span><span class="w"> </span>**<span class="w"> </span><span class="m">4</span>,
+<span class="w">        </span><span class="s1">&#39;P&#39;</span>:<span class="w"> </span><span class="m">1024</span><span class="w"> </span>**<span class="w"> </span><span class="m">5</span>,
+<span class="w">    </span><span class="o">}</span>
+
+<span class="w">    </span><span class="nv">match</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>re.match<span class="o">(</span>r<span class="s1">&#39;^([\d.]+)\s*([KMGTP]?B?)$&#39;</span>,<span class="w"> </span>value_upper<span class="o">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>match:
+<span class="w">        </span>num,<span class="w"> </span><span class="nv">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>match.groups<span class="o">()</span>
+<span class="w">        </span><span class="c1"># Only treat as size if there&#39;s actually a unit suffix</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>unit<span class="w"> </span>and<span class="w"> </span>unit<span class="w"> </span><span class="k">in</span><span class="w"> </span>units:
+<span class="w">            </span><span class="k">return</span><span class="w"> </span>float<span class="o">(</span>num<span class="o">)</span><span class="w"> </span>*<span class="w"> </span>units.get<span class="o">(</span>unit,<span class="w"> </span><span class="m">1</span><span class="o">)</span>,<span class="w"> </span><span class="s1">&#39;size&#39;</span>
+
+<span class="w">    </span><span class="c1"># Plain number</span>
+<span class="w">    </span>try:
+<span class="w">        </span><span class="k">return</span><span class="w"> </span>float<span class="o">(</span>value_str<span class="o">)</span>,<span class="w"> </span><span class="s1">&#39;number&#39;</span>
+<span class="w">    </span>except<span class="w"> </span>ValueError:
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="m">0</span>.0,<span class="w"> </span><span class="s1">&#39;number&#39;</span>
+
+
+def<span class="w"> </span>format_size<span class="o">(</span>bytes_val:<span class="w"> </span>float<span class="o">)</span><span class="w"> </span>-&gt;<span class="w"> </span>str:
+<span class="w">    </span><span class="s2">&quot;&quot;&quot;Format bytes back to human-readable size.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nv">bytes_val</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span>:
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s2">&quot;0B&quot;</span>
+
+<span class="w">    </span><span class="nv">units</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;B&#39;</span>,<span class="w"> </span><span class="s1">&#39;KB&#39;</span>,<span class="w"> </span><span class="s1">&#39;MB&#39;</span>,<span class="w"> </span><span class="s1">&#39;GB&#39;</span>,<span class="w"> </span><span class="s1">&#39;TB&#39;</span>,<span class="w"> </span><span class="s1">&#39;PB&#39;</span><span class="o">]</span>
+<span class="w">    </span><span class="nv">unit_idx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+<span class="w">    </span><span class="nv">size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>float<span class="o">(</span>bytes_val<span class="o">)</span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span>size<span class="w"> </span>&gt;<span class="o">=</span><span class="w"> </span><span class="m">1024</span><span class="w"> </span>and<span class="w"> </span>unit_idx<span class="w"> </span>&lt;<span class="w"> </span>len<span class="o">(</span>units<span class="o">)</span><span class="w"> </span>-<span class="w"> </span><span class="m">1</span>:
+<span class="w">        </span>size<span class="w"> </span>/<span class="o">=</span><span class="w"> </span><span class="m">1024</span>
+<span class="w">        </span><span class="nv">unit_idx</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="m">1</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nv">size</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>int<span class="o">(</span>size<span class="o">)</span>:
+<span class="w">        </span><span class="k">return</span><span class="w"> </span>f<span class="s2">&quot;{int(size)}{units[unit_idx]}&quot;</span>
+<span class="w">    </span><span class="k">else</span>:
+<span class="w">        </span><span class="k">return</span><span class="w"> </span>f<span class="s2">&quot;{size:.2f}{units[unit_idx]}&quot;</span>
+
+
+def<span class="w"> </span>format_value<span class="o">(</span>value:<span class="w"> </span>float,<span class="w"> </span>format_type:<span class="w"> </span>str<span class="o">)</span><span class="w"> </span>-&gt;<span class="w"> </span>str:
+<span class="w">    </span><span class="s2">&quot;&quot;&quot;Format value based on its type.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nv">format_type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;size&#39;</span>:
+<span class="w">        </span><span class="k">return</span><span class="w"> </span>format_size<span class="o">(</span>value<span class="o">)</span>
+<span class="w">    </span><span class="k">elif</span><span class="w"> </span><span class="nv">format_type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;percent&#39;</span>:
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nv">value</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>int<span class="o">(</span>value<span class="o">)</span>:
+<span class="w">            </span><span class="k">return</span><span class="w"> </span>f<span class="s2">&quot;{int(value)}%&quot;</span>
+<span class="w">        </span><span class="k">else</span>:
+<span class="w">            </span><span class="k">return</span><span class="w"> </span>f<span class="s2">&quot;{value:.2f}%&quot;</span>
+<span class="w">    </span><span class="k">else</span>:
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nv">value</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>int<span class="o">(</span>value<span class="o">)</span>:
+<span class="w">            </span><span class="k">return</span><span class="w"> </span>str<span class="o">(</span>int<span class="o">(</span>value<span class="o">))</span>
+<span class="w">        </span><span class="k">else</span>:
+<span class="w">            </span><span class="k">return</span><span class="w"> </span>f<span class="s2">&quot;{value:.2f}&quot;</span>
+
+
+def<span class="w"> </span>parse_table<span class="o">(</span>lines:<span class="w"> </span>List<span class="o">[</span>str<span class="o">])</span><span class="w"> </span>-&gt;<span class="w"> </span>tuple<span class="o">[</span>List<span class="o">[</span>str<span class="o">]</span>,<span class="w"> </span>List<span class="o">[</span>Dict<span class="o">[</span>str,<span class="w"> </span>str<span class="o">]]]</span>:
+<span class="w">    </span><span class="s2">&quot;&quot;&quot;Parse table from stdin, return headers and rows.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>lines:
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">[]</span>,<span class="w"> </span><span class="o">[]</span>
+
+<span class="w">    </span><span class="nv">header_line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>lines<span class="o">[</span><span class="m">0</span><span class="o">]</span>
+<span class="w">    </span><span class="nv">headers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>header_line.split<span class="o">()</span>
+
+<span class="w">    </span><span class="nv">rows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>line<span class="w"> </span><span class="k">in</span><span class="w"> </span>lines<span class="o">[</span><span class="m">1</span>:<span class="o">]</span>:
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>line.strip<span class="o">()</span>:
+<span class="w">            </span><span class="k">continue</span>
+<span class="w">        </span><span class="nv">parts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>line.split<span class="o">()</span>
+<span class="w">        </span><span class="c1"># Include all rows, even with missing values</span>
+<span class="w">        </span><span class="nv">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{}</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span>range<span class="o">(</span>len<span class="o">(</span>headers<span class="o">))</span>:
+<span class="w">            </span>row<span class="o">[</span>headers<span class="o">[</span>i<span class="o">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>parts<span class="o">[</span>i<span class="o">]</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>i<span class="w"> </span>&lt;<span class="w"> </span>len<span class="o">(</span>parts<span class="o">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
+<span class="w">        </span>rows.append<span class="o">(</span>row<span class="o">)</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>headers,<span class="w"> </span>rows
+
+
+def<span class="w"> </span>apply_filters<span class="o">(</span>rows:<span class="w"> </span>List<span class="o">[</span>Dict<span class="o">[</span>str,<span class="w"> </span>str<span class="o">]]</span>,<span class="w"> </span>filters:<span class="w"> </span>List<span class="o">[</span>str<span class="o">])</span><span class="w"> </span>-&gt;<span class="w"> </span>List<span class="o">[</span>Dict<span class="o">[</span>str,<span class="w"> </span>str<span class="o">]]</span>:
+<span class="w">    </span><span class="s2">&quot;&quot;&quot;Apply filters with operators: =, !=, &lt;&gt;, &gt;, &gt;=, &lt;, &lt;=. Supports wildcards with * for = and !=.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>filters:
+<span class="w">        </span><span class="k">return</span><span class="w"> </span>rows
+
+<span class="w">    </span><span class="nv">filtered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>rows
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span>filters:
+<span class="w">        </span><span class="c1"># Parse operator (check longer operators first)</span>
+<span class="w">        </span><span class="nv">operator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>None
+<span class="w">        </span><span class="nv">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>None
+<span class="w">        </span><span class="nv">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>None
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span>op<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;!=&#39;</span>,<span class="w"> </span><span class="s1">&#39;&lt;&gt;&#39;</span>,<span class="w"> </span><span class="s1">&#39;&gt;=&#39;</span>,<span class="w"> </span><span class="s1">&#39;&lt;=&#39;</span>,<span class="w"> </span><span class="s1">&#39;=&#39;</span>,<span class="w"> </span><span class="s1">&#39;&gt;&#39;</span>,<span class="w"> </span><span class="s1">&#39;&lt;&#39;</span><span class="o">]</span>:
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>op<span class="w"> </span><span class="k">in</span><span class="w"> </span>f:
+<span class="w">                </span><span class="nv">parts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>f.split<span class="o">(</span>op,<span class="w"> </span><span class="m">1</span><span class="o">)</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span>len<span class="o">(</span>parts<span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">2</span>:
+<span class="w">                    </span>col,<span class="w"> </span><span class="nv">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>parts<span class="o">[</span><span class="m">0</span><span class="o">]</span>.strip<span class="o">()</span>,<span class="w"> </span>parts<span class="o">[</span><span class="m">1</span><span class="o">]</span>.strip<span class="o">()</span>
+<span class="w">                    </span><span class="nv">operator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>op
+<span class="w">                    </span><span class="k">break</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>operator:
+<span class="w">            </span>print<span class="o">(</span>f<span class="s2">&quot;Warning: Invalid filter format &#39;{f}&#39;, expected col&lt;op&gt;value where &lt;op&gt; is =, !=, &lt;&gt;, &gt;, &gt;=, &lt;, &lt;=&quot;</span>,<span class="w"> </span><span class="nv">file</span><span class="o">=</span>sys.stderr<span class="o">)</span>
+<span class="w">            </span><span class="k">continue</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nv">operator</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;=&#39;</span>:
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="s1">&#39;*&#39;</span><span class="w"> </span><span class="k">in</span><span class="w"> </span>value:
+<span class="w">                </span><span class="c1"># Convert wildcard pattern to regex</span>
+<span class="w">                </span><span class="nv">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>re.escape<span class="o">(</span>value<span class="o">)</span>.replace<span class="o">(</span>r<span class="s1">&#39;\*&#39;</span>,<span class="w"> </span><span class="s1">&#39;.*&#39;</span><span class="o">)</span>
+<span class="w">                </span><span class="nv">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>f<span class="s1">&#39;^{pattern}$&#39;</span>
+<span class="w">                </span><span class="nv">filtered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>row<span class="w"> </span><span class="k">for</span><span class="w"> </span>row<span class="w"> </span><span class="k">in</span><span class="w"> </span>filtered<span class="w"> </span><span class="k">if</span><span class="w"> </span>row.get<span class="o">(</span>col<span class="o">)</span><span class="w"> </span>and<span class="w"> </span>re.match<span class="o">(</span>pattern,<span class="w"> </span>row.get<span class="o">(</span>col<span class="o">))]</span>
+<span class="w">            </span><span class="k">else</span>:
+<span class="w">                </span><span class="c1"># Exact match</span>
+<span class="w">                </span><span class="nv">filtered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>row<span class="w"> </span><span class="k">for</span><span class="w"> </span>row<span class="w"> </span><span class="k">in</span><span class="w"> </span>filtered<span class="w"> </span><span class="k">if</span><span class="w"> </span>row.get<span class="o">(</span>col<span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>value<span class="o">]</span>
+
+<span class="w">        </span><span class="k">elif</span><span class="w"> </span>operator<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;!=&#39;</span>,<span class="w"> </span><span class="s1">&#39;&lt;&gt;&#39;</span><span class="o">]</span>:
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="s1">&#39;*&#39;</span><span class="w"> </span><span class="k">in</span><span class="w"> </span>value:
+<span class="w">                </span><span class="c1"># Convert wildcard pattern to regex</span>
+<span class="w">                </span><span class="nv">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>re.escape<span class="o">(</span>value<span class="o">)</span>.replace<span class="o">(</span>r<span class="s1">&#39;\*&#39;</span>,<span class="w"> </span><span class="s1">&#39;.*&#39;</span><span class="o">)</span>
+<span class="w">                </span><span class="nv">pattern</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>f<span class="s1">&#39;^{pattern}$&#39;</span>
+<span class="w">                </span><span class="nv">filtered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>row<span class="w"> </span><span class="k">for</span><span class="w"> </span>row<span class="w"> </span><span class="k">in</span><span class="w"> </span>filtered<span class="w"> </span><span class="k">if</span><span class="w"> </span>row.get<span class="o">(</span>col<span class="o">)</span><span class="w"> </span>and<span class="w"> </span>not<span class="w"> </span>re.match<span class="o">(</span>pattern,<span class="w"> </span>row.get<span class="o">(</span>col<span class="o">))]</span>
+<span class="w">            </span><span class="k">else</span>:
+<span class="w">                </span><span class="c1"># Not equal</span>
+<span class="w">                </span><span class="nv">filtered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>row<span class="w"> </span><span class="k">for</span><span class="w"> </span>row<span class="w"> </span><span class="k">in</span><span class="w"> </span>filtered<span class="w"> </span><span class="k">if</span><span class="w"> </span>row.get<span class="o">(</span>col<span class="o">)</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span>value<span class="o">]</span>
+
+<span class="w">        </span><span class="k">elif</span><span class="w"> </span>operator<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;&gt;&#39;</span>,<span class="w"> </span><span class="s1">&#39;&gt;=&#39;</span>,<span class="w"> </span><span class="s1">&#39;&lt;&#39;</span>,<span class="w"> </span><span class="s1">&#39;&lt;=&#39;</span><span class="o">]</span>:
+<span class="w">            </span><span class="c1"># Numeric comparison</span>
+<span class="w">            </span><span class="nv">new_filtered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span>row<span class="w"> </span><span class="k">in</span><span class="w"> </span>filtered:
+<span class="w">                </span><span class="nv">row_value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>row.get<span class="o">(</span>col<span class="o">)</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>row_value:
+<span class="w">                    </span><span class="k">continue</span>
+
+<span class="w">                </span><span class="c1"># Parse both values as numeric</span>
+<span class="w">                </span>row_num,<span class="w"> </span><span class="nv">_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>parse_numeric<span class="o">(</span>row_value<span class="o">)</span>
+<span class="w">                </span>filter_num,<span class="w"> </span><span class="nv">_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>parse_numeric<span class="o">(</span>value<span class="o">)</span>
+
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="nv">operator</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;&gt;&#39;</span>:
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span>row_num<span class="w"> </span>&gt;<span class="w"> </span>filter_num:
+<span class="w">                        </span>new_filtered.append<span class="o">(</span>row<span class="o">)</span>
+<span class="w">                </span><span class="k">elif</span><span class="w"> </span><span class="nv">operator</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;&gt;=&#39;</span>:
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span>row_num<span class="w"> </span>&gt;<span class="o">=</span><span class="w"> </span>filter_num:
+<span class="w">                        </span>new_filtered.append<span class="o">(</span>row<span class="o">)</span>
+<span class="w">                </span><span class="k">elif</span><span class="w"> </span><span class="nv">operator</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;&lt;&#39;</span>:
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span>row_num<span class="w"> </span>&lt;<span class="w"> </span>filter_num:
+<span class="w">                        </span>new_filtered.append<span class="o">(</span>row<span class="o">)</span>
+<span class="w">                </span><span class="k">elif</span><span class="w"> </span><span class="nv">operator</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;&lt;=&#39;</span>:
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span>row_num<span class="w"> </span>&lt;<span class="o">=</span><span class="w"> </span>filter_num:
+<span class="w">                        </span>new_filtered.append<span class="o">(</span>row<span class="o">)</span>
+
+<span class="w">            </span><span class="nv">filtered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>new_filtered
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>filtered
+
+
+def<span class="w"> </span>group_and_aggregate<span class="o">(</span>rows:<span class="w"> </span>List<span class="o">[</span>Dict<span class="o">[</span>str,<span class="w"> </span>str<span class="o">]]</span>,<span class="w"> </span>group_cols:<span class="w"> </span>List<span class="o">[</span>str<span class="o">]</span>,
+<span class="w">                        </span>agg_specs:<span class="w"> </span>Dict<span class="o">[</span>str,<span class="w"> </span>List<span class="o">[</span>str<span class="o">]])</span><span class="w"> </span>-&gt;<span class="w"> </span>List<span class="o">[</span>Dict<span class="o">[</span>str,<span class="w"> </span>any<span class="o">]]</span>:
+<span class="w">    </span><span class="s2">&quot;&quot;&quot;Group rows and calculate aggregations.</span>
+
+<span class="s2">    agg_specs is a dict like {&#39;sum&#39;: [&#39;col1&#39;, &#39;col2&#39;], &#39;count&#39;: [&#39;col3&#39;], ...}</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>group_cols:
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>any<span class="o">(</span>agg_specs.values<span class="o">())</span>:
+<span class="w">            </span><span class="nv">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{}</span>
+
+<span class="w">            </span><span class="k">for</span><span class="w"> </span>col<span class="w"> </span><span class="k">in</span><span class="w"> </span>agg_specs.get<span class="o">(</span><span class="s1">&#39;sum&#39;</span>,<span class="w"> </span><span class="o">[])</span>:
+<span class="w">                </span><span class="nv">values_types</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>parse_numeric<span class="o">(</span>row.get<span class="o">(</span>col,<span class="w"> </span><span class="m">0</span><span class="o">))</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>row<span class="w"> </span><span class="k">in</span><span class="w"> </span>rows<span class="o">]</span>
+<span class="w">                </span><span class="nv">total</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>sum<span class="o">(</span>v<span class="w"> </span><span class="k">for</span><span class="w"> </span>v,<span class="w"> </span>_<span class="w"> </span><span class="k">in</span><span class="w"> </span>values_types<span class="o">)</span>
+<span class="w">                </span><span class="nv">format_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>values_types<span class="o">[</span><span class="m">0</span><span class="o">][</span><span class="m">1</span><span class="o">]</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>values_types<span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;number&#39;</span>
+<span class="w">                </span>result<span class="o">[</span>f<span class="s2">&quot;sum_{col}&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>format_value<span class="o">(</span>total,<span class="w"> </span>format_type<span class="o">)</span>
+
+<span class="w">            </span><span class="k">for</span><span class="w"> </span>col<span class="w"> </span><span class="k">in</span><span class="w"> </span>agg_specs.get<span class="o">(</span><span class="s1">&#39;count&#39;</span>,<span class="w"> </span><span class="o">[])</span>:
+<span class="w">                </span>result<span class="o">[</span>f<span class="s2">&quot;count_{col}&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>len<span class="o">([</span>r<span class="w"> </span><span class="k">for</span><span class="w"> </span>r<span class="w"> </span><span class="k">in</span><span class="w"> </span>rows<span class="w"> </span><span class="k">if</span><span class="w"> </span>r.get<span class="o">(</span>col<span class="o">)])</span>
+
+<span class="w">            </span><span class="k">for</span><span class="w"> </span>col<span class="w"> </span><span class="k">in</span><span class="w"> </span>agg_specs.get<span class="o">(</span><span class="s1">&#39;max&#39;</span>,<span class="w"> </span><span class="o">[])</span>:
+<span class="w">                </span><span class="nv">values_types</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>parse_numeric<span class="o">(</span>row.get<span class="o">(</span>col,<span class="w"> </span><span class="m">0</span><span class="o">))</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>row<span class="w"> </span><span class="k">in</span><span class="w"> </span>rows<span class="w"> </span><span class="k">if</span><span class="w"> </span>row.get<span class="o">(</span>col<span class="o">)]</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span>values_types:
+<span class="w">                    </span><span class="nv">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>v<span class="w"> </span><span class="k">for</span><span class="w"> </span>v,<span class="w"> </span>_<span class="w"> </span><span class="k">in</span><span class="w"> </span>values_types<span class="o">]</span>
+<span class="w">                    </span><span class="nv">format_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>values_types<span class="o">[</span><span class="m">0</span><span class="o">][</span><span class="m">1</span><span class="o">]</span>
+<span class="w">                    </span>result<span class="o">[</span>f<span class="s2">&quot;max_{col}&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>format_value<span class="o">(</span>max<span class="o">(</span>values<span class="o">)</span>,<span class="w"> </span>format_type<span class="o">)</span>
+
+<span class="w">            </span><span class="k">for</span><span class="w"> </span>col<span class="w"> </span><span class="k">in</span><span class="w"> </span>agg_specs.get<span class="o">(</span><span class="s1">&#39;min&#39;</span>,<span class="w"> </span><span class="o">[])</span>:
+<span class="w">                </span><span class="nv">values_types</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>parse_numeric<span class="o">(</span>row.get<span class="o">(</span>col,<span class="w"> </span><span class="m">0</span><span class="o">))</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>row<span class="w"> </span><span class="k">in</span><span class="w"> </span>rows<span class="w"> </span><span class="k">if</span><span class="w"> </span>row.get<span class="o">(</span>col<span class="o">)]</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span>values_types:
+<span class="w">                    </span><span class="nv">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>v<span class="w"> </span><span class="k">for</span><span class="w"> </span>v,<span class="w"> </span>_<span class="w"> </span><span class="k">in</span><span class="w"> </span>values_types<span class="o">]</span>
+<span class="w">                    </span><span class="nv">format_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>values_types<span class="o">[</span><span class="m">0</span><span class="o">][</span><span class="m">1</span><span class="o">]</span>
+<span class="w">                    </span>result<span class="o">[</span>f<span class="s2">&quot;min_{col}&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>format_value<span class="o">(</span>min<span class="o">(</span>values<span class="o">)</span>,<span class="w"> </span>format_type<span class="o">)</span>
+
+<span class="w">            </span><span class="k">for</span><span class="w"> </span>col<span class="w"> </span><span class="k">in</span><span class="w"> </span>agg_specs.get<span class="o">(</span><span class="s1">&#39;avg&#39;</span>,<span class="w"> </span><span class="o">[])</span>:
+<span class="w">                </span><span class="nv">values_types</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>parse_numeric<span class="o">(</span>row.get<span class="o">(</span>col,<span class="w"> </span><span class="m">0</span><span class="o">))</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>row<span class="w"> </span><span class="k">in</span><span class="w"> </span>rows<span class="w"> </span><span class="k">if</span><span class="w"> </span>row.get<span class="o">(</span>col<span class="o">)]</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span>values_types:
+<span class="w">                    </span><span class="nv">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>v<span class="w"> </span><span class="k">for</span><span class="w"> </span>v,<span class="w"> </span>_<span class="w"> </span><span class="k">in</span><span class="w"> </span>values_types<span class="o">]</span>
+<span class="w">                    </span><span class="nv">format_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>values_types<span class="o">[</span><span class="m">0</span><span class="o">][</span><span class="m">1</span><span class="o">]</span>
+<span class="w">                    </span>result<span class="o">[</span>f<span class="s2">&quot;avg_{col}&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>format_value<span class="o">(</span>sum<span class="o">(</span>values<span class="o">)</span><span class="w"> </span>/<span class="w"> </span>len<span class="o">(</span>values<span class="o">)</span>,<span class="w"> </span>format_type<span class="o">)</span>
+
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="o">[</span>result<span class="o">]</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>result<span class="w"> </span><span class="k">else</span><span class="w"> </span>rows
+<span class="w">        </span><span class="k">return</span><span class="w"> </span>rows
+
+<span class="w">    </span><span class="nv">groups</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>defaultdict<span class="o">(</span>lambda:<span class="w"> </span>defaultdict<span class="o">(</span>list<span class="o">))</span>
+<span class="w">    </span><span class="nv">format_types</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>defaultdict<span class="o">(</span>str<span class="o">)</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>row<span class="w"> </span><span class="k">in</span><span class="w"> </span>rows:
+<span class="w">        </span><span class="nv">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>tuple<span class="o">(</span>row.get<span class="o">(</span>col,<span class="w"> </span><span class="s1">&#39;&#39;</span><span class="o">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>col<span class="w"> </span><span class="k">in</span><span class="w"> </span>group_cols<span class="o">)</span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span>agg_type,<span class="w"> </span>cols<span class="w"> </span><span class="k">in</span><span class="w"> </span>agg_specs.items<span class="o">()</span>:
+<span class="w">            </span><span class="k">for</span><span class="w"> </span>col<span class="w"> </span><span class="k">in</span><span class="w"> </span>cols:
+<span class="w">                </span><span class="nv">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>row.get<span class="o">(</span>col<span class="o">)</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span>val:
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="nv">agg_type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;count&#39;</span>:
+<span class="w">                        </span>groups<span class="o">[</span>key<span class="o">][</span>f<span class="s1">&#39;count_{col}&#39;</span><span class="o">]</span>.append<span class="o">(</span><span class="m">1</span><span class="o">)</span>
+<span class="w">                    </span><span class="k">else</span>:
+<span class="w">                        </span>try:
+<span class="w">                            </span>numeric_val,<span class="w"> </span><span class="nv">fmt_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>parse_numeric<span class="o">(</span>val<span class="o">)</span>
+<span class="w">                            </span><span class="nv">agg_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>f<span class="s1">&#39;{agg_type}_{col}&#39;</span>
+<span class="w">                            </span>groups<span class="o">[</span>key<span class="o">][</span>agg_key<span class="o">]</span>.append<span class="o">(</span>numeric_val<span class="o">)</span>
+<span class="w">                            </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>format_types<span class="o">[</span>agg_key<span class="o">]</span>:
+<span class="w">                                </span>format_types<span class="o">[</span>agg_key<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>fmt_type
+<span class="w">                        </span>except<span class="w"> </span><span class="o">(</span>ValueError,<span class="w"> </span>TypeError<span class="o">)</span>:
+<span class="w">                            </span>pass
+
+<span class="w">    </span><span class="nv">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>key,<span class="w"> </span>agg_data<span class="w"> </span><span class="k">in</span><span class="w"> </span>groups.items<span class="o">()</span>:
+<span class="w">        </span><span class="nv">row_data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{}</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span>i,<span class="w"> </span>col<span class="w"> </span><span class="k">in</span><span class="w"> </span>enumerate<span class="o">(</span>group_cols<span class="o">)</span>:
+<span class="w">            </span>row_data<span class="o">[</span>col<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>key<span class="o">[</span>i<span class="o">]</span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span>agg_key,<span class="w"> </span>values<span class="w"> </span><span class="k">in</span><span class="w"> </span>agg_data.items<span class="o">()</span>:
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>values:
+<span class="w">                </span><span class="k">continue</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>agg_key.startswith<span class="o">(</span><span class="s1">&#39;count_&#39;</span><span class="o">)</span>:
+<span class="w">                </span>row_data<span class="o">[</span>agg_key<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>len<span class="o">(</span>values<span class="o">)</span>
+<span class="w">            </span><span class="k">elif</span><span class="w"> </span>agg_key.startswith<span class="o">(</span><span class="s1">&#39;sum_&#39;</span><span class="o">)</span>:
+<span class="w">                </span>row_data<span class="o">[</span>agg_key<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>format_value<span class="o">(</span>sum<span class="o">(</span>values<span class="o">)</span>,<span class="w"> </span>format_types.get<span class="o">(</span>agg_key,<span class="w"> </span><span class="s1">&#39;number&#39;</span><span class="o">))</span>
+<span class="w">            </span><span class="k">elif</span><span class="w"> </span>agg_key.startswith<span class="o">(</span><span class="s1">&#39;max_&#39;</span><span class="o">)</span>:
+<span class="w">                </span>row_data<span class="o">[</span>agg_key<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>format_value<span class="o">(</span>max<span class="o">(</span>values<span class="o">)</span>,<span class="w"> </span>format_types.get<span class="o">(</span>agg_key,<span class="w"> </span><span class="s1">&#39;number&#39;</span><span class="o">))</span>
+<span class="w">            </span><span class="k">elif</span><span class="w"> </span>agg_key.startswith<span class="o">(</span><span class="s1">&#39;min_&#39;</span><span class="o">)</span>:
+<span class="w">                </span>row_data<span class="o">[</span>agg_key<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>format_value<span class="o">(</span>min<span class="o">(</span>values<span class="o">)</span>,<span class="w"> </span>format_types.get<span class="o">(</span>agg_key,<span class="w"> </span><span class="s1">&#39;number&#39;</span><span class="o">))</span>
+<span class="w">            </span><span class="k">elif</span><span class="w"> </span>agg_key.startswith<span class="o">(</span><span class="s1">&#39;avg_&#39;</span><span class="o">)</span>:
+<span class="w">                </span>row_data<span class="o">[</span>agg_key<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>format_value<span class="o">(</span>sum<span class="o">(</span>values<span class="o">)</span><span class="w"> </span>/<span class="w"> </span>len<span class="o">(</span>values<span class="o">)</span>,<span class="w"> </span>format_types.get<span class="o">(</span>agg_key,<span class="w"> </span><span class="s1">&#39;number&#39;</span><span class="o">))</span>
+
+<span class="w">        </span>result.append<span class="o">(</span>row_data<span class="o">)</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>result
+
+
+def<span class="w"> </span>select_columns<span class="o">(</span>rows:<span class="w"> </span>List<span class="o">[</span>Dict<span class="o">[</span>str,<span class="w"> </span>any<span class="o">]]</span>,<span class="w"> </span>show_cols:<span class="w"> </span>List<span class="o">[</span>str<span class="o">]</span>,
+<span class="w">                   </span>all_headers:<span class="w"> </span>List<span class="o">[</span>str<span class="o">])</span><span class="w"> </span>-&gt;<span class="w"> </span>tuple<span class="o">[</span>List<span class="o">[</span>str<span class="o">]</span>,<span class="w"> </span>List<span class="o">[</span>Dict<span class="o">[</span>str,<span class="w"> </span>any<span class="o">]]]</span>:
+<span class="w">    </span><span class="s2">&quot;&quot;&quot;Select specific columns to display.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>show_cols:
+<span class="w">        </span><span class="k">return</span><span class="w"> </span>all_headers,<span class="w"> </span>rows
+
+<span class="w">    </span><span class="c1"># Expand to include aggregation prefixed columns</span>
+<span class="w">    </span><span class="nv">expanded_cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
+<span class="w">    </span><span class="nv">agg_prefixes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;sum_&#39;</span>,<span class="w"> </span><span class="s1">&#39;count_&#39;</span>,<span class="w"> </span><span class="s1">&#39;max_&#39;</span>,<span class="w"> </span><span class="s1">&#39;min_&#39;</span>,<span class="w"> </span><span class="s1">&#39;avg_&#39;</span><span class="o">]</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>col<span class="w"> </span><span class="k">in</span><span class="w"> </span>show_cols:
+<span class="w">        </span>expanded_cols.append<span class="o">(</span>col<span class="o">)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span>prefix<span class="w"> </span><span class="k">in</span><span class="w"> </span>agg_prefixes:
+<span class="w">            </span><span class="nv">agg_col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>f<span class="s2">&quot;{prefix}{col}&quot;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>any<span class="o">(</span>agg_col<span class="w"> </span><span class="k">in</span><span class="w"> </span>row<span class="w"> </span><span class="k">for</span><span class="w"> </span>row<span class="w"> </span><span class="k">in</span><span class="w"> </span>rows<span class="o">)</span>:
+<span class="w">                </span>expanded_cols.append<span class="o">(</span>agg_col<span class="o">)</span>
+
+<span class="w">    </span><span class="c1"># Remove duplicates while preserving order</span>
+<span class="w">    </span><span class="nv">seen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>set<span class="o">()</span>
+<span class="w">    </span><span class="nv">final_cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>col<span class="w"> </span><span class="k">in</span><span class="w"> </span>expanded_cols:
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>col<span class="w"> </span>not<span class="w"> </span><span class="k">in</span><span class="w"> </span>seen:
+<span class="w">            </span>seen.add<span class="o">(</span>col<span class="o">)</span>
+<span class="w">            </span>final_cols.append<span class="o">(</span>col<span class="o">)</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>final_cols,<span class="w"> </span>rows
+
+
+def<span class="w"> </span>calculate_totals<span class="o">(</span>rows:<span class="w"> </span>List<span class="o">[</span>Dict<span class="o">[</span>str,<span class="w"> </span>any<span class="o">]]</span>,<span class="w"> </span>headers:<span class="w"> </span>List<span class="o">[</span>str<span class="o">])</span><span class="w"> </span>-&gt;<span class="w"> </span>Dict<span class="o">[</span>str,<span class="w"> </span>any<span class="o">]</span>:
+<span class="w">    </span><span class="s2">&quot;&quot;&quot;Calculate totals row: sum of sums, max of maxs, min of mins, avg of avgs, sum of counts.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="nv">totals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{}</span>
+<span class="w">    </span><span class="nv">agg_prefixes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;sum_&#39;</span>,<span class="w"> </span><span class="s1">&#39;count_&#39;</span>,<span class="w"> </span><span class="s1">&#39;max_&#39;</span>,<span class="w"> </span><span class="s1">&#39;min_&#39;</span>,<span class="w"> </span><span class="s1">&#39;avg_&#39;</span><span class="o">]</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>header<span class="w"> </span><span class="k">in</span><span class="w"> </span>headers:
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>any<span class="o">(</span>header.startswith<span class="o">(</span>prefix<span class="o">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>prefix<span class="w"> </span><span class="k">in</span><span class="w"> </span>agg_prefixes<span class="o">)</span>:
+<span class="w">            </span><span class="c1"># Non-aggregated column, leave empty or put &quot;TOTAL&quot;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nv">header</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>headers<span class="o">[</span><span class="m">0</span><span class="o">]</span>:
+<span class="w">                </span>totals<span class="o">[</span>header<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;TOTAL&#39;</span>
+<span class="w">            </span><span class="k">else</span>:
+<span class="w">                </span>totals<span class="o">[</span>header<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
+<span class="w">            </span><span class="k">continue</span>
+
+<span class="w">        </span><span class="c1"># Collect all values for this aggregated column</span>
+<span class="w">        </span><span class="nv">values</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span>row<span class="w"> </span><span class="k">in</span><span class="w"> </span>rows:
+<span class="w">            </span><span class="nv">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>row.get<span class="o">(</span>header<span class="o">)</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>val:
+<span class="w">                </span>numeric_val,<span class="w"> </span><span class="nv">_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>parse_numeric<span class="o">(</span>str<span class="o">(</span>val<span class="o">))</span>
+<span class="w">                </span>values.append<span class="o">(</span>numeric_val<span class="o">)</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>values:
+<span class="w">            </span>totals<span class="o">[</span>header<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
+<span class="w">            </span><span class="k">continue</span>
+
+<span class="w">        </span><span class="c1"># Determine format type from first non-empty value</span>
+<span class="w">        </span><span class="nv">format_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;number&#39;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span>row<span class="w"> </span><span class="k">in</span><span class="w"> </span>rows:
+<span class="w">            </span><span class="nv">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>row.get<span class="o">(</span>header<span class="o">)</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>val:
+<span class="w">                </span>_,<span class="w"> </span><span class="nv">format_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>parse_numeric<span class="o">(</span>str<span class="o">(</span>val<span class="o">))</span>
+<span class="w">                </span><span class="k">break</span>
+
+<span class="w">        </span><span class="c1"># Apply appropriate aggregation based on prefix</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>header.startswith<span class="o">(</span><span class="s1">&#39;sum_&#39;</span><span class="o">)</span>:
+<span class="w">            </span>totals<span class="o">[</span>header<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>format_value<span class="o">(</span>sum<span class="o">(</span>values<span class="o">)</span>,<span class="w"> </span>format_type<span class="o">)</span>
+<span class="w">        </span><span class="k">elif</span><span class="w"> </span>header.startswith<span class="o">(</span><span class="s1">&#39;count_&#39;</span><span class="o">)</span>:
+<span class="w">            </span>totals<span class="o">[</span>header<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>format_value<span class="o">(</span>sum<span class="o">(</span>values<span class="o">)</span>,<span class="w"> </span><span class="s1">&#39;number&#39;</span><span class="o">)</span>
+<span class="w">        </span><span class="k">elif</span><span class="w"> </span>header.startswith<span class="o">(</span><span class="s1">&#39;max_&#39;</span><span class="o">)</span>:
+<span class="w">            </span>totals<span class="o">[</span>header<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>format_value<span class="o">(</span>max<span class="o">(</span>values<span class="o">)</span>,<span class="w"> </span>format_type<span class="o">)</span>
+<span class="w">        </span><span class="k">elif</span><span class="w"> </span>header.startswith<span class="o">(</span><span class="s1">&#39;min_&#39;</span><span class="o">)</span>:
+<span class="w">            </span>totals<span class="o">[</span>header<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>format_value<span class="o">(</span>min<span class="o">(</span>values<span class="o">)</span>,<span class="w"> </span>format_type<span class="o">)</span>
+<span class="w">        </span><span class="k">elif</span><span class="w"> </span>header.startswith<span class="o">(</span><span class="s1">&#39;avg_&#39;</span><span class="o">)</span>:
+<span class="w">            </span>totals<span class="o">[</span>header<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>format_value<span class="o">(</span>sum<span class="o">(</span>values<span class="o">)</span><span class="w"> </span>/<span class="w"> </span>len<span class="o">(</span>values<span class="o">)</span>,<span class="w"> </span>format_type<span class="o">)</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>totals
+
+
+def<span class="w"> </span>print_table<span class="o">(</span>headers:<span class="w"> </span>List<span class="o">[</span>str<span class="o">]</span>,<span class="w"> </span>rows:<span class="w"> </span>List<span class="o">[</span>Dict<span class="o">[</span>str,<span class="w"> </span>any<span class="o">]]</span>,<span class="w"> </span>show_totals:<span class="w"> </span><span class="nv">bool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>False<span class="o">)</span>:
+<span class="w">    </span><span class="s2">&quot;&quot;&quot;Print formatted table.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>rows:
+<span class="w">        </span>print<span class="o">(</span><span class="s2">&quot;No results&quot;</span><span class="o">)</span>
+<span class="w">        </span><span class="k">return</span>
+
+<span class="w">    </span><span class="c1"># Calculate totals if requested</span>
+<span class="w">    </span><span class="nv">totals_row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>None
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>show_totals:
+<span class="w">        </span><span class="nv">totals_row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>calculate_totals<span class="o">(</span>rows,<span class="w"> </span>headers<span class="o">)</span>
+
+<span class="w">    </span><span class="c1"># Calculate column widths (including totals row if present)</span>
+<span class="w">    </span><span class="nv">col_widths</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span>h:<span class="w"> </span>len<span class="o">(</span>h<span class="o">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>h<span class="w"> </span><span class="k">in</span><span class="w"> </span>headers<span class="o">}</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>row<span class="w"> </span><span class="k">in</span><span class="w"> </span>rows:
+<span class="w">        </span><span class="k">for</span><span class="w"> </span>h<span class="w"> </span><span class="k">in</span><span class="w"> </span>headers:
+<span class="w">            </span><span class="nv">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>str<span class="o">(</span>row.get<span class="o">(</span>h,<span class="w"> </span><span class="s1">&#39;&#39;</span><span class="o">))</span>
+<span class="w">            </span>col_widths<span class="o">[</span>h<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>max<span class="o">(</span>col_widths<span class="o">[</span>h<span class="o">]</span>,<span class="w"> </span>len<span class="o">(</span>val<span class="o">))</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>totals_row:
+<span class="w">        </span><span class="k">for</span><span class="w"> </span>h<span class="w"> </span><span class="k">in</span><span class="w"> </span>headers:
+<span class="w">            </span><span class="nv">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>str<span class="o">(</span>totals_row.get<span class="o">(</span>h,<span class="w"> </span><span class="s1">&#39;&#39;</span><span class="o">))</span>
+<span class="w">            </span>col_widths<span class="o">[</span>h<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>max<span class="o">(</span>col_widths<span class="o">[</span>h<span class="o">]</span>,<span class="w"> </span>len<span class="o">(</span>val<span class="o">))</span>
+
+<span class="w">    </span><span class="nv">header_parts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>h.ljust<span class="o">(</span>col_widths<span class="o">[</span>h<span class="o">])</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>h<span class="w"> </span><span class="k">in</span><span class="w"> </span>headers<span class="o">]</span>
+<span class="w">    </span>print<span class="o">(</span><span class="s1">&#39;  &#39;</span>.join<span class="o">(</span>header_parts<span class="o">))</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>row<span class="w"> </span><span class="k">in</span><span class="w"> </span>rows:
+<span class="w">        </span><span class="nv">row_parts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>str<span class="o">(</span>row.get<span class="o">(</span>h,<span class="w"> </span><span class="s1">&#39;&#39;</span><span class="o">))</span>.ljust<span class="o">(</span>col_widths<span class="o">[</span>h<span class="o">])</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>h<span class="w"> </span><span class="k">in</span><span class="w"> </span>headers<span class="o">]</span>
+<span class="w">        </span>print<span class="o">(</span><span class="s1">&#39;  &#39;</span>.join<span class="o">(</span>row_parts<span class="o">))</span>
+
+<span class="w">    </span><span class="c1"># Print totals row if requested</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>totals_row:
+<span class="w">        </span><span class="c1"># Print separator line</span>
+<span class="w">        </span><span class="nv">separator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;  &#39;</span>.join<span class="o">([</span><span class="s1">&#39;-&#39;</span><span class="w"> </span>*<span class="w"> </span>col_widths<span class="o">[</span>h<span class="o">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>h<span class="w"> </span><span class="k">in</span><span class="w"> </span>headers<span class="o">])</span>
+<span class="w">        </span>print<span class="o">(</span>separator<span class="o">)</span>
+<span class="w">        </span><span class="nv">totals_parts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>str<span class="o">(</span>totals_row.get<span class="o">(</span>h,<span class="w"> </span><span class="s1">&#39;&#39;</span><span class="o">))</span>.ljust<span class="o">(</span>col_widths<span class="o">[</span>h<span class="o">])</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>h<span class="w"> </span><span class="k">in</span><span class="w"> </span>headers<span class="o">]</span>
+<span class="w">        </span>print<span class="o">(</span><span class="s1">&#39;  &#39;</span>.join<span class="o">(</span>totals_parts<span class="o">))</span>
+
+
+def<span class="w"> </span>print_csv<span class="o">(</span>headers:<span class="w"> </span>List<span class="o">[</span>str<span class="o">]</span>,<span class="w"> </span>rows:<span class="w"> </span>List<span class="o">[</span>Dict<span class="o">[</span>str,<span class="w"> </span>any<span class="o">]]</span>,<span class="w"> </span>show_totals:<span class="w"> </span><span class="nv">bool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>False<span class="o">)</span>:
+<span class="w">    </span><span class="s2">&quot;&quot;&quot;Print CSV format.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>rows:
+<span class="w">        </span><span class="k">return</span>
+
+<span class="w">    </span><span class="c1"># Calculate totals if requested</span>
+<span class="w">    </span><span class="nv">totals_row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>None
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>show_totals:
+<span class="w">        </span><span class="nv">totals_row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>calculate_totals<span class="o">(</span>rows,<span class="w"> </span>headers<span class="o">)</span>
+
+<span class="w">    </span><span class="nv">writer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>csv.DictWriter<span class="o">(</span>sys.stdout,<span class="w"> </span><span class="nv">fieldnames</span><span class="o">=</span>headers,<span class="w"> </span><span class="nv">extrasaction</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="o">)</span>
+<span class="w">    </span>writer.writeheader<span class="o">()</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>row<span class="w"> </span><span class="k">in</span><span class="w"> </span>rows:
+<span class="w">        </span>writer.writerow<span class="o">(</span>row<span class="o">)</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>totals_row:
+<span class="w">        </span>writer.writerow<span class="o">(</span>totals_row<span class="o">)</span>
+
+
+def<span class="w"> </span>print_json<span class="o">(</span>headers:<span class="w"> </span>List<span class="o">[</span>str<span class="o">]</span>,<span class="w"> </span>rows:<span class="w"> </span>List<span class="o">[</span>Dict<span class="o">[</span>str,<span class="w"> </span>any<span class="o">]]</span>,<span class="w"> </span>show_totals:<span class="w"> </span><span class="nv">bool</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>False<span class="o">)</span>:
+<span class="w">    </span><span class="s2">&quot;&quot;&quot;Print JSON format.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>rows:
+<span class="w">        </span>print<span class="o">(</span><span class="s2">&quot;[]&quot;</span><span class="o">)</span>
+<span class="w">        </span><span class="k">return</span>
+
+<span class="w">    </span><span class="c1"># Calculate totals if requested</span>
+<span class="w">    </span><span class="nv">output</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="s2">&quot;data&quot;</span>:<span class="w"> </span>rows<span class="o">}</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>show_totals:
+<span class="w">        </span><span class="nv">totals_row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>calculate_totals<span class="o">(</span>rows,<span class="w"> </span>headers<span class="o">)</span>
+<span class="w">        </span>output<span class="o">[</span><span class="s2">&quot;totals&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>totals_row
+
+<span class="w">    </span><span class="c1"># Filter rows to only include headers we&#39;re showing</span>
+<span class="w">    </span><span class="nv">filtered_rows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>row<span class="w"> </span><span class="k">in</span><span class="w"> </span>rows:
+<span class="w">        </span><span class="nv">filtered_row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span>h:<span class="w"> </span>row.get<span class="o">(</span>h,<span class="w"> </span><span class="s1">&#39;&#39;</span><span class="o">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>h<span class="w"> </span><span class="k">in</span><span class="w"> </span>headers<span class="o">}</span>
+<span class="w">        </span>filtered_rows.append<span class="o">(</span>filtered_row<span class="o">)</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>show_totals:
+<span class="w">        </span><span class="nv">filtered_totals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span>h:<span class="w"> </span>totals_row.get<span class="o">(</span>h,<span class="w"> </span><span class="s1">&#39;&#39;</span><span class="o">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>h<span class="w"> </span><span class="k">in</span><span class="w"> </span>headers<span class="o">}</span>
+<span class="w">        </span>print<span class="o">(</span>json.dumps<span class="o">({</span><span class="s2">&quot;data&quot;</span>:<span class="w"> </span>filtered_rows,<span class="w"> </span><span class="s2">&quot;totals&quot;</span>:<span class="w"> </span>filtered_totals<span class="o">}</span>,<span class="w"> </span><span class="nv">indent</span><span class="o">=</span><span class="m">2</span><span class="o">))</span>
+<span class="w">    </span><span class="k">else</span>:
+<span class="w">        </span>print<span class="o">(</span>json.dumps<span class="o">(</span>filtered_rows,<span class="w"> </span><span class="nv">indent</span><span class="o">=</span><span class="m">2</span><span class="o">))</span>
+
+
+def<span class="w"> </span>main<span class="o">()</span>:
+<span class="w">    </span><span class="nv">parser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>argparse.ArgumentParser<span class="o">(</span>
+<span class="w">        </span><span class="nv">description</span><span class="o">=</span><span class="s1">&#39;Filter, group, and aggregate tabular data&#39;</span>,
+<span class="w">        </span><span class="nv">epilog</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;Examples:</span>
+<span class="s1">  command | %(prog)s col1=bbbb col3=y --group col1 --sum col4 --show col1,sum_col4</span>
+<span class="s1">  command | %(prog)s col1!=foo &quot;size&gt;1GB&quot; count&gt;=10 --order -size</span>
+<span class="s1">Filters support: =, !=, &lt;&gt;, &gt;, &gt;=, &lt;, &lt;= (wildcards * allowed with = and !=)&#39;&#39;&#39;</span>
+<span class="w">    </span><span class="o">)</span>
+<span class="w">    </span>parser.add_argument<span class="o">(</span><span class="s1">&#39;--group&#39;</span>,<span class="w"> </span><span class="nv">help</span><span class="o">=</span><span class="s1">&#39;Comma-separated columns to group by&#39;</span><span class="o">)</span>
+<span class="w">    </span>parser.add_argument<span class="o">(</span><span class="s1">&#39;--sum&#39;</span>,<span class="w"> </span><span class="nv">help</span><span class="o">=</span><span class="s1">&#39;Comma-separated columns to sum&#39;</span><span class="o">)</span>
+<span class="w">    </span>parser.add_argument<span class="o">(</span><span class="s1">&#39;--count&#39;</span>,<span class="w"> </span><span class="nv">help</span><span class="o">=</span><span class="s1">&#39;Comma-separated columns to count&#39;</span><span class="o">)</span>
+<span class="w">    </span>parser.add_argument<span class="o">(</span><span class="s1">&#39;--max&#39;</span>,<span class="w"> </span><span class="nv">help</span><span class="o">=</span><span class="s1">&#39;Comma-separated columns to find maximum&#39;</span><span class="o">)</span>
+<span class="w">    </span>parser.add_argument<span class="o">(</span><span class="s1">&#39;--min&#39;</span>,<span class="w"> </span><span class="nv">help</span><span class="o">=</span><span class="s1">&#39;Comma-separated columns to find minimum&#39;</span><span class="o">)</span>
+<span class="w">    </span>parser.add_argument<span class="o">(</span><span class="s1">&#39;--avg&#39;</span>,<span class="w"> </span><span class="nv">help</span><span class="o">=</span><span class="s1">&#39;Comma-separated columns to average&#39;</span><span class="o">)</span>
+<span class="w">    </span>parser.add_argument<span class="o">(</span><span class="s1">&#39;--show&#39;</span>,<span class="w"> </span><span class="nv">help</span><span class="o">=</span><span class="s1">&#39;Comma-separated columns to display&#39;</span><span class="o">)</span>
+<span class="w">    </span>parser.add_argument<span class="o">(</span><span class="s1">&#39;--order&#39;</span>,<span class="w"> </span><span class="nv">help</span><span class="o">=</span><span class="s1">&#39;Comma-separated columns to order by (prefix with - for descending)&#39;</span><span class="o">)</span>
+<span class="w">    </span>parser.add_argument<span class="o">(</span><span class="s1">&#39;--totals&#39;</span>,<span class="w"> </span><span class="nv">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span>,<span class="w"> </span><span class="nv">help</span><span class="o">=</span><span class="s1">&#39;Add a totals row (sum of sums, max of maxs, min of mins, avg of avgs, sum of counts)&#39;</span><span class="o">)</span>
+<span class="w">    </span>parser.add_argument<span class="o">(</span><span class="s1">&#39;--output&#39;</span>,<span class="w"> </span><span class="nv">choices</span><span class="o">=[</span><span class="s1">&#39;table&#39;</span>,<span class="w"> </span><span class="s1">&#39;csv&#39;</span>,<span class="w"> </span><span class="s1">&#39;json&#39;</span><span class="o">]</span>,<span class="w"> </span><span class="nv">default</span><span class="o">=</span><span class="s1">&#39;table&#39;</span>,<span class="w"> </span><span class="nv">help</span><span class="o">=</span><span class="s1">&#39;Output format: table (default), csv, or json&#39;</span><span class="o">)</span>
+<span class="w">    </span>parser.add_argument<span class="o">(</span><span class="s1">&#39;--sqlite&#39;</span>,<span class="w"> </span><span class="nv">metavar</span><span class="o">=</span><span class="s1">&#39;DATABASE&#39;</span>,<span class="w"> </span><span class="nv">help</span><span class="o">=</span><span class="s1">&#39;Load data into SQLite database file in table &quot;t&quot; (e.g., --sqlite data.db)&#39;</span><span class="o">)</span>
+
+<span class="w">    </span>args,<span class="w"> </span><span class="nv">unknown</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>parser.parse_known_args<span class="o">()</span>
+
+<span class="w">    </span><span class="c1"># Validate unknown arguments - they should only be filters (contain comparison operators)</span>
+<span class="w">    </span><span class="c1"># Anything that starts with -- or - and isn&#39;t a filter is an invalid option</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>arg<span class="w"> </span><span class="k">in</span><span class="w"> </span>unknown:
+<span class="w">        </span><span class="nv">has_operator</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>any<span class="o">(</span>op<span class="w"> </span><span class="k">in</span><span class="w"> </span>arg<span class="w"> </span><span class="k">for</span><span class="w"> </span>op<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;!=&#39;</span>,<span class="w"> </span><span class="s1">&#39;&lt;&gt;&#39;</span>,<span class="w"> </span><span class="s1">&#39;&gt;=&#39;</span>,<span class="w"> </span><span class="s1">&#39;&lt;=&#39;</span>,<span class="w"> </span><span class="s1">&#39;=&#39;</span>,<span class="w"> </span><span class="s1">&#39;&gt;&#39;</span>,<span class="w"> </span><span class="s1">&#39;&lt;&#39;</span><span class="o">])</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>arg.startswith<span class="o">(</span><span class="s1">&#39;-&#39;</span><span class="o">)</span><span class="w"> </span>and<span class="w"> </span>not<span class="w"> </span>has_operator:
+<span class="w">            </span>print<span class="o">(</span>f<span class="s2">&quot;Error: Unrecognized option &#39;{arg}&#39;&quot;</span>,<span class="w"> </span><span class="nv">file</span><span class="o">=</span>sys.stderr<span class="o">)</span>
+<span class="w">            </span>print<span class="o">(</span>f<span class="s2">&quot;Valid options are: --group, --sum, --count, --max, --min, --avg, --show, --order&quot;</span>,<span class="w"> </span><span class="nv">file</span><span class="o">=</span>sys.stderr<span class="o">)</span>
+<span class="w">            </span>sys.exit<span class="o">(</span><span class="m">1</span><span class="o">)</span>
+
+<span class="w">    </span><span class="nv">lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>line.rstrip<span class="o">(</span><span class="s1">&#39;\n&#39;</span><span class="o">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>line<span class="w"> </span><span class="k">in</span><span class="w"> </span>sys.stdin<span class="o">]</span>
+<span class="w">    </span>headers,<span class="w"> </span><span class="nv">rows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>parse_table<span class="o">(</span>lines<span class="o">)</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>rows:
+<span class="w">        </span>print<span class="o">(</span><span class="s2">&quot;No data to process&quot;</span>,<span class="w"> </span><span class="nv">file</span><span class="o">=</span>sys.stderr<span class="o">)</span>
+<span class="w">        </span>sys.exit<span class="o">(</span><span class="m">1</span><span class="o">)</span>
+
+<span class="w">    </span><span class="c1"># Collect filters from unknown arguments (anything with comparison operators)</span>
+<span class="w">    </span><span class="nv">filters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>arg<span class="w"> </span><span class="k">for</span><span class="w"> </span>arg<span class="w"> </span><span class="k">in</span><span class="w"> </span>unknown<span class="w"> </span><span class="k">if</span><span class="w"> </span>any<span class="o">(</span>op<span class="w"> </span><span class="k">in</span><span class="w"> </span>arg<span class="w"> </span><span class="k">for</span><span class="w"> </span>op<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;!=&#39;</span>,<span class="w"> </span><span class="s1">&#39;&lt;&gt;&#39;</span>,<span class="w"> </span><span class="s1">&#39;&gt;=&#39;</span>,<span class="w"> </span><span class="s1">&#39;&lt;=&#39;</span>,<span class="w"> </span><span class="s1">&#39;=&#39;</span>,<span class="w"> </span><span class="s1">&#39;&gt;&#39;</span>,<span class="w"> </span><span class="s1">&#39;&lt;&#39;</span><span class="o">])]</span>
+
+<span class="w">    </span><span class="c1"># Validate filter column names</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span>filters:
+<span class="w">        </span><span class="c1"># Extract column name from filter</span>
+<span class="w">        </span><span class="nv">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>None
+<span class="w">        </span><span class="k">for</span><span class="w"> </span>op<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;!=&#39;</span>,<span class="w"> </span><span class="s1">&#39;&lt;&gt;&#39;</span>,<span class="w"> </span><span class="s1">&#39;&gt;=&#39;</span>,<span class="w"> </span><span class="s1">&#39;&lt;=&#39;</span>,<span class="w"> </span><span class="s1">&#39;=&#39;</span>,<span class="w"> </span><span class="s1">&#39;&gt;&#39;</span>,<span class="w"> </span><span class="s1">&#39;&lt;&#39;</span><span class="o">]</span>:
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>op<span class="w"> </span><span class="k">in</span><span class="w"> </span>f:
+<span class="w">                </span><span class="nv">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>f.split<span class="o">(</span>op,<span class="w"> </span><span class="m">1</span><span class="o">)[</span><span class="m">0</span><span class="o">]</span>.strip<span class="o">()</span>
+<span class="w">                </span><span class="k">break</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>col<span class="w"> </span>and<span class="w"> </span>col<span class="w"> </span>not<span class="w"> </span><span class="k">in</span><span class="w"> </span>headers:
+<span class="w">            </span>print<span class="o">(</span>f<span class="s2">&quot;Error: Filter column &#39;{col}&#39; does not exist. Available columns: {&#39;, &#39;.join(headers)}&quot;</span>,<span class="w"> </span><span class="nv">file</span><span class="o">=</span>sys.stderr<span class="o">)</span>
+<span class="w">            </span>sys.exit<span class="o">(</span><span class="m">1</span><span class="o">)</span>
+
+<span class="w">    </span><span class="c1"># Apply filters</span>
+<span class="w">    </span><span class="nv">filtered</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>apply_filters<span class="o">(</span>rows,<span class="w"> </span>filters<span class="o">)</span>
+
+<span class="w">    </span><span class="c1"># Parse grouping and aggregation columns</span>
+<span class="w">    </span><span class="nv">group_cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>c.strip<span class="o">()</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>c<span class="w"> </span><span class="k">in</span><span class="w"> </span>args.group.split<span class="o">(</span><span class="s1">&#39;,&#39;</span><span class="o">)]</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>args.group<span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="o">[]</span>
+
+<span class="w">    </span><span class="c1"># Validate group columns</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>col<span class="w"> </span><span class="k">in</span><span class="w"> </span>group_cols:
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>col<span class="w"> </span>and<span class="w"> </span>col<span class="w"> </span>not<span class="w"> </span><span class="k">in</span><span class="w"> </span>headers:
+<span class="w">            </span>print<span class="o">(</span>f<span class="s2">&quot;Error: Group column &#39;{col}&#39; does not exist. Available columns: {&#39;, &#39;.join(headers)}&quot;</span>,<span class="w"> </span><span class="nv">file</span><span class="o">=</span>sys.stderr<span class="o">)</span>
+<span class="w">            </span>sys.exit<span class="o">(</span><span class="m">1</span><span class="o">)</span>
+
+<span class="w">    </span><span class="nv">agg_specs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>args.sum:
+<span class="w">        </span>agg_specs<span class="o">[</span><span class="s1">&#39;sum&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>c.strip<span class="o">()</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>c<span class="w"> </span><span class="k">in</span><span class="w"> </span>args.sum.split<span class="o">(</span><span class="s1">&#39;,&#39;</span><span class="o">)]</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>args.count:
+<span class="w">        </span>agg_specs<span class="o">[</span><span class="s1">&#39;count&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>c.strip<span class="o">()</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>c<span class="w"> </span><span class="k">in</span><span class="w"> </span>args.count.split<span class="o">(</span><span class="s1">&#39;,&#39;</span><span class="o">)]</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>args.max:
+<span class="w">        </span>agg_specs<span class="o">[</span><span class="s1">&#39;max&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>c.strip<span class="o">()</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>c<span class="w"> </span><span class="k">in</span><span class="w"> </span>args.max.split<span class="o">(</span><span class="s1">&#39;,&#39;</span><span class="o">)]</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>args.min:
+<span class="w">        </span>agg_specs<span class="o">[</span><span class="s1">&#39;min&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>c.strip<span class="o">()</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>c<span class="w"> </span><span class="k">in</span><span class="w"> </span>args.min.split<span class="o">(</span><span class="s1">&#39;,&#39;</span><span class="o">)]</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>args.avg:
+<span class="w">        </span>agg_specs<span class="o">[</span><span class="s1">&#39;avg&#39;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>c.strip<span class="o">()</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>c<span class="w"> </span><span class="k">in</span><span class="w"> </span>args.avg.split<span class="o">(</span><span class="s1">&#39;,&#39;</span><span class="o">)]</span>
+
+<span class="w">    </span><span class="c1"># Validate aggregation columns</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>agg_type,<span class="w"> </span>cols<span class="w"> </span><span class="k">in</span><span class="w"> </span>agg_specs.items<span class="o">()</span>:
+<span class="w">        </span><span class="k">for</span><span class="w"> </span>col<span class="w"> </span><span class="k">in</span><span class="w"> </span>cols:
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>col<span class="w"> </span>and<span class="w"> </span>col<span class="w"> </span>not<span class="w"> </span><span class="k">in</span><span class="w"> </span>headers:
+<span class="w">                </span>print<span class="o">(</span>f<span class="s2">&quot;Error: Aggregation column &#39;{col}&#39; (--{agg_type}) does not exist. Available columns: {&#39;, &#39;.join(headers)}&quot;</span>,<span class="w"> </span><span class="nv">file</span><span class="o">=</span>sys.stderr<span class="o">)</span>
+<span class="w">                </span>sys.exit<span class="o">(</span><span class="m">1</span><span class="o">)</span>
+
+<span class="w">    </span><span class="c1"># Group and aggregate</span>
+<span class="w">    </span><span class="nv">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>group_and_aggregate<span class="o">(</span>filtered,<span class="w"> </span>group_cols,<span class="w"> </span>agg_specs<span class="o">)</span>
+
+<span class="w">    </span><span class="c1"># Apply ordering</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>args.order:
+<span class="w">        </span><span class="nv">order_cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>c.strip<span class="o">()</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>c<span class="w"> </span><span class="k">in</span><span class="w"> </span>args.order.split<span class="o">(</span><span class="s1">&#39;,&#39;</span><span class="o">)]</span>
+<span class="w">        </span><span class="nv">order_keys</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
+
+<span class="w">        </span><span class="c1"># Build list of all possible columns (original + aggregated)</span>
+<span class="w">        </span><span class="nv">agg_prefixes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="s1">&#39;sum_&#39;</span>,<span class="w"> </span><span class="s1">&#39;count_&#39;</span>,<span class="w"> </span><span class="s1">&#39;max_&#39;</span>,<span class="w"> </span><span class="s1">&#39;min_&#39;</span>,<span class="w"> </span><span class="s1">&#39;avg_&#39;</span><span class="o">)</span>
+<span class="w">        </span><span class="nv">all_possible_cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>set<span class="o">(</span>headers<span class="o">)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span>agg_type,<span class="w"> </span>cols<span class="w"> </span><span class="k">in</span><span class="w"> </span>agg_specs.items<span class="o">()</span>:
+<span class="w">            </span><span class="k">for</span><span class="w"> </span>col<span class="w"> </span><span class="k">in</span><span class="w"> </span>cols:
+<span class="w">                </span>all_possible_cols.add<span class="o">(</span>f<span class="s2">&quot;{agg_type}_{col}&quot;</span><span class="o">)</span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span>col<span class="w"> </span><span class="k">in</span><span class="w"> </span>order_cols:
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>col.startswith<span class="o">(</span><span class="s1">&#39;-&#39;</span><span class="o">)</span>:
+<span class="w">                </span><span class="c1"># Descending order</span>
+<span class="w">                </span><span class="nv">actual_col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>col<span class="o">[</span><span class="m">1</span>:<span class="o">]</span>
+<span class="w">                </span><span class="nv">reverse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>True
+<span class="w">            </span><span class="k">else</span>:
+<span class="w">                </span><span class="c1"># Ascending order</span>
+<span class="w">                </span><span class="nv">actual_col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>col
+<span class="w">                </span><span class="nv">reverse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>False
+
+<span class="w">            </span><span class="c1"># Validate order column</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>actual_col<span class="w"> </span>not<span class="w"> </span><span class="k">in</span><span class="w"> </span>all_possible_cols:
+<span class="w">                </span>print<span class="o">(</span>f<span class="s2">&quot;Error: Order column &#39;{actual_col}&#39; does not exist. Available columns: {&#39;, &#39;.join(sorted(all_possible_cols))}&quot;</span>,<span class="w"> </span><span class="nv">file</span><span class="o">=</span>sys.stderr<span class="o">)</span>
+<span class="w">                </span>sys.exit<span class="o">(</span><span class="m">1</span><span class="o">)</span>
+
+<span class="w">            </span>order_keys.append<span class="o">((</span>actual_col,<span class="w"> </span>reverse<span class="o">))</span>
+
+<span class="w">        </span><span class="c1"># Sort by multiple columns</span>
+<span class="w">        </span>def<span class="w"> </span>sort_key<span class="o">(</span>row,<span class="w"> </span>col<span class="o">)</span>:
+<span class="w">            </span><span class="nv">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>str<span class="o">(</span>row.get<span class="o">(</span>col,<span class="w"> </span><span class="s1">&#39;&#39;</span><span class="o">))</span>
+<span class="w">            </span>numeric_val,<span class="w"> </span><span class="nv">format_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>parse_numeric<span class="o">(</span>val<span class="o">)</span>
+<span class="w">            </span><span class="c1"># If it parsed as a number/size/percent, use numeric value</span>
+<span class="w">            </span><span class="c1"># Otherwise use the original string for text sorting</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>format_type<span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s1">&#39;number&#39;</span><span class="w"> </span>or<span class="w"> </span>numeric_val<span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="m">0</span>.0<span class="w"> </span>or<span class="w"> </span>val<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">(</span><span class="s1">&#39;0&#39;</span>,<span class="w"> </span><span class="s1">&#39;0.0&#39;</span>,<span class="w"> </span><span class="s1">&#39;0B&#39;</span>,<span class="w"> </span><span class="s1">&#39;0%&#39;</span><span class="o">)</span>:
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="o">(</span><span class="m">0</span>,<span class="w"> </span>numeric_val,<span class="w"> </span><span class="s1">&#39;&#39;</span><span class="o">)</span>
+<span class="w">            </span><span class="k">else</span>:
+<span class="w">                </span><span class="c1"># It&#39;s text, sort as string (case-insensitive)</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="o">(</span><span class="m">1</span>,<span class="w"> </span><span class="m">0</span>,<span class="w"> </span>val.lower<span class="o">())</span>
+
+<span class="w">        </span><span class="k">for</span><span class="w"> </span>actual_col,<span class="w"> </span>reverse<span class="w"> </span><span class="k">in</span><span class="w"> </span>reversed<span class="o">(</span>order_keys<span class="o">)</span>:
+<span class="w">            </span>result.sort<span class="o">(</span><span class="nv">key</span><span class="o">=</span>lambda<span class="w"> </span>row:<span class="w"> </span>sort_key<span class="o">(</span>row,<span class="w"> </span>actual_col<span class="o">)</span>,<span class="w"> </span><span class="nv">reverse</span><span class="o">=</span>reverse<span class="o">)</span>
+
+<span class="w">    </span><span class="c1"># Determine output columns</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>args.show:
+<span class="w">        </span><span class="nv">show_cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>c.strip<span class="o">()</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>c<span class="w"> </span><span class="k">in</span><span class="w"> </span>args.show.split<span class="o">(</span><span class="s1">&#39;,&#39;</span><span class="o">)]</span>
+<span class="w">    </span><span class="k">else</span>:
+<span class="w">        </span><span class="nv">show_cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>group_cols.copy<span class="o">()</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span>agg_type,<span class="w"> </span>cols<span class="w"> </span><span class="k">in</span><span class="w"> </span>agg_specs.items<span class="o">()</span>:
+<span class="w">            </span>show_cols.extend<span class="o">([</span>f<span class="s2">&quot;{agg_type}_{col}&quot;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>col<span class="w"> </span><span class="k">in</span><span class="w"> </span>cols<span class="o">])</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>show_cols:
+<span class="w">            </span><span class="nv">show_cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>headers
+
+<span class="w">    </span><span class="c1"># Build list of all possible columns (original + aggregated)</span>
+<span class="w">    </span><span class="nv">agg_prefixes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span><span class="s1">&#39;sum_&#39;</span>,<span class="w"> </span><span class="s1">&#39;count_&#39;</span>,<span class="w"> </span><span class="s1">&#39;max_&#39;</span>,<span class="w"> </span><span class="s1">&#39;min_&#39;</span>,<span class="w"> </span><span class="s1">&#39;avg_&#39;</span><span class="o">)</span>
+<span class="w">    </span><span class="nv">all_possible_cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>set<span class="o">(</span>headers<span class="o">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>agg_type,<span class="w"> </span>cols<span class="w"> </span><span class="k">in</span><span class="w"> </span>agg_specs.items<span class="o">()</span>:
+<span class="w">        </span><span class="k">for</span><span class="w"> </span>col<span class="w"> </span><span class="k">in</span><span class="w"> </span>cols:
+<span class="w">            </span>all_possible_cols.add<span class="o">(</span>f<span class="s2">&quot;{agg_type}_{col}&quot;</span><span class="o">)</span>
+
+<span class="w">    </span><span class="c1"># Validate show columns</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>col<span class="w"> </span><span class="k">in</span><span class="w"> </span>show_cols:
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>col<span class="w"> </span>and<span class="w"> </span>col<span class="w"> </span>not<span class="w"> </span><span class="k">in</span><span class="w"> </span>all_possible_cols:
+<span class="w">            </span>print<span class="o">(</span>f<span class="s2">&quot;Error: Show column &#39;{col}&#39; does not exist. Available columns: {&#39;, &#39;.join(sorted(all_possible_cols))}&quot;</span>,<span class="w"> </span><span class="nv">file</span><span class="o">=</span>sys.stderr<span class="o">)</span>
+<span class="w">            </span>sys.exit<span class="o">(</span><span class="m">1</span><span class="o">)</span>
+
+<span class="w">    </span><span class="c1"># Filter to only show requested columns</span>
+<span class="w">    </span><span class="nv">output_headers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>col<span class="w"> </span><span class="k">in</span><span class="w"> </span>show_cols:
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>col<span class="w"> </span><span class="k">in</span><span class="w"> </span>headers<span class="w"> </span>or<span class="w"> </span>any<span class="o">(</span>col.startswith<span class="o">(</span>prefix<span class="o">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>prefix<span class="w"> </span><span class="k">in</span><span class="w"> </span>agg_prefixes<span class="o">)</span>:
+<span class="w">            </span>output_headers.append<span class="o">(</span>col<span class="o">)</span>
+
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>output_headers:
+<span class="w">        </span><span class="nv">output_headers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>headers
+
+<span class="w">    </span><span class="c1"># Output based on format</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>args.sqlite:
+<span class="w">        </span><span class="c1"># Create temporary CSV file with numeric values (strip units)</span>
+<span class="w">        </span>with<span class="w"> </span>tempfile.NamedTemporaryFile<span class="o">(</span><span class="nv">mode</span><span class="o">=</span><span class="s1">&#39;w&#39;</span>,<span class="w"> </span><span class="nv">suffix</span><span class="o">=</span><span class="s1">&#39;.csv&#39;</span>,<span class="w"> </span><span class="nv">delete</span><span class="o">=</span>False<span class="o">)</span><span class="w"> </span>as<span class="w"> </span>f:
+<span class="w">            </span><span class="nv">csv_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>f.name
+<span class="w">            </span><span class="nv">writer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>csv.DictWriter<span class="o">(</span>f,<span class="w"> </span><span class="nv">fieldnames</span><span class="o">=</span>output_headers,<span class="w"> </span><span class="nv">extrasaction</span><span class="o">=</span><span class="s1">&#39;ignore&#39;</span><span class="o">)</span>
+<span class="w">            </span>writer.writeheader<span class="o">()</span>
+
+<span class="w">            </span><span class="c1"># Convert formatted values to pure numbers for SQLite</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span>row<span class="w"> </span><span class="k">in</span><span class="w"> </span>result:
+<span class="w">                </span><span class="nv">numeric_row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{}</span>
+<span class="w">                </span><span class="k">for</span><span class="w"> </span>header<span class="w"> </span><span class="k">in</span><span class="w"> </span>output_headers:
+<span class="w">                    </span><span class="nv">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>row.get<span class="o">(</span>header,<span class="w"> </span><span class="s1">&#39;&#39;</span><span class="o">)</span>
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span>val:
+<span class="w">                        </span><span class="c1"># Try to parse as numeric (strips GB, MB, %, etc)</span>
+<span class="w">                        </span>numeric_val,<span class="w"> </span><span class="nv">_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>parse_numeric<span class="o">(</span>str<span class="o">(</span>val<span class="o">))</span>
+<span class="w">                        </span><span class="c1"># If it parsed to a non-zero number OR the original was &#39;0&#39;, use numeric value</span>
+<span class="w">                        </span><span class="k">if</span><span class="w"> </span>numeric_val<span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="m">0</span>.0<span class="w"> </span>or<span class="w"> </span>str<span class="o">(</span>val<span class="o">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">(</span><span class="s1">&#39;0&#39;</span>,<span class="w"> </span><span class="s1">&#39;0.0&#39;</span>,<span class="w"> </span><span class="s1">&#39;0B&#39;</span>,<span class="w"> </span><span class="s1">&#39;0%&#39;</span>,<span class="w"> </span><span class="s1">&#39;0KB&#39;</span>,<span class="w"> </span><span class="s1">&#39;0MB&#39;</span>,<span class="w"> </span><span class="s1">&#39;0GB&#39;</span><span class="o">)</span>:
+<span class="w">                            </span>numeric_row<span class="o">[</span>header<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>numeric_val
+<span class="w">                        </span><span class="k">else</span>:
+<span class="w">                            </span><span class="c1"># It&#39;s text, keep as-is</span>
+<span class="w">                            </span>numeric_row<span class="o">[</span>header<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>val
+<span class="w">                    </span><span class="k">else</span>:
+<span class="w">                        </span>numeric_row<span class="o">[</span>header<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>val
+<span class="w">                </span>writer.writerow<span class="o">(</span>numeric_row<span class="o">)</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>args.totals:
+<span class="w">                </span><span class="nv">totals_row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>calculate_totals<span class="o">(</span>result,<span class="w"> </span>output_headers<span class="o">)</span>
+<span class="w">                </span><span class="nv">numeric_totals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{}</span>
+<span class="w">                </span><span class="k">for</span><span class="w"> </span>header<span class="w"> </span><span class="k">in</span><span class="w"> </span>output_headers:
+<span class="w">                    </span><span class="nv">val</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>totals_row.get<span class="o">(</span>header,<span class="w"> </span><span class="s1">&#39;&#39;</span><span class="o">)</span>
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span>val<span class="w"> </span>and<span class="w"> </span>val<span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s1">&#39;TOTAL&#39;</span>:
+<span class="w">                        </span>numeric_val,<span class="w"> </span><span class="nv">_</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>parse_numeric<span class="o">(</span>str<span class="o">(</span>val<span class="o">))</span>
+<span class="w">                        </span><span class="k">if</span><span class="w"> </span>numeric_val<span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="m">0</span>.0<span class="w"> </span>or<span class="w"> </span>str<span class="o">(</span>val<span class="o">)</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">(</span><span class="s1">&#39;0&#39;</span>,<span class="w"> </span><span class="s1">&#39;0.0&#39;</span>,<span class="w"> </span><span class="s1">&#39;0B&#39;</span>,<span class="w"> </span><span class="s1">&#39;0%&#39;</span>,<span class="w"> </span><span class="s1">&#39;0KB&#39;</span>,<span class="w"> </span><span class="s1">&#39;0MB&#39;</span>,<span class="w"> </span><span class="s1">&#39;0GB&#39;</span><span class="o">)</span>:
+<span class="w">                            </span>numeric_totals<span class="o">[</span>header<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>numeric_val
+<span class="w">                        </span><span class="k">else</span>:
+<span class="w">                            </span>numeric_totals<span class="o">[</span>header<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>val
+<span class="w">                    </span><span class="k">else</span>:
+<span class="w">                        </span>numeric_totals<span class="o">[</span>header<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>val
+<span class="w">                </span>writer.writerow<span class="o">(</span>numeric_totals<span class="o">)</span>
+
+<span class="w">        </span><span class="c1"># Create SQLite database and import</span>
+<span class="w">        </span><span class="nv">db_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>args.sqlite
+<span class="w">        </span>try:
+<span class="w">            </span><span class="c1"># Drop table if it exists and import CSV</span>
+<span class="w">            </span><span class="nv">import_cmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>f<span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">.mode csv</span>
+<span class="s2">DROP TABLE IF EXISTS t;</span>
+<span class="s2">.import {csv_path} t</span>
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="w">            </span><span class="nv">proc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>subprocess.Popen<span class="o">([</span><span class="s1">&#39;sqlite3&#39;</span>,<span class="w"> </span>db_path<span class="o">]</span>,<span class="w"> </span><span class="nv">stdin</span><span class="o">=</span>subprocess.PIPE,<span class="w"> </span><span class="nv">text</span><span class="o">=</span>True<span class="o">)</span>
+<span class="w">            </span>proc.communicate<span class="o">(</span>import_cmd<span class="o">)</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>proc.returncode<span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span>:
+<span class="w">                </span>print<span class="o">(</span>f<span class="s2">&quot;Data loaded into table &#39;t&#39; in database: {db_path}&quot;</span>,<span class="w"> </span><span class="nv">file</span><span class="o">=</span>sys.stderr<span class="o">)</span>
+<span class="w">                </span>print<span class="o">(</span>f<span class="s2">&quot;To query: sqlite3 {db_path}&quot;</span>,<span class="w"> </span><span class="nv">file</span><span class="o">=</span>sys.stderr<span class="o">)</span>
+<span class="w">            </span><span class="k">else</span>:
+<span class="w">                </span>print<span class="o">(</span>f<span class="s2">&quot;Error creating SQLite database&quot;</span>,<span class="w"> </span><span class="nv">file</span><span class="o">=</span>sys.stderr<span class="o">)</span>
+<span class="w">                </span>sys.exit<span class="o">(</span><span class="m">1</span><span class="o">)</span>
+<span class="w">        </span>finally:
+<span class="w">            </span><span class="c1"># Cleanup CSV</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>os.path.exists<span class="o">(</span>csv_path<span class="o">)</span>:
+<span class="w">                </span>os.unlink<span class="o">(</span>csv_path<span class="o">)</span>
+<span class="w">    </span><span class="k">elif</span><span class="w"> </span>args.output<span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;csv&#39;</span>:
+<span class="w">        </span>print_csv<span class="o">(</span>output_headers,<span class="w"> </span>result,<span class="w"> </span>args.totals<span class="o">)</span>
+<span class="w">    </span><span class="k">elif</span><span class="w"> </span>args.output<span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;json&#39;</span>:
+<span class="w">        </span>print_json<span class="o">(</span>output_headers,<span class="w"> </span>result,<span class="w"> </span>args.totals<span class="o">)</span>
+<span class="w">    </span><span class="k">else</span>:
+<span class="w">        </span>print_table<span class="o">(</span>output_headers,<span class="w"> </span>result,<span class="w"> </span>args.totals<span class="o">)</span>
+
+
+<span class="k">if</span><span class="w"> </span><span class="nv">__name__</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;__main__&#39;</span>:
+<span class="w">    </span>main<span class="o">()</span>
+</code></pre></div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: September 03, 2026</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

@@ -230,23 +230,57 @@ find<span class="w"> </span>.<span class="w"> </span>-maxdepth<span class="w"> <
 find<span class="w"> </span>.<span class="w"> </span>-maxdepth<span class="w"> </span><span class="m">1</span><span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-executable<span class="w"> </span>-printf<span class="w"> </span><span class="s2">&quot;%f\n&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>grep<span class="w"> </span>-H<span class="w"> </span>-s<span class="w"> </span>-i<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;^help_line=&quot;</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;^-- help_line:&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>egrep<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$filter</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/tmp/h.tmp
 
+<span class="c1"># Append any alias descriptions to the help lines</span>
+<span class="nv">aliases</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;^alias &quot;</span><span class="w"> </span>/home/martin/mjnurse/bash/mjn-bashrc<span class="k">)</span><span class="s2">&quot;</span>
+<span class="k">while</span><span class="w"> </span><span class="nv">IFS</span><span class="o">=</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>line<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="c1"># Extract the script name (text before the first colon)</span>
+<span class="w">    </span><span class="nv">script_name</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$line</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d:<span class="w"> </span>-f1<span class="k">)</span>
+<span class="w">    </span><span class="c1"># echo SCRIPT: $script_name</span>
+
+<span class="w">    </span><span class="c1"># Check if an alias exists for this script name</span>
+<span class="w">    </span><span class="nv">alias_desc</span><span class="o">=</span><span class="k">$(</span><span class="nb">alias</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$script_name</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/^alias </span><span class="nv">$script_name</span><span class="s2">=&#39;\(.*\)&#39;</span>$<span class="s2">/\1/&quot;</span><span class="k">)</span>
+<span class="w">    </span><span class="nv">alias_desc</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>egrep<span class="w"> </span><span class="s2">&quot;alias.*&#39;</span><span class="nv">$script_name</span><span class="s2">&#39;&quot;</span><span class="w"> </span><span class="o">&lt;&lt;&lt;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$aliases</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/^alias  *\([^=]*\)=.*/\1/&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="c1"># echo ALIAS: $alias_desc</span>
+
+<span class="w">    </span><span class="c1"># If an alias exists and is different from the script name itself</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$alias_desc</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$alias_desc</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$script_name</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="c1"># Append the alias description to the line</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$line</span><span class="s2">(#CGREalias: #CLGRE</span><span class="si">${</span><span class="nv">alias_desc</span><span class="si">}</span><span class="s2">#CDEF)&quot;</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="c1"># No alias found, print the line as-is</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$line</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="k">done</span><span class="w"> </span>&lt;<span class="w"> </span>/tmp/h.tmp<span class="w"> </span>&gt;<span class="w"> </span>/tmp/h.tmp2
+
+cp<span class="w"> </span>/tmp/h.tmp2<span class="w"> </span>/tmp/h.tmp
+
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-f<span class="w"> </span>/home/martin/mjnurse/bash/mjn-bashrc<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">    </span>grep<span class="w"> </span>func:<span class="w"> </span>/home/martin/mjnurse/bash/mjn-bashrc<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
 <span class="w">        </span>egrep<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$filter</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
-<span class="w">        </span>sed<span class="w"> </span><span class="s1">&#39;s/ *# *func: *\([^ :]\+\): *\(.*\)$/\1:help_line=&quot;\2 BASHFUNC&quot;/&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/tmp/h.tmp
+<span class="w">        </span>sed<span class="w"> </span><span class="s1">&#39;s/ *# *func: *\([^ :]\+\): *\(.*\)$/\1:help_line=&quot;\2 #CGRA(bash-function)#CDEF&quot;/&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/tmp/h.tmp
+
+<span class="w">    </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;^alias.*#&quot;</span><span class="w"> </span>/home/martin/mjnurse/bash/mjn-bashrc<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>egrep<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$filter</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>sed<span class="w"> </span><span class="s1">&#39;s/alias *\([^=]*\)=\(.*\)# help_line:*=* *\(.*\) *$/\1:help_line=&quot;\3 #CGRA(alias-only: \2)#CDEF&quot;/&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/tmp/h.tmp
 <span class="k">fi</span>
 
 cat<span class="w"> </span>/tmp/h.tmp<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
-sed<span class="w"> </span><span class="s1">&#39; </span>
+sed<span class="w"> </span><span class="s1">&#39;</span>
+<span class="s1">    s/\\/\\\\/g;</span>
 <span class="s1">    /help_line=.*tbc.*/d</span>
 <span class="s1">    /^h:/d; s/help_line=//I; s/-- help_line://I; s/&quot;/ /g;</span>
 <span class="s1">    /tidy:.*echo/d;</span>
 <span class="s1">    /^README.*md/d;</span>
 <span class="s1">    s/:[0-9][0-9]*:/:/;</span>
+<span class="s1">    s/ )#CDEF/)#CDEF/;</span>
+<span class="s1">    s/#CGRE/&#39;</span><span class="si">${</span><span class="nv">cgre</span><span class="si">}</span><span class="s1">&#39;/g;</span>
+<span class="s1">    s/#CLGRE/&#39;</span><span class="si">${</span><span class="nv">clgre</span><span class="si">}</span><span class="s1">&#39;/g;</span>
+<span class="s1">    s/#CGRA/&#39;</span><span class="si">${</span><span class="nv">cgra</span><span class="si">}</span><span class="s1">&#39;/g;</span>
+<span class="s1">    s/#CDEF/&#39;</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s1">&#39;/g;</span>
 <span class="s1">    &#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
 sort<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="nv">IFS</span><span class="o">=</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>line<span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>
 <span class="w">    </span><span class="nv">curr_char</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">line</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="nv">line</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">line</span><span class="p">/BASHFUNC/</span><span class="nv">$cgra</span><span class="p">(bash-function)</span><span class="nv">$cdef</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nv">line</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">line</span><span class="p">/ALIASONLY/</span><span class="si">${</span><span class="nv">cgra</span><span class="si">}</span><span class="nv">alias</span><span class="p">-only:</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$curr_char</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$prev_char</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">         </span><span class="nv">prev_char</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$curr_char</span><span class="s2">&quot;</span>
 <span class="w">         </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">clmag</span><span class="si">}${</span><span class="nv">curr_char</span><span class="si">}${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2"> - </span><span class="si">${</span><span class="nv">clcya</span><span class="si">}</span><span class="nv">$line</span><span class="s2">&quot;</span>
@@ -281,7 +315,7 @@ rm<span class="w"> </span>-f<span class="w"> </span>/tmp/h.out<span class="w"> <
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: September 01, 2026</p>
+      <p>Last updated: September 03, 2026</p>
     </footer>
 
     <div class="scroll-container">
