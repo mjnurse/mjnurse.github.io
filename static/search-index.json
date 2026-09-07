@@ -1543,7 +1543,7 @@
     "id": "220",
     "title": "@ GCloud (GCP) CLI",
     "url": "/other/cli_builder/definition-file-@-gcloud-(gcp)-gc.def.html",
-    "content": "Definition file gc.def @ GCloud (GCP) cmd if [[ &quot;$GCP_PROJECT&quot; != &quot;&quot; ]]; then GCP_PROJECT=&quot;--project $GCP_PROJECT&quot;; fi cmd gc() { \\ echo PROJ: $GCP_PROJECT; \\ gcloud &quot;$@&quot; $GCP_PROJECT; \\ } # -------------------------------------------------------------------------------- = Config # -------------------------------------------------------------------------------- auth login (al) :: gcloud auth login --no-launch-browser \\ ## auth login with --no-launch-browse",
+    "content": "Definition file gc.def @ GCloud (GCP) cmd if [[ &quot;$GCP_PROJECT&quot; != &quot;&quot; ]]; then GCP_PROJECT=&quot;--project $GCP_PROJECT&quot;; fi cmd gc() { \\ echo PROJ: $GCP_PROJECT; \\ gcloud &quot;$@&quot; $GCP_PROJECT; \\ } # -------------------------------------------------------------------------------- = Config # -------------------------------------------------------------------------------- auth login (al) [-a] :: \\ if [[ &quot;$1&quot; == &quot;-a&quot; ]]; then gcloud auth applicatio",
     "type": "page"
   },
   {
