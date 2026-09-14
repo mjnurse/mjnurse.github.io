@@ -193,7 +193,7 @@ find<span class="w"> </span>.<span class="w"> </span>-maxdepth<span class="w"> <
 
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$noissues_yn</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>n<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">    </span>find<span class="w"> </span>.<span class="w"> </span>-maxdepth<span class="w"> </span><span class="m">1</span><span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-executable<span class="w"> </span>-printf<span class="w"> </span><span class="s2">&quot;%f\n&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">        </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>egrep<span class="w"> </span>-s<span class="w"> </span>-l<span class="w"> </span>-e<span class="w"> </span>--ignore-case<span class="w"> </span><span class="s2">&quot;help_line=.*tbc.*&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>egrep<span class="w"> </span>-s<span class="w"> </span>-l<span class="w"> </span>--ignore-case<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;help_line=.*tbc.*&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">        </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span>--ignore-case<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">filter</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">        </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;/README.*.md/d; /^h</span>$<span class="s2">/d; /tmp0/d</span>
 <span class="s2">               s/</span><span class="si">${</span><span class="nv">filter</span><span class="p">//</span><span class="se">\.\*</span><span class="p">/</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">cyel</span><span class="si">}${</span><span class="nv">filter</span><span class="p">//</span><span class="se">\.\*</span><span class="p">/</span><span class="si">}${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">/g;</span>
@@ -315,7 +315,7 @@ rm<span class="w"> </span>-f<span class="w"> </span>/tmp/h.out<span class="w"> <
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: September 09, 2026</p>
+      <p>Last updated: September 11, 2026</p>
     </footer>
 
     <div class="scroll-container">
