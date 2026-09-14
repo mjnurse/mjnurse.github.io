@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Running Spark on YARN - Cluster or Client Mode" />
+    <meta name="description" content="Public Key Encryption Analogy" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>Running Spark on YARN - Cluster or Client Mode</title>
+    <title>Public Key Encryption Analogy</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
@@ -90,19 +90,20 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/misc/running-spark_on-yarn-cluster_or-client-mode.md">Running Spark on YARN - Cluster or Client Mode</a></h1>
-<p>Spark jobs can run on YARN in two modes: cluster mode and client mode. Understanding the difference between the two modes is important for choosing an appropriate memory allocation configuration, and to submit jobs as expected.</p>
-<p>A Spark job consists of two parts:</p>
-<ul>
-<li>Spark Executors that run the actual tasks, and </li>
-<li>a Spark Driver that schedules the Executors.</li>
-</ul>
-<h2 id="cluster-mode">Cluster Mode</h2>
-<p>Everything runs inside the cluster. You can start a job from your laptop and the job will continue running even if you close your computer. In this mode, the Spark Driver is encapsulated inside the YARN Application Master.</p>
-<h2 id="client-mode">Client Mode</h2>
-<p>The Spark driver runs on a client, such as your laptop. If the client is shut down, the job fails. Spark Executors still run on the cluster, and to schedule everything, a small YARN Application Master is created.</p>
-<h2 id="use-cases">Use Cases</h2>
-<p>Client mode is well suited for interactive jobs, but applications will fail if the client stops. For long running jobs, cluster mode is more appropriate.</p>
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/misc/public_key_encryption_analogy.md">Public Key Encryption Analogy</a></h1>
+<h1 id="what-is-public-private-key-encryption">What is Public Private Key Encryption?</h1>
+<p>This process uses an algorithm that can encrypt data using a public key however, the data can only be decrypted using a private key.  </p>
+<p>I share my public key with everyone and they use it to encrypt data they send to me.  Only I can decrypt and read that data.</p>
+<h1 id="the-analogy">The Analogy</h1>
+<p>As an analogy to public, private key encryption, consider a secure, locked post-box which contains a slot through which notes can be posted.  Notes posted in to the post-box cannot be read (as with encryption).  To read the notes (decrypt the data) the post-box must first be unlocked.</p>
+<p>The post-box will be identified by an id number / key.  The post-box is one of a billion billion billion (or more) identical post-boxes stored in a shared location.  The only means of identifying the correct post-box is by the post-box Id. When a note is posted into the locked post-box, the note can't be read and is secure.  </p>
+<p>The process of posting a note into the post-box is synonymous to encrypting the data using the post-box id (public key).  </p>
+<p>The only way to access notes in the post-box is by unlocking the post-box.   This means unlocking the post-box using the lock code (private key).  The notes can then be read which is synonymous to decrypting the data.</p>
+<p>The analogy fails because the notes have to be taken to the shared location for the post-box and posted.  Notes will also need to be taken from shared location to the location of the individual who wants to read the notes.  Whilst the notes are in transit, the contents are insecure.   </p>
+<h1 id="we-can-extend-the-analogy-to-solve-this-issue">We can extend the analogy to solve this issue.</h1>
+<p>Let's say we can request a new post-box each time we need to post a note (encrypt data).  We state the post-box Id and the post-box comes locked using the same unlock code (private key) as used in other post-boxes with the same Id / Key.</p>
+<p>Once we have a post-box, we post the note(s) into the locked post-box, and then send the post-box to a shared location.  The note is secure during transit.</p>
+<p>When we want to access and read the notes, we request that all the post-boxes with my public Id / Key are sent to our location (the notes will be secure in transit).  We can then un-lock the post-boxes and read the notes (decrypt the data).  Before the post-boxes are sent to us a copy will be made of the post-boxes without unlocking them (simple with software - impossible with our physical post-boxes).</p>
 <hr>
         </div>
       </article>

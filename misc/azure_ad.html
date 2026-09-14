@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Public Key Encryption Analogy" />
+    <meta name="description" content="Azure AD - Find My AD Group Memberships" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>Public Key Encryption Analogy</title>
+    <title>Azure AD - Find My AD Group Memberships</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
@@ -90,21 +90,28 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/misc/public-key-encryption-analogy.md">Public Key Encryption Analogy</a></h1>
-<h1 id="what-is-public-private-key-encryption">What is Public Private Key Encryption?</h1>
-<p>This process uses an algorithm that can encrypt data using a public key however, the data can only be decrypted using a private key.  </p>
-<p>I share my public key with everyone and they use it to encrypt data they send to me.  Only I can decrypt and read that data.</p>
-<h1 id="the-analogy">The Analogy</h1>
-<p>As an analogy to public, private key encryption, consider a secure, locked post-box which contains a slot through which notes can be posted.  Notes posted in to the post-box cannot be read (as with encryption).  To read the notes (decrypt the data) the post-box must first be unlocked.</p>
-<p>The post-box will be identified by an id number / key.  The post-box is one of a billion billion billion (or more) identical post-boxes stored in a shared location.  The only means of identifying the correct post-box is by the post-box Id. When a note is posted into the locked post-box, the note can't be read and is secure.  </p>
-<p>The process of posting a note into the post-box is synonymous to encrypting the data using the post-box id (public key).  </p>
-<p>The only way to access notes in the post-box is by unlocking the post-box.   This means unlocking the post-box using the lock code (private key).  The notes can then be read which is synonymous to decrypting the data.</p>
-<p>The analogy fails because the notes have to be taken to the shared location for the post-box and posted.  Notes will also need to be taken from shared location to the location of the individual who wants to read the notes.  Whilst the notes are in transit, the contents are insecure.   </p>
-<h1 id="we-can-extend-the-analogy-to-solve-this-issue">We can extend the analogy to solve this issue.</h1>
-<p>Let's say we can request a new post-box each time we need to post a note (encrypt data).  We state the post-box Id and the post-box comes locked using the same unlock code (private key) as used in other post-boxes with the same Id / Key.</p>
-<p>Once we have a post-box, we post the note(s) into the locked post-box, and then send the post-box to a shared location.  The note is secure during transit.</p>
-<p>When we want to access and read the notes, we request that all the post-boxes with my public Id / Key are sent to our location (the notes will be secure in transit).  We can then un-lock the post-boxes and read the notes (decrypt the data).  Before the post-boxes are sent to us a copy will be made of the post-boxes without unlocking them (simple with software - impossible with our physical post-boxes).</p>
-<hr>
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/misc/azure_ad.md">Azure AD - Find My AD Group Memberships</a></h1>
+<p>First authenticate - this command will pop up a window to sign in.</p>
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>Connect-AzureAD
+
+Account<span class="w">              </span>Environment<span class="w"> </span>TenantId<span class="w">           </span>TenantDomain<span class="w"> </span>AccountType
+-------<span class="w">              </span>-----------<span class="w"> </span>--------<span class="w">           </span>------------<span class="w"> </span>-----------
+martinnurse@demo.com<span class="w"> </span>AzureCloud<span class="w">  </span>c780234d-ed5b-4ccd<span class="w"> </span>demo.com<span class="w">     </span>User
+</code></pre></div>
+
+<p>Get my AD group memberships.</p>
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>Get-AzureADUser<span class="w"> </span>-SearchString<span class="w"> </span>martinnurse@demo.com<span class="w"> </span><span class="sb">`</span>
+<span class="w">  </span><span class="p">|</span><span class="w"> </span>Get-AzureADUserMembership<span class="w"> </span><span class="sb">`</span>
+<span class="w">  </span><span class="p">|</span><span class="w"> </span>%<span class="w"> </span><span class="o">{</span>Get-AzureADObjectByObjectId<span class="w"> </span>-ObjectId<span class="w"> </span><span class="nv">$_</span>.ObjectId<span class="w"> </span><span class="sb">`</span>
+<span class="w">  </span><span class="p">|</span><span class="w"> </span><span class="k">select</span><span class="w"> </span>DisplayName,ObjectType,MailEnabled,SecurityEnabled,ObjectId<span class="o">}</span><span class="w"> </span><span class="sb">`</span>
+<span class="w">  </span><span class="p">|</span><span class="w"> </span>ft
+
+DisplayName<span class="w">      </span>ObjectType<span class="w"> </span>MailEnabled<span class="w"> </span>SecurityEnabled<span class="w"> </span>ObjectId
+-----------<span class="w">      </span>----------<span class="w"> </span>-----------<span class="w"> </span>---------------<span class="w"> </span>--------
+Sport<span class="w"> </span>And<span class="w"> </span>Social<span class="w"> </span>Group<span class="w">             </span>True<span class="w">           </span>False<span class="w"> </span>a3c234fe-82ba-4223-9e87
+AllStaff<span class="w">         </span>Group<span class="w">             </span>True<span class="w">            </span>True<span class="w"> </span>7869b234-1f75-433d-b9d5
+...
+</code></pre></div>
         </div>
       </article>
     </main>

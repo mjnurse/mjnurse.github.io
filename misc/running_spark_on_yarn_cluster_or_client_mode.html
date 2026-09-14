@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Azure AD - Find My AD Group Memberships" />
+    <meta name="description" content="Running Spark on YARN - Cluster or Client Mode" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>Azure AD - Find My AD Group Memberships</title>
+    <title>Running Spark on YARN - Cluster or Client Mode</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
@@ -90,28 +90,20 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/misc/azure-ad.md">Azure AD - Find My AD Group Memberships</a></h1>
-<p>First authenticate - this command will pop up a window to sign in.</p>
-<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>Connect-AzureAD
-
-Account<span class="w">              </span>Environment<span class="w"> </span>TenantId<span class="w">           </span>TenantDomain<span class="w"> </span>AccountType
--------<span class="w">              </span>-----------<span class="w"> </span>--------<span class="w">           </span>------------<span class="w"> </span>-----------
-martinnurse@demo.com<span class="w"> </span>AzureCloud<span class="w">  </span>c780234d-ed5b-4ccd<span class="w"> </span>demo.com<span class="w">     </span>User
-</code></pre></div>
-
-<p>Get my AD group memberships.</p>
-<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>Get-AzureADUser<span class="w"> </span>-SearchString<span class="w"> </span>martinnurse@demo.com<span class="w"> </span><span class="sb">`</span>
-<span class="w">  </span><span class="p">|</span><span class="w"> </span>Get-AzureADUserMembership<span class="w"> </span><span class="sb">`</span>
-<span class="w">  </span><span class="p">|</span><span class="w"> </span>%<span class="w"> </span><span class="o">{</span>Get-AzureADObjectByObjectId<span class="w"> </span>-ObjectId<span class="w"> </span><span class="nv">$_</span>.ObjectId<span class="w"> </span><span class="sb">`</span>
-<span class="w">  </span><span class="p">|</span><span class="w"> </span><span class="k">select</span><span class="w"> </span>DisplayName,ObjectType,MailEnabled,SecurityEnabled,ObjectId<span class="o">}</span><span class="w"> </span><span class="sb">`</span>
-<span class="w">  </span><span class="p">|</span><span class="w"> </span>ft
-
-DisplayName<span class="w">      </span>ObjectType<span class="w"> </span>MailEnabled<span class="w"> </span>SecurityEnabled<span class="w"> </span>ObjectId
------------<span class="w">      </span>----------<span class="w"> </span>-----------<span class="w"> </span>---------------<span class="w"> </span>--------
-Sport<span class="w"> </span>And<span class="w"> </span>Social<span class="w"> </span>Group<span class="w">             </span>True<span class="w">           </span>False<span class="w"> </span>a3c234fe-82ba-4223-9e87
-AllStaff<span class="w">         </span>Group<span class="w">             </span>True<span class="w">            </span>True<span class="w"> </span>7869b234-1f75-433d-b9d5
-...
-</code></pre></div>
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/misc/running_spark_on_yarn_cluster_or_client_mode.md">Running Spark on YARN - Cluster or Client Mode</a></h1>
+<p>Spark jobs can run on YARN in two modes: cluster mode and client mode. Understanding the difference between the two modes is important for choosing an appropriate memory allocation configuration, and to submit jobs as expected.</p>
+<p>A Spark job consists of two parts:</p>
+<ul>
+<li>Spark Executors that run the actual tasks, and </li>
+<li>a Spark Driver that schedules the Executors.</li>
+</ul>
+<h2 id="cluster-mode">Cluster Mode</h2>
+<p>Everything runs inside the cluster. You can start a job from your laptop and the job will continue running even if you close your computer. In this mode, the Spark Driver is encapsulated inside the YARN Application Master.</p>
+<h2 id="client-mode">Client Mode</h2>
+<p>The Spark driver runs on a client, such as your laptop. If the client is shut down, the job fails. Spark Executors still run on the cluster, and to schedule everything, a small YARN Application Master is created.</p>
+<h2 id="use-cases">Use Cases</h2>
+<p>Client mode is well suited for interactive jobs, but applications will fail if the client stops. For long running jobs, cluster mode is more appropriate.</p>
+<hr>
         </div>
       </article>
     </main>

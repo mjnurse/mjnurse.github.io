@@ -1549,21 +1549,21 @@
   {
     "id": "221",
     "title": "Azure AD - Find My AD Group Memberships",
-    "url": "/misc/azure-ad.html",
+    "url": "/misc/azure_ad.html",
     "content": "First authenticate - this command will pop up a window to sign in. &gt; Connect-AzureAD Account Environment TenantId TenantDomain AccountType ------- ----------- -------- ------------ ----------- martinnurse@demo.com AzureCloud c780234d-ed5b-4ccd demo.com User Get my AD group memberships. &gt; Get-AzureADUser -SearchString martinnurse@demo.com ` | Get-AzureADUserMembership ` | % {Get-AzureADObjectByObjectId -ObjectId $_.ObjectId ` | select DisplayName,ObjectType,MailEnabled,SecurityEnabled,Objec",
     "type": "page"
   },
   {
     "id": "222",
     "title": "BMI Calculator",
-    "url": "/misc/bmi-calculator.html",
+    "url": "/misc/bmi_calculator.html",
     "content": "Weight St Lb lbs Kg Height Ft In m Target Weight Current BMI: 0 Target Weight (BMI 20 - 25) BMI 20 weight (lose/gain)BMI 25 weight (lose/gain) Kg00 Lbs00 St Lb00 Notes: BMI for adults only. Doesn't account for body / bone structure, other formulae exist. BMI &lt;20: Underweight. BMI 20-25: Healthy weight. BMI 25-30: Over Weight. BMI 30-35: Obese. BMI&gt;35 very/morbidly obese. function getFloat(id) { return parseFloat(document.getElementById(id).value) || 0; } function setValue(id, value) { docu",
     "type": "page"
   },
   {
     "id": "223",
     "title": "Dashboard Design Principles",
-    "url": "/misc/dashboard-design-principles.html",
+    "url": "/misc/dashboard_design_principles.html",
     "content": "'The greatest value of a picture is when it forces us to notice what we never expected to see'John Tukey, 'Exploratory Data Analysis', 1977 'A picture is worth a thousand words. An interface is worth a thousand pictures'Ben Shneiderman, 2003 'Data becomes useful knowledge of something that matters when it builds a bridge between a question and an answer. This connection is the signal.' Stephen Few, 'Signal: Understanding What Matters in a World of Noise, 2015 'Graphical excellence is that which ",
     "type": "page"
   },
@@ -1577,42 +1577,42 @@
   {
     "id": "225",
     "title": "HTML Colour Converter",
-    "url": "/misc/html-colour-converter.html",
+    "url": "/misc/html_colour_converter.html",
     "content": "RGB: HEX: I've found rotating the RGB values around can give some colours that work well together. Not sure if this has a name... function setColors() { let h = document.getElementById('h'); let rh = h.value.slice(0,2); let gh = h.value.slice(2,4); let bh = h.value.slice(4,6); color = rh + gh + bh; document.getElementById('c1').style.backgroundColor = '#' + color; document.getElementById('c1').innerHTML = '#' + color + '&nbsp;#' + color + ''; color = bh + rh + gh; document.getElementById('c2').s",
     "type": "page"
   },
   {
     "id": "226",
     "title": "HTTP Status Codes",
-    "url": "/misc/http-status-codes.html",
+    "url": "/misc/http_status_codes.html",
     "content": "1xx Informational Response An informational response indicates that the request was received and understood and is being processed. It alerts the client to wait for a final response. Code Name Description 100 Continue The server has received the request headers and the client should proceed to send the request body. 101 Switching Protocols The requester has asked the server to switch protocols and the server has agreed to do so. 102 Processing A WebDAV request may contain many sub-requests invol",
     "type": "page"
   },
   {
     "id": "227",
     "title": "JWT - JSON Web Tokens",
-    "url": "/misc/jwt-json-web-tokens.html",
+    "url": "/misc/jwt_json_web_tokens.html",
     "content": "Today I was looking at authentication for a web-service. It was using JSON Web Tokens. What are JWTs? How do they work? A JWT is a cryptographically signed JSON token used to authenticate users making calls to an application. A JWT is sent to a user when they authenticate with an authentication Service. The user can send this token with requests to an application (web-service or other) as proof of identity. The application talks to the authentication server and is told the how the token was cryp",
     "type": "page"
   },
   {
     "id": "228",
     "title": "Public Key Encryption Analogy",
-    "url": "/misc/public-key-encryption-analogy.html",
+    "url": "/misc/public_key_encryption_analogy.html",
     "content": "What is Public Private Key Encryption? This process uses an algorithm that can encrypt data using a public key however, the data can only be decrypted using a private key. I share my public key with everyone and they use it to encrypt data they send to me. Only I can decrypt and read that data. The Analogy As an analogy to public, private key encryption, consider a secure, locked post-box which contains a slot through which notes can be posted. Notes posted in to the post-box cannot be read (as ",
     "type": "page"
   },
   {
     "id": "229",
     "title": "Read Aloud In MS Word",
-    "url": "/misc/read-aloud-in-ms-word.html",
+    "url": "/misc/read_aloud_in_ms_word.html",
     "content": "To activate: [Alt][Ctrl][Space]. Cursor at a specific point in the text: The document will be read aloud from here on. Text selected: The selected text will be read aloud. [Ctrl][Space] - Play or pause. [Ctrl][Left arrow] - Jump to the previous paragraph. [Ctrl][Right arrow] - Jump to the next paragraph. [Alt][Left arrow] - Slower reading speed. [Alt][Arrow right] - Faster reading speed.",
     "type": "page"
   },
   {
     "id": "230",
     "title": "Running Spark on YARN - Cluster or Client Mode",
-    "url": "/misc/running-spark_on-yarn-cluster_or-client-mode.html",
+    "url": "/misc/running_spark_on_yarn_cluster_or_client_mode.html",
     "content": "Spark jobs can run on YARN in two modes: cluster mode and client mode. Understanding the difference between the two modes is important for choosing an appropriate memory allocation configuration, and to submit jobs as expected. A Spark job consists of two parts: Spark Executors that run the actual tasks, and a Spark Driver that schedules the Executors. Cluster Mode Everything runs inside the cluster. You can start a job from your laptop and the job will continue running even if you close your co",
     "type": "page"
   },
@@ -1626,28 +1626,28 @@
   {
     "id": "232",
     "title": "Statistical Testing",
-    "url": "/misc/statistical-testing.html",
+    "url": "/misc/statistical_testing.html",
     "content": "For a long time I've wanted to explore using statistics to determine how many tests are needed to test for errors. The question I have is that, for a set of n records, if we want to be say 99.9% sure none contain an error, how many would be need to test at random to reach a point where we can be statistically, say, 99.9% sure there are no errors. The Basics Tests with a fixed number of options / records to test If I have a die and there is a chance the number has not been printed on one side, ho",
     "type": "page"
   },
   {
     "id": "233",
     "title": "Text To Speech - Clipboard",
-    "url": "/misc/text-to-speech-clipboard.html",
+    "url": "/misc/text_to_speech_clipboard.html",
     "content": "I've been using the Microsoft Word text-to-speech function for a while to proof read text. Works great but the text needs to be a Word document or I need to copy and paste it there first. I've been looking online for an application to read aloud the clipboard. It's surprisingly difficult to find an application. I then thought about AHK and (convinced it would be far to complex for AHK) I ran a search. I was wrong, a very simple AHK script now means I can read aloud the contents of the clipboard ",
     "type": "page"
   },
   {
     "id": "234",
     "title": "This Sites Markdown",
-    "url": "/misc/this-sites-markdown.html",
+    "url": "/misc/this_sites_markdown.html",
     "content": "Heading 1 # Heading 1 Heading 2 ## Heading 2 Heading 3 ### Heading 3 Heading 4 #### Heading 4 Heading 5 ##### Heading 5 Heading 6 ###### Heading 6 Horizontal Line: --- Bold: **Bold** Italic: *Italic* Bold Italic: ***Bold Italic*** ~~Strikethrough~~: ~~Strikethrough~~ Links I'm an inline-style link [I'm an inline-style link](https://www.google.com) I'm an inline-style link with title [I'm an inline-style link with title](https://www.google.com \"Google's Homepage\") Simple Lists Single spacing: Sim",
     "type": "page"
   },
   {
     "id": "235",
     "title": "Using Git and GitHub - A Walk-through",
-    "url": "/misc/using-git_and-git-hub-a-walkthrough.html",
+    "url": "/misc/using_git_and_git_hub_a_walkthrough.html",
     "content": "In the following walk-through we use Git and GitHub from the view point of two 'users' in parallel and look at the workflow and interaction between the two. Simulate two users - each has a home directory Create two 'user home' directories: &gt; ~/git-test$ mkdir user1 &gt; ~/git-test$ mkdir user2 Use User1 to create a file, add this to Git and push the local Git repo up and into GitHub Go to User1 home directory and initialise local Git: &gt; ~/git-test$ cd user1 &gt; ~/git-test/user1$ git init ",
     "type": "page"
   }
