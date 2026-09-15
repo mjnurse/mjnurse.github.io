@@ -1466,28 +1466,28 @@
     "id": "209",
     "title": "@ GCloud (GCP) CLI",
     "url": "/other/cli_builder/definition-file-@-gcloud-(gcp)-gc.def.html",
-    "content": "Definition file gc.def The definition file contains command definitions for the CLI builder. @ GCloud (GCP) cmd if [[ &quot;$GCP_PROJECT&quot; != &quot;&quot; ]]; then GCP_PROJECT=&quot;--project $GCP_PROJECT&quot;; fi cmd gc() { \\ echo PROJ: $GCP_PROJECT; \\ gcloud &quot;$@&quot; $GCP_PROJECT; \\ } # -------------------------------------------------------------------------------- = Config # -------------------------------------------------------------------------------- auth login (al) [-a] :: \\ ",
+    "content": "Definition file gc.def The definition file contains command definitions for the CLI builder. @ GCloud (GCP) cmd if [[ &quot;$GCP_PROJECT&quot; != &quot;&quot; ]]; then GCP_PROJECT=&quot;--project $GCP_PROJECT&quot;; fi cmd gc() { echo PROJ: $GCP_PROJECT gcloud &quot;$@&quot; $GCP_PROJECT } # -------------------------------------------------------------------------------- = Config # -------------------------------------------------------------------------------- auth login (al) [-a] :: if [[ &quo",
     "type": "page"
   },
   {
     "id": "210",
     "title": "@ GIT CLI",
     "url": "/other/cli_builder/definition-file-@-git-gi.def.html",
-    "content": "Definition file gi.def The definition file contains command definitions for the CLI builder. @ GIT aliasLeadChars: gi # --------------------------------------------------------------------------------------- = GENERAL # --------------------------------------------------------------------------------------- add commit push (acp) [&lt;-f|--force&gt;] [&lt;message&gt;] :: \\ force_yn=n; \\ if [[ $1 == -f || $1 == --force ]]; then \\ force_yn=y; \\ shift; \\ fi; \\ if [[ &quot;$1&quot; == &quot;&quot; ]];",
+    "content": "Definition file gi.def The definition file contains command definitions for the CLI builder. @ GIT aliasLeadChars: gi # --------------------------------------------------------------------------------------- = GENERAL # --------------------------------------------------------------------------------------- add commit push (acp) [&lt;-f|--force&gt;] [&lt;message&gt;] :: force_yn=n if [[ $1 == -f || $1 == --force ]]; then force_yn=y shift fi if [[ &quot;$1&quot; == &quot;&quot; ]]; then message=&q",
     "type": "page"
   },
   {
     "id": "211",
     "title": "Docker CLI",
     "url": "/other/cli_builder/definition-file-docker-dc.def.html",
-    "content": "Definition file dc.def The definition file contains command definitions for the CLI builder. # Docker # ------------------------------------------------------------------------------------------------- = IMAGES # ------------------------------------------------------------------------------------------------- list images (li) [&lt;name&gt;] :: \\ if [[ &quot;$1&quot; == &quot;&quot; ]]; then \\ docker images; \\ else \\ filter=&quot;${1//\\*/.\\*}&quot;; \\ filter=&quot;${filter//%/.\\*}&quot;; \\ docker",
+    "content": "Definition file dc.def The definition file contains command definitions for the CLI builder. # Docker # ------------------------------------------------------------------------------------------------- = IMAGES # ------------------------------------------------------------------------------------------------- list images (li) [&lt;name&gt;] :: if [[ &quot;$1&quot; == &quot;&quot; ]]; then docker images else filter=&quot;${1//\\*/.\\*}&quot; filter=&quot;${filter//%/.\\*}&quot; docker images 2&gt;/d",
     "type": "page"
   },
   {
     "id": "212",
     "title": "Kubectl CLI",
     "url": "/other/cli_builder/definition-file-kubectl-kc.def.html",
-    "content": "Definition file kc.def The definition file contains command definitions for the CLI builder. # Kubectl # ------------------------------------------------------------------------------------------------- = ALL # ------------------------------------------------------------------------------------------------- get all (ga) [&lt;namespace&gt;] :: \\ if [[ &quot;$1&quot; == &quot;&quot; ]]; then kubectl get all -A; else kubectl get all -n $1; fi get (g) &lt;item&gt; :: kubectl get $1 # ---------------",
+    "content": "Definition file kc.def The definition file contains command definitions for the CLI builder. # Kubectl # ------------------------------------------------------------------------------------------------- = ALL # ------------------------------------------------------------------------------------------------- get all (ga) [&lt;namespace&gt;] :: if [[ &quot;$1&quot; == &quot;&quot; ]]; then kubectl get all -A; else kubectl get all -n $1; fi get (g) &lt;item&gt; :: kubectl get $1 # -----------------",
     "type": "page"
   },
   {
@@ -1501,7 +1501,7 @@
     "id": "214",
     "title": "Run CLI",
     "url": "/other/cli_builder/definition-file-run-r.def.html",
-    "content": "Definition file r.def The definition file contains command definitions for the CLI builder. # Run # ------------------------------------------------------------------------------------------------------------ = MDM # ------------------------------------------------------------------------------------------------------------ start mdm (sm) [&lt;streaming|ui|all|k(afka)&gt;|kapp&gt;|shaper] :: \\ mjn-start-mdm $1 \\ ## kapp starts kafka streaming for the application data source restart mdm (rm) [&lt",
+    "content": "Definition file r.def The definition file contains command definitions for the CLI builder. # Run # ------------------------------------------------------------------------------------------------------------ = MDM # ------------------------------------------------------------------------------------------------------------ start mdm (sm) [&lt;streaming|ui|all|k(afka)&gt;|kapp&gt;|shaper] :: mjn-start-mdm $1 ## kapp starts kafka streaming for the application data source restart mdm (rm) [&lt;str",
     "type": "page"
   },
   {

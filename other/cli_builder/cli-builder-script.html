@@ -152,9 +152,27 @@ from<span class="w"> </span>typing<span class="w"> </span>import<span class="w">
 <span class="s2">                    definition filename).  For example, &#39;aliasLeadChars: es&#39; will generate aliases</span>
 <span class="s2">                    like @esli, @essi instead of @eli, @esi.</span>
 
-<span class="s2">  ( \ - is the line continuation character.  Any line ending \ is joined to the next line. )</span>
+<span class="s2">  Indentation (Python-style continuation)</span>
+<span class="s2">  ---------------------------------------</span>
+<span class="s2">  A command definition starts at the left margin (column 0).  The Linux command(s)</span>
+<span class="s2">  that make up its body are written on the following lines, indented beneath it -</span>
+<span class="s2">  just like a Python block.  No &#39;;&#39; separators and no trailing &#39;\&#39; are needed:</span>
+<span class="s2">  each indented line is a separate command, and relative indentation is preserved,</span>
+<span class="s2">  so you can indent the body of an if/while/for/case block naturally.</span>
+
+<span class="s2">  The body ends at the next line that returns to column 0 (a comment, a section</span>
+<span class="s2">  header, a blank line, or the next command definition).  &#39;## help text&#39; and</span>
+<span class="s2">  &#39;!! completion command&#39; lines may be written indented within the body.</span>
+
+<span class="s2">    ( For backward compatibility a trailing &#39;\&#39; still joins a line to the next,</span>
+<span class="s2">      and stray &#39;;&#39; separators are still accepted. )</span>
 
 <span class="s2">  All other lines in the file are command definitions.  These lines are structured as follows:</span>
+
+<span class="s2">  name-1..name-n (shortcut) &lt;param&gt; [&lt;opt_param] ::</span>
+<span class="s2">      command \$1 \$2</span>
+
+<span class="s2">  or, for a single short command, on one line:</span>
 
 <span class="s2">  name-1..name-n (shortcut) &lt;param&gt; [&lt;opt_param] :: command \$1 \$2</span>
 
@@ -179,8 +197,10 @@ from<span class="w"> </span>typing<span class="w"> </span>import<span class="w">
 <span class="s2">    Separates the command definition with the Linux command that is run.</span>
 
 <span class="s2">  command</span>
-<span class="s2">    Is an Linux command.  Parameter values entered after the command are specified using there</span>
-<span class="s2">    position preceded by a \$.  e.g \$1, \$2.</span>
+<span class="s2">    One or more Linux commands.  A single command may follow the &#39;::&#39; on the same</span>
+<span class="s2">    line; multiple commands are written on the following indented lines (see</span>
+<span class="s2">    &quot;</span>Indentation<span class="s2">&quot; above).  Parameter values entered after the command are specified</span>
+<span class="s2">    using their position preceded by a \$.  e.g \$1, \$2.</span>
 
 <span class="s2">  Example</span>
 
@@ -188,6 +208,15 @@ from<span class="w"> </span>typing<span class="w"> </span>import<span class="w">
 <span class="s2">  ----------------------------------------------------------------</span>
 <span class="s2">  # FILE OPTIONS</span>
 <span class="s2">  sort file (sf) &lt;filename&gt; &lt;sort_parameter&gt; :: cat \$1 | sort \$2</span>
+
+<span class="s2">  # A multi-command body using indentation (no ; or \\ needed):</span>
+<span class="s2">  clean sort (cs) &lt;filename&gt; ::</span>
+<span class="s2">      if [[ -s &quot;</span><span class="se">\$</span><span class="m">1</span><span class="s2">&quot; ]]; then</span>
+<span class="s2">          sort -u &quot;</span><span class="se">\$</span><span class="m">1</span><span class="s2">&quot;</span>
+<span class="s2">      else</span>
+<span class="s2">          echo &quot;</span>empty<span class="w"> </span>file<span class="s2">&quot;</span>
+<span class="s2">      fi</span>
+<span class="s2">      ## sort unique, warn on empty file</span>
 <span class="s2">  ----------------------------------------------------------------</span>
 
 <span class="s2">  This example sorts a file specified by a mandatory filename.  An optional sort parameter can</span>
@@ -229,6 +258,62 @@ class<span class="w"> </span>Cmd:
 <span class="w">    </span>@property
 <span class="w">    </span>def<span class="w"> </span>opt_params<span class="o">(</span>self<span class="o">)</span>:
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">[</span>p<span class="w"> </span><span class="k">for</span><span class="w"> </span>p,<span class="w"> </span>opt<span class="w"> </span><span class="k">in</span><span class="w"> </span>self.params<span class="w"> </span><span class="k">if</span><span class="w"> </span>opt<span class="o">]</span>
+
+def<span class="w"> </span>group_blocks<span class="o">(</span>lines<span class="o">)</span>:
+<span class="w">    </span><span class="s2">&quot;&quot;&quot;Group physical lines into logical blocks based on indentation.</span>
+
+<span class="s2">    A block starts on a non-blank line at indentation level 0 (no leading</span>
+<span class="s2">    whitespace).  Any following lines that are indented (start with whitespace)</span>
+<span class="s2">    are continuation lines belonging to that block.  Blank lines terminate the</span>
+<span class="s2">    current block.</span>
+
+<span class="s2">    Returns a list of blocks, where each block is a list of physical lines</span>
+<span class="s2">    (with the header line first).  Trailing &#39;\\&#39; line-continuation characters</span>
+<span class="s2">    are still honoured for backward compatibility: a line ending in &#39;\\&#39; is</span>
+<span class="s2">    joined to the next line regardless of its indentation.</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="nv">blocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
+<span class="w">    </span><span class="nv">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>None
+
+<span class="w">    </span><span class="nv">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span>i<span class="w"> </span>&lt;<span class="w"> </span>len<span class="o">(</span>lines<span class="o">)</span>:
+<span class="w">        </span><span class="nv">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>lines<span class="o">[</span>i<span class="o">]</span>
+
+<span class="w">        </span><span class="c1"># Backward-compatible &#39;\&#39; continuation: join following line(s) first.</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span>line.rstrip<span class="o">()</span>.endswith<span class="o">(</span><span class="s1">&#39;\\&#39;</span><span class="o">)</span>:
+<span class="w">            </span><span class="nv">joined</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>line.rstrip<span class="o">()[</span>:-1<span class="o">]</span>
+<span class="w">            </span><span class="nv">nxt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>lines<span class="o">[</span>i<span class="w"> </span>+<span class="w"> </span><span class="m">1</span><span class="o">]</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>i<span class="w"> </span>+<span class="w"> </span><span class="m">1</span><span class="w"> </span>&lt;<span class="w"> </span>len<span class="o">(</span>lines<span class="o">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
+<span class="w">            </span><span class="c1"># Preserve a single space where the two lines meet, matching the</span>
+<span class="w">            </span><span class="c1"># historical behaviour of joining continuation lines.</span>
+<span class="w">            </span><span class="nv">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>joined.rstrip<span class="o">()</span><span class="w"> </span>+<span class="w"> </span><span class="s1">&#39; &#39;</span><span class="w"> </span>+<span class="w"> </span>nxt.strip<span class="o">()</span>
+<span class="w">            </span>del<span class="w"> </span>lines<span class="o">[</span>i<span class="w"> </span>+<span class="w"> </span><span class="m">1</span><span class="o">]</span>
+
+<span class="w">        </span><span class="nv">stripped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>line.strip<span class="o">()</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>stripped:
+<span class="w">            </span><span class="c1"># Blank line ends the current block.</span>
+<span class="w">            </span><span class="nv">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>None
+<span class="w">            </span><span class="nv">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="m">1</span>
+<span class="w">            </span><span class="k">continue</span>
+
+<span class="w">        </span><span class="nv">indented</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>line<span class="o">[</span>:1<span class="o">]</span>.isspace<span class="o">()</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>indented<span class="w"> </span>and<span class="w"> </span>current<span class="w"> </span>is<span class="w"> </span>not<span class="w"> </span>None:
+<span class="w">            </span>current.append<span class="o">(</span>line<span class="o">)</span>
+<span class="w">        </span><span class="k">else</span>:
+<span class="w">            </span><span class="nv">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>line<span class="o">]</span>
+<span class="w">            </span>blocks.append<span class="o">(</span>current<span class="o">)</span>
+
+<span class="w">        </span><span class="nv">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="m">1</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>blocks
+
+
+def<span class="w"> </span>block_min_indent<span class="o">(</span>cont_lines<span class="o">)</span>:
+<span class="w">    </span><span class="s2">&quot;&quot;&quot;Smallest leading-whitespace width among non-blank continuation lines.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="nv">indents</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>len<span class="o">(</span>l<span class="o">)</span><span class="w"> </span>-<span class="w"> </span>len<span class="o">(</span>l.lstrip<span class="o">())</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>l<span class="w"> </span><span class="k">in</span><span class="w"> </span>cont_lines<span class="w"> </span><span class="k">if</span><span class="w"> </span>l.strip<span class="o">()]</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>min<span class="o">(</span>indents<span class="o">)</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>indents<span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="m">0</span>
+
 
 def<span class="w"> </span>parse_def<span class="o">(</span>lines,<span class="w"> </span>title,<span class="w"> </span>description,<span class="w"> </span>cli_name,<span class="w"> </span>alias_lead_chars<span class="o">)</span>:
 <span class="w">    </span><span class="s2">&quot;&quot;&quot;Parse definition file into commands and groups&quot;&quot;&quot;</span>
@@ -279,31 +364,79 @@ def<span class="w"> </span>parse_def<span class="o">(</span>lines,<span class="w
 <span class="s1">            comp=&#39;&#39;</span>
 <span class="s1">        ), &#39;</span>HELP<span class="s1">&#39;))</span>
 
-<span class="s1">    for line in (l.strip() for l in lines):</span>
-<span class="s1">        # Skip comments and empty lines</span>
-<span class="s1">        if not line or line.startswith(&#39;</span><span class="c1">#&#39;):</span>
+<span class="s1">    for block in group_blocks(lines):</span>
+<span class="s1">        header = block[0].strip()</span>
+<span class="s1">        # Drop comment-only continuation lines, but keep &#39;</span><span class="c1">##&#39; help directives</span>
+<span class="w">        </span><span class="c1"># (&#39;###&#39; is a comment, not help) and &#39;!!&#39; completion directives.</span>
+<span class="w">        </span>def<span class="w"> </span>_is_comment<span class="o">(</span>l<span class="o">)</span>:
+<span class="w">            </span><span class="nv">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>l.strip<span class="o">()</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span>s.startswith<span class="o">(</span><span class="s1">&#39;#&#39;</span><span class="o">)</span><span class="w"> </span>and<span class="w"> </span>not<span class="w"> </span><span class="o">(</span>s.startswith<span class="o">(</span><span class="s1">&#39;##&#39;</span><span class="o">)</span><span class="w"> </span>and<span class="w"> </span>not<span class="w"> </span>s.startswith<span class="o">(</span><span class="s1">&#39;###&#39;</span><span class="o">))</span>
+<span class="w">        </span><span class="nv">cont_lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>l<span class="w"> </span><span class="k">for</span><span class="w"> </span>l<span class="w"> </span><span class="k">in</span><span class="w"> </span>block<span class="o">[</span><span class="m">1</span>:<span class="o">]</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>_is_comment<span class="o">(</span>l<span class="o">)]</span>
+
+<span class="w">        </span><span class="c1"># Skip comments and empty blocks</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>header<span class="w"> </span>or<span class="w"> </span>header.startswith<span class="o">(</span><span class="s1">&#39;#&#39;</span><span class="o">)</span>:
 <span class="w">            </span><span class="k">continue</span>
 
 <span class="w">        </span><span class="c1"># Group description</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span>line.startswith<span class="o">(</span><span class="s1">&#39;=&#39;</span><span class="o">)</span>:
-<span class="w">            </span><span class="nv">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>line<span class="o">[</span><span class="m">2</span>:<span class="o">]</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>header.startswith<span class="o">(</span><span class="s1">&#39;=&#39;</span><span class="o">)</span>:
+<span class="w">            </span><span class="nv">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>header<span class="o">[</span><span class="m">2</span>:<span class="o">]</span>
 <span class="w">            </span><span class="k">continue</span>
 
-<span class="w">        </span><span class="c1"># Direct command insertion</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span>line.startswith<span class="o">(</span><span class="s1">&#39;cmd &#39;</span><span class="o">)</span>:
-<span class="w">            </span>cmds.append<span class="o">((</span><span class="s1">&#39;raw&#39;</span>,<span class="w"> </span>line<span class="o">[</span><span class="m">4</span>:<span class="o">]))</span>
+<span class="w">        </span><span class="c1"># Direct command insertion (may span multiple indented lines)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>header.startswith<span class="o">(</span><span class="s1">&#39;cmd &#39;</span><span class="o">)</span>:
+<span class="w">            </span><span class="nv">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>header<span class="o">[</span><span class="m">4</span>:<span class="o">]</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>cont_lines:
+<span class="w">                </span><span class="nv">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>block_min_indent<span class="o">(</span>cont_lines<span class="o">)</span>
+<span class="w">                </span><span class="k">for</span><span class="w"> </span>cl<span class="w"> </span><span class="k">in</span><span class="w"> </span>cont_lines:
+<span class="w">                    </span><span class="nv">body</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s1">&#39;\n&#39;</span><span class="w"> </span>+<span class="w"> </span><span class="o">(</span>cl<span class="o">[</span>base:<span class="o">]</span>.rstrip<span class="o">()</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>cl.strip<span class="o">()</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="o">)</span>
+<span class="w">            </span>cmds.append<span class="o">((</span><span class="s1">&#39;raw&#39;</span>,<span class="w"> </span>body<span class="o">))</span>
 <span class="w">            </span><span class="k">continue</span>
 
-<span class="w">        </span><span class="c1"># Command definition</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="s1">&#39;::&#39;</span><span class="w"> </span>not<span class="w"> </span><span class="k">in</span><span class="w"> </span>line:
+<span class="w">        </span><span class="c1"># Command definition must contain &#39;::&#39; somewhere in the block</span>
+<span class="w">        </span><span class="nv">block_has_sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;::&#39;</span><span class="w"> </span><span class="k">in</span><span class="w"> </span>header<span class="w"> </span>or<span class="w"> </span>any<span class="o">(</span><span class="s1">&#39;::&#39;</span><span class="w"> </span><span class="k">in</span><span class="w"> </span>l<span class="w"> </span><span class="k">for</span><span class="w"> </span>l<span class="w"> </span><span class="k">in</span><span class="w"> </span>cont_lines<span class="o">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>block_has_sep:
 <span class="w">            </span><span class="k">continue</span>
 
-<span class="w">        </span><span class="c1"># Extract parts</span>
-<span class="w">        </span><span class="nv">help_txt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>re.search<span class="o">(</span>r<span class="s1">&#39;##\s*(.+)&#39;</span>,<span class="w"> </span>line<span class="o">)</span>
-<span class="w">        </span><span class="nv">comp_cmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>re.search<span class="o">(</span>r<span class="s1">&#39;!!\s*([^#]+)&#39;</span>,<span class="w"> </span>line<span class="o">)</span>
-<span class="w">        </span><span class="nv">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>re.sub<span class="o">(</span>r<span class="s1">&#39;##.*|!!.*&#39;</span>,<span class="w"> </span><span class="s1">&#39;&#39;</span>,<span class="w"> </span>line<span class="o">)</span>
+<span class="w">        </span><span class="c1"># A &#39;##&#39; help directive or &#39;!!&#39; completion directive may appear inline</span>
+<span class="w">        </span><span class="c1"># on the header/command lines, or on their own indented continuation</span>
+<span class="w">        </span><span class="c1"># lines.  Pull them out of the block first, then treat everything that</span>
+<span class="w">        </span><span class="c1"># remains as the (possibly multi-line) command body.</span>
+<span class="w">        </span><span class="nv">help_txt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>None
+<span class="w">        </span><span class="nv">comp_cmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>None
 
-<span class="w">        </span>defn,<span class="w"> </span><span class="nv">cmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>s.strip<span class="o">()</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>s<span class="w"> </span><span class="k">in</span><span class="w"> </span>line.split<span class="o">(</span><span class="s1">&#39;::&#39;</span>,<span class="w"> </span><span class="m">1</span><span class="o">))</span>
+<span class="w">        </span>def<span class="w"> </span>_extract<span class="o">(</span>text<span class="o">)</span>:
+<span class="w">            </span>nonlocal<span class="w"> </span>help_txt,<span class="w"> </span>comp_cmd
+<span class="w">            </span><span class="nv">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>re.search<span class="o">(</span>r<span class="s1">&#39;##\s*(.+)&#39;</span>,<span class="w"> </span>text<span class="o">)</span>
+<span class="w">            </span><span class="nv">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>re.search<span class="o">(</span>r<span class="s1">&#39;!!\s*([^#]+)&#39;</span>,<span class="w"> </span>text<span class="o">)</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>h<span class="w"> </span>and<span class="w"> </span>help_txt<span class="w"> </span>is<span class="w"> </span>None:
+<span class="w">                </span><span class="nv">help_txt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>h.group<span class="o">(</span><span class="m">1</span><span class="o">)</span>.strip<span class="o">()</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>c<span class="w"> </span>and<span class="w"> </span>comp_cmd<span class="w"> </span>is<span class="w"> </span>None:
+<span class="w">                </span><span class="nv">comp_cmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>c.group<span class="o">(</span><span class="m">1</span><span class="o">)</span>.strip<span class="o">()</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span>re.sub<span class="o">(</span>r<span class="s1">&#39;##.*|!!.*&#39;</span>,<span class="w"> </span><span class="s1">&#39;&#39;</span>,<span class="w"> </span>text<span class="o">)</span>
+
+<span class="w">        </span><span class="nv">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>_extract<span class="o">(</span>header<span class="o">)</span>
+<span class="w">        </span><span class="nv">cont_clean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span>cl<span class="w"> </span><span class="k">in</span><span class="w"> </span>cont_lines:
+<span class="w">            </span><span class="nv">leading</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>cl<span class="o">[</span>:len<span class="o">(</span>cl<span class="o">)</span><span class="w"> </span>-<span class="w"> </span>len<span class="o">(</span>cl.lstrip<span class="o">())]</span>
+<span class="w">            </span>cont_clean.append<span class="o">(</span>leading<span class="w"> </span>+<span class="w"> </span>_extract<span class="o">(</span>cl.lstrip<span class="o">())</span>.rstrip<span class="o">())</span>
+
+<span class="w">        </span><span class="c1"># Split header on the first &#39;::&#39; into the definition and the (first</span>
+<span class="w">        </span><span class="c1"># line of the) command body.</span>
+<span class="w">        </span>defn,<span class="w"> </span>_,<span class="w"> </span><span class="nv">first_cmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>header.partition<span class="o">(</span><span class="s1">&#39;::&#39;</span><span class="o">)</span>
+<span class="w">        </span><span class="nv">defn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>defn.strip<span class="o">()</span>
+
+<span class="w">        </span><span class="c1"># Assemble the multi-line command body: the remainder of the header</span>
+<span class="w">        </span><span class="c1"># line, followed by continuation lines with their relative indentation</span>
+<span class="w">        </span><span class="c1"># preserved (dedented to the shallowest continuation line).</span>
+<span class="w">        </span><span class="nv">cmd_lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>first_cmd.strip<span class="o">()</span>:
+<span class="w">            </span>cmd_lines.append<span class="o">(</span>first_cmd.strip<span class="o">())</span>
+<span class="w">        </span><span class="nv">real_cont</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>l<span class="w"> </span><span class="k">for</span><span class="w"> </span>l<span class="w"> </span><span class="k">in</span><span class="w"> </span>cont_clean<span class="w"> </span><span class="k">if</span><span class="w"> </span>l.strip<span class="o">()]</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>real_cont:
+<span class="w">            </span><span class="nv">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>block_min_indent<span class="o">(</span>real_cont<span class="o">)</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span>cl<span class="w"> </span><span class="k">in</span><span class="w"> </span>cont_clean:
+<span class="w">                </span>cmd_lines.append<span class="o">(</span>cl<span class="o">[</span>base:<span class="o">]</span>.rstrip<span class="o">()</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>cl.strip<span class="o">()</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="o">)</span>
+<span class="w">        </span><span class="nv">cmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;\n&#39;</span>.join<span class="o">(</span>cmd_lines<span class="o">)</span>.rstrip<span class="o">()</span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nv">cmd</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;&#39;</span>:
 <span class="w">            </span>print<span class="o">(</span>f<span class="s1">&#39;Warning: Command missing for definition: {defn}\n&#39;</span><span class="o">)</span>
@@ -331,8 +464,8 @@ def<span class="w"> </span>parse_def<span class="o">(</span>lines,<span class="w
 <span class="w">            </span><span class="nv">shortcut</span><span class="o">=</span>shortcut,
 <span class="w">            </span><span class="nv">params</span><span class="o">=</span>params,
 <span class="w">            </span><span class="nv">cmd</span><span class="o">=</span>cmd,
-<span class="w">            </span><span class="nv">help</span><span class="o">=</span>help_txt.group<span class="o">(</span><span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>help_txt<span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;&#39;</span>,
-<span class="w">            </span><span class="nv">comp</span><span class="o">=</span>comp_cmd.group<span class="o">(</span><span class="m">1</span><span class="o">)</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>comp_cmd<span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
+<span class="w">            </span><span class="nv">help</span><span class="o">=</span>help_txt<span class="w"> </span><span class="k">if</span><span class="w"> </span>help_txt<span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;&#39;</span>,
+<span class="w">            </span><span class="nv">comp</span><span class="o">=</span>comp_cmd<span class="w"> </span><span class="k">if</span><span class="w"> </span>comp_cmd<span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
 <span class="w">        </span><span class="o">)</span>,<span class="w"> </span>group<span class="o">))</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span>cmds
@@ -393,9 +526,14 @@ def<span class="w"> </span>gen_script<span class="o">(</span>cli_name,<span clas
 <span class="s1">   check_params $# {cmd.num_mandatory} &quot;Usage: $usage&quot;</span>
 <span class="s1">&#39;&#39;&#39;</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span>cmd.all_keys<span class="w"> </span>not<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;h&#39;</span>,<span class="w"> </span><span class="s1">&#39;help&#39;</span><span class="o">]</span>:
-<span class="w">            </span><span class="nv">escaped_cmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>cmd.cmd.replace<span class="o">(</span><span class="s1">&#39;&quot;&#39;</span>,<span class="w"> </span><span class="s1">&#39;\\&quot;&#39;</span><span class="o">)</span>
+<span class="w">            </span><span class="c1"># Collapse the (possibly multi-line) command to a single line for the</span>
+<span class="w">            </span><span class="c1"># debug display only - this string is echoed, not executed.</span>
+<span class="w">            </span><span class="nv">display_cmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;; &#39;</span>.join<span class="o">(</span>l.strip<span class="o">()</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>l<span class="w"> </span><span class="k">in</span><span class="w"> </span>cmd.cmd.splitlines<span class="o">()</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>l.strip<span class="o">())</span>
+<span class="w">            </span><span class="nv">escaped_cmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>display_cmd.replace<span class="o">(</span><span class="s1">&#39;&quot;&#39;</span>,<span class="w"> </span><span class="s1">&#39;\\&quot;&#39;</span><span class="o">)</span>
 <span class="w">            </span><span class="nv">script</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s1">&#39;&#39;&#39;   print_command &quot; {escaped_cmd}&quot;\n&#39;&#39;&#39;</span>
-<span class="w">        </span><span class="nv">script</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s1">&#39;   {cmd.cmd}\n   exit\nfi\n&#39;</span>
+<span class="w">        </span><span class="c1"># Emit the real command body, preserving line breaks / indentation.</span>
+<span class="w">        </span><span class="nv">cmd_body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>cmd.cmd.replace<span class="o">(</span><span class="s1">&#39;\n&#39;</span>,<span class="w"> </span><span class="s1">&#39;\n   &#39;</span><span class="o">)</span>
+<span class="w">        </span><span class="nv">script</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s1">&#39;   {cmd_body}\n   exit\nfi\n&#39;</span>
 
 <span class="w">        </span><span class="c1"># Add alias</span>
 <span class="w">        </span>aliases.append<span class="o">(</span>f<span class="s2">&quot;alias @{cmd.shortcut}=&#39;{cli_name} {cmd.shortcut}&#39;&quot;</span><span class="o">)</span>
@@ -509,29 +647,25 @@ def<span class="w"> </span>main<span class="o">()</span>:
 <span class="w">        </span>with<span class="w"> </span>open<span class="o">(</span>f<span class="s1">&#39;{def_file}.def&#39;</span><span class="o">)</span><span class="w"> </span>as<span class="w"> </span>f:
 <span class="w">            </span><span class="nv">lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>l.rstrip<span class="o">()</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>l<span class="w"> </span><span class="k">in</span><span class="w"> </span>f<span class="o">]</span>
 
-<span class="w">        </span><span class="c1"># Handle line continuations, extract title, description, and aliasLeadChars</span>
-<span class="w">        </span><span class="nv">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+<span class="w">        </span><span class="c1"># Extract title, description, and aliasLeadChars (single-line, top-level</span>
+<span class="w">        </span><span class="c1"># directives).  Command grouping / line continuation is handled by</span>
+<span class="w">        </span><span class="c1"># group_blocks() inside parse_def().</span>
 <span class="w">        </span><span class="nv">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
 <span class="w">        </span><span class="nv">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
 <span class="w">        </span><span class="nv">alias_lead_chars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>cli_name<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w">  </span><span class="c1"># Default to first char of filename</span>
-<span class="w">        </span><span class="k">while</span><span class="w"> </span>i<span class="w"> </span>&lt;<span class="w"> </span>len<span class="o">(</span>lines<span class="o">)</span>:
-<span class="w">            </span><span class="k">if</span><span class="w"> </span>lines<span class="o">[</span>i<span class="o">]</span>.startswith<span class="o">(</span><span class="s1">&#39;@ &#39;</span><span class="o">)</span><span class="w"> </span>and<span class="w"> </span>not<span class="w"> </span>lines<span class="o">[</span>i<span class="o">]</span>.startswith<span class="o">(</span><span class="s1">&#39;@@ &#39;</span><span class="o">)</span>:
-<span class="w">                </span><span class="nv">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>lines<span class="o">[</span>i<span class="o">][</span><span class="m">2</span>:<span class="o">]</span>.strip<span class="o">()</span>
-<span class="w">                </span>del<span class="w"> </span>lines<span class="o">[</span>i<span class="o">]</span>
+<span class="w">        </span><span class="nv">remaining</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span>line<span class="w"> </span><span class="k">in</span><span class="w"> </span>lines:
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>line.startswith<span class="o">(</span><span class="s1">&#39;@ &#39;</span><span class="o">)</span><span class="w"> </span>and<span class="w"> </span>not<span class="w"> </span>line.startswith<span class="o">(</span><span class="s1">&#39;@@ &#39;</span><span class="o">)</span>:
+<span class="w">                </span><span class="nv">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>line<span class="o">[</span><span class="m">2</span>:<span class="o">]</span>.strip<span class="o">()</span>
 <span class="w">                </span><span class="k">continue</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span>lines<span class="o">[</span>i<span class="o">]</span>.startswith<span class="o">(</span><span class="s1">&#39;@@ &#39;</span><span class="o">)</span>:
-<span class="w">                </span>description.append<span class="o">(</span>lines<span class="o">[</span>i<span class="o">][</span><span class="m">3</span>:<span class="o">]</span>.strip<span class="o">())</span>
-<span class="w">                </span>del<span class="w"> </span>lines<span class="o">[</span>i<span class="o">]</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>line.startswith<span class="o">(</span><span class="s1">&#39;@@ &#39;</span><span class="o">)</span>:
+<span class="w">                </span>description.append<span class="o">(</span>line<span class="o">[</span><span class="m">3</span>:<span class="o">]</span>.strip<span class="o">())</span>
 <span class="w">                </span><span class="k">continue</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span>lines<span class="o">[</span>i<span class="o">]</span>.startswith<span class="o">(</span><span class="s1">&#39;aliasLeadChars:&#39;</span><span class="o">)</span>:
-<span class="w">                </span><span class="nv">alias_lead_chars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>lines<span class="o">[</span>i<span class="o">]</span>.split<span class="o">(</span><span class="s1">&#39;:&#39;</span>,<span class="w"> </span><span class="m">1</span><span class="o">)[</span><span class="m">1</span><span class="o">]</span>.strip<span class="o">()</span>
-<span class="w">                </span>del<span class="w"> </span>lines<span class="o">[</span>i<span class="o">]</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>line.startswith<span class="o">(</span><span class="s1">&#39;aliasLeadChars:&#39;</span><span class="o">)</span>:
+<span class="w">                </span><span class="nv">alias_lead_chars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>line.split<span class="o">(</span><span class="s1">&#39;:&#39;</span>,<span class="w"> </span><span class="m">1</span><span class="o">)[</span><span class="m">1</span><span class="o">]</span>.strip<span class="o">()</span>
 <span class="w">                </span><span class="k">continue</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span>lines<span class="o">[</span>i<span class="o">]</span>.endswith<span class="o">(</span><span class="s1">&#39;\\&#39;</span><span class="o">)</span>:
-<span class="w">                </span>lines<span class="o">[</span>i<span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>lines<span class="o">[</span>i<span class="o">][</span>:-1<span class="o">]</span><span class="w"> </span>+<span class="w"> </span>lines<span class="o">[</span>i+1<span class="o">]</span>.lstrip<span class="o">()</span>
-<span class="w">                </span>del<span class="w"> </span>lines<span class="o">[</span>i+1<span class="o">]</span>
-<span class="w">            </span><span class="k">else</span>:
-<span class="w">                </span><span class="nv">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="m">1</span>
+<span class="w">            </span>remaining.append<span class="o">(</span>line<span class="o">)</span>
+<span class="w">        </span><span class="nv">lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>remaining
 
 <span class="w">        </span><span class="nv">cmds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>parse_def<span class="o">(</span>lines,<span class="w"> </span>title,<span class="w"> </span>description,<span class="w"> </span>cli_name,<span class="w"> </span>alias_lead_chars<span class="o">)</span>
 
@@ -579,7 +713,7 @@ def<span class="w"> </span>main<span class="o">()</span>:
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: July 14, 2026</p>
+      <p>Last updated: September 14, 2026</p>
     </footer>
 
     <div class="scroll-container">
