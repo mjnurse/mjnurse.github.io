@@ -198,16 +198,18 @@ def<span class="w"> </span>format_value<span class="o">(</span>value:<span class
 <span class="w">            </span><span class="k">return</span><span class="w"> </span>f<span class="s2">&quot;{value:.2f}&quot;</span>
 
 
-def<span class="w"> </span>parse_table<span class="o">(</span>lines:<span class="w"> </span>List<span class="o">[</span>str<span class="o">])</span><span class="w"> </span>-&gt;<span class="w"> </span>tuple<span class="o">[</span>List<span class="o">[</span>str<span class="o">]</span>,<span class="w"> </span>List<span class="o">[</span>Dict<span class="o">[</span>str,<span class="w"> </span>str<span class="o">]]]</span>:
-<span class="w">    </span><span class="s2">&quot;&quot;&quot;Parse table from stdin, return headers and rows.&quot;&quot;&quot;</span>
+def<span class="w"> </span>parse_table<span class="o">(</span>lines:<span class="w"> </span>List<span class="o">[</span>str<span class="o">])</span><span class="w"> </span>-&gt;<span class="w"> </span>tuple<span class="o">[</span>List<span class="o">[</span>str<span class="o">]</span>,<span class="w"> </span>List<span class="o">[</span>Dict<span class="o">[</span>str,<span class="w"> </span>str<span class="o">]]</span>,<span class="w"> </span>List<span class="o">[</span>int<span class="o">]]</span>:
+<span class="w">    </span><span class="s2">&quot;&quot;&quot;Parse table from stdin, return headers, rows, and line numbers with mismatched column counts.&quot;&quot;&quot;</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>lines:
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">[]</span>,<span class="w"> </span><span class="o">[]</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">[]</span>,<span class="w"> </span><span class="o">[]</span>,<span class="w"> </span><span class="o">[]</span>
 
 <span class="w">    </span><span class="nv">header_line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>lines<span class="o">[</span><span class="m">0</span><span class="o">]</span>
 <span class="w">    </span><span class="nv">headers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>header_line.split<span class="o">()</span>
+<span class="w">    </span><span class="nv">expected_cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>len<span class="o">(</span>headers<span class="o">)</span>
 
 <span class="w">    </span><span class="nv">rows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
-<span class="w">    </span><span class="k">for</span><span class="w"> </span>line<span class="w"> </span><span class="k">in</span><span class="w"> </span>lines<span class="o">[</span><span class="m">1</span>:<span class="o">]</span>:
+<span class="w">    </span><span class="nv">mismatched_lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>line_idx,<span class="w"> </span>line<span class="w"> </span><span class="k">in</span><span class="w"> </span>enumerate<span class="o">(</span>lines<span class="o">[</span><span class="m">1</span>:<span class="o">]</span>,<span class="w"> </span><span class="nv">start</span><span class="o">=</span><span class="m">2</span><span class="o">)</span>:<span class="w">  </span><span class="c1"># Start at 2 since line 1 is header</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>line.strip<span class="o">()</span>:
 <span class="w">            </span><span class="k">continue</span>
 <span class="w">        </span><span class="nv">parts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>line.split<span class="o">()</span>
@@ -217,7 +219,11 @@ def<span class="w"> </span>parse_table<span class="o">(</span>lines:<span class=
 <span class="w">            </span>row<span class="o">[</span>headers<span class="o">[</span>i<span class="o">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>parts<span class="o">[</span>i<span class="o">]</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>i<span class="w"> </span>&lt;<span class="w"> </span>len<span class="o">(</span>parts<span class="o">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
 <span class="w">        </span>rows.append<span class="o">(</span>row<span class="o">)</span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span>headers,<span class="w"> </span>rows
+<span class="w">        </span><span class="c1"># Track lines with column count mismatch</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>len<span class="o">(</span>parts<span class="o">)</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span>expected_cols:
+<span class="w">            </span>mismatched_lines.append<span class="o">(</span>line_idx<span class="o">)</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>headers,<span class="w"> </span>rows,<span class="w"> </span>mismatched_lines
 
 
 def<span class="w"> </span>apply_filters<span class="o">(</span>rows:<span class="w"> </span>List<span class="o">[</span>Dict<span class="o">[</span>str,<span class="w"> </span>str<span class="o">]]</span>,<span class="w"> </span>filters:<span class="w"> </span>List<span class="o">[</span>str<span class="o">])</span><span class="w"> </span>-&gt;<span class="w"> </span>List<span class="o">[</span>Dict<span class="o">[</span>str,<span class="w"> </span>str<span class="o">]]</span>:
@@ -578,11 +584,20 @@ def<span class="w"> </span>main<span class="o">()</span>:
 <span class="w">            </span>sys.exit<span class="o">(</span><span class="m">1</span><span class="o">)</span>
 
 <span class="w">    </span><span class="nv">lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>line.rstrip<span class="o">(</span><span class="s1">&#39;\n&#39;</span><span class="o">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>line<span class="w"> </span><span class="k">in</span><span class="w"> </span>sys.stdin<span class="o">]</span>
-<span class="w">    </span>headers,<span class="w"> </span><span class="nv">rows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>parse_table<span class="o">(</span>lines<span class="o">)</span>
+<span class="w">    </span>headers,<span class="w"> </span>rows,<span class="w"> </span><span class="nv">mismatched_lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>parse_table<span class="o">(</span>lines<span class="o">)</span>
 
 <span class="w">    </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>rows:
 <span class="w">        </span>print<span class="o">(</span><span class="s2">&quot;No data to process&quot;</span>,<span class="w"> </span><span class="nv">file</span><span class="o">=</span>sys.stderr<span class="o">)</span>
 <span class="w">        </span>sys.exit<span class="o">(</span><span class="m">1</span><span class="o">)</span>
+
+<span class="w">    </span><span class="c1"># Warn if any lines have mismatched column counts</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>mismatched_lines:
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>len<span class="o">(</span>mismatched_lines<span class="o">)</span><span class="w"> </span>&lt;<span class="o">=</span><span class="w"> </span><span class="m">5</span>:
+<span class="w">            </span><span class="nv">lines_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;, &#39;</span>.join<span class="o">(</span>str<span class="o">(</span>ln<span class="o">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>ln<span class="w"> </span><span class="k">in</span><span class="w"> </span>mismatched_lines<span class="o">)</span>
+<span class="w">            </span>print<span class="o">(</span>f<span class="s2">&quot;Warning: Line(s) {lines_str} do not have {len(headers)} columns (expected based on header).&quot;</span>,<span class="w"> </span><span class="nv">file</span><span class="o">=</span>sys.stderr<span class="o">)</span>
+<span class="w">        </span><span class="k">else</span>:
+<span class="w">            </span><span class="nv">lines_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;, &#39;</span>.join<span class="o">(</span>str<span class="o">(</span>ln<span class="o">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>ln<span class="w"> </span><span class="k">in</span><span class="w"> </span>mismatched_lines<span class="o">[</span>:5<span class="o">])</span>
+<span class="w">            </span>print<span class="o">(</span>f<span class="s2">&quot;Warning: {len(mismatched_lines)} lines do not have {len(headers)} columns (first few: {lines_str}).&quot;</span>,<span class="w"> </span><span class="nv">file</span><span class="o">=</span>sys.stderr<span class="o">)</span>
 
 <span class="w">    </span><span class="c1"># Collect filters from unknown arguments (anything with comparison operators)</span>
 <span class="w">    </span><span class="nv">filters</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>arg<span class="w"> </span><span class="k">for</span><span class="w"> </span>arg<span class="w"> </span><span class="k">in</span><span class="w"> </span>unknown<span class="w"> </span><span class="k">if</span><span class="w"> </span>any<span class="o">(</span>op<span class="w"> </span><span class="k">in</span><span class="w"> </span>arg<span class="w"> </span><span class="k">for</span><span class="w"> </span>op<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;!=&#39;</span>,<span class="w"> </span><span class="s1">&#39;&lt;&gt;&#39;</span>,<span class="w"> </span><span class="s1">&#39;&gt;=&#39;</span>,<span class="w"> </span><span class="s1">&#39;&lt;=&#39;</span>,<span class="w"> </span><span class="s1">&#39;=&#39;</span>,<span class="w"> </span><span class="s1">&#39;&gt;&#39;</span>,<span class="w"> </span><span class="s1">&#39;&lt;&#39;</span><span class="o">])]</span>
@@ -598,6 +613,8 @@ def<span class="w"> </span>main<span class="o">()</span>:
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span>col<span class="w"> </span>and<span class="w"> </span>col<span class="w"> </span>not<span class="w"> </span><span class="k">in</span><span class="w"> </span>headers:
 <span class="w">            </span>print<span class="o">(</span>f<span class="s2">&quot;Error: Filter column &#39;{col}&#39; does not exist. Available columns: {&#39;, &#39;.join(headers)}&quot;</span>,<span class="w"> </span><span class="nv">file</span><span class="o">=</span>sys.stderr<span class="o">)</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>len<span class="o">(</span>headers<span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span>:
+<span class="w">                </span>print<span class="o">(</span>f<span class="s2">&quot;Warning: Only one column detected: &#39;{headers[0]}&#39;. Expected space-separated columns.&quot;</span>,<span class="w"> </span><span class="nv">file</span><span class="o">=</span>sys.stderr<span class="o">)</span>
 <span class="w">            </span>sys.exit<span class="o">(</span><span class="m">1</span><span class="o">)</span>
 
 <span class="w">    </span><span class="c1"># Apply filters</span>
@@ -610,6 +627,8 @@ def<span class="w"> </span>main<span class="o">()</span>:
 <span class="w">    </span><span class="k">for</span><span class="w"> </span>col<span class="w"> </span><span class="k">in</span><span class="w"> </span>group_cols:
 <span class="w">        </span><span class="k">if</span><span class="w"> </span>col<span class="w"> </span>and<span class="w"> </span>col<span class="w"> </span>not<span class="w"> </span><span class="k">in</span><span class="w"> </span>headers:
 <span class="w">            </span>print<span class="o">(</span>f<span class="s2">&quot;Error: Group column &#39;{col}&#39; does not exist. Available columns: {&#39;, &#39;.join(headers)}&quot;</span>,<span class="w"> </span><span class="nv">file</span><span class="o">=</span>sys.stderr<span class="o">)</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>len<span class="o">(</span>headers<span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span>:
+<span class="w">                </span>print<span class="o">(</span>f<span class="s2">&quot;Warning: Only one column detected: &#39;{headers[0]}&#39;. Expected space-separated columns.&quot;</span>,<span class="w"> </span><span class="nv">file</span><span class="o">=</span>sys.stderr<span class="o">)</span>
 <span class="w">            </span>sys.exit<span class="o">(</span><span class="m">1</span><span class="o">)</span>
 
 <span class="w">    </span><span class="nv">agg_specs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{}</span>
@@ -629,6 +648,8 @@ def<span class="w"> </span>main<span class="o">()</span>:
 <span class="w">        </span><span class="k">for</span><span class="w"> </span>col<span class="w"> </span><span class="k">in</span><span class="w"> </span>cols:
 <span class="w">            </span><span class="k">if</span><span class="w"> </span>col<span class="w"> </span>and<span class="w"> </span>col<span class="w"> </span>not<span class="w"> </span><span class="k">in</span><span class="w"> </span>headers:
 <span class="w">                </span>print<span class="o">(</span>f<span class="s2">&quot;Error: Aggregation column &#39;{col}&#39; (--{agg_type}) does not exist. Available columns: {&#39;, &#39;.join(headers)}&quot;</span>,<span class="w"> </span><span class="nv">file</span><span class="o">=</span>sys.stderr<span class="o">)</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span>len<span class="o">(</span>headers<span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span>:
+<span class="w">                    </span>print<span class="o">(</span>f<span class="s2">&quot;Warning: Only one column detected: &#39;{headers[0]}&#39;. Expected space-separated columns.&quot;</span>,<span class="w"> </span><span class="nv">file</span><span class="o">=</span>sys.stderr<span class="o">)</span>
 <span class="w">                </span>sys.exit<span class="o">(</span><span class="m">1</span><span class="o">)</span>
 
 <span class="w">    </span><span class="c1"># Group and aggregate</span>
@@ -659,6 +680,8 @@ def<span class="w"> </span>main<span class="o">()</span>:
 <span class="w">            </span><span class="c1"># Validate order column</span>
 <span class="w">            </span><span class="k">if</span><span class="w"> </span>actual_col<span class="w"> </span>not<span class="w"> </span><span class="k">in</span><span class="w"> </span>all_possible_cols:
 <span class="w">                </span>print<span class="o">(</span>f<span class="s2">&quot;Error: Order column &#39;{actual_col}&#39; does not exist. Available columns: {&#39;, &#39;.join(sorted(all_possible_cols))}&quot;</span>,<span class="w"> </span><span class="nv">file</span><span class="o">=</span>sys.stderr<span class="o">)</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span>len<span class="o">(</span>headers<span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span>:
+<span class="w">                    </span>print<span class="o">(</span>f<span class="s2">&quot;Warning: Only one column detected: &#39;{headers[0]}&#39;. Expected space-separated columns.&quot;</span>,<span class="w"> </span><span class="nv">file</span><span class="o">=</span>sys.stderr<span class="o">)</span>
 <span class="w">                </span>sys.exit<span class="o">(</span><span class="m">1</span><span class="o">)</span>
 
 <span class="w">            </span>order_keys.append<span class="o">((</span>actual_col,<span class="w"> </span>reverse<span class="o">))</span>
@@ -699,6 +722,8 @@ def<span class="w"> </span>main<span class="o">()</span>:
 <span class="w">    </span><span class="k">for</span><span class="w"> </span>col<span class="w"> </span><span class="k">in</span><span class="w"> </span>show_cols:
 <span class="w">        </span><span class="k">if</span><span class="w"> </span>col<span class="w"> </span>and<span class="w"> </span>col<span class="w"> </span>not<span class="w"> </span><span class="k">in</span><span class="w"> </span>all_possible_cols:
 <span class="w">            </span>print<span class="o">(</span>f<span class="s2">&quot;Error: Show column &#39;{col}&#39; does not exist. Available columns: {&#39;, &#39;.join(sorted(all_possible_cols))}&quot;</span>,<span class="w"> </span><span class="nv">file</span><span class="o">=</span>sys.stderr<span class="o">)</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>len<span class="o">(</span>headers<span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span>:
+<span class="w">                </span>print<span class="o">(</span>f<span class="s2">&quot;Warning: Only one column detected: &#39;{headers[0]}&#39;. Expected space-separated columns.&quot;</span>,<span class="w"> </span><span class="nv">file</span><span class="o">=</span>sys.stderr<span class="o">)</span>
 <span class="w">            </span>sys.exit<span class="o">(</span><span class="m">1</span><span class="o">)</span>
 
 <span class="w">    </span><span class="c1"># Filter to only show requested columns</span>
@@ -780,6 +805,10 @@ def<span class="w"> </span>main<span class="o">()</span>:
 <span class="w">    </span><span class="k">else</span>:
 <span class="w">        </span>print_table<span class="o">(</span>output_headers,<span class="w"> </span>result,<span class="w"> </span>args.totals<span class="o">)</span>
 
+<span class="w">    </span><span class="c1"># Warn if only one column was detected</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>len<span class="o">(</span>headers<span class="o">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">1</span>:
+<span class="w">        </span>print<span class="o">(</span>f<span class="s2">&quot;\nWarning: Only one column detected: &#39;{headers[0]}&#39;. Expected space-separated columns.&quot;</span>,<span class="w"> </span><span class="nv">file</span><span class="o">=</span>sys.stderr<span class="o">)</span>
+
 
 <span class="k">if</span><span class="w"> </span><span class="nv">__name__</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;__main__&#39;</span>:
 <span class="w">    </span>main<span class="o">()</span>
@@ -801,7 +830,7 @@ def<span class="w"> </span>main<span class="o">()</span>:
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: September 03, 2026</p>
+      <p>Last updated: September 29, 2026</p>
     </footer>
 
     <div class="scroll-container">
