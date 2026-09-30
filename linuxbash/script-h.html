@@ -161,8 +161,13 @@
 <span class="w">        </span><span class="nb">exit</span>
 <span class="k">esac</span>
 
-<span class="nv">location</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>which<span class="w"> </span>h<span class="k">)</span><span class="s2">&quot;</span>
-<span class="nb">cd</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">location</span><span class="p">:</span><span class="nv">0</span><span class="k">:-</span><span class="nv">2</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nv">running_elsewhere_yn</span><span class="o">=</span>y
+<span class="nv">current_location</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="nv">location</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>realpath<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>which<span class="w"> </span>h<span class="k">)</span><span class="s2">&quot;</span><span class="k">)</span><span class="s2">&quot;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$current_location</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">location</span><span class="p">:</span><span class="nv">0</span><span class="k">:-</span><span class="nv">2</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nv">running_elsewhere_yn</span><span class="o">=</span>n
+<span class="k">fi</span>
 
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">    </span><span class="nv">filter</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
@@ -171,12 +176,24 @@
 <span class="w">    </span><span class="nv">filter</span><span class="o">=</span><span class="s2">&quot;.*&quot;</span>
 <span class="k">fi</span>
 
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$running_elsewhere_yn</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>y<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span>find<span class="w"> </span>.<span class="w"> </span>-maxdepth<span class="w"> </span><span class="m">1</span><span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-executable<span class="w"> </span>-printf<span class="w"> </span><span class="s2">&quot;%f\n&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>grep<span class="w"> </span>--exclude<span class="o">=</span><span class="s2">&quot;*.pack&quot;</span><span class="w"> </span>--exclude<span class="o">=</span><span class="s2">&quot;*.tmp&quot;</span><span class="w"> </span>--exclude<span class="o">=</span><span class="s2">&quot;*.bkp&quot;</span><span class="w"> </span>--exclude<span class="o">=</span><span class="s2">&quot;*.json&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>--exclude<span class="o">=</span><span class="s2">&quot;*.bac&quot;</span><span class="w"> </span>--exclude<span class="o">=</span><span class="s2">&quot;mjn*rc&quot;</span><span class="w"> </span>--exclude-dir<span class="o">=</span><span class="s2">&quot;*&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>-s<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;^help_line=&quot;</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;^HELP_LINE=&quot;</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;^-- help_line:&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;/README.*.md/d; /^h:/d; /tmp0/d&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-f<span class="w"> </span>&gt;<span class="w"> </span>/tmp/h.l.tmp
+<span class="k">fi</span>
+
+<span class="nb">cd</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">location</span><span class="p">:</span><span class="nv">0</span><span class="k">:-</span><span class="nv">2</span><span class="si">}</span><span class="s2">&quot;</span>
+
 find<span class="w"> </span>.<span class="w"> </span>-maxdepth<span class="w"> </span><span class="m">1</span><span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-executable<span class="w"> </span>-printf<span class="w"> </span><span class="s2">&quot;%f\n&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>grep<span class="w"> </span>--exclude<span class="o">=</span><span class="s2">&quot;*.pack&quot;</span><span class="w"> </span>--exclude<span class="o">=</span><span class="s2">&quot;*.tmp&quot;</span><span class="w"> </span>--exclude<span class="o">=</span><span class="s2">&quot;*.bkp&quot;</span><span class="w"> </span>--exclude<span class="o">=</span><span class="s2">&quot;*.json&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">        </span>--exclude<span class="o">=</span><span class="s2">&quot;*.bac&quot;</span><span class="w"> </span>--exclude<span class="o">=</span><span class="s2">&quot;mjn*rc&quot;</span><span class="w"> </span>--exclude-dir<span class="o">=</span><span class="s2">&quot;*&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">        </span>-s<span class="w"> </span>-L<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;^help_line=&quot;</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;^HELP_LINE=&quot;</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;^-- help_line:&quot;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;/README.*.md/d; /^h:/d; /tmp0/d&#39;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-f<span class="w"> </span>&gt;<span class="w"> </span>/tmp/h.tmp
+
 
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$noissues_yn</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>n<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="k">$(</span>cat<span class="w"> </span>/tmp/h.tmp<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l<span class="k">)</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
@@ -264,39 +281,53 @@ cp<span class="w"> </span>/tmp/h.tmp2<span class="w"> </span>/tmp/h.tmp
 <span class="w">        </span>sed<span class="w"> </span><span class="s1">&#39;s/alias *\([^=]*\)=\(.*\)# help_line:*=* *\(.*\) *$/\1:help_line=&quot;\3 #CGRA(alias-only)#CDEF&quot;/&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/tmp/h.tmp
 <span class="k">fi</span>
 
-cat<span class="w"> </span>/tmp/h.tmp<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
-sed<span class="w"> </span><span class="s1">&#39;</span>
-<span class="s1">    s/\\/\\\\/g;</span>
-<span class="s1">    /help_line=.*tbc.*/d</span>
-<span class="s1">    /^h:/d; s/help_line=//I; s/-- help_line://I; s/&quot;/ /g;</span>
-<span class="s1">    /tidy:.*echo/d;</span>
-<span class="s1">    /^README.*md/d;</span>
-<span class="s1">    s/:[0-9][0-9]*:/:/;</span>
-<span class="s1">    s/ )#CDEF/)#CDEF/;</span>
-<span class="s1">    s/#CGRE/&#39;</span><span class="si">${</span><span class="nv">cgre</span><span class="si">}</span><span class="s1">&#39;/g;</span>
-<span class="s1">    s/#CLGRE/&#39;</span><span class="si">${</span><span class="nv">clgre</span><span class="si">}</span><span class="s1">&#39;/g;</span>
-<span class="s1">    s/#CGRA/&#39;</span><span class="si">${</span><span class="nv">cgra</span><span class="si">}</span><span class="s1">&#39;/g;</span>
-<span class="s1">    s/#CDEF/&#39;</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s1">&#39;/g;</span>
-<span class="s1">    &#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
-sort<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="nv">IFS</span><span class="o">=</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>line<span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>
-<span class="w">    </span><span class="nv">curr_char</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">line</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="nv">line</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">line</span><span class="p">/ALIASONLY/</span><span class="si">${</span><span class="nv">cgra</span><span class="si">}</span><span class="nv">alias</span><span class="p">-only:</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$curr_char</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$prev_char</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">         </span><span class="nv">prev_char</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$curr_char</span><span class="s2">&quot;</span>
-<span class="w">         </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">clmag</span><span class="si">}${</span><span class="nv">curr_char</span><span class="si">}${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2"> - </span><span class="si">${</span><span class="nv">clcya</span><span class="si">}</span><span class="nv">$line</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="k">else</span>
-<span class="w">         </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">    </span><span class="si">${</span><span class="nv">clcya</span><span class="si">}</span><span class="nv">$line</span><span class="s2">&quot;</span><span class="w"> </span>
-<span class="w">    </span><span class="k">fi</span>
-<span class="k">done</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w">  </span><span class="s2">&quot;</span>
-<span class="s2">     s/: /:</span><span class="nv">$cdef</span><span class="s2">                                                     /;</span>
-<span class="s2">     s/\(...............................................\) *\(.*\)/\1\2/;</span>
-<span class="s2">     s/^\([^:]*\)</span><span class="si">${</span><span class="nv">filter</span><span class="p">//</span><span class="se">\.\*</span><span class="p">/</span><span class="si">}</span><span class="s2">/\1</span><span class="si">${</span><span class="nv">cyel</span><span class="si">}${</span><span class="nv">filter</span><span class="p">//</span><span class="se">\.\*</span><span class="p">/</span><span class="si">}${</span><span class="nv">clcya</span><span class="si">}</span><span class="s2">/g;</span>
-<span class="s2">     s/^\(.*:.*\)</span><span class="si">${</span><span class="nv">filter</span><span class="p">//</span><span class="se">\.\*</span><span class="p">/</span><span class="si">}</span><span class="s2">/\1</span><span class="si">${</span><span class="nv">cyel</span><span class="si">}${</span><span class="nv">filter</span><span class="p">//</span><span class="se">\.\*</span><span class="p">/</span><span class="si">}${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">/g;</span>
-<span class="s2">     /tidy:.*echo/d</span>
-<span class="s2">     &quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/tmp/h.out<span class="w"> </span>
+<span class="k">function</span><span class="w"> </span>list<span class="o">()</span><span class="w"> </span><span class="o">{</span>
 
-cat<span class="w"> </span>/tmp/h.out
-rm<span class="w"> </span>-f<span class="w"> </span>/tmp/h.out<span class="w"> </span>/tmp/h.tmp
+<span class="w">    </span>cat<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>sed<span class="w"> </span><span class="s1">&#39;</span>
+<span class="s1">        s/\\/\\\\/g;</span>
+<span class="s1">        /help_line=.*tbc.*/d</span>
+<span class="s1">        /^h:/d; s/help_line=//I; s/-- help_line://I; s/&quot;/ /g;</span>
+<span class="s1">        /tidy:.*echo/d;</span>
+<span class="s1">        /^README.*md/d;</span>
+<span class="s1">        s/:[0-9][0-9]*:/:/;</span>
+<span class="s1">        s/ )#CDEF/)#CDEF/;</span>
+<span class="s1">        s/#CGRE/&#39;</span><span class="si">${</span><span class="nv">cgre</span><span class="si">}</span><span class="s1">&#39;/g;</span>
+<span class="s1">        s/#CLGRE/&#39;</span><span class="si">${</span><span class="nv">clgre</span><span class="si">}</span><span class="s1">&#39;/g;</span>
+<span class="s1">        s/#CGRA/&#39;</span><span class="si">${</span><span class="nv">cgra</span><span class="si">}</span><span class="s1">&#39;/g;</span>
+<span class="s1">        s/#CDEF/&#39;</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s1">&#39;/g;</span>
+<span class="s1">        &#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="nv">IFS</span><span class="o">=</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>line<span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>
+<span class="w">        </span><span class="nv">curr_char</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">line</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="nv">line</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">line</span><span class="p">/ALIASONLY/</span><span class="si">${</span><span class="nv">cgra</span><span class="si">}</span><span class="nv">alias</span><span class="p">-only:</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$curr_char</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$prev_char</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="nv">prev_char</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$curr_char</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">clmag</span><span class="si">}${</span><span class="nv">curr_char</span><span class="si">}${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2"> - </span><span class="si">${</span><span class="nv">clcya</span><span class="si">}</span><span class="nv">$line</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="k">else</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">    </span><span class="si">${</span><span class="nv">clcya</span><span class="si">}</span><span class="nv">$line</span><span class="s2">&quot;</span><span class="w"> </span>
+<span class="w">        </span><span class="k">fi</span>
+<span class="w">    </span><span class="k">done</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w">  </span><span class="s2">&quot;</span>
+<span class="s2">        s/: /:</span><span class="nv">$cdef</span><span class="s2">                                                     /;</span>
+<span class="s2">        s/\(...............................................\) *\(.*\)/\1\2/;</span>
+<span class="s2">        s/^\([^:]*\)</span><span class="si">${</span><span class="nv">filter</span><span class="p">//</span><span class="se">\.\*</span><span class="p">/</span><span class="si">}</span><span class="s2">/\1</span><span class="si">${</span><span class="nv">cyel</span><span class="si">}${</span><span class="nv">filter</span><span class="p">//</span><span class="se">\.\*</span><span class="p">/</span><span class="si">}${</span><span class="nv">clcya</span><span class="si">}</span><span class="s2">/g;</span>
+<span class="s2">        s/^\(.*:.*\)</span><span class="si">${</span><span class="nv">filter</span><span class="p">//</span><span class="se">\.\*</span><span class="p">/</span><span class="si">}</span><span class="s2">/\1</span><span class="si">${</span><span class="nv">cyel</span><span class="si">}${</span><span class="nv">filter</span><span class="p">//</span><span class="se">\.\*</span><span class="p">/</span><span class="si">}${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">/g;</span>
+<span class="s2">        /tidy:.*echo/d</span>
+<span class="s2">        &quot;</span>
+<span class="o">}</span>
+
+list<span class="w"> </span>/tmp/h.tmp
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$running_elsewhere_yn</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;y&quot;</span><span class="w">  </span><span class="o">&amp;&amp;</span><span class="w"> </span>-e<span class="w"> </span>/tmp/h.l.tmp<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>cat<span class="w"> </span>/tmp/h.l.tmp<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l<span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nb">echo</span>
+<span class="w">        </span>cecho<span class="w"> </span>lmag<span class="w"> </span>-------------
+<span class="w">        </span>cecho<span class="w"> </span>lmag<span class="w"> </span>Local<span class="w"> </span>Scripts
+<span class="w">        </span>cecho<span class="w"> </span>lmag<span class="w"> </span>-------------
+<span class="w">        </span>list<span class="w"> </span>/tmp/h.l.tmp
+<span class="w">    </span><span class="k">fi</span>
+<span class="k">fi</span>
+
+rm<span class="w"> </span>-f<span class="w"> </span>/tmp/h.tmp<span class="w"> </span>/tmp/h.l.tmp
 </code></pre></div>
         </div>
       </article>
@@ -315,7 +346,7 @@ rm<span class="w"> </span>-f<span class="w"> </span>/tmp/h.out<span class="w"> <
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: September 11, 2026</p>
+      <p>Last updated: September 29, 2026</p>
     </footer>
 
     <div class="scroll-container">

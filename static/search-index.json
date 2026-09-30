@@ -1135,9 +1135,9 @@
   },
   {
     "id": "162",
-    "title": "table-filter - Python tool for filtering, grouping, and aggregating tabular data from stdinh",
+    "title": "table-filter - Python tool for filtering, grouping, and aggregating tabular data from stdin",
     "url": "/linuxbash/script-table-filter.html",
-    "content": "#!/usr/bin/env python3 DESCRIPTION=&quot;&quot;&quot; Python tool processing whitespace-separated tabular data from stdin, allowing: - Filter rows based on column values with various operators. - Group rows by one or more columns. - Aggregate data using functions like sum, average, min, max, and count. &quot;&quot;&quot; AUTHOR=&quot;mjnurse.github.io - 2026&quot; HELP_LINE=&quot;Python tool for filtering, grouping, and aggregating tabular data from stdin&quot; WEB_DESC_LINE=&quot;Python tool fo",
+    "content": "#!/usr/bin/env python3 DESCRIPTION=&quot;&quot;&quot; Python tool processing tabular data from stdin (whitespace or custom separator), allowing: - Filter rows based on column values with various operators. - Group rows by one or more columns. - Aggregate data using functions like sum, average, min, max, and count. - Custom column separators (e.g., comma, tab, pipe). - Quoted fields (separators inside quotes are preserved). &quot;&quot;&quot; AUTHOR=&quot;mjnurse.github.io - 2026&quot; HELP_LINE=",
     "type": "page"
   },
   {

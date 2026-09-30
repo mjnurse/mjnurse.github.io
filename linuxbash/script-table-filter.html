@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="table-filter - Python tool for filtering, grouping, and aggregating tabular data from stdinh" />
+    <meta name="description" content="table-filter - Python tool for filtering, grouping, and aggregating tabular data from stdin" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>table-filter - Python tool for filtering, grouping, and aggregating tabular data from stdinh</title>
+    <title>table-filter - Python tool for filtering, grouping, and aggregating tabular data from stdin</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
@@ -90,18 +90,21 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-table-filter.md">table-filter - Python tool for filtering, grouping, and aggregating tabular data from stdinh</a></h1>
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-table-filter.md">table-filter - Python tool for filtering, grouping, and aggregating tabular data from stdin</a></h1>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python3</span>
 <span class="nv">DESCRIPTION</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">Python tool processing whitespace-separated tabular data from stdin, allowing:</span>
+<span class="s2">Python tool processing tabular data from stdin (whitespace or custom separator), allowing:</span>
 <span class="s2">- Filter rows based on column values with various operators.</span>
 <span class="s2">- Group rows by one or more columns.</span>
 <span class="s2">- Aggregate data using functions like sum, average, min, max, and count.</span>
+<span class="s2">- Custom column separators (e.g., comma, tab, pipe).</span>
+<span class="s2">- Quoted fields (separators inside quotes are preserved).</span>
 <span class="s2">&quot;&quot;&quot;</span>
 <span class="nv">AUTHOR</span><span class="o">=</span><span class="s2">&quot;mjnurse.github.io - 2026&quot;</span>
 
 <span class="nv">HELP_LINE</span><span class="o">=</span><span class="s2">&quot;Python tool for filtering, grouping, and aggregating tabular data from stdin&quot;</span>
-<span class="nv">WEB_DESC_LINE</span><span class="o">=</span><span class="s2">&quot;Python tool for filtering, grouping, and aggregating tabular data from stdinh&quot;</span>
+<span class="nv">WEB_DESC_LINE</span><span class="o">=</span><span class="s2">&quot;Python tool for filtering, grouping, and aggregating tabular data from stdin&quot;</span>
+
 import<span class="w"> </span>sys
 import<span class="w"> </span>argparse
 import<span class="w"> </span>re
@@ -198,13 +201,71 @@ def<span class="w"> </span>format_value<span class="o">(</span>value:<span class
 <span class="w">            </span><span class="k">return</span><span class="w"> </span>f<span class="s2">&quot;{value:.2f}&quot;</span>
 
 
-def<span class="w"> </span>parse_table<span class="o">(</span>lines:<span class="w"> </span>List<span class="o">[</span>str<span class="o">])</span><span class="w"> </span>-&gt;<span class="w"> </span>tuple<span class="o">[</span>List<span class="o">[</span>str<span class="o">]</span>,<span class="w"> </span>List<span class="o">[</span>Dict<span class="o">[</span>str,<span class="w"> </span>str<span class="o">]]</span>,<span class="w"> </span>List<span class="o">[</span>int<span class="o">]]</span>:
-<span class="w">    </span><span class="s2">&quot;&quot;&quot;Parse table from stdin, return headers, rows, and line numbers with mismatched column counts.&quot;&quot;&quot;</span>
+def<span class="w"> </span>split_with_quotes<span class="o">(</span>line:<span class="w"> </span>str,<span class="w"> </span>separator:<span class="w"> </span><span class="nv">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>None<span class="o">)</span><span class="w"> </span>-&gt;<span class="w"> </span>List<span class="o">[</span>str<span class="o">]</span>:
+<span class="w">    </span><span class="s2">&quot;&quot;&quot;Split a line by separator, respecting quoted fields.</span>
+
+<span class="s2">    Args:</span>
+<span class="s2">        line: Line to split</span>
+<span class="s2">        separator: Separator to use (None for whitespace)</span>
+
+<span class="s2">    Returns:</span>
+<span class="s2">        List of fields with quotes removed and values stripped</span>
+<span class="s2">    &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>separator<span class="w"> </span>is<span class="w"> </span>None:
+<span class="w">        </span><span class="c1"># For whitespace separation, use shlex-like parsing</span>
+<span class="w">        </span>import<span class="w"> </span>shlex
+<span class="w">        </span>try:
+<span class="w">            </span><span class="k">return</span><span class="w"> </span>shlex.split<span class="o">(</span>line<span class="o">)</span>
+<span class="w">        </span>except<span class="w"> </span>ValueError:
+<span class="w">            </span><span class="c1"># If shlex fails (unmatched quotes), fall back to simple split</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span>line.split<span class="o">()</span>
+
+<span class="w">    </span><span class="c1"># For specific separator, manually parse respecting quotes</span>
+<span class="w">    </span><span class="nv">parts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
+<span class="w">    </span><span class="nv">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
+<span class="w">    </span><span class="nv">in_quotes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>False
+<span class="w">    </span><span class="nv">quote_char</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>None
+<span class="w">    </span><span class="nv">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>
+
+<span class="w">    </span><span class="k">while</span><span class="w"> </span>i<span class="w"> </span>&lt;<span class="w"> </span>len<span class="o">(</span>line<span class="o">)</span>:
+<span class="w">        </span><span class="nv">char</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>line<span class="o">[</span>i<span class="o">]</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>in_quotes:
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>char<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">(</span><span class="s1">&#39;&quot;&#39;</span>,<span class="w"> </span><span class="s2">&quot;&#39;&quot;</span><span class="o">)</span>:
+<span class="w">                </span><span class="nv">in_quotes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>True
+<span class="w">                </span><span class="nv">quote_char</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>char
+<span class="w">            </span><span class="k">elif</span><span class="w"> </span><span class="nv">char</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>separator:
+<span class="w">                </span>parts.append<span class="o">(</span><span class="s1">&#39;&#39;</span>.join<span class="o">(</span>current<span class="o">)</span>.strip<span class="o">())</span>
+<span class="w">                </span><span class="nv">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
+<span class="w">            </span><span class="k">else</span>:
+<span class="w">                </span>current.append<span class="o">(</span>char<span class="o">)</span>
+<span class="w">        </span><span class="k">else</span>:
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="nv">char</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>quote_char:
+<span class="w">                </span><span class="nv">in_quotes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>False
+<span class="w">                </span><span class="nv">quote_char</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>None
+<span class="w">            </span><span class="k">else</span>:
+<span class="w">                </span>current.append<span class="o">(</span>char<span class="o">)</span>
+
+<span class="w">        </span><span class="nv">i</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="m">1</span>
+
+<span class="w">    </span><span class="c1"># Add the last field</span>
+<span class="w">    </span>parts.append<span class="o">(</span><span class="s1">&#39;&#39;</span>.join<span class="o">(</span>current<span class="o">)</span>.strip<span class="o">())</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>parts
+
+
+def<span class="w"> </span>parse_table<span class="o">(</span>lines:<span class="w"> </span>List<span class="o">[</span>str<span class="o">]</span>,<span class="w"> </span>separator:<span class="w"> </span><span class="nv">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>None<span class="o">)</span><span class="w"> </span>-&gt;<span class="w"> </span>tuple<span class="o">[</span>List<span class="o">[</span>str<span class="o">]</span>,<span class="w"> </span>List<span class="o">[</span>Dict<span class="o">[</span>str,<span class="w"> </span>str<span class="o">]]</span>,<span class="w"> </span>List<span class="o">[</span>int<span class="o">]]</span>:
+<span class="w">    </span><span class="s2">&quot;&quot;&quot;Parse table from stdin, return headers, rows, and line numbers with mismatched column counts.</span>
+
+<span class="s2">    Args:</span>
+<span class="s2">        lines: Input lines to parse</span>
+<span class="s2">        separator: Column separator (None for whitespace, or a specific character like &#39;,&#39;)</span>
+<span class="s2">    &quot;&quot;&quot;</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>lines:
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">[]</span>,<span class="w"> </span><span class="o">[]</span>,<span class="w"> </span><span class="o">[]</span>
 
 <span class="w">    </span><span class="nv">header_line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>lines<span class="o">[</span><span class="m">0</span><span class="o">]</span>
-<span class="w">    </span><span class="nv">headers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>header_line.split<span class="o">()</span>
+<span class="w">    </span><span class="nv">headers</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>split_with_quotes<span class="o">(</span>header_line,<span class="w"> </span>separator<span class="o">)</span>
 <span class="w">    </span><span class="nv">expected_cols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>len<span class="o">(</span>headers<span class="o">)</span>
 
 <span class="w">    </span><span class="nv">rows</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
@@ -212,7 +273,7 @@ def<span class="w"> </span>parse_table<span class="o">(</span>lines:<span class=
 <span class="w">    </span><span class="k">for</span><span class="w"> </span>line_idx,<span class="w"> </span>line<span class="w"> </span><span class="k">in</span><span class="w"> </span>enumerate<span class="o">(</span>lines<span class="o">[</span><span class="m">1</span>:<span class="o">]</span>,<span class="w"> </span><span class="nv">start</span><span class="o">=</span><span class="m">2</span><span class="o">)</span>:<span class="w">  </span><span class="c1"># Start at 2 since line 1 is header</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>line.strip<span class="o">()</span>:
 <span class="w">            </span><span class="k">continue</span>
-<span class="w">        </span><span class="nv">parts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>line.split<span class="o">()</span>
+<span class="w">        </span><span class="nv">parts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>split_with_quotes<span class="o">(</span>line,<span class="w"> </span>separator<span class="o">)</span>
 <span class="w">        </span><span class="c1"># Include all rows, even with missing values</span>
 <span class="w">        </span><span class="nv">row</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{}</span>
 <span class="w">        </span><span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span>range<span class="o">(</span>len<span class="o">(</span>headers<span class="o">))</span>:
@@ -558,8 +619,10 @@ def<span class="w"> </span>main<span class="o">()</span>:
 <span class="w">        </span><span class="nv">epilog</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;Examples:</span>
 <span class="s1">  command | %(prog)s col1=bbbb col3=y --group col1 --sum col4 --show col1,sum_col4</span>
 <span class="s1">  command | %(prog)s col1!=foo &quot;size&gt;1GB&quot; count&gt;=10 --order -size</span>
+<span class="s1">  command | %(prog)s --sep &#39;</span>,<span class="s1">&#39; col1=value --group col2</span>
 <span class="s1">Filters support: =, !=, &lt;&gt;, &gt;, &gt;=, &lt;, &lt;= (wildcards * allowed with = and !=)&#39;&#39;&#39;</span>
 <span class="w">    </span><span class="o">)</span>
+<span class="w">    </span>parser.add_argument<span class="o">(</span><span class="s1">&#39;--sep&#39;</span>,<span class="w"> </span><span class="s1">&#39;--separator&#39;</span>,<span class="w"> </span><span class="nv">dest</span><span class="o">=</span><span class="s1">&#39;separator&#39;</span>,<span class="w"> </span><span class="nv">metavar</span><span class="o">=</span><span class="s1">&#39;SEP&#39;</span>,<span class="w"> </span><span class="nv">help</span><span class="o">=</span><span class="s1">&#39;Column separator (default: whitespace). Use --sep &quot;\\t&quot; for tab-separated, &quot;,&quot; for comma-separated&#39;</span><span class="o">)</span>
 <span class="w">    </span>parser.add_argument<span class="o">(</span><span class="s1">&#39;--group&#39;</span>,<span class="w"> </span><span class="nv">help</span><span class="o">=</span><span class="s1">&#39;Comma-separated columns to group by&#39;</span><span class="o">)</span>
 <span class="w">    </span>parser.add_argument<span class="o">(</span><span class="s1">&#39;--sum&#39;</span>,<span class="w"> </span><span class="nv">help</span><span class="o">=</span><span class="s1">&#39;Comma-separated columns to sum&#39;</span><span class="o">)</span>
 <span class="w">    </span>parser.add_argument<span class="o">(</span><span class="s1">&#39;--count&#39;</span>,<span class="w"> </span><span class="nv">help</span><span class="o">=</span><span class="s1">&#39;Comma-separated columns to count&#39;</span><span class="o">)</span>
@@ -584,7 +647,7 @@ def<span class="w"> </span>main<span class="o">()</span>:
 <span class="w">            </span>sys.exit<span class="o">(</span><span class="m">1</span><span class="o">)</span>
 
 <span class="w">    </span><span class="nv">lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>line.rstrip<span class="o">(</span><span class="s1">&#39;\n&#39;</span><span class="o">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>line<span class="w"> </span><span class="k">in</span><span class="w"> </span>sys.stdin<span class="o">]</span>
-<span class="w">    </span>headers,<span class="w"> </span>rows,<span class="w"> </span><span class="nv">mismatched_lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>parse_table<span class="o">(</span>lines<span class="o">)</span>
+<span class="w">    </span>headers,<span class="w"> </span>rows,<span class="w"> </span><span class="nv">mismatched_lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>parse_table<span class="o">(</span>lines,<span class="w"> </span><span class="nv">separator</span><span class="o">=</span>args.separator<span class="o">)</span>
 
 <span class="w">    </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>rows:
 <span class="w">        </span>print<span class="o">(</span><span class="s2">&quot;No data to process&quot;</span>,<span class="w"> </span><span class="nv">file</span><span class="o">=</span>sys.stderr<span class="o">)</span>
@@ -811,7 +874,15 @@ def<span class="w"> </span>main<span class="o">()</span>:
 
 
 <span class="k">if</span><span class="w"> </span><span class="nv">__name__</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;__main__&#39;</span>:
-<span class="w">    </span>main<span class="o">()</span>
+<span class="w">    </span>try:
+<span class="w">        </span>main<span class="o">()</span>
+<span class="w">    </span>except<span class="w"> </span>BrokenPipeError:
+<span class="w">        </span><span class="c1"># Gracefully handle broken pipe (e.g., when output is piped to head)</span>
+<span class="w">        </span><span class="c1"># Close stdout to avoid additional broken pipe errors</span>
+<span class="w">        </span>import<span class="w"> </span>os
+<span class="w">        </span><span class="nv">devnull</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>os.open<span class="o">(</span>os.devnull,<span class="w"> </span>os.O_WRONLY<span class="o">)</span>
+<span class="w">        </span>os.dup2<span class="o">(</span>devnull,<span class="w"> </span>sys.stdout.fileno<span class="o">())</span>
+<span class="w">        </span>sys.exit<span class="o">(</span><span class="m">0</span><span class="o">)</span>
 </code></pre></div>
         </div>
       </article>
@@ -830,7 +901,7 @@ def<span class="w"> </span>main<span class="o">()</span>:
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: September 29, 2026</p>
+      <p>Last updated: September 30, 2026</p>
     </footer>
 
     <div class="scroll-container">
