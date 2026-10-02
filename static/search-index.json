@@ -1599,7 +1599,7 @@
     "id": "228",
     "title": "Identity and Access Management (IAM)",
     "url": "/misc/identity-and-access-management-(iam).html",
-    "content": "LDAP",
+    "content": "LDAP SAML OIDC OAuth2 FIDO2",
     "type": "page"
   },
   {
