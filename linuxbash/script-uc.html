@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="uc - Search and find Unicode characters and icons" />
+    <meta name="description" content="uc - Search and find Unicode characters and icons (not but similar to extended ASCII)" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/static/styles.css" />
     <link rel="stylesheet" href="/static/syntax.css" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <title>uc - Search and find Unicode characters and icons</title>
+    <title>uc - Search and find Unicode characters and icons (not but similar to extended ASCII)</title>
   </head>
   <body class="light" id="top">
     <header class="header center">
@@ -90,7 +90,7 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-uc.md">uc - Search and find Unicode characters and icons</a></h1>
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-uc.md">uc - Search and find Unicode characters and icons (not but similar to extended ASCII)</a></h1>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 <span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
 <span class="s2">NAME</span>
@@ -114,8 +114,8 @@
 <span class="s2">AUTHOR</span>
 <span class="s2">    mjnurse.github.io - 2026</span>
 <span class="s2">&quot;</span>
-<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Search and find Unicode characters and icons&quot;</span>
-<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Search and find Unicode characters and icons&quot;</span>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Search and find Unicode characters and icons (not but similar to extended ASCII)&quot;</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Search and find Unicode characters and icons (not but similar to extended ASCII)&quot;</span>
 
 <span class="nv">tmpfile</span><span class="o">=</span><span class="s2">&quot;/tmp/uc.tmp&quot;</span>
 rm<span class="w"> </span>-f<span class="w"> </span><span class="nv">$tmpfile</span>
@@ -186,7 +186,7 @@ cat<span class="w"> </span><span class="nv">$0</span><span class="w"> </span><sp
 <span class="k">done</span>
 
 <span class="nb">echo</span>
-<span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">clcya</span><span class="si">}</span><span class="s2">Select a character by number of view enlarged/copy (blank to exit): </span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">clcya</span><span class="si">}</span><span class="s2">Select a character by number to view enlarged/copy to clipboard (blank to exit): </span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="nb">read</span><span class="w"> </span>n
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$n</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">    </span><span class="nb">exit</span>
@@ -1572,7 +1572,7 @@ cat<span class="w"> </span><span class="nv">$0</span><span class="w"> </span><sp
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: August 21, 2026</p>
+      <p>Last updated: October 06, 2026</p>
     </footer>
 
     <div class="scroll-container">

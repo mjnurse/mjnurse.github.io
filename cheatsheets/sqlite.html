@@ -115,6 +115,7 @@
 <li class="toc-h2"><a href="#modifiers">Modifiers</a></li>
 <li class="toc-h2"><a href="#examples">Examples</a></li>
 <li><a href="#explain-plan">Explain Plan</a></li>
+<li><a href="#table-value-constructor---values">Table Value Constructor - VALUES</a></li>
 <li><a href="#load-csv-data">Load CSV Data</a></li>
 </ul>
 </div>
@@ -756,6 +757,18 @@
 <span class="k">WHERE</span><span class="w">  </span><span class="n">col</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;bloggs&#39;</span><span class="p">;</span>
 </code></pre></div>
 
+<h1 id="table-value-constructor-values">Table Value Constructor - VALUES</h1>
+<div class="codehilite"><pre><span></span><code><span class="k">WITH</span><span class="w"> </span><span class="n">t</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span>
+<span class="w">    </span><span class="p">(</span><span class="k">VALUES</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;p&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span><span class="w"> </span>
+<span class="k">SELECT</span><span class="w">  </span><span class="o">*</span><span class="w"> </span>
+<span class="k">FROM</span><span class="w">    </span><span class="n">t</span><span class="p">;</span>
+
+<span class="n">a</span><span class="w">  </span><span class="n">b</span>
+<span class="o">-</span><span class="w">  </span><span class="o">-</span>
+<span class="n">p</span><span class="w">  </span><span class="mi">2</span>
+<span class="n">q</span><span class="w">  </span><span class="mi">1</span>
+</code></pre></div>
+
 <h1 id="load-csv-data">Load CSV Data</h1>
 <div class="codehilite"><pre><span></span><code><span class="p">.</span><span class="k">mode</span><span class="w"> </span><span class="n">csv</span>
 <span class="p">.</span><span class="n">import</span><span class="w"> </span><span class="n">file</span><span class="p">.</span><span class="n">csv</span><span class="w"> </span><span class="k">table_name</span>
@@ -779,7 +792,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: December 11, 2025</p>
+      <p>Last updated: October 07, 2026</p>
     </footer>
 
     <div class="scroll-container">

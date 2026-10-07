@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="emoji - Search and find Emoji characters" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>emoji - Search and find Emoji characters</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-emoji.md">emoji - Search and find Emoji characters</a></h1>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
+<span class="s2">NAME</span>
+<span class="s2">    emoji - Search and find emoji characters.</span>
+
+<span class="s2">USAGE</span>
+<span class="s2">    emoji [options] &lt;search-terms&gt;</span>
+
+<span class="s2">OPTIONS</span>
+<span class="s2">    -e|--exact</span>
+<span class="s2">        Perform exact matching of search terms.</span>
+
+<span class="s2">    -h|--help</span>
+<span class="s2">        Show help text.</span>
+
+<span class="s2">DESCRIPTION</span>
+<span class="s2">    Search through emojis.</span>
+
+<span class="s2">AUTHOR</span>
+<span class="s2">    mjnurse.github.io - 2026</span>
+<span class="s2">&quot;</span>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Search and find Emoji characters&quot;</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Search and find Emoji characters&quot;</span>
+
+<span class="nv">tmpfile</span><span class="o">=</span><span class="s2">&quot;/tmp/uc.tmp&quot;</span>
+rm<span class="w"> </span>-f<span class="w"> </span><span class="nv">$tmpfile</span>
+
+<span class="c1"># Terminal Colours</span>
+<span class="nv">cdef</span><span class="o">=</span><span class="s2">&quot;\x1b[39m&quot;</span><span class="w"> </span><span class="c1"># default colour</span>
+<span class="nv">cbla</span><span class="o">=</span><span class="s2">&quot;\x1b[30m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cgra</span><span class="o">=</span><span class="s2">&quot;\x1b[90m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clgra</span><span class="o">=</span><span class="s2">&quot;\x1b[37m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cwhi</span><span class="o">=</span><span class="s2">&quot;\x1b[97m&quot;</span>
+<span class="nv">cred</span><span class="o">=</span><span class="s2">&quot;\x1b[31m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cgre</span><span class="o">=</span><span class="s2">&quot;\x1b[32m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cyel</span><span class="o">=</span><span class="s2">&quot;\x1b[33m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cblu</span><span class="o">=</span><span class="s2">&quot;\x1b[34m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cmag</span><span class="o">=</span><span class="s2">&quot;\x1b[35m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">ccya</span><span class="o">=</span><span class="s2">&quot;\x1b[36m&quot;</span><span class="p">;</span>
+<span class="nv">clred</span><span class="o">=</span><span class="s2">&quot;\x1b[91m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clgre</span><span class="o">=</span><span class="s2">&quot;\x1b[92m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clyel</span><span class="o">=</span><span class="s2">&quot;\x1b[93m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clblu</span><span class="o">=</span><span class="s2">&quot;\x1b[94m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clmag</span><span class="o">=</span><span class="s2">&quot;\x1b[95m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clcya</span><span class="o">=</span><span class="s2">&quot;\x1b[96m&quot;</span>
+
+<span class="nv">try</span><span class="o">=</span><span class="s2">&quot;Try </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h for more information&quot;</span>
+<span class="nv">tmp</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">help_text</span><span class="p">##*USAGE</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nv">usage</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%OPTIONS*</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;\n&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/  */ /g&quot;</span><span class="k">)</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">usage</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">try</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="nv">exact</span><span class="o">=</span><span class="nb">false</span>
+<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
+<span class="w">        </span>-h<span class="p">|</span>--help<span class="o">)</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="nb">exit</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>-e<span class="p">|</span>--exact<span class="o">)</span>
+<span class="w">            </span><span class="nv">exact</span><span class="o">=</span><span class="nb">true</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>?*<span class="o">)</span>
+<span class="w">            </span><span class="k">break</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">    </span><span class="k">esac</span>
+<span class="w">    </span><span class="nb">shift</span>
+<span class="k">done</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$exact</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nv">sp</span><span class="o">=</span><span class="s2">&quot; &quot;</span>
+<span class="k">fi</span>
+<span class="nv">p1</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">sp</span><span class="si">}${</span><span class="nv">1</span><span class="si">}${</span><span class="nv">sp</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nv">p2</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">sp</span><span class="si">}${</span><span class="nv">2</span><span class="k">:-</span><span class="nv">$1</span><span class="si">}${</span><span class="nv">sp</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nv">p3</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">sp</span><span class="si">}${</span><span class="nv">3</span><span class="k">:-</span><span class="nv">$1</span><span class="si">}${</span><span class="nv">sp</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="nv">n</span><span class="o">=</span><span class="m">1</span>
+cat<span class="w"> </span><span class="nv">$0</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/$/ /; s/:/ : /&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>egrep<span class="w"> </span><span class="s2">&quot;^## |^# [^:]*:.*</span><span class="si">${</span><span class="nv">p1</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>egrep<span class="w"> </span><span class="s2">&quot;^## |.*:.*</span><span class="si">${</span><span class="nv">p2</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>egrep<span class="w"> </span><span class="s2">&quot;^## |.*:.*</span><span class="si">${</span><span class="nv">p3</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>sed<span class="w"> </span><span class="s1">&#39;/^##/{N;/\n# /!d}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>sed<span class="w"> </span><span class="s1">&#39;/^##/{$d;N;/\n#/!D}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>sed<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;</span>
+<span class="s2">        s/^# //; </span>
+<span class="s2">        s/^## (.*)</span>$<span class="s2">/#</span><span class="si">${</span><span class="nv">clcya</span><span class="si">}</span><span class="s2">\1</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">/; </span>
+<span class="s2">        s/(.*:.*)(</span><span class="si">${</span><span class="nv">p1</span><span class="si">}</span><span class="s2">)/\1</span><span class="si">${</span><span class="nv">clmag</span><span class="si">}</span><span class="s2">\2</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">/g;</span>
+<span class="s2">        s/(.*:.*)(</span><span class="si">${</span><span class="nv">p2</span><span class="si">}</span><span class="s2">)/\1</span><span class="si">${</span><span class="nv">clmag</span><span class="si">}</span><span class="s2">\2</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">/g;</span>
+<span class="s2">        s/(.*:.*)(</span><span class="si">${</span><span class="nv">p3</span><span class="si">}</span><span class="s2">)/\1</span><span class="si">${</span><span class="nv">clmag</span><span class="si">}</span><span class="s2">\2</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">/g;</span>
+<span class="s2">    &quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="k">while</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>line<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">line</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;#&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;\n</span><span class="si">${</span><span class="nv">line</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$n</span><span class="s2">) </span><span class="nv">$line</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="nv">tmp</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">line</span><span class="p">/ */</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">tmp</span><span class="k">:-</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmpfile</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="o">((</span>n++<span class="o">))</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="k">done</span>
+
+<span class="nb">echo</span>
+<span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">clcya</span><span class="si">}</span><span class="s2">Select a character by number copy to clipboard (blank to exit): </span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nb">read</span><span class="w"> </span>n
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$n</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">exit</span>
+<span class="k">fi</span>
+<span class="nb">echo</span>
+<span class="nv">char</span><span class="o">=</span><span class="k">$(</span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="k">$((</span><span class="nv">n</span><span class="k">))</span><span class="s2">p&quot;</span><span class="w"> </span><span class="nv">$tmpfile</span><span class="k">)</span>
+<span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$char</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>iconv<span class="w"> </span>-f<span class="w"> </span>UTF-8<span class="w"> </span>-t<span class="w"> </span>UTF-16LE<span class="w"> </span><span class="p">|</span><span class="w"> </span>clip.exe
+
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;(copied to clipboard)&quot;</span>
+
+<span class="c1">## smileys &amp; people</span>
+<span class="c1"># \U0001f600:grinning face</span>
+<span class="c1"># \U0001f603:grinning face with big eyes </span>
+<span class="c1"># \U0001f604:grinning face with smiling eyes </span>
+<span class="c1"># \U0001f601:beaming face </span>
+<span class="c1"># \U0001f606:grinning squinting face </span>
+<span class="c1"># \U0001f605:grinning face with sweat </span>
+<span class="c1"># \U0001f923:rolling on the floor laughing </span>
+<span class="c1"># \U0001f602:face with tears of joy </span>
+<span class="c1"># \U0001f60a:smiling face with smiling eyes </span>
+<span class="c1"># \U0001f607:smiling face with halo </span>
+<span class="c1"># \U0001f60d:heart eyes </span>
+<span class="c1"># \U0001f929:star-struck </span>
+<span class="c1"># \U0001f60e:smiling face with sunglasses </span>
+<span class="c1"># \U0001f914:thinking face </span>
+<span class="c1"># \U0001f634:sleeping face </span>
+<span class="c1"># \U0001f631:face screaming in fear </span>
+<span class="c1"># \U0001f92f:exploding head </span>
+<span class="c1"># \U0001f973:partying face </span>
+<span class="c1"># \U0001f608:smiling face with horns </span>
+<span class="c1"># \U0001f480:skull </span>
+<span class="c1"># \U0001f47b:ghost </span>
+<span class="c1"># \U0001f916:robot </span>
+<span class="c1"># \U0001f44d:thumbs up </span>
+<span class="c1"># \U0001f44e:thumbs down </span>
+<span class="c1"># \U0001f44b:waving hand </span>
+<span class="c1"># \U0001f44f:clapping hands </span>
+<span class="c1"># \U0001f64c:raising hands </span>
+<span class="c1"># \U0001f91d:handshake </span>
+<span class="c1"># \U270c:victory hand </span>
+<span class="c1"># \U0001f4aa:flexed biceps </span>
+<span class="c1"># </span>
+<span class="c1">## symbols</span>
+<span class="c1"># \U2764:| red heart </span>
+<span class="c1"># \U0001f9e1:orange heart </span>
+<span class="c1"># \U0001f49b:yellow heart </span>
+<span class="c1"># \U0001f49a:green heart </span>
+<span class="c1"># \U0001f499:blue heart </span>
+<span class="c1"># \U0001f49c:purple heart </span>
+<span class="c1"># \U0001f5a4:black heart </span>
+<span class="c1"># \U0001f494:broken heart </span>
+<span class="c1"># \U0001f4af:hundred points </span>
+<span class="c1"># \U0001f4a5:collision </span>
+<span class="c1"># \U0001f4ab:dizzy </span>
+<span class="c1"># \U0001f4a6:sweat droplets </span>
+<span class="c1"># \U0001f525:fire </span>
+<span class="c1"># \U2728:sparkles </span>
+<span class="c1"># \U2b50:star </span>
+<span class="c1"># \U0001f31f:glowing star </span>
+<span class="c1"># \U0001f4a1:light bulb </span>
+<span class="c1"># </span>
+<span class="c1">## nature</span>
+<span class="c1"># \U0001f436:| dog face </span>
+<span class="c1"># \U0001f431:cat face </span>
+<span class="c1"># \U0001f42d:mouse face </span>
+<span class="c1"># \U0001f43b:bear </span>
+<span class="c1"># \U0001f98a:fox </span>
+<span class="c1"># \U0001f427:penguin </span>
+<span class="c1"># \U0001f984:unicorn </span>
+<span class="c1"># \U0001f40d:snake </span>
+<span class="c1"># \U0001f422:turtle </span>
+<span class="c1"># \U0001f41d:honeybee </span>
+<span class="c1"># \U0001f98b:butterfly </span>
+<span class="c1"># \U0001f338:cherry blossom </span>
+<span class="c1"># \U0001f339:rose </span>
+<span class="c1"># \U0001f33b:sunflower </span>
+<span class="c1"># \U0001f332:evergreen tree </span>
+<span class="c1"># \U0001f308:rainbow </span>
+<span class="c1"># \U2600:sun </span>
+<span class="c1"># \U0001f319:crescent moon </span>
+<span class="c1"># \U26a1:high voltage </span>
+<span class="c1"># \U2744:snowflake </span>
+<span class="c1"># \U0001f30a:water wave </span>
+<span class="c1"># </span>
+<span class="c1">## drink</span>
+<span class="c1"># \U0001f34e:| red apple </span>
+<span class="c1"># \U0001f355:pizza </span>
+<span class="c1"># \U0001f354:hamburger </span>
+<span class="c1"># \U0001f37a:beer mug </span>
+<span class="c1"># \U2615:hot beverage </span>
+<span class="c1"># \U0001f369:doughnut </span>
+<span class="c1"># \U0001f382:birthday cake </span>
+<span class="c1"># \U0001f37f:popcorn </span>
+<span class="c1"># </span>
+<span class="c1">## transport</span>
+<span class="c1"># \U0001f680:| rocket </span>
+<span class="c1"># \U2708:airplane </span>
+<span class="c1"># \U0001f697:car </span>
+<span class="c1"># \U0001f682:locomotive </span>
+<span class="c1"># \U0001f6a2:ship </span>
+<span class="c1"># \U0001f3e0:house </span>
+<span class="c1"># \U0001f3e2:office building </span>
+<span class="c1"># \U0001f3ed:factory </span>
+<span class="c1"># \U0001f30d:globe (europe-africa) </span>
+<span class="c1"># \U0001f30e:globe (americas) </span>
+<span class="c1"># \U0001f30f:globe (asia-australia) </span>
+<span class="c1"># \U0001f5fa:world map </span>
+<span class="c1"># </span>
+<span class="c1">## tech favourites</span>
+<span class="c1"># \U0001f4bb:| laptop </span>
+<span class="c1"># \U0001f5a5:desktop computer </span>
+<span class="c1"># \U2328:keyboard </span>
+<span class="c1"># \U0001f5b1:computer mouse </span>
+<span class="c1"># \U0001f4f1:mobile phone </span>
+<span class="c1"># \U0001f527:wrench </span>
+<span class="c1"># \U0001f528:hammer </span>
+<span class="c1"># \U2699:gear </span>
+<span class="c1"># \U0001f6e0:hammer and wrench </span>
+<span class="c1"># \U0001f511:key </span>
+<span class="c1"># \U0001f512:locked </span>
+<span class="c1"># \U0001f513:unlocked </span>
+<span class="c1"># \U0001f41b:bug </span>
+<span class="c1"># \U0001f9ea:test tube </span>
+<span class="c1"># \U0001f9ec:dna </span>
+<span class="c1"># \U0001f4e1:satellite antenna </span>
+<span class="c1"># \U0001f50c:electric plug </span>
+<span class="c1"># \U0001f50b:battery </span>
+<span class="c1"># \U0001f4be:floppy disk </span>
+<span class="c1"># \U0001f4c0:dvd </span>
+<span class="c1"># \U0001f9f2:magnet </span>
+<span class="c1"># \U0001f52c:microscope </span>
+<span class="c1"># \U0001f52d:telescope </span>
+<span class="c1"># \U0001f3d7:building construction </span>
+<span class="c1"># \U0001f4e6:package </span>
+<span class="c1"># \U0001f5c2:card index dividers </span>
+<span class="c1"># \U0001f4cb:clipboard </span>
+<span class="c1"># \U0001f4dd:memo </span>
+<span class="c1"># \U0001f4ca:bar chart </span>
+<span class="c1"># \U0001f4c8:chart increasing </span>
+<span class="c1"># \U0001f4c9:chart decreasing </span>
+<span class="c1"># </span>
+<span class="c1">## indicators</span>
+<span class="c1"># \U2705:| check mark </span>
+<span class="c1"># \U274c:cross mark </span>
+<span class="c1"># \U26a0:warning </span>
+<span class="c1"># \U0001f6ab:prohibited </span>
+<span class="c1"># \U2753:question mark </span>
+<span class="c1"># \U2757:exclamation mark </span>
+<span class="c1"># \U0001f534:red circle </span>
+<span class="c1"># \U0001f7e0:orange circle </span>
+<span class="c1"># \U0001f7e1:yellow circle </span>
+<span class="c1"># \U0001f7e2:green circle </span>
+<span class="c1"># \U0001f535:blue circle </span>
+<span class="c1"># \U0001f7e3:purple circle </span>
+<span class="c1"># \U26aa:white circle </span>
+<span class="c1"># \U26ab:black circle </span>
+<span class="c1"># \U0001f7e5:red square </span>
+<span class="c1"># \U0001f7e7:orange square </span>
+<span class="c1"># \U0001f7e8:yellow square </span>
+<span class="c1"># \U0001f7e9:green square </span>
+<span class="c1"># \U0001f7e6:blue square </span>
+<span class="c1"># \U0001f7ea:purple square </span>
+<span class="c1"># \U2b1b:black large square </span>
+<span class="c1"># \U2b1c:white large square </span>
+<span class="c1"># \U25b6:play button </span>
+<span class="c1"># \U23f8:pause button </span>
+<span class="c1"># \U23f9:stop button </span>
+<span class="c1"># \U0001f504:counterclockwise arrows </span>
+<span class="c1"># \U267b:recycling symbol </span>
+<span class="c1"># \U0001f3c1:chequered flag </span>
+<span class="c1"># \U0001f6a9:triangular flag </span>
+<span class="c1"># \U0001f3af:bullseye </span>
+<span class="c1"># </span>
+<span class="c1">## calendar</span>
+<span class="c1"># \U23f0:| alarm clock </span>
+<span class="c1"># \U23f1:stopwatch </span>
+<span class="c1"># \U23f3:hourglass </span>
+<span class="c1"># \U0001f4c5:calendar </span>
+<span class="c1"># \U0001f550:one oclock </span>
+<span class="c1"># \U0001f551:two oclock </span>
+<span class="c1"># \U0001f552:three oclock </span>
+<span class="c1"># \U0001f553:four oclock </span>
+<span class="c1"># \U0001f554:five oclock </span>
+<span class="c1"># \U0001f555:six oclock </span>
+<span class="c1"># </span>
+<span class="c1">## directions</span>
+<span class="c1"># \U2b06:| up arrow </span>
+<span class="c1"># \U2b07:down arrow </span>
+<span class="c1"># \U2b05:left arrow </span>
+<span class="c1"># \U27a1:right arrow </span>
+<span class="c1"># \U2197:up-right arrow </span>
+<span class="c1"># \U2198:down-right arrow </span>
+<span class="c1"># \U2199:down-left arrow </span>
+<span class="c1"># \U2196:up-left arrow </span>
+<span class="c1"># \U21a9:right arrow curving left </span>
+<span class="c1"># \U21aa:left arrow curving right </span>
+<span class="c1"># </span>
+<span class="c1">## objects</span>
+<span class="c1"># \U0001f389:| party popper </span>
+<span class="c1"># \U0001f38a:confetti ball </span>
+<span class="c1"># \U0001f388:balloon </span>
+<span class="c1"># \U0001f3c6:trophy </span>
+<span class="c1"># \U0001f947:gold medal </span>
+<span class="c1"># \U0001f948:silver medal </span>
+<span class="c1"># \U0001f949:bronze medal </span>
+<span class="c1"># \U0001f3b5:musical note </span>
+<span class="c1"># \U0001f3b6:musical notes </span>
+<span class="c1"># \U0001f3ae:video game </span>
+<span class="c1"># \U0001f3b2:game die </span>
+<span class="c1"># \U0001f9e9:puzzle piece </span>
+<span class="c1"># \U0001f4cc:pushpin </span>
+<span class="c1"># \U0001f4ce:paperclip </span>
+<span class="c1"># \U270f:pencil </span>
+<span class="c1"># \U0001f58a:pen </span>
+<span class="c1"># \U0001f4da:books </span>
+<span class="c1"># \U0001f4d6:open book </span>
+<span class="c1"># \U0001f4b0:money bag </span>
+<span class="c1"># \U0001f4b3:credit card </span>
+<span class="c1"># \U0001f4e7:email </span>
+<span class="c1"># \U0001f4de:telephone receiver </span>
+<span class="c1"># \U0001f514:bell </span>
+<span class="c1"># \U0001f515:bell with slash </span>
+<span class="c1"># \U0001f50a:speaker high volume </span>
+<span class="c1"># \U0001f507:muted speaker </span>
+</code></pre></div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: October 06, 2026</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>
