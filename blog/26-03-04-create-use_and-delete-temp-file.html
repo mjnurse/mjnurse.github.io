@@ -90,7 +90,7 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/blog/26-03-04-create-use_and-delete-temp-file.md">26-03-04 - Create Use and Delete Temp File</a></h1>
+          <h1><a class="link" href="#" data-clipboard="code ~/mjnurse/mjnurse-website/blog/26-03-04-create-use_and-delete-temp-file.md">26-03-04 - Create Use and Delete Temp File</a></h1>
 <p>How have I only just learnt about <code>mktemp</code>? It's a great way to create a temporary file, and trap means that it is automatically cleaned up when the script exits.</p>
 <div class="codehilite"><pre><span></span><code><span class="nv">tmpfile</span><span class="o">=</span><span class="k">$(</span>mktemp<span class="k">)</span>
 <span class="nb">trap</span><span class="w"> </span><span class="s1">&#39;rm -f &quot;$tmpfile&quot;&#39;</span><span class="w"> </span>EXIT

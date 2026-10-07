@@ -90,7 +90,7 @@
     <main>
       <article class="article">
         <div class="article-body">
-          <h1><a href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-emoji.md">emoji - Search and find Emoji characters</a></h1>
+          <h1><a class="link" href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-emoji.md">emoji - Search and find Emoji characters</a></h1>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 <span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
 <span class="s2">NAME</span>
@@ -127,12 +127,6 @@ rm<span class="w"> </span>-f<span class="w"> </span><span class="nv">$tmpfile</s
 <span class="nv">try</span><span class="o">=</span><span class="s2">&quot;Try </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h for more information&quot;</span>
 <span class="nv">tmp</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">help_text</span><span class="p">##*USAGE</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="nv">usage</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%OPTIONS*</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;\n&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/  */ /g&quot;</span><span class="k">)</span>
-
-<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">usage</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">try</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
-<span class="k">fi</span>
 
 <span class="nv">exact</span><span class="o">=</span><span class="nb">false</span>
 <span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
@@ -191,7 +185,7 @@ cat<span class="w"> </span><span class="nv">$0</span><span class="w"> </span><sp
 <span class="k">fi</span>
 <span class="nb">echo</span>
 <span class="nv">char</span><span class="o">=</span><span class="k">$(</span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="k">$((</span><span class="nv">n</span><span class="k">))</span><span class="s2">p&quot;</span><span class="w"> </span><span class="nv">$tmpfile</span><span class="k">)</span>
-<span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$char</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>iconv<span class="w"> </span>-f<span class="w"> </span>UTF-8<span class="w"> </span>-t<span class="w"> </span>UTF-16LE<span class="w"> </span><span class="p">|</span><span class="w"> </span>clip.exe
+<span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$char</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>powershell.exe<span class="w"> </span>-NoProfile<span class="w"> </span>-Command<span class="w"> </span><span class="s1">&#39;[Console]::InputEncoding=[Text.Encoding]::UTF8; Set-Clipboard -Value ([Console]::In.ReadToEnd())&#39;</span>
 
 <span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;(copied to clipboard)&quot;</span>
 
@@ -228,7 +222,7 @@ cat<span class="w"> </span><span class="nv">$0</span><span class="w"> </span><sp
 <span class="c1"># \U0001f4aa:flexed biceps </span>
 <span class="c1"># </span>
 <span class="c1">## symbols</span>
-<span class="c1"># \U2764:| red heart </span>
+<span class="c1"># \U2764:red heart </span>
 <span class="c1"># \U0001f9e1:orange heart </span>
 <span class="c1"># \U0001f49b:yellow heart </span>
 <span class="c1"># \U0001f49a:green heart </span>
@@ -247,7 +241,7 @@ cat<span class="w"> </span><span class="nv">$0</span><span class="w"> </span><sp
 <span class="c1"># \U0001f4a1:light bulb </span>
 <span class="c1"># </span>
 <span class="c1">## nature</span>
-<span class="c1"># \U0001f436:| dog face </span>
+<span class="c1"># \U0001f436:dog face </span>
 <span class="c1"># \U0001f431:cat face </span>
 <span class="c1"># \U0001f42d:mouse face </span>
 <span class="c1"># \U0001f43b:bear </span>
@@ -270,7 +264,7 @@ cat<span class="w"> </span><span class="nv">$0</span><span class="w"> </span><sp
 <span class="c1"># \U0001f30a:water wave </span>
 <span class="c1"># </span>
 <span class="c1">## drink</span>
-<span class="c1"># \U0001f34e:| red apple </span>
+<span class="c1"># \U0001f34e:red apple </span>
 <span class="c1"># \U0001f355:pizza </span>
 <span class="c1"># \U0001f354:hamburger </span>
 <span class="c1"># \U0001f37a:beer mug </span>
@@ -280,7 +274,7 @@ cat<span class="w"> </span><span class="nv">$0</span><span class="w"> </span><sp
 <span class="c1"># \U0001f37f:popcorn </span>
 <span class="c1"># </span>
 <span class="c1">## transport</span>
-<span class="c1"># \U0001f680:| rocket </span>
+<span class="c1"># \U0001f680:rocket </span>
 <span class="c1"># \U2708:airplane </span>
 <span class="c1"># \U0001f697:car </span>
 <span class="c1"># \U0001f682:locomotive </span>
@@ -294,7 +288,7 @@ cat<span class="w"> </span><span class="nv">$0</span><span class="w"> </span><sp
 <span class="c1"># \U0001f5fa:world map </span>
 <span class="c1"># </span>
 <span class="c1">## tech favourites</span>
-<span class="c1"># \U0001f4bb:| laptop </span>
+<span class="c1"># \U0001f4bb:laptop </span>
 <span class="c1"># \U0001f5a5:desktop computer </span>
 <span class="c1"># \U2328:keyboard </span>
 <span class="c1"># \U0001f5b1:computer mouse </span>
@@ -327,7 +321,7 @@ cat<span class="w"> </span><span class="nv">$0</span><span class="w"> </span><sp
 <span class="c1"># \U0001f4c9:chart decreasing </span>
 <span class="c1"># </span>
 <span class="c1">## indicators</span>
-<span class="c1"># \U2705:| check mark </span>
+<span class="c1"># \U2705:check mark </span>
 <span class="c1"># \U274c:cross mark </span>
 <span class="c1"># \U26a0:warning </span>
 <span class="c1"># \U0001f6ab:prohibited </span>
@@ -359,7 +353,7 @@ cat<span class="w"> </span><span class="nv">$0</span><span class="w"> </span><sp
 <span class="c1"># \U0001f3af:bullseye </span>
 <span class="c1"># </span>
 <span class="c1">## calendar</span>
-<span class="c1"># \U23f0:| alarm clock </span>
+<span class="c1"># \U23f0:alarm clock </span>
 <span class="c1"># \U23f1:stopwatch </span>
 <span class="c1"># \U23f3:hourglass </span>
 <span class="c1"># \U0001f4c5:calendar </span>
@@ -371,7 +365,7 @@ cat<span class="w"> </span><span class="nv">$0</span><span class="w"> </span><sp
 <span class="c1"># \U0001f555:six oclock </span>
 <span class="c1"># </span>
 <span class="c1">## directions</span>
-<span class="c1"># \U2b06:| up arrow </span>
+<span class="c1"># \U2b06:up arrow </span>
 <span class="c1"># \U2b07:down arrow </span>
 <span class="c1"># \U2b05:left arrow </span>
 <span class="c1"># \U27a1:right arrow </span>
@@ -383,7 +377,7 @@ cat<span class="w"> </span><span class="nv">$0</span><span class="w"> </span><sp
 <span class="c1"># \U21aa:left arrow curving right </span>
 <span class="c1"># </span>
 <span class="c1">## objects</span>
-<span class="c1"># \U0001f389:| party popper </span>
+<span class="c1"># \U0001f389:party popper </span>
 <span class="c1"># \U0001f38a:confetti ball </span>
 <span class="c1"># \U0001f388:balloon </span>
 <span class="c1"># \U0001f3c6:trophy </span>
@@ -427,7 +421,7 @@ cat<span class="w"> </span><span class="nv">$0</span><span class="w"> </span><sp
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: October 06, 2026</p>
+      <p>Last updated: October 07, 2026</p>
     </footer>
 
     <div class="scroll-container">
