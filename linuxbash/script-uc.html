@@ -91,13 +91,58 @@
       <article class="article">
         <div class="article-body">
           <h1><a class="link" href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-uc.md">uc - Search and find Unicode characters and icons (not but similar to extended ASCII)</a></h1>
+<h2 id="demo">Demo</h2>
+<pre style='background: black; color: white;'>
+$ uc arrow up right
+
+<span style="filter: contrast(70%) brightness(190%);color:teal;">Arrows </span>
+1) ↗ : <span style="filter: contrast(70%) brightness(190%);color:purple;">up</span> <span style="filter: contrast(70%) brightness(190%);color:purple;">right</span> <span style="filter: contrast(70%) brightness(190%);color:purple;">arrow</span>
+2) ↱ : <span style="filter: contrast(70%) brightness(190%);color:purple;">up</span> <span style="filter: contrast(70%) brightness(190%);color:purple;">arrow</span> corner <span style="filter: contrast(70%) brightness(190%);color:purple;">right</span>
+
+<span style="filter: contrast(70%) brightness(190%);color:teal;">Dingbats </span>
+3) ➦ : heavy black curved <span style="filter: contrast(70%) brightness(190%);color:purple;">up</span> <span style="filter: contrast(70%) brightness(190%);color:purple;">right</span> <span style="filter: contrast(70%) brightness(190%);color:purple;">arrow</span>
+4) ➮ : heavy <span style="filter: contrast(70%) brightness(190%);color:purple;">up</span>per right shadowed white <span style="filter: contrast(70%) brightness(190%);color:purple;">right</span> <span style="filter: contrast(70%) brightness(190%);color:purple;">arrow</span>
+5) ➱ : notched <span style="filter: contrast(70%) brightness(190%);color:purple;">up</span>per right shadowed white <span style="filter: contrast(70%) brightness(190%);color:purple;">right</span> <span style="filter: contrast(70%) brightness(190%);color:purple;">arrow</span>
+
+<span style="filter: contrast(70%) brightness(190%);color:teal;">Select a character by number to view enlarged/copy to clipboard (blank to exit): </span>2
+
+
+
+
+
+                            ▄▄                    
+                           ▀███▄                  
+                             ▀███▄                
+                  ▄▄▄▄▄▄▄▄▄▄▄▄▄████▄              
+                  ███████████████████             
+                  ████        ▄████▀              
+                  ████      ▄████▀                
+                  ████     ████▀                  
+                  ████      ▀▀                    
+                  ████                            
+                  ████                            
+                  ████                            
+                  ████                            
+                  ████                            
+                  ████                            
+
+
+
+
+
+
+(copied to clipboard)
+$ 
+</pre>
+
+<h2 id="script">Script</h2>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
 <span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
 <span class="s2">NAME</span>
 <span class="s2">    unicode - Search and find Unicode characters and icons.</span>
 
 <span class="s2">USAGE</span>
-<span class="s2">    unicode [options] &lt;search-terms&gt;</span>
+<span class="s2">    unicode [options] &lt;search-terms (. matches all)&gt;</span>
 
 <span class="s2">OPTIONS</span>
 <span class="s2">    -e|--exact</span>
@@ -160,6 +205,12 @@ rm<span class="w"> </span>-f<span class="w"> </span><span class="nv">$tmpfile</s
 <span class="nv">p2</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">sp</span><span class="si">}${</span><span class="nv">2</span><span class="k">:-</span><span class="nv">$1</span><span class="si">}${</span><span class="nv">sp</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="nv">p3</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">sp</span><span class="si">}${</span><span class="nv">3</span><span class="k">:-</span><span class="nv">$1</span><span class="si">}${</span><span class="nv">sp</span><span class="si">}</span><span class="s2">&quot;</span>
 
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$p1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;.&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nv">p1m</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">p2m</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">p3m</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="k">else</span>
+<span class="w">    </span><span class="nv">p1m</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$p1</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">p2m</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$p2</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">p3m</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$p3</span><span class="s2">&quot;</span>
+<span class="k">fi</span>
+
 <span class="nv">n</span><span class="o">=</span><span class="m">1</span>
 cat<span class="w"> </span><span class="nv">$0</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/$/ /; s/:/ : /&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
 <span class="w">    </span>egrep<span class="w"> </span><span class="s2">&quot;^## |^# [^:]*:.*</span><span class="si">${</span><span class="nv">p1</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
@@ -170,9 +221,9 @@ cat<span class="w"> </span><span class="nv">$0</span><span class="w"> </span><sp
 <span class="w">    </span>sed<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;</span>
 <span class="s2">        s/^# //; </span>
 <span class="s2">        s/^## (.*)</span>$<span class="s2">/#</span><span class="si">${</span><span class="nv">clcya</span><span class="si">}</span><span class="s2">\1</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">/; </span>
-<span class="s2">        s/(.*:.*)(</span><span class="si">${</span><span class="nv">p1</span><span class="si">}</span><span class="s2">)/\1</span><span class="si">${</span><span class="nv">clmag</span><span class="si">}</span><span class="s2">\2</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">/g;</span>
-<span class="s2">        s/(.*:.*)(</span><span class="si">${</span><span class="nv">p2</span><span class="si">}</span><span class="s2">)/\1</span><span class="si">${</span><span class="nv">clmag</span><span class="si">}</span><span class="s2">\2</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">/g;</span>
-<span class="s2">        s/(.*:.*)(</span><span class="si">${</span><span class="nv">p3</span><span class="si">}</span><span class="s2">)/\1</span><span class="si">${</span><span class="nv">clmag</span><span class="si">}</span><span class="s2">\2</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">/g;</span>
+<span class="s2">        s/(.*:.*)(</span><span class="si">${</span><span class="nv">p1m</span><span class="si">}</span><span class="s2">)(.*)/\1</span><span class="si">${</span><span class="nv">clmag</span><span class="si">}</span><span class="s2">\2</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">\3/g;</span>
+<span class="s2">        s/(.*:.*)(</span><span class="si">${</span><span class="nv">p2m</span><span class="si">}</span><span class="s2">)(.*)/\1</span><span class="si">${</span><span class="nv">clmag</span><span class="si">}</span><span class="s2">\2</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">\3/g;</span>
+<span class="s2">        s/(.*:.*)(</span><span class="si">${</span><span class="nv">p3m</span><span class="si">}</span><span class="s2">)(.*)/\1</span><span class="si">${</span><span class="nv">clmag</span><span class="si">}</span><span class="s2">\2</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">\3/g;</span>
 <span class="s2">    &quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
 <span class="k">while</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>line<span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">line</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;#&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
@@ -213,7 +264,7 @@ cat<span class="w"> </span><span class="nv">$0</span><span class="w"> </span><sp
 <span class="s1">        if top and bottom: print(&quot;█&quot;, end=&quot;&quot;)</span>
 <span class="s1">        elif top: print(&quot;▀&quot;, end=&quot;&quot;)</span>
 <span class="s1">        elif bottom: print(&quot;▄&quot;, end=&quot;&quot;)</span>
-<span class="s1">        else: print(&quot;⋅&quot;, end=&quot;&quot;)</span>
+<span class="s1">        else: print(&quot; &quot;, end=&quot;&quot;)</span>
 <span class="s1">    print()</span>
 <span class="s1">&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>python3
 
@@ -1572,7 +1623,7 @@ cat<span class="w"> </span><span class="nv">$0</span><span class="w"> </span><sp
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: October 06, 2026</p>
+      <p>Last updated: October 08, 2026</p>
     </footer>
 
     <div class="scroll-container">
