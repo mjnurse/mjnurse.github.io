@@ -1114,9 +1114,9 @@
   },
   {
     "id": "159",
-    "title": "record-shell - Record Shell Session - saving as HTML",
+    "title": "record-shell - Record shell session - saving as HTML",
     "url": "/linuxbash/script-record-shell.html",
-    "content": "#!/usr/bin/env bash help_text=&quot; usage: record [options] &lt;filename&gt; -h : This help text. &quot; help_line=&quot;Record Shell Session - saving as HTML&quot; web_desc_line=&quot;Record Shell Session - saving as HTML&quot; case $1 in -h|--help) echo &quot;$help_text&quot; exit ;; esac if [[ &quot;$1&quot; == &quot;&quot; ]]; then echo &quot;$help_text&quot; exit 1 fi script --log-out=/tmp/record.log -c &#39;PS1=&quot;$ &quot;; export PS1; exec bash --norc -i&#39; sed -i &#39; /^Script sta",
+    "content": "#!/usr/bin/env bash help_text=&quot; usage: record [options] &lt;filename&gt; -h : This help text. &quot; help_line=&quot;Record shell session - saving as HTML&quot; web_desc_line=&quot;Record shell session - saving as HTML&quot; case $1 in -h|--help) echo &quot;$help_text&quot; exit ;; esac if [[ &quot;$1&quot; == &quot;&quot; ]]; then echo &quot;$help_text&quot; exit 1 fi # Record the shell session to a temporary log file script --log-out=/tmp/record.log -c &#39;PS1=&quot;$ &quot;; export PS1;",
     "type": "page"
   },
   {
