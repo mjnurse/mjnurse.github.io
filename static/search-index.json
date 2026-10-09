@@ -1170,7 +1170,7 @@
   },
   {
     "id": "167",
-    "title": "uc - Search and find Unicode characters and icons (not but similar to extended ASCII)",
+    "title": "uc - Search and find Unicode characters and icons",
     "url": "/linuxbash/script-uc.html",
     "content": "Demo $ uc arrow up right Arrows 1) \u2197 : up right arrow 2) \u21b1 : up arrow corner right Dingbats 3) \u27a6 : heavy black curved up right arrow 4) \u27ae : heavy upper right shadowed white right arrow 5) \u27b1 : notched upper right shadowed white right arrow Select a character by number to view enlarged/copy to clipboard (blank to exit): 2 \u2584\u2584 \u2580\u2588\u2588\u2588\u2584 \u2580\u2588\u2588\u2588\u2584 \u2584\u2584\u2584\u2584\u2584\u2584\u2584\u2584\u2584\u2584\u2584\u2584\u2584\u2588\u2588\u2588\u2588\u2584 \u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588\u2588 \u2588\u2588\u2588\u2588 \u2584\u2588\u2588\u2588\u2588\u2580 \u2588\u2588\u2588\u2588 \u2584\u2588\u2588\u2588\u2588\u2580 \u2588\u2588\u2588\u2588 \u2588\u2588\u2588\u2588\u2580 \u2588\u2588\u2588\u2588 \u2580\u2580 \u2588\u2588\u2588\u2588 \u2588\u2588\u2588\u2588 \u2588\u2588\u2588\u2588 \u2588\u2588\u2588\u2588 \u2588\u2588\u2588\u2588 \u2588\u2588\u2588\u2588 (copied to clipboard) $ Script #!/usr/bin/env bash ",
     "type": "page"
