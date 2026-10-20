@@ -122,7 +122,7 @@
 <span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Query shortcut keys.  Options to add, edit, delete.&quot;</span>
 <span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Query shortcut keys - Options to add edit delete&quot;</span>
 
-<span class="nv">sck_csv</span><span class="o">=</span><span class="s2">&quot;/home/martin/mjnurse/shortcut-keys/sck.csv&quot;</span>
+<span class="nv">sck_csv</span><span class="o">=</span><span class="s2">&quot;/home/martin/mjnurse/bash/sck.csv&quot;</span>
 <span class="nv">tmp_file</span><span class="o">=</span><span class="s2">&quot;/tmp/sck.tmp&quot;</span>
 
 <span class="nv">try</span><span class="o">=</span><span class="s2">&quot;Try \&quot;</span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h\&quot; for more information&quot;</span>
@@ -238,7 +238,7 @@
 <span class="w">    </span><span class="k">fi</span>
 <span class="w">    </span><span class="nb">echo</span>
 <span class="w">    </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$w1</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$sck_csv</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$w2</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$w3</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$w4</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$w5</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
-<span class="w">        </span>sed<span class="w"> </span><span class="s2">&quot;s/\&quot;,\&quot;/ - /g; s/^\&quot;//; s/\&quot;</span>$<span class="s2">//; s/ -  - / - /&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>--color<span class="o">=</span>auto<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$words</span><span class="s2">&quot;</span>
+<span class="w">        </span>sed<span class="w"> </span><span class="s1">&#39;s/&quot;,&quot;/¬/g; s/^&quot;//; s/&quot;$//&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>column<span class="w"> </span>-s¬<span class="w"> </span>-t<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>--color<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$words</span><span class="s2">&quot;</span><span class="w"> </span>
 <span class="w">    </span><span class="nb">echo</span>
 <span class="k">fi</span>
 </code></pre></div>
@@ -259,7 +259,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: October 16, 2026</p>
+      <p>Last updated: October 19, 2026</p>
     </footer>
 
     <div class="scroll-container">
