@@ -927,7 +927,7 @@
     "id": "132",
     "title": "fe - Search for a file and edit",
     "url": "/linuxbash/script-fe.html",
-    "content": "#!/usr/bin/env bash help_text=&quot; NAME fe - Search for a file and edit in gvim or VSCode. USAGE fe &lt;search words&gt; OPTIONS -h|--help Show help text. -f|--fuzzy Run a fuzzy search - adds wildcards before and after each word. -g|--use-grep Run grep - search content of files instead of filename. DESCRIPTION Search for a file and edit in gvim or VSCode. A list of matching files will be shown with the option to select one for edit. AUTHOR mjnurse.github.io - 2020 &quot; help_line=&quot;Search",
+    "content": "#!/usr/bin/env bash help_text=&quot; NAME fe - Search for a file and edit in gvim or VSCode. USAGE fe &lt;search words&gt; OPTIONS -h|--help Show help text. -f|--fuzzy Run a fuzzy search - adds wildcards before and after each word. -g|--use-grep Run grep - search content of files instead of filename. -p|--path Edit first matching file in current PATH config DESCRIPTION Search for a file and edit in gvim or VSCode. A list of matching files will be shown with the option to select one for edit. AUT",
     "type": "page"
   },
   {

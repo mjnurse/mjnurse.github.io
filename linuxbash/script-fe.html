@@ -109,6 +109,9 @@
 <span class="s2">    -g|--use-grep</span>
 <span class="s2">        Run grep - search content of files instead of filename.</span>
 
+<span class="s2">    -p|--path</span>
+<span class="s2">        Edit first matching file in current PATH config</span>
+
 <span class="s2">DESCRIPTION</span>
 <span class="s2">    Search for a file and edit in gvim or VSCode.  A list of matching files will</span>
 <span class="s2">    be shown with the option to select one for edit.</span>
@@ -142,6 +145,17 @@
 <span class="w">            </span><span class="p">;;</span>
 <span class="w">        </span>-g<span class="p">|</span>--use-grep<span class="o">)</span><span class="w"> </span><span class="c1"># arg: Run grep - search content of files instead of filename.</span>
 <span class="w">            </span><span class="nv">run_grep</span><span class="o">=</span>y
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>-p<span class="p">|</span>--path<span class="o">)</span><span class="w"> </span><span class="c1"># arg: Edit first matching file in current PATH config</span>
+<span class="w">            </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;code/gVim/vi [Cgv]? &quot;</span><span class="w"> </span>choice
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">choice</span><span class="p">,,</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;v&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                </span>vi<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>which<span class="w"> </span><span class="nv">$2</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="k">elif</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">choice</span><span class="p">,,</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;g&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                </span>gvim<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>which<span class="w"> </span><span class="nv">$2</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">                </span>code<span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>which<span class="w"> </span><span class="nv">$2</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="k">fi</span>
+<span class="w">            </span><span class="nb">exit</span>
 <span class="w">            </span><span class="p">;;</span>
 <span class="w">        </span>?*<span class="o">)</span>
 <span class="w">            </span><span class="k">break</span>
@@ -227,7 +241,7 @@ mv<span class="w"> </span>-f<span class="w"> </span><span class="nv">$tmp2</span
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: June 25, 2026</p>
+      <p>Last updated: October 20, 2026</p>
     </footer>
 
     <div class="scroll-container">

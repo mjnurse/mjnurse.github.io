@@ -132,7 +132,7 @@
 
 <span class="k">function</span><span class="w"> </span>cecho<span class="w"> </span><span class="o">{</span>
 <span class="w">    </span><span class="nv">color</span><span class="o">=</span>c<span class="nv">$1</span><span class="p">;</span><span class="w"> </span><span class="nb">shift</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="p">!color</span><span class="si">}</span><span class="nv">$*</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span>$<span class="s2">&quot;</span><span class="si">${</span><span class="p">!color</span><span class="si">}</span><span class="nv">$*</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="o">}</span>
 
 <span class="nv">try</span><span class="o">=</span><span class="s2">&quot;Try </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h for more information&quot;</span>
@@ -161,16 +161,16 @@ cecho<span class="w"> </span>lgre<span class="w"> </span><span class="s2">&quot;
 
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$push_yn</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;n&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span>
 <span class="w">    </span><span class="nv">changes_yn</span><span class="o">=</span>n
-<span class="w">    </span><span class="k">for</span><span class="w"> </span>d<span class="w"> </span><span class="k">in</span><span class="w"> </span>/home/martin/mjnurse/bash<span class="w"> </span><span class="se">\</span>
-<span class="w">             </span>/home/martin/mjnurse/python<span class="w"> </span><span class="se">\</span>
-<span class="w">             </span>/home/martin/mjnurse/cli-builder<span class="w"> </span><span class="se">\</span>
-<span class="w">             </span>/home/martin/mjnurse/website-builder<span class="w"> </span><span class="se">\</span>
-<span class="w">             </span>/home/martin/mjnurse/mjnurse-website<span class="w"> </span><span class="se">\</span>
-<span class="w">             </span>/home/martin/mjnurse/mjnurse.github.io<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>d<span class="w"> </span><span class="k">in</span><span class="w"> </span>~/mjnurse/bash<span class="w"> </span><span class="se">\</span>
+<span class="w">             </span>~/mjnurse/python<span class="w"> </span><span class="se">\</span>
+<span class="w">             </span>~/mjnurse/cli-builder<span class="w"> </span><span class="se">\</span>
+<span class="w">             </span>~/mjnurse/website-builder<span class="w"> </span><span class="se">\</span>
+<span class="w">             </span>~/mjnurse/mjnurse-website<span class="w"> </span><span class="se">\</span>
+<span class="w">             </span>~/mjnurse/mjnurse.github.io<span class="w"> </span><span class="se">\</span>
 <span class="w">            </span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">        </span><span class="nb">cd</span><span class="w"> </span><span class="nv">$d</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>git<span class="w"> </span>status<span class="w"> </span>--short<span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">            </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">ccya</span><span class="si">}</span><span class="s2">- Uncommitted changes in repo: </span><span class="si">${</span><span class="nv">clcya</span><span class="si">}</span><span class="nv">$d</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span>$<span class="s2">&quot;</span><span class="si">${</span><span class="nv">ccya</span><span class="si">}</span><span class="s2">- Uncommitted changes in repo: </span><span class="si">${</span><span class="nv">clcya</span><span class="si">}</span><span class="nv">$d</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="w">            </span><span class="nv">changes_yn</span><span class="o">=</span>y
 <span class="w">        </span><span class="k">fi</span>
 <span class="w">    </span><span class="k">done</span>
@@ -181,13 +181,12 @@ cecho<span class="w"> </span>lgre<span class="w"> </span><span class="s2">&quot;
 <span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 <span class="k">fi</span>
 
-<span class="k">for</span><span class="w"> </span>d<span class="w"> </span><span class="k">in</span><span class="w"> </span>/home/martin/mjnurse/bash<span class="w"> </span><span class="se">\</span>
-<span class="w">         </span>/home/martin/mjnurse/shortcut-keys<span class="w"> </span><span class="se">\</span>
-<span class="w">         </span>/home/martin/mjnurse/python<span class="w"> </span><span class="se">\</span>
-<span class="w">         </span>/home/martin/mjnurse/cli-builder<span class="w"> </span><span class="se">\</span>
-<span class="w">         </span>/home/martin/mjnurse/website-builder<span class="w"> </span><span class="se">\</span>
-<span class="w">         </span>/home/martin/mjnurse/mjnurse-website<span class="w"> </span><span class="se">\</span>
-<span class="w">         </span>/home/martin/mjnurse/mjnurse.github.io<span class="w"> </span><span class="se">\</span>
+<span class="k">for</span><span class="w"> </span>d<span class="w"> </span><span class="k">in</span><span class="w"> </span>~/mjnurse/bash<span class="w"> </span><span class="se">\</span>
+<span class="w">         </span>~/mjnurse/python<span class="w"> </span><span class="se">\</span>
+<span class="w">         </span>~/mjnurse/cli-builder<span class="w"> </span><span class="se">\</span>
+<span class="w">         </span>~/mjnurse/website-builder<span class="w"> </span><span class="se">\</span>
+<span class="w">         </span>~/mjnurse/mjnurse-website<span class="w"> </span><span class="se">\</span>
+<span class="w">         </span>~/mjnurse/mjnurse.github.io<span class="w"> </span><span class="se">\</span>
 <span class="w">        </span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">    </span><span class="nb">cd</span><span class="w"> </span><span class="nv">$d</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>git<span class="w"> </span>status<span class="w"> </span>--short<span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
@@ -234,7 +233,7 @@ cecho<span class="w"> </span>lgre<span class="w"> </span><span class="s2">&quot;
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: October 19, 2026</p>
+      <p>Last updated: October 20, 2026</p>
     </footer>
 
     <div class="scroll-container">
