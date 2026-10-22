@@ -162,6 +162,51 @@
 <span class="w">    </span><span class="nv">message</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$*</span><span class="s2">&quot;</span>
 <span class="w">    </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="p">!color</span><span class="si">}${</span><span class="nv">message</span><span class="si">}${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="o">}</span>
+
+
+cecho<span class="w"> </span><span class="nv">gre</span><span class="w"> </span><span class="o">================================================================================</span>
+cecho<span class="w"> </span>gre<span class="w"> </span><span class="s2">&quot;File Type Shouldn&#39;t be executable&quot;</span>
+cecho<span class="w"> </span><span class="nv">gre</span><span class="w"> </span><span class="o">================================================================================</span>
+
+<span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span>*<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nv">ft</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>file<span class="w"> </span>-b<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ft</span><span class="s2">&quot;</span><span class="w"> </span><span class="k">in</span>
+<span class="w">        </span>HTML*<span class="o">)</span><span class="w"> </span><span class="nv">ft</span><span class="o">=</span><span class="s2">&quot;HTML&quot;</span><span class="p">;;</span>
+<span class="w">        </span>JPEG*<span class="o">)</span><span class="w"> </span><span class="nv">ft</span><span class="o">=</span><span class="s2">&quot;JPEG&quot;</span><span class="p">;;</span>
+<span class="w">        </span>PNG*<span class="o">)</span><span class="w"> </span><span class="nv">ft</span><span class="o">=</span><span class="s2">&quot;PNG&quot;</span><span class="p">;;</span>
+<span class="w">        </span>GIF*<span class="o">)</span><span class="w"> </span><span class="nv">ft</span><span class="o">=</span><span class="s2">&quot;GIF&quot;</span><span class="p">;;</span>
+<span class="w">        </span>M*Excel*<span class="o">)</span><span class="w"> </span><span class="nv">ft</span><span class="o">=</span><span class="s2">&quot;Excel&quot;</span><span class="p">;;</span>
+<span class="w">        </span>M*Word*<span class="o">)</span><span class="w"> </span><span class="nv">ft</span><span class="o">=</span><span class="s2">&quot;Word&quot;</span><span class="p">;;</span>
+<span class="w">        </span>M*PowerPoint*<span class="o">)</span><span class="w"> </span><span class="nv">ft</span><span class="o">=</span><span class="s2">&quot;PowerPoint&quot;</span><span class="p">;;</span>
+<span class="w">        </span>PDF*<span class="o">)</span><span class="w"> </span><span class="nv">ft</span><span class="o">=</span><span class="s2">&quot;PDF&quot;</span><span class="p">;;</span>
+<span class="w">        </span>Zip*<span class="o">)</span><span class="w"> </span><span class="nv">ft</span><span class="o">=</span><span class="s2">&quot;Zip&quot;</span><span class="p">;;</span>
+<span class="w">        </span>*<span class="o">)</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$f</span><span class="w"> </span>-<span class="w"> </span><span class="nv">$ft</span><span class="p">;</span><span class="nv">ft</span><span class="o">=</span><span class="s2">&quot;Other&quot;</span><span class="p">;;</span>
+<span class="w">    </span><span class="k">esac</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ft</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;Other&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>-x<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span>--------------------------------------------------------------------------------
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;FILE:      </span><span class="nv">$f</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;TYPE:      </span><span class="nv">$ft</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span>--------------------------------------------------------------------------------
+<span class="w">        </span><span class="nv">opt</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">opt</span><span class="p">^</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">=</span>~<span class="w"> </span>^<span class="o">[</span>IRSQ<span class="o">]</span>$<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">            </span><span class="o">[[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$opt</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Invalid option: </span><span class="nv">$opt</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">clblu</span><span class="si">}</span><span class="s2">[i]gnore rule, [r]emove executable, [s]kip, q[uit]. [irSq]?: </span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="nb">read</span><span class="w"> </span>opt
+<span class="w">            </span><span class="o">[[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$opt</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nv">opt</span><span class="o">=</span><span class="s2">&quot;S&quot;</span>
+<span class="w">        </span><span class="k">done</span>
+<span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="nv">$opt</span><span class="w"> </span><span class="k">in</span>
+<span class="w">            </span>r<span class="p">|</span>R<span class="o">)</span>
+<span class="w">                </span>chmod<span class="w"> </span>-x<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span>
+<span class="w">                </span><span class="p">;;</span>
+<span class="w">            </span>i<span class="p">|</span>I<span class="o">)</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;;</span>
+<span class="w">            </span>q<span class="p">|</span>Q<span class="o">)</span>
+<span class="w">                </span>exit<span class="p">;;</span>
+<span class="w">        </span><span class="k">esac</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="k">done</span>
+
+
 cecho<span class="w"> </span><span class="nv">gre</span><span class="w"> </span><span class="o">================================================================================</span>
 cecho<span class="w"> </span>gre<span class="w"> </span><span class="s2">&quot;Filename contains character other than [a-z][0-9]_-.&quot;</span>
 cecho<span class="w"> </span><span class="nv">gre</span><span class="w"> </span><span class="o">================================================================================</span>
@@ -222,33 +267,33 @@ cecho<span class="w"> </span><span class="nv">gre</span><span class="w"> </span>
 <span class="k">fi</span>
 
 cecho<span class="w"> </span><span class="nv">gre</span><span class="w"> </span><span class="o">================================================================================</span>
-cecho<span class="w"> </span>gre<span class="w"> </span>Executable<span class="w"> </span>but<span class="w"> </span>not<span class="w"> </span><span class="s1">&#39;#!/usr/bin/env bash&#39;</span>
+cecho<span class="w"> </span>gre<span class="w"> </span>Executable<span class="w"> </span>but<span class="w"> </span>not<span class="w"> </span><span class="s1">&#39;#!/usr/bin/env ...&#39;</span>
 cecho<span class="w"> </span><span class="nv">gre</span><span class="w"> </span><span class="o">================================================================================</span>
 
 <span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>find<span class="w"> </span>.<span class="w"> </span>-maxdepth<span class="w"> </span><span class="m">1</span><span class="w"> </span>-executable<span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
 
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-f<span class="w"> </span><span class="nv">$f</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>!<span class="w"> </span>-L<span class="w"> </span><span class="nv">$f</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">        </span><span class="nv">line1</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>head<span class="w"> </span>-1<span class="w"> </span><span class="nv">$f</span><span class="k">)</span><span class="s2">&quot;</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">line1</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">18</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;#!/usr/bin/env bash&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nv">line1</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>head<span class="w"> </span>-1<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">line1</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">13</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;#!/usr/bin/env&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">            </span><span class="nb">echo</span><span class="w"> </span>--------------------------------------------------------------------------------
 <span class="w">            </span><span class="nb">echo</span><span class="w"> </span>FILE:<span class="w"> </span><span class="nv">$f</span>
 <span class="w">            </span><span class="nb">echo</span><span class="w"> </span>--------------------------------------------------------------------------------
 <span class="w">            </span><span class="nb">echo</span><span class="w"> </span>First<span class="w"> </span><span class="m">5</span><span class="w"> </span>lines:
 <span class="w">            </span><span class="nb">echo</span><span class="w"> </span>--------------
-<span class="w">            </span>head<span class="w"> </span>-5<span class="w"> </span><span class="nv">$f</span>
+<span class="w">            </span>head<span class="w"> </span>-5<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>trunc
 <span class="w">            </span><span class="nb">echo</span>
 <span class="w">            </span><span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">clblu</span><span class="si">}</span><span class="s2">[i]gnore rule, [r]emove exec, add [b]ash, add [p]ython3, [s]kip, q[uit]. [irbpSq]?: </span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="w">            </span><span class="nb">read</span><span class="w"> </span>opt
 <span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="nv">$opt</span><span class="w"> </span><span class="k">in</span>
 <span class="w">                </span>r<span class="p">|</span>R<span class="o">)</span>
-<span class="w">                    </span>chmod<span class="w"> </span>a-x<span class="w"> </span><span class="nv">$f</span>
+<span class="w">                    </span>chmod<span class="w"> </span>a-x<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span>
 <span class="w">                    </span><span class="p">;;</span>
 <span class="w">                </span>b<span class="p">|</span>B<span class="o">)</span>
-<span class="w">                    </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;/^#!\/bin\/bash/d&#39;</span><span class="w"> </span><span class="nv">$f</span>
-<span class="w">                    </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;1i#!/usr/bin/env bash&#39;</span><span class="w"> </span><span class="nv">$f</span>
+<span class="w">                    </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;/^#!\/bin\/bash/d&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span>
+<span class="w">                    </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;1i#!/usr/bin/env bash&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span>
 <span class="w">                    </span><span class="p">;;</span>
 <span class="w">                </span>p<span class="p">|</span>P<span class="o">)</span>
-<span class="w">                    </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;1i#!/usr/bin/env python3&#39;</span><span class="w"> </span><span class="nv">$f</span>
+<span class="w">                    </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;1i#!/usr/bin/env python3&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span>
 <span class="w">                    </span><span class="p">;;</span>
 <span class="w">                </span>i<span class="p">|</span>I<span class="o">)</span>
 <span class="w">                    </span><span class="k">break</span>
@@ -267,7 +312,7 @@ cecho<span class="w"> </span><span class="nv">gre</span><span class="w"> </span>
 
 <span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>find<span class="w"> </span>.<span class="w"> </span>-maxdepth<span class="w"> </span><span class="m">1</span><span class="w"> </span>!<span class="w"> </span>-executable<span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-f<span class="w"> </span><span class="nv">$f</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>!<span class="w"> </span>-L<span class="w"> </span><span class="nv">$f</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">      </span><span class="nv">line1</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>head<span class="w"> </span>-1<span class="w"> </span><span class="nv">$f</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">      </span><span class="nv">line1</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>head<span class="w"> </span>-1<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;\000&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
 <span class="w">      </span><span class="nv">line1</span><span class="o">=</span><span class="si">${</span><span class="nv">line1</span><span class="p">//[</span><span class="s1">$&#39; \t\r\n&#39;</span><span class="p">]</span><span class="si">}</span>
 <span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$line1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;#!/usr/bin/env bash&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">         </span><span class="nb">echo</span><span class="w"> </span>--------------------------------------------------------------------------------
@@ -275,14 +320,14 @@ cecho<span class="w"> </span><span class="nv">gre</span><span class="w"> </span>
 <span class="w">         </span><span class="nb">echo</span><span class="w"> </span>--------------------------------------------------------------------------------
 <span class="w">         </span><span class="nb">echo</span><span class="w"> </span>First<span class="w"> </span><span class="m">5</span><span class="w"> </span>lines:
 <span class="w">            </span><span class="nb">echo</span><span class="w"> </span>--------------
-<span class="w">         </span>head<span class="w"> </span>-5<span class="w"> </span><span class="nv">$f</span>
+<span class="w">         </span>head<span class="w"> </span>-5<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span>
 <span class="w">         </span><span class="nb">echo</span>
 <span class="w">         </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;[i]gnore rule, [d]elete &#39;#!/usr/bin/env bash&#39;, [m]ake exec, [s]kip, q[uit]. [idmSq]?: &quot;</span><span class="w"> </span>opt
 <span class="w">         </span><span class="k">case</span><span class="w"> </span><span class="nv">$opt</span><span class="w"> </span><span class="k">in</span>
 <span class="w">            </span>d<span class="p">|</span>D<span class="o">)</span>
-<span class="w">               </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;1d&#39;</span><span class="w"> </span><span class="nv">$f</span><span class="p">;;</span>
+<span class="w">               </span>sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;1d&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="p">;;</span>
 <span class="w">            </span>m<span class="p">|</span>M<span class="o">)</span>
-<span class="w">               </span>chmod<span class="w"> </span>u+x<span class="w"> </span><span class="nv">$f</span><span class="p">;;</span>
+<span class="w">               </span>chmod<span class="w"> </span>u+x<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="p">;;</span>
 <span class="w">            </span>i<span class="p">|</span>I<span class="o">)</span>
 <span class="w">               </span><span class="k">break</span><span class="p">;;</span>
 <span class="w">            </span>q<span class="p">|</span>Q<span class="o">)</span>
@@ -382,13 +427,13 @@ cecho<span class="w"> </span><span class="nv">gre</span><span class="w"> </span>
 
 <span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>find<span class="w"> </span>.<span class="w"> </span>-maxdepth<span class="w"> </span><span class="m">1</span><span class="w"> </span>-executable<span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-f<span class="w"> </span><span class="nv">$f</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>!<span class="w"> </span>-L<span class="w"> </span><span class="nv">$f</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">      </span><span class="nv">l1</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>cat<span class="w"> </span><span class="nv">$f</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;1p&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
-<span class="w">      </span><span class="nv">l2</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>cat<span class="w"> </span><span class="nv">$f</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;2p&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">      </span><span class="nv">l1</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>cat<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;1p&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">      </span><span class="nv">l2</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>cat<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s1">&#39;2p&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
 <span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$l1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;#!/usr/bin/env bash&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">l2</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="nv">10</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;help_text=&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">         </span><span class="nb">echo</span><span class="w"> </span>--------------------------------------------------------------------------------
-<span class="w">         </span>ls<span class="w"> </span>-al<span class="w"> </span><span class="nv">$f</span>
+<span class="w">         </span>ls<span class="w"> </span>-al<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span>
 <span class="w">         </span><span class="nb">echo</span>
-<span class="w">         </span>head<span class="w"> </span>-15<span class="w"> </span><span class="nv">$f</span>
+<span class="w">         </span>head<span class="w"> </span>-15<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span>
 <span class="w">         </span><span class="nb">echo</span>
 <span class="w">         </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;[i]gnore rule, [a]dd header, edit [v]im, edit [c]ode, [s]kip, q[uit]. [iavcSq]?: &quot;</span><span class="w"> </span>opt
 <span class="w">         </span><span class="k">case</span><span class="w"> </span><span class="nv">$opt</span><span class="w"> </span><span class="k">in</span>
@@ -435,8 +480,8 @@ cecho<span class="w"> </span><span class="nv">gre</span><span class="w"> </span>
 <span class="s1">        ;;</span>
 <span class="s1">esac</span>
 <span class="s1">&#39;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$tidytmp</span>
-<span class="w">               </span>tail<span class="w"> </span>+2<span class="w"> </span><span class="nv">$f</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$tidytmp</span>
-<span class="w">               </span>cp<span class="w"> </span>-f<span class="w"> </span><span class="nv">$tidytmp</span><span class="w"> </span><span class="nv">$f</span>
+<span class="w">               </span>tail<span class="w"> </span>+2<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$tidytmp</span>
+<span class="w">               </span>cp<span class="w"> </span>-f<span class="w"> </span><span class="nv">$tidytmp</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$f</span><span class="s2">&quot;</span>
 <span class="w">               </span><span class="p">;;</span>
 <span class="w">            </span>v<span class="p">|</span>V<span class="o">)</span>
 <span class="w">               </span>vgim<span class="w"> </span><span class="nv">$f</span>
@@ -472,7 +517,7 @@ cecho<span class="w"> </span><span class="nv">gre</span><span class="w"> </span>
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: October 19, 2026</p>
+      <p>Last updated: October 21, 2026</p>
     </footer>
 
     <div class="scroll-container">
