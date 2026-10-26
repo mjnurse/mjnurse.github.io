@@ -1004,7 +1004,7 @@
     "id": "143",
     "title": "h: Extracts and displays the help_lines",
     "url": "/linuxbash/script-h.html",
-    "content": "#!/usr/bin/env bash help_text=&quot; NAME h - Extracts and displays the (single line) help lines in bash scripts. USAGE h [&lt;search_string - wildcards allowed&gt;] OPTIONS -h|--help Show help text. -i|--issues Only display scripts with help_line issues. -n|--noissues Hide scripts with help_line issues. DESCRIPTION Extracts and displays the (single line) help lines. It searches for lines starting with &#39;help_line=&#39; or &#39;-- help_line:&#39; in bash scripts. If search strings are provide",
+    "content": "Demo $ h ba -------------------------- help_lines: (filter: *ba*) -------------------------- b - backup: Create a dated zip archive of files and directories bash-basic-script-ex: Example Basic Bash Script bash-opts-example: Example Bash script processing short and long command-line options, including grouped short options bash-script-example: Example Bash Script e - ebc: Edit the mjn-bashrc file (alias-only) g - gen-bash-func: Generates code and header of a bash function gen-bash: Generates a ba",
     "type": "page"
   },
   {
