@@ -1053,7 +1053,7 @@
     "id": "150",
     "title": "n: Record and query notes",
     "url": "/linuxbash/script-n.html",
-    "content": "#!/usr/bin/env bash help_text=&quot; NAME n - Notes USAGE n [options] [&lt;text - consider wrapping in quotes&gt; &lt;text2&gt; &lt;text3&gt;] OPTIONS -h|--help Show this help message. -a|--add Add the &lt;text&gt; as a new note. -e|--edit Edit the notes text file. -m|--markdown Generate a markdown version of the notes file. DESCRIPTION Record and query notes. Any note which contains the text &quot;[P]&quot; is a Private note. Private notes are not included in the markdown extract. AUTHOR mjnurs",
+    "content": "Demo $ n vim _ _ _ | \\| |___| |_ ___ ___ | .` / _ \\ _/ -_|_-&lt; |_|\\_\\___/\\__\\___/__/ vim: /lala\\C # Make search case sensitive (..\\c - insensitive) [sed, regex] vim: :%!sort -R # Random order - calling external app to order [sed, regex] vim: \\a (\\A) # alphabetic character [A-Za-z]. Uppercase: non ... [sed, regex] vim: \\d \\x (\\D \\X) # digit [0-9], hex digit [0-9A-Fa-f]. Uppercase: non... [sed, regex] vim: \\l \\u # lowercase letter [a-z], uppercase letter [sed, regex] vim: \\w \\s (\\W \\S) # word ch",
     "type": "page"
   },
   {
@@ -1172,7 +1172,7 @@
     "id": "167",
     "title": "tot: Sum, average, min, max calculator with size unit support",
     "url": "/linuxbash/script-tot.html",
-    "content": "#!/bin/bash help_text=&quot; NAME tot - Sum, average, min, max for a list of values with optional size units. USAGE tot [options] [values...] OPTIONS -h|--help Show help text. -u [&lt;unit&gt;] Display values with size units. Without a value, auto-selects the best unit. With a value (b, kb, mb, gb, tb), displays all values in that unit. Units are also shown automatically when any input value includes a unit suffix. DESCRIPTION Calculates sum, average, min and max for a list of numeric values. Va",
+    "content": "Demo $ tot Enter values (e.g. 100 2.5gb 300kb), Ctrl-D to finish: 10GB 300MB 2.2GB Count: 3 Sum: 13,414,223,053 (12.49 gb) Avg: 4,471,407,684 (4.16 gb) Min: 314,572,800 (300.00 mb) Max: 10,737,418,240 (10.00 gb) $ $ printf &quot;1\\n2\\n3\\n4\\n5&quot; | tot Enter values (e.g. 100 2.5gb 300kb), Ctrl-D to finish: Count: 5 Sum: 15 Avg: 3 Min: 1 Max: 5 $ Script #!/bin/bash help_text=&quot; NAME tot - Sum, average, min, max for a list of values with optional size units. USAGE tot [options] [values...] O",
     "type": "page"
   },
   {
