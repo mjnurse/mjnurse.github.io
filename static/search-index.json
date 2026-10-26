@@ -787,7 +787,7 @@
     "id": "112",
     "title": "3wp: Generates a random 3 word password",
     "url": "/linuxbash/script-3wp.html",
-    "content": "#!/usr/bin/env bash help_text=&quot; NAME 3wp - Generates a random 3 word password USAGE 3wp DESCRIPTION A script to generate a 3 word password. AUTHOR mjnurse.github.io - 2025 &quot; help_line=&quot;Generates a random 3 word password&quot; web_desc_line=&quot;Generates a random 3 word password&quot; if [ &quot;$1&quot; == &quot;-h&quot; ] || [ &quot;$1&quot; == &quot;--help&quot; ]; then echo &quot;$help_text&quot; exit fi words=&quot;$MJNWINROOT/MJN/words.txt&quot; num_words=$(cat &quot;$words",
+    "content": "Demo $ 3wp pitched-tories-bonded $ 3wp overpricing-misfeasances-sporing $ Script #!/usr/bin/env bash help_text=&quot; NAME 3wp - Generates a random 3 word password USAGE 3wp DESCRIPTION A script to generate a 3 word password. AUTHOR mjnurse.github.io - 2025 &quot; help_line=&quot;Generates a random 3 word password&quot; web_desc_line=&quot;Generates a random 3 word password&quot; if [ &quot;$1&quot; == &quot;-h&quot; ] || [ &quot;$1&quot; == &quot;--help&quot; ]; then echo &quot;$help_text&quot;",
     "type": "page"
   },
   {
@@ -892,7 +892,7 @@
     "id": "127",
     "title": "emoji: Search and find Emoji characters",
     "url": "/linuxbash/script-emoji.html",
-    "content": "#!/usr/bin/env bash help_text=&quot; NAME emoji - Search and find emoji characters. USAGE emoji [options] &lt;search-terms&gt; OPTIONS -e|--exact Perform exact matching of search terms. -h|--help Show help text. DESCRIPTION Search through emojis. AUTHOR mjnurse.github.io - 2026 &quot; help_line=&quot;Search and find Emoji characters&quot; web_desc_line=&quot;Search and find Emoji characters&quot; tmpfile=&quot;/tmp/uc.tmp&quot; rm -f $tmpfile # Terminal Colours cdef=&quot;\\x1b[39m&quot; # defaul",
+    "content": "Demo $ emoji hand smileys &amp; people 1) \ud83d\udc4b : waving hand 2) \ud83d\udc4f : clapping hands 3) \ud83d\ude4c : raising hands 4) \ud83e\udd1d : handshake 5) \u270c : victory hand Select a character by number copy to clipboard (blank to exit): 2 (copied to clipboard) $ Script #!/usr/bin/env bash help_text=&quot; NAME emoji - Search and find emoji characters. USAGE emoji [options] &lt;search-terms&gt; OPTIONS -e|--exact Perform exact matching of search terms. -h|--help Show help text. DESCRIPTION Search through emojis. AUTHOR mjnurse.git",
     "type": "page"
   },
   {
