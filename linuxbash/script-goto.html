@@ -182,9 +182,11 @@
 <span class="w">                </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 <span class="w">            </span><span class="k">fi</span>
 <span class="w">            </span>ls<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>*<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/\(^.*\/\)\(.*\)/\2, \1\2/&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$0</span>.dat
-<span class="w">                </span>cat<span class="w"> </span><span class="nv">$0</span>.dat<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;/^ *$/d;</span>
-<span class="s1">                              s/,/                                            /; </span>
-<span class="s1">                              s/\(^................\)[^ ]*   *\(.*\)/\1, \2/&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-u<span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$0</span>.tmp
+<span class="w">                </span>cat<span class="w"> </span><span class="nv">$0</span>.dat<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;</span>
+<span class="s1">                    /^ *$/d;</span>
+<span class="s1">                    s/,/                                            /; </span>
+<span class="s1">                    s/\(^................\)[^ ]*   *\(.*\)/\1, \2/</span>
+<span class="s1">                &#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-u<span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$0</span>.tmp
 <span class="w">            </span>mv<span class="w"> </span><span class="nv">$0</span>.tmp<span class="w"> </span><span class="nv">$0</span>.dat
 <span class="w">            </span><span class="nb">exit</span>
 <span class="w">            </span><span class="p">;;</span>
@@ -257,7 +259,7 @@ rm<span class="w"> </span><span class="nv">$tf</span>
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: June 25, 2026</p>
+      <p>Last updated: October 28, 2026</p>
     </footer>
 
     <div class="scroll-container">
