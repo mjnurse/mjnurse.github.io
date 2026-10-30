@@ -808,7 +808,7 @@
     "id": "115",
     "title": "bash-basic-script-ex: Example Basic Bash Script",
     "url": "/linuxbash/script-bash-basic-script-ex.html",
-    "content": "#!/usr/bin/env bash help_text=&quot; usage: &lt;&lt;FILENAME&gt;&gt; [options] &lt;filename&gt; -h : This help text. &quot; help_line=&quot;Example Basic Bash Script&quot; web_desc_line=&quot;Example Basic Bash Script&quot; case $1 in -h|--help) echo &quot;$help_text&quot; exit ;; esac if [[ &quot;$1&quot; == &quot;&quot; ]]; then echo &quot;$help_text&quot; exit 1 fi",
+    "content": "#!/usr/bin/env bash help_text=&quot; usage: &lt;&lt;FILENAME&gt;&gt; [options] &lt;filename&gt; -h : This help text. &quot; help_line=&quot;Example Basic Bash Script&quot; web_desc_line=&quot;Example Basic Bash Script&quot; set -uo pipefail # Treat unset variables as an error and fail on pipe errors case $1 in -h|--help) echo &quot;$help_text&quot; exit ;; esac if [[ &quot;$1&quot; == &quot;&quot; ]]; then echo &quot;$help_text&quot; exit 1 fi",
     "type": "page"
   },
   {
@@ -822,7 +822,7 @@
     "id": "117",
     "title": "bash-script-example: Example Bash Script",
     "url": "/linuxbash/script-bash-script-example.html",
-    "content": "#!/usr/bin/env bash help_text=&quot; NAME bash-func - One line description. USAGE bash-func [options] &lt;parameters&gt; OPTIONS -x Description... -h|--help Show help text. DESCRIPTION Description description description description. AUTHOR mjnurse.github.io - 2026 &quot; help_line=&quot;Example Bash Script&quot; web_desc_line=&quot;Example Bash Script&quot; tmpfile=$(mktemp) trap &#39;rm -f &quot;$tmpfile&quot;&#39; EXIT # set -x # for debugging # Terminal Colours cdef=&quot;\\x1b[39m&quot; # de",
+    "content": "#!/usr/bin/env bash help_text=&quot; NAME bash-func - One line description. USAGE bash-func [options] &lt;parameters&gt; OPTIONS -x Description... -h|--help Show help text. DESCRIPTION Description description description description. AUTHOR mjnurse.github.io - 2026 &quot; help_line=&quot;Example Bash Script&quot; web_desc_line=&quot;Example Bash Script&quot; set -u -o pipefail # Treat unset variables as an error and fail on pipe errors # set -x # for debugging tmpfile=$(mktemp) trap &#39;rm -f &",
     "type": "page"
   },
   {

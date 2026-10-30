@@ -115,10 +115,12 @@
 <span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Example Bash Script&quot;</span>
 <span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Example Bash Script&quot;</span>
 
+<span class="nb">set</span><span class="w"> </span>-u<span class="w"> </span>-o<span class="w"> </span>pipefail<span class="w"> </span><span class="c1"># Treat unset variables as an error and fail on pipe errors</span>
+<span class="c1"># set -x # for debugging</span>
+
 <span class="nv">tmpfile</span><span class="o">=</span><span class="k">$(</span>mktemp<span class="k">)</span>
 <span class="nb">trap</span><span class="w"> </span><span class="s1">&#39;rm -f &quot;$tmpfile&quot;&#39;</span><span class="w"> </span>EXIT
 
-<span class="c1"># set -x # for debugging</span>
 
 <span class="c1"># Terminal Colours</span>
 <span class="nv">cdef</span><span class="o">=</span><span class="s2">&quot;\x1b[39m&quot;</span><span class="w"> </span><span class="c1"># default colour</span>
@@ -174,7 +176,7 @@ cat<span class="w"> </span><span class="nv">$0</span>
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: August 24, 2026</p>
+      <p>Last updated: October 30, 2026</p>
     </footer>
 
     <div class="scroll-container">
