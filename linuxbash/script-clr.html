@@ -102,17 +102,22 @@
 
 <span class="s2">OPTIONS</span>
 <span class="s2">    -p|--push</span>
-<span class="s2">        Interactively commit and push changes for each repository</span>
-<span class="s2">        with uncommitted changes.</span>
+<span class="s2">        Interactively commit, rebase, and push changes for each repository</span>
+<span class="s2">        with uncommitted or unpushed changes.</span>
+
+<span class="s2">    -f|--force</span>
+<span class="s2">        With -p, commit (with default message 'Various') and push without</span>
+<span class="s2">        prompting for confirmation unless a conflict occurs.</span>
 
 <span class="s2">    -h|--help</span>
 <span class="s2">        Show help text.</span>
 
 <span class="s2">DESCRIPTION</span>
 <span class="s2">    Checks a predefined list of local git repositories for uncommitted</span>
-<span class="s2">    changes. When run without options, displays a list of repositories</span>
-<span class="s2">    that have uncommitted changes. With the -p option, iterates through</span>
-<span class="s2">    each repository with changes and prompts to commit and push.</span>
+<span class="s2">    changes, unpushed commits, or unfinished rebases/merges. When run</span>
+<span class="s2">    without options, displays a summary of repositories needing attention.</span>
+<span class="s2">    With the -p option, iterates through each repository and prompts to</span>
+<span class="s2">    commit, pull --rebase, and push.</span>
 
 <span class="s2">AUTHOR</span>
 <span class="s2">    mjnurse.github.io - 2026</span>
@@ -140,38 +145,150 @@
 <span class="nv">usage</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Usage: </span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%OPTIONS*</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s2">"\n"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">"s/  */ /g"</span><span class="k">)</span>
 
 <span class="nv">push_yn</span><span class="o">=</span>n
+<span class="nv">force_yn</span><span class="o">=</span>n
 <span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
 <span class="w">        </span>-h<span class="p">|</span>--help<span class="o">)</span>
 <span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$help_text</span><span class="s2">"</span>
-<span class="w">            </span><span class="nb">exit</span>
+<span class="w">            </span><span class="nb">exit</span><span class="w"> </span><span class="m">0</span>
 <span class="w">            </span><span class="p">;;</span>
 <span class="w">        </span>-p<span class="p">|</span>--push<span class="o">)</span>
 <span class="w">            </span><span class="nv">push_yn</span><span class="o">=</span>y
 <span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>-f<span class="p">|</span>--force<span class="o">)</span>
+<span class="w">            </span><span class="nv">force_yn</span><span class="o">=</span>y
+<span class="w">            </span><span class="p">;;</span>
 <span class="w">        </span>?*<span class="o">)</span>
-<span class="w">            </span><span class="k">break</span>
+<span class="w">            </span>cecho<span class="w"> </span>lred<span class="w"> </span><span class="s2">"Unknown option: </span><span class="nv">$1</span><span class="s2">"</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$usage</span><span class="s2">"</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$try</span><span class="s2">"</span>
+<span class="w">            </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 <span class="w">            </span><span class="p">;;</span>
 <span class="w">    </span><span class="k">esac</span>
 <span class="w">    </span><span class="nb">shift</span>
 <span class="k">done</span>
+
+<span class="nv">repos</span><span class="o">=(</span>
+<span class="w">    </span>~/mjnurse/bash
+<span class="w">    </span>~/mjnurse/python
+<span class="w">    </span>~/mjnurse/cli-builder
+<span class="w">    </span>~/mjnurse/website-builder
+<span class="w">    </span>~/mjnurse/mjnurse-website
+<span class="w">    </span>~/mjnurse/mjnurse.github.io
+<span class="o">)</span>
+
+<span class="k">function</span><span class="w"> </span>is_rebase_in_progress<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span>git_dir
+<span class="w">    </span><span class="nv">git_dir</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>git<span class="w"> </span>rev-parse<span class="w"> </span>--git-dir<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="m">1</span>
+<span class="w">    </span><span class="o">[[</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">"</span><span class="nv">$git_dir</span><span class="s2">/rebase-merge"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">"</span><span class="nv">$git_dir</span><span class="s2">/rebase-apply"</span><span class="w"> </span><span class="o">]]</span>
+<span class="o">}</span>
+
+<span class="k">function</span><span class="w"> </span>is_merge_in_progress<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span>git_dir
+<span class="w">    </span><span class="nv">git_dir</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>git<span class="w"> </span>rev-parse<span class="w"> </span>--git-dir<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="m">1</span>
+<span class="w">    </span><span class="o">[[</span><span class="w"> </span>-f<span class="w"> </span><span class="s2">"</span><span class="nv">$git_dir</span><span class="s2">/MERGE_HEAD"</span><span class="w"> </span><span class="o">]]</span>
+<span class="o">}</span>
+
+<span class="k">function</span><span class="w"> </span>get_ahead_behind<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="c1"># Sets global ahead_count and behind_count relative to upstream (if configured)</span>
+<span class="w">    </span><span class="nv">ahead_count</span><span class="o">=</span><span class="m">0</span>
+<span class="w">    </span><span class="nv">behind_count</span><span class="o">=</span><span class="m">0</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>git<span class="w"> </span>rev-parse<span class="w"> </span>--abbrev-ref<span class="w"> </span>--symbolic-full-name<span class="w"> </span>@<span class="o">{</span>u<span class="o">}</span><span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nb">local</span><span class="w"> </span>counts
+<span class="w">        </span><span class="nv">counts</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>git<span class="w"> </span>rev-list<span class="w"> </span>--left-right<span class="w"> </span>--count<span class="w"> </span>@<span class="o">{</span>u<span class="o">}</span>...HEAD<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="k">)</span><span class="s2">"</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">"</span><span class="nv">$counts</span><span class="s2">"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>behind_count<span class="w"> </span>ahead_count<span class="w"> </span><span class="o">&lt;&lt;&lt;</span><span class="w"> </span><span class="s2">"</span><span class="nv">$counts</span><span class="s2">"</span>
+<span class="w">        </span><span class="k">fi</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="o">}</span>
+
+<span class="k">function</span><span class="w"> </span>pull_rebase_and_push<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span><span class="nv">repo_dir</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
+
+<span class="w">    </span>get_ahead_behind
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">((</span><span class="w"> </span>behind_count<span class="w"> </span>&gt;<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">))</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span>cecho<span class="w"> </span>lcya<span class="w"> </span><span class="s2">"Pulling </span><span class="nv">$behind_count</span><span class="s2"> remote commit(s) with rebase..."</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>!<span class="w"> </span>git<span class="w"> </span>pull<span class="w"> </span>--rebase<span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span>cecho<span class="w"> </span>lred<span class="w"> </span><span class="s2">"Rebase conflict encountered in </span><span class="nv">$repo_dir</span><span class="s2">!"</span>
+<span class="w">            </span>git<span class="w"> </span>status<span class="w"> </span>--short
+<span class="w">            </span><span class="nb">local</span><span class="w"> </span><span class="nv">res</span><span class="o">=</span><span class="s2">""</span>
+<span class="w">            </span><span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">res</span><span class="p">^</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="o">=</span>~<span class="w"> </span>^<span class="o">[</span>OTA<span class="o">]</span>$<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">                </span><span class="nb">echo</span>
+<span class="w">                </span><span class="nb">printf</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">clyel</span><span class="si">}</span><span class="s2">Resolve conflict using [O]urs (local), [T]heirs (remote), or [A]bort rebase [otA]? </span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">                </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>res
+<span class="w">                </span><span class="nv">res</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">res</span><span class="k">:-</span><span class="nv">A</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">            </span><span class="k">done</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">res</span><span class="p">^</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="k">in</span>
+<span class="w">                </span>O<span class="o">)</span>
+<span class="w">                    </span>git<span class="w"> </span>diff<span class="w"> </span>--name-only<span class="w"> </span>--diff-filter<span class="o">=</span>U<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="nv">IFS</span><span class="o">=</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>file<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">                        </span><span class="o">[[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>checkout<span class="w"> </span>--ours<span class="w"> </span>--<span class="w"> </span><span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>--<span class="w"> </span><span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span>
+<span class="w">                    </span><span class="k">done</span>
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span>!<span class="w"> </span><span class="nv">GIT_EDITOR</span><span class="o">=</span><span class="nb">true</span><span class="w"> </span>git<span class="w"> </span>rebase<span class="w"> </span>--continue<span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                        </span>cecho<span class="w"> </span>lred<span class="w"> </span><span class="s2">"Failed to continue rebase automatically. Aborting rebase."</span>
+<span class="w">                        </span>git<span class="w"> </span>rebase<span class="w"> </span>--abort
+<span class="w">                        </span><span class="k">return</span><span class="w"> </span><span class="m">1</span>
+<span class="w">                    </span><span class="k">fi</span>
+<span class="w">                    </span><span class="p">;;</span>
+<span class="w">                </span>T<span class="o">)</span>
+<span class="w">                    </span>git<span class="w"> </span>diff<span class="w"> </span>--name-only<span class="w"> </span>--diff-filter<span class="o">=</span>U<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="k">while</span><span class="w"> </span><span class="nv">IFS</span><span class="o">=</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>file<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">                        </span><span class="o">[[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>checkout<span class="w"> </span>--theirs<span class="w"> </span>--<span class="w"> </span><span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>--<span class="w"> </span><span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span>
+<span class="w">                    </span><span class="k">done</span>
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span>!<span class="w"> </span><span class="nv">GIT_EDITOR</span><span class="o">=</span><span class="nb">true</span><span class="w"> </span>git<span class="w"> </span>rebase<span class="w"> </span>--continue<span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                        </span>cecho<span class="w"> </span>lred<span class="w"> </span><span class="s2">"Failed to continue rebase automatically. Aborting rebase."</span>
+<span class="w">                        </span>git<span class="w"> </span>rebase<span class="w"> </span>--abort
+<span class="w">                        </span><span class="k">return</span><span class="w"> </span><span class="m">1</span>
+<span class="w">                    </span><span class="k">fi</span>
+<span class="w">                    </span><span class="p">;;</span>
+<span class="w">                </span>A<span class="o">)</span>
+<span class="w">                    </span>git<span class="w"> </span>rebase<span class="w"> </span>--abort
+<span class="w">                    </span>cecho<span class="w"> </span>lyel<span class="w"> </span><span class="s2">"Rebase aborted for </span><span class="nv">$repo_dir</span><span class="s2"> (local commit preserved on branch)."</span>
+<span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="m">1</span>
+<span class="w">                    </span><span class="p">;;</span>
+<span class="w">            </span><span class="k">esac</span>
+<span class="w">        </span><span class="k">fi</span>
+<span class="w">    </span><span class="k">fi</span>
+
+<span class="w">    </span><span class="c1"># Warn if remote origin uses HTTPS instead of SSH on github.com</span>
+<span class="w">    </span><span class="nb">local</span><span class="w"> </span>remote_url
+<span class="w">    </span><span class="nv">remote_url</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>git<span class="w"> </span>remote<span class="w"> </span>get-url<span class="w"> </span>origin<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="k">)</span><span class="s2">"</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$remote_url</span><span class="s2">"</span><span class="w"> </span><span class="o">=</span>~<span class="w"> </span>^https://github<span class="se">\.</span>com/<span class="o">(</span>.+<span class="o">)</span>$<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nb">local</span><span class="w"> </span><span class="nv">ssh_url</span><span class="o">=</span><span class="s2">"git@github.com:</span><span class="si">${</span><span class="nv">BASH_REMATCH</span><span class="p">[1]</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">        </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$ssh_url</span><span class="s2">"</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span>*.git<span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nv">ssh_url</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">ssh_url</span><span class="si">}</span><span class="s2">.git"</span>
+<span class="w">        </span>cecho<span class="w"> </span>lyel<span class="w"> </span><span class="s2">"Note: origin uses HTTPS (</span><span class="nv">$remote_url</span><span class="s2">). Switching to SSH (</span><span class="nv">$ssh_url</span><span class="s2">)..."</span>
+<span class="w">        </span>git<span class="w"> </span>remote<span class="w"> </span>set-url<span class="w"> </span>origin<span class="w"> </span><span class="s2">"</span><span class="nv">$ssh_url</span><span class="s2">"</span>
+<span class="w">    </span><span class="k">fi</span>
+
+<span class="w">    </span>cecho<span class="w"> </span>lcya<span class="w"> </span><span class="s2">"Pushing to remote..."</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>git<span class="w"> </span>push<span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span>cecho<span class="w"> </span>lgre<span class="w"> </span><span class="s2">"Successfully pushed </span><span class="nv">$repo_dir</span><span class="s2">."</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span>cecho<span class="w"> </span>lred<span class="w"> </span><span class="s2">"Failed to push </span><span class="nv">$repo_dir</span><span class="s2">!"</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="m">1</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="o">}</span>
 
 <span class="nb">echo</span>
 cecho<span class="w"> </span>lgre<span class="w"> </span><span class="s2">"Checking local git repositories for uncommitted changes..."</span>
 
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$push_yn</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"n"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span>
 <span class="w">    </span><span class="nv">changes_yn</span><span class="o">=</span>n
-<span class="w">    </span><span class="k">for</span><span class="w"> </span>d<span class="w"> </span><span class="k">in</span><span class="w"> </span>~/mjnurse/bash<span class="w"> </span><span class="se">\</span>
-<span class="w">             </span>~/mjnurse/python<span class="w"> </span><span class="se">\</span>
-<span class="w">             </span>~/mjnurse/cli-builder<span class="w"> </span><span class="se">\</span>
-<span class="w">             </span>~/mjnurse/website-builder<span class="w"> </span><span class="se">\</span>
-<span class="w">             </span>~/mjnurse/mjnurse-website<span class="w"> </span><span class="se">\</span>
-<span class="w">             </span>~/mjnurse/mjnurse.github.io<span class="w"> </span><span class="se">\</span>
-<span class="w">            </span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-d<span class="w"> </span><span class="nv">$d</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">            </span><span class="nb">cd</span><span class="w"> </span><span class="nv">$d</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="k">$(</span>git<span class="w"> </span>status<span class="w"> </span>--short<span class="k">)</span><span class="s2">"</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span>d<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">repos</span><span class="p">[@]</span><span class="si">}</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">"</span><span class="nv">$d</span><span class="s2">"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="nb">cd</span><span class="w"> </span><span class="s2">"</span><span class="nv">$d</span><span class="s2">"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">continue</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>is_rebase_in_progress<span class="w"> </span><span class="o">||</span><span class="w"> </span>is_merge_in_progress<span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                </span>cecho<span class="w"> </span>lred<span class="w"> </span><span class="s2">"Rebase/merge in progress in repo: </span><span class="si">${</span><span class="nv">clcya</span><span class="si">}</span><span class="nv">$d</span><span class="s2">"</span>
+<span class="w">                </span><span class="nv">changes_yn</span><span class="o">=</span>y
+<span class="w">            </span><span class="k">elif</span><span class="w"> </span>!<span class="w"> </span>git<span class="w"> </span>symbolic-ref<span class="w"> </span>-q<span class="w"> </span>HEAD<span class="w"> </span>&gt;/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                </span>cecho<span class="w"> </span>lred<span class="w"> </span><span class="s2">"Detached HEAD in repo: </span><span class="si">${</span><span class="nv">clcya</span><span class="si">}</span><span class="nv">$d</span><span class="s2">"</span>
+<span class="w">                </span><span class="nv">changes_yn</span><span class="o">=</span>y
+<span class="w">            </span><span class="k">fi</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>git<span class="w"> </span>status<span class="w"> </span>--porcelain<span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">                </span>cecho<span class="w"> </span>cya<span class="w"> </span><span class="s2">"Uncommitted changes in repo: </span><span class="si">${</span><span class="nv">clcya</span><span class="si">}</span><span class="nv">$d</span><span class="s2">"</span>
+<span class="w">                </span><span class="nv">changes_yn</span><span class="o">=</span>y
+<span class="w">            </span><span class="k">fi</span>
+<span class="w">            </span>get_ahead_behind
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">((</span><span class="w"> </span>ahead_count<span class="w"> </span>&gt;<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">))</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                </span>cecho<span class="w"> </span>lyel<span class="w"> </span><span class="s2">"Unpushed commits (</span><span class="nv">$ahead_count</span><span class="s2"> ahead) in repo: </span><span class="si">${</span><span class="nv">clcya</span><span class="si">}</span><span class="nv">$d</span><span class="s2">"</span>
 <span class="w">                </span><span class="nv">changes_yn</span><span class="o">=</span>y
 <span class="w">            </span><span class="k">fi</span>
 <span class="w">        </span><span class="k">fi</span>
@@ -179,52 +296,116 @@ cecho<span class="w"> </span>lgre<span class="w"> </span><span class="s2">"Check
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$changes_yn</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"y"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">        </span><span class="nb">echo</span>
 <span class="w">        </span>cecho<span class="w"> </span>lmag<span class="w"> </span><span class="s2">"Run clr -p to selectively commit/push changes."</span>
+<span class="w">        </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 <span class="w">    </span><span class="k">fi</span>
-<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">0</span>
 <span class="k">fi</span>
 
-<span class="k">for</span><span class="w"> </span>d<span class="w"> </span><span class="k">in</span><span class="w"> </span>~/mjnurse/bash<span class="w"> </span><span class="se">\</span>
-<span class="w">         </span>~/mjnurse/python<span class="w"> </span><span class="se">\</span>
-<span class="w">         </span>~/mjnurse/cli-builder<span class="w"> </span><span class="se">\</span>
-<span class="w">         </span>~/mjnurse/website-builder<span class="w"> </span><span class="se">\</span>
-<span class="w">         </span>~/mjnurse/mjnurse-website<span class="w"> </span><span class="se">\</span>
-<span class="w">         </span>~/mjnurse/mjnurse.github.io<span class="w"> </span><span class="se">\</span>
-<span class="w">        </span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-d<span class="w"> </span><span class="nv">$d</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">        </span><span class="nb">cd</span><span class="w"> </span><span class="nv">$d</span>
+<span class="k">for</span><span class="w"> </span>d<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">repos</span><span class="p">[@]</span><span class="si">}</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">"</span><span class="nv">$d</span><span class="s2">"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nb">cd</span><span class="w"> </span><span class="s2">"</span><span class="nv">$d</span><span class="s2">"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">continue</span>
 <span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Checking repository: </span><span class="nv">$d</span><span class="s2">"</span>
-<span class="w">        </span>git<span class="w"> </span>fetch
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="k">$(</span>git<span class="w"> </span>status<span class="w"> </span>--short<span class="k">)</span><span class="s2">"</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span>git<span class="w"> </span>fetch<span class="w"> </span>--quiet
+
+<span class="w">        </span><span class="c1"># Handle unfinished rebase or merge first</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>is_rebase_in_progress<span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="nb">echo</span>
+<span class="w">            </span>cecho<span class="w"> </span>lred<span class="w"> </span><span class="s2">"------------------------------------------------------------"</span>
+<span class="w">            </span>cecho<span class="w"> </span>lred<span class="w"> </span><span class="s2">"Repository: </span><span class="nv">$d</span><span class="s2"> (REBASE IN PROGRESS)"</span>
+<span class="w">            </span>cecho<span class="w"> </span>lred<span class="w"> </span><span class="s2">"------------------------------------------------------------"</span>
+<span class="w">            </span>git<span class="w"> </span>status
+<span class="w">            </span><span class="nb">echo</span>
+<span class="w">            </span><span class="nb">printf</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">clyel</span><span class="si">}</span><span class="s2">Continue rebase (C), abort rebase (A), or skip (S) [caS]? </span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">            </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>rb_choice
+<span class="w">            </span><span class="nv">rb_choice</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">rb_choice</span><span class="k">:-</span><span class="nv">S</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">rb_choice</span><span class="p">^</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"A"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                </span>git<span class="w"> </span>rebase<span class="w"> </span>--abort
+<span class="w">                </span>cecho<span class="w"> </span>lyel<span class="w"> </span><span class="s2">"Rebase aborted."</span>
+<span class="w">            </span><span class="k">elif</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">rb_choice</span><span class="p">^</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"C"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                </span>git<span class="w"> </span>add<span class="w"> </span>.
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="nv">GIT_EDITOR</span><span class="o">=</span><span class="nb">true</span><span class="w"> </span>git<span class="w"> </span>rebase<span class="w"> </span>--continue<span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                    </span>cecho<span class="w"> </span>lgre<span class="w"> </span><span class="s2">"Rebase completed."</span>
+<span class="w">                    </span>pull_rebase_and_push<span class="w"> </span><span class="s2">"</span><span class="nv">$d</span><span class="s2">"</span>
+<span class="w">                </span><span class="k">else</span>
+<span class="w">                    </span>cecho<span class="w"> </span>lred<span class="w"> </span><span class="s2">"Could not complete rebase automatically."</span>
+<span class="w">                </span><span class="k">fi</span>
+<span class="w">                </span><span class="k">continue</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">                </span><span class="k">continue</span>
+<span class="w">            </span><span class="k">fi</span>
+<span class="w">        </span><span class="k">fi</span>
+
+<span class="w">        </span><span class="nv">has_uncommitted</span><span class="o">=</span>n
+<span class="w">        </span><span class="o">[[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>git<span class="w"> </span>status<span class="w"> </span>--porcelain<span class="k">)</span><span class="s2">"</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nv">has_uncommitted</span><span class="o">=</span>y
+<span class="w">        </span>get_ahead_behind
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$has_uncommitted</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"y"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">            </span><span class="nb">echo</span>
 <span class="w">            </span>cecho<span class="w"> </span>lmag<span class="w"> </span><span class="s2">"------------------------------------------------------------"</span>
 <span class="w">            </span>cecho<span class="w"> </span>lmag<span class="w"> </span><span class="s2">"Repository: </span><span class="nv">$d</span><span class="s2">"</span>
 <span class="w">            </span>cecho<span class="w"> </span>lmag<span class="w"> </span><span class="s2">"------------------------------------------------------------"</span>
 <span class="w">            </span>git<span class="w"> </span>status
-<span class="w">            </span><span class="nv">yn</span><span class="o">=</span><span class="s2">""</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$force_yn</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"y"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                </span><span class="nv">yn</span><span class="o">=</span><span class="s2">"Y"</span>
+<span class="w">                </span><span class="nv">cm</span><span class="o">=</span><span class="s2">"Various"</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">                </span><span class="nv">yn</span><span class="o">=</span><span class="s2">""</span>
+<span class="w">            </span><span class="k">fi</span>
+
 <span class="w">            </span><span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">yn</span><span class="p">^</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">"Y"</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">yn</span><span class="p">^</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">"N"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">                </span><span class="nb">echo</span>
 <span class="w">                </span><span class="nb">printf</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">clcya</span><span class="si">}</span><span class="s2">Commit and Push changes with comment Various (YN), custom comment (C) or view diff (D) [cdyN]? </span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">"</span>
-<span class="w">                </span><span class="nb">read</span><span class="w"> </span>yn
+<span class="w">                </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>yn
 <span class="w">                </span><span class="nv">yn</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">yn</span><span class="k">:-</span><span class="nv">N</span><span class="si">}</span><span class="s2">"</span>
 
-<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">yn</span><span class="p">^</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"D"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">                    </span>git<span class="w"> </span>diff
-<span class="w">                </span><span class="k">fi</span>
-<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">yn</span><span class="p">^</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"C"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">                    </span><span class="nb">printf</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">clcya</span><span class="si">}</span><span class="s2">Commit Message: </span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span>
-<span class="w">                    </span><span class="nb">read</span><span class="w"> </span>cm
-<span class="w">                    </span><span class="nv">yn</span><span class="o">=</span><span class="s2">"Y"</span>
-<span class="w">                </span><span class="k">else</span>
-<span class="w">                    </span><span class="nv">cm</span><span class="o">=</span><span class="s2">"Various"</span>
-<span class="w">                    </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span>$<span class="s2">"</span><span class="si">${</span><span class="nv">clcya</span><span class="si">}</span><span class="s2">Using default commit message:</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2"> Various"</span>
-<span class="w">                </span><span class="k">fi</span>
-<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">yn</span><span class="p">^</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Y"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">                    </span>git<span class="w"> </span>add<span class="w"> </span>.
-<span class="w">                    </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"</span><span class="nv">$cm</span><span class="s2">"</span>
-<span class="w">                    </span>git<span class="w"> </span>pull<span class="w"> </span>--rebase
-<span class="w">                    </span>git<span class="w"> </span>push
-<span class="w">                </span><span class="k">fi</span>
+<span class="w">                </span><span class="k">case</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">yn</span><span class="p">^</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="k">in</span>
+<span class="w">                    </span>D<span class="o">)</span>
+<span class="w">                        </span>git<span class="w"> </span>diff
+<span class="w">                        </span><span class="p">;;</span>
+<span class="w">                    </span>C<span class="o">)</span>
+<span class="w">                        </span><span class="nb">printf</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">clcya</span><span class="si">}</span><span class="s2">Commit Message (blank defaults to 'Various'): </span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span>
+<span class="w">                        </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>cm
+<span class="w">                        </span><span class="nv">cm</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">cm</span><span class="k">:-</span><span class="nv">Various</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">                        </span><span class="nv">yn</span><span class="o">=</span><span class="s2">"Y"</span>
+<span class="w">                        </span><span class="p">;;</span>
+<span class="w">                    </span>Y<span class="o">)</span>
+<span class="w">                        </span><span class="nv">cm</span><span class="o">=</span><span class="s2">"Various"</span>
+<span class="w">                        </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span>$<span class="s2">"</span><span class="si">${</span><span class="nv">clcya</span><span class="si">}</span><span class="s2">Using default commit message:</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2"> Various"</span>
+<span class="w">                        </span><span class="p">;;</span>
+<span class="w">                    </span>N<span class="o">)</span>
+<span class="w">                        </span><span class="p">;;</span>
+<span class="w">                    </span>*<span class="o">)</span>
+<span class="w">                        </span>cecho<span class="w"> </span>lyel<span class="w"> </span><span class="s2">"Invalid choice: </span><span class="nv">$yn</span><span class="s2">"</span>
+<span class="w">                        </span><span class="p">;;</span>
+<span class="w">                </span><span class="k">esac</span>
 <span class="w">            </span><span class="k">done</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">yn</span><span class="p">^</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Y"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                </span>git<span class="w"> </span>add<span class="w"> </span>.
+<span class="w">                </span><span class="k">if</span><span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"</span><span class="nv">$cm</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                    </span>pull_rebase_and_push<span class="w"> </span><span class="s2">"</span><span class="nv">$d</span><span class="s2">"</span>
+<span class="w">                </span><span class="k">else</span>
+<span class="w">                    </span>cecho<span class="w"> </span>lred<span class="w"> </span><span class="s2">"Commit failed in </span><span class="nv">$d</span><span class="s2">."</span>
+<span class="w">                </span><span class="k">fi</span>
+<span class="w">            </span><span class="k">fi</span>
+<span class="w">        </span><span class="k">elif</span><span class="w"> </span><span class="o">((</span><span class="w"> </span>ahead_count<span class="w"> </span>&gt;<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span>behind_count<span class="w"> </span>&gt;<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">))</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="nb">echo</span>
+<span class="w">            </span>cecho<span class="w"> </span>lmag<span class="w"> </span><span class="s2">"------------------------------------------------------------"</span>
+<span class="w">            </span>cecho<span class="w"> </span>lmag<span class="w"> </span><span class="s2">"Repository: </span><span class="nv">$d</span><span class="s2"> (clean working tree; ahead </span><span class="nv">$ahead_count</span><span class="s2">, behind </span><span class="nv">$behind_count</span><span class="s2">)"</span>
+<span class="w">            </span>cecho<span class="w"> </span>lmag<span class="w"> </span><span class="s2">"------------------------------------------------------------"</span>
+<span class="w">            </span>git<span class="w"> </span>status<span class="w"> </span>-sb
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$force_yn</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"y"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                </span><span class="nv">sync_yn</span><span class="o">=</span><span class="s2">"Y"</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">                </span><span class="nb">echo</span>
+<span class="w">                </span><span class="nb">printf</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">clcya</span><span class="si">}</span><span class="s2">Sync (pull --rebase / push) this repository with origin [yN]? </span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">                </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>sync_yn
+<span class="w">                </span><span class="nv">sync_yn</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">sync_yn</span><span class="k">:-</span><span class="nv">N</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">            </span><span class="k">fi</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">sync_yn</span><span class="p">^</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Y"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                </span>pull_rebase_and_push<span class="w"> </span><span class="s2">"</span><span class="nv">$d</span><span class="s2">"</span>
+<span class="w">            </span><span class="k">fi</span>
 <span class="w">        </span><span class="k">fi</span>
 <span class="w">    </span><span class="k">fi</span>
 <span class="k">done</span>
@@ -246,7 +427,7 @@ cecho<span class="w"> </span>lgre<span class="w"> </span><span class="s2">"Check
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: October 27, 2026</p>
+      <p>Last updated: November 03, 2026</p>
     </footer>
 
     <div class="scroll-container">

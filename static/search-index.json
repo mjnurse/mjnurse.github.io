@@ -304,7 +304,7 @@
     "id": "43",
     "title": "clr: Check Local Repositories for uncommitted changes",
     "url": "/linuxbash/script-clr.html",
-    "content": "#!/usr/bin/env bash help_text=\" NAME clr - Check Local Repositories for uncommitted changes. USAGE clr [options] OPTIONS -p|--push Interactively commit and push changes for each repository with uncommitted changes. -h|--help Show help text. DESCRIPTION Checks a predefined list of local git repositories for uncommitted changes. When run without options, displays a list of repositories that have uncommitted changes. With the -p option, iterates through each repository with changes and prompts to c",
+    "content": "#!/usr/bin/env bash help_text=\" NAME clr - Check Local Repositories for uncommitted changes. USAGE clr [options] OPTIONS -p|--push Interactively commit, rebase, and push changes for each repository with uncommitted or unpushed changes. -f|--force With -p, commit (with default message 'Various') and push without prompting for confirmation unless a conflict occurs. -h|--help Show help text. DESCRIPTION Checks a predefined list of local git repositories for uncommitted changes, unpushed commits, or",
     "type": "page"
   },
   {
