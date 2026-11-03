@@ -192,15 +192,6 @@ cecho<span class="w"> </span>lgre<span class="w"> </span><span class="s2">"Check
 <span class="w">        </span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-d<span class="w"> </span><span class="nv">$d</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">        </span><span class="nb">cd</span><span class="w"> </span><span class="nv">$d</span>
-<<<<<<< HEAD
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Checking repository: </span><span class="nv">$d</span><span class="s2">&quot;</span>
-<span class="w">        </span>git<span class="w"> </span>fetch
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span>git<span class="w"> </span>status<span class="w"> </span>--short<span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">            </span><span class="nb">echo</span>
-<span class="w">            </span>cecho<span class="w"> </span>lmag<span class="w"> </span><span class="s2">&quot;------------------------------------------------------------&quot;</span>
-<span class="w">            </span>cecho<span class="w"> </span>lmag<span class="w"> </span><span class="s2">&quot;Repository: </span><span class="nv">$d</span><span class="s2">&quot;</span>
-<span class="w">            </span>cecho<span class="w"> </span>lmag<span class="w"> </span><span class="s2">&quot;------------------------------------------------------------&quot;</span>
-=======
 <span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Checking repository: </span><span class="nv">$d</span><span class="s2">"</span>
 <span class="w">        </span>git<span class="w"> </span>fetch
 <span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="k">$(</span>git<span class="w"> </span>status<span class="w"> </span>--short<span class="k">)</span><span class="s2">"</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
@@ -208,7 +199,6 @@ cecho<span class="w"> </span>lgre<span class="w"> </span><span class="s2">"Check
 <span class="w">            </span>cecho<span class="w"> </span>lmag<span class="w"> </span><span class="s2">"------------------------------------------------------------"</span>
 <span class="w">            </span>cecho<span class="w"> </span>lmag<span class="w"> </span><span class="s2">"Repository: </span><span class="nv">$d</span><span class="s2">"</span>
 <span class="w">            </span>cecho<span class="w"> </span>lmag<span class="w"> </span><span class="s2">"------------------------------------------------------------"</span>
->>>>>>> b44b2a5 (Various)
 <span class="w">            </span>git<span class="w"> </span>status
 <span class="w">            </span><span class="nv">yn</span><span class="o">=</span><span class="s2">""</span>
 <span class="w">            </span><span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">yn</span><span class="p">^</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">"Y"</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">yn</span><span class="p">^</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">"N"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
@@ -230,11 +220,7 @@ cecho<span class="w"> </span>lgre<span class="w"> </span><span class="s2">"Check
 <span class="w">                </span><span class="k">fi</span>
 <span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">yn</span><span class="p">^</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Y"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">                    </span>git<span class="w"> </span>add<span class="w"> </span>.
-<<<<<<< HEAD
-<span class="w">                    </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$cm</span><span class="s2">&quot;</span>
-=======
 <span class="w">                    </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"</span><span class="nv">$cm</span><span class="s2">"</span>
->>>>>>> b44b2a5 (Various)
 <span class="w">                    </span>git<span class="w"> </span>pull<span class="w"> </span>--rebase
 <span class="w">                    </span>git<span class="w"> </span>push
 <span class="w">                </span><span class="k">fi</span>

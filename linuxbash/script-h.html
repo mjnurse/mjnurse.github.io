@@ -272,11 +272,7 @@ find<span class="w"> </span>.<span class="w"> </span>-maxdepth<span class="w"> <
 <span class="w">    </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>grep<span class="w"> </span>--ignore-case<span class="w"> </span>-H<span class="w"> </span>-s<span class="w"> </span>-i<span class="w"> </span>-e<span class="w"> </span><span class="s2">"^help_line="</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"^-- help_line:"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>egrep<span class="w"> </span>--ignore-case<span class="w"> </span><span class="s2">"</span><span class="nv">$filter</span><span class="s2">"</span><span class="w"> </span>&gt;<span class="w"> </span>/tmp/h.tmp
 
 <span class="c1"># Append any alias descriptions to the help lines</span>
-<<<<<<< HEAD
-<span class="nv">aliases</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>grep<span class="w"> </span>-E<span class="w"> </span>--ignore-case<span class="w"> </span><span class="s2">&quot;^alias &quot;</span><span class="w"> </span>~/mjnurse/bash/mjn-bashrc<span class="k">)</span><span class="s2">&quot;</span>
-=======
 <span class="nv">aliases</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>grep<span class="w"> </span>-E<span class="w"> </span>--ignore-case<span class="w"> </span><span class="s2">"^alias "</span><span class="w"> </span>~/mjnurse/bash/mjn-bashrc<span class="k">)</span><span class="s2">"</span>
->>>>>>> b44b2a5 (Various)
 <span class="k">while</span><span class="w"> </span><span class="nv">IFS</span><span class="o">=</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>line<span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">    </span><span class="c1"># Extract the script name (text before the first colon)</span>
 <span class="w">    </span><span class="nv">script_name</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$line</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d:<span class="w"> </span>-f1<span class="k">)</span>
@@ -301,21 +297,12 @@ cp<span class="w"> </span>/tmp/h.tmp2<span class="w"> </span>/tmp/h.tmp
 
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-f<span class="w"> </span>~/mjnurse/bash/mjn-bashrc<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">    </span>grep<span class="w"> </span>--ignore-case<span class="w"> </span>func:<span class="w"> </span>~/mjnurse/bash/mjn-bashrc<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
-<<<<<<< HEAD
-<span class="w">        </span>egrep<span class="w"> </span>--ignore-case<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$filter</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
-<span class="w">        </span>sed<span class="w"> </span><span class="s1">&#39;s/ *# *func: *\([^ :]\+\): *\(.*\)$/\1:help_line=&quot;\2 #CGRA(bash-function)#CDEF&quot;/&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/tmp/h.tmp
-
-<span class="w">    </span>grep<span class="w"> </span>-E<span class="w"> </span>--ignore-case<span class="w"> </span><span class="s2">&quot;^alias.*#&quot;</span><span class="w"> </span>~/mjnurse/bash/mjn-bashrc<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
-<span class="w">        </span>egrep<span class="w"> </span>--ignore-case<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$filter</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
-<span class="w">        </span>sed<span class="w"> </span><span class="s1">&#39;s/alias *\([^=]*\)=\(.*\)# help_line:*=* *\(.*\) *$/\1:help_line=&quot;\3 #CGRA(alias-only)#CDEF&quot;/&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/tmp/h.tmp
-=======
 <span class="w">        </span>egrep<span class="w"> </span>--ignore-case<span class="w"> </span><span class="s2">"</span><span class="nv">$filter</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
 <span class="w">        </span>sed<span class="w"> </span><span class="s1">'s/ *# *func: *\([^ :]\+\): *\(.*\)$/\1:help_line="\2 #CGRA(bash-function)#CDEF"/'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/tmp/h.tmp
 
 <span class="w">    </span>grep<span class="w"> </span>-E<span class="w"> </span>--ignore-case<span class="w"> </span><span class="s2">"^alias.*#"</span><span class="w"> </span>~/mjnurse/bash/mjn-bashrc<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
 <span class="w">        </span>egrep<span class="w"> </span>--ignore-case<span class="w"> </span><span class="s2">"</span><span class="nv">$filter</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
 <span class="w">        </span>sed<span class="w"> </span><span class="s1">'s/alias *\([^=]*\)=\(.*\)# help_line:*=* *\(.*\) *$/\1:help_line="\3 #CGRA(alias-only)#CDEF"/'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>/tmp/h.tmp
->>>>>>> b44b2a5 (Various)
 <span class="k">fi</span>
 
 <span class="k">function</span><span class="w"> </span>list<span class="o">()</span><span class="w"> </span><span class="o">{</span>
