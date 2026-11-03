@@ -92,7 +92,7 @@
         <div class="article-body">
           <h1><a class="link" href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-csvplot.md">csvplot: Generates a HTML page containing a Google Chart plotting the csv data</a></h1>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
-<span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
+<span class="nv">help_text</span><span class="o">=</span><span class="s2">"</span>
 <span class="s2">NAME</span>
 <span class="s2">  csvplot - Generates a HTML page containing a Google Chart plotting the csv data.</span>
 
@@ -120,29 +120,29 @@
 
 <span class="s2">AUTHOR</span>
 <span class="s2">  mjnurse.github.io - 2020</span>
-<span class="s2">&quot;</span>
-<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Generates a HTML page containing a Google Chart plotting the csv data&quot;</span>
-<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Generates a HTML page containing a Google Chart plotting the csv data&quot;</span>
+<span class="s2">"</span>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">"Generates a HTML page containing a Google Chart plotting the csv data"</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">"Generates a HTML page containing a Google Chart plotting the csv data"</span>
 
-<span class="nv">try</span><span class="o">=</span><span class="s2">&quot;Try </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h for more information&quot;</span>
-<span class="nv">tmp</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">help_text</span><span class="p">##*USAGE</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="nv">usage</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span>Usage:<span class="w"> </span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%OPTIONS*</span><span class="si">}</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="nv">try</span><span class="o">=</span><span class="s2">"Try </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h for more information"</span>
+<span class="nv">tmp</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">help_text</span><span class="p">##*USAGE</span><span class="si">}</span><span class="s2">"</span>
+<span class="nv">usage</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span>Usage:<span class="w"> </span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%OPTIONS*</span><span class="si">}</span><span class="k">)</span><span class="s2">"</span>
 
-<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">usage</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">try</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">usage</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">try</span><span class="si">}</span><span class="s2">"</span>
 <span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 <span class="k">fi</span>
 
 <span class="nv">font_size</span><span class="o">=</span><span class="m">12</span>
 <span class="nv">smooth</span><span class="o">=</span>n
-<span class="nv">haxis</span><span class="o">=</span><span class="s2">&quot;H-Axis&quot;</span>
-<span class="nv">vaxis</span><span class="o">=</span><span class="s2">&quot;V-Axis&quot;</span>
+<span class="nv">haxis</span><span class="o">=</span><span class="s2">"H-Axis"</span>
+<span class="nv">vaxis</span><span class="o">=</span><span class="s2">"V-Axis"</span>
 
-<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">   </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span><span class="w"> </span>
 <span class="w">      </span>-h<span class="p">|</span>--help<span class="p">|</span>?<span class="o">)</span>
-<span class="w">         </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
+<span class="w">         </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$help_text</span><span class="s2">"</span>
 <span class="w">         </span><span class="nb">exit</span>
 <span class="w">         </span><span class="p">;;</span>
 <span class="w">      </span>-f<span class="p">|</span>--fontsize<span class="o">)</span>
@@ -154,11 +154,11 @@
 <span class="w">         </span><span class="p">;;</span>
 <span class="w">      </span>-x<span class="p">|</span>--xaxis<span class="p">|</span>--haxis<span class="o">)</span>
 <span class="w">         </span><span class="nb">shift</span>
-<span class="w">         </span><span class="nv">haxis</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="w">         </span><span class="nv">haxis</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
 <span class="w">         </span><span class="p">;;</span>
 <span class="w">      </span>-y<span class="p">|</span>--yaxis<span class="p">|</span>--vaxis<span class="o">)</span>
 <span class="w">         </span><span class="nb">shift</span>
-<span class="w">         </span><span class="nv">vaxis</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="w">         </span><span class="nv">vaxis</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
 <span class="w">         </span><span class="p">;;</span>
 <span class="w">      </span>?*<span class="o">)</span>
 <span class="w">         </span><span class="k">break</span>
@@ -168,16 +168,16 @@
 <span class="k">done</span><span class="w"> </span>
 
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$smooth</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>y<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">  </span><span class="nv">smooth_cmd</span><span class="o">=</span><span class="s1">&#39;curveType: &quot;function&quot;,&#39;</span>
+<span class="w">  </span><span class="nv">smooth_cmd</span><span class="o">=</span><span class="s1">'curveType: "function",'</span>
 <span class="k">else</span>
-<span class="w">  </span><span class="nv">smooth_cmd</span><span class="o">=</span><span class="s1">&#39;&#39;</span>
+<span class="w">  </span><span class="nv">smooth_cmd</span><span class="o">=</span><span class="s1">''</span>
 <span class="k">fi</span>
 
 <span class="nv">cf</span><span class="o">=</span><span class="nv">$1</span>
 <span class="nv">html_doc</span><span class="o">=</span><span class="si">${</span><span class="nv">cf</span><span class="p">/.csv/</span><span class="si">}</span>.html
 rm<span class="w"> </span>-f<span class="w"> </span><span class="nv">$html_doc</span>
 
-<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;&lt;!DOCTYPE html&gt;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">'&lt;!DOCTYPE html&gt;</span>
 <span class="s1">&lt;html&gt;</span>
 <span class="s1">  &lt;head&gt;</span>
 <span class="s1">  &lt;/head&gt;</span>
@@ -191,55 +191,55 @@ rm<span class="w"> </span>-f<span class="w"> </span><span class="nv">$html_doc</
 <span class="s1">        bottom: 0;</span>
 <span class="s1">      }</span>
 <span class="s1">    &lt;/style&gt;</span>
-<span class="s1">    &lt;script type=&quot;text/javascript&quot; src=&quot;https://www.gstatic.com/charts/loader.js&quot;&gt;&lt;/script&gt;</span>
-<span class="s1">    &lt;script type=&quot;text/javascript&quot;&gt;</span>
-<span class="s1">      google.charts.load(&quot;current&quot;, {&quot;packages&quot;: [&quot;corechart&quot;]});</span>
+<span class="s1">    &lt;script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"&gt;&lt;/script&gt;</span>
+<span class="s1">    &lt;script type="text/javascript"&gt;</span>
+<span class="s1">      google.charts.load("current", {"packages": ["corechart"]});</span>
 <span class="s1">      google.charts.setOnLoadCallback(drawCht);</span>
 <span class="s1">      function drawCht() {</span>
-<span class="s1">        const gChtData = google.visualization.arrayToDataTable([&#39;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$html_doc</span>
+<span class="s1">        const gChtData = google.visualization.arrayToDataTable(['</span><span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$html_doc</span>
 
-cat<span class="w"> </span><span class="nv">$cf</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/\&quot;/&#39;/g; s/^/[/; s/</span>$<span class="s2">/],/&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
-<span class="w">          </span>sed<span class="w"> </span><span class="s2">&quot;1s/\]/&#39;\]/; 1s/\[/\[&#39;/; 1s/,/&#39;,&#39;/g; 1s/&#39;&#39;/&#39;/g; 1s/&#39;,&#39;</span>$<span class="s2">/,/&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$html_doc</span>
+cat<span class="w"> </span><span class="nv">$cf</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">"s/\"/'/g; s/^/[/; s/</span>$<span class="s2">/],/"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">          </span>sed<span class="w"> </span><span class="s2">"1s/\]/'\]/; 1s/\[/\['/; 1s/,/','/g; 1s/''/'/g; 1s/','</span>$<span class="s2">/,/"</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$html_doc</span>
 
-<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;    ]);</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">'    ]);</span>
 <span class="s1">        const chtOptions = {</span>
-<span class="s1">          backgroundColor: &quot;#FFFFFF&quot;,</span>
-<span class="s1">          chartArea: { left: &quot;10%&quot;, top: &quot;6%&quot;, height: &quot;80%&quot;, width: &quot;84%&quot; },</span>
+<span class="s1">          backgroundColor: "#FFFFFF",</span>
+<span class="s1">          chartArea: { left: "10%", top: "6%", height: "80%", width: "84%" },</span>
 <span class="s1">          pointsVisible: false,</span>
-<span class="s1">          fontSize: &#39;</span><span class="nv">$font_size</span><span class="s1">&#39;,</span>
-<span class="s1">          height: &quot;100%&quot;,</span>
-<span class="s1">          width: &quot;100%&quot;,</span>
-<span class="s1">          legend: &quot;bottom&quot;,</span>
+<span class="s1">          fontSize: '</span><span class="nv">$font_size</span><span class="s1">',</span>
+<span class="s1">          height: "100%",</span>
+<span class="s1">          width: "100%",</span>
+<span class="s1">          legend: "bottom",</span>
 <span class="s1">          vAxis: { </span>
 <span class="s1">            viewWindow: {min: 0},</span>
-<span class="s1">            title: &quot;&#39;</span><span class="nv">$vaxis</span><span class="s1">&#39;&quot;,</span>
+<span class="s1">            title: "'</span><span class="nv">$vaxis</span><span class="s1">'",</span>
 <span class="s1">            titleTextStyle: {</span>
 <span class="s1">              // color: &lt;string&gt;,</span>
 <span class="s1">              // fontName: &lt;string&gt;,</span>
-<span class="s1">              fontSize: &#39;</span><span class="nv">$font_size</span><span class="s1">&#39;,</span>
+<span class="s1">              fontSize: '</span><span class="nv">$font_size</span><span class="s1">',</span>
 <span class="s1">              bold: true,</span>
 <span class="s1">              italic: false,</span>
 <span class="s1">            },</span>
 <span class="s1">          },</span>
 <span class="s1">          hAxis: {</span>
-<span class="s1">            title: &quot;&#39;</span><span class="nv">$haxis</span><span class="s1">&#39;&quot;,</span>
+<span class="s1">            title: "'</span><span class="nv">$haxis</span><span class="s1">'",</span>
 <span class="s1">            titleTextStyle: {</span>
 <span class="s1">              // color: &lt;string&gt;,</span>
 <span class="s1">              // fontName: &lt;string&gt;,</span>
-<span class="s1">              fontSize: &#39;</span><span class="nv">$font_size</span><span class="s1">&#39;,</span>
+<span class="s1">              fontSize: '</span><span class="nv">$font_size</span><span class="s1">',</span>
 <span class="s1">              bold: true,</span>
 <span class="s1">              italic: false,</span>
 <span class="s1">            },</span>
-<span class="s1">          }, &#39;</span><span class="nv">$smooth_cmd</span><span class="s1">&#39;</span>
+<span class="s1">          }, '</span><span class="nv">$smooth_cmd</span><span class="s1">'</span>
 <span class="s1">        };</span>
-<span class="s1">        const chart = new google.visualization.LineChart( document.getElementById(&quot;gChart&quot;));</span>
+<span class="s1">        const chart = new google.visualization.LineChart( document.getElementById("gChart"));</span>
 <span class="s1">        chart.draw(gChtData, chtOptions);</span>
 <span class="s1">      }</span>
 <span class="s1">    &lt;/script&gt;</span>
-<span class="s1">    &lt;div id=&quot;gChartBox&quot;&gt;&lt;div id=&quot;gChart&quot;&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;</span>
+<span class="s1">    &lt;div id="gChartBox"&gt;&lt;div id="gChart"&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;</span>
 <span class="s1">  &lt;/body&gt;</span>
 <span class="s1">&lt;/html&gt;</span>
-<span class="s1">&#39;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$html_doc</span>
+<span class="s1">'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="nv">$html_doc</span>
 </code></pre></div>
         </div>
       </article>
@@ -258,7 +258,7 @@ cat<span class="w"> </span><span class="nv">$cf</span><span class="w"> </span><s
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: January 02, 2026</p>
+      <p>Last updated: October 19, 2026</p>
     </footer>
 
     <div class="scroll-container">

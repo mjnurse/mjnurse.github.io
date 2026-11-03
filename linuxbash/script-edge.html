@@ -92,7 +92,7 @@
         <div class="article-body">
           <h1><a class="link" href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-edge.md">edge: Launches the Microsoft Edge browser with the specified path or URL</a></h1>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
-<span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
+<span class="nv">help_text</span><span class="o">=</span><span class="s2">"</span>
 <span class="s2">NAME</span>
 <span class="s2">  edge - Launches the Microsoft Edge browser.</span>
 
@@ -114,57 +114,57 @@
 
 <span class="s2">AUTHOR</span>
 <span class="s2">  mjnurse.github.io - 2025</span>
-<span class="s2">&quot;</span>
+<span class="s2">"</span>
 
-<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Launches the Microsoft Edge browser with the specified path or URL&quot;</span>
-<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Launches the Microsoft Edge browser with the specified path or URL&quot;</span>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">"Launches the Microsoft Edge browser with the specified path or URL"</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">"Launches the Microsoft Edge browser with the specified path or URL"</span>
 
 <span class="c1"># Function to display help</span>
 show_help<span class="o">()</span><span class="w"> </span><span class="o">{</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$help_text</span><span class="s2">"</span>
 <span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">0</span>
 <span class="o">}</span>
 
 <span class="c1"># Function to display error and exit</span>
 error_exit<span class="o">()</span><span class="w"> </span><span class="o">{</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Error: </span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Try &#39;</span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> --help&#39; for more information.&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Error: </span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Try '</span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> --help' for more information."</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
 <span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 <span class="o">}</span>
 
 <span class="c1"># Check for help flag</span>
-<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;-h&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;--help&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"-h"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"--help"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">    </span>show_help
 <span class="k">fi</span>
 
 <span class="c1"># Validate that an argument was provided</span>
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$#</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span>error_exit<span class="w"> </span><span class="s2">&quot;No path or URL provided.&quot;</span>
+<span class="w">    </span>error_exit<span class="w"> </span><span class="s2">"No path or URL provided."</span>
 <span class="k">fi</span>
 
 <span class="c1"># Get the path/URL argument</span>
-<span class="nv">target</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="nv">target</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
 
-<span class="c1"># Check if it&#39;s a URL or a file path</span>
-<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$target</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">=</span>~<span class="w"> </span>^https?://<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="c1"># It&#39;s a URL, use it directly</span>
-<span class="w">    </span><span class="nv">edge_path</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$target</span><span class="s2">&quot;</span>
+<span class="c1"># Check if it's a URL or a file path</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$target</span><span class="s2">"</span><span class="w"> </span><span class="o">=</span>~<span class="w"> </span>^https?://<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="c1"># It's a URL, use it directly</span>
+<span class="w">    </span><span class="nv">edge_path</span><span class="o">=</span><span class="s2">"</span><span class="nv">$target</span><span class="s2">"</span>
 <span class="k">else</span>
-<span class="w">    </span><span class="c1"># It&#39;s a file path, convert to Windows path</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span>!<span class="w"> </span><span class="nv">edge_path</span><span class="o">=</span><span class="k">$(</span>wslpath<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$target</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">        </span>error_exit<span class="w"> </span><span class="s2">&quot;Failed to convert path &#39;</span><span class="nv">$target</span><span class="s2">&#39; to Windows format.&quot;</span>
+<span class="w">    </span><span class="c1"># It's a file path, convert to Windows path</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>!<span class="w"> </span><span class="nv">edge_path</span><span class="o">=</span><span class="k">$(</span>wslpath<span class="w"> </span>-w<span class="w"> </span><span class="s2">"</span><span class="nv">$target</span><span class="s2">"</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span>error_exit<span class="w"> </span><span class="s2">"Failed to convert path '</span><span class="nv">$target</span><span class="s2">' to Windows format."</span>
 <span class="w">    </span><span class="k">fi</span>
 
 <span class="w">    </span><span class="c1"># Verify the file exists (for local files)</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$target</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">        </span>error_exit<span class="w"> </span><span class="s2">&quot;File &#39;</span><span class="nv">$target</span><span class="s2">&#39; does not exist.&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-e<span class="w"> </span><span class="s2">"</span><span class="nv">$target</span><span class="s2">"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span>error_exit<span class="w"> </span><span class="s2">"File '</span><span class="nv">$target</span><span class="s2">' does not exist."</span>
 <span class="w">    </span><span class="k">fi</span>
 <span class="k">fi</span>
 
 <span class="c1"># Launch Edge browser</span>
-<span class="c1"># if ! powershell.exe /c start msedge &quot;$edge_path&quot;; then</span>
-<span class="k">if</span><span class="w"> </span>!<span class="w"> </span>cmd.exe<span class="w"> </span>/c<span class="w"> </span>start<span class="w"> </span>msedge<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$edge_path</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span>error_exit<span class="w"> </span><span class="s2">&quot;Failed to launch Microsoft Edge. Ensure Edge is installed and accessible.&quot;</span>
+<span class="c1"># if ! powershell.exe /c start msedge "$edge_path"; then</span>
+<span class="k">if</span><span class="w"> </span>!<span class="w"> </span>cmd.exe<span class="w"> </span>/c<span class="w"> </span>start<span class="w"> </span>msedge<span class="w"> </span><span class="s2">"</span><span class="nv">$edge_path</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span>error_exit<span class="w"> </span><span class="s2">"Failed to launch Microsoft Edge. Ensure Edge is installed and accessible."</span>
 <span class="k">fi</span>
 
 <span class="nb">exit</span><span class="w"> </span><span class="m">0</span>
@@ -186,7 +186,7 @@ error_exit<span class="o">()</span><span class="w"> </span><span class="o">{</sp
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: March 02, 2026</p>
+      <p>Last updated: October 19, 2026</p>
     </footer>
 
     <div class="scroll-container">

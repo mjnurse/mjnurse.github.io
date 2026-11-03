@@ -92,7 +92,7 @@
         <div class="article-body">
           <h1><a class="link" href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-find-kill.md">find-kill: Find and kill processes interactively</a></h1>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
-<span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
+<span class="nv">help_text</span><span class="o">=</span><span class="s2">"</span>
 <span class="s2">NAME</span>
 <span class="s2">    find-kill - Find and kill processes interactively</span>
 
@@ -109,39 +109,39 @@
 
 <span class="s2">AUTHOR</span>
 <span class="s2">    mjnurse.github.io - 2026</span>
-<span class="s2">&quot;</span>
-<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Find and kill processes interactively&quot;</span>
-<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Find and kill processes interactively&quot;</span>
+<span class="s2">"</span>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">"Find and kill processes interactively"</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">"Find and kill processes interactively"</span>
 
 <span class="c1"># set -x # for debugging</span>
 
 <span class="c1"># Terminal Colours</span>
-<span class="nv">cdef</span><span class="o">=</span><span class="s2">&quot;\e[39m&quot;</span><span class="w"> </span><span class="c1"># default colour</span>
-<span class="nv">cbla</span><span class="o">=</span><span class="s2">&quot;\e[30m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cgra</span><span class="o">=</span><span class="s2">&quot;\e[90m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clgra</span><span class="o">=</span><span class="s2">&quot;\e[37m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cwhi</span><span class="o">=</span><span class="s2">&quot;\e[97m&quot;</span>
-<span class="nv">cred</span><span class="o">=</span><span class="s2">&quot;\e[31m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cgre</span><span class="o">=</span><span class="s2">&quot;\e[32m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cyel</span><span class="o">=</span><span class="s2">&quot;\e[33m&quot;</span><span class="w"> </span>
-<span class="nv">cblu</span><span class="o">=</span><span class="s2">&quot;\e[34m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cmag</span><span class="o">=</span><span class="s2">&quot;\e[35m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">ccya</span><span class="o">=</span><span class="s2">&quot;\e[36m&quot;</span><span class="p">;</span>
-<span class="nv">clred</span><span class="o">=</span><span class="s2">&quot;\e[91m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clgre</span><span class="o">=</span><span class="s2">&quot;\e[92m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clyel</span><span class="o">=</span><span class="s2">&quot;\e[93m&quot;</span>
-<span class="nv">clblu</span><span class="o">=</span><span class="s2">&quot;\e[94m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clmag</span><span class="o">=</span><span class="s2">&quot;\e[95m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clcya</span><span class="o">=</span><span class="s2">&quot;\e[96m&quot;</span>
+<span class="nv">cdef</span><span class="o">=</span><span class="s2">"\e[39m"</span><span class="w"> </span><span class="c1"># default colour</span>
+<span class="nv">cbla</span><span class="o">=</span><span class="s2">"\e[30m"</span><span class="p">;</span><span class="w"> </span><span class="nv">cgra</span><span class="o">=</span><span class="s2">"\e[90m"</span><span class="p">;</span><span class="w"> </span><span class="nv">clgra</span><span class="o">=</span><span class="s2">"\e[37m"</span><span class="p">;</span><span class="w"> </span><span class="nv">cwhi</span><span class="o">=</span><span class="s2">"\e[97m"</span>
+<span class="nv">cred</span><span class="o">=</span><span class="s2">"\e[31m"</span><span class="p">;</span><span class="w"> </span><span class="nv">cgre</span><span class="o">=</span><span class="s2">"\e[32m"</span><span class="p">;</span><span class="w"> </span><span class="nv">cyel</span><span class="o">=</span><span class="s2">"\e[33m"</span><span class="w"> </span>
+<span class="nv">cblu</span><span class="o">=</span><span class="s2">"\e[34m"</span><span class="p">;</span><span class="w"> </span><span class="nv">cmag</span><span class="o">=</span><span class="s2">"\e[35m"</span><span class="p">;</span><span class="w"> </span><span class="nv">ccya</span><span class="o">=</span><span class="s2">"\e[36m"</span><span class="p">;</span>
+<span class="nv">clred</span><span class="o">=</span><span class="s2">"\e[91m"</span><span class="p">;</span><span class="w"> </span><span class="nv">clgre</span><span class="o">=</span><span class="s2">"\e[92m"</span><span class="p">;</span><span class="w"> </span><span class="nv">clyel</span><span class="o">=</span><span class="s2">"\e[93m"</span>
+<span class="nv">clblu</span><span class="o">=</span><span class="s2">"\e[94m"</span><span class="p">;</span><span class="w"> </span><span class="nv">clmag</span><span class="o">=</span><span class="s2">"\e[95m"</span><span class="p">;</span><span class="w"> </span><span class="nv">clcya</span><span class="o">=</span><span class="s2">"\e[96m"</span>
 
 <span class="k">function</span><span class="w"> </span>cecho<span class="w"> </span><span class="o">{</span>
 <span class="w">    </span><span class="nv">color</span><span class="o">=</span>c<span class="nv">$1</span><span class="p">;</span><span class="w"> </span><span class="nb">shift</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="p">!color</span><span class="si">}</span><span class="nv">$*</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="p">!color</span><span class="si">}</span><span class="nv">$*</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">"</span>
 <span class="o">}</span>
 
-<span class="nv">try</span><span class="o">=</span><span class="s2">&quot;Try </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h for more information&quot;</span>
-<span class="nv">tmp</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">help_text</span><span class="p">##*USAGE</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="nv">usage</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%OPTIONS*</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;\n&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/  */ /g&quot;</span><span class="k">)</span>
+<span class="nv">try</span><span class="o">=</span><span class="s2">"Try </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h for more information"</span>
+<span class="nv">tmp</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">help_text</span><span class="p">##*USAGE</span><span class="si">}</span><span class="s2">"</span>
+<span class="nv">usage</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Usage: </span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%OPTIONS*</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s2">"\n"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">"s/  */ /g"</span><span class="k">)</span>
 
-<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">usage</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">try</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">usage</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">try</span><span class="si">}</span><span class="s2">"</span>
 <span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 <span class="k">fi</span>
 
-<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
 <span class="w">        </span>-h<span class="p">|</span>--help<span class="o">)</span>
-<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$help_text</span><span class="s2">"</span>
 <span class="w">            </span><span class="nb">exit</span>
 <span class="w">            </span><span class="p">;;</span>
 <span class="w">        </span>?*<span class="o">)</span>
@@ -151,29 +151,29 @@
 <span class="w">    </span><span class="nb">shift</span>
 <span class="k">done</span>
 
-ps<span class="w"> </span>-edf<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span>grep<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$0</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/tmp/<span class="nv">$$</span>.lst
+ps<span class="w"> </span>-edf<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span>grep<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span><span class="s2">"</span><span class="nv">$0</span><span class="s2">"</span><span class="w"> </span>&gt;<span class="w"> </span>/tmp/<span class="nv">$$</span>.lst
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-s<span class="w"> </span>/tmp/<span class="nv">$$</span>.lst<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span>cecho<span class="w"> </span>red<span class="w"> </span><span class="s2">&quot;No processes found matching &#39;</span><span class="nv">$1</span><span class="s2">&#39;&quot;</span>
+<span class="w">    </span>cecho<span class="w"> </span>red<span class="w"> </span><span class="s2">"No processes found matching '</span><span class="nv">$1</span><span class="s2">'"</span>
 <span class="w">    </span>rm<span class="w"> </span>/tmp/<span class="nv">$$</span>.lst
 <span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 <span class="k">fi</span>
-cecho<span class="w"> </span>cya<span class="w"> </span><span class="s2">&quot;Processes matching &#39;</span><span class="nv">$1</span><span class="s2">&#39;:&quot;</span>
+cecho<span class="w"> </span>cya<span class="w"> </span><span class="s2">"Processes matching '</span><span class="nv">$1</span><span class="s2">':"</span>
 cat<span class="w"> </span>/tmp/<span class="nv">$$</span>.lst<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>sed<span class="w"> </span><span class="s1">&#39;s/^\([^ ]* *[^ ]*\) *[^ ]* *[^ ]* *[^ ]* *[^ ]* *[^ ]* *\([^ ]*\).*/  \1 \2/&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>grep<span class="w"> </span>--color<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="w">    </span>sed<span class="w"> </span><span class="s1">'s/^\([^ ]* *[^ ]*\) *[^ ]* *[^ ]* *[^ ]* *[^ ]* *[^ ]* *\([^ ]*\).*/  \1 \2/'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>grep<span class="w"> </span>--color<span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
 <span class="nb">echo</span>
 <span class="k">while</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>line<span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="w">    </span><span class="nv">pid</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$line</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $2}&#39;</span><span class="k">)</span>
-<span class="w">    </span><span class="nv">pname</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$line</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $8}&#39;</span><span class="k">)</span>
-<span class="w">    </span><span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;Kill PID </span><span class="si">${</span><span class="nv">pid</span><span class="si">}</span><span class="s2"> (</span><span class="si">${</span><span class="nv">pname</span><span class="si">}</span><span class="s2">) [yNq]? &quot;</span>
+<span class="w">    </span><span class="nv">pid</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$line</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">'{print $2}'</span><span class="k">)</span>
+<span class="w">    </span><span class="nv">pname</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$line</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">'{print $8}'</span><span class="k">)</span>
+<span class="w">    </span><span class="nb">printf</span><span class="w"> </span><span class="s2">"Kill PID </span><span class="si">${</span><span class="nv">pid</span><span class="si">}</span><span class="s2"> (</span><span class="si">${</span><span class="nv">pname</span><span class="si">}</span><span class="s2">) [yNq]? "</span>
 <span class="w">    </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>yn<span class="w"> </span>&lt;/dev/tty
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">yn</span><span class="p">^</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;Q&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">        </span>cecho<span class="w"> </span>yel<span class="w"> </span><span class="s2">&quot;Quitting&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">yn</span><span class="p">^</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Q"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span>cecho<span class="w"> </span>yel<span class="w"> </span><span class="s2">"Quitting"</span>
 <span class="w">        </span><span class="k">break</span>
 <span class="w">    </span><span class="k">fi</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">yn</span><span class="p">^</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;Y&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">        </span>cecho<span class="w"> </span>yel<span class="w"> </span><span class="s2">&quot;Killing PID </span><span class="si">${</span><span class="nv">pid</span><span class="si">}</span><span class="s2"> (</span><span class="si">${</span><span class="nv">pname</span><span class="si">}</span><span class="s2">)&quot;</span><span class="w"> </span>
-<span class="w">        </span><span class="nb">kill</span><span class="w"> </span>-9<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$pid</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">yn</span><span class="p">^</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"Y"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span>cecho<span class="w"> </span>yel<span class="w"> </span><span class="s2">"Killing PID </span><span class="si">${</span><span class="nv">pid</span><span class="si">}</span><span class="s2"> (</span><span class="si">${</span><span class="nv">pname</span><span class="si">}</span><span class="s2">)"</span><span class="w"> </span>
+<span class="w">        </span><span class="nb">kill</span><span class="w"> </span>-9<span class="w"> </span><span class="s2">"</span><span class="nv">$pid</span><span class="s2">"</span>
 <span class="w">    </span><span class="k">fi</span>
 <span class="k">done</span><span class="w"> </span>&lt;<span class="w"> </span>/tmp/<span class="nv">$$</span>.lst
 
@@ -196,7 +196,7 @@ rm<span class="w"> </span>/tmp/<span class="nv">$$</span>.lst
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: February 02, 2026</p>
+      <p>Last updated: October 19, 2026</p>
     </footer>
 
     <div class="scroll-container">

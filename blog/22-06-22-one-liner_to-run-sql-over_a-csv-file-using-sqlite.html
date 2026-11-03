@@ -103,17 +103,17 @@ anna,f,53
 
 <p>We can run a SQL command on this file using a single line (Linux) <code>sqlite3</code> command:</p>
 <div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>sqlite3<span class="w"> </span>:memory:<span class="w"> </span><span class="se">\ </span><span class="w">                            </span><span class="c1"># Use an in memory database</span>
-<span class="w">         </span>-cmd<span class="w"> </span><span class="s1">&#39;.mode csv&#39;</span><span class="w"> </span><span class="se">\ </span><span class="w">                     </span><span class="c1"># Switch to csv mode for import</span>
-<span class="w">         </span>-cmd<span class="w"> </span><span class="s1">&#39;.import &lt;filename&gt; &lt;tablename&gt;&#39;</span><span class="w"> </span><span class="se">\ </span><span class="c1"># Import file as csv</span>
-<span class="w">         </span>-cmd<span class="w"> </span><span class="s1">&#39;.mode column&#39;</span><span class="w">                     </span><span class="c1"># Switch to column mode for output</span>
+<span class="w">         </span>-cmd<span class="w"> </span><span class="s1">'.mode csv'</span><span class="w"> </span><span class="se">\ </span><span class="w">                     </span><span class="c1"># Switch to csv mode for import</span>
+<span class="w">         </span>-cmd<span class="w"> </span><span class="s1">'.import &lt;filename&gt; &lt;tablename&gt;'</span><span class="w"> </span><span class="se">\ </span><span class="c1"># Import file as csv</span>
+<span class="w">         </span>-cmd<span class="w"> </span><span class="s1">'.mode column'</span><span class="w">                     </span><span class="c1"># Switch to column mode for output</span>
 <span class="w">         </span>-header<span class="w"> </span><span class="se">\ </span><span class="w">                              </span><span class="c1"># Show header for output</span>
-<span class="w">         </span><span class="s1">&#39;&lt;sql_statement&gt;&#39;</span>
+<span class="w">         </span><span class="s1">'&lt;sql_statement&gt;'</span>
 </code></pre></div>
 
 <p>An example over <code>people.csv</code>:</p>
-<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>sqlite3<span class="w"> </span>:memory:<span class="w"> </span>-cmd<span class="w"> </span><span class="s1">&#39;.mode csv&#39;</span><span class="w"> </span>-cmd<span class="w"> </span><span class="s1">&#39;.import people.csv people&#39;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">          </span>-cmd<span class="w"> </span><span class="s1">&#39;.mode column&#39;</span><span class="w"> </span>-header<span class="w"> </span><span class="se">\</span>
-<span class="w">          </span><span class="s1">&#39;SELECT sex, COUNT(*), AVG(age) FROM people GROUP BY sex&#39;</span>
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>sqlite3<span class="w"> </span>:memory:<span class="w"> </span>-cmd<span class="w"> </span><span class="s1">'.mode csv'</span><span class="w"> </span>-cmd<span class="w"> </span><span class="s1">'.import people.csv people'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">          </span>-cmd<span class="w"> </span><span class="s1">'.mode column'</span><span class="w"> </span>-header<span class="w"> </span><span class="se">\</span>
+<span class="w">          </span><span class="s1">'SELECT sex, COUNT(*), AVG(age) FROM people GROUP BY sex'</span>
 
 sex<span class="w">         </span>COUNT<span class="o">(</span>*<span class="o">)</span><span class="w">    </span>AVG<span class="o">(</span>age<span class="o">)</span>
 ----------<span class="w">  </span>----------<span class="w">  </span>----------
@@ -143,9 +143,9 @@ m<span class="w">           </span><span class="m">3</span><span class="w">     
 
 <span class="c1"># Run the SQL query over people4.csv</span>
 
-&gt;<span class="w"> </span><span class="nb">time</span><span class="w"> </span>sqlite3<span class="w"> </span>:memory:<span class="w"> </span>-cmd<span class="w"> </span><span class="s1">&#39;.mode csv&#39;</span><span class="w"> </span>-cmd<span class="w"> </span><span class="s1">&#39;.import people4.csv people&#39;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">       </span>-cmd<span class="w"> </span><span class="s1">&#39;.mode column&#39;</span><span class="w"> </span>-header<span class="w"> </span><span class="se">\</span>
-<span class="w">       </span><span class="s1">&#39;SELECT sex, COUNT(*), AVG(age) FROM people GROUP BY sex&#39;</span>
+&gt;<span class="w"> </span><span class="nb">time</span><span class="w"> </span>sqlite3<span class="w"> </span>:memory:<span class="w"> </span>-cmd<span class="w"> </span><span class="s1">'.mode csv'</span><span class="w"> </span>-cmd<span class="w"> </span><span class="s1">'.import people4.csv people'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">       </span>-cmd<span class="w"> </span><span class="s1">'.mode column'</span><span class="w"> </span>-header<span class="w"> </span><span class="se">\</span>
+<span class="w">       </span><span class="s1">'SELECT sex, COUNT(*), AVG(age) FROM people GROUP BY sex'</span>
 
 sex<span class="w">         </span>COUNT<span class="o">(</span>*<span class="o">)</span><span class="w">    </span>AVG<span class="o">(</span>age<span class="o">)</span>
 ----------<span class="w">  </span>----------<span class="w">  </span>----------
@@ -175,7 +175,7 @@ sys<span class="w">     </span>0m0.188s
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: December 11, 2025</p>
+      <p>Last updated: October 27, 2026</p>
     </footer>
 
     <div class="scroll-container">

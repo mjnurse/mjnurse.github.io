@@ -115,9 +115,9 @@
 </ul>
 </div>
 <h1 id="variables">Variables</h1>
-<div class="codehilite"><pre><span></span><code><span class="k">SET</span> <span class="nv">b</span><span class="p">=</span><span class="nv">%a:x=y%</span>   # Replace &#39;x&#39; with &#39;y&#39;.
-<span class="k">SET</span> <span class="nv">b</span><span class="p">=</span><span class="nv">%a:xy=%</span>   # Delete the string &#39;xy&#39;.
-<span class="k">SET</span> <span class="nv">b</span><span class="p">=</span><span class="nv">%a:*xy=%</span>  # Delete the string &#39;xy&#39; and everything before it.
+<div class="codehilite"><pre><span></span><code><span class="k">SET</span> <span class="nv">b</span><span class="p">=</span><span class="nv">%a:x=y%</span>   # Replace 'x' with 'y'.
+<span class="k">SET</span> <span class="nv">b</span><span class="p">=</span><span class="nv">%a:xy=%</span>   # Delete the string 'xy'.
+<span class="k">SET</span> <span class="nv">b</span><span class="p">=</span><span class="nv">%a:*xy=%</span>  # Delete the string 'xy' and everything before it.
 <span class="k">SET</span> <span class="nv">b</span><span class="p">=</span><span class="nv">%a: =%</span>    # Remove spaces from a string.
 
 <span class="k">SET</span> <span class="nv">s</span><span class="p">=</span>martin
@@ -129,13 +129,13 @@
 
 <p>To remove characters from the right hand side of a string is a two step process - To delete everything after the string 't':</p>
 <div class="codehilite"><pre><span></span><code><span class="k">SET</span> <span class="nv">a</span><span class="p">=</span>Martin
-<span class="k">SET</span> <span class="nv">tmp</span><span class="p">=</span><span class="nv">%a:*t=%</span>          # Create tmp string removing &#39;t&#39; and everything before it.
+<span class="k">SET</span> <span class="nv">tmp</span><span class="p">=</span><span class="nv">%a:*t=%</span>          # Create tmp string removing 't' and everything before it.
 <span class="k">CALL</span> <span class="k">SET</span> <span class="nv">b</span><span class="p">=</span><span class="se">%%</span>a:<span class="nv">%tmp%</span>=<span class="se">%%</span>  # Remove tmp from original string.  Use CALL to expand tmp before replace.
 </code></pre></div>
 
 <p>Boolean Test "does string exist ?" - To test for string 'Three':</p>
-<div class="codehilite"><pre><span></span><code><span class="k">SET</span> <span class="nv">a</span><span class="p">=</span><span class="s2">&quot;One, Two, Three&quot;</span>
-<span class="k">SET</span> <span class="nv">tmp</span><span class="p">=</span><span class="nv">%a:Three=%</span>      # Create tmp string removing &#39;Three&#39; if it exists, then compare or original.
+<div class="codehilite"><pre><span></span><code><span class="k">SET</span> <span class="nv">a</span><span class="p">=</span><span class="s2">"One, Two, Three"</span>
+<span class="k">SET</span> <span class="nv">tmp</span><span class="p">=</span><span class="nv">%a:Three=%</span>      # Create tmp string removing 'Three' if it exists, then compare or original.
 <span class="k">IF</span> <span class="k">NOT</span> <span class="nv">%tmp%</span> <span class="o">==</span> <span class="nv">%a%</span> <span class="p">(</span><span class="k">ECHO</span> found.<span class="p">)</span> <span class="k">ELSE</span> <span class="p">(</span><span class="k">ECHO</span> Not found.<span class="p">)</span>
 </code></pre></div>
 
@@ -156,7 +156,7 @@
 
 <p><code>/M</code> makes this a System variable rather than User variable.  <code>/M</code> requires administrator privileges.</p>
 <h1 id="read-user-input">Read user Input</h1>
-<div class="codehilite"><pre><span></span><code>set /p &quot;value=Enter value: &quot;
+<div class="codehilite"><pre><span></span><code>set /p "value=Enter value: "
 echo %value%
 </code></pre></div>
 
@@ -178,8 +178,8 @@ echo %value%
 
 # The == comparison operator always results in a string comparison.  EQU will compare numbers.
 
-# Filenames/Paths - Always surround them with quotes: if <span class="nv">%_myvar%</span> contains <span class="s2">&quot;C:\Some Path&quot;</span> then 
-# comparison becomes IF [<span class="s2">&quot;C:\Some Path&quot;</span>] EQU []
+# Filenames/Paths - Always surround them with quotes: if <span class="nv">%_myvar%</span> contains <span class="s2">"C:\Some Path"</span> then 
+# comparison becomes IF [<span class="s2">"C:\Some Path"</span>] EQU []
 </code></pre></div>
 
 <h2 id="error-check-syntax">Error Check Syntax</h2>
@@ -207,7 +207,7 @@ echo %value%
 </code></pre></div>
 
 <h2 id="an-or-test">An OR test:</h2>
-<div class="codehilite"><pre><span></span><code><span class="k">SET</span> <span class="s2">&quot;tmp=&quot;</span>
+<div class="codehilite"><pre><span></span><code><span class="k">SET</span> <span class="s2">"tmp="</span>
 <span class="k">IF</span> SomeCondition<span class="err"> SET tmp=1</span>
 <span class="k">IF</span> SomeOtherCondition<span class="err"> SET tmp=1</span>
 <span class="k">IF</span> <span class="nv">%tmp%</span> <span class="ow">EQU</span> 1 Command_to_run_if_either_is_true
@@ -224,11 +224,11 @@ echo %value%
 <span class="k">FOR</span> <span class="k">/F</span> <span class="se">%%</span>l <span class="k">IN</span> <span class="p">(</span>file.txt<span class="p">)</span> <span class="k">DO</span> <span class="k">ECHO</span> <span class="se">%%</span>l
 
 # delims= overrides default space delimiter so whole line is a single token
-<span class="k">FOR</span> <span class="k">/F</span> <span class="s2">&quot;delims=&quot;</span> <span class="se">%%</span>line <span class="k">IN</span> <span class="p">(</span>file.txt<span class="p">)</span> <span class="k">DO</span> <span class="k">ECHO</span> <span class="se">%%</span>line
+<span class="k">FOR</span> <span class="k">/F</span> <span class="s2">"delims="</span> <span class="se">%%</span>line <span class="k">IN</span> <span class="p">(</span>file.txt<span class="p">)</span> <span class="k">DO</span> <span class="k">ECHO</span> <span class="se">%%</span>line
 # tokens=* overrides default token=1 to return all tokens using the default space delimiter
-<span class="k">FOR</span> <span class="k">/F</span> <span class="s2">&quot;tokens=*&quot;</span> <span class="se">%%</span>line <span class="k">IN</span> <span class="p">(</span>file.txt<span class="p">)</span> <span class="k">DO</span> <span class="k">ECHO</span> <span class="se">%%</span>line
-<span class="k">FOR</span> <span class="k">/F</span> <span class="s2">&quot;tokens=*&quot;</span> <span class="se">%%</span>character <span class="k">IN</span> <span class="p">(</span><span class="s2">&quot;I am cool&quot;</span><span class="p">)</span> <span class="k">DO</span> <span class="k">ECHO</span> <span class="se">%%</span>character
-<span class="k">FOR</span> <span class="k">/F</span> <span class="s2">&quot;tokens=*&quot;</span> <span class="se">%%</span>l <span class="k">IN</span> <span class="p">(</span><span class="s1">&#39;DIR /B&#39;</span><span class="p">)</span> <span class="k">DO</span> <span class="k">ECHO</span> <span class="se">%%</span>l
+<span class="k">FOR</span> <span class="k">/F</span> <span class="s2">"tokens=*"</span> <span class="se">%%</span>line <span class="k">IN</span> <span class="p">(</span>file.txt<span class="p">)</span> <span class="k">DO</span> <span class="k">ECHO</span> <span class="se">%%</span>line
+<span class="k">FOR</span> <span class="k">/F</span> <span class="s2">"tokens=*"</span> <span class="se">%%</span>character <span class="k">IN</span> <span class="p">(</span><span class="s2">"I am cool"</span><span class="p">)</span> <span class="k">DO</span> <span class="k">ECHO</span> <span class="se">%%</span>character
+<span class="k">FOR</span> <span class="k">/F</span> <span class="s2">"tokens=*"</span> <span class="se">%%</span>l <span class="k">IN</span> <span class="p">(</span><span class="s1">'DIR /B'</span><span class="p">)</span> <span class="k">DO</span> <span class="k">ECHO</span> <span class="se">%%</span>l
 </code></pre></div>
 
 <h1 id="other">Other</h1>
@@ -247,7 +247,7 @@ echo %value%
 
 <span class="p">:</span><span class="c1">: Kill task</span>
 taskkill /F /PID <span class="p">&lt;</span>pid_number&gt;
-taskkill /IM <span class="p">&lt;</span><span class="s2">&quot;process name&quot;</span><span class="p">&gt;</span> /F
+taskkill /IM <span class="p">&lt;</span><span class="s2">"process name"</span><span class="p">&gt;</span> /F
 </code></pre></div>
 
 <h1 id="an-example-script-to-process-command-line-parameters">An example script to process command line parameters</h1>
@@ -304,9 +304,9 @@ taskkill /IM <span class="p">&lt;</span><span class="s2">&quot;process name&quot
 
 <h1 id="a-script-to-emulate-the-linux-sudo-command">A script to emulate the linux sudo command:</h1>
 <p>Create a script <code>sudo.bat</code>:</p>
-<div class="codehilite"><pre><span></span><code><span class="p">@</span><span class="k">echo</span> Set objShell = CreateObject(<span class="s2">&quot;Shell.Application&quot;</span>) <span class="p">&gt;</span> <span class="nv">%temp%</span>\sudo.tmp.vbs
-<span class="p">@</span><span class="k">echo</span> args = Right(<span class="s2">&quot;</span><span class="nv">%*</span><span class="s2">&quot;</span>, (Len(<span class="s2">&quot;</span><span class="nv">%*</span><span class="s2">&quot;</span>) - Len(<span class="s2">&quot;</span><span class="nv">%1</span><span class="s2">&quot;</span>))) <span class="p">&gt;&gt;</span> <span class="nv">%temp%</span>\sudo.tmp.vbs
-<span class="p">@</span><span class="k">echo</span> objShell.ShellExecute <span class="s2">&quot;</span><span class="nv">%1</span><span class="s2">&quot;</span>, args, <span class="s2">&quot;&quot;</span>, <span class="s2">&quot;runas&quot;</span> <span class="p">&gt;&gt;</span> <span class="nv">%temp%</span>\sudo.tmp.vbs
+<div class="codehilite"><pre><span></span><code><span class="p">@</span><span class="k">echo</span> Set objShell = CreateObject(<span class="s2">"Shell.Application"</span>) <span class="p">&gt;</span> <span class="nv">%temp%</span>\sudo.tmp.vbs
+<span class="p">@</span><span class="k">echo</span> args = Right(<span class="s2">"</span><span class="nv">%*</span><span class="s2">"</span>, (Len(<span class="s2">"</span><span class="nv">%*</span><span class="s2">"</span>) - Len(<span class="s2">"</span><span class="nv">%1</span><span class="s2">"</span>))) <span class="p">&gt;&gt;</span> <span class="nv">%temp%</span>\sudo.tmp.vbs
+<span class="p">@</span><span class="k">echo</span> objShell.ShellExecute <span class="s2">"</span><span class="nv">%1</span><span class="s2">"</span>, args, <span class="s2">""</span>, <span class="s2">"runas"</span> <span class="p">&gt;&gt;</span> <span class="nv">%temp%</span>\sudo.tmp.vbs
 <span class="p">@</span>cscript <span class="nv">%temp%</span>\sudo.tmp.vbs
 </code></pre></div>
 
@@ -338,7 +338,7 @@ taskkill /IM <span class="p">&lt;</span><span class="s2">&quot;process name&quot
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: December 11, 2025</p>
+      <p>Last updated: October 27, 2026</p>
     </footer>
 
     <div class="scroll-container">

@@ -92,7 +92,7 @@
         <div class="article-body">
           <h1><a class="link" href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-parq.md">parq: A bash utility for viewing Apache Parquet files in JSON, CSV, or schema format</a></h1>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
-<span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
+<span class="nv">help_text</span><span class="o">=</span><span class="s2">"</span>
 <span class="s2">NAME</span>
 <span class="s2">  parq - Read and display parquet files in various formats.</span>
 
@@ -118,7 +118,7 @@
 <span class="s2">DESCRIPTION</span>
 <span class="s2">  parq is a utility for reading Apache Parquet files and displaying their</span>
 <span class="s2">  contents in different formats. By default, it displays the first 10 records</span>
-<span class="s2">  in JSON format. The script uses Python&#39;s pandas and pyarrow libraries to</span>
+<span class="s2">  in JSON format. The script uses Python's pandas and pyarrow libraries to</span>
 <span class="s2">  read parquet files and can output in JSON, CSV, or display the schema.</span>
 
 <span class="s2">  If required Python libraries (pandas, pyarrow) are not installed, the script</span>
@@ -126,28 +126,28 @@
 
 <span class="s2">AUTHOR</span>
 <span class="s2">  mjnurse.github.io - 2025</span>
-<span class="s2">&quot;</span>
-<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Read and display parquet files in various formats&quot;</span>
-<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;A bash utility for viewing Apache Parquet files in JSON, CSV, or schema format&quot;</span>
+<span class="s2">"</span>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">"Read and display parquet files in various formats"</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">"A bash utility for viewing Apache Parquet files in JSON, CSV, or schema format"</span>
 
-<span class="nv">try</span><span class="o">=</span><span class="s2">&quot;Try </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h for more information&quot;</span>
-<span class="nv">tmp</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">help_text</span><span class="p">##*USAGE</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="nv">usage</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%OPTIONS*</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;\n&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/  */ /g&quot;</span><span class="k">)</span>
+<span class="nv">try</span><span class="o">=</span><span class="s2">"Try </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h for more information"</span>
+<span class="nv">tmp</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">help_text</span><span class="p">##*USAGE</span><span class="si">}</span><span class="s2">"</span>
+<span class="nv">usage</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Usage: </span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%OPTIONS*</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s2">"\n"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">"s/  */ /g"</span><span class="k">)</span>
 
-<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">usage</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">try</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">usage</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">try</span><span class="si">}</span><span class="s2">"</span>
 <span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 <span class="k">fi</span>
 
 <span class="nv">mode</span><span class="o">=</span>json
 <span class="nv">recs</span><span class="o">=</span><span class="m">10</span>
 
-<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
 <span class="w">    </span>-a<span class="p">|</span>--all<span class="o">)</span><span class="w"> </span><span class="nv">recs</span><span class="o">=</span><span class="m">0</span><span class="w"> </span><span class="p">;;</span>
 <span class="w">    </span>-c<span class="p">|</span>--csv<span class="o">)</span><span class="w"> </span><span class="nv">mode</span><span class="o">=</span>csv<span class="w"> </span><span class="p">;;</span>
-<span class="w">    </span>-h<span class="p">|</span>--help<span class="o">)</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">    </span>-h<span class="p">|</span>--help<span class="o">)</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$help_text</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="p">;;</span>
 <span class="w">    </span>-n<span class="p">|</span>--num<span class="o">)</span><span class="w"> </span>shift<span class="p">;</span><span class="w"> </span><span class="nv">recs</span><span class="o">=</span><span class="nv">$1</span><span class="w"> </span><span class="p">;;</span>
 <span class="w">    </span>-s<span class="p">|</span>--schema<span class="o">)</span><span class="w"> </span><span class="nv">mode</span><span class="o">=</span>schema<span class="w"> </span><span class="p">;;</span>
 <span class="w">    </span>?*<span class="o">)</span><span class="w"> </span><span class="k">break</span><span class="w"> </span><span class="p">;;</span>
@@ -157,47 +157,47 @@
 
 <span class="c1"># Check if python libraries are installed, if not offer to install</span>
 <span class="k">for</span><span class="w"> </span>lib<span class="w"> </span><span class="k">in</span><span class="w"> </span>pandas<span class="w"> </span>pyarrow<span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="w">  </span><span class="k">if</span><span class="w"> </span>!<span class="w"> </span>pip3<span class="w"> </span>list<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$lib</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Missing python library: </span><span class="nv">$lib</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Install </span><span class="nv">$lib</span><span class="s2">? [Yn]: &quot;</span><span class="w"> </span>yn
-<span class="w">    </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">yn</span><span class="p">^</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;Y&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">exit</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span>!<span class="w"> </span>pip3<span class="w"> </span>list<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s2">"</span><span class="nv">$lib</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Missing python library: </span><span class="nv">$lib</span><span class="s2">"</span>
+<span class="w">    </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">"Install </span><span class="nv">$lib</span><span class="s2">? [Yn]: "</span><span class="w"> </span>yn
+<span class="w">    </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">yn</span><span class="p">^</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">"Y"</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">exit</span>
 <span class="w">    </span>pip3<span class="w"> </span>install<span class="w"> </span><span class="nv">$lib</span>
 <span class="w">  </span><span class="k">fi</span>
 <span class="k">done</span>
 
 <span class="c1"># Execute Python and display results</span>
 exec_py<span class="o">()</span><span class="w"> </span><span class="o">{</span>
-<span class="w">  </span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null
+<span class="w">  </span>python3<span class="w"> </span>-c<span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null
 <span class="o">}</span>
 
 show_recs<span class="o">()</span><span class="w"> </span><span class="o">{</span>
-<span class="w">  </span><span class="nb">local</span><span class="w"> </span><span class="nv">total</span><span class="o">=</span><span class="k">$(</span>wc<span class="w"> </span>-l<span class="w"> </span>&lt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="k">)</span>
+<span class="w">  </span><span class="nb">local</span><span class="w"> </span><span class="nv">total</span><span class="o">=</span><span class="k">$(</span>wc<span class="w"> </span>-l<span class="w"> </span>&lt;<span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="k">)</span>
 <span class="w">  </span><span class="o">[[</span><span class="w"> </span><span class="nv">$mode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>csv<span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">((</span>total--<span class="o">))</span>
 
 <span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$recs</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span>cat<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="si">${</span><span class="nv">2</span><span class="k">:-</span><span class="nv">cat</span><span class="si">}</span>
+<span class="w">    </span>cat<span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="si">${</span><span class="nv">2</span><span class="k">:-</span><span class="nv">cat</span><span class="si">}</span>
 <span class="w">  </span><span class="k">else</span>
-<span class="w">    </span>head<span class="w"> </span>-n<span class="w"> </span><span class="k">$((</span><span class="nv">recs</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">(</span><span class="nv">mode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nv">csv</span><span class="w"> </span>?<span class="w"> </span><span class="m">1</span><span class="w"> </span>:<span class="w"> </span><span class="m">0</span><span class="k">))</span><span class="o">)</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="si">${</span><span class="nv">2</span><span class="k">:-</span><span class="nv">cat</span><span class="si">}</span>
+<span class="w">    </span>head<span class="w"> </span>-n<span class="w"> </span><span class="k">$((</span><span class="nv">recs</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="o">(</span><span class="nv">mode</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nv">csv</span><span class="w"> </span>?<span class="w"> </span><span class="m">1</span><span class="w"> </span>:<span class="w"> </span><span class="m">0</span><span class="k">))</span><span class="o">)</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="si">${</span><span class="nv">2</span><span class="k">:-</span><span class="nv">cat</span><span class="si">}</span>
 <span class="w">  </span><span class="k">fi</span>
 <span class="w">  </span><span class="nb">echo</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span><span class="o">[[</span><span class="w"> </span><span class="nv">$recs</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$total</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$recs</span><span class="w"> </span>of<span class="w"> </span><span class="nv">$total</span><span class="k">)</span><span class="s2"> total records&quot;</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="k">$(</span><span class="o">[[</span><span class="w"> </span><span class="nv">$recs</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$total</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$recs</span><span class="w"> </span>of<span class="w"> </span><span class="nv">$total</span><span class="k">)</span><span class="s2"> total records"</span>
 <span class="o">}</span>
 
 <span class="k">case</span><span class="w"> </span><span class="nv">$mode</span><span class="w"> </span><span class="k">in</span>
 <span class="w">  </span>csv<span class="o">)</span>
-<span class="w">    </span><span class="nv">tmpfile</span><span class="o">=</span><span class="s2">&quot;/tmp/parq_</span><span class="nv">$$</span><span class="s2">.csv&quot;</span>
-<span class="w">    </span>exec_py<span class="w"> </span><span class="s2">&quot;import pandas as pd; pd.read_parquet(&#39;</span><span class="nv">$1</span><span class="s2">&#39;).to_csv(&#39;</span><span class="nv">$tmpfile</span><span class="s2">&#39;)&quot;</span>
-<span class="w">    </span>show_recs<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmpfile</span><span class="s2">&quot;</span>
-<span class="w">    </span>rm<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmpfile</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nv">tmpfile</span><span class="o">=</span><span class="s2">"/tmp/parq_</span><span class="nv">$$</span><span class="s2">.csv"</span>
+<span class="w">    </span>exec_py<span class="w"> </span><span class="s2">"import pandas as pd; pd.read_parquet('</span><span class="nv">$1</span><span class="s2">').to_csv('</span><span class="nv">$tmpfile</span><span class="s2">')"</span>
+<span class="w">    </span>show_recs<span class="w"> </span><span class="s2">"</span><span class="nv">$tmpfile</span><span class="s2">"</span>
+<span class="w">    </span>rm<span class="w"> </span>-f<span class="w"> </span><span class="s2">"</span><span class="nv">$tmpfile</span><span class="s2">"</span>
 <span class="w">    </span><span class="p">;;</span>
 <span class="w">  </span>json<span class="o">)</span>
-<span class="w">    </span><span class="nv">tmpfile</span><span class="o">=</span><span class="s2">&quot;/tmp/parq_</span><span class="nv">$$</span><span class="s2">.json&quot;</span>
-<span class="w">    </span>exec_py<span class="w"> </span><span class="s2">&quot;import pandas as pd, json; df=pd.read_parquet(&#39;</span><span class="nv">$1</span><span class="s2">&#39;); [print(json.dumps(r)) for r in json.loads(df.to_json(orient=&#39;records&#39;))]&quot;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmpfile</span><span class="s2">&quot;</span>
-<span class="w">    </span>show_recs<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmpfile</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">command</span><span class="w"> </span>-v<span class="w"> </span>jq<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span>cat<span class="k">)</span><span class="s2">&quot;</span>
-<span class="w">    </span>rm<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$tmpfile</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nv">tmpfile</span><span class="o">=</span><span class="s2">"/tmp/parq_</span><span class="nv">$$</span><span class="s2">.json"</span>
+<span class="w">    </span>exec_py<span class="w"> </span><span class="s2">"import pandas as pd, json; df=pd.read_parquet('</span><span class="nv">$1</span><span class="s2">'); [print(json.dumps(r)) for r in json.loads(df.to_json(orient='records'))]"</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">"</span><span class="nv">$tmpfile</span><span class="s2">"</span>
+<span class="w">    </span>show_recs<span class="w"> </span><span class="s2">"</span><span class="nv">$tmpfile</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="k">$(</span><span class="nb">command</span><span class="w"> </span>-v<span class="w"> </span>jq<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span>cat<span class="k">)</span><span class="s2">"</span>
+<span class="w">    </span>rm<span class="w"> </span>-f<span class="w"> </span><span class="s2">"</span><span class="nv">$tmpfile</span><span class="s2">"</span>
 <span class="w">    </span><span class="p">;;</span>
 <span class="w">  </span>schema<span class="o">)</span>
-<span class="w">    </span>exec_py<span class="w"> </span><span class="s2">&quot;import pyarrow.parquet as pq; print(pq.read_table(&#39;</span><span class="nv">$1</span><span class="s2">&#39;).schema)&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;/-- schema/q; /./p&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>--color<span class="o">=</span>auto<span class="w"> </span><span class="s2">&quot; .*&quot;</span>
+<span class="w">    </span>exec_py<span class="w"> </span><span class="s2">"import pyarrow.parquet as pq; print(pq.read_table('</span><span class="nv">$1</span><span class="s2">').schema)"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s2">"/-- schema/q; /./p"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>--color<span class="o">=</span>auto<span class="w"> </span><span class="s2">" .*"</span>
 <span class="w">    </span><span class="p">;;</span>
 <span class="k">esac</span>
 </code></pre></div>
@@ -218,7 +218,7 @@ show_recs<span class="o">()</span><span class="w"> </span><span class="o">{</spa
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: January 02, 2026</p>
+      <p>Last updated: October 19, 2026</p>
     </footer>
 
     <div class="scroll-container">

@@ -92,7 +92,7 @@
         <div class="article-body">
           <h1><a class="link" href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-sqlite-load-csv.md">sqlite-load-csv: Load a csv file into a sqlite3 database</a></h1>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
-<span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
+<span class="nv">help_text</span><span class="o">=</span><span class="s2">"</span>
 <span class="s2">NAME</span>
 <span class="s2">  sqlite-load-csv - Load a csv file into a sqlite3 database.</span>
 
@@ -118,31 +118,31 @@
 
 <span class="s2">AUTHOR</span>
 <span class="s2">  mjnurse.github.io - 2020</span>
-<span class="s2">&quot;</span>
-<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Load a csv file into a sqlite3 database&quot;</span>
-<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Load a csv file into a sqlite3 database&quot;</span>
+<span class="s2">"</span>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">"Load a csv file into a sqlite3 database"</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">"Load a csv file into a sqlite3 database"</span>
 
-<span class="nv">try</span><span class="o">=</span><span class="s2">&quot;Try </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h for more information&quot;</span>
-<span class="nv">tmp</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">help_text</span><span class="p">##*USAGE</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="nv">usage</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span>Usage:<span class="w"> </span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%OPTIONS*</span><span class="si">}</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="nv">try</span><span class="o">=</span><span class="s2">"Try </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h for more information"</span>
+<span class="nv">tmp</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">help_text</span><span class="p">##*USAGE</span><span class="si">}</span><span class="s2">"</span>
+<span class="nv">usage</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span>Usage:<span class="w"> </span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%OPTIONS*</span><span class="si">}</span><span class="k">)</span><span class="s2">"</span>
 
-<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">usage</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">try</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">usage</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">try</span><span class="si">}</span><span class="s2">"</span>
 <span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 <span class="k">fi</span>
 
-<span class="nv">table_name</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="nv">table_name</span><span class="o">=</span><span class="s2">""</span>
 
-<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">   </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
 <span class="w">      </span>-h<span class="p">|</span>--help<span class="o">)</span>
-<span class="w">         </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
+<span class="w">         </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$help_text</span><span class="s2">"</span>
 <span class="w">         </span><span class="nb">exit</span>
 <span class="w">         </span><span class="p">;;</span>
 <span class="w">      </span>-t<span class="p">|</span>--table<span class="o">)</span>
 <span class="w">         </span><span class="nb">shift</span>
-<span class="w">         </span><span class="nv">table_name</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="w">         </span><span class="nv">table_name</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
 <span class="w">         </span><span class="p">;;</span>
 <span class="w">      </span>?*<span class="o">)</span>
 <span class="w">         </span><span class="k">break</span>
@@ -151,27 +151,27 @@
 <span class="w">   </span><span class="nb">shift</span>
 <span class="k">done</span>
 
-<span class="nv">csv_filename</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
-<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$table_name</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">  </span><span class="nv">table_name</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">csv_filename</span><span class="p">/.csv/</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nv">csv_filename</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$table_name</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nv">table_name</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">csv_filename</span><span class="p">/.csv/</span><span class="si">}</span><span class="s2">"</span>
 <span class="k">fi</span>
-<span class="nv">db_name</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">2</span><span class="p">/.db/</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nv">db_name</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">2</span><span class="p">/.db/</span><span class="si">}</span><span class="s2">"</span>
 
-<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$db_name</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">  </span><span class="nv">db_name</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">csv_filename</span><span class="p">/.csv/</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$db_name</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nv">db_name</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">csv_filename</span><span class="p">/.csv/</span><span class="si">}</span><span class="s2">"</span>
 <span class="k">fi</span><span class="w"> </span>
-<span class="nv">db_name</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">db_name</span><span class="si">}</span><span class="s2">.db&quot;</span>
+<span class="nv">db_name</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">db_name</span><span class="si">}</span><span class="s2">.db"</span>
 
 <span class="nb">echo</span><span class="w"> </span>loading:<span class="w"> </span><span class="nv">$csv_filename</span><span class="w"> </span>into<span class="w"> </span>table:<span class="w"> </span><span class="nv">$table_name</span><span class="w"> </span><span class="k">in</span><span class="w"> </span>database:<span class="w"> </span><span class="nv">$db_name</span><span class="w"> </span>
 
-cat<span class="w"> </span><span class="nv">$csv_filename</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/ *, */,/g&quot;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$0</span>.tmpcsv
+cat<span class="w"> </span><span class="nv">$csv_filename</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">"s/ *, */,/g"</span><span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$0</span>.tmpcsv
 
-<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;drop table &#39;</span><span class="nv">$table_name</span><span class="s1">&#39;;&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sqlite3<span class="w"> </span><span class="nv">$db_name</span><span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">'drop table '</span><span class="nv">$table_name</span><span class="s1">';'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sqlite3<span class="w"> </span><span class="nv">$db_name</span><span class="w"> </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
 
-<span class="nb">echo</span><span class="w"> </span><span class="s1">&#39;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s1">'</span>
 <span class="s1">.mode csv</span>
-<span class="s1">.import &#39;</span><span class="nv">$0</span>.tmpcsv<span class="s1">&#39; &#39;</span><span class="nv">$table_name</span><span class="s1">&#39;</span>
-<span class="s1">&#39;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$0</span>.tmp
+<span class="s1">.import '</span><span class="nv">$0</span>.tmpcsv<span class="s1">' '</span><span class="nv">$table_name</span><span class="s1">'</span>
+<span class="s1">'</span><span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$0</span>.tmp
 
 cat<span class="w"> </span><span class="nv">$0</span>.tmp<span class="w"> </span><span class="p">|</span><span class="w"> </span>sqlite3<span class="w"> </span><span class="nv">$db_name</span><span class="w"> </span>
 
@@ -194,7 +194,7 @@ rm<span class="w"> </span>-f<span class="w"> </span><span class="nv">$0</span>.t
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: January 02, 2026</p>
+      <p>Last updated: October 19, 2026</p>
     </footer>
 
     <div class="scroll-container">

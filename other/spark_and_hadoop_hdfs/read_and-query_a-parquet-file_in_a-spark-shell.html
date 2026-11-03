@@ -93,7 +93,7 @@
           <h1><a class="link" href="#" data-clipboard="code ~/mjnurse/mjnurse-website/other/spark_and_hadoop_hdfs/read_and-query_a-parquet-file_in_a-spark-shell.md">Read and Query a Parquet File in a Spark Shell</a></h1>
 <h2 id="basic-read-and-query">Basic Read and Query</h2>
 <div class="codehilite"><pre><span></span><code><span class="c1">// Read in file to a data frame.</span>
-<span class="o">&gt;</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">spark</span><span class="p">.</span><span class="n">read</span><span class="p">.</span><span class="n">parquet</span><span class="p">(</span><span class="s">&quot;filename.parquet&quot;</span><span class="p">)</span>
+<span class="o">&gt;</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">spark</span><span class="p">.</span><span class="n">read</span><span class="p">.</span><span class="n">parquet</span><span class="p">(</span><span class="s">"filename.parquet"</span><span class="p">)</span>
 
 <span class="c1">// Print the data frame schema.</span>
 <span class="o">&gt;</span><span class="w"> </span><span class="n">df</span><span class="p">.</span><span class="n">printSchema</span><span class="p">()</span>
@@ -107,13 +107,13 @@
 
 <h2 id="spark-sql">Spark SQL</h2>
 <div class="codehilite"><pre><span></span><code><span class="c1">// Read in file to a data frame.</span>
-<span class="o">&gt;</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">spark</span><span class="p">.</span><span class="n">read</span><span class="p">.</span><span class="n">parquet</span><span class="p">(</span><span class="s">&quot;filename.parquet&quot;</span><span class="p">)</span>
+<span class="o">&gt;</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">df</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">spark</span><span class="p">.</span><span class="n">read</span><span class="p">.</span><span class="n">parquet</span><span class="p">(</span><span class="s">"filename.parquet"</span><span class="p">)</span>
 
 <span class="c1">// Create a temporary view over the dataframe</span>
-<span class="o">&gt;</span><span class="w"> </span><span class="n">df</span><span class="p">.</span><span class="n">createOrReplaceTempView</span><span class="p">(</span><span class="s">&quot;dfv&quot;</span><span class="p">)</span><span class="w"> </span><span class="c1">// dfv - data frame view</span>
+<span class="o">&gt;</span><span class="w"> </span><span class="n">df</span><span class="p">.</span><span class="n">createOrReplaceTempView</span><span class="p">(</span><span class="s">"dfv"</span><span class="p">)</span><span class="w"> </span><span class="c1">// dfv - data frame view</span>
 
 <span class="c1">// Run SQL Select query</span>
-<span class="o">&gt;</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">res</span><span class="o">=</span><span class="n">spark</span><span class="p">.</span><span class="n">sql</span><span class="p">(</span><span class="s">&quot;SELECT * FROM dfv&quot;</span><span class="p">)</span>
+<span class="o">&gt;</span><span class="w"> </span><span class="kd">val</span><span class="w"> </span><span class="n">res</span><span class="o">=</span><span class="n">spark</span><span class="p">.</span><span class="n">sql</span><span class="p">(</span><span class="s">"SELECT * FROM dfv"</span><span class="p">)</span>
 <span class="o">&gt;</span><span class="w"> </span><span class="n">res</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
 </code></pre></div>
 
@@ -141,7 +141,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: December 11, 2025</p>
+      <p>Last updated: October 27, 2026</p>
     </footer>
 
     <div class="scroll-container">

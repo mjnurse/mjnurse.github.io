@@ -92,32 +92,32 @@
         <div class="article-body">
           <h1><a class="link" href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-gen-fake.md">gen-fake: Generate fake data</a></h1>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python3</span>
-<span class="nv">DESCRIPTION</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="nv">DESCRIPTION</span><span class="o">=</span><span class="s2">"""</span>
 <span class="s2">Generate fake data: business names, person names, or addresses.</span>
-<span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">"""</span>
 <span class="nv">ARGS</span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
-<span class="w">    </span><span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="w"> </span><span class="s2">&quot;datatype&quot;</span>,<span class="w"> </span><span class="s2">&quot;choices&quot;</span>:<span class="w"> </span><span class="o">[</span><span class="s2">&quot;business&quot;</span>,<span class="w"> </span><span class="s2">&quot;person&quot;</span>,<span class="w"> </span><span class="s2">&quot;address&quot;</span>,<span class="w"> </span><span class="s2">&quot;email&quot;</span>,<span class="w"> </span><span class="s2">&quot;all&quot;</span><span class="o">]</span>,<span class="w"> </span><span class="s2">&quot;help&quot;</span>:<span class="w"> </span><span class="s2">&quot;Type of data to generate&quot;</span><span class="o">}</span>,
-<span class="w">    </span><span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="w"> </span><span class="s2">&quot;count&quot;</span>,<span class="w"> </span><span class="s2">&quot;nargs&quot;</span>:<span class="w"> </span><span class="s2">&quot;?&quot;</span>,<span class="w"> </span><span class="s2">&quot;type&quot;</span>:<span class="w"> </span>int,<span class="w"> </span><span class="s2">&quot;default&quot;</span>:<span class="w"> </span><span class="m">1</span>,<span class="w"> </span><span class="s2">&quot;help&quot;</span>:<span class="w"> </span><span class="s2">&quot;Number of items to generate&quot;</span><span class="o">}</span>
+<span class="w">    </span><span class="o">{</span><span class="s2">"name"</span>:<span class="w"> </span><span class="s2">"datatype"</span>,<span class="w"> </span><span class="s2">"choices"</span>:<span class="w"> </span><span class="o">[</span><span class="s2">"business"</span>,<span class="w"> </span><span class="s2">"person"</span>,<span class="w"> </span><span class="s2">"address"</span>,<span class="w"> </span><span class="s2">"email"</span>,<span class="w"> </span><span class="s2">"all"</span><span class="o">]</span>,<span class="w"> </span><span class="s2">"help"</span>:<span class="w"> </span><span class="s2">"Type of data to generate"</span><span class="o">}</span>,
+<span class="w">    </span><span class="o">{</span><span class="s2">"name"</span>:<span class="w"> </span><span class="s2">"count"</span>,<span class="w"> </span><span class="s2">"nargs"</span>:<span class="w"> </span><span class="s2">"?"</span>,<span class="w"> </span><span class="s2">"type"</span>:<span class="w"> </span>int,<span class="w"> </span><span class="s2">"default"</span>:<span class="w"> </span><span class="m">1</span>,<span class="w"> </span><span class="s2">"help"</span>:<span class="w"> </span><span class="s2">"Number of items to generate"</span><span class="o">}</span>
 <span class="o">]</span>
-<span class="nv">AUTHOR</span><span class="o">=</span><span class="s2">&quot;mjnurse.github.io - 2026&quot;</span>
+<span class="nv">AUTHOR</span><span class="o">=</span><span class="s2">"mjnurse.github.io - 2026"</span>
 
-<span class="nv">HELP_LINE</span><span class="o">=</span><span class="s2">&quot;Generate fake data&quot;</span>
-<span class="nv">WEB_DESC_LINE</span><span class="o">=</span><span class="s2">&quot;Generate fake data&quot;</span>
+<span class="nv">HELP_LINE</span><span class="o">=</span><span class="s2">"Generate fake data"</span>
+<span class="nv">WEB_DESC_LINE</span><span class="o">=</span><span class="s2">"Generate fake data"</span>
 
 import<span class="w"> </span>argparse
 from<span class="w"> </span>faker<span class="w"> </span>import<span class="w"> </span>Faker
 import<span class="w"> </span>sys
 
-<span class="nv">fake</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Faker<span class="o">(</span><span class="s2">&quot;en_GB&quot;</span><span class="o">)</span>
+<span class="nv">fake</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Faker<span class="o">(</span><span class="s2">"en_GB"</span><span class="o">)</span>
 
 def<span class="w"> </span>parse_args<span class="o">()</span>:
 <span class="w">    </span><span class="nv">parser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>argparse.ArgumentParser<span class="o">(</span>
-<span class="w">        </span><span class="nv">description</span><span class="o">=</span><span class="s2">&quot;description:&quot;</span><span class="w"> </span>+<span class="w"> </span>DESCRIPTION.replace<span class="o">(</span><span class="s2">&quot;\n&quot;</span>,<span class="w"> </span><span class="s2">&quot;\n  &quot;</span><span class="o">)[</span>:-2<span class="o">]</span>,
-<span class="w">        </span><span class="nv">epilog</span><span class="o">=</span><span class="s2">&quot;author:\n  &quot;</span><span class="w"> </span>+<span class="w"> </span>AUTHOR,
+<span class="w">        </span><span class="nv">description</span><span class="o">=</span><span class="s2">"description:"</span><span class="w"> </span>+<span class="w"> </span>DESCRIPTION.replace<span class="o">(</span><span class="s2">"\n"</span>,<span class="w"> </span><span class="s2">"\n  "</span><span class="o">)[</span>:-2<span class="o">]</span>,
+<span class="w">        </span><span class="nv">epilog</span><span class="o">=</span><span class="s2">"author:\n  "</span><span class="w"> </span>+<span class="w"> </span>AUTHOR,
 <span class="w">        </span><span class="nv">formatter_class</span><span class="o">=</span>argparse.RawDescriptionHelpFormatter<span class="w"> </span><span class="o">)</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span>arg<span class="w"> </span><span class="k">in</span><span class="w"> </span>ARGS:
-<span class="w">        </span><span class="nv">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>arg<span class="o">[</span><span class="s2">&quot;name&quot;</span><span class="o">]]</span><span class="w"> </span>+<span class="w"> </span><span class="o">([</span>arg<span class="o">[</span><span class="s2">&quot;name2&quot;</span><span class="o">]]</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="s2">&quot;name2&quot;</span><span class="w"> </span><span class="k">in</span><span class="w"> </span>arg<span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="o">[])</span>
-<span class="w">        </span><span class="nv">kwargs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span>k:<span class="w"> </span>v<span class="w"> </span><span class="k">for</span><span class="w"> </span>k,<span class="w"> </span>v<span class="w"> </span><span class="k">in</span><span class="w"> </span>arg.items<span class="o">()</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>k<span class="w"> </span>not<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">(</span><span class="s2">&quot;name&quot;</span>,<span class="w"> </span><span class="s2">&quot;name2&quot;</span><span class="o">)</span><span class="w"> </span>and<span class="w"> </span>v<span class="w"> </span>is<span class="w"> </span>not<span class="w"> </span>None<span class="o">}</span>
+<span class="w">        </span><span class="nv">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>arg<span class="o">[</span><span class="s2">"name"</span><span class="o">]]</span><span class="w"> </span>+<span class="w"> </span><span class="o">([</span>arg<span class="o">[</span><span class="s2">"name2"</span><span class="o">]]</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="s2">"name2"</span><span class="w"> </span><span class="k">in</span><span class="w"> </span>arg<span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="o">[])</span>
+<span class="w">        </span><span class="nv">kwargs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span>k:<span class="w"> </span>v<span class="w"> </span><span class="k">for</span><span class="w"> </span>k,<span class="w"> </span>v<span class="w"> </span><span class="k">in</span><span class="w"> </span>arg.items<span class="o">()</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>k<span class="w"> </span>not<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">(</span><span class="s2">"name"</span>,<span class="w"> </span><span class="s2">"name2"</span><span class="o">)</span><span class="w"> </span>and<span class="w"> </span>v<span class="w"> </span>is<span class="w"> </span>not<span class="w"> </span>None<span class="o">}</span>
 <span class="w">        </span>parser.add_argument<span class="o">(</span>*names,<span class="w"> </span>**kwargs<span class="o">)</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span>parser.parse_args<span class="o">()</span>
 
@@ -127,38 +127,38 @@ def<span class="w"> </span>generate_business_names<span class="o">()</span>:
 def<span class="w"> </span>generate_person_names<span class="o">()</span>:
 <span class="w">    </span><span class="k">return</span><span class="w"> </span>fake.name<span class="o">()</span>
 
-def<span class="w"> </span>generate_email_addresses<span class="o">(</span><span class="nv">bus</span><span class="o">=</span><span class="s2">&quot;&quot;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="o">)</span>:
+def<span class="w"> </span>generate_email_addresses<span class="o">(</span><span class="nv">bus</span><span class="o">=</span><span class="s2">""</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">""</span><span class="o">)</span>:
 <span class="w">    </span><span class="k">if</span><span class="w"> </span>bus<span class="w"> </span>and<span class="w"> </span>name:
-<span class="w">        </span><span class="k">return</span><span class="w"> </span>f<span class="s2">&quot;{name.replace(&#39; &#39;, &#39;.&#39;).lower()}@{bus.replace(&#39; &#39;, &#39;&#39;).lower()}.com&quot;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span>f<span class="s2">"{name.replace(' ', '.').lower()}@{bus.replace(' ', '').lower()}.com"</span>
 <span class="w">    </span><span class="k">else</span>:
 <span class="w">        </span><span class="k">return</span><span class="w"> </span>fake.email<span class="o">()</span>
 
 def<span class="w"> </span>generate_addresses<span class="o">()</span>:
-<span class="w">    </span><span class="k">return</span><span class="w"> </span>f<span class="s2">&quot;{fake.street_address()}, {fake.city()}, {fake.postcode()}&quot;</span>.replace<span class="o">(</span><span class="s2">&quot;\n&quot;</span>,<span class="w"> </span><span class="s2">&quot;, &quot;</span><span class="o">)</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>f<span class="s2">"{fake.street_address()}, {fake.city()}, {fake.postcode()}"</span>.replace<span class="o">(</span><span class="s2">"\n"</span>,<span class="w"> </span><span class="s2">", "</span><span class="o">)</span>
 
 def<span class="w"> </span>main<span class="o">()</span>:
 
 <span class="w">    </span><span class="nv">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>parse_args<span class="o">()</span>
 
 <span class="w">    </span><span class="k">for</span><span class="w"> </span>_<span class="w"> </span><span class="k">in</span><span class="w"> </span>range<span class="o">(</span>args.count<span class="o">)</span>:
-<span class="w">        </span><span class="k">if</span><span class="w"> </span>args.datatype<span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;business&quot;</span>:
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>args.datatype<span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"business"</span>:
 <span class="w">            </span>print<span class="o">(</span>generate_business_names<span class="o">())</span>
-<span class="w">        </span><span class="k">elif</span><span class="w"> </span>args.datatype<span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;person&quot;</span>:
+<span class="w">        </span><span class="k">elif</span><span class="w"> </span>args.datatype<span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"person"</span>:
 <span class="w">            </span>print<span class="o">(</span>generate_person_names<span class="o">())</span>
-<span class="w">        </span><span class="k">elif</span><span class="w"> </span>args.datatype<span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;address&quot;</span>:
+<span class="w">        </span><span class="k">elif</span><span class="w"> </span>args.datatype<span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"address"</span>:
 <span class="w">            </span>print<span class="o">(</span>generate_addresses<span class="o">())</span>
-<span class="w">        </span><span class="k">elif</span><span class="w"> </span>args.datatype<span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;email&quot;</span>:
+<span class="w">        </span><span class="k">elif</span><span class="w"> </span>args.datatype<span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"email"</span>:
 <span class="w">            </span>print<span class="o">(</span>generate_email_addresses<span class="o">())</span>
-<span class="w">        </span><span class="k">elif</span><span class="w"> </span>args.datatype<span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;all&quot;</span>:
+<span class="w">        </span><span class="k">elif</span><span class="w"> </span>args.datatype<span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"all"</span>:
 <span class="w">            </span><span class="nv">bus_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>generate_business_names<span class="o">()</span>
 <span class="w">            </span><span class="nv">person_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>generate_person_names<span class="o">()</span>
-<span class="w">            </span><span class="nv">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="s2">&quot;business&quot;</span>:<span class="w"> </span>bus_name,<span class="w"> </span><span class="s2">&quot;person&quot;</span>:<span class="w"> </span>person_name,<span class="w"> </span><span class="s2">&quot;email&quot;</span>:<span class="w"> </span>generate_email_addresses<span class="o">(</span>bus_name,<span class="w"> </span>person_name<span class="o">)</span>,<span class="w"> </span><span class="s2">&quot;address&quot;</span>:<span class="w"> </span>generate_addresses<span class="o">()}</span>
+<span class="w">            </span><span class="nv">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span><span class="s2">"business"</span>:<span class="w"> </span>bus_name,<span class="w"> </span><span class="s2">"person"</span>:<span class="w"> </span>person_name,<span class="w"> </span><span class="s2">"email"</span>:<span class="w"> </span>generate_email_addresses<span class="o">(</span>bus_name,<span class="w"> </span>person_name<span class="o">)</span>,<span class="w"> </span><span class="s2">"address"</span>:<span class="w"> </span>generate_addresses<span class="o">()}</span>
 <span class="w">            </span>print<span class="o">(</span>json<span class="o">)</span>
 <span class="w">        </span><span class="k">else</span>:
-<span class="w">            </span>print<span class="o">(</span><span class="s2">&quot;Unsupported datatype&quot;</span>,<span class="w"> </span><span class="nv">file</span><span class="o">=</span>sys.stderr<span class="o">)</span>
+<span class="w">            </span>print<span class="o">(</span><span class="s2">"Unsupported datatype"</span>,<span class="w"> </span><span class="nv">file</span><span class="o">=</span>sys.stderr<span class="o">)</span>
 <span class="w">            </span>sys.exit<span class="o">(</span><span class="m">1</span><span class="o">)</span>
 
-<span class="k">if</span><span class="w"> </span><span class="nv">__name__</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;__main__&quot;</span>:
+<span class="k">if</span><span class="w"> </span><span class="nv">__name__</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"__main__"</span>:
 <span class="w">    </span>main<span class="o">()</span>
 </code></pre></div>
         </div>
@@ -178,7 +178,7 @@ def<span class="w"> </span>main<span class="o">()</span>:
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: February 03, 2026</p>
+      <p>Last updated: October 19, 2026</p>
     </footer>
 
     <div class="scroll-container">

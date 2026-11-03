@@ -92,12 +92,12 @@
         <div class="article-body">
           <h1><a class="link" href="#" data-clipboard="code ~/mjnurse/mjnurse-website/python/sqlite3-with-python3.md">Sqlite3 With Python3</a></h1>
 <p>An example of how to use a Sqlite3 database with Python3.</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">sqlite3</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">sqlite3</span>
 
-<span class="k">def</span> <span class="nf">dbOpen</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">dbOpen</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
   <span class="k">return</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">sql</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="p">()):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">sql</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="p">()):</span>
   <span class="k">try</span><span class="p">:</span>
     <span class="n">cur</span> <span class="o">=</span> <span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
     <span class="n">cur</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span>
@@ -105,24 +105,24 @@
     <span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">rows</span>
   <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'Error:'</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
 
-<span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
-  <span class="n">conn</span> <span class="o">=</span> <span class="n">dbOpen</span><span class="p">(</span><span class="s1">&#39;test.db&#39;</span><span class="p">)</span>
-  <span class="n">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">&#39;DROP TABLE test&#39;</span><span class="p">)</span>
-  <span class="n">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">&#39;CREATE TABLE test(n NUMBER, t TEXT)&#39;</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">test</span><span class="p">():</span>
+  <span class="n">conn</span> <span class="o">=</span> <span class="n">dbOpen</span><span class="p">(</span><span class="s1">'test.db'</span><span class="p">)</span>
+  <span class="n">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">'DROP TABLE test'</span><span class="p">)</span>
+  <span class="n">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">'CREATE TABLE test(n NUMBER, t TEXT)'</span><span class="p">)</span>
 
-  <span class="n">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">&#39;INSERT INTO test(n, t) VALUES (?, ?)&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Hello&#39;</span><span class="p">))</span>
-  <span class="n">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">&#39;INSERT INTO test(n, t) VALUES (?, ?)&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Goodbye&#39;</span><span class="p">))</span>
-  <span class="nb">print</span><span class="p">(</span><span class="n">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">&#39;SELECT * FROM test&#39;</span><span class="p">))</span>
+  <span class="n">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">'INSERT INTO test(n, t) VALUES (?, ?)'</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">'Hello'</span><span class="p">))</span>
+  <span class="n">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">'INSERT INTO test(n, t) VALUES (?, ?)'</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s1">'Goodbye'</span><span class="p">))</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">'SELECT * FROM test'</span><span class="p">))</span>
 
-  <span class="n">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">&#39;UPDATE test SET t = ? WHERE n = ?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s1">&#39;See ya&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
-  <span class="nb">print</span><span class="p">(</span><span class="n">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">&#39;SELECT * FROM test&#39;</span><span class="p">))</span>
+  <span class="n">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">'UPDATE test SET t = ? WHERE n = ?'</span><span class="p">,</span> <span class="p">(</span><span class="s1">'See ya'</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">'SELECT * FROM test'</span><span class="p">))</span>
 
-  <span class="n">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">&#39;DELETE FROM test WHERE n = ?&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,))</span>
-  <span class="nb">print</span><span class="p">(</span><span class="n">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">&#39;SELECT * FROM test&#39;</span><span class="p">))</span>
+  <span class="n">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">'DELETE FROM test WHERE n = ?'</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,))</span>
+  <span class="nb">print</span><span class="p">(</span><span class="n">dbRunSQL</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">'SELECT * FROM test'</span><span class="p">))</span>
 
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
   <span class="n">test</span><span class="p">()</span>
 </code></pre></div>
 
@@ -144,7 +144,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: December 11, 2025</p>
+      <p>Last updated: October 27, 2026</p>
     </footer>
 
     <div class="scroll-container">

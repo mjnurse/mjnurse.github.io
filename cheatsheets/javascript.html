@@ -158,10 +158,10 @@
 <h1 id="basics">Basics</h1>
 <h2 id="including-javascript-on-a-page">Including Javascript On A Page</h2>
 <div class="codehilite"><pre><span></span><code><span class="c1">// On page script</span>
-<span class="o">&lt;</span><span class="nx">script</span><span class="w"> </span><span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span><span class="w">  </span><span class="p">...</span><span class="w">  </span><span class="o">&lt;</span><span class="err">/script&gt;</span>
+<span class="o">&lt;</span><span class="nx">script</span><span class="w"> </span><span class="nx">type</span><span class="o">=</span><span class="s2">"text/javascript"</span><span class="o">&gt;</span><span class="w">  </span><span class="p">...</span><span class="w">  </span><span class="o">&lt;</span><span class="err">/script&gt;</span>
 
 <span class="c1">// Include external JS file</span>
-<span class="o">&lt;</span><span class="nx">script</span><span class="w"> </span><span class="nx">src</span><span class="o">=</span><span class="s2">&quot;filename.js&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+<span class="o">&lt;</span><span class="nx">script</span><span class="w"> </span><span class="nx">src</span><span class="o">=</span><span class="s2">"filename.js"</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
 </code></pre></div>
 
 <h2 id="functions">Functions</h2>
@@ -195,14 +195,14 @@
 
 <h2 id="misc">Misc</h2>
 <div class="codehilite"><pre><span></span><code><span class="c1">// Edit DOM element</span>
-<span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;elementID&quot;</span><span class="p">).</span><span class="nx">innerHTML</span><span class="o">=</span><span class="s2">&quot;Hello World!&quot;</span><span class="p">;</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"elementID"</span><span class="p">).</span><span class="nx">innerHTML</span><span class="o">=</span><span class="s2">"Hello World!"</span><span class="p">;</span>
 
 <span class="c1">// Output</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span><span class="w">          </span><span class="c1">// Write to the browser console</span>
 <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span><span class="w">       </span><span class="c1">// Write to the HTML</span>
 <span class="nx">alert</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span><span class="w">                </span><span class="c1">// Output in an alert box</span>
-<span class="nx">confirm</span><span class="p">(</span><span class="s2">&quot;Really?&quot;</span><span class="p">);</span><span class="w">      </span><span class="c1">// Yes/no dialogue, returns true/false depending on user click</span>
-<span class="nx">prompt</span><span class="p">(</span><span class="s2">&quot;Your age?&quot;</span><span class="p">,</span><span class="s2">&quot;0&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// Input dialogue. Second argument is the initial value</span>
+<span class="nx">confirm</span><span class="p">(</span><span class="s2">"Really?"</span><span class="p">);</span><span class="w">      </span><span class="c1">// Yes/no dialogue, returns true/false depending on user click</span>
+<span class="nx">prompt</span><span class="p">(</span><span class="s2">"Your age?"</span><span class="p">,</span><span class="s2">"0"</span><span class="p">);</span><span class="w"> </span><span class="c1">// Input dialogue. Second argument is the initial value</span>
 
 <span class="c1">// Comments</span>
 <span class="cm">/* Multi line</span>
@@ -214,21 +214,21 @@
 
 <h1 id="data-types">Data Types</h1>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">age</span><span class="o">=</span><span class="mf">18</span><span class="p">;</span><span class="w">                           </span><span class="c1">// Number</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">name</span><span class="o">=</span><span class="s2">&quot;Jane&quot;</span><span class="p">;</span><span class="w">                      </span><span class="c1">// String</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">name</span><span class="o">=</span><span class="p">{</span><span class="nx">first</span><span class="o">:</span><span class="s2">&quot;Jane&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">last</span><span class="o">:</span><span class="s2">&quot;Doe&quot;</span><span class="p">};</span><span class="w">  </span><span class="c1">// Object</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">name</span><span class="o">=</span><span class="s2">"Jane"</span><span class="p">;</span><span class="w">                      </span><span class="c1">// String</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">name</span><span class="o">=</span><span class="p">{</span><span class="nx">first</span><span class="o">:</span><span class="s2">"Jane"</span><span class="p">,</span><span class="w"> </span><span class="nx">last</span><span class="o">:</span><span class="s2">"Doe"</span><span class="p">};</span><span class="w">  </span><span class="c1">// Object</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">truth</span><span class="o">=</span><span class="kc">false</span><span class="p">;</span><span class="w">                      </span><span class="c1">// Boolean</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">sheets</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;HTML&quot;</span><span class="p">,</span><span class="s2">&quot;CSS&quot;</span><span class="p">,</span><span class="s2">&quot;JS&quot;</span><span class="p">];</span><span class="w">       </span><span class="c1">// Array</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">sheets</span><span class="o">=</span><span class="p">[</span><span class="s2">"HTML"</span><span class="p">,</span><span class="s2">"CSS"</span><span class="p">,</span><span class="s2">"JS"</span><span class="p">];</span><span class="w">       </span><span class="c1">// Array</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="p">;</span><span class="w"> </span><span class="ow">typeof</span><span class="w"> </span><span class="nx">a</span><span class="p">;</span><span class="w">                      </span><span class="c1">// Undefined</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="o">=</span><span class="kc">null</span><span class="p">;</span><span class="w">                           </span><span class="c1">// Value null</span>
 </code></pre></div>
 
 <h1 id="objects">Objects</h1>
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">student</span><span class="o">=</span><span class="p">{</span><span class="w"> </span><span class="c1">// Object name</span>
-<span class="w">  </span><span class="nx">firstName</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Jane&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// List of properties and values</span>
-<span class="w">  </span><span class="nx">lastName</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Doe&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">firstName</span><span class="o">:</span><span class="w"> </span><span class="s2">"Jane"</span><span class="p">,</span><span class="w"> </span><span class="c1">// List of properties and values</span>
+<span class="w">  </span><span class="nx">lastName</span><span class="o">:</span><span class="w"> </span><span class="s2">"Doe"</span><span class="p">,</span>
 <span class="w">  </span><span class="nx">age</span><span class="o">:</span><span class="w"> </span><span class="mf">18</span><span class="p">,</span>
 <span class="w">  </span><span class="nx">fullName</span><span class="o">:</span><span class="w"> </span><span class="kd">function</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// Object function</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">firstName</span><span class="o">+</span><span class="s2">&quot; &quot;</span><span class="o">+</span><span class="k">this</span><span class="p">.</span><span class="nx">lastName</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">firstName</span><span class="o">+</span><span class="s2">" "</span><span class="o">+</span><span class="k">this</span><span class="p">.</span><span class="nx">lastName</span><span class="p">;</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 <span class="nx">student</span><span class="p">.</span><span class="nx">age</span><span class="o">=</span><span class="mf">19</span><span class="p">;</span><span class="w">          </span><span class="c1">// Setting value</span>
@@ -236,25 +236,25 @@
 </code></pre></div>
 
 <h1 id="variables">Variables</h1>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">b</span><span class="o">=</span><span class="s2">&quot;init&quot;</span><span class="p">;</span><span class="w">       </span><span class="c1">// String</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">d</span><span class="o">=</span><span class="mf">1</span><span class="o">+</span><span class="mf">2</span><span class="o">+</span><span class="s2">&quot;3&quot;</span><span class="p">;</span><span class="w">      </span><span class="c1">// &quot;33&quot;</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">b</span><span class="o">=</span><span class="s2">"init"</span><span class="p">;</span><span class="w">       </span><span class="c1">// String</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">d</span><span class="o">=</span><span class="mf">1</span><span class="o">+</span><span class="mf">2</span><span class="o">+</span><span class="s2">"3"</span><span class="p">;</span><span class="w">      </span><span class="c1">// "33"</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">e</span><span class="o">=</span><span class="p">[</span><span class="mf">2</span><span class="p">,</span><span class="mf">3</span><span class="p">,</span><span class="mf">5</span><span class="p">,</span><span class="mf">8</span><span class="p">];</span><span class="w">    </span><span class="c1">// Array</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">g</span><span class="o">=</span><span class="sr">/()/</span><span class="p">;</span><span class="w">         </span><span class="c1">// RegEx</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">h</span><span class="o">=</span><span class="kd">function</span><span class="p">(){};</span><span class="w"> </span><span class="c1">// Function object</span>
 <span class="kd">const</span><span class="w"> </span><span class="nx">PI</span><span class="o">=</span><span class="mf">3.14</span><span class="p">;</span><span class="w">      </span><span class="c1">// Constant</span>
-<span class="kd">let</span><span class="w"> </span><span class="nx">z</span><span class="o">=</span><span class="s1">&#39;zzz&#39;</span><span class="p">;</span><span class="w">        </span><span class="c1">// Block scope local variable</span>
+<span class="kd">let</span><span class="w"> </span><span class="nx">z</span><span class="o">=</span><span class="s1">'zzz'</span><span class="p">;</span><span class="w">        </span><span class="c1">// Block scope local variable</span>
 <span class="kd">let</span><span class="w"> </span><span class="nx">a</span><span class="o">??=</span><span class="mf">10</span><span class="p">;</span><span class="w">         </span><span class="c1">// Only assign is a is Nullish (null or undefined)</span>
 </code></pre></div>
 
 <h2 id="strict-mode">Strict Mode</h2>
-<div class="codehilite"><pre><span></span><code><span class="s2">&quot;use strict&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Use strict mode to write secure code</span>
+<div class="codehilite"><pre><span></span><code><span class="s2">"use strict"</span><span class="p">;</span><span class="w"> </span><span class="c1">// Use strict mode to write secure code</span>
 <span class="nx">x</span><span class="o">=</span><span class="mf">1</span><span class="p">;</span><span class="w">          </span><span class="c1">// Throws an error because variable is not declared</span>
 </code></pre></div>
 
 <h2 id="values">Values</h2>
 <div class="codehilite"><pre><span></span><code><span class="kc">false</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="w">                  </span><span class="c1">// Boolean</span>
 <span class="mf">18</span><span class="p">,</span><span class="w"> </span><span class="mf">3.14</span><span class="p">,</span><span class="w"> </span><span class="mb">0b10011</span><span class="p">,</span><span class="w"> </span><span class="mh">0xF6</span><span class="p">,</span><span class="w"> </span><span class="kc">NaN</span><span class="w"> </span><span class="c1">// Number</span>
-<span class="s2">&quot;flower&quot;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;John&#39;</span><span class="w">             </span><span class="c1">// String</span>
+<span class="s2">"flower"</span><span class="p">,</span><span class="w"> </span><span class="s1">'John'</span><span class="w">             </span><span class="c1">// String</span>
 <span class="kc">undefined</span><span class="p">,</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">,</span><span class="kc">Infinity</span><span class="w">    </span><span class="c1">// Special</span>
 </code></pre></div>
 
@@ -274,7 +274,7 @@
 <span class="nx">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nx">b</span><span class="w">      </span><span class="c1">// Equals</span>
 <span class="nx">a</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">b</span><span class="w">      </span><span class="c1">// Unequal</span>
 <span class="nx">a</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">b</span><span class="w">     </span><span class="c1">// Strict equal (datatypes must also match)</span>
-<span class="nx">a</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nx">b</span><span class="w">     </span><span class="c1">// Strict unequal (value or datatypes don&#39;t match)</span>
+<span class="nx">a</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="nx">b</span><span class="w">     </span><span class="c1">// Strict unequal (value or datatypes don't match)</span>
 <span class="nx">a</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">b</span>
 <span class="nx">a</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">b</span>
 </code></pre></div>
@@ -291,19 +291,19 @@
 </code></pre></div>
 
 <h2 id="in-line">In Line</h2>
-<div class="codehilite"><pre><span></span><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="o">&gt;</span><span class="nx">b</span><span class="o">?</span><span class="s1">&#39;a biggest&#39;</span><span class="o">:</span><span class="s1">&#39;b biggest&#39;</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">a</span><span class="o">&gt;</span><span class="nx">b</span><span class="o">?</span><span class="s1">'a biggest'</span><span class="o">:</span><span class="s1">'b biggest'</span><span class="p">);</span>
 </code></pre></div>
 
 <h2 id="switch">Switch</h2>
 <div class="codehilite"><pre><span></span><code><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">().</span><span class="nx">getDay</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mf">6</span><span class="o">:</span>
-<span class="w">        </span><span class="nx">text</span><span class="o">=</span><span class="s2">&quot;Saturday&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">text</span><span class="o">=</span><span class="s2">"Saturday"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">break</span><span class="p">;</span>
 <span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="mf">0</span><span class="o">:</span>
-<span class="w">        </span><span class="nx">text</span><span class="o">=</span><span class="s2">&quot;Sunday&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">text</span><span class="o">=</span><span class="s2">"Sunday"</span><span class="p">;</span>
 <span class="w">        </span><span class="k">break</span><span class="p">;</span>
 <span class="w">    </span><span class="k">default</span><span class="o">:</span>
-<span class="w">        </span><span class="nx">text</span><span class="o">=</span><span class="s2">&quot;Whatever&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">text</span><span class="o">=</span><span class="s2">"Whatever"</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre></div>
 
@@ -315,11 +315,11 @@
 <span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">val</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">Will</span><span class="w"> </span><span class="nx">go</span><span class="w"> </span><span class="nx">here</span><span class="w"> </span><span class="p">}</span>
 </code></pre></div>
 
-<div class="codehilite"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">person_obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;nonsense&#39;</span><span class="p">;</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">const</span><span class="w"> </span><span class="nx">person_obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'nonsense'</span><span class="p">;</span>
 
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">person</span><span class="p">.</span><span class="nx">obj</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">first</span><span class="p">);</span><span class="w"> </span><span class="c1">// Error!</span>
 
-<span class="c1">// Check if it&#39;s defined</span>
+<span class="c1">// Check if it's defined</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">person_obj</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">person_obj</span><span class="p">.</span><span class="nx">name</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nx">person_obj</span><span class="p">.</span><span class="nx">name</span><span class="p">.</span><span class="nx">first</span><span class="p">);</span><span class="w"> </span><span class="c1">// undefined.</span>
 
 <span class="c1">// Cleaner option.</span>
@@ -332,7 +332,7 @@
 <span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="o">=</span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">&lt;</span><span class="nx">a</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">sum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">a</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
 <span class="p">}</span>
-<span class="nx">html</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="nx">html</span><span class="o">=</span><span class="s2">""</span><span class="p">;</span>
 <span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">custOrder</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">}</span>
 </code></pre></div>
 
@@ -350,30 +350,30 @@
 <h2 id="continue">Continue</h2>
 <div class="codehilite"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="o">=</span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">&lt;</span><span class="mf">10</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">5</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">continue</span><span class="p">;</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="c1">// Skips the rest of the cycle</span>
-<span class="w">  </span><span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">&quot;, &quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// 5 not output</span>
+<span class="w">  </span><span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s2">", "</span><span class="p">);</span><span class="w"> </span><span class="c1">// 5 not output</span>
 <span class="p">}</span>
 </code></pre></div>
 
 <h1 id="strings">Strings</h1>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">esc</span><span class="o">=</span><span class="s1">&#39;I don\&#39;t \n know&#39;</span><span class="p">;</span><span class="w"> </span><span class="c1">// \n new line</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">esc</span><span class="o">=</span><span class="s1">'I don\'t \n know'</span><span class="p">;</span><span class="w"> </span><span class="c1">// \n new line</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">len</span><span class="o">=</span><span class="nx">abc</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w">         </span><span class="c1">// String length</span>
 </code></pre></div>
 
-<div class="codehilite"><pre><span></span><code><span class="s2">&quot;abc&quot;</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s2">&quot;lmno&quot;</span><span class="p">);</span><span class="w">      </span><span class="c1">// Find substring, -1 if doesn&#39;t contain</span>
-<span class="s2">&quot;abc&quot;</span><span class="p">.</span><span class="nx">lastIndexOf</span><span class="p">(</span><span class="s2">&quot;lmno&quot;</span><span class="p">);</span><span class="w">  </span><span class="c1">// Last occurrence</span>
-<span class="s2">&quot;abc&quot;</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="mf">6</span><span class="p">);</span><span class="w">          </span><span class="c1">// Cuts out &quot;def&quot;, negative values count from behind</span>
-<span class="s2">&quot;abc&quot;</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="s2">&quot;abc&quot;</span><span class="p">,</span><span class="s2">&quot;123&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// Find and replace, takes regular expressions</span>
-<span class="s2">&quot;abc&quot;</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">();</span><span class="w">        </span><span class="c1">// Convert to upper case</span>
-<span class="s2">&quot;abc&quot;</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">();</span><span class="w">        </span><span class="c1">// Convert to lower case</span>
-<span class="s2">&quot;abc&quot;</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">str2</span><span class="p">);</span><span class="w">    </span><span class="c1">// Abc + &quot; &quot; + str2</span>
-<span class="s2">&quot;abc&quot;</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="mf">2</span><span class="p">);</span><span class="w">            </span><span class="c1">// Character at index: &quot;c&quot;</span>
-<span class="s2">&quot;abc&quot;</span><span class="p">[</span><span class="mf">2</span><span class="p">];</span><span class="w">                   </span><span class="c1">// Unsafe, abc[2]=&quot;C&quot; doesn&#39;t work</span>
-<span class="s2">&quot;abc&quot;</span><span class="p">.</span><span class="nx">charCodeAt</span><span class="p">(</span><span class="mf">2</span><span class="p">);</span><span class="w">        </span><span class="c1">// Character code at index: &quot;c&quot; -&gt; 99</span>
-<span class="s2">&quot;abc&quot;</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">);</span><span class="w">           </span><span class="c1">// Splitting a string on commas gives an array</span>
-<span class="s2">&quot;abc&quot;</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">);</span><span class="w">            </span><span class="c1">// Splitting on characters</span>
+<div class="codehilite"><pre><span></span><code><span class="s2">"abc"</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="s2">"lmno"</span><span class="p">);</span><span class="w">      </span><span class="c1">// Find substring, -1 if doesn't contain</span>
+<span class="s2">"abc"</span><span class="p">.</span><span class="nx">lastIndexOf</span><span class="p">(</span><span class="s2">"lmno"</span><span class="p">);</span><span class="w">  </span><span class="c1">// Last occurrence</span>
+<span class="s2">"abc"</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="mf">6</span><span class="p">);</span><span class="w">          </span><span class="c1">// Cuts out "def", negative values count from behind</span>
+<span class="s2">"abc"</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="s2">"abc"</span><span class="p">,</span><span class="s2">"123"</span><span class="p">);</span><span class="w"> </span><span class="c1">// Find and replace, takes regular expressions</span>
+<span class="s2">"abc"</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">();</span><span class="w">        </span><span class="c1">// Convert to upper case</span>
+<span class="s2">"abc"</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">();</span><span class="w">        </span><span class="c1">// Convert to lower case</span>
+<span class="s2">"abc"</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="s2">" "</span><span class="p">,</span><span class="w"> </span><span class="nx">str2</span><span class="p">);</span><span class="w">    </span><span class="c1">// Abc + " " + str2</span>
+<span class="s2">"abc"</span><span class="p">.</span><span class="nx">charAt</span><span class="p">(</span><span class="mf">2</span><span class="p">);</span><span class="w">            </span><span class="c1">// Character at index: "c"</span>
+<span class="s2">"abc"</span><span class="p">[</span><span class="mf">2</span><span class="p">];</span><span class="w">                   </span><span class="c1">// Unsafe, abc[2]="C" doesn't work</span>
+<span class="s2">"abc"</span><span class="p">.</span><span class="nx">charCodeAt</span><span class="p">(</span><span class="mf">2</span><span class="p">);</span><span class="w">        </span><span class="c1">// Character code at index: "c" -&gt; 99</span>
+<span class="s2">"abc"</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">","</span><span class="p">);</span><span class="w">           </span><span class="c1">// Splitting a string on commas gives an array</span>
+<span class="s2">"abc"</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">""</span><span class="p">);</span><span class="w">            </span><span class="c1">// Splitting on characters</span>
 <span class="mf">128.</span><span class="nx">toString</span><span class="p">(</span><span class="mf">16</span><span class="p">);</span><span class="w">           </span><span class="c1">// Number to hex(16), octal (8) or binary (2)</span>
-<span class="s2">&quot;abc&quot;</span><span class="p">.</span><span class="nx">padEnd</span><span class="p">(</span><span class="mf">4</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">);</span><span class="w">        </span><span class="c1">// Rpad</span>
-<span class="s2">&quot;abc&quot;</span><span class="p">.</span><span class="nx">padStart</span><span class="p">(</span><span class="mf">4</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">);</span><span class="w">      </span><span class="c1">// Lpad</span>
+<span class="s2">"abc"</span><span class="p">.</span><span class="nx">padEnd</span><span class="p">(</span><span class="mf">4</span><span class="p">,</span><span class="s1">'-'</span><span class="p">);</span><span class="w">        </span><span class="c1">// Rpad</span>
+<span class="s2">"abc"</span><span class="p">.</span><span class="nx">padStart</span><span class="p">(</span><span class="mf">4</span><span class="p">,</span><span class="s1">'-'</span><span class="p">);</span><span class="w">      </span><span class="c1">// Lpad</span>
 </code></pre></div>
 
 <h1 id="numbers-and-math">Numbers and Math</h1>
@@ -386,8 +386,8 @@
 
 <div class="codehilite"><pre><span></span><code><span class="nb">Number</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span><span class="w">           </span><span class="c1">// Converts to number</span>
 <span class="nb">Number</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">())</span><span class="w">      </span><span class="c1">// Number of milliseconds since 1970</span>
-<span class="nb">parseInt</span><span class="p">(</span><span class="s2">&quot;3 months&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">// Returns the first number: 3</span>
-<span class="nb">parseFloat</span><span class="p">(</span><span class="s2">&quot;3.5 days&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// Returns 3.5</span>
+<span class="nb">parseInt</span><span class="p">(</span><span class="s2">"3 months"</span><span class="p">);</span><span class="w">   </span><span class="c1">// Returns the first number: 3</span>
+<span class="nb">parseFloat</span><span class="p">(</span><span class="s2">"3.5 days"</span><span class="p">);</span><span class="w"> </span><span class="c1">// Returns 3.5</span>
 <span class="nb">Number</span><span class="p">.</span><span class="nx">MAX_VALUE</span><span class="w">        </span><span class="c1">// Largest possible JS number</span>
 <span class="nb">Number</span><span class="p">.</span><span class="nx">MIN_VALUE</span><span class="w">        </span><span class="c1">// Smallest possible JS number</span>
 <span class="nb">Number</span><span class="p">.</span><span class="nx">NEGATIVE_INFINITY</span>
@@ -413,10 +413,10 @@
 </code></pre></div>
 
 <h1 id="dates-times">Dates / Times</h1>
-<div class="codehilite"><pre><span></span><code><span class="nb">Date</span><span class="p">(</span><span class="s2">&quot;2017-06-23&quot;</span><span class="p">);</span><span class="w"> </span><span class="c1">// Date declaration. Also: Date(&quot;June 23 2017&quot;)</span>
-<span class="nb">Date</span><span class="p">(</span><span class="s2">&quot;2017&quot;</span><span class="p">);</span><span class="w">       </span><span class="c1">// Is set to Jan 01</span>
-<span class="nb">Date</span><span class="p">(</span><span class="s2">&quot;2017-06-23T12:00:00-09:45&quot;</span><span class="p">);</span>
-<span class="nb">Date</span><span class="p">(</span><span class="s2">&quot;Jun 23 2017 07:45:00 GMT+0100 (Tokyo Time)&quot;</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><code><span class="nb">Date</span><span class="p">(</span><span class="s2">"2017-06-23"</span><span class="p">);</span><span class="w"> </span><span class="c1">// Date declaration. Also: Date("June 23 2017")</span>
+<span class="nb">Date</span><span class="p">(</span><span class="s2">"2017"</span><span class="p">);</span><span class="w">       </span><span class="c1">// Is set to Jan 01</span>
+<span class="nb">Date</span><span class="p">(</span><span class="s2">"2017-06-23T12:00:00-09:45"</span><span class="p">);</span>
+<span class="nb">Date</span><span class="p">(</span><span class="s2">"Jun 23 2017 07:45:00 GMT+0100 (Tokyo Time)"</span><span class="p">);</span>
 <span class="nb">Date</span><span class="p">(</span><span class="mf">2012</span><span class="p">,</span><span class="mf">10</span><span class="p">,</span><span class="mf">23</span><span class="p">,</span><span class="mf">17</span><span class="p">,</span><span class="mf">34</span><span class="p">,</span><span class="mf">32</span><span class="p">)</span><span class="w"> </span><span class="c1">// 2012-11-23T17:34:32.000Z</span>
 </code></pre></div>
 
@@ -425,7 +425,7 @@
 
 <p>Date in the format: YYYYMMDDHH24MISS</p>
 <div class="codehilite"><pre><span></span><code><span class="nx">date</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">();</span>
-<span class="nx">date</span><span class="p">.</span><span class="nx">toISOString</span><span class="p">().</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[ZT:-]/g</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\..*/g</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+<span class="nx">date</span><span class="p">.</span><span class="nx">toISOString</span><span class="p">().</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/[ZT:-]/g</span><span class="p">,</span><span class="s1">''</span><span class="p">).</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\..*/g</span><span class="p">,</span><span class="s1">''</span><span class="p">);</span>
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">d</span><span class="o">=</span><span class="ow">new</span><span class="w"> </span><span class="nb">Date</span><span class="p">();</span><span class="w">    </span><span class="c1">// Thu Aug 22 2019 16:26:11 GMT+0100 (British Summer Time)</span>
@@ -455,28 +455,28 @@
 </code></pre></div>
 
 <h1 id="arrays">Arrays</h1>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">dogs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Bulldog&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Beagle&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Labrador&quot;</span><span class="p">];</span>
-<span class="kd">var</span><span class="w"> </span><span class="nx">dogs</span><span class="o">=</span><span class="ow">new</span><span class="w"> </span><span class="nb">Array</span><span class="p">(</span><span class="s2">&quot;Bulldog&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Beagle&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Labrador&quot;</span><span class="p">);</span><span class="w">  </span><span class="c1">// Declaration</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">dogs</span><span class="o">=</span><span class="p">[</span><span class="s2">"Bulldog"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Beagle"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Labrador"</span><span class="p">];</span>
+<span class="kd">var</span><span class="w"> </span><span class="nx">dogs</span><span class="o">=</span><span class="ow">new</span><span class="w"> </span><span class="nb">Array</span><span class="p">(</span><span class="s2">"Bulldog"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Beagle"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Labrador"</span><span class="p">);</span><span class="w">  </span><span class="c1">// Declaration</span>
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code><span class="nx">alert</span><span class="p">(</span><span class="nx">dogs</span><span class="p">[</span><span class="mf">1</span><span class="p">]);</span><span class="w">         </span><span class="c1">// Access value at index, first item being [0]</span>
-<span class="nx">dogs</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;Bull Terrier&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Change the first item</span>
+<span class="nx">dogs</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="o">=</span><span class="s2">"Bull Terrier"</span><span class="p">;</span><span class="w"> </span><span class="c1">// Change the first item</span>
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">var</span><span class="w"> </span><span class="nx">i</span><span class="o">=</span><span class="mf">0</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">&lt;</span><span class="nx">dogs</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span><span class="w"> </span><span class="nx">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dogs</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span><span class="w"> </span><span class="p">}</span>
 </code></pre></div>
 
-<div class="codehilite"><pre><span></span><code><span class="nx">dogs</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span><span class="w">                     </span><span class="c1">// Convert to string: results &quot;Bulldog,Beagle,Labrador&quot;</span>
-<span class="nx">dogs</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s2">&quot; * &quot;</span><span class="p">);</span><span class="w">                    </span><span class="c1">// Join: &quot;Bulldog * Beagle * Labrador&quot;</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">dogs</span><span class="p">.</span><span class="nx">toString</span><span class="p">();</span><span class="w">                     </span><span class="c1">// Convert to string: results "Bulldog,Beagle,Labrador"</span>
+<span class="nx">dogs</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s2">" * "</span><span class="p">);</span><span class="w">                    </span><span class="c1">// Join: "Bulldog * Beagle * Labrador"</span>
 <span class="nx">dogs</span><span class="p">.</span><span class="nx">pop</span><span class="p">();</span><span class="w">                          </span><span class="c1">// Remove last element</span>
-<span class="nx">dogs</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">&quot;Chihuahua&quot;</span><span class="p">);</span><span class="w">              </span><span class="c1">// Add new element to the end</span>
-<span class="nx">dogs</span><span class="p">[</span><span class="nx">dogs</span><span class="p">.</span><span class="nx">length</span><span class="p">]</span><span class="o">=</span><span class="s2">&quot;Chihuahua&quot;</span><span class="p">;</span><span class="w">       </span><span class="c1">// The same as push</span>
-<span class="nx">dogs</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">&#39;Boxer&#39;</span><span class="p">);</span><span class="w">              </span><span class="c1">// Returns True / False</span>
-<span class="nx">dogs</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">&#39;Boxer&#39;</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">);</span><span class="w">           </span><span class="c1">// Includes from position 3 onwards</span>
+<span class="nx">dogs</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s2">"Chihuahua"</span><span class="p">);</span><span class="w">              </span><span class="c1">// Add new element to the end</span>
+<span class="nx">dogs</span><span class="p">[</span><span class="nx">dogs</span><span class="p">.</span><span class="nx">length</span><span class="p">]</span><span class="o">=</span><span class="s2">"Chihuahua"</span><span class="p">;</span><span class="w">       </span><span class="c1">// The same as push</span>
+<span class="nx">dogs</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">'Boxer'</span><span class="p">);</span><span class="w">              </span><span class="c1">// Returns True / False</span>
+<span class="nx">dogs</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">'Boxer'</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">);</span><span class="w">           </span><span class="c1">// Includes from position 3 onwards</span>
 <span class="nx">dogs</span><span class="p">.</span><span class="nx">shift</span><span class="p">();</span><span class="w">                        </span><span class="c1">// Remove first element</span>
-<span class="nx">dogs</span><span class="p">.</span><span class="nx">unshift</span><span class="p">(</span><span class="s2">&quot;Chihuahua&quot;</span><span class="p">);</span><span class="w">           </span><span class="c1">// Add new element to the beginning</span>
+<span class="nx">dogs</span><span class="p">.</span><span class="nx">unshift</span><span class="p">(</span><span class="s2">"Chihuahua"</span><span class="p">);</span><span class="w">           </span><span class="c1">// Add new element to the beginning</span>
 <span class="ow">delete</span><span class="w"> </span><span class="nx">dogs</span><span class="p">[</span><span class="mf">0</span><span class="p">];</span><span class="w">                      </span><span class="c1">// Change element to undefined (not recommended)</span>
-<span class="nx">dogs</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Pug&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;Boxer&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">// Add elements (where, how many to remove, element list)</span>
+<span class="nx">dogs</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">,</span><span class="w"> </span><span class="s2">"Pug"</span><span class="p">,</span><span class="w"> </span><span class="s2">"Boxer"</span><span class="p">);</span><span class="w">   </span><span class="c1">// Add elements (where, how many to remove, element list)</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">animals</span><span class="o">=</span><span class="nx">dogs</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">cats</span><span class="p">,</span><span class="nx">birds</span><span class="p">);</span><span class="w"> </span><span class="c1">// Join two arrays (dogs followed by cats and birds)</span>
 <span class="nx">dogs</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mf">1</span><span class="p">,</span><span class="mf">4</span><span class="p">);</span><span class="w">                     </span><span class="c1">// Elements from [1] to [4-1]</span>
 <span class="nx">dogs</span><span class="p">.</span><span class="nx">sort</span><span class="p">();</span><span class="w">                         </span><span class="c1">// Sort string alphabetically</span>
@@ -504,13 +504,13 @@
 <div class="codehilite"><pre><span></span><code><span class="p">(</span><span class="mf">23</span><span class="p">).</span><span class="nx">toString</span><span class="p">();</span><span class="w">         </span><span class="c1">// Return string from number</span>
 </code></pre></div>
 
-<div class="codehilite"><pre><span></span><code><span class="nb">Number</span><span class="p">(</span><span class="s2">&quot;23&quot;</span><span class="p">);</span><span class="w">            </span><span class="c1">// Return number from string</span>
+<div class="codehilite"><pre><span></span><code><span class="nb">Number</span><span class="p">(</span><span class="s2">"23"</span><span class="p">);</span><span class="w">            </span><span class="c1">// Return number from string</span>
 </code></pre></div>
 
-<div class="codehilite"><pre><span></span><code><span class="nb">decodeURI</span><span class="p">(</span><span class="nx">enc</span><span class="p">);</span><span class="w">          </span><span class="c1">// Decode URI. Result: &quot;my page.asp&quot;</span>
+<div class="codehilite"><pre><span></span><code><span class="nb">decodeURI</span><span class="p">(</span><span class="nx">enc</span><span class="p">);</span><span class="w">          </span><span class="c1">// Decode URI. Result: "my page.asp"</span>
 </code></pre></div>
 
-<div class="codehilite"><pre><span></span><code><span class="nb">encodeURI</span><span class="p">(</span><span class="nx">uri</span><span class="p">);</span><span class="w">          </span><span class="c1">// Encode URI. Result: &quot;my%page.asp&quot;</span>
+<div class="codehilite"><pre><span></span><code><span class="nb">encodeURI</span><span class="p">(</span><span class="nx">uri</span><span class="p">);</span><span class="w">          </span><span class="c1">// Encode URI. Result: "my%page.asp"</span>
 </code></pre></div>
 
 <div class="codehilite"><pre><span></span><code><span class="nb">decodeURIComponent</span><span class="p">(</span><span class="nx">enc</span><span class="p">);</span><span class="w"> </span><span class="c1">// Decode a URI component</span>
@@ -584,28 +584,28 @@
 </code></pre></div>
 
 <h2 id="throw-error">Throw Error</h2>
-<div class="codehilite"><pre><span></span><code><span class="k">throw</span><span class="w"> </span><span class="s2">&quot;My error message&quot;</span><span class="p">;</span><span class="w"> </span><span class="c1">// Throw a text</span>
+<div class="codehilite"><pre><span></span><code><span class="k">throw</span><span class="w"> </span><span class="s2">"My error message"</span><span class="p">;</span><span class="w"> </span><span class="c1">// Throw a text</span>
 </code></pre></div>
 
 <h2 id="input-validation">Input Validation</h2>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">x</span><span class="o">=</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;mynum&quot;</span><span class="p">).</span><span class="nx">value</span><span class="p">;</span><span class="w"> </span><span class="c1">// Get input value</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">x</span><span class="o">=</span><span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"mynum"</span><span class="p">).</span><span class="nx">value</span><span class="p">;</span><span class="w"> </span><span class="c1">// Get input value</span>
 <span class="k">try</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="nx">x</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="p">)</span><span class="w">  </span><span class="k">throw</span><span class="w"> </span><span class="s2">&quot;empty&quot;</span><span class="p">;</span><span class="w">         </span><span class="c1">// Error cases</span>
-<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="nb">isNaN</span><span class="p">(</span><span class="nx">x</span><span class="p">))</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="s2">&quot;not a number&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="nx">x</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">""</span><span class="p">)</span><span class="w">  </span><span class="k">throw</span><span class="w"> </span><span class="s2">"empty"</span><span class="p">;</span><span class="w">         </span><span class="c1">// Error cases</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="nb">isNaN</span><span class="p">(</span><span class="nx">x</span><span class="p">))</span><span class="w"> </span><span class="k">throw</span><span class="w"> </span><span class="s2">"not a number"</span><span class="p">;</span>
 <span class="w">    </span><span class="nx">x</span><span class="o">=</span><span class="nb">Number</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
-<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="nx">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">10</span><span class="p">)</span><span class="w">   </span><span class="k">throw</span><span class="w"> </span><span class="s2">&quot;too high&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="nx">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">10</span><span class="p">)</span><span class="w">   </span><span class="k">throw</span><span class="w"> </span><span class="s2">"too high"</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="k">catch</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">                            </span><span class="c1">// If there&#39;s an error</span>
-<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">&quot;Input is &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">err</span><span class="p">);</span><span class="w">  </span><span class="c1">// Output error</span>
+<span class="k">catch</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">                            </span><span class="c1">// If there's an error</span>
+<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">"Input is "</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">err</span><span class="p">);</span><span class="w">  </span><span class="c1">// Output error</span>
 <span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span><span class="w">                 </span><span class="c1">// Write the error in console</span>
 <span class="p">}</span>
 <span class="k">finally</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">&quot;&lt;/br /&gt;Done&quot;</span><span class="p">);</span><span class="w">      </span><span class="c1">// Executed regardless of the try / catch result</span>
+<span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">"&lt;/br /&gt;Done"</span><span class="p">);</span><span class="w">      </span><span class="c1">// Executed regardless of the try / catch result</span>
 <span class="p">}</span>
 </code></pre></div>
 
 <h2 id="error-name-values">Error Name Values</h2>
-<div class="codehilite"><pre><span></span><code><span class="ne">RangeError</span><span class="w">     </span><span class="c1">// A number is &quot;out of range&quot;</span>
+<div class="codehilite"><pre><span></span><code><span class="ne">RangeError</span><span class="w">     </span><span class="c1">// A number is "out of range"</span>
 <span class="ne">ReferenceError</span><span class="w"> </span><span class="c1">// An illegal reference has occurred</span>
 <span class="ne">SyntaxError</span><span class="w">    </span><span class="c1">// A syntax error has occurred</span>
 <span class="ne">TypeError</span><span class="w">      </span><span class="c1">// A type error has occurred</span>
@@ -614,29 +614,29 @@
 
 <h2 id="json">JSON</h2>
 <h2 id="create-json-object">Create JSON object</h2>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">str</span><span class="o">=</span><span class="s1">&#39;{&quot;names&quot;:[{&quot;first&quot;:&quot;Hakuna&quot;,&quot;last&quot;:&quot;Matata&quot;},{&quot;first&quot;:&quot;Air&quot;,&quot;last&quot;:&quot;Jordan&quot;}]}&#39;</span><span class="p">;</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">str</span><span class="o">=</span><span class="s1">'{"names":[{"first":"Hakuna","last":"Matata"},{"first":"Air","last":"Jordan"}]}'</span><span class="p">;</span>
 
 <span class="nx">obj</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">str</span><span class="p">);</span><span class="w">               </span><span class="c1">// Parse</span>
 <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">names</span><span class="p">[</span><span class="mf">1</span><span class="p">].</span><span class="nx">first</span><span class="p">);</span><span class="w">  </span><span class="c1">// Access</span>
 </code></pre></div>
 
 <h2 id="iterate-loop-through-json-elements">Iterate / Loop Through JSON Elements</h2>
-<div class="codehilite"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Martin&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;age&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">21</span><span class="w"> </span><span class="p">};</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">let</span><span class="w"> </span><span class="nx">json</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="s2">"name"</span><span class="o">:</span><span class="w"> </span><span class="s2">"Martin"</span><span class="p">,</span><span class="w"> </span><span class="s2">"age"</span><span class="o">:</span><span class="w"> </span><span class="mf">21</span><span class="w"> </span><span class="p">};</span>
 <span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">let</span><span class="w"> </span><span class="nx">j</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nx">json</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">j</span><span class="p">,</span><span class="w"> </span><span class="nx">json</span><span class="p">[</span><span class="nx">j</span><span class="p">]);</span><span class="w">  </span><span class="c1">// Yields name Martin etc</span>
 <span class="p">}</span>
 </code></pre></div>
 
 <h2 id="send">Send</h2>
-<div class="codehilite"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">myObj</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;name&quot;</span><span class="o">:</span><span class="s2">&quot;Jane&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;age&quot;</span><span class="o">:</span><span class="mf">18</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;city&quot;</span><span class="o">:</span><span class="s2">&quot;Chicago&quot;</span><span class="p">};</span><span class="w"> </span><span class="c1">// Create object</span>
+<div class="codehilite"><pre><span></span><code><span class="kd">var</span><span class="w"> </span><span class="nx">myObj</span><span class="o">=</span><span class="p">{</span><span class="s2">"name"</span><span class="o">:</span><span class="s2">"Jane"</span><span class="p">,</span><span class="w"> </span><span class="s2">"age"</span><span class="o">:</span><span class="mf">18</span><span class="p">,</span><span class="w"> </span><span class="s2">"city"</span><span class="o">:</span><span class="s2">"Chicago"</span><span class="p">};</span><span class="w"> </span><span class="c1">// Create object</span>
 <span class="kd">var</span><span class="w"> </span><span class="nx">myJSON</span><span class="o">=</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">myObj</span><span class="p">);</span><span class="w">                      </span><span class="c1">// Stringify</span>
-<span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="o">=</span><span class="s2">&quot;demo.php?x=&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">myJSON</span><span class="p">;</span><span class="w">                </span><span class="c1">// Send to php</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="o">=</span><span class="s2">"demo.php?x="</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">myJSON</span><span class="p">;</span><span class="w">                </span><span class="c1">// Send to php</span>
 </code></pre></div>
 
 <h2 id="storing-and-retrieving">Storing And Retrieving</h2>
 <div class="codehilite"><pre><span></span><code><span class="nx">myJSON</span><span class="o">=</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">myObj</span><span class="p">);</span><span class="w">            </span><span class="c1">// Storing data</span>
-<span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s2">&quot;testJSON&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">myJSON</span><span class="p">);</span>
-<span class="nx">text</span><span class="o">=</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s2">&quot;testJSON&quot;</span><span class="p">);</span><span class="w">   </span><span class="c1">// Retrieving data</span>
+<span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s2">"testJSON"</span><span class="p">,</span><span class="w"> </span><span class="nx">myJSON</span><span class="p">);</span>
+<span class="nx">text</span><span class="o">=</span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="s2">"testJSON"</span><span class="p">);</span><span class="w">   </span><span class="c1">// Retrieving data</span>
 <span class="nx">obj</span><span class="o">=</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
 <span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">obj</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
 </code></pre></div>
@@ -645,8 +645,8 @@
 <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">sum</span><span class="w"> </span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="nb">Promise</span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span><span class="w"> </span><span class="nx">reject</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">      </span><span class="nx">setTimeout</span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// Send the response after 1 second</span>
-<span class="w">         </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="ow">typeof</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="s2">&quot;number&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// Testing input types</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nx">reject</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Inputs must be numbers&quot;</span><span class="p">));</span>
+<span class="w">         </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="s2">"number"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="ow">typeof</span><span class="w"> </span><span class="nx">b</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="s2">"number"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// Testing input types</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nx">reject</span><span class="p">(</span><span class="ow">new</span><span class="w"> </span><span class="ne">TypeError</span><span class="p">(</span><span class="s2">"Inputs must be numbers"</span><span class="p">));</span>
 <span class="w">         </span><span class="p">}</span>
 <span class="w">         </span><span class="nx">resolve</span><span class="p">(</span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">b</span><span class="p">);</span>
 <span class="w">      </span><span class="p">},</span><span class="w"> </span><span class="mf">1000</span><span class="p">);</span>
@@ -656,9 +656,9 @@
 <span class="kd">var</span><span class="w"> </span><span class="nx">myPromise</span><span class="o">=</span><span class="nx">sum</span><span class="p">(</span><span class="mf">10</span><span class="p">,</span><span class="w"> </span><span class="mf">5</span><span class="p">);</span>
 
 <span class="nx">myPromsise</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">result</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">   </span><span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">&quot; 10 + 5: &quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">result</span><span class="p">);</span>
-<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="nx">sum</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;foo&quot;</span><span class="p">);</span><span class="w">  </span><span class="c1">// Invalid data and return another promise</span>
-<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">        </span><span class="c1">// Won&#39;t be called because of the error</span>
+<span class="w">   </span><span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="s2">" 10 + 5: "</span><span class="p">,</span><span class="w"> </span><span class="nx">result</span><span class="p">);</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="nx">sum</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="s2">"foo"</span><span class="p">);</span><span class="w">  </span><span class="c1">// Invalid data and return another promise</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">        </span><span class="c1">// Won't be called because of the error</span>
 <span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">    </span><span class="c1">// The catch handler is called instead, after another second</span>
 <span class="w">   </span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span><span class="w">       </span><span class="c1">// =&gt; Please provide two numbers to sum.</span>
 <span class="p">});</span>
@@ -677,7 +677,7 @@
 </code></pre></div>
 
 <h2 id="events">Events</h2>
-<div class="codehilite"><pre><span></span><code><span class="o">&lt;</span><span class="nx">button</span><span class="w"> </span><span class="nx">onclick</span><span class="o">=</span><span class="s2">&quot;myFunction();&quot;</span><span class="o">&gt;</span><span class="w"> </span><span class="nx">Click</span><span class="w"> </span><span class="nx">here</span><span class="w"> </span><span class="o">&lt;</span><span class="err">/button&gt;</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&lt;</span><span class="nx">button</span><span class="w"> </span><span class="nx">onclick</span><span class="o">=</span><span class="s2">"myFunction();"</span><span class="o">&gt;</span><span class="w"> </span><span class="nx">Click</span><span class="w"> </span><span class="nx">here</span><span class="w"> </span><span class="o">&lt;</span><span class="err">/button&gt;</span>
 </code></pre></div>
 
 <h2 id="mouse">Mouse</h2>
@@ -724,12 +724,12 @@
 
 <h1 id="save-text-to-local-file">Save Text To Local File</h1>
 <div class="codehilite"><pre><span></span><code><span class="kd">function</span><span class="w"> </span><span class="nx">saveText</span><span class="p">(</span><span class="nx">text</span><span class="p">,</span><span class="w"> </span><span class="nx">fileName</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="o">=</span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">&quot;a&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">a</span><span class="o">=</span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s2">"a"</span><span class="p">);</span>
 <span class="w">    </span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">a</span><span class="p">);</span>
-<span class="w">    </span><span class="nx">a</span><span class="p">.</span><span class="nx">style</span><span class="o">=</span><span class="s2">&quot;display: none&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">a</span><span class="p">.</span><span class="nx">style</span><span class="o">=</span><span class="s2">"display: none"</span><span class="p">;</span>
 
 <span class="w">    </span><span class="kd">var</span><span class="w"> </span><span class="nx">json</span><span class="o">=</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">text</span><span class="p">),</span>
-<span class="w">        </span><span class="nx">blob</span><span class="o">=</span><span class="ow">new</span><span class="w"> </span><span class="nx">Blob</span><span class="p">([</span><span class="nx">text</span><span class="p">],</span><span class="w"> </span><span class="p">{</span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;text/plain;charset=utf-8&quot;</span><span class="p">}),</span>
+<span class="w">        </span><span class="nx">blob</span><span class="o">=</span><span class="ow">new</span><span class="w"> </span><span class="nx">Blob</span><span class="p">([</span><span class="nx">text</span><span class="p">],</span><span class="w"> </span><span class="p">{</span><span class="nx">type</span><span class="o">:</span><span class="w"> </span><span class="s2">"text/plain;charset=utf-8"</span><span class="p">}),</span>
 <span class="w">        </span><span class="nx">url</span><span class="o">=</span><span class="nb">window</span><span class="p">.</span><span class="nx">URL</span><span class="p">.</span><span class="nx">createObjectURL</span><span class="p">(</span><span class="nx">blob</span><span class="p">);</span>
 <span class="w">    </span><span class="nx">a</span><span class="p">.</span><span class="nx">href</span><span class="o">=</span><span class="nx">url</span><span class="p">;</span>
 <span class="w">    </span><span class="nx">a</span><span class="p">.</span><span class="nx">download</span><span class="o">=</span><span class="nx">fileName</span><span class="p">;</span>
@@ -778,7 +778,7 @@ process.exit(1);
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: December 11, 2025</p>
+      <p>Last updated: October 27, 2026</p>
     </footer>
 
     <div class="scroll-container">
