@@ -123,15 +123,15 @@
 
 <h1 id="index-manipulation">Index Manipulation</h1>
 <h2 id="create-index">Create Index</h2>
-<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/&lt;index_name&gt;<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="s1">'</span>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/&lt;index_name&gt;<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;</span>
 <span class="s1">{ </span>
-<span class="s1">  "settings": { </span>
-<span class="s1">    "index": { </span>
-<span class="s1">      "number_of_shards": &lt;number_of_shards&gt;,</span>
-<span class="s1">      "number_of_replicas": &lt;number_of_replicas&gt;</span>
+<span class="s1">  &quot;settings&quot;: { </span>
+<span class="s1">    &quot;index&quot;: { </span>
+<span class="s1">      &quot;number_of_shards&quot;: &lt;number_of_shards&gt;,</span>
+<span class="s1">      &quot;number_of_replicas&quot;: &lt;number_of_replicas&gt;</span>
 <span class="s1">    }</span>
 <span class="s1">  }</span>
-<span class="s1">}'</span>
+<span class="s1">}&#39;</span>
 </code></pre></div>
 
 <h2 id="delete-index">Delete Index</h2>
@@ -147,22 +147,22 @@
 </code></pre></div>
 
 <h2 id="enable-read-write">Enable Read Write</h2>
-<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/&lt;index_name&gt;/_settings<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="s1">'</span>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/&lt;index_name&gt;/_settings<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;</span>
 <span class="s1">{ </span>
-<span class="s1">  "index.blocks.read_only_allow_delete": null</span>
-<span class="s1">}'</span>
+<span class="s1">  &quot;index.blocks.read_only_allow_delete&quot;: null</span>
+<span class="s1">}&#39;</span>
 </code></pre></div>
 
 <h2 id="reindex-index">Reindex Index</h2>
-<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/_reindex<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="s1">'</span>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/_reindex<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;</span>
 <span class="s1">{</span>
-<span class="s1">  "source": {</span>
-<span class="s1">    "index": "&lt;source_index_name&gt;"</span>
+<span class="s1">  &quot;source&quot;: {</span>
+<span class="s1">    &quot;index&quot;: &quot;&lt;source_index_name&gt;&quot;</span>
 <span class="s1">  },</span>
-<span class="s1">  "dest": {</span>
-<span class="s1">    "index": "&lt;dest_index_name&gt;"</span>
+<span class="s1">  &quot;dest&quot;: {</span>
+<span class="s1">    &quot;index&quot;: &quot;&lt;dest_index_name&gt;&quot;</span>
 <span class="s1">  }</span>
-<span class="s1">}'</span>
+<span class="s1">}&#39;</span>
 </code></pre></div>
 
 <h2 id="forcemerge">Forcemerge</h2>
@@ -170,44 +170,44 @@
 </code></pre></div>
 
 <h2 id="move-shard">Move Shard</h2>
-<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/_cluster/reroute<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="s1">'</span>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/_cluster/reroute<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;</span>
 <span class="s1">{ </span>
-<span class="s1">  "commands": [ {</span>
-<span class="s1">    "move": {</span>
-<span class="s1">      "index": "&lt;index_name&gt;",</span>
-<span class="s1">      "shard": &lt;shard_num&gt;,</span>
-<span class="s1">      "from_node": "&lt;from_node_name&gt;",</span>
-<span class="s1">      "to_node": "&lt;to_node_name&gt;"</span>
+<span class="s1">  &quot;commands&quot;: [ {</span>
+<span class="s1">    &quot;move&quot;: {</span>
+<span class="s1">      &quot;index&quot;: &quot;&lt;index_name&gt;&quot;,</span>
+<span class="s1">      &quot;shard&quot;: &lt;shard_num&gt;,</span>
+<span class="s1">      &quot;from_node&quot;: &quot;&lt;from_node_name&gt;&quot;,</span>
+<span class="s1">      &quot;to_node&quot;: &quot;&lt;to_node_name&gt;&quot;</span>
 <span class="s1">    } </span>
 <span class="s1">  } ]</span>
-<span class="s1">}'</span>
+<span class="s1">}&#39;</span>
 </code></pre></div>
 
 <h2 id="alter-number-replicas">Alter Number Replicas</h2>
-<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/&lt;index_name&gt;/_settings<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="s1">'</span>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/&lt;index_name&gt;/_settings<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;</span>
 <span class="s1">{</span>
-<span class="s1">  "index": {</span>
-<span class="s1">    "number_of_replicas": &lt;number_of_replicas&gt;</span>
+<span class="s1">  &quot;index&quot;: {</span>
+<span class="s1">    &quot;number_of_replicas&quot;: &lt;number_of_replicas&gt;</span>
 <span class="s1">  }</span>
-<span class="s1">}'</span>
+<span class="s1">}&#39;</span>
 </code></pre></div>
 
 <h2 id="disable-shard-allocation">Disable Shard Allocation</h2>
-<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/_cluster/settings<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="s1">'</span>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/_cluster/settings<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;</span>
 <span class="s1">{</span>
-<span class="s1">  "persistent": {</span>
-<span class="s1">    "cluster.routing.allocation.enable": "primaries"</span>
+<span class="s1">  &quot;persistent&quot;: {</span>
+<span class="s1">    &quot;cluster.routing.allocation.enable&quot;: &quot;primaries&quot;</span>
 <span class="s1">  }</span>
-<span class="s1">}'</span>
+<span class="s1">}&#39;</span>
 </code></pre></div>
 
 <h2 id="re-enable-shard-allocation">Re-enable Shard Allocation</h2>
-<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/_cluster/settings<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="s1">'</span>
+<div class="codehilite"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span>http://<span class="si">${</span><span class="nv">HOSTNAME</span><span class="si">}</span>:<span class="si">${</span><span class="nv">PORT</span><span class="si">}</span>/_cluster/settings<span class="w"> </span>-H<span class="w"> </span>Content-Type:<span class="w"> </span>application/json<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;</span>
 <span class="s1">{ </span>
-<span class="s1">  "persistent": { </span>
-<span class="s1">    "cluster.routing.allocation.enable": null</span>
+<span class="s1">  &quot;persistent&quot;: { </span>
+<span class="s1">    &quot;cluster.routing.allocation.enable&quot;: null</span>
 <span class="s1">  }</span>
-<span class="s1">}'</span>
+<span class="s1">}&#39;</span>
 </code></pre></div>
 
 <h1 id="index-interrogation">Index Interrogation</h1>
@@ -309,7 +309,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: October 27, 2026</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

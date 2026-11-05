@@ -92,7 +92,7 @@
         <div class="article-body">
           <h1><a class="link" href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-sck.md">sck: Query shortcut keys - Options to add edit delete</a></h1>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
-<span class="nv">help_text</span><span class="o">=</span><span class="s2">"</span>
+<span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
 <span class="s2">NAME</span>
 <span class="s2">    sck - Query shortcut keys.  Options to add, edit, delete.</span>
 
@@ -114,83 +114,83 @@
 <span class="s2">        Show help text.</span>
 
 <span class="s2">DESCRIPTION</span>
-<span class="s2">    Query shortcut keys. To show all records use \".\" as the search string.</span>
+<span class="s2">    Query shortcut keys. To show all records use \&quot;.\&quot; as the search string.</span>
 
 <span class="s2">AUTHOR</span>
 <span class="s2">    mjnurse.github.io - 2020</span>
-<span class="s2">"</span>
-<span class="nv">help_line</span><span class="o">=</span><span class="s2">"Query shortcut keys.  Options to add, edit, delete."</span>
-<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">"Query shortcut keys - Options to add edit delete"</span>
+<span class="s2">&quot;</span>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Query shortcut keys.  Options to add, edit, delete.&quot;</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Query shortcut keys - Options to add edit delete&quot;</span>
 
-<span class="nv">sck_csv</span><span class="o">=</span><span class="s2">"/home/martin/mjnurse/bash/sck.csv"</span>
-<span class="nv">tmp_file</span><span class="o">=</span><span class="s2">"/tmp/sck.tmp"</span>
+<span class="nv">sck_csv</span><span class="o">=</span><span class="s2">&quot;/home/martin/mjnurse/bash/sck.csv&quot;</span>
+<span class="nv">tmp_file</span><span class="o">=</span><span class="s2">&quot;/tmp/sck.tmp&quot;</span>
 
-<span class="nv">try</span><span class="o">=</span><span class="s2">"Try \"</span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h\" for more information"</span>
-<span class="nv">tmp</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">help_text</span><span class="p">##*USAGE</span><span class="si">}</span><span class="s2">"</span>
-<span class="nv">usage</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span>Usage:<span class="w"> </span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%OPTIONS*</span><span class="si">}</span><span class="k">)</span><span class="s2">"</span>
+<span class="nv">try</span><span class="o">=</span><span class="s2">&quot;Try \&quot;</span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h\&quot; for more information&quot;</span>
+<span class="nv">tmp</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">help_text</span><span class="p">##*USAGE</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nv">usage</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span>Usage:<span class="w"> </span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%OPTIONS*</span><span class="si">}</span><span class="k">)</span><span class="s2">&quot;</span>
 
 <span class="c1"># Terminal Colours</span>
-<span class="nv">cdef</span><span class="o">=</span><span class="s2">"\x1b[39m"</span><span class="w"> </span><span class="c1"># default colour</span>
-<span class="nv">cbla</span><span class="o">=</span><span class="s2">"\x1b[30m"</span><span class="p">;</span><span class="w"> </span><span class="nv">cgra</span><span class="o">=</span><span class="s2">"\x1b[90m"</span><span class="p">;</span><span class="w"> </span><span class="nv">clgra</span><span class="o">=</span><span class="s2">"\x1b[37m"</span><span class="p">;</span><span class="w"> </span><span class="nv">cwhi</span><span class="o">=</span><span class="s2">"\x1b[97m"</span>
-<span class="nv">cred</span><span class="o">=</span><span class="s2">"\x1b[31m"</span><span class="p">;</span><span class="w"> </span><span class="nv">cgre</span><span class="o">=</span><span class="s2">"\x1b[32m"</span><span class="p">;</span><span class="w"> </span><span class="nv">cyel</span><span class="o">=</span><span class="s2">"\x1b[33m"</span><span class="p">;</span><span class="w"> </span><span class="nv">cblu</span><span class="o">=</span><span class="s2">"\x1b[34m"</span><span class="p">;</span><span class="w"> </span><span class="nv">cmag</span><span class="o">=</span><span class="s2">"\x1b[35m"</span><span class="p">;</span><span class="w"> </span><span class="nv">ccya</span><span class="o">=</span><span class="s2">"\x1b[36m"</span><span class="p">;</span>
-<span class="nv">clred</span><span class="o">=</span><span class="s2">"\x1b[91m"</span><span class="p">;</span><span class="w"> </span><span class="nv">clgre</span><span class="o">=</span><span class="s2">"\x1b[92m"</span><span class="p">;</span><span class="w"> </span><span class="nv">clyel</span><span class="o">=</span><span class="s2">"\x1b[93m"</span><span class="p">;</span><span class="w"> </span><span class="nv">clblu</span><span class="o">=</span><span class="s2">"\x1b[94m"</span><span class="p">;</span><span class="w"> </span><span class="nv">clmag</span><span class="o">=</span><span class="s2">"\x1b[95m"</span><span class="p">;</span><span class="w"> </span><span class="nv">clcya</span><span class="o">=</span><span class="s2">"\x1b[96m"</span>
+<span class="nv">cdef</span><span class="o">=</span><span class="s2">&quot;\x1b[39m&quot;</span><span class="w"> </span><span class="c1"># default colour</span>
+<span class="nv">cbla</span><span class="o">=</span><span class="s2">&quot;\x1b[30m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cgra</span><span class="o">=</span><span class="s2">&quot;\x1b[90m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clgra</span><span class="o">=</span><span class="s2">&quot;\x1b[37m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cwhi</span><span class="o">=</span><span class="s2">&quot;\x1b[97m&quot;</span>
+<span class="nv">cred</span><span class="o">=</span><span class="s2">&quot;\x1b[31m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cgre</span><span class="o">=</span><span class="s2">&quot;\x1b[32m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cyel</span><span class="o">=</span><span class="s2">&quot;\x1b[33m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cblu</span><span class="o">=</span><span class="s2">&quot;\x1b[34m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cmag</span><span class="o">=</span><span class="s2">&quot;\x1b[35m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">ccya</span><span class="o">=</span><span class="s2">&quot;\x1b[36m&quot;</span><span class="p">;</span>
+<span class="nv">clred</span><span class="o">=</span><span class="s2">&quot;\x1b[91m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clgre</span><span class="o">=</span><span class="s2">&quot;\x1b[92m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clyel</span><span class="o">=</span><span class="s2">&quot;\x1b[93m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clblu</span><span class="o">=</span><span class="s2">&quot;\x1b[94m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clmag</span><span class="o">=</span><span class="s2">&quot;\x1b[95m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clcya</span><span class="o">=</span><span class="s2">&quot;\x1b[96m&quot;</span>
 
-<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">    </span><span class="nb">echo</span>
 <span class="w">    </span>sck<span class="w"> </span>-s
 <span class="w">    </span><span class="nb">echo</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">usage</span><span class="si">}</span><span class="s2">"</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">try</span><span class="si">}</span><span class="s2">"</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"     \"sck .\" to list all records"</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">usage</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">try</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;     \&quot;sck .\&quot; to list all records&quot;</span>
 <span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 <span class="k">fi</span>
 
 <span class="nv">gen_md_yn</span><span class="o">=</span>n
 
-<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span><span class="w"> </span>
 <span class="w">        </span>-h<span class="p">|</span>--help<span class="o">)</span>
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$help_text</span><span class="s2">"</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
 <span class="w">        </span><span class="nb">exit</span>
 <span class="w">        </span><span class="p">;;</span>
 <span class="w">    </span>-a<span class="p">|</span>--add<span class="o">)</span>
 <span class="w">        </span><span class="nb">shift</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">            </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">"Application: "</span><span class="w"> </span>a
-<span class="w">            </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">"Sub Heading: "</span><span class="w"> </span>s
-<span class="w">            </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">"ShortCut Keys: "</span><span class="w"> </span>k
-<span class="w">            </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">"Description: "</span><span class="w"> </span>d
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Application: &quot;</span><span class="w"> </span>a
+<span class="w">            </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Sub Heading: &quot;</span><span class="w"> </span>s
+<span class="w">            </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;ShortCut Keys: &quot;</span><span class="w"> </span>k
+<span class="w">            </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Description: &quot;</span><span class="w"> </span>d
 <span class="w">        </span><span class="k">else</span>
-<span class="w">            </span><span class="nv">a</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
-<span class="w">            </span><span class="nv">s</span><span class="o">=</span><span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span>
-<span class="w">            </span><span class="nv">k</span><span class="o">=</span><span class="s2">"</span><span class="nv">$3</span><span class="s2">"</span>
-<span class="w">            </span><span class="nv">d</span><span class="o">=</span><span class="s2">"</span><span class="nv">$4</span><span class="s2">"</span>
+<span class="w">            </span><span class="nv">a</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="nv">s</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="nv">k</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$3</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="nv">d</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$4</span><span class="s2">&quot;</span>
 <span class="w">        </span><span class="k">fi</span>
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"\"</span><span class="nv">$a</span><span class="s2">\",\"</span><span class="nv">$s</span><span class="s2">\",\"</span><span class="nv">$k</span><span class="s2">\",\"</span><span class="nv">$d</span><span class="s2">\""</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">"</span><span class="nv">$sck_csv</span><span class="s2">"</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;\&quot;</span><span class="nv">$a</span><span class="s2">\&quot;,\&quot;</span><span class="nv">$s</span><span class="s2">\&quot;,\&quot;</span><span class="nv">$k</span><span class="s2">\&quot;,\&quot;</span><span class="nv">$d</span><span class="s2">\&quot;&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$sck_csv</span><span class="s2">&quot;</span>
 <span class="w">        </span><span class="nb">exit</span>
 <span class="w">        </span><span class="p">;;</span>
 <span class="w">    </span>-e<span class="p">|</span>--edit<span class="o">)</span>
-<span class="w">        </span>gvim<span class="w"> </span><span class="s2">"</span><span class="nv">$sck_csv</span><span class="s2">"</span>
+<span class="w">        </span>gvim<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$sck_csv</span><span class="s2">&quot;</span>
 <span class="w">        </span><span class="nb">exit</span>
 <span class="w">        </span><span class="p">;;</span>
 <span class="w">    </span>-m<span class="p">|</span>--markdown<span class="o">)</span>
 <span class="w">        </span><span class="nv">gen_md_yn</span><span class="o">=</span>y
 <span class="w">        </span><span class="p">;;</span>
 <span class="w">    </span>-s<span class="p">|</span>--summary<span class="o">)</span>
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Group                 Count"</span>
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"------------------- -------"</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Group                 Count&quot;</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;------------------- -------&quot;</span>
 <span class="w">        </span>cat<span class="w"> </span><span class="nv">$sck_csv</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
-<span class="w">            </span>sed<span class="w"> </span><span class="s1">'</span>
+<span class="w">            </span>sed<span class="w"> </span><span class="s1">&#39;</span>
 <span class="s1">                s/ *,.*//;</span>
-<span class="s1">                s/"//g;</span>
+<span class="s1">                s/&quot;//g;</span>
 <span class="s1">                s/$/:                             /;</span>
-<span class="s1">                s/^\(....................\).*/\1/'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="s1">                s/^\(....................\).*/\1/&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
 <span class="w">            </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span>uniq<span class="w"> </span>-c<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
-<span class="w">            </span>sed<span class="w"> </span><span class="s1">'s/^\([ 0-9]*\)\(.*\)/\2\1/'</span>
+<span class="w">            </span>sed<span class="w"> </span><span class="s1">&#39;s/^\([ 0-9]*\)\(.*\)/\2\1/&#39;</span>
 <span class="w">        </span><span class="nb">exit</span>
 <span class="w">        </span><span class="p">;;</span>
 <span class="w">    </span>-*<span class="o">)</span>
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Error: </span><span class="nv">$1</span><span class="s2"> - bad option"</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Error: </span><span class="nv">$1</span><span class="s2"> - bad option&quot;</span>
 <span class="w">        </span><span class="nb">exit</span>
 <span class="w">        </span><span class="p">;;</span>
 <span class="w">    </span>?*<span class="o">)</span>
@@ -201,58 +201,58 @@
 <span class="k">done</span><span class="w"> </span>
 
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$gen_md_yn</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>y<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span>sort<span class="w"> </span><span class="s2">"</span><span class="nv">$sck_csv</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">"/^ *</span>$<span class="s2">/d"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
-<span class="w">        </span>sed<span class="w"> </span><span class="s1">'s/^"\(.*\)","\(.*\)","\(.*\)","\(.*\)"$/\1\n\2\n| \`\3\` | \4 |/'</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>sort<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$sck_csv</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;/^ *</span>$<span class="s2">/d&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">        </span>sed<span class="w"> </span><span class="s1">&#39;s/^&quot;\(.*\)&quot;,&quot;\(.*\)&quot;,&quot;\(.*\)&quot;,&quot;\(.*\)&quot;$/\1\n\2\n| \`\3\` | \4 |/&#39;</span><span class="w"> </span><span class="se">\</span>
 <span class="w">        </span>&gt;<span class="w"> </span><span class="nv">$tmp_file</span>
-<span class="w">    </span><span class="nv">prev_heading</span><span class="o">=</span><span class="s2">""</span>
-<span class="w">    </span><span class="nv">prev_subheading</span><span class="o">=</span><span class="s2">""</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"# Shortcut Keys"</span>
+<span class="w">    </span><span class="nv">prev_heading</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="nv">prev_subheading</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;# Shortcut Keys&quot;</span>
 <span class="w">    </span><span class="nb">echo</span>
 <span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>heading<span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">        </span><span class="nb">read</span><span class="w"> </span>subheading
 <span class="w">        </span><span class="nb">read</span><span class="w"> </span>line
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$heading</span><span class="s2">"</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">"</span><span class="nv">$prev_heading</span><span class="s2">"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$heading</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$prev_heading</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">            </span><span class="nb">echo</span>
-<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"## </span><span class="nv">$heading</span><span class="s2">"</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;## </span><span class="nv">$heading</span><span class="s2">&quot;</span>
 <span class="w">            </span><span class="nb">echo</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$subheading</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">                </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"| Key | Description |"</span>
-<span class="w">                </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"|-----|-------------|"</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$subheading</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">                </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;| Key | Description |&quot;</span>
+<span class="w">                </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;|-----|-------------|&quot;</span>
 <span class="w">            </span><span class="k">fi</span>
-<span class="w">            </span><span class="nv">prev_subheading</span><span class="o">=</span><span class="s2">""</span>
-<span class="w">            </span><span class="nv">prev_heading</span><span class="o">=</span><span class="s2">"</span><span class="nv">$heading</span><span class="s2">"</span>
+<span class="w">            </span><span class="nv">prev_subheading</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="w">            </span><span class="nv">prev_heading</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$heading</span><span class="s2">&quot;</span>
 <span class="w">        </span><span class="k">fi</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$subheading</span><span class="s2">"</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">"</span><span class="nv">$prev_subheading</span><span class="s2">"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$subheading</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$prev_subheading</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">            </span><span class="nb">echo</span>
-<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"### </span><span class="nv">$subheading</span><span class="s2">"</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;### </span><span class="nv">$subheading</span><span class="s2">&quot;</span>
 <span class="w">            </span><span class="nb">echo</span>
-<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"| Key | Description |"</span>
-<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"|-----|-------------|"</span>
-<span class="w">            </span><span class="nv">prev_subheading</span><span class="o">=</span><span class="s2">"</span><span class="nv">$subheading</span><span class="s2">"</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;| Key | Description |&quot;</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;|-----|-------------|&quot;</span>
+<span class="w">            </span><span class="nv">prev_subheading</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$subheading</span><span class="s2">&quot;</span>
 <span class="w">        </span><span class="k">fi</span>
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$line</span><span class="s2">"</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$line</span><span class="s2">&quot;</span>
 <span class="w">    </span><span class="k">done</span><span class="w"> </span>&lt;<span class="w"> </span><span class="nv">$tmp_file</span><span class="w"> </span>
 <span class="w">    </span><span class="c1"># rm -f $tmp_file</span>
 <span class="k">else</span>
-<span class="w">    </span><span class="nv">w1</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="nv">w2</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">2</span><span class="k">:-</span><span class="nv">$w1</span><span class="si">}</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="nv">w3</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">3</span><span class="k">:-</span><span class="nv">$w1</span><span class="si">}</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="nv">w4</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">4</span><span class="k">:-</span><span class="nv">$w1</span><span class="si">}</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="nv">w5</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">5</span><span class="k">:-</span><span class="nv">$w1</span><span class="si">}</span><span class="s2">"</span>
-<span class="w">    </span><span class="nv">words</span><span class="o">=</span><span class="s2">"</span><span class="nv">$*</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="nv">words</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">words</span><span class="p">// /</span><span class="se">\\</span><span class="p">|</span><span class="si">}</span><span class="s2">"</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$w1</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"."</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">        </span>cat<span class="w"> </span><span class="s2">"</span><span class="nv">$sck_csv</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
-<span class="w">            </span>sed<span class="w"> </span><span class="s2">"s/\",\"/ - /g; s/^\"//; s/\"</span>$<span class="s2">//; s/ -  - / - /"</span><span class="w"> </span>
+<span class="w">    </span><span class="nv">w1</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">w2</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">2</span><span class="k">:-</span><span class="nv">$w1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">w3</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">3</span><span class="k">:-</span><span class="nv">$w1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">w4</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">4</span><span class="k">:-</span><span class="nv">$w1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">w5</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">5</span><span class="k">:-</span><span class="nv">$w1</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nv">words</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$*</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">words</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">words</span><span class="p">// /</span><span class="se">\\</span><span class="p">|</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$w1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;.&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span>cat<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$sck_csv</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>sed<span class="w"> </span><span class="s2">&quot;s/\&quot;,\&quot;/ - /g; s/^\&quot;//; s/\&quot;</span>$<span class="s2">//; s/ -  - / - /&quot;</span><span class="w"> </span>
 <span class="w">        </span><span class="nb">exit</span>
 <span class="w">    </span><span class="k">fi</span>
 <span class="w">    </span><span class="nb">echo</span>
-<span class="w">    </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">"</span><span class="nv">$w1</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$sck_csv</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">"</span><span class="nv">$w2</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">"</span><span class="nv">$w3</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">"</span><span class="nv">$w4</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">"</span><span class="nv">$w5</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>
+<span class="w">    </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$w1</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$sck_csv</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$w2</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$w3</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$w4</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$w5</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>
 <span class="w">        </span>sort<span class="w"> </span><span class="p">|</span>
-<span class="w">        </span>sed<span class="w"> </span><span class="s2">"1i\\</span><span class="si">${</span><span class="nv">clmag</span><span class="si">}</span><span class="s2">Application¬Sub Heading¬Key¬Descriptions</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>
-<span class="w">        </span>sed<span class="w"> </span><span class="s1">'s/","/¬/g; s/^"//; s/"$//'</span><span class="w"> </span><span class="p">|</span>
-<span class="w">        </span>column<span class="w"> </span>-s¬<span class="w"> </span>-t<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">'NR&gt;1 &amp;&amp; $1!=prev {print ""} {print; prev=$1}'</span><span class="w"> </span><span class="p">|</span>
-<span class="w">        </span>sed<span class="w"> </span><span class="s2">"s/</span><span class="nv">$1</span><span class="s2">/</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">'\033[1;32m&amp;\033[0m'</span><span class="k">)</span><span class="s2">/Ig"</span><span class="w"> </span><span class="p">|</span>
-<span class="w">        </span>sed<span class="w"> </span><span class="s2">"s/</span><span class="si">${</span><span class="nv">2</span><span class="k">:-</span><span class="nv">IIGGNNOORREE</span><span class="si">}</span><span class="s2">/</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">'\033[1;32m&amp;\033[0m'</span><span class="k">)</span><span class="s2">/Ig"</span><span class="w"> </span><span class="p">|</span>
-<span class="w">        </span>sed<span class="w"> </span><span class="s2">"s/</span><span class="si">${</span><span class="nv">3</span><span class="k">:-</span><span class="nv">IIGGNNOORREE</span><span class="si">}</span><span class="s2">/</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">'\033[1;32m&amp;\033[0m'</span><span class="k">)</span><span class="s2">/Ig"</span><span class="w"> </span><span class="p">|</span>
-<span class="w">        </span>sed<span class="w"> </span><span class="s2">"s/</span><span class="si">${</span><span class="nv">4</span><span class="k">:-</span><span class="nv">IIGGNNOORREE</span><span class="si">}</span><span class="s2">/</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">'\033[1;32m&amp;\033[0m'</span><span class="k">)</span><span class="s2">/Ig"</span><span class="w"> </span><span class="p">|</span>
-<span class="w">        </span>sed<span class="w"> </span><span class="s2">"s/</span><span class="si">${</span><span class="nv">5</span><span class="k">:-</span><span class="nv">IIGGNNOORREE</span><span class="si">}</span><span class="s2">/</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">'\033[1;32m&amp;\033[0m'</span><span class="k">)</span><span class="s2">/Ig"</span>
+<span class="w">        </span>sed<span class="w"> </span><span class="s2">&quot;1i\\</span><span class="si">${</span><span class="nv">clmag</span><span class="si">}</span><span class="s2">Application¬Sub Heading¬Key¬Descriptions</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>
+<span class="w">        </span>sed<span class="w"> </span><span class="s1">&#39;s/&quot;,&quot;/¬/g; s/^&quot;//; s/&quot;$//&#39;</span><span class="w"> </span><span class="p">|</span>
+<span class="w">        </span>column<span class="w"> </span>-s¬<span class="w"> </span>-t<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;NR&gt;1 &amp;&amp; $1!=prev {print &quot;&quot;} {print; prev=$1}&#39;</span><span class="w"> </span><span class="p">|</span>
+<span class="w">        </span>sed<span class="w"> </span><span class="s2">&quot;s/</span><span class="nv">$1</span><span class="s2">/</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;\033[1;32m&amp;\033[0m&#39;</span><span class="k">)</span><span class="s2">/Ig&quot;</span><span class="w"> </span><span class="p">|</span>
+<span class="w">        </span>sed<span class="w"> </span><span class="s2">&quot;s/</span><span class="si">${</span><span class="nv">2</span><span class="k">:-</span><span class="nv">IIGGNNOORREE</span><span class="si">}</span><span class="s2">/</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;\033[1;32m&amp;\033[0m&#39;</span><span class="k">)</span><span class="s2">/Ig&quot;</span><span class="w"> </span><span class="p">|</span>
+<span class="w">        </span>sed<span class="w"> </span><span class="s2">&quot;s/</span><span class="si">${</span><span class="nv">3</span><span class="k">:-</span><span class="nv">IIGGNNOORREE</span><span class="si">}</span><span class="s2">/</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;\033[1;32m&amp;\033[0m&#39;</span><span class="k">)</span><span class="s2">/Ig&quot;</span><span class="w"> </span><span class="p">|</span>
+<span class="w">        </span>sed<span class="w"> </span><span class="s2">&quot;s/</span><span class="si">${</span><span class="nv">4</span><span class="k">:-</span><span class="nv">IIGGNNOORREE</span><span class="si">}</span><span class="s2">/</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;\033[1;32m&amp;\033[0m&#39;</span><span class="k">)</span><span class="s2">/Ig&quot;</span><span class="w"> </span><span class="p">|</span>
+<span class="w">        </span>sed<span class="w"> </span><span class="s2">&quot;s/</span><span class="si">${</span><span class="nv">5</span><span class="k">:-</span><span class="nv">IIGGNNOORREE</span><span class="si">}</span><span class="s2">/</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;\033[1;32m&amp;\033[0m&#39;</span><span class="k">)</span><span class="s2">/Ig&quot;</span>
 <span class="w">        </span><span class="nb">echo</span>
 <span class="k">fi</span>
 </code></pre></div>
@@ -273,7 +273,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: November 03, 2026</p>
+      <p>Last updated: November 04, 2026</p>
     </footer>
 
     <div class="scroll-container">

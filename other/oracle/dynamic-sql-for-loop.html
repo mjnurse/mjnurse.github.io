@@ -103,9 +103,9 @@
    <span class="n">l_employees</span>   <span class="n">name_salary_aat</span><span class="p">;</span>
 <span class="kr">BEGIN</span>
    <span class="n">EXECUTE</span> <span class="n">IMMEDIATE</span>
-      <span class="n">q</span><span class="s">'[SELECT   first_name || '</span> <span class="err">'</span> <span class="p">||</span> <span class="n">last_name</span><span class="p">,</span> <span class="n">salary</span> 
+      <span class="n">q</span><span class="s">&#39;[SELECT   first_name || &#39;</span> <span class="err">&#39;</span> <span class="p">||</span> <span class="n">last_name</span><span class="p">,</span> <span class="n">salary</span> 
          <span class="n">FROM</span>     <span class="n">hr</span><span class="p">.</span><span class="n">employees</span>
-         <span class="n">ORDER</span> <span class="kr">BY</span> <span class="n">salary</span> <span class="n">desc</span><span class="p">]</span><span class="err">'</span>
+         <span class="n">ORDER</span> <span class="kr">BY</span> <span class="n">salary</span> <span class="n">desc</span><span class="p">]</span><span class="err">&#39;</span>
       <span class="n">BULK</span> <span class="n">COLLECT</span> <span class="n">INTO</span> <span class="n">l_employees</span><span class="p">;</span>
 
    <span class="kr">FOR</span> <span class="n">indx</span> <span class="kr">IN</span> <span class="mi">1</span> <span class="p">..</span> <span class="n">l_employees</span><span class="p">.</span><span class="n">COUNT</span>
@@ -133,7 +133,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: October 27, 2026</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

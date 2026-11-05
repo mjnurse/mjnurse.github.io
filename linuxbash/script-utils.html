@@ -92,7 +92,7 @@
         <div class="article-body">
           <h1><a class="link" href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-utils.md">utils: Some bash Utility Functions</a></h1>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
-<span class="nv">help_text</span><span class="o">=</span><span class="s2">"</span>
+<span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
 <span class="s2">NAME</span>
 <span class="s2">  utils - One line description.</span>
 
@@ -111,91 +111,91 @@
 
 <span class="s2">AUTHOR</span>
 <span class="s2">  mjnurse.github.io - 2020</span>
-<span class="s2">"</span>
-<span class="nv">help_line</span><span class="o">=</span><span class="s2">"Some bash Utility Functions"</span>
-<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">"Some bash Utility Functions"</span>
+<span class="s2">&quot;</span>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Some bash Utility Functions&quot;</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Some bash Utility Functions&quot;</span>
 
-<span class="nv">colour_default</span><span class="o">=</span><span class="s2">"\e[39m"</span>
-<span class="nv">colour_black</span><span class="o">=</span><span class="s2">"\e[30m"</span>
-<span class="nv">colour_red</span><span class="o">=</span><span class="s2">"\e[31m"</span>
-<span class="nv">colour_green</span><span class="o">=</span><span class="s2">"\e[32m"</span>
-<span class="nv">colour_yellow</span><span class="o">=</span><span class="s2">"\e[33m"</span>
-<span class="nv">colour_blue</span><span class="o">=</span><span class="s2">"\e[34m"</span>
-<span class="nv">colour_magenta</span><span class="o">=</span><span class="s2">"\e[35m"</span>
-<span class="nv">colour_cyan</span><span class="o">=</span><span class="s2">"\e[36m"</span>
-<span class="nv">colour_dark_gray</span><span class="o">=</span><span class="s2">"\e[90m"</span>
-<span class="nv">colour_light_gray</span><span class="o">=</span><span class="s2">"\e[37m"</span>
-<span class="nv">colour_light_red</span><span class="o">=</span><span class="s2">"\e[91m"</span>
-<span class="nv">colour_light_green</span><span class="o">=</span><span class="s2">"\e[92m"</span>
-<span class="nv">colour_light_yellow</span><span class="o">=</span><span class="s2">"\e[93m"</span>
-<span class="nv">colour_light_blue</span><span class="o">=</span><span class="s2">"\e[94m"</span>
-<span class="nv">colour_light_magenta</span><span class="o">=</span><span class="s2">"\e[95m"</span>
-<span class="nv">colour_light_cyan</span><span class="o">=</span><span class="s2">"\e[96m"</span>
-<span class="nv">colour_white</span><span class="o">=</span><span class="s2">"\e[97m"</span>
+<span class="nv">colour_default</span><span class="o">=</span><span class="s2">&quot;\e[39m&quot;</span>
+<span class="nv">colour_black</span><span class="o">=</span><span class="s2">&quot;\e[30m&quot;</span>
+<span class="nv">colour_red</span><span class="o">=</span><span class="s2">&quot;\e[31m&quot;</span>
+<span class="nv">colour_green</span><span class="o">=</span><span class="s2">&quot;\e[32m&quot;</span>
+<span class="nv">colour_yellow</span><span class="o">=</span><span class="s2">&quot;\e[33m&quot;</span>
+<span class="nv">colour_blue</span><span class="o">=</span><span class="s2">&quot;\e[34m&quot;</span>
+<span class="nv">colour_magenta</span><span class="o">=</span><span class="s2">&quot;\e[35m&quot;</span>
+<span class="nv">colour_cyan</span><span class="o">=</span><span class="s2">&quot;\e[36m&quot;</span>
+<span class="nv">colour_dark_gray</span><span class="o">=</span><span class="s2">&quot;\e[90m&quot;</span>
+<span class="nv">colour_light_gray</span><span class="o">=</span><span class="s2">&quot;\e[37m&quot;</span>
+<span class="nv">colour_light_red</span><span class="o">=</span><span class="s2">&quot;\e[91m&quot;</span>
+<span class="nv">colour_light_green</span><span class="o">=</span><span class="s2">&quot;\e[92m&quot;</span>
+<span class="nv">colour_light_yellow</span><span class="o">=</span><span class="s2">&quot;\e[93m&quot;</span>
+<span class="nv">colour_light_blue</span><span class="o">=</span><span class="s2">&quot;\e[94m&quot;</span>
+<span class="nv">colour_light_magenta</span><span class="o">=</span><span class="s2">&quot;\e[95m&quot;</span>
+<span class="nv">colour_light_cyan</span><span class="o">=</span><span class="s2">&quot;\e[96m&quot;</span>
+<span class="nv">colour_white</span><span class="o">=</span><span class="s2">&quot;\e[97m&quot;</span>
 
-<span class="nv">ls</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">colour_white</span><span class="si">}</span><span class="s2">"</span>
-<span class="nv">le</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">colour_white</span><span class="si">}</span><span class="s2">"</span>
+<span class="nv">ls</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">colour_white</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nv">le</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">colour_white</span><span class="si">}</span><span class="s2">&quot;</span>
 
 
 <span class="k">function</span><span class="w"> </span>set_colour<span class="o">()</span><span class="w"> </span><span class="o">{</span>
-<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">  </span><span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
 <span class="w">      </span>-red<span class="o">)</span>
-<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">colour_red</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">colour_red</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="w">        </span><span class="p">;;</span>
 <span class="w">      </span>-lred<span class="o">)</span>
-<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">colour_light_red</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">colour_light_red</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="w">        </span><span class="p">;;</span>
 <span class="w">      </span>-default<span class="o">)</span>
-<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">colour_default</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">colour_default</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="w">        </span><span class="p">;;</span>
 <span class="w">      </span>-black<span class="o">)</span>
-<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">colour_black</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">colour_black</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="w">        </span><span class="p">;;</span>
 <span class="w">      </span>-red<span class="o">)</span>
-<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">colour_red</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">colour_red</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="w">        </span><span class="p">;;</span>
 <span class="w">      </span>-green<span class="o">)</span>
-<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">colour_green</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">colour_green</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="w">        </span><span class="p">;;</span>
 <span class="w">      </span>-yellow<span class="o">)</span>
-<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">colour_yellow</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">colour_yellow</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="w">        </span><span class="p">;;</span>
 <span class="w">      </span>-blue<span class="o">)</span>
-<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">colour_blue</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">colour_blue</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="w">        </span><span class="p">;;</span>
 <span class="w">      </span>-magenta<span class="o">)</span>
-<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">colour_magenta</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">colour_magenta</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="w">        </span><span class="p">;;</span>
 <span class="w">      </span>-cyan<span class="o">)</span>
-<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">colour_cyan</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">colour_cyan</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="w">        </span><span class="p">;;</span>
 <span class="w">      </span>-dark_gray<span class="o">)</span>
-<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">colour_dark_gray</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">colour_dark_gray</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="w">        </span><span class="p">;;</span>
 <span class="w">      </span>-light_gray<span class="p">|</span>-lgray<span class="o">)</span>
-<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">colour_light_gray</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">colour_light_gray</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="w">        </span><span class="p">;;</span>
 <span class="w">      </span>-light_red<span class="p">|</span>-lred<span class="o">)</span>
-<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">colour_light_red</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">colour_light_red</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="w">        </span><span class="p">;;</span>
 <span class="w">      </span>-light_green<span class="p">|</span>-lgreen<span class="o">)</span>
-<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">colour_light_green</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">colour_light_green</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="w">        </span><span class="p">;;</span>
 <span class="w">      </span>-light_yellow<span class="p">|</span>-lyellow<span class="o">)</span>
-<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">colour_light_yellow</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">colour_light_yellow</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="w">        </span><span class="p">;;</span>
 <span class="w">      </span>-light_blue<span class="p">|</span>-lblue<span class="o">)</span>
-<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">colour_light_blue</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">colour_light_blue</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="w">        </span><span class="p">;;</span>
 <span class="w">      </span>-light_magenta<span class="p">|</span>-lmagenta<span class="o">)</span>
-<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">colour_light_magenta</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">colour_light_magenta</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="w">        </span><span class="p">;;</span>
 <span class="w">      </span>-light_cyan<span class="p">|</span>-lcyan<span class="o">)</span>
-<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">colour_light_cyan</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">colour_light_cyan</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="w">        </span><span class="p">;;</span>
 <span class="w">      </span>-white<span class="o">)</span>
-<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">colour_white</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">        </span><span class="nv">ls</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">colour_white</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="w">        </span><span class="p">;;</span>
 <span class="w">      </span>*<span class="o">)</span>
 <span class="w">        </span><span class="k">break</span>
@@ -206,43 +206,43 @@
 <span class="o">}</span>
 
 <span class="k">function</span><span class="w"> </span>reset_colour<span class="o">()</span><span class="w"> </span><span class="o">{</span>
-<span class="w">  </span><span class="nv">ls</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">colour_white</span><span class="si">}</span><span class="s2">"</span>
-<span class="w">  </span><span class="nv">le</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">colour_white</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">  </span><span class="nv">ls</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">colour_white</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="nv">le</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">colour_white</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="o">}</span>
 
 <span class="c1"># </span>
 <span class="k">function</span><span class="w"> </span>echo_line<span class="o">()</span><span class="w"> </span><span class="o">{</span>
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"-r"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;-r&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">    </span><span class="nb">shift</span>
-<span class="w">    </span><span class="nv">str</span><span class="o">=</span><span class="s2">"</span><span class="nv">$*</span><span class="s2">"</span>
-<span class="w">    </span><span class="nv">underline</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$str</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">"s/./-/g"</span><span class="k">)</span><span class="s2">"</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">ls</span><span class="si">}${</span><span class="nv">underline</span><span class="si">}${</span><span class="nv">le</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">    </span><span class="nv">str</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$*</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nv">underline</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$str</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/./-/g&quot;</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">ls</span><span class="si">}${</span><span class="nv">underline</span><span class="si">}${</span><span class="nv">le</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="w">  </span><span class="k">else</span>
-<span class="w">    </span><span class="nv">char</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">2</span><span class="k">:-</span><span class="p">-</span><span class="si">}</span><span class="s2">"</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s2">"%0.s</span><span class="si">${</span><span class="nv">char</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="k">$(</span>seq<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="nv">$1</span><span class="k">))</span>
+<span class="w">    </span><span class="nv">char</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">2</span><span class="k">:-</span><span class="p">-</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;%0.s</span><span class="si">${</span><span class="nv">char</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="k">$(</span>seq<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="nv">$1</span><span class="k">))</span>
 <span class="w">  </span><span class="k">fi</span>
 <span class="o">}</span>
 
 <span class="k">function</span><span class="w"> </span>echo_h1<span class="o">()</span><span class="w"> </span><span class="o">{</span>
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">=</span>~<span class="w"> </span>-.*<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">=</span>~<span class="w"> </span>-.*<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">    </span>set_colour<span class="w"> </span><span class="nv">$1</span>
 <span class="w">    </span><span class="nb">shift</span>
 <span class="w">  </span><span class="k">fi</span>
-<span class="w">  </span><span class="nv">heading</span><span class="o">=</span><span class="s2">"</span><span class="nv">$*</span><span class="s2">"</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">ls</span><span class="si">}${</span><span class="nv">heading</span><span class="p">^^</span><span class="si">}${</span><span class="nv">le</span><span class="si">}</span><span class="s2">"</span>
-<span class="w">  </span>echo_line<span class="w"> </span>-r<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">heading</span><span class="si">}</span><span class="s2">"</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">""</span>
+<span class="w">  </span><span class="nv">heading</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$*</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">ls</span><span class="si">}${</span><span class="nv">heading</span><span class="p">^^</span><span class="si">}${</span><span class="nv">le</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">  </span>echo_line<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">heading</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
 <span class="w">  </span>reset_colour
 <span class="o">}</span>
 
 <span class="k">function</span><span class="w"> </span>echo_h2<span class="o">()</span><span class="w"> </span><span class="o">{</span>
-<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">=</span>~<span class="w"> </span>-.*<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">=</span>~<span class="w"> </span>-.*<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">    </span>set_colour<span class="w"> </span><span class="nv">$1</span>
 <span class="w">    </span><span class="nb">shift</span>
 <span class="w">  </span><span class="k">fi</span>
-<span class="w">  </span><span class="nv">heading</span><span class="o">=</span><span class="s2">"</span><span class="nv">$*</span><span class="s2">"</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">ls</span><span class="si">}${</span><span class="nv">heading</span><span class="si">}${</span><span class="nv">le</span><span class="si">}</span><span class="s2">"</span>
-<span class="w">  </span>echo_line<span class="w"> </span>-r<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">heading</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">  </span><span class="nv">heading</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$*</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">ls</span><span class="si">}${</span><span class="nv">heading</span><span class="si">}${</span><span class="nv">le</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">  </span>echo_line<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">heading</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="o">}</span>
 </code></pre></div>
         </div>
@@ -262,7 +262,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: October 19, 2026</p>
+      <p>Last updated: January 02, 2026</p>
     </footer>
 
     <div class="scroll-container">

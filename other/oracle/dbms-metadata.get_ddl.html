@@ -98,14 +98,14 @@
 <span class="nb">--</span><span class="c"> Objects: TYPE: If TRUE</span><span class="nt">,</span><span class="c"> output the type body</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> Default: TRUE</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
-<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> 'BODY'</span><span class="nt">,</span><span class="c"> TRUE);</span>
+<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> &#39;BODY&#39;</span><span class="nt">,</span><span class="c"> TRUE);</span>
 
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
 <span class="nb">--</span><span class="c"> Paramtr: CONSTRAINTS</span>
 <span class="nb">--</span><span class="c"> Objects: TABLE: If TRUE</span><span class="nt">,</span><span class="c"> output all non</span><span class="nb">-</span><span class="c">referential table constraints</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> Default: TRUE</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
-<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> 'CONSTRAINTS'</span><span class="nt">,</span><span class="c"> TRUE);</span>
+<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> &#39;CONSTRAINTS&#39;</span><span class="nt">,</span><span class="c"> TRUE);</span>
 
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
 <span class="nb">--</span><span class="c"> Paramtr: CONSTRAINTS_AS_ALTER</span>
@@ -114,7 +114,7 @@
 <span class="nb">--</span><span class="c">          Requires that CONSTRAINTS be TRUE</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> Default: FALSE</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
-<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> 'CONSTRAINTS_AS_ALTER'</span><span class="nt">,</span><span class="c"> FALSE);</span>
+<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> &#39;CONSTRAINTS_AS_ALTER&#39;</span><span class="nt">,</span><span class="c"> FALSE);</span>
 
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
 <span class="nb">--</span><span class="c"> Paramtr: DEFAULT</span>
@@ -122,14 +122,14 @@
 <span class="nb">--</span><span class="c">          resetting all parameters for the transform to their default values</span><span class="nt">.</span><span class="c"> Setting this FALSE has no effect</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> There is no default</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
-<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> 'DEFAULT'</span><span class="nt">,</span><span class="c"> FALSE);</span>
+<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> &#39;DEFAULT&#39;</span><span class="nt">,</span><span class="c"> FALSE);</span>
 
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
 <span class="nb">--</span><span class="c"> Paramtr: FORCE</span>
 <span class="nb">--</span><span class="c"> Objects: VIEW: If TRUE</span><span class="nt">,</span><span class="c"> use the FORCE keyword in the CREATE VIEW statement</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> Default: TRUE</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
-<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> 'FORCE'</span><span class="nt">,</span><span class="c"> TRUE);</span>
+<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> &#39;FORCE&#39;</span><span class="nt">,</span><span class="c"> TRUE);</span>
 
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
 <span class="nb">--</span><span class="c"> Paramtr: INHERIT</span>
@@ -139,7 +139,7 @@
 <span class="nb">--</span><span class="c">          handle</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> Default: FALSE</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
-<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> 'INHERIT'</span><span class="nt">,</span><span class="c"> FALSE);</span>
+<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> &#39;INHERIT&#39;</span><span class="nt">,</span><span class="c"> FALSE);</span>
 
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
 <span class="nb">--</span><span class="c"> Paramtr: OID</span>
@@ -147,14 +147,14 @@
 <span class="nb">--</span><span class="c"> Objects: TYPE: If TRUE</span><span class="nt">,</span><span class="c"> output the OID clause</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> Default: FALSE</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
-<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> 'OID'</span><span class="nt">,</span><span class="c"> FALSE);</span>
+<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> &#39;OID&#39;</span><span class="nt">,</span><span class="c"> FALSE);</span>
 
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
 <span class="nb">--</span><span class="c"> Paramtr: PARTITIONING</span>
 <span class="nb">--</span><span class="c"> Objects: TABLE</span><span class="nt">,</span><span class="c"> INDEX: If TRUE</span><span class="nt">,</span><span class="c"> output partitioning clauses; if FALSE</span><span class="nt">,</span><span class="c"> suppress them</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> Default: TRUE</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
-<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> 'PARTITIONING'</span><span class="nt">,</span><span class="c"> TRUE);</span>
+<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> &#39;PARTITIONING&#39;</span><span class="nt">,</span><span class="c"> TRUE);</span>
 
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
 <span class="nb">--</span><span class="c"> Paramtr: PCTSPACE</span>
@@ -165,21 +165,21 @@
 <span class="nb">--</span><span class="c">          MINIMUM EXTENT</span><span class="nt">,</span><span class="c"> EXTENT MANAGEMENT LOCAL UNIFORM SIZE For other object types</span><span class="nt">,</span><span class="c"> INITIAL and NEXT are</span>
 <span class="nb">--</span><span class="c">          affected</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
-<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> 'PCTSPACE'</span><span class="nt">,</span><span class="c"> NUMBER);</span>
+<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> &#39;PCTSPACE&#39;</span><span class="nt">,</span><span class="c"> NUMBER);</span>
 
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
 <span class="nb">--</span><span class="c"> Paramtr: PRETTY</span>
 <span class="nb">--</span><span class="c"> Objects: All objects: If TRUE</span><span class="nt">,</span><span class="c"> format the output with indentation and line feeds</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> Default: TRUE</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
-<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> 'PRETTY'</span><span class="nt">,</span><span class="c"> TRUE);</span>
+<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> &#39;PRETTY&#39;</span><span class="nt">,</span><span class="c"> TRUE);</span>
 
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
 <span class="nb">--</span><span class="c"> Paramtr: REF_CONSTRAINTS</span>
 <span class="nb">--</span><span class="c"> Objects: TABLE: If TRUE</span><span class="nt">,</span><span class="c"> output all referential constraints (foreign keys)</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> Default: TRUE</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
-<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> 'REF_CONSTRAINTS'</span><span class="nt">,</span><span class="c"> TRUE);</span>
+<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> &#39;REF_CONSTRAINTS&#39;</span><span class="nt">,</span><span class="c"> TRUE);</span>
 
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
 <span class="nb">--</span><span class="c"> Paramtr: REUSE</span>
@@ -187,7 +187,7 @@
 <span class="nb">--</span><span class="c">          existing files can be reused</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> Default: FALSE</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
-<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> 'REUSE'</span><span class="nt">,</span><span class="c"> FALSE);</span>
+<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> &#39;REUSE&#39;</span><span class="nt">,</span><span class="c"> FALSE);</span>
 
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
 <span class="nb">--</span><span class="c"> Paramtr: REVOKE_FROM</span>
@@ -197,7 +197,7 @@
 <span class="nb">--</span><span class="c">          transform parameter to undo the grant</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> Default: null string</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
-<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> 'REVOKE_FROM'</span><span class="nt">,</span><span class="c"> Text);</span>
+<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> &#39;REVOKE_FROM&#39;</span><span class="nt">,</span><span class="c"> Text);</span>
 
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
 <span class="nb">--</span><span class="c"> Paramtr: SEGMENT_ATTRIBUTES</span>
@@ -207,7 +207,7 @@
 <span class="nb">--</span><span class="c">          logging)</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> Default: TRUE</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
-<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> 'SEGMENT_ATTRIBUTES'</span><span class="nt">,</span><span class="c"> TRUE);</span>
+<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> &#39;SEGMENT_ATTRIBUTES&#39;</span><span class="nt">,</span><span class="c"> TRUE);</span>
 
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
 <span class="nb">--</span><span class="c"> Paramtr: SIZE_BYTE_KEYWORD</span>
@@ -215,7 +215,7 @@
 <span class="nb">--</span><span class="c">          columns that use byte semantics</span><span class="nt">.</span><span class="c"> If FALSE</span><span class="nt">,</span><span class="c"> omit the keyword</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> Default: FALSE</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
-<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> 'SIZE_BYTE_KEYWORD'</span><span class="nt">,</span><span class="c"> FALSE);</span>
+<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> &#39;SIZE_BYTE_KEYWORD&#39;</span><span class="nt">,</span><span class="c"> FALSE);</span>
 
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
 <span class="nb">--</span><span class="c"> Paramtr: SPECIFICATION</span>
@@ -223,14 +223,14 @@
 <span class="nb">--</span><span class="c"> Objects: TYPE: If TRUE</span><span class="nt">,</span><span class="c"> output the type specification</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> Default: TRUE</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
-<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> 'SPECIFICATION'</span><span class="nt">,</span><span class="c"> TRUE);</span>
+<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> &#39;SPECIFICATION&#39;</span><span class="nt">,</span><span class="c"> TRUE);</span>
 
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
 <span class="nb">--</span><span class="c"> Paramtr: SQLTERMINATOR</span>
 <span class="nb">--</span><span class="c"> Objects: All objects: If TRUE</span><span class="nt">,</span><span class="c"> append a SQL terminator (; or /) to each DDL statement</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> Default: FALSE</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
-<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> 'SQLTERMINATOR'</span><span class="nt">,</span><span class="c"> FALSE);</span>
+<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> &#39;SQLTERMINATOR&#39;</span><span class="nt">,</span><span class="c"> FALSE);</span>
 
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
 <span class="nb">--</span><span class="c"> Paramtr: STORAGE</span>
@@ -239,7 +239,7 @@
 <span class="nb">--</span><span class="c"> Objects: TABLE: If TRUE</span><span class="nt">,</span><span class="c"> output storage clause</span><span class="nt">.</span><span class="c"> (Ignored if SEGMENT_ATTRIBUTES is FALSE</span><span class="nt">.</span><span class="c">)</span>
 <span class="nb">--</span><span class="c"> Default: TRUE</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
-<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> 'STORAGE'</span><span class="nt">,</span><span class="c"> TRUE);</span>
+<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> &#39;STORAGE&#39;</span><span class="nt">,</span><span class="c"> TRUE);</span>
 
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
 <span class="nb">--</span><span class="c"> Paramtr: TABLESPACE</span>
@@ -248,7 +248,7 @@
 <span class="nb">--</span><span class="c"> Objects: TABLE: If TRUE</span><span class="nt">,</span><span class="c"> output tablespace</span><span class="nt">.</span><span class="c"> (Ignored if SEGMENT_ATTRIBUTES is FALSE</span><span class="nt">.</span><span class="c">)</span>
 <span class="nb">--</span><span class="c"> Default: TRUE</span><span class="nt">.</span>
 <span class="nb">--</span><span class="c"> </span><span class="nb">--------------------------------------------------------------------------------------------------------------</span>
-<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> 'TABLESPACE'</span><span class="nt">,</span><span class="c"> TRUE);</span>
+<span class="c">exec dbms_metadata</span><span class="nt">.</span><span class="c">set_transform_param(dbms_metadata</span><span class="nt">.</span><span class="c">session_transform</span><span class="nt">,</span><span class="c"> &#39;TABLESPACE&#39;</span><span class="nt">,</span><span class="c"> TRUE);</span>
 </code></pre></div>
 
 <hr>
@@ -269,7 +269,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: October 27, 2026</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

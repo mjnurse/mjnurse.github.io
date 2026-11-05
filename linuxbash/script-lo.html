@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="lo: Locate files using bash locate" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>lo: Locate files using bash locate</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1><a class="link" href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-lo.md">lo: Locate files using bash locate</a></h1>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
+<span class="s2">usage: lo [options] &lt;filename-regex&gt;</span>
+<span class="s2">-h : This help text.</span>
+<span class="s2">&quot;</span>
+
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Locate files using bash locate&quot;</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Locate files using bash locate&quot;</span>
+
+<span class="nb">set</span><span class="w"> </span>-uo<span class="w"> </span>pipefail<span class="w"> </span><span class="c1"># Treat unset variables as an error and fail on pipe errors</span>
+
+<span class="c1"># Terminal Colours</span>
+<span class="nv">cdef</span><span class="o">=</span><span class="s2">&quot;\x1b[39m&quot;</span><span class="w"> </span><span class="c1"># default colour</span>
+<span class="nv">cbla</span><span class="o">=</span><span class="s2">&quot;\x1b[30m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cgra</span><span class="o">=</span><span class="s2">&quot;\x1b[90m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clgra</span><span class="o">=</span><span class="s2">&quot;\x1b[37m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cwhi</span><span class="o">=</span><span class="s2">&quot;\x1b[97m&quot;</span>
+<span class="nv">cred</span><span class="o">=</span><span class="s2">&quot;\x1b[31m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cgre</span><span class="o">=</span><span class="s2">&quot;\x1b[32m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cyel</span><span class="o">=</span><span class="s2">&quot;\x1b[33m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cblu</span><span class="o">=</span><span class="s2">&quot;\x1b[34m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cmag</span><span class="o">=</span><span class="s2">&quot;\x1b[35m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">ccya</span><span class="o">=</span><span class="s2">&quot;\x1b[36m&quot;</span><span class="p">;</span>
+<span class="nv">clred</span><span class="o">=</span><span class="s2">&quot;\x1b[91m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clgre</span><span class="o">=</span><span class="s2">&quot;\x1b[92m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clyel</span><span class="o">=</span><span class="s2">&quot;\x1b[93m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clblu</span><span class="o">=</span><span class="s2">&quot;\x1b[94m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clmag</span><span class="o">=</span><span class="s2">&quot;\x1b[95m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clcya</span><span class="o">=</span><span class="s2">&quot;\x1b[96m&quot;</span>
+
+<span class="nv">search_all</span><span class="o">=</span><span class="nb">false</span>
+<span class="k">case</span><span class="w"> </span><span class="si">${</span><span class="nv">1</span><span class="k">:-</span><span class="si">}</span><span class="w"> </span><span class="k">in</span>
+<span class="w">    </span>-h<span class="p">|</span>--help<span class="o">)</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="nb">exit</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="w">    </span>-a<span class="p">|</span>--all<span class="o">)</span>
+<span class="w">        </span><span class="nv">search_all</span><span class="o">=</span><span class="nb">true</span>
+<span class="w">        </span><span class="nb">shift</span>
+<span class="w">        </span><span class="p">;;</span>
+<span class="k">esac</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">1</span><span class="k">:-</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+
+<span class="nv">h</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">1</span><span class="p">//</span><span class="se">\*</span><span class="p">/</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$h</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">search_all</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nv">s</span><span class="o">=</span><span class="s2">&quot;/</span><span class="nv">$1</span>$<span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="nv">s</span><span class="o">=</span><span class="s2">&quot;^</span><span class="nv">$1</span>$<span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="k">else</span>
+<span class="w">    </span><span class="nv">s</span><span class="o">=</span><span class="s2">&quot;^</span><span class="si">${</span><span class="nv">1</span><span class="p">//</span><span class="se">\*</span><span class="p">/.</span><span class="se">\*</span><span class="si">}</span>$<span class="s2">&quot;</span>
+<span class="k">fi</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">search_all</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nv">res</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>locate<span class="w"> </span>-r<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$s</span><span class="s2">&quot;</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nv">grep_cmd</span><span class="o">=(</span>grep<span class="w"> </span>--color<span class="o">=</span>always<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$h</span><span class="s2">&quot;</span><span class="o">)</span>
+<span class="w">    </span><span class="nv">msg</span><span class="o">=</span><span class="s2">&quot;Searched for paths/files matching regex: </span><span class="nv">$s</span><span class="s2">&quot;</span>
+<span class="k">else</span>
+<span class="w">    </span><span class="nv">res</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>locate<span class="w"> </span>-br<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$s</span><span class="s2">&quot;</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nv">grep_cmd</span><span class="o">=(</span>grep<span class="w"> </span>-P<span class="w"> </span>--color<span class="o">=</span>always<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$h</span><span class="s2">(?!.*</span><span class="nv">$h</span><span class="s2">)&quot;</span><span class="o">)</span>
+<span class="w">    </span><span class="nv">msg</span><span class="o">=</span><span class="s2">&quot;Searched for files matching regex: </span><span class="nv">$s</span><span class="s2">&quot;</span>
+<span class="k">fi</span>
+
+mapfile<span class="w"> </span>-t<span class="w"> </span>matches<span class="w"> </span>&lt;<span class="w"> </span>&lt;<span class="o">(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;%s\n&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$res</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;/^$/d&#39;</span><span class="o">)</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="si">${#</span><span class="nv">matches</span><span class="p">[@]</span><span class="si">}</span><span class="w"> </span>-eq<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;\n</span><span class="si">${</span><span class="nv">cyel</span><span class="si">}${</span><span class="nv">msg</span><span class="si">}${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">0</span>
+<span class="k">fi</span>
+
+<span class="c1"># List matches (numbered if multiple), marking directories</span>
+<span class="nv">multi</span><span class="o">=</span><span class="nb">false</span>
+<span class="o">[[</span><span class="w"> </span><span class="si">${#</span><span class="nv">matches</span><span class="p">[@]</span><span class="si">}</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nv">multi</span><span class="o">=</span><span class="nb">true</span>
+<span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="p">!matches[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="nv">line</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;%s\n&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">matches</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">grep_cmd</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">matches</span><span class="p">[</span><span class="nv">$i</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nv">line</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">line</span><span class="si">}</span><span class="s2">/ </span><span class="si">${</span><span class="nv">clblu</span><span class="si">}</span><span class="s2">[dir]</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$multi</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;%3d) %b\n&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="k">$((</span><span class="nv">i</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="k">))</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$line</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;%b\n&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$line</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="k">done</span>
+<span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;\n</span><span class="si">${</span><span class="nv">cyel</span><span class="si">}${</span><span class="nv">msg</span><span class="si">}${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$multi</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">clmag</span><span class="si">}</span><span class="s2">Select: # copy name, v# view (cat/ls), e# edit in code, i# edit in vim (Enter to quit): </span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">else</span>
+<span class="w">    </span><span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">clmag</span><span class="si">}</span><span class="s2">Enter copy name, v view (cat/ls), e edit in code, i edit in vim (q to quit): </span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">fi</span>
+<span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>choice<span class="w"> </span>&lt;/dev/tty
+<span class="nb">echo</span><span class="w"> </span>-ne<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="o">[[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$choice</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$multi</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">0</span>
+<span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$choice</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;q&quot;</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">exit</span><span class="w"> </span><span class="m">0</span>
+
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$choice</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">=</span>~<span class="w"> </span>^<span class="o">([</span>vei<span class="o">]</span>?<span class="o">)([</span><span class="m">0</span>-9<span class="o">]</span>*<span class="o">)</span>$<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nv">action</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">BASH_REMATCH</span><span class="p">[1]</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nv">n</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">BASH_REMATCH</span><span class="p">[2]</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$n</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$multi</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Invalid selection: </span><span class="nv">$choice</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+<span class="w">            </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="w">        </span><span class="k">fi</span>
+<span class="w">        </span><span class="nv">n</span><span class="o">=</span><span class="m">1</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">((</span><span class="w"> </span>n<span class="w"> </span>&lt;<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="o">||</span><span class="w"> </span>n<span class="w"> </span>&gt;<span class="w"> </span><span class="si">${#</span><span class="nv">matches</span><span class="p">[@]</span><span class="si">}</span><span class="w"> </span><span class="o">))</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Invalid selection: </span><span class="nv">$choice</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+<span class="w">        </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="w">    </span><span class="nv">file</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">matches</span><span class="p">[</span><span class="k">$((</span><span class="nv">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="k">))</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$action</span><span class="s2">&quot;</span><span class="w"> </span><span class="k">in</span>
+<span class="w">        </span><span class="s2">&quot;&quot;</span><span class="o">)</span><span class="w"> </span><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;%s&#39;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>xclip<span class="w"> </span>-selection<span class="w"> </span>clipboard<span class="w"> </span><span class="p">;;</span>
+<span class="w">        </span>v<span class="o">)</span><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span>ls<span class="w"> </span>-la<span class="w"> </span>--color<span class="o">=</span>auto<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">else</span><span class="w"> </span>cat<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">        </span>e<span class="o">)</span><span class="w">  </span>code<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">        </span>i<span class="o">)</span><span class="w">  </span>vim<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">    </span><span class="k">esac</span>
+<span class="k">else</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Invalid selection: </span><span class="nv">$choice</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="k">fi</span>
+</code></pre></div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: November 04, 2026</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

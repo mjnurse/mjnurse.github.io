@@ -98,50 +98,50 @@ import<span class="w"> </span>json
 import<span class="w"> </span>sys
 import<span class="w"> </span>os
 
-<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">"Convert between JSON and JSONL formats"</span>
-<span class="nv">help_line</span><span class="o">=</span><span class="s2">"Convert between JSON and JSONL formats"</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Convert between JSON and JSONL formats&quot;</span>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Convert between JSON and JSONL formats&quot;</span>
 
 def<span class="w"> </span>jsonl_to_json<span class="o">(</span>jsonl_path,<span class="w"> </span>json_path<span class="o">)</span>:
-<span class="w">    </span>with<span class="w"> </span>open<span class="o">(</span>jsonl_path,<span class="w"> </span><span class="s2">"r"</span>,<span class="w"> </span><span class="nv">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="o">)</span><span class="w"> </span>as<span class="w"> </span>f_in:
+<span class="w">    </span>with<span class="w"> </span>open<span class="o">(</span>jsonl_path,<span class="w"> </span><span class="s2">&quot;r&quot;</span>,<span class="w"> </span><span class="nv">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="o">)</span><span class="w"> </span>as<span class="w"> </span>f_in:
 <span class="w">        </span><span class="nv">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>json.loads<span class="o">(</span>line<span class="o">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>line<span class="w"> </span><span class="k">in</span><span class="w"> </span>f_in<span class="o">]</span>
 
-<span class="w">    </span>with<span class="w"> </span>open<span class="o">(</span>json_path,<span class="w"> </span><span class="s2">"w"</span>,<span class="w"> </span><span class="nv">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="o">)</span><span class="w"> </span>as<span class="w"> </span>f_out:
+<span class="w">    </span>with<span class="w"> </span>open<span class="o">(</span>json_path,<span class="w"> </span><span class="s2">&quot;w&quot;</span>,<span class="w"> </span><span class="nv">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="o">)</span><span class="w"> </span>as<span class="w"> </span>f_out:
 <span class="w">        </span>json.dump<span class="o">(</span>data,<span class="w"> </span>f_out,<span class="w"> </span><span class="nv">indent</span><span class="o">=</span><span class="m">2</span><span class="o">)</span>
 
 def<span class="w"> </span>json_to_jsonl<span class="o">(</span>json_path,<span class="w"> </span>jsonl_path<span class="o">)</span>:
-<span class="w">    </span>with<span class="w"> </span>open<span class="o">(</span>json_path,<span class="w"> </span><span class="s2">"r"</span>,<span class="w"> </span><span class="nv">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="o">)</span><span class="w"> </span>as<span class="w"> </span>f_in:
+<span class="w">    </span>with<span class="w"> </span>open<span class="o">(</span>json_path,<span class="w"> </span><span class="s2">&quot;r&quot;</span>,<span class="w"> </span><span class="nv">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="o">)</span><span class="w"> </span>as<span class="w"> </span>f_in:
 <span class="w">        </span><span class="nv">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>json.load<span class="o">(</span>f_in<span class="o">)</span>
 
-<span class="w">    </span>with<span class="w"> </span>open<span class="o">(</span>jsonl_path,<span class="w"> </span><span class="s2">"w"</span>,<span class="w"> </span><span class="nv">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="o">)</span><span class="w"> </span>as<span class="w"> </span>f_out:
+<span class="w">    </span>with<span class="w"> </span>open<span class="o">(</span>jsonl_path,<span class="w"> </span><span class="s2">&quot;w&quot;</span>,<span class="w"> </span><span class="nv">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="o">)</span><span class="w"> </span>as<span class="w"> </span>f_out:
 <span class="w">        </span><span class="k">for</span><span class="w"> </span>obj<span class="w"> </span><span class="k">in</span><span class="w"> </span>data:
-<span class="w">            </span>f_out.write<span class="o">(</span>json.dumps<span class="o">(</span>obj<span class="o">)</span><span class="w"> </span>+<span class="w"> </span><span class="s2">"\n"</span><span class="o">)</span>
+<span class="w">            </span>f_out.write<span class="o">(</span>json.dumps<span class="o">(</span>obj<span class="o">)</span><span class="w"> </span>+<span class="w"> </span><span class="s2">&quot;\n&quot;</span><span class="o">)</span>
 
 def<span class="w"> </span>main<span class="o">()</span>:
-<span class="w">    </span><span class="nv">parser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>argparse.ArgumentParser<span class="o">(</span><span class="nv">description</span><span class="o">=</span><span class="s2">"Convert between JSON and JSONL formats."</span><span class="o">)</span>
-<span class="w">    </span>parser.add_argument<span class="o">(</span><span class="s2">"input"</span>,<span class="w"> </span><span class="nv">help</span><span class="o">=</span><span class="s2">"Input file path (.json or .jsonl)"</span><span class="o">)</span>
-<span class="w">    </span>parser.add_argument<span class="o">(</span><span class="s2">"-o"</span>,<span class="w"> </span><span class="s2">"--output"</span>,<span class="w"> </span><span class="nv">help</span><span class="o">=</span><span class="s2">"Output file path (optional)"</span><span class="o">)</span>
+<span class="w">    </span><span class="nv">parser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>argparse.ArgumentParser<span class="o">(</span><span class="nv">description</span><span class="o">=</span><span class="s2">&quot;Convert between JSON and JSONL formats.&quot;</span><span class="o">)</span>
+<span class="w">    </span>parser.add_argument<span class="o">(</span><span class="s2">&quot;input&quot;</span>,<span class="w"> </span><span class="nv">help</span><span class="o">=</span><span class="s2">&quot;Input file path (.json or .jsonl)&quot;</span><span class="o">)</span>
+<span class="w">    </span>parser.add_argument<span class="o">(</span><span class="s2">&quot;-o&quot;</span>,<span class="w"> </span><span class="s2">&quot;--output&quot;</span>,<span class="w"> </span><span class="nv">help</span><span class="o">=</span><span class="s2">&quot;Output file path (optional)&quot;</span><span class="o">)</span>
 
 <span class="w">    </span><span class="nv">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>parser.parse_args<span class="o">()</span>
 <span class="w">    </span><span class="nv">input_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>args.input
 <span class="w">    </span><span class="nv">output_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>args.output
 
 <span class="w">    </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>os.path.isfile<span class="o">(</span>input_path<span class="o">)</span>:
-<span class="w">        </span>print<span class="o">(</span>f<span class="s2">"ERROR: File not found: {input_path}"</span><span class="o">)</span>
+<span class="w">        </span>print<span class="o">(</span>f<span class="s2">&quot;ERROR: File not found: {input_path}&quot;</span><span class="o">)</span>
 <span class="w">        </span>sys.exit<span class="o">(</span><span class="m">1</span><span class="o">)</span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span>input_path.endswith<span class="o">(</span><span class="s2">".jsonl"</span><span class="o">)</span>:
-<span class="w">        </span><span class="nv">output_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>output_path<span class="w"> </span>or<span class="w"> </span>input_path.replace<span class="o">(</span><span class="s2">".jsonl"</span>,<span class="w"> </span><span class="s2">".json"</span><span class="o">)</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>input_path.endswith<span class="o">(</span><span class="s2">&quot;.jsonl&quot;</span><span class="o">)</span>:
+<span class="w">        </span><span class="nv">output_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>output_path<span class="w"> </span>or<span class="w"> </span>input_path.replace<span class="o">(</span><span class="s2">&quot;.jsonl&quot;</span>,<span class="w"> </span><span class="s2">&quot;.json&quot;</span><span class="o">)</span>
 <span class="w">        </span>jsonl_to_json<span class="o">(</span>input_path,<span class="w"> </span>output_path<span class="o">)</span>
-<span class="w">        </span>print<span class="o">(</span>f<span class="s2">"Converted JSONL → JSON: {output_path}"</span><span class="o">)</span>
-<span class="w">    </span><span class="k">elif</span><span class="w"> </span>input_path.endswith<span class="o">(</span><span class="s2">".json"</span><span class="o">)</span>:
-<span class="w">        </span><span class="nv">output_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>output_path<span class="w"> </span>or<span class="w"> </span>input_path.replace<span class="o">(</span><span class="s2">".json"</span>,<span class="w"> </span><span class="s2">".jsonl"</span><span class="o">)</span>
+<span class="w">        </span>print<span class="o">(</span>f<span class="s2">&quot;Converted JSONL → JSON: {output_path}&quot;</span><span class="o">)</span>
+<span class="w">    </span><span class="k">elif</span><span class="w"> </span>input_path.endswith<span class="o">(</span><span class="s2">&quot;.json&quot;</span><span class="o">)</span>:
+<span class="w">        </span><span class="nv">output_path</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>output_path<span class="w"> </span>or<span class="w"> </span>input_path.replace<span class="o">(</span><span class="s2">&quot;.json&quot;</span>,<span class="w"> </span><span class="s2">&quot;.jsonl&quot;</span><span class="o">)</span>
 <span class="w">        </span>json_to_jsonl<span class="o">(</span>input_path,<span class="w"> </span>output_path<span class="o">)</span>
-<span class="w">        </span>print<span class="o">(</span>f<span class="s2">"Converted JSON → JSONL: {output_path}"</span><span class="o">)</span>
+<span class="w">        </span>print<span class="o">(</span>f<span class="s2">&quot;Converted JSON → JSONL: {output_path}&quot;</span><span class="o">)</span>
 <span class="w">    </span><span class="k">else</span>:
-<span class="w">        </span>print<span class="o">(</span><span class="s2">"ERROR: Unsupported file type. Use .json or .jsonl"</span><span class="o">)</span>
+<span class="w">        </span>print<span class="o">(</span><span class="s2">&quot;ERROR: Unsupported file type. Use .json or .jsonl&quot;</span><span class="o">)</span>
 <span class="w">        </span>sys.exit<span class="o">(</span><span class="m">1</span><span class="o">)</span>
 
-<span class="k">if</span><span class="w"> </span><span class="nv">__name__</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"__main__"</span>:
+<span class="k">if</span><span class="w"> </span><span class="nv">__name__</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;__main__&quot;</span>:
 <span class="w">    </span>main<span class="o">()</span>
 </code></pre></div>
         </div>
@@ -161,7 +161,7 @@ def<span class="w"> </span>main<span class="o">()</span>:
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: October 19, 2026</p>
+      <p>Last updated: March 02, 2026</p>
     </footer>
 
     <div class="scroll-container">

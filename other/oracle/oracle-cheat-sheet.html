@@ -117,23 +117,23 @@
 <h3 id="sqlplus-variables">SQLPLUS Variables</h3>
 <h4 id="using-substitution-variables">Using Substitution Variables</h4>
 <p>A character substitution variable can be up to 240 bytes long.</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="nt">DEFINE</span><span class="w"> </span><span class="nt">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'King'</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="nt">DEFINE</span><span class="w"> </span><span class="nt">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;King&#39;</span>
 
-<span class="o">&gt;</span><span class="w"> </span><span class="nt">ACCEPT</span><span class="w"> </span><span class="nt">name</span><span class="w"> </span><span class="nt">CHAR</span><span class="w"> </span><span class="nt">PROMPT</span><span class="w"> </span><span class="s1">'Enter a last name: '</span>
+<span class="o">&gt;</span><span class="w"> </span><span class="nt">ACCEPT</span><span class="w"> </span><span class="nt">name</span><span class="w"> </span><span class="nt">CHAR</span><span class="w"> </span><span class="nt">PROMPT</span><span class="w"> </span><span class="s1">&#39;Enter a last name: &#39;</span>
 
 <span class="nt">--</span><span class="w"> </span><span class="nt">Show</span><span class="w"> </span><span class="nt">the</span><span class="w"> </span><span class="nt">value</span><span class="o">.</span>
 <span class="o">&gt;</span><span class="w"> </span><span class="nt">DEFINE</span><span class="w"> </span><span class="nt">name</span>
-<span class="nt">DEFINE</span><span class="w"> </span><span class="nt">name</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">"King"</span><span class="w"> </span><span class="o">(</span><span class="nt">CHAR</span><span class="o">)</span>
+<span class="nt">DEFINE</span><span class="w"> </span><span class="nt">name</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;King&quot;</span><span class="w"> </span><span class="o">(</span><span class="nt">CHAR</span><span class="o">)</span>
 
 <span class="nt">--</span><span class="w"> </span><span class="nt">Show</span><span class="w"> </span><span class="nt">all</span><span class="w"> </span><span class="nt">values</span><span class="o">.</span>
 <span class="o">&gt;</span><span class="w"> </span><span class="nt">DEFINE</span>
-<span class="nt">DEFINE</span><span class="w"> </span><span class="nt">name</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">"King"</span><span class="w"> </span><span class="o">(</span><span class="nt">CHAR</span><span class="o">)</span>
-<span class="nt">DEFINE</span><span class="w"> </span><span class="nt">name2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"Taylor"</span><span class="w"> </span><span class="o">(</span><span class="nt">CHAR</span><span class="o">)</span>
+<span class="nt">DEFINE</span><span class="w"> </span><span class="nt">name</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;King&quot;</span><span class="w"> </span><span class="o">(</span><span class="nt">CHAR</span><span class="o">)</span>
+<span class="nt">DEFINE</span><span class="w"> </span><span class="nt">name2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;Taylor&quot;</span><span class="w"> </span><span class="o">(</span><span class="nt">CHAR</span><span class="o">)</span>
 
-<span class="nt">--</span><span class="w"> </span><span class="nt">Use</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nt">SQL</span><span class="o">.</span><span class="w">  </span><span class="nt">If</span><span class="w"> </span><span class="nt">its</span><span class="w"> </span><span class="nt">doesn</span><span class="s1">'t exist will be prompted.</span>
-<span class="s1">&gt; SELECT '</span><span class="o">&amp;</span><span class="nt">name</span><span class="s1">' FROM dual;</span>
+<span class="nt">--</span><span class="w"> </span><span class="nt">Use</span><span class="w"> </span><span class="nt">in</span><span class="w"> </span><span class="nt">SQL</span><span class="o">.</span><span class="w">  </span><span class="nt">If</span><span class="w"> </span><span class="nt">its</span><span class="w"> </span><span class="nt">doesn</span><span class="s1">&#39;t exist will be prompted.</span>
+<span class="s1">&gt; SELECT &#39;</span><span class="o">&amp;</span><span class="nt">name</span><span class="s1">&#39; FROM dual;</span>
 
-<span class="s1">-- Difference Between "&amp;" and "&amp;&amp;" Prefixes. "&amp;" will re-prompt "&amp;&amp;" won'</span><span class="nt">t</span><span class="o">.</span>
+<span class="s1">-- Difference Between &quot;&amp;&quot; and &quot;&amp;&amp;&quot; Prefixes. &quot;&amp;&quot; will re-prompt &quot;&amp;&amp;&quot; won&#39;</span><span class="nt">t</span><span class="o">.</span>
 
 <span class="o">&gt;</span><span class="w"> </span><span class="nt">DEFINE</span><span class="w"> </span><span class="nt">c</span><span class="o">=</span><span class="nt">8</span>
 <span class="o">&gt;</span><span class="w"> </span><span class="nt">DEFINE</span><span class="w"> </span><span class="nt">d</span><span class="o">=</span><span class="nt">9</span>
@@ -178,9 +178,9 @@
 
 <span class="o">--</span><span class="w"> </span><span class="n">Assigning</span><span class="w"> </span><span class="n">Bind</span><span class="w"> </span><span class="n">Variables</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">Substitution</span><span class="w"> </span><span class="n">Variables</span><span class="o">.</span>
 <span class="o">&gt;</span><span class="w"> </span><span class="n">VARIABLE</span><span class="w"> </span><span class="n">mybv</span><span class="w"> </span><span class="n">VARCHAR2</span><span class="p">(</span><span class="mi">14</span><span class="p">)</span>
-<span class="o">&gt;</span><span class="w"> </span><span class="n">EXEC</span><span class="w"> </span><span class="p">:</span><span class="n">mybv</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">'report.log'</span><span class="p">;</span>
+<span class="o">&gt;</span><span class="w"> </span><span class="n">EXEC</span><span class="w"> </span><span class="p">:</span><span class="n">mybv</span><span class="w"> </span><span class="p">:</span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;report.log&#39;</span><span class="p">;</span>
 
-<span class="o">--</span><span class="w"> </span><span class="n">Pass</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">bind</span><span class="w"> </span><span class="n">variable</span><span class="s1">'s value to a new substitution variable "nv" by using a query:</span>
+<span class="o">--</span><span class="w"> </span><span class="n">Pass</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">bind</span><span class="w"> </span><span class="n">variable</span><span class="s1">&#39;s value to a new substitution variable &quot;nv&quot; by using a query:</span>
 <span class="o">&gt;</span><span class="w"> </span><span class="n">COLUMN</span><span class="w"> </span><span class="n">mybvcol</span><span class="w"> </span><span class="n">NEW_VALUE</span><span class="w"> </span><span class="n">nv</span><span class="w"> </span><span class="n">NOPRINT</span>
 <span class="o">&gt;</span><span class="w"> </span><span class="n">SELECT</span><span class="w"> </span><span class="p">:</span><span class="n">mybv</span><span class="w"> </span><span class="n">AS</span><span class="w"> </span><span class="n">mybvcol</span><span class="w"> </span><span class="n">FROM</span><span class="w"> </span><span class="n">dual</span><span class="p">;</span>
 </code></pre></div>
@@ -188,7 +188,7 @@
 <h4 id="set-define-set-escape">SET DEFINE / SET ESCAPE</h4>
 <p>Use SET DEFINE OFF to stop SQLPlus performing any variable substitution. This makes SQLPlus treat all ampersands (&amp;) as literal characters.</p>
 <div class="codehilite"><pre><span></span><code>&gt; SET ESCAPE \
-&gt; SELECT 'B\&amp;W' myHeading FROM dual;
+&gt; SELECT &#39;B\&amp;W&#39; myHeading FROM dual;
 </code></pre></div>
 
 <hr>
@@ -209,7 +209,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: October 27, 2026</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

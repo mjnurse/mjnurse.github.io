@@ -129,7 +129,7 @@
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 <span class="nb">export</span><span class="w"> </span><span class="nv">PGPASSWORD</span><span class="o">=</span>postgres
 
-<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">   </span>psql<span class="w"> </span>--host<span class="o">=</span>localhost<span class="w"> </span>-U<span class="w"> </span>postgres<span class="w"> </span><span class="nv">$*</span>
 <span class="k">else</span>
 <span class="w">   </span>psql<span class="w"> </span>--host<span class="o">=</span>localhost<span class="w"> </span>-U<span class="w"> </span>postgres<span class="w"> </span>-f<span class="w"> </span><span class="nv">$1</span>
@@ -159,7 +159,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: October 27, 2026</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

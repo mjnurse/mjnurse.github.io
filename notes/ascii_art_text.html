@@ -94,18 +94,18 @@
 <h1 id="ascii-art-text-generation-using-figlet">ASCII Art Text Generation Using <code>figlet</code></h1>
 <p>The Linux utility <code>figlet</code> can be used to generate ASCII art text.</p>
 <p>This list of available fonts can be found as follows:</p>
-<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>ls<span class="w"> </span>/usr/share/figlet/*.flf<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">'s/.*\///; s/\.flf$//'</span>
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span>ls<span class="w"> </span>/usr/share/figlet/*.flf<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/.*\///; s/\.flf$//&#39;</span>
 </code></pre></div>
 
 <p>Text can be generated as follows:</p>
-<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Hello World"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>figlet<span class="w"> </span>-f<span class="w"> </span>&lt;font-name&gt;
+<div class="codehilite"><pre><span></span><code>&gt;<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Hello World&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>figlet<span class="w"> </span>-f<span class="w"> </span>&lt;font-name&gt;
 </code></pre></div>
 
 <h2 id="font-examples">Font Examples</h2>
 <p>We can run the following script to generate an example of each available font:</p>
-<div class="codehilite"><pre><span></span><code><span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>ls<span class="w"> </span>/usr/share/figlet/*.flf<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">'s/.*\///; s/\.flf$//'</span><span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>
+<div class="codehilite"><pre><span></span><code><span class="k">for</span><span class="w"> </span>f<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="k">$(</span>ls<span class="w"> </span>/usr/share/figlet/*.flf<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/.*\///; s/\.flf$//&#39;</span><span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>
 <span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$f</span>:
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Hello World!"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>figlet<span class="w"> </span>-f<span class="w"> </span><span class="nv">$f</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Hello World!&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>figlet<span class="w"> </span>-f<span class="w"> </span><span class="nv">$f</span>
 <span class="k">done</span>
 </code></pre></div>
 
@@ -124,7 +124,7 @@ big:
  <span class="ge">_    _</span>      <span class="ge">_ _</span>        __          __        <span class="ge">_     _</span> _
 | |  | |    | | |       \ \        / /       | |   | | |
 | |__| | ___| | | ___    \ \  /\  / /__  _ __| | __| | |
-|  __  |/ <span class="ge">_ \ | |/ _</span> \    \ \/  \/ / _ \| '__| |/ _` | |
+|  __  |/ <span class="ge">_ \ | |/ _</span> \    \ \/  \/ / _ \| &#39;__| |/ _` | |
 | |  | |  __/ | | (_) |    \  /\  / (_) | |  | | (_| |_|
 |_|  |_|\___|_|_|\___/      \/  \/ \___/|_|  |_|\__,_(_)
 
@@ -151,7 +151,7 @@ digital:
 ivrit:
  <span class="ge">_     _</span> _        __        __        <span class="ge">_ _</span>      <span class="ge">_   _</span>
 | | __| | |_ __ __\ \      / /   ___ | | | ___| | | |
-| |/ _` | | '__/ <span class="ge">_ \ \ /\ / /   / _</span> \| | |/ <span class="ge">_ \ |_</span>| |
+| |/ _` | | &#39;__/ <span class="ge">_ \ \ /\ / /   / _</span> \| | |/ <span class="ge">_ \ |_</span>| |
 |_| (_| | | | | (_) \ V  V /   | (_) | | |  __/  <span class="ge">_  |</span>
 <span class="ge">(_</span>)\__,_|_|_|  \___/ \_/\_/     \___/|_|_|\___|_| |_|
 
@@ -193,7 +193,7 @@ slant:
 small:
  <span class="ge">_  _</span>     <span class="ge">_ _</span>      __      __       <span class="ge">_    _</span> _
 | || |___| | |___  \ \    / /__ <span class="ge">_ _</span>| |__| | |
-| __ / -_) | / <span class="ge">_ \  \ \/\/ / _</span> \ '_| / <span class="ge">_` |_</span>|
+| __ / -_) | / <span class="ge">_ \  \ \/\/ / _</span> \ &#39;_| / <span class="ge">_` |_</span>|
 |_||_\___|_|_\___/   \_/\_/\___/_| |_\__,_(_)
 
 smscript:
@@ -217,7 +217,7 @@ smslant:
 standard:
  <span class="ge">_   _</span>      <span class="ge">_ _</span>        __        __         <span class="ge">_     _</span> _
 | | | | ___| | | ___   \ \      / /__  _ __| | __| | |
-| |_| |/ <span class="ge">_ \ | |/ _</span> \   \ \ /\ / / _ \| '__| |/ <span class="ge">_` | |</span>
+| |_| |/ <span class="ge">_ \ | |/ _</span> \   \ \ /\ / / _ \| &#39;__| |/ <span class="ge">_` | |</span>
 <span class="ge">|  _</span>  |  __/ | | (_) |   \ V  V / (_) | |  | | (_| |_|
 |_| |_|\___|_|_|\___/     \_/\_/ \___/|_|  |_|\__,_(_)
 
@@ -241,7 +241,7 @@ Hello World!
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: October 27, 2026</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

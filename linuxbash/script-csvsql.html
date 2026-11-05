@@ -92,7 +92,7 @@
         <div class="article-body">
           <h1><a class="link" href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-csvsql.md">csvsql: Run a SQL query over a csv file</a></h1>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
-<span class="nv">help_text</span><span class="o">=</span><span class="s2">"</span>
+<span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
 <span class="s2">NAME</span>
 <span class="s2">    csvsql - Run a SQL query over a csv file</span>
 
@@ -120,37 +120,37 @@
 
 <span class="s2">    If no SQL query is provided, Sqlite3 will be run in interactive mode.</span>
 
-<span class="s2">    The table to query has the name 't'</span>
+<span class="s2">    The table to query has the name &#39;t&#39;</span>
 
 <span class="s2">AUTHOR</span>
 <span class="s2">    mjnurse.github.io - 2026</span>
-<span class="s2">"</span>
+<span class="s2">&quot;</span>
 
-<span class="nv">help_line</span><span class="o">=</span><span class="s2">"Run a SQL query over a csv file"</span>
-<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">"Run a SQL query over a csv file"</span>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Run a SQL query over a csv file&quot;</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Run a SQL query over a csv file&quot;</span>
 
-<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Usage: csvsql &lt;csv_filename&gt; [&lt;sql_query (in quotes)&gt;]"</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Try csvsql -h for more information"</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Usage: csvsql &lt;csv_filename&gt; [&lt;sql_query (in quotes)&gt;]&quot;</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Try csvsql -h for more information&quot;</span>
 <span class="w">  </span><span class="nb">exit</span>
 <span class="k">fi</span>
 
-<span class="nv">database</span><span class="o">=</span><span class="s2">":memory:"</span>
+<span class="nv">database</span><span class="o">=</span><span class="s2">&quot;:memory:&quot;</span>
 <span class="nv">silent</span><span class="o">=</span><span class="nb">false</span>
-<span class="nv">sql_file</span><span class="o">=</span><span class="s2">""</span>
+<span class="nv">sql_file</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
 <span class="nv">no_query</span><span class="o">=</span><span class="nb">false</span>
-<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
 <span class="w">        </span>-d<span class="p">|</span>--database<span class="o">)</span>
 <span class="w">            </span><span class="nb">shift</span>
-<span class="w">            </span><span class="nv">database</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
+<span class="w">            </span><span class="nv">database</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
 <span class="w">            </span><span class="p">;;</span>
 <span class="w">        </span>-f<span class="p">|</span>--file<span class="o">)</span>
 <span class="w">            </span><span class="nb">shift</span>
-<span class="w">            </span><span class="nv">sql_file</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
+<span class="w">            </span><span class="nv">sql_file</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
 <span class="w">            </span><span class="p">;;</span>
 <span class="w">        </span>-h<span class="p">|</span>--help<span class="o">)</span>
-<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$help_text</span><span class="s2">"</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
 <span class="w">            </span><span class="nb">exit</span>
 <span class="w">            </span><span class="p">;;</span>
 <span class="w">        </span>-s<span class="p">|</span>--silent<span class="o">)</span>
@@ -166,28 +166,28 @@
 <span class="w">    </span><span class="nb">shift</span>
 <span class="k">done</span>
 
-<span class="nv">filter</span><span class="o">=</span><span class="s2">""</span>
+<span class="nv">filter</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
 <span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$silent</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="nv">filter</span><span class="o">=</span><span class="s2">"</span>
+<span class="w">    </span><span class="nv">filter</span><span class="o">=</span><span class="s2">&quot;</span>
 <span class="s2">        /expected.*columns but found/d;</span>
-<span class="s2">    "</span>
+<span class="s2">    &quot;</span>
 <span class="k">fi</span>
-<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$sql_file</span><span class="s2">"</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$sql_file</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">    </span><span class="c1"># Run the SQL query from the file</span>
-<span class="w">    </span>sqlite3<span class="w"> </span><span class="s2">"</span><span class="nv">$database</span><span class="s2">"</span><span class="w"> </span>-cmd<span class="w"> </span><span class="s2">".mode csv"</span><span class="w"> </span>-cmd<span class="w"> </span><span class="s2">".import </span><span class="nv">$1</span><span class="s2"> t"</span><span class="w"> </span><span class="se">\</span>
-<span class="w">            </span>-cmd<span class="w"> </span><span class="s2">".mode column"</span><span class="w"> </span>-header<span class="w"> </span>&lt;<span class="w"> </span><span class="s2">"</span><span class="nv">$sql_file</span><span class="s2">"</span><span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-e<span class="w"> </span><span class="s2">"</span><span class="nv">$filter</span><span class="s2">"</span>
-<span class="k">elif</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$no_query</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span>sqlite3<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$database</span><span class="s2">&quot;</span><span class="w"> </span>-cmd<span class="w"> </span><span class="s2">&quot;.mode csv&quot;</span><span class="w"> </span>-cmd<span class="w"> </span><span class="s2">&quot;.import </span><span class="nv">$1</span><span class="s2"> t&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>-cmd<span class="w"> </span><span class="s2">&quot;.mode column&quot;</span><span class="w"> </span>-header<span class="w"> </span>&lt;<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$sql_file</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$filter</span><span class="s2">&quot;</span>
+<span class="k">elif</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$no_query</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">true</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">    </span><span class="c1"># Do not run any SQL query over the CSV file</span>
-<span class="w">    </span>sqlite3<span class="w"> </span><span class="s2">"</span><span class="nv">$database</span><span class="s2">"</span><span class="w"> </span>-cmd<span class="w"> </span><span class="s2">".mode csv"</span><span class="w"> </span>-cmd<span class="w"> </span><span class="s2">".import </span><span class="nv">$1</span><span class="s2"> t"</span><span class="w"> </span><span class="se">\</span>
-<span class="w">            </span>-cmd<span class="w"> </span><span class="s2">".mode column"</span><span class="w"> </span>-header<span class="w"> </span><span class="s2">".q"</span><span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
-<span class="k">elif</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span>sqlite3<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$database</span><span class="s2">&quot;</span><span class="w"> </span>-cmd<span class="w"> </span><span class="s2">&quot;.mode csv&quot;</span><span class="w"> </span>-cmd<span class="w"> </span><span class="s2">&quot;.import </span><span class="nv">$1</span><span class="s2"> t&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>-cmd<span class="w"> </span><span class="s2">&quot;.mode column&quot;</span><span class="w"> </span>-header<span class="w"> </span><span class="s2">&quot;.q&quot;</span><span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+<span class="k">elif</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">    </span><span class="c1"># Run sqlite3 in interactive mode</span>
-<span class="w">    </span>sqlite3<span class="w"> </span><span class="s2">"</span><span class="nv">$database</span><span class="s2">"</span><span class="w"> </span>-cmd<span class="w"> </span><span class="s2">".mode csv"</span><span class="w"> </span>-cmd<span class="w"> </span><span class="s2">".import </span><span class="nv">$1</span><span class="s2"> t"</span><span class="w"> </span><span class="se">\</span>
-<span class="w">            </span>-cmd<span class="w"> </span><span class="s2">".mode column"</span><span class="w"> </span>-header<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
+<span class="w">    </span>sqlite3<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$database</span><span class="s2">&quot;</span><span class="w"> </span>-cmd<span class="w"> </span><span class="s2">&quot;.mode csv&quot;</span><span class="w"> </span>-cmd<span class="w"> </span><span class="s2">&quot;.import </span><span class="nv">$1</span><span class="s2"> t&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>-cmd<span class="w"> </span><span class="s2">&quot;.mode column&quot;</span><span class="w"> </span>-header<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span>
 <span class="k">else</span>
 <span class="w">    </span><span class="c1"># Run the SQL query from the command line</span>
-<span class="w">    </span>sqlite3<span class="w"> </span><span class="s2">"</span><span class="nv">$database</span><span class="s2">"</span><span class="w"> </span>-cmd<span class="w"> </span><span class="s2">".mode csv"</span><span class="w"> </span>-cmd<span class="w"> </span><span class="s2">".import </span><span class="nv">$1</span><span class="s2"> t"</span><span class="w"> </span><span class="se">\</span>
-<span class="w">            </span>-cmd<span class="w"> </span><span class="s2">".mode column"</span><span class="w"> </span>-header<span class="w"> </span><span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span><span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-e<span class="w"> </span><span class="s2">"</span><span class="nv">$filter</span><span class="s2">"</span>
+<span class="w">    </span>sqlite3<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$database</span><span class="s2">&quot;</span><span class="w"> </span>-cmd<span class="w"> </span><span class="s2">&quot;.mode csv&quot;</span><span class="w"> </span>-cmd<span class="w"> </span><span class="s2">&quot;.import </span><span class="nv">$1</span><span class="s2"> t&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">            </span>-cmd<span class="w"> </span><span class="s2">&quot;.mode column&quot;</span><span class="w"> </span>-header<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$filter</span><span class="s2">&quot;</span>
 <span class="k">fi</span>
 </code></pre></div>
         </div>
@@ -207,7 +207,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: October 19, 2026</p>
+      <p>Last updated: October 02, 2026</p>
     </footer>
 
     <div class="scroll-container">

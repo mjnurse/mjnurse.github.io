@@ -92,25 +92,25 @@
         <div class="article-body">
           <h1><a class="link" href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-bash-basic-script-ex.md">bash-basic-script-ex: Example Basic Bash Script</a></h1>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
-<span class="nv">help_text</span><span class="o">=</span><span class="s2">"</span>
+<span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
 <span class="s2">usage: &lt;&lt;FILENAME&gt;&gt; [options] &lt;filename&gt;</span>
 <span class="s2">-h : This help text.</span>
-<span class="s2">"</span>
+<span class="s2">&quot;</span>
 
-<span class="nv">help_line</span><span class="o">=</span><span class="s2">"Example Basic Bash Script"</span>
-<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">"Example Basic Bash Script"</span>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Example Basic Bash Script&quot;</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Example Basic Bash Script&quot;</span>
 
 <span class="nb">set</span><span class="w"> </span>-uo<span class="w"> </span>pipefail<span class="w"> </span><span class="c1"># Treat unset variables as an error and fail on pipe errors</span>
 
 <span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
 <span class="w">    </span>-h<span class="p">|</span>--help<span class="o">)</span>
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$help_text</span><span class="s2">"</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
 <span class="w">        </span><span class="nb">exit</span>
 <span class="w">        </span><span class="p">;;</span>
 <span class="k">esac</span>
 
-<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$help_text</span><span class="s2">"</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
 <span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 <span class="k">fi</span>
 </code></pre></div>
@@ -131,7 +131,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: November 02, 2026</p>
+      <p>Last updated: October 30, 2026</p>
     </footer>
 
     <div class="scroll-container">

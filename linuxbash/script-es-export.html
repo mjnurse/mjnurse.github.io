@@ -92,20 +92,20 @@
         <div class="article-body">
           <h1><a class="link" href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-es-export.md">es-export: Export Elasticsearch index to bulk-compatible JSONL format</a></h1>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python3</span>
-<span class="nv">DESCRIPTION</span><span class="o">=</span><span class="s2">"""</span>
+<span class="nv">DESCRIPTION</span><span class="o">=</span><span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">Export Elasticsearch index to bulk-compatible JSONL format.</span>
-<span class="s2">"""</span>
+<span class="s2">&quot;&quot;&quot;</span>
 <span class="nv">ARGS</span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
-<span class="w">    </span><span class="o">{</span><span class="s2">"name"</span>:<span class="w"> </span><span class="s2">"-o"</span>,<span class="w"> </span><span class="s2">"name2"</span>:<span class="w"> </span><span class="s2">"--output"</span>,<span class="w"> </span><span class="s2">"type"</span>:<span class="w"> </span>str,<span class="w"> </span><span class="s2">"default"</span>:<span class="w"> </span><span class="s2">"&lt;index&gt;.jsonl"</span>,<span class="w"> </span>
-<span class="w">     </span><span class="s2">"help"</span>:<span class="w"> </span><span class="s2">"Output filename (default: &lt;index&gt;.jsonl)"</span><span class="o">}</span>,
-<span class="w">    </span><span class="o">{</span><span class="s2">"name"</span>:<span class="w"> </span><span class="s2">"--host"</span>,<span class="w"> </span><span class="s2">"type"</span>:<span class="w"> </span>str,<span class="w"> </span><span class="s2">"default"</span>:<span class="w"> </span><span class="s2">"localhost"</span>,<span class="w"> </span><span class="s2">"help"</span>:<span class="w"> </span><span class="s2">"Elasticsearch host URL (default: localhost)"</span><span class="o">}</span>,
-<span class="w">    </span><span class="o">{</span><span class="s2">"name"</span>:<span class="w"> </span><span class="s2">"--port"</span>,<span class="w"> </span><span class="s2">"type"</span>:<span class="w"> </span>str,<span class="w"> </span><span class="s2">"default"</span>:<span class="w"> </span><span class="s2">"9200"</span>,<span class="w"> </span><span class="s2">"help"</span>:<span class="w"> </span><span class="s2">"Elasticsearch port (default: 9200)"</span><span class="o">}</span>,
-<span class="w">    </span><span class="o">{</span><span class="s2">"name"</span>:<span class="w"> </span><span class="s2">"index_name"</span>,<span class="w"> </span><span class="s2">"type"</span>:<span class="w"> </span>str,<span class="w"> </span><span class="s2">"help"</span>:<span class="w"> </span><span class="s2">"Name of the Elasticsearch index to dump"</span><span class="o">}</span>
+<span class="w">    </span><span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="w"> </span><span class="s2">&quot;-o&quot;</span>,<span class="w"> </span><span class="s2">&quot;name2&quot;</span>:<span class="w"> </span><span class="s2">&quot;--output&quot;</span>,<span class="w"> </span><span class="s2">&quot;type&quot;</span>:<span class="w"> </span>str,<span class="w"> </span><span class="s2">&quot;default&quot;</span>:<span class="w"> </span><span class="s2">&quot;&lt;index&gt;.jsonl&quot;</span>,<span class="w"> </span>
+<span class="w">     </span><span class="s2">&quot;help&quot;</span>:<span class="w"> </span><span class="s2">&quot;Output filename (default: &lt;index&gt;.jsonl)&quot;</span><span class="o">}</span>,
+<span class="w">    </span><span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="w"> </span><span class="s2">&quot;--host&quot;</span>,<span class="w"> </span><span class="s2">&quot;type&quot;</span>:<span class="w"> </span>str,<span class="w"> </span><span class="s2">&quot;default&quot;</span>:<span class="w"> </span><span class="s2">&quot;localhost&quot;</span>,<span class="w"> </span><span class="s2">&quot;help&quot;</span>:<span class="w"> </span><span class="s2">&quot;Elasticsearch host URL (default: localhost)&quot;</span><span class="o">}</span>,
+<span class="w">    </span><span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="w"> </span><span class="s2">&quot;--port&quot;</span>,<span class="w"> </span><span class="s2">&quot;type&quot;</span>:<span class="w"> </span>str,<span class="w"> </span><span class="s2">&quot;default&quot;</span>:<span class="w"> </span><span class="s2">&quot;9200&quot;</span>,<span class="w"> </span><span class="s2">&quot;help&quot;</span>:<span class="w"> </span><span class="s2">&quot;Elasticsearch port (default: 9200)&quot;</span><span class="o">}</span>,
+<span class="w">    </span><span class="o">{</span><span class="s2">&quot;name&quot;</span>:<span class="w"> </span><span class="s2">&quot;index_name&quot;</span>,<span class="w"> </span><span class="s2">&quot;type&quot;</span>:<span class="w"> </span>str,<span class="w"> </span><span class="s2">&quot;help&quot;</span>:<span class="w"> </span><span class="s2">&quot;Name of the Elasticsearch index to dump&quot;</span><span class="o">}</span>
 <span class="o">]</span>
-<span class="nv">AUTHOR</span><span class="o">=</span><span class="s2">"mjnurse.github.io - 2026"</span>
+<span class="nv">AUTHOR</span><span class="o">=</span><span class="s2">&quot;mjnurse.github.io - 2026&quot;</span>
 
-<span class="nv">HELP_LINE</span><span class="o">=</span><span class="s2">"Export Elasticsearch index to bulk-compatible JSONL format"</span>
-<span class="nv">WEB_DESC_LINE</span><span class="o">=</span><span class="s2">"Export Elasticsearch index to bulk-compatible JSONL format"</span>
+<span class="nv">HELP_LINE</span><span class="o">=</span><span class="s2">&quot;Export Elasticsearch index to bulk-compatible JSONL format&quot;</span>
+<span class="nv">WEB_DESC_LINE</span><span class="o">=</span><span class="s2">&quot;Export Elasticsearch index to bulk-compatible JSONL format&quot;</span>
 
 import<span class="w"> </span>sys
 import<span class="w"> </span>argparse
@@ -115,53 +115,53 @@ from<span class="w"> </span>elasticsearch.helpers<span class="w"> </span>import<
 
 def<span class="w"> </span>parse_args<span class="o">()</span>:
 <span class="w">    </span><span class="nv">parser</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>argparse.ArgumentParser<span class="o">(</span>
-<span class="w">        </span><span class="nv">description</span><span class="o">=</span><span class="s2">"description:"</span><span class="w"> </span>+<span class="w"> </span>DESCRIPTION.replace<span class="o">(</span><span class="s2">"\n"</span>,<span class="w"> </span><span class="s2">"\n  "</span><span class="o">)[</span>:-2<span class="o">]</span>,
-<span class="w">        </span><span class="nv">epilog</span><span class="o">=</span><span class="s2">"author:\n  "</span><span class="w"> </span>+<span class="w"> </span>AUTHOR,
+<span class="w">        </span><span class="nv">description</span><span class="o">=</span><span class="s2">&quot;description:&quot;</span><span class="w"> </span>+<span class="w"> </span>DESCRIPTION.replace<span class="o">(</span><span class="s2">&quot;\n&quot;</span>,<span class="w"> </span><span class="s2">&quot;\n  &quot;</span><span class="o">)[</span>:-2<span class="o">]</span>,
+<span class="w">        </span><span class="nv">epilog</span><span class="o">=</span><span class="s2">&quot;author:\n  &quot;</span><span class="w"> </span>+<span class="w"> </span>AUTHOR,
 <span class="w">        </span><span class="nv">formatter_class</span><span class="o">=</span>argparse.RawDescriptionHelpFormatter<span class="o">)</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span>arg<span class="w"> </span><span class="k">in</span><span class="w"> </span>ARGS:
-<span class="w">        </span><span class="nv">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>arg<span class="o">[</span><span class="s2">"name"</span><span class="o">]]</span><span class="w"> </span>+<span class="w"> </span><span class="o">([</span>arg<span class="o">[</span><span class="s2">"name2"</span><span class="o">]]</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="s2">"name2"</span><span class="w"> </span><span class="k">in</span><span class="w"> </span>arg<span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="o">[])</span>
-<span class="w">        </span><span class="nv">kwargs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span>k:<span class="w"> </span>v<span class="w"> </span><span class="k">for</span><span class="w"> </span>k,<span class="w"> </span>v<span class="w"> </span><span class="k">in</span><span class="w"> </span>arg.items<span class="o">()</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>k<span class="w"> </span>not<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">(</span><span class="s2">"name"</span>,<span class="w"> </span><span class="s2">"name2"</span><span class="o">)</span><span class="w"> </span>and<span class="w"> </span>v<span class="w"> </span>is<span class="w"> </span>not<span class="w"> </span>None<span class="o">}</span>
+<span class="w">        </span><span class="nv">names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>arg<span class="o">[</span><span class="s2">&quot;name&quot;</span><span class="o">]]</span><span class="w"> </span>+<span class="w"> </span><span class="o">([</span>arg<span class="o">[</span><span class="s2">&quot;name2&quot;</span><span class="o">]]</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="s2">&quot;name2&quot;</span><span class="w"> </span><span class="k">in</span><span class="w"> </span>arg<span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="o">[])</span>
+<span class="w">        </span><span class="nv">kwargs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span>k:<span class="w"> </span>v<span class="w"> </span><span class="k">for</span><span class="w"> </span>k,<span class="w"> </span>v<span class="w"> </span><span class="k">in</span><span class="w"> </span>arg.items<span class="o">()</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>k<span class="w"> </span>not<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">(</span><span class="s2">&quot;name&quot;</span>,<span class="w"> </span><span class="s2">&quot;name2&quot;</span><span class="o">)</span><span class="w"> </span>and<span class="w"> </span>v<span class="w"> </span>is<span class="w"> </span>not<span class="w"> </span>None<span class="o">}</span>
 <span class="w">        </span>parser.add_argument<span class="o">(</span>*names,<span class="w"> </span>**kwargs<span class="o">)</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span>parser.parse_args<span class="o">()</span>
 
 def<span class="w"> </span>dump_index<span class="o">(</span>index_name,<span class="w"> </span>output_file,<span class="w"> </span>host,<span class="w"> </span>port<span class="o">)</span>:
-<span class="w">    </span><span class="s2">"""Export all documents from an index to JSONL file"""</span>
-<span class="w">    </span><span class="nv">es</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Elasticsearch<span class="o">(</span>f<span class="s2">"http://{host}:{port}"</span><span class="o">)</span>
+<span class="w">    </span><span class="s2">&quot;&quot;&quot;Export all documents from an index to JSONL file&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="nv">es</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Elasticsearch<span class="o">(</span>f<span class="s2">&quot;http://{host}:{port}&quot;</span><span class="o">)</span>
 
 <span class="w">    </span>try:
 <span class="w">        </span>es.info<span class="o">()</span>
 <span class="w">    </span>except<span class="w"> </span>Exception<span class="w"> </span>as<span class="w"> </span>e:
-<span class="w">        </span>print<span class="o">(</span>f<span class="s2">"ERROR: Could not connect to Elasticsearch at {host}:{port}.\n\nException: {e}"</span><span class="o">)</span>
+<span class="w">        </span>print<span class="o">(</span>f<span class="s2">&quot;ERROR: Could not connect to Elasticsearch at {host}:{port}.\n\nException: {e}&quot;</span><span class="o">)</span>
 <span class="w">        </span>sys.exit<span class="o">(</span><span class="m">1</span><span class="o">)</span>
 
 <span class="w">    </span><span class="c1"># Verify index exists</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>es.indices.exists<span class="o">(</span><span class="nv">index</span><span class="o">=</span>index_name<span class="o">)</span>:
-<span class="w">        </span>print<span class="o">(</span>f<span class="s2">"ERROR: Index '{index_name}' not found."</span><span class="o">)</span>
+<span class="w">        </span>print<span class="o">(</span>f<span class="s2">&quot;ERROR: Index &#39;{index_name}&#39; not found.&quot;</span><span class="o">)</span>
 <span class="w">        </span>sys.exit<span class="o">(</span><span class="m">1</span><span class="o">)</span>
 
 <span class="w">    </span><span class="c1"># Write bulk-compatible format: metadata line + document line</span>
-<span class="w">    </span>with<span class="w"> </span>open<span class="o">(</span>output_file,<span class="w"> </span><span class="s2">"w"</span>,<span class="w"> </span><span class="nv">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="o">)</span><span class="w"> </span>as<span class="w"> </span>f:
-<span class="w">        </span><span class="k">for</span><span class="w"> </span>doc<span class="w"> </span><span class="k">in</span><span class="w"> </span>scan<span class="o">(</span>es,<span class="w"> </span><span class="nv">index</span><span class="o">=</span>index_name,<span class="w"> </span><span class="nv">query</span><span class="o">={</span><span class="s2">"query"</span>:<span class="w"> </span><span class="o">{</span><span class="s2">"match_all"</span>:<span class="w"> </span><span class="o">{}}})</span>:
+<span class="w">    </span>with<span class="w"> </span>open<span class="o">(</span>output_file,<span class="w"> </span><span class="s2">&quot;w&quot;</span>,<span class="w"> </span><span class="nv">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="o">)</span><span class="w"> </span>as<span class="w"> </span>f:
+<span class="w">        </span><span class="k">for</span><span class="w"> </span>doc<span class="w"> </span><span class="k">in</span><span class="w"> </span>scan<span class="o">(</span>es,<span class="w"> </span><span class="nv">index</span><span class="o">=</span>index_name,<span class="w"> </span><span class="nv">query</span><span class="o">={</span><span class="s2">&quot;query&quot;</span>:<span class="w"> </span><span class="o">{</span><span class="s2">&quot;match_all&quot;</span>:<span class="w"> </span><span class="o">{}}})</span>:
 <span class="w">            </span><span class="nv">meta</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">{</span>
-<span class="w">                </span><span class="s2">"index"</span>:<span class="w"> </span><span class="o">{</span>
-<span class="w">                    </span><span class="s2">"_index"</span>:<span class="w"> </span>doc<span class="o">[</span><span class="s2">"_index"</span><span class="o">]</span>,
-<span class="w">                    </span><span class="s2">"_id"</span>:<span class="w"> </span>doc<span class="o">[</span><span class="s2">"_id"</span><span class="o">]</span>
+<span class="w">                </span><span class="s2">&quot;index&quot;</span>:<span class="w"> </span><span class="o">{</span>
+<span class="w">                    </span><span class="s2">&quot;_index&quot;</span>:<span class="w"> </span>doc<span class="o">[</span><span class="s2">&quot;_index&quot;</span><span class="o">]</span>,
+<span class="w">                    </span><span class="s2">&quot;_id&quot;</span>:<span class="w"> </span>doc<span class="o">[</span><span class="s2">&quot;_id&quot;</span><span class="o">]</span>
 <span class="w">                </span><span class="o">}</span>
 <span class="w">            </span><span class="o">}</span>
-<span class="w">            </span>f.write<span class="o">(</span>json.dumps<span class="o">(</span>meta<span class="o">)</span><span class="w"> </span>+<span class="w"> </span><span class="s2">"\n"</span><span class="o">)</span>
-<span class="w">            </span>f.write<span class="o">(</span>json.dumps<span class="o">(</span>doc<span class="o">[</span><span class="s2">"_source"</span><span class="o">])</span><span class="w"> </span>+<span class="w"> </span><span class="s2">"\n"</span><span class="o">)</span>
+<span class="w">            </span>f.write<span class="o">(</span>json.dumps<span class="o">(</span>meta<span class="o">)</span><span class="w"> </span>+<span class="w"> </span><span class="s2">&quot;\n&quot;</span><span class="o">)</span>
+<span class="w">            </span>f.write<span class="o">(</span>json.dumps<span class="o">(</span>doc<span class="o">[</span><span class="s2">&quot;_source&quot;</span><span class="o">])</span><span class="w"> </span>+<span class="w"> </span><span class="s2">&quot;\n&quot;</span><span class="o">)</span>
 
 def<span class="w"> </span>main<span class="o">()</span>:
 <span class="w">    </span><span class="nv">args</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>parse_args<span class="o">()</span>
 
 <span class="w">    </span><span class="c1"># Set default output filename</span>
-<span class="w">    </span><span class="nv">output_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>f<span class="s2">"{args.index_name}.jsonl"</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>args.output<span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"&lt;index&gt;.jsonl"</span><span class="w"> </span><span class="k">else</span><span class="w"> </span>args.output
-<span class="w">    </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>output_file.endswith<span class="o">(</span><span class="s2">".jsonl"</span><span class="o">)</span>:
-<span class="w">        </span><span class="nv">output_file</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">".jsonl"</span>
+<span class="w">    </span><span class="nv">output_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>f<span class="s2">&quot;{args.index_name}.jsonl&quot;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>args.output<span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&lt;index&gt;.jsonl&quot;</span><span class="w"> </span><span class="k">else</span><span class="w"> </span>args.output
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>output_file.endswith<span class="o">(</span><span class="s2">&quot;.jsonl&quot;</span><span class="o">)</span>:
+<span class="w">        </span><span class="nv">output_file</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;.jsonl&quot;</span>
 
 <span class="w">    </span>dump_index<span class="o">(</span>args.index_name,<span class="w"> </span>output_file,<span class="w"> </span>args.host,<span class="w"> </span>args.port<span class="o">)</span>
 
-<span class="k">if</span><span class="w"> </span><span class="nv">__name__</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"__main__"</span>:
+<span class="k">if</span><span class="w"> </span><span class="nv">__name__</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;__main__&quot;</span>:
 <span class="w">    </span>main<span class="o">()</span>
 </code></pre></div>
         </div>
@@ -181,7 +181,7 @@ def<span class="w"> </span>main<span class="o">()</span>:
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: October 19, 2026</p>
+      <p>Last updated: February 03, 2026</p>
     </footer>
 
     <div class="scroll-container">
