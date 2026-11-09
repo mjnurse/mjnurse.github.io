@@ -1053,7 +1053,7 @@
     "id": "150",
     "title": "lo: Locate files using bash locate",
     "url": "/linuxbash/script-lo.html",
-    "content": "#!/usr/bin/env bash help_text=&quot; usage: lo [options] &lt;filename-regex&gt; -h : This help text. &quot; help_line=&quot;Locate files using bash locate&quot; web_desc_line=&quot;Locate files using bash locate&quot; set -uo pipefail # Treat unset variables as an error and fail on pipe errors # Terminal Colours cdef=&quot;\\x1b[39m&quot; # default colour cbla=&quot;\\x1b[30m&quot;; cgra=&quot;\\x1b[90m&quot;; clgra=&quot;\\x1b[37m&quot;; cwhi=&quot;\\x1b[97m&quot; cred=&quot;\\x1b[31m&quot;; cgre=&qu",
+    "content": "#!/usr/bin/env bash help_text=&quot; usage: lo [options] &lt;filename-regex&gt; -h|--help : This help text. -a|--all : Search full pathname instead of just filenames. -m|--max &lt;num&gt; : Maximum number of matches to display (default: 20). &quot; help_line=&quot;Locate files using bash locate&quot; web_desc_line=&quot;Locate files using bash locate&quot; set -uo pipefail # Treat unset variables as an error and fail on pipe errors # Terminal Colours cdef=&quot;\\x1b[39m&quot; # default colour cb",
     "type": "page"
   },
   {
