@@ -92,50 +92,50 @@
         <div class="article-body">
           <h1><a class="link" href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-record-shell.md">record-shell: Record shell session - saving as HTML</a></h1>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
-<span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
+<span class="nv">help_text</span><span class="o">=</span><span class="s2">"</span>
 <span class="s2">usage: record [options] &lt;filename&gt;</span>
 <span class="s2">-h : This help text.</span>
-<span class="s2">&quot;</span>
+<span class="s2">"</span>
 
-<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Record shell session - saving as HTML&quot;</span>
-<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Record shell session - saving as HTML&quot;</span>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">"Record shell session - saving as HTML"</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">"Record shell session - saving as HTML"</span>
 
 <span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
 <span class="w">    </span>-h<span class="p">|</span>--help<span class="o">)</span>
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$help_text</span><span class="s2">"</span>
 <span class="w">        </span><span class="nb">exit</span>
 <span class="w">        </span><span class="p">;;</span>
 <span class="k">esac</span>
 
-<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$help_text</span><span class="s2">"</span>
 <span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 <span class="k">fi</span>
 
 <span class="c1"># Record the shell session to a temporary log file</span>
-script<span class="w"> </span>--log-out<span class="o">=</span>/tmp/record.log<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;PS1=&quot;$ &quot;; export PS1; exec bash --norc -i&#39;</span>
+script<span class="w"> </span>--log-out<span class="o">=</span>/tmp/record.log<span class="w"> </span>-c<span class="w"> </span><span class="s1">'PS1="$ "; export PS1; exec bash --norc -i'</span>
 
 <span class="c1"># Remove script start and end lines, and carriage return characters</span>
-sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;</span>
+sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">'</span>
 <span class="s1">    /^Script started/d</span>
 <span class="s1">    /^Script done/d</span>
 <span class="s1">    s/\r//g</span>
-<span class="s1">&#39;</span><span class="w"> </span>/tmp/record.log
+<span class="s1">'</span><span class="w"> </span>/tmp/record.log
 
 <span class="c1"># Remove empty lines at the beginning and end of the log</span>
-sed<span class="w"> </span>-i<span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;/./,$!d&#39;</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;:a&#39;</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;/./!{$d;N;ba}&#39;</span><span class="w"> </span>/tmp/record.log
+sed<span class="w"> </span>-i<span class="w"> </span>-e<span class="w"> </span><span class="s1">'/./,$!d'</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">':a'</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">'/./!{$d;N;ba}'</span><span class="w"> </span>/tmp/record.log
 
 <span class="c1"># Remove exit command at the end of the log</span>
-sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">&#39;${/^exit$/d;}&#39;</span><span class="w"> </span>/tmp/record.log
+sed<span class="w"> </span>-i<span class="w"> </span><span class="s1">'${/^exit$/d;}'</span><span class="w"> </span>/tmp/record.log
 
 <span class="c1"># Convert the log to HTML and style the &lt;pre&gt; block</span>
-aha<span class="w"> </span>&lt;<span class="w"> </span>/tmp/record.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s2">&quot;/&lt;pre&gt;/,/&lt;\/pre&gt;/p&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;</span>
-<span class="s2">    s/^&lt;pre&gt;</span>$<span class="s2">/&lt;pre style=&#39;background: black; color: white; margin-top: 20px;&#39;&gt;/</span>
+aha<span class="w"> </span>&lt;<span class="w"> </span>/tmp/record.log<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span>-n<span class="w"> </span><span class="s2">"/&lt;pre&gt;/,/&lt;\/pre&gt;/p"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">"</span>
+<span class="s2">    s/^&lt;pre&gt;</span>$<span class="s2">/&lt;pre style='background: black; color: white; margin-top: 20px;'&gt;/</span>
 <span class="s2">    s/filter: contrast[^;]*; *//g</span>
-<span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$1</span>.html
+<span class="s2">"</span><span class="w"> </span>&gt;<span class="w"> </span><span class="nv">$1</span>.html
 rm<span class="w"> </span>-f<span class="w"> </span>/tmp/record.log
 
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;File created: </span><span class="nv">$1</span><span class="s2">.html&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"File created: </span><span class="nv">$1</span><span class="s2">.html"</span>
 </code></pre></div>
         </div>
       </article>
@@ -154,7 +154,7 @@ rm<span class="w"> </span>-f<span class="w"> </span>/tmp/record.log
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: October 09, 2026</p>
+      <p>Last updated: October 19, 2026</p>
     </footer>
 
     <div class="scroll-container">

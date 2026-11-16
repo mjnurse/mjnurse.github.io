@@ -92,7 +92,7 @@
         <div class="article-body">
           <h1><a class="link" href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-drawio.md">drawio: Launch Draw.io application with specified file or URL</a></h1>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
-<span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
+<span class="nv">help_text</span><span class="o">=</span><span class="s2">"</span>
 <span class="s2">NAME</span>
 <span class="s2">  drawio - Launch Draw.io application with specified file or URL</span>
 
@@ -111,47 +111,47 @@
 
 <span class="s2">AUTHOR</span>
 <span class="s2">  mjnurse.github.io - 2025</span>
-<span class="s2">&quot;</span>
+<span class="s2">"</span>
 
-<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Launch Draw.io application with specified file or URL&quot;</span>
-<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Launch Draw.io application with specified file or URL&quot;</span>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">"Launch Draw.io application with specified file or URL"</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">"Launch Draw.io application with specified file or URL"</span>
 
 <span class="c1"># Function to display help</span>
 show_help<span class="o">()</span><span class="w"> </span><span class="o">{</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$help_text</span><span class="s2">"</span>
 <span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">0</span>
 <span class="o">}</span>
 
 <span class="c1"># Function to display error and exit</span>
 error_exit<span class="o">()</span><span class="w"> </span><span class="o">{</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Error: </span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Try &#39;</span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> --help&#39; for more information.&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Error: </span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Try '</span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> --help' for more information."</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
 <span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 <span class="o">}</span>
 
 <span class="c1"># Check for help flag</span>
-<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;-h&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;--help&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"-h"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"--help"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">    </span>show_help
 <span class="k">fi</span>
 
-<span class="nv">target</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="nv">target</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
 
-<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$target</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$target</span><span class="s2">"</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">    </span><span class="c1"># Convert to Windows path</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span>!<span class="w"> </span><span class="nv">file_path</span><span class="o">=</span><span class="k">$(</span>wslpath<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$target</span><span class="s2">&quot;</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">        </span>error_exit<span class="w"> </span><span class="s2">&quot;Failed to convert path &#39;</span><span class="nv">$target</span><span class="s2">&#39; to Windows format.&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>!<span class="w"> </span><span class="nv">file_path</span><span class="o">=</span><span class="k">$(</span>wslpath<span class="w"> </span>-w<span class="w"> </span><span class="s2">"</span><span class="nv">$target</span><span class="s2">"</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="k">)</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span>error_exit<span class="w"> </span><span class="s2">"Failed to convert path '</span><span class="nv">$target</span><span class="s2">' to Windows format."</span>
 <span class="w">    </span><span class="k">fi</span>
 
 <span class="w">    </span><span class="c1"># Verify the file exists (for local files)</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$target</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">        </span>error_exit<span class="w"> </span><span class="s2">&quot;File &#39;</span><span class="nv">$target</span><span class="s2">&#39; does not exist.&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-e<span class="w"> </span><span class="s2">"</span><span class="nv">$target</span><span class="s2">"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span>error_exit<span class="w"> </span><span class="s2">"File '</span><span class="nv">$target</span><span class="s2">' does not exist."</span>
 <span class="w">    </span><span class="k">fi</span>
 <span class="k">fi</span>
 
 <span class="c1"># Launch Application</span>
-<span class="nb">echo</span><span class="w"> </span>cmd.exe<span class="w"> </span>/c<span class="w"> </span>start<span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="s2">&quot;C:\Program Files\WindowsApps\draw.io.draw.ioDiagrams_28.2.7.0_x64__1zh33159kp73c\app\draw.io.exe </span><span class="nv">$file_path</span><span class="s2">&quot;</span>
-<span class="k">if</span><span class="w"> </span>!<span class="w"> </span>cmd.exe<span class="w"> </span>/c<span class="w"> </span>start<span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file_path</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span>error_exit<span class="w"> </span><span class="s2">&quot;Failed to launch drawio&quot;</span>
+<span class="nb">echo</span><span class="w"> </span>cmd.exe<span class="w"> </span>/c<span class="w"> </span>start<span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="s2">"C:\Program Files\WindowsApps\draw.io.draw.ioDiagrams_28.2.7.0_x64__1zh33159kp73c\app\draw.io.exe </span><span class="nv">$file_path</span><span class="s2">"</span>
+<span class="k">if</span><span class="w"> </span>!<span class="w"> </span>cmd.exe<span class="w"> </span>/c<span class="w"> </span>start<span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="s2">"</span><span class="nv">$file_path</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span>error_exit<span class="w"> </span><span class="s2">"Failed to launch drawio"</span>
 <span class="k">fi</span>
 
 <span class="nb">exit</span><span class="w"> </span><span class="m">0</span>
@@ -173,7 +173,7 @@ error_exit<span class="o">()</span><span class="w"> </span><span class="o">{</sp
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: March 02, 2026</p>
+      <p>Last updated: October 19, 2026</p>
     </footer>
 
     <div class="scroll-container">

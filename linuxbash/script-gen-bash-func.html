@@ -92,7 +92,7 @@
         <div class="article-body">
           <h1><a class="link" href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-gen-bash-func.md">gen-bash-func: Generates code and header of a bash function</a></h1>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
-<span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
+<span class="nv">help_text</span><span class="o">=</span><span class="s2">"</span>
 <span class="s2">NAME</span>
 <span class="s2">    gen-bash-func - Generates code and header of a bash function</span>
 
@@ -115,33 +115,33 @@
 
 <span class="s2">AUTHOR</span>
 <span class="s2">    mjnurse.github.io - 2023</span>
-<span class="s2">&quot;</span>
-<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Generates code and header of a bash function&quot;</span>
-<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Generates code and header of a bash function&quot;</span>
+<span class="s2">"</span>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">"Generates code and header of a bash function"</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">"Generates code and header of a bash function"</span>
 
-<span class="nv">try</span><span class="o">=</span><span class="s2">&quot;Try </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h for more information&quot;</span>
-<span class="nv">tmp</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">help_text</span><span class="p">##*USAGE</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="nv">usage</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%OPTIONS*</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;\n&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/  */ /g&quot;</span><span class="k">)</span>
+<span class="nv">try</span><span class="o">=</span><span class="s2">"Try </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h for more information"</span>
+<span class="nv">tmp</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">help_text</span><span class="p">##*USAGE</span><span class="si">}</span><span class="s2">"</span>
+<span class="nv">usage</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Usage: </span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%OPTIONS*</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s2">"\n"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">"s/  */ /g"</span><span class="k">)</span>
 
 <span class="c1"># This function runs through a set of parameters and generates a function description header.</span>
 <span class="c1"># In other words generate this header.</span>
 <span class="k">function</span><span class="w"> </span>desc<span class="o">()</span><span class="w"> </span><span class="o">{</span>
 <span class="w">    </span><span class="nv">optional_yn</span><span class="o">=</span>n
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;# </span><span class="nv">$1</span><span class="s2">: DESC&quot;</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;#&quot;</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;# Arguments:&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"# </span><span class="nv">$1</span><span class="s2">: DESC"</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"#"</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"# Arguments:"</span>
 <span class="w">    </span><span class="nb">shift</span>
 <span class="w">    </span><span class="nv">i</span><span class="o">=</span><span class="m">1</span>
-<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
 <span class="w">            </span>-o<span class="p">|</span>--optional<span class="o">)</span>
 <span class="w">                </span><span class="nv">optional_yn</span><span class="o">=</span>y
 <span class="w">                </span><span class="p">;;</span>
 <span class="w">            </span>?*<span class="o">)</span>
 <span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="si">${</span><span class="nv">optional_yn</span><span class="si">}</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>n<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">                    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;#   </span>$<span class="s2">&quot;&quot;</span><span class="nv">$i</span><span class="s2"> &lt;</span><span class="nv">$1</span><span class="s2">&gt; - DESC&quot;</span>
+<span class="w">                    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"#   </span>$<span class="s2">""</span><span class="nv">$i</span><span class="s2"> &lt;</span><span class="nv">$1</span><span class="s2">&gt; - DESC"</span>
 <span class="w">                </span><span class="k">else</span>
-<span class="w">                    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;#   </span>$<span class="s2">&quot;&quot;</span><span class="nv">$i</span><span class="s2"> &lt;</span><span class="nv">$1</span><span class="s2">&gt; (optional) - DESC&quot;</span>
+<span class="w">                    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"#   </span>$<span class="s2">""</span><span class="nv">$i</span><span class="s2"> &lt;</span><span class="nv">$1</span><span class="s2">&gt; (optional) - DESC"</span>
 <span class="w">                </span><span class="k">fi</span>
 <span class="w">                </span><span class="nb">let</span><span class="w"> </span><span class="nv">i</span><span class="o">=</span>i+1
 <span class="w">                </span><span class="p">;;</span>
@@ -153,34 +153,34 @@
 <span class="k">function</span><span class="w"> </span>func<span class="o">()</span><span class="w"> </span><span class="o">{</span>
 <span class="w">    </span><span class="nv">optional_yn</span><span class="o">=</span>n
 <span class="w">    </span><span class="nv">param_pos</span><span class="o">=</span><span class="m">1</span>
-<span class="w">    </span><span class="nv">function_name</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="nv">body</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
-<span class="w">    </span><span class="nv">paramlist</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="nv">function_name</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
+<span class="w">    </span><span class="nv">body</span><span class="o">=</span><span class="s2">""</span>
+<span class="w">    </span><span class="nv">paramlist</span><span class="o">=</span><span class="s2">""</span>
 <span class="w">    </span><span class="k">function</span><span class="w"> </span>b<span class="o">()</span><span class="w"> </span><span class="o">{</span>
-<span class="w">        </span><span class="nv">body</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$body$1</span><span class="s2">\n&quot;</span>
+<span class="w">        </span><span class="nv">body</span><span class="o">=</span><span class="s2">"</span><span class="nv">$body$1</span><span class="s2">\n"</span>
 <span class="w">    </span><span class="o">}</span>
 <span class="w">    </span><span class="k">function</span><span class="w"> </span>p<span class="o">()</span><span class="w"> </span><span class="o">{</span>
-<span class="w">        </span><span class="nv">paramlist</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$paramlist</span><span class="s2">\n</span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="w">        </span><span class="nv">paramlist</span><span class="o">=</span><span class="s2">"</span><span class="nv">$paramlist</span><span class="s2">\n</span><span class="nv">$1</span><span class="s2">"</span>
 <span class="w">    </span><span class="o">}</span>
 <span class="w">    </span><span class="nb">shift</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="o">=</span>~<span class="w"> </span>-.*<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">        </span>b<span class="w"> </span><span class="s2">&quot;  while [[ \&quot;\$1 ]]; do&quot;</span>
-<span class="w">        </span>b<span class="w"> </span><span class="s2">&quot;    case \$1 in&quot;</span>
+<span class="w">        </span>b<span class="w"> </span><span class="s2">"  while [[ \"\$1 ]]; do"</span>
+<span class="w">        </span>b<span class="w"> </span><span class="s2">"    case \$1 in"</span>
 <span class="w">    </span><span class="k">fi</span>
-<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
 <span class="w">        </span>-o<span class="p">|</span>--optional<span class="o">)</span>
 <span class="w">            </span><span class="nv">optional_yn</span><span class="o">=</span>y
 <span class="w">            </span><span class="p">;;</span>
 <span class="w">        </span>?*<span class="o">)</span>
 <span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="si">${</span><span class="nv">optional_yn</span><span class="si">}</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>n<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">                </span>b<span class="w"> </span><span class="s2">&quot;    local </span><span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="s2">=\&quot;\$</span><span class="si">${</span><span class="nv">param_pos</span><span class="si">}</span><span class="s2">\&quot;&quot;</span>
-<span class="w">                </span>b<span class="w"> </span><span class="s2">&quot;    if [[ \&quot;\$</span><span class="nv">$1</span><span class="s2">\&quot; == \&quot;\&quot; ]]; then&quot;</span>
-<span class="w">                </span>b<span class="w"> </span><span class="s2">&quot;        echo \&quot;Error: Function: </span><span class="nv">$function_name</span><span class="s2">.  Mandatory parameter &lt;</span><span class="nv">$1</span><span class="s2">&gt; not set\&quot;&quot;</span>
-<span class="w">                </span>b<span class="w"> </span><span class="s2">&quot;        exit 1&quot;</span>
-<span class="w">                </span>b<span class="w"> </span><span class="s2">&quot;    fi&quot;</span>
+<span class="w">                </span>b<span class="w"> </span><span class="s2">"    local </span><span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="s2">=\"\$</span><span class="si">${</span><span class="nv">param_pos</span><span class="si">}</span><span class="s2">\""</span>
+<span class="w">                </span>b<span class="w"> </span><span class="s2">"    if [[ \"\$</span><span class="nv">$1</span><span class="s2">\" == \"\" ]]; then"</span>
+<span class="w">                </span>b<span class="w"> </span><span class="s2">"        echo \"Error: Function: </span><span class="nv">$function_name</span><span class="s2">.  Mandatory parameter &lt;</span><span class="nv">$1</span><span class="s2">&gt; not set\""</span>
+<span class="w">                </span>b<span class="w"> </span><span class="s2">"        exit 1"</span>
+<span class="w">                </span>b<span class="w"> </span><span class="s2">"    fi"</span>
 <span class="w">            </span><span class="k">else</span>
-<span class="w">                </span>b<span class="w"> </span><span class="s2">&quot;    local </span><span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="s2">=\&quot;\$</span><span class="si">${</span><span class="nv">param_pos</span><span class="si">}</span><span class="s2">\&quot; # Optional parameter&quot;</span>
+<span class="w">                </span>b<span class="w"> </span><span class="s2">"    local </span><span class="si">${</span><span class="nv">1</span><span class="si">}</span><span class="s2">=\"\$</span><span class="si">${</span><span class="nv">param_pos</span><span class="si">}</span><span class="s2">\" # Optional parameter"</span>
 <span class="w">            </span><span class="k">fi</span>
 <span class="w">            </span><span class="nb">let</span><span class="w"> </span><span class="nv">param_pos</span><span class="o">=</span>param_pos+1
 <span class="w">            </span><span class="p">;;</span>
@@ -188,22 +188,22 @@
 <span class="w">        </span><span class="nb">shift</span>
 <span class="w">    </span><span class="k">done</span>
 
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;function </span><span class="si">${</span><span class="nv">function_name</span><span class="si">}</span><span class="s2"> () {&quot;</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$paramlist</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$body</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;}&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"function </span><span class="si">${</span><span class="nv">function_name</span><span class="si">}</span><span class="s2"> () {"</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"</span><span class="nv">$paramlist</span><span class="s2">"</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"</span><span class="nv">$body</span><span class="s2">"</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"}"</span>
 <span class="o">}</span>
 
-<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">usage</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">try</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">usage</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">try</span><span class="si">}</span><span class="s2">"</span>
 <span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 <span class="k">fi</span>
 
-<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
 <span class="w">        </span>-h<span class="p">|</span>--help<span class="o">)</span>
-<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$help_text</span><span class="s2">"</span>
 <span class="w">            </span><span class="nb">exit</span>
 <span class="w">            </span><span class="p">;;</span>
 <span class="w">        </span>?*<span class="o">)</span>
@@ -233,7 +233,7 @@ func<span class="w"> </span><span class="nv">$*</span>
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: February 02, 2026</p>
+      <p>Last updated: October 19, 2026</p>
     </footer>
 
     <div class="scroll-container">

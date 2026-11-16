@@ -161,9 +161,9 @@
 <span class="w"> </span><span class="o">*/</span>
 <span class="k">const</span><span class="w"> </span><span class="n">BandersnatchType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="o">/**</span><span class="w"> </span><span class="n">This</span><span class="w"> </span><span class="n">kind</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">really</span><span class="w"> </span><span class="n">frumious</span><span class="o">.</span><span class="w"> </span><span class="o">*/</span>
-<span class="w">  </span><span class="n">FRUMIOUS</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;frumious&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="n">FRUMIOUS</span><span class="p">:</span><span class="w"> </span><span class="s1">'frumious'</span><span class="p">,</span>
 <span class="w">  </span><span class="o">/**</span><span class="w"> </span><span class="n">The</span><span class="w"> </span><span class="n">less</span><span class="o">-</span><span class="n">frumious</span><span class="w"> </span><span class="n">kind</span><span class="o">.</span><span class="w"> </span><span class="o">*/</span>
-<span class="w">  </span><span class="n">MANXOME</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;manxome&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="n">MANXOME</span><span class="p">:</span><span class="w"> </span><span class="s1">'manxome'</span><span class="p">,</span>
 <span class="p">};</span>
 </code></pre></div>
 
@@ -210,7 +210,7 @@
 <div class="codehilite"><pre><span></span><code><span class="cm">/** My class. */</span>
 <span class="kd">class</span><span class="w"> </span><span class="nx">MyClass</span><span class="w"> </span><span class="p">{</span>
 <span class="w">  </span><span class="cm">/** @param {string=} someString */</span>
-<span class="w">  </span><span class="nx">constructor</span><span class="p">(</span><span class="nx">someString</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="err">&#39;</span><span class="k">default</span><span class="w"> </span><span class="kt">string</span><span class="err">&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">constructor</span><span class="p">(</span><span class="nx">someString</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="err">'</span><span class="k">default</span><span class="w"> </span><span class="kt">string</span><span class="err">'</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="cm">/** @private @const {string} */</span>
 <span class="w">    </span><span class="nx">this</span><span class="p">.</span><span class="nx">someString_</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">someString</span><span class="p">;</span>
 
@@ -226,7 +226,7 @@
 <span class="p">}</span>
 
 <span class="cm">/**</span>
-<span class="cm"> * The number of times we&#39;ll try before giving up.</span>
+<span class="cm"> * The number of times we'll try before giving up.</span>
 <span class="cm"> * @const {number}</span>
 <span class="cm"> */</span>
 <span class="nx">MyClass</span><span class="p">.</span><span class="nx">RETRY_COUNT</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">33</span><span class="p">;</span>
@@ -260,7 +260,7 @@
 <span class="nx">const</span><span class="w"> </span><span class="cm">/** !MyTypeDef */</span><span class="w"> </span><span class="nx">def</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">...</span><span class="p">;</span>
 <span class="nx">const</span><span class="w"> </span><span class="cm">/** ?SomeCamelCaseName */</span><span class="w"> </span><span class="nx">n</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">...</span><span class="p">;</span>
 <span class="m m-Double">7.10.2</span><span class="w"> </span><span class="nx">Type</span><span class="w"> </span><span class="nx">Casts</span>
-<span class="nx">In</span><span class="w"> </span><span class="nx">cases</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">compiler</span><span class="w"> </span><span class="nx">doesn</span><span class="err">&#39;</span><span class="nx">t</span><span class="w"> </span><span class="nx">accurately</span><span class="w"> </span><span class="nx">infer</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">expression</span><span class="p">,</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">assertion</span><span class="w"> </span><span class="nx">functions</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">goog</span><span class="p">.</span><span class="nx">asserts</span><span class="w"> </span><span class="nx">cannot</span><span class="w"> </span><span class="nx">remedy</span><span class="w"> </span><span class="nx">it</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="nx">it</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">possible</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">tighten</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="nx">adding</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="nx">annotation</span><span class="w"> </span><span class="nx">comment</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">enclosing</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">expression</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">parentheses</span><span class="p">.</span><span class="w"> </span><span class="nx">Note</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">parentheses</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="nx">required</span><span class="p">.</span>
+<span class="nx">In</span><span class="w"> </span><span class="nx">cases</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">compiler</span><span class="w"> </span><span class="nx">doesn</span><span class="err">'</span><span class="nx">t</span><span class="w"> </span><span class="nx">accurately</span><span class="w"> </span><span class="nx">infer</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="nx">of</span><span class="w"> </span><span class="nx">an</span><span class="w"> </span><span class="nx">expression</span><span class="p">,</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">assertion</span><span class="w"> </span><span class="nx">functions</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">goog</span><span class="p">.</span><span class="nx">asserts</span><span class="w"> </span><span class="nx">cannot</span><span class="w"> </span><span class="nx">remedy</span><span class="w"> </span><span class="nx">it</span><span class="w"> </span><span class="p">,</span><span class="w"> </span><span class="nx">it</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="nx">possible</span><span class="w"> </span><span class="nx">to</span><span class="w"> </span><span class="nx">tighten</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="nx">by</span><span class="w"> </span><span class="nx">adding</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="nx">annotation</span><span class="w"> </span><span class="nx">comment</span><span class="w"> </span><span class="k">and</span><span class="w"> </span><span class="nx">enclosing</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">expression</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="nx">parentheses</span><span class="p">.</span><span class="w"> </span><span class="nx">Note</span><span class="w"> </span><span class="nx">that</span><span class="w"> </span><span class="nx">the</span><span class="w"> </span><span class="nx">parentheses</span><span class="w"> </span><span class="nx">are</span><span class="w"> </span><span class="nx">required</span><span class="p">.</span>
 
 <span class="cm">/** @type {number} */</span><span class="w"> </span><span class="p">(</span><span class="nx">x</span><span class="p">)</span>
 <span class="m m-Double">7.10.3</span><span class="w"> </span><span class="nx">Template</span><span class="w"> </span><span class="nx">Parameter</span><span class="w"> </span><span class="nx">Types</span>
@@ -295,9 +295,9 @@
 
 <span class="cm">/**</span>
 <span class="cm"> * @param {function(): *} inputFunction1 Can return any type.</span>
-<span class="cm"> * @param {function(): undefined} inputFunction2 Definitely doesn&#39;t return</span>
+<span class="cm"> * @param {function(): undefined} inputFunction2 Definitely doesn't return</span>
 <span class="cm"> *      anything.</span>
-<span class="cm"> * NOTE: the return type of &#39;foo&#39; itself is safely implied to be {undefined}.</span>
+<span class="cm"> * NOTE: the return type of 'foo' itself is safely implied to be {undefined}.</span>
 <span class="cm"> */</span>
 <span class="nx">function</span><span class="w"> </span><span class="nx">foo</span><span class="p">(</span><span class="nx">inputFunction1</span><span class="p">,</span><span class="w"> </span><span class="nx">inputFunction2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="o">...</span><span class="p">}</span>
 <span class="m m-Double">7.10.5</span><span class="w"> </span><span class="nx">Whitespace</span>
@@ -374,7 +374,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: December 11, 2025</p>
+      <p>Last updated: October 27, 2026</p>
     </footer>
 
     <div class="scroll-container">
