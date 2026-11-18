@@ -108,7 +108,7 @@ Initialized empty Git repository in /home/martin/git-test/user1/.git/
 </code></pre></div>
 
 <p>Create a text file add add this is local Git:</p>
-<div class="codehilite"><pre><span></span><code>&gt; ~/git-test/user1$ echo "hello - I am the first version of the file" &gt; file
+<div class="codehilite"><pre><span></span><code>&gt; ~/git-test/user1$ echo &quot;hello - I am the first version of the file&quot; &gt; file
 &gt; ~/git-test/user2$ cat file
 hello - I am the first version of the file
 &gt; ~/git-test/user1$ git add file 
@@ -116,8 +116,8 @@ hello - I am the first version of the file
 
 <p>Set username and email in local Git:</p>
 <p>If we don't do this, Git will prompt for this information for a commit.</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="o">~/</span><span class="n">git</span><span class="o">-</span><span class="n">test</span><span class="o">/</span><span class="n">user1</span><span class="err">$</span><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="c1">--local user.name "User 1"</span>
-<span class="o">&gt;</span><span class="w"> </span><span class="o">~/</span><span class="n">git</span><span class="o">-</span><span class="n">test</span><span class="o">/</span><span class="n">user1</span><span class="err">$</span><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="c1">--local user.email "user1@test.com"</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="o">~/</span><span class="n">git</span><span class="o">-</span><span class="n">test</span><span class="o">/</span><span class="n">user1</span><span class="err">$</span><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">--</span><span class="k">local</span><span class="w"> </span><span class="k">user</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="ss">&quot;User 1&quot;</span>
+<span class="o">&gt;</span><span class="w"> </span><span class="o">~/</span><span class="n">git</span><span class="o">-</span><span class="n">test</span><span class="o">/</span><span class="n">user1</span><span class="err">$</span><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="c1">--local user.email &quot;user1@test.com&quot;</span>
 </code></pre></div>
 
 <p>Ask Git to store the credentials locally:</p>
@@ -125,7 +125,7 @@ hello - I am the first version of the file
 </code></pre></div>
 
 <p>Commit this (new file) change to local Git:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="o">~/</span><span class="n">git</span><span class="o">-</span><span class="n">test</span><span class="o">/</span><span class="n">user1</span><span class="err">$</span><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="k">commit</span><span class="w"> </span><span class="o">-</span><span class="n">m</span><span class="w"> </span><span class="ss">"Created the file"</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="o">~/</span><span class="n">git</span><span class="o">-</span><span class="n">test</span><span class="o">/</span><span class="n">user1</span><span class="err">$</span><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="k">commit</span><span class="w"> </span><span class="o">-</span><span class="n">m</span><span class="w"> </span><span class="ss">&quot;Created the file&quot;</span>
 <span class="o">[</span><span class="n">master (root-commit) aaa4a05</span><span class="o">]</span><span class="w"> </span><span class="n">Created</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="k">file</span>
 <span class="w"> </span><span class="nl">Committer</span><span class="p">:</span><span class="w"> </span><span class="n">Martin</span><span class="w"> </span><span class="o">&lt;</span><span class="n">martin</span><span class="nv">@server</span><span class="o">&gt;</span>
 <span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">file</span><span class="w"> </span><span class="n">changed</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="n">insertion</span><span class="p">(</span><span class="o">+</span><span class="p">)</span>
@@ -139,8 +139,8 @@ hello - I am the first version of the file
 
 <p>Second push to origin the current branch - master.</p>
 <div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="o">~/</span><span class="n">git</span><span class="o">-</span><span class="n">test</span><span class="o">/</span><span class="n">user1$</span><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="n">push</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="n">master</span>
-<span class="n">Username</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="err">'</span><span class="n">https</span><span class="o">:</span><span class="c1">//github.com': mjnurse</span>
-<span class="n">Password</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="err">'</span><span class="n">https</span><span class="o">:</span><span class="c1">//mjnurse@github.com': </span>
+<span class="n">Username</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="err">&#39;</span><span class="n">https</span><span class="o">:</span><span class="c1">//github.com&#39;: mjnurse</span>
+<span class="n">Password</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="err">&#39;</span><span class="n">https</span><span class="o">:</span><span class="c1">//mjnurse@github.com&#39;: </span>
 <span class="n">Counting</span><span class="w"> </span><span class="n">objects</span><span class="o">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">done</span><span class="p">.</span>
 <span class="n">Writing</span><span class="w"> </span><span class="n">objects</span><span class="o">:</span><span class="w"> </span><span class="mi">100</span><span class="o">%</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="o">/</span><span class="mi">3</span><span class="p">),</span><span class="w"> </span><span class="mi">276</span><span class="w"> </span><span class="n">bytes</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">bytes</span><span class="o">/</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">done</span><span class="p">.</span>
 <span class="n">Total</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">(</span><span class="n">delta</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="n">reused</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">(</span><span class="n">delta</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
@@ -158,8 +158,8 @@ hello - I am the first version of the file
 </code></pre></div>
 
 <p>Again set username and email in local Git:</p>
-<div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="o">~/</span><span class="n">git</span><span class="o">-</span><span class="n">test</span><span class="o">/</span><span class="n">user2</span><span class="err">$</span><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="c1">--local user.name "User 2"</span>
-<span class="o">&gt;</span><span class="w"> </span><span class="o">~/</span><span class="n">git</span><span class="o">-</span><span class="n">test</span><span class="o">/</span><span class="n">user2</span><span class="err">$</span><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="c1">--local user.email "user2@test.com"</span>
+<div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="o">~/</span><span class="n">git</span><span class="o">-</span><span class="n">test</span><span class="o">/</span><span class="n">user2</span><span class="err">$</span><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">--</span><span class="k">local</span><span class="w"> </span><span class="k">user</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="ss">&quot;User 2&quot;</span>
+<span class="o">&gt;</span><span class="w"> </span><span class="o">~/</span><span class="n">git</span><span class="o">-</span><span class="n">test</span><span class="o">/</span><span class="n">user2</span><span class="err">$</span><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="c1">--local user.email &quot;user2@test.com&quot;</span>
 </code></pre></div>
 
 <h3 id="now-user-2-develops-a-new-feature-in-the-code">Now User 2 develops a new feature in the code</h3>
@@ -169,7 +169,7 @@ hello - I am the first version of the file
 
 <p>Switch to (checkout) the development branch code to current directory:</p>
 <div class="codehilite"><pre><span></span><code>&gt; ~/git-test/user2$ git checkout feature-x-u2
-Switched to branch 'feature-x-u2'
+Switched to branch &#39;feature-x-u2&#39;
 </code></pre></div>
 
 <p>Confirm we are now working on the branch feature-x-u2:</p>
@@ -179,12 +179,12 @@ Switched to branch 'feature-x-u2'
 </code></pre></div>
 
 <p>Make a change to file, add this to local Git and Commit:</p>
-<div class="codehilite"><pre><span></span><code>&gt; ~/git-test/user2$ echo "This is a second line added by User2 (on branch feature-x-u2)." &gt;&gt; file
+<div class="codehilite"><pre><span></span><code>&gt; ~/git-test/user2$ echo &quot;This is a second line added by User2 (on branch feature-x-u2).&quot; &gt;&gt; file
 &gt; ~/git-test/user2$ cat file
 hello - I am the first version of the file
 This is a second line added by User2 (on branch feature-x-u2).
 &gt; ~/git-test/user2$ git add file
-&gt; ~/git-test/user2$ git commit -m "Modified file (add new line)"
+&gt; ~/git-test/user2$ git commit -m &quot;Modified file (add new line)&quot;
 [feature-x-u2 eb279ab] Modified file (add new line)
  1 file changed, 1 insertion(+)
 </code></pre></div>
@@ -200,8 +200,8 @@ This is a second line added by User2 (on branch feature-x-u2).
 <p>Note: Master could of changed again but the risk here is small - however we could check by pulling the master branch again from GitHub</p>
 <p>Switch back to the master branch in local Git and run a pull from GitHub to make sure this is up to date:</p>
 <div class="codehilite"><pre><span></span><code><span class="k">&gt; </span><span class="ge">~/git-test/user2$ git checkout master</span>
-Switched to branch 'master'
-Your branch is up-to-date with 'origin/master'.
+Switched to branch &#39;master&#39;
+Your branch is up-to-date with &#39;origin/master&#39;.
 <span class="k">&gt; </span><span class="ge">~/git-test/user2$ git pull origin master</span>
 From https://github.com/mjnurse/git-test
  <span class="k">*</span> branch            master     -&gt; FETCH_HEAD
@@ -210,7 +210,7 @@ Already up-to-date.
 
 <p>Switch back to the dev branch and merge the master branch into the dev branch:</p>
 <div class="codehilite"><pre><span></span><code>&gt; ~/git-test/user2$ git checkout feature-x-u2
-Switched to branch 'feature-x-u2'
+Switched to branch &#39;feature-x-u2&#39;
 &gt; ~/git-test/user2$ git merge master
 Already up-to-date.
 </code></pre></div>
@@ -219,14 +219,14 @@ Already up-to-date.
 <p>Push the dev branch up and into GitHub:</p>
 <p>Note: As this branch does not already exist in GitHub we need to instruct Git to create the branch.</p>
 <div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="o">~/</span><span class="n">git</span><span class="o">-</span><span class="n">test</span><span class="o">/</span><span class="n">user2$</span><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="n">push</span><span class="w"> </span><span class="o">--</span><span class="n">set</span><span class="o">-</span><span class="n">upstream</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="n">feature</span><span class="o">-</span><span class="n">x</span><span class="o">-</span><span class="n">u2</span>
-<span class="n">Username</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="err">'</span><span class="n">https</span><span class="o">:</span><span class="c1">//github.com': mjnurse</span>
-<span class="n">Password</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="err">'</span><span class="n">https</span><span class="o">:</span><span class="c1">//mjnurse@github.com': </span>
+<span class="n">Username</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="err">&#39;</span><span class="n">https</span><span class="o">:</span><span class="c1">//github.com&#39;: mjnurse</span>
+<span class="n">Password</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="err">&#39;</span><span class="n">https</span><span class="o">:</span><span class="c1">//mjnurse@github.com&#39;: </span>
 <span class="n">Counting</span><span class="w"> </span><span class="n">objects</span><span class="o">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">done</span><span class="p">.</span>
 <span class="n">Compressing</span><span class="w"> </span><span class="n">objects</span><span class="o">:</span><span class="w"> </span><span class="mi">100</span><span class="o">%</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="n">done</span><span class="p">.</span>
 <span class="n">Writing</span><span class="w"> </span><span class="n">objects</span><span class="o">:</span><span class="w"> </span><span class="mi">100</span><span class="o">%</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="o">/</span><span class="mi">3</span><span class="p">),</span><span class="w"> </span><span class="mi">335</span><span class="w"> </span><span class="n">bytes</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">bytes</span><span class="o">/</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">done</span><span class="p">.</span>
 <span class="n">Total</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">(</span><span class="n">delta</span><span class="w"> </span><span class="mi">0</span><span class="p">),</span><span class="w"> </span><span class="n">reused</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">(</span><span class="n">delta</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
 <span class="nl">remote</span><span class="p">:</span><span class="w"> </span>
-<span class="nl">remote</span><span class="p">:</span><span class="w"> </span><span class="n">Create</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">pull</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="err">'</span><span class="n">feature</span><span class="o">-</span><span class="n">x</span><span class="o">-</span><span class="n">u2</span><span class="err">'</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">GitHub</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">visiting</span><span class="o">:</span>
+<span class="nl">remote</span><span class="p">:</span><span class="w"> </span><span class="n">Create</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">pull</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="err">&#39;</span><span class="n">feature</span><span class="o">-</span><span class="n">x</span><span class="o">-</span><span class="n">u2</span><span class="err">&#39;</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">GitHub</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">visiting</span><span class="o">:</span>
 <span class="nl">remote</span><span class="p">:</span><span class="w">      </span><span class="n">https</span><span class="o">:</span><span class="c1">//github.com/mjnurse/git-test/pull/new/feature-x-u2</span>
 <span class="nl">remote</span><span class="p">:</span><span class="w"> </span>
 <span class="n">To</span><span class="w"> </span><span class="n">https</span><span class="o">:</span><span class="c1">//github.com/mjnurse/git-test.git</span>
@@ -252,16 +252,16 @@ Already up-to-date.
 <h3 id="now-user-1-develops-a-new-feature-in-the-code">Now User 1 develops a new feature in the code</h3>
 <p>Create and switch to (checkout) development branch for User 1 to create a feature (call it y):</p>
 <div class="codehilite"><pre><span></span><code>&gt; ~/git-test/user2$ git checkout -b feature-x-u2
-Switched to a new branch 'feature-y-u1'
+Switched to a new branch &#39;feature-y-u1&#39;
 </code></pre></div>
 
 <p>Make a change to file, add this to local Git and Commit:</p>
-<div class="codehilite"><pre><span></span><code>&gt; ~/git-test/user1$ echo "This is a second line added by User1 (on branch feature-y-u2)." &gt;&gt; file
+<div class="codehilite"><pre><span></span><code>&gt; ~/git-test/user1$ echo &quot;This is a second line added by User1 (on branch feature-y-u2).&quot; &gt;&gt; file
 &gt; ~/git-test/user1$ cat file 
 hello - I am the first version of the file
 This is a second line added by User1 (on branch feature-y-u2).
 &gt; ~/git-test/user1$ git add file 
-&gt; ~/git-test/user1$ git commit -m "Modified file (added a new line)"
+&gt; ~/git-test/user1$ git commit -m &quot;Modified file (added a new line)&quot;
 [feature-y-u1 606700e] Modified file (added a new line)
  1 file changed, 1 insertion(+)
 </code></pre></div>
@@ -270,7 +270,7 @@ This is a second line added by User1 (on branch feature-y-u2).
 <p>As above, to prepare for a merge into master, get most recent version of master from GitHub and merge it into this branch:</p>
 <p>Switch back to the master branch in local Git and run a pull from GitHub to make sure this is up to date:</p>
 <div class="codehilite"><pre><span></span><code><span class="k">&gt; </span><span class="ge">~/git-test/user1$ git checkout master</span>
-Switched to branch 'master'
+Switched to branch &#39;master&#39;
 <span class="k">&gt; </span><span class="ge">~/git-test/user1$ git pull origin master</span>
 remote: Enumerating objects: 6, done.
 remote: Counting objects: 100% (6/6), done.
@@ -294,7 +294,7 @@ This is a second line added by User2 (on branch feature-x-u2).
 
 <p>Switch back to the dev branch and merge the master branch into the dev branch:</p>
 <div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="o">~/</span><span class="nv">git</span><span class="o">-</span><span class="nv">test</span><span class="o">/</span><span class="nv">user1</span>$<span class="w"> </span><span class="nv">git</span><span class="w"> </span><span class="nv">checkout</span><span class="w"> </span><span class="nv">feature</span><span class="o">-</span><span class="nv">y</span><span class="o">-</span><span class="nv">u1</span>
-<span class="nv">Switched</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">branch</span><span class="w"> </span><span class="s1">'feature-y-u1'</span>
+<span class="nv">Switched</span><span class="w"> </span><span class="nv">to</span><span class="w"> </span><span class="nv">branch</span><span class="w"> </span><span class="s1">&#39;feature-y-u1&#39;</span>
 <span class="o">&gt;</span><span class="w"> </span><span class="o">~/</span><span class="nv">git</span><span class="o">-</span><span class="nv">test</span><span class="o">/</span><span class="nv">user1</span>$<span class="w"> </span><span class="nv">git</span><span class="w"> </span><span class="nv">merge</span><span class="w"> </span><span class="nv">master</span>
 <span class="nv">Auto</span><span class="o">-</span><span class="nv">merging</span><span class="w"> </span><span class="nv">file</span>
 <span class="nv">CONFLICT</span><span class="w"> </span><span class="ss">(</span><span class="nv">content</span><span class="ss">)</span>:<span class="w"> </span><span class="nv">Merge</span><span class="w"> </span><span class="nv">conflict</span><span class="w"> </span><span class="nv">in</span><span class="w"> </span><span class="nv">file</span>
@@ -319,7 +319,7 @@ This is a third line added by User2 (on branch feature-x-u2).
 
 <p>Add and commit the new version of file to the dev branch in the local Git:</p>
 <div class="codehilite"><pre><span></span><code>&gt; ~/git-test/user1$ git add file
-&gt; ~/git-test/user1$ git commit -m "Merged master into feature y"
+&gt; ~/git-test/user1$ git commit -m &quot;Merged master into feature y&quot;
 [feature-y-u1 238442a] Merged master into feature y
 </code></pre></div>
 
@@ -328,8 +328,8 @@ This is a third line added by User2 (on branch feature-x-u2).
 <hr />
 <h2 id="push-this-local-git-dev-branch-up-into-github">Push this local Git dev branch up into GitHub</h2>
 <div class="codehilite"><pre><span></span><code><span class="o">&gt;</span><span class="w"> </span><span class="o">~/</span><span class="n">git</span><span class="o">-</span><span class="n">test</span><span class="o">/</span><span class="n">user1$</span><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="n">push</span><span class="w"> </span><span class="o">--</span><span class="n">set</span><span class="o">-</span><span class="n">upstream</span><span class="w"> </span><span class="n">origin</span><span class="w"> </span><span class="n">feature</span><span class="o">-</span><span class="n">y</span><span class="o">-</span><span class="n">u1</span>
-<span class="n">Username</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="err">'</span><span class="n">https</span><span class="o">:</span><span class="c1">//github.com': mjnurse</span>
-<span class="n">Password</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="err">'</span><span class="n">https</span><span class="o">:</span><span class="c1">//mjnurse@github.com': </span>
+<span class="n">Username</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="err">&#39;</span><span class="n">https</span><span class="o">:</span><span class="c1">//github.com&#39;: mjnurse</span>
+<span class="n">Password</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="err">&#39;</span><span class="n">https</span><span class="o">:</span><span class="c1">//mjnurse@github.com&#39;: </span>
 <span class="n">Counting</span><span class="w"> </span><span class="n">objects</span><span class="o">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="n">done</span><span class="p">.</span>
 <span class="n">Compressing</span><span class="w"> </span><span class="n">objects</span><span class="o">:</span><span class="w"> </span><span class="mi">100</span><span class="o">%</span><span class="w"> </span><span class="p">(</span><span class="mi">4</span><span class="o">/</span><span class="mi">4</span><span class="p">),</span><span class="w"> </span><span class="n">done</span><span class="p">.</span>
 <span class="n">Writing</span><span class="w"> </span><span class="n">objects</span><span class="o">:</span><span class="w"> </span><span class="mi">100</span><span class="o">%</span><span class="w"> </span><span class="p">(</span><span class="mi">6</span><span class="o">/</span><span class="mi">6</span><span class="p">),</span><span class="w"> </span><span class="mi">597</span><span class="w"> </span><span class="n">bytes</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="n">bytes</span><span class="o">/</span><span class="n">s</span><span class="p">,</span><span class="w"> </span><span class="n">done</span><span class="p">.</span>
@@ -338,7 +338,7 @@ This is a third line added by User2 (on branch feature-x-u2).
 <span class="nl">remote</span><span class="p">:</span><span class="w"> </span><span class="n">This</span><span class="w"> </span><span class="n">repository</span><span class="w"> </span><span class="n">moved</span><span class="p">.</span><span class="w">  </span><span class="n">Please</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">location</span><span class="o">:</span>
 <span class="nl">remote</span><span class="p">:</span><span class="w">   </span><span class="n">https</span><span class="o">:</span><span class="c1">//github.com/mjnurse/git-test.git</span>
 <span class="nl">remote</span><span class="p">:</span><span class="w"> </span>
-<span class="nl">remote</span><span class="p">:</span><span class="w"> </span><span class="n">Create</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">pull</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="err">'</span><span class="n">feature</span><span class="o">-</span><span class="n">y</span><span class="o">-</span><span class="n">u1</span><span class="err">'</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">GitHub</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">visiting</span><span class="o">:</span>
+<span class="nl">remote</span><span class="p">:</span><span class="w"> </span><span class="n">Create</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">pull</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="err">&#39;</span><span class="n">feature</span><span class="o">-</span><span class="n">y</span><span class="o">-</span><span class="n">u1</span><span class="err">&#39;</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">GitHub</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">visiting</span><span class="o">:</span>
 <span class="nl">remote</span><span class="p">:</span><span class="w">      </span><span class="n">https</span><span class="o">:</span><span class="c1">//github.com/mjnurse/git-test/pull/new/feature-y-u1</span>
 <span class="nl">remote</span><span class="p">:</span><span class="w"> </span>
 <span class="n">To</span><span class="w"> </span><span class="n">https</span><span class="o">:</span><span class="c1">//github.com/mjnurse/git-test.git</span>
@@ -366,7 +366,7 @@ This is a third line added by User2 (on branch feature-x-u2).
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: October 27, 2026</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

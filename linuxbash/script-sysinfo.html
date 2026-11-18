@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="sysinfo: Display Linux system information" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <script src="https://unpkg.com/lunr/lunr.js"></script>
+    <link rel="stylesheet" href="/static/styles.css" />
+    <link rel="stylesheet" href="/static/syntax.css" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>sysinfo: Display Linux system information</title>
+  </head>
+  <body class="light" id="top">
+    <header class="header center">
+      <h3>
+        <a href="/" class="link">MjN</a>
+      </h3>
+
+      <nav class="nav center">
+        <ul class="nav__list center">
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/blog/" data-shortcut="b"><strong>b</strong>log</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/cheatsheets/" data-shortcut="c"><strong>c</strong>heatsheets</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/elasticsearch/" data-shortcut="e"><strong>e</strong>lasticsearch</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/js/" data-shortcut="j"><strong>j</strong>s</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/linuxbash/" data-shortcut="l"><strong>l</strong>inuxbash</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/misc/" data-shortcut="m"><strong>m</strong>isc</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/notes/" data-shortcut="n"><strong>n</strong>otes</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/other/" data-shortcut="o"><strong>o</strong>ther</a>
+          </li>
+          
+          <li class="nav__list-item">
+            <a class="link link--nav" href="/python/" data-shortcut="p"><strong>p</strong>ython</a>
+          </li>
+          
+        </ul>
+
+        <button type="button" aria-label="search" id="searchBtn" class="btn btn--icon">
+          <i aria-hidden="true" class="fas fa-search"></i>
+        </button>
+
+        <button type="button" aria-label="toggle theme" class="btn btn--icon">
+          <i aria-hidden="true" id="btn-theme" class="fas fa-moon"></i>
+        </button>
+
+        <button
+          type="button"
+          aria-label="toggle navigation"
+          class="btn btn--icon nav__hamburger"
+        >
+          <i aria-hidden="true" class="fas fa-bars"></i>
+        </button>
+      </nav>
+    </header>
+
+    <main>
+      <article class="article">
+        <div class="article-body">
+          <h1><a class="link" href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-sysinfo.md">sysinfo: Display Linux system information</a></h1>
+<div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
+<span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
+<span class="s2">usage: sysinfo</span>
+<span class="s2">-h : This help text.</span>
+<span class="s2">-d : Show disk usage information.</span>
+<span class="s2">-n : Show network information.</span>
+<span class="s2">-p : Show processes information.</span>
+<span class="s2">&quot;</span>
+
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Display Linux system information&quot;</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Display Linux system information&quot;</span>
+
+<span class="nb">set</span><span class="w"> </span>-uo<span class="w"> </span>pipefail<span class="w"> </span><span class="c1"># Treat unset variables as an error and fail on pipe errors</span>
+
+<span class="c1"># Terminal Colours</span>
+<span class="nv">cdef</span><span class="o">=</span><span class="s2">&quot;\x1b[39m&quot;</span><span class="w"> </span><span class="c1"># default colour</span>
+<span class="nv">cbla</span><span class="o">=</span><span class="s2">&quot;\x1b[30m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cgra</span><span class="o">=</span><span class="s2">&quot;\x1b[90m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clgra</span><span class="o">=</span><span class="s2">&quot;\x1b[37m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cwhi</span><span class="o">=</span><span class="s2">&quot;\x1b[97m&quot;</span>
+<span class="nv">cred</span><span class="o">=</span><span class="s2">&quot;\x1b[31m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cgre</span><span class="o">=</span><span class="s2">&quot;\x1b[32m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cyel</span><span class="o">=</span><span class="s2">&quot;\x1b[33m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cblu</span><span class="o">=</span><span class="s2">&quot;\x1b[34m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">cmag</span><span class="o">=</span><span class="s2">&quot;\x1b[35m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">ccya</span><span class="o">=</span><span class="s2">&quot;\x1b[36m&quot;</span><span class="p">;</span>
+<span class="nv">clred</span><span class="o">=</span><span class="s2">&quot;\x1b[91m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clgre</span><span class="o">=</span><span class="s2">&quot;\x1b[92m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clyel</span><span class="o">=</span><span class="s2">&quot;\x1b[93m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clblu</span><span class="o">=</span><span class="s2">&quot;\x1b[94m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clmag</span><span class="o">=</span><span class="s2">&quot;\x1b[95m&quot;</span><span class="p">;</span><span class="w"> </span><span class="nv">clcya</span><span class="o">=</span><span class="s2">&quot;\x1b[96m&quot;</span>
+
+<span class="k">function</span><span class="w"> </span>cecho<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;-u&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nv">ul</span><span class="o">=</span>true<span class="p">;</span><span class="w"> </span>shift<span class="p">;</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="nv">ul</span><span class="o">=</span>false<span class="p">;</span><span class="w"> </span><span class="k">fi</span>
+<span class="w">    </span><span class="nv">color</span><span class="o">=</span>c<span class="nv">$1</span><span class="p">;</span><span class="w"> </span>shift<span class="p">;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="p">!color</span><span class="si">}</span><span class="nv">$*</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nv">$ul</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="p">!color</span><span class="si">}${</span><span class="p">*//?/-</span><span class="si">}${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
+<span class="o">}</span>
+
+<span class="k">function</span><span class="w"> </span>h1<span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nv">txt</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$*</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span>
+<span class="w">    </span>cecho<span class="w"> </span>lmag<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$txt</span><span class="s2">&quot;</span>
+<span class="w">    </span>cecho<span class="w"> </span>lmag<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">txt</span><span class="p">//?/-</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="o">}</span>
+
+usage<span class="o">()</span><span class="w"> </span><span class="o">{</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="nv">$0</span><span class="s2"> [options]&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Options:&quot;</span>
+<span class="w">    </span>grep<span class="w"> </span><span class="s2">&quot;# arg:&quot;</span><span class="w"> </span><span class="nv">$0</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span><span class="s2">&quot;grep&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/^ *//; s/).*# *arg://&#39;</span>
+<span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<span class="o">}</span>
+
+<span class="nv">network</span><span class="o">=</span><span class="nb">false</span>
+<span class="nv">processes</span><span class="o">=</span><span class="nb">false</span>
+<span class="nv">disk</span><span class="o">=</span><span class="nb">false</span>
+
+<span class="c1"># Split combined short arguments (eg -abc) into individual arguments (-a -b -c). Remove = symbols.</span>
+<span class="nv">new_args</span><span class="o">=()</span>
+<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">1</span><span class="k">:-</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="si">${</span><span class="nv">1</span><span class="k">:-</span><span class="si">}</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>-*<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="si">${</span><span class="nv">1</span><span class="k">:-</span><span class="si">}</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span>--*<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="si">${#</span><span class="nv">1</span><span class="si">}</span><span class="w"> </span>-gt<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="o">((</span><span class="nv">i</span><span class="o">=</span><span class="m">1</span><span class="p">;</span><span class="w"> </span>i&lt;<span class="si">${#</span><span class="nv">1</span><span class="si">}</span><span class="p">;</span><span class="w"> </span>i++<span class="o">))</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">            </span><span class="nv">arg</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">1</span><span class="p">:</span><span class="nv">i</span><span class="p">:</span><span class="nv">1</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$arg</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;=&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nv">new_args</span><span class="o">+=(</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">1</span><span class="p">:</span><span class="nv">i</span><span class="p">+1</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">)</span><span class="p">;</span><span class="w"> </span><span class="k">break</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
+<span class="w">            </span><span class="nv">new_args</span><span class="o">+=(</span><span class="s2">&quot;-</span><span class="nv">$arg</span><span class="s2">&quot;</span><span class="o">)</span>
+<span class="w">        </span><span class="k">done</span>
+<span class="w">    </span><span class="k">else</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="si">${</span><span class="nv">1</span><span class="k">:-</span><span class="si">}</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>--*<span class="o">=</span>*<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="nv">new_args</span><span class="o">+=(</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">1</span><span class="p">%%=*</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">)</span><span class="p">;</span><span class="w"> </span><span class="nv">new_args</span><span class="o">+=(</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">1</span><span class="p">##*=</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">)</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="nv">new_args</span><span class="o">+=(</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">1</span><span class="k">:-</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">)</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="w">    </span><span class="nb">shift</span>
+<span class="k">done</span>
+
+<span class="c1"># Process the arguments</span>
+<span class="nb">set</span><span class="w"> </span>--<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">new_args</span><span class="p">[@]</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">1</span><span class="k">:-</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">1</span><span class="k">:-</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="k">in</span>
+<span class="w">        </span>-d<span class="p">|</span>--disk<span class="o">)</span><span class="w"> </span><span class="c1"># arg: Show disk information.</span>
+<span class="w">            </span><span class="nv">disk</span><span class="o">=</span><span class="nb">true</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>-h<span class="p">|</span>--help<span class="o">)</span><span class="w"> </span><span class="c1"># arg: Show this help text.</span>
+<span class="w">            </span>usage
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>-n<span class="p">|</span>--network<span class="o">)</span><span class="w"> </span><span class="c1"># arg: Show network information.</span>
+<span class="w">            </span><span class="nv">network</span><span class="o">=</span><span class="nb">true</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>-p<span class="p">|</span>--processes<span class="o">)</span><span class="w"> </span><span class="c1"># arg: Show process information.</span>
+<span class="w">            </span><span class="nv">processes</span><span class="o">=</span><span class="nb">true</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>-*<span class="p">|</span>--*<span class="o">)</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Unknown option: </span><span class="si">${</span><span class="nv">1</span><span class="k">:-</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">            </span>usage
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>*<span class="o">)</span>
+<span class="w">            </span><span class="k">break</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">    </span><span class="k">esac</span>
+<span class="w">    </span><span class="nb">shift</span>
+<span class="k">done</span>
+
+.<span class="w"> </span>/etc/os-release
+<span class="nv">cpu</span><span class="o">=</span><span class="k">$(</span>grep<span class="w"> </span>-m1<span class="w"> </span><span class="s1">&#39;model name&#39;</span><span class="w"> </span>/proc/cpuinfo<span class="w"> </span><span class="p">|</span><span class="w"> </span>cut<span class="w"> </span>-d:<span class="w"> </span>-f2<span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="k">)</span>
+
+h1<span class="w"> </span><span class="s2">&quot;Summary&quot;</span>
+cecho<span class="w"> </span>lcya<span class="w"> </span><span class="s2">&quot;Hostname :</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2"> </span><span class="k">$(</span>hostname<span class="k">)</span><span class="s2">&quot;</span>
+cecho<span class="w"> </span>lcya<span class="w"> </span><span class="s2">&quot;OS       :</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2"> </span><span class="nv">$PRETTY_NAME</span><span class="s2">&quot;</span>
+cecho<span class="w"> </span>lcya<span class="w"> </span><span class="s2">&quot;Kernel   :</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2"> </span><span class="k">$(</span>uname<span class="w"> </span>-r<span class="k">)</span><span class="s2">&quot;</span>
+cecho<span class="w"> </span>lcya<span class="w"> </span><span class="s2">&quot;Arch     :</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2"> </span><span class="k">$(</span>uname<span class="w"> </span>-m<span class="k">)</span><span class="s2">&quot;</span>
+cecho<span class="w"> </span>lcya<span class="w"> </span><span class="s2">&quot;Uptime   :</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2"> </span><span class="k">$(</span>uptime<span class="w"> </span>-p<span class="k">)</span><span class="s2">&quot;</span>
+cecho<span class="w"> </span>lcya<span class="w"> </span><span class="s2">&quot;User     :</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2"> </span><span class="nv">$USER</span><span class="s2"> (UID </span><span class="k">$(</span>id<span class="w"> </span>-u<span class="k">)</span><span class="s2">)&quot;</span>
+cecho<span class="w"> </span>lcya<span class="w"> </span><span class="s2">&quot;Shell    :</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2"> </span><span class="nv">$SHELL</span><span class="s2">&quot;</span>
+cecho<span class="w"> </span>lcya<span class="w"> </span><span class="s2">&quot;CPU      :</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2"> </span><span class="si">${</span><span class="nv">cpu</span><span class="k">:-</span><span class="nv">unknown</span><span class="si">}</span><span class="s2">&quot;</span>
+cecho<span class="w"> </span>lcya<span class="w"> </span><span class="s2">&quot;Cores    :</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2"> </span><span class="k">$(</span>nproc<span class="k">)</span><span class="s2">&quot;</span>
+cecho<span class="w"> </span>lcya<span class="w"> </span><span class="s2">&quot;RAM      :</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2"> </span><span class="k">$(</span>free<span class="w"> </span>-h<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;/^Mem/ {print $2}&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
+
+<span class="nb">read</span><span class="w"> </span>l1<span class="w"> </span>l5<span class="w"> </span>l15<span class="w"> </span>_<span class="w"> </span>&lt;<span class="w"> </span>/proc/loadavg
+<span class="nv">cores</span><span class="o">=</span><span class="k">$(</span>nproc<span class="k">)</span>
+<span class="nv">mood</span><span class="o">=</span><span class="k">$(</span>awk<span class="w"> </span>-v<span class="w"> </span><span class="nv">l</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$l1</span><span class="s2">&quot;</span><span class="w"> </span>-v<span class="w"> </span><span class="nv">c</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$cores</span><span class="s2">&quot;</span><span class="w"> </span><span class="s1">&#39;BEGIN { print (l &gt; c) ? &quot;OVERLOADED&quot; : &quot;relaxed&quot; }&#39;</span><span class="k">)</span>
+cecho<span class="w"> </span>lcya<span class="w"> </span><span class="s2">&quot;Load     :</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2"> </span><span class="nv">$l1</span><span class="s2">  </span><span class="nv">$l5</span><span class="s2">  </span><span class="nv">$l15</span><span class="s2">  on </span><span class="nv">$cores</span><span class="s2"> cores  (</span><span class="nv">$mood</span><span class="s2">)&quot;</span>
+cecho<span class="w"> </span>lcya<span class="w"> </span><span class="s2">&quot;RAM      :</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2"> </span><span class="k">$(</span>free<span class="w"> </span>-m<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;/^Mem/ { printf &quot;%d MB used, %d MB available of %d MB\n&quot;, $3, $7, $2 }&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
+
+<span class="k">if</span><span class="w"> </span><span class="nv">$disk</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span>h1<span class="w"> </span><span class="s2">&quot;Disk Usage&quot;</span>
+<span class="w">    </span>df<span class="w"> </span>-h<span class="w"> </span>--output<span class="o">=</span>target,pcent<span class="w"> </span>-x<span class="w"> </span>tmpfs<span class="w"> </span>-x<span class="w"> </span>devtmpfs<span class="w"> </span>-x<span class="w"> </span>squashfs<span class="w"> </span><span class="p">|</span><span class="w"> </span>tail<span class="w"> </span>-n<span class="w"> </span>+2<span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span><span class="p">|</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>mount<span class="w"> </span>pct<span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$mount</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">=</span>~<span class="w"> </span>^/snap/<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span><span class="k">continue</span><span class="p">;</span><span class="w"> </span><span class="k">fi</span>
+<span class="w">        </span><span class="nv">n</span><span class="o">=</span><span class="si">${</span><span class="nv">pct</span><span class="p">%</span><span class="se">\%</span><span class="si">}</span>
+<span class="w">        </span><span class="nb">printf</span><span class="w"> </span><span class="s2">&quot;%-56s %5s  &quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$mount</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$pct</span><span class="s2">&quot;</span><span class="w"> </span>
+<span class="w">        </span><span class="k">if</span><span class="w">   </span><span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$n</span><span class="s2">&quot;</span><span class="w"> </span>-ge<span class="w"> </span><span class="m">90</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span>cecho<span class="w"> </span>red<span class="w"> </span><span class="s2">&quot;DANGER&quot;</span>
+<span class="w">        </span><span class="k">elif</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$n</span><span class="s2">&quot;</span><span class="w"> </span>-ge<span class="w"> </span><span class="m">75</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span>cecho<span class="w"> </span>yel<span class="w"> </span><span class="s2">&quot;Watch&quot;</span>
+<span class="w">        </span><span class="k">else</span><span class="w">                       </span>cecho<span class="w"> </span>gre<span class="w"> </span><span class="s2">&quot;OK&quot;</span>
+<span class="w">        </span><span class="k">fi</span>
+<span class="w">    </span><span class="k">done</span>
+<span class="k">fi</span>
+
+<span class="k">if</span><span class="w"> </span><span class="nv">$processes</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span>h1<span class="w"> </span><span class="s2">&quot;Processes&quot;</span>
+<span class="w">    </span>cecho<span class="w"> </span>lgre<span class="w"> </span><span class="s2">&quot;Top 5 by CPU&quot;</span>
+<span class="w">    </span>ps<span class="w"> </span>-eo<span class="w"> </span>pid,user,%cpu,%mem,comm<span class="w"> </span>--sort<span class="o">=</span>-%cpu<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n<span class="w"> </span><span class="m">6</span>
+<span class="w">    </span><span class="nb">echo</span>
+
+<span class="w">    </span>cecho<span class="w"> </span>lgre<span class="w"> </span><span class="s2">&quot;Top 5 by memory&quot;</span>
+<span class="w">    </span>ps<span class="w"> </span>-eo<span class="w"> </span>pid,user,%cpu,%mem,comm<span class="w"> </span>--sort<span class="o">=</span>-%mem<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-n<span class="w"> </span><span class="m">6</span>
+<span class="w">    </span><span class="nb">echo</span>
+
+<span class="w">    </span>cecho<span class="w"> </span>lcya<span class="w"> </span><span class="s2">&quot;Processes running : </span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="k">$(</span>ps<span class="w"> </span>-e<span class="w"> </span>--no-headers<span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l<span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">    </span>cecho<span class="w"> </span>lcya<span class="w"> </span><span class="s2">&quot;Zombie processes  : </span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="k">$(</span>ps<span class="w"> </span>-eo<span class="w"> </span>stat<span class="w"> </span>--no-headers<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;^Z&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="k">fi</span>
+
+<span class="k">if</span><span class="w"> </span><span class="nv">$network</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span>h1<span class="w"> </span><span class="s2">&quot;Network Information&quot;</span>
+<span class="w">    </span>cecho<span class="w"> </span>lcya<span class="w"> </span><span class="s2">&quot;Local IP  : </span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="k">$(</span>hostname<span class="w"> </span>-I<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $1}&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">    </span>cecho<span class="w"> </span>lcya<span class="w"> </span><span class="s2">&quot;Gateway   : </span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="k">$(</span>ip<span class="w"> </span>route<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;/^default/ {print $3; exit}&#39;</span><span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">    </span>cecho<span class="w"> </span>lcya<span class="w"> </span><span class="s2">&quot;DNS       : </span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="k">$(</span>awk<span class="w"> </span><span class="s1">&#39;/^nameserver/ {print $2}&#39;</span><span class="w"> </span>/etc/resolv.conf<span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">    </span>cecho<span class="w"> </span>lcya<span class="w"> </span><span class="s2">&quot;Public IP : </span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="k">$(</span>curl<span class="w"> </span>-s<span class="w"> </span>--max-time<span class="w"> </span><span class="m">5</span><span class="w"> </span>ifconfig.me<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span>unavailable<span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">    </span><span class="nb">echo</span>
+
+<span class="w">    </span>cecho<span class="w"> </span>lgre<span class="w"> </span><span class="s2">&quot;Interfaces:&quot;</span>
+<span class="w">    </span>ip<span class="w"> </span>-br<span class="w"> </span>addr<span class="w"> </span>show<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;</span>
+<span class="s2">        s/^/</span><span class="si">${</span><span class="nv">clcya</span><span class="si">}</span><span class="s2">/;</span>
+<span class="s2">        s/ / </span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">/;</span>
+<span class="s2">        s/ UNKNOWN / </span><span class="si">${</span><span class="nv">cyel</span><span class="si">}</span><span class="s2">UNKNOWN</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2"> /;</span>
+<span class="s2">        s/ UP / </span><span class="si">${</span><span class="nv">cgre</span><span class="si">}</span><span class="s2">UP</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2"> /;</span>
+<span class="s2">        s/ DOWN / </span><span class="si">${</span><span class="nv">cred</span><span class="si">}</span><span class="s2">DOWN</span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2"> /;</span>
+<span class="s2">    &quot;</span>
+<span class="w">    </span><span class="nb">echo</span>
+
+<span class="w">    </span>cecho<span class="w"> </span>lgre<span class="w"> </span><span class="s2">&quot;Ports listening for connections:&quot;</span>
+<span class="w">    </span>ss<span class="w"> </span>-tuln<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;NR &gt; 1 {print $1, $5}&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sort<span class="w"> </span>-u<span class="w"> </span><span class="p">|</span><span class="w"> </span>column<span class="w"> </span>-t<span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;</span>
+<span class="s2">        s/^/</span><span class="si">${</span><span class="nv">clcya</span><span class="si">}</span><span class="s2">/;</span>
+<span class="s2">        s/ / </span><span class="si">${</span><span class="nv">cdef</span><span class="si">}</span><span class="s2">/;</span>
+<span class="s2">    &quot;</span>
+<span class="k">fi</span>
+
+<span class="k">if</span><span class="w"> </span>!<span class="w"> </span><span class="nv">$processes</span><span class="w"> </span><span class="o">||</span><span class="w"> </span>!<span class="w"> </span><span class="nv">$network</span><span class="w"> </span><span class="o">||</span><span class="w"> </span>!<span class="w"> </span><span class="nv">$disk</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span>
+<span class="w">    </span>cecho<span class="w"> </span>gra<span class="w"> </span><span class="s2">&quot;Available options:&quot;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>!<span class="w"> </span><span class="nv">$processes</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span>cecho<span class="w"> </span>gra<span class="w"> </span><span class="s2">&quot;-p : Show processes information&quot;</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>!<span class="w"> </span><span class="nv">$network</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span>cecho<span class="w"> </span>gra<span class="w"> </span><span class="s2">&quot;-n : Show network information&quot;</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>!<span class="w"> </span><span class="nv">$disk</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span>cecho<span class="w"> </span>gra<span class="w"> </span><span class="s2">&quot;-d : Show disk usage information&quot;</span>
+<span class="w">    </span><span class="k">fi</span>
+<span class="k">fi</span>
+</code></pre></div>
+        </div>
+      </article>
+    </main>
+
+    <footer class="footer">
+      <p>
+        <a href="/about_me.html" class="link">About Me</a> | 
+        <a href="/help.html" class="link">Help</a>
+      </p>
+      <p>
+        <a href="https://github.com/mjnurse" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-github"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/martin-nurse" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="link footer__link">
+          <i aria-hidden="true" class="fab fa-linkedin"></i>
+        </a>
+      </p>
+      <p>Last updated: November 17, 2026</p>
+    </footer>
+
+    <div class="scroll-container">
+      <div class="scroll-top">
+        <a aria-label="Scroll up" href="#top">
+          <i aria-hidden="true" class="fas fa-arrow-up"></i>
+        </a>
+      </div>
+    </div>
+
+    <script src="/static/page-nav.js"></script>
+    <script src="/static/script.js"></script>
+    <script src="/static/search.js"></script>
+  </body>
+</html>

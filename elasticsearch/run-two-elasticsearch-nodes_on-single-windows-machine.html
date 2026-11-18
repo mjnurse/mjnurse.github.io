@@ -95,26 +95,26 @@
 <p>Each instance of Elasticsearch needs a separate <code>elasticsearch.yml</code> config file.  This file is located in the Elasticsearch <code>config</code> directory.</p>
 <h3 id="node-1">Node 1</h3>
 <p><code>elasticsearch.yml</code></p>
-<div class="codehilite"><pre><span></span><code><span class="nt">cluster.name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mjn-cluster</span>
-<span class="nt">node.name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node-1</span>
-<span class="nt">http.port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9200</span>
-<span class="nt">transport.port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9300</span>
-<span class="nt">discovery.seed_hosts</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"127.0.0.1:9301"</span><span class="p p-Indicator">]</span>
-<span class="nt">cluster.initial_master_nodes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"node-1"</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">"node-2"</span><span class="p p-Indicator">]</span>
-<span class="nt">path.data</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">C:\\mjn\\elasticsearch-7.17.9\\data-node-1</span>
-<span class="nt">path.logs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">C:\\mjn\\elasticsearch-7.17.9\\logs-node-1</span>
+<div class="codehilite"><pre><span></span><code>cluster.name: mjn-cluster
+node.name: node-1
+http.port: 9200
+transport.port: 9300
+discovery.seed_hosts: [&quot;127.0.0.1:9301&quot;]
+cluster.initial_master_nodes: [&quot;node-1&quot;, &quot;node-2&quot;]
+path.data: C:\\mjn\\elasticsearch-7.17.9\\data-node-1
+path.logs: C:\\mjn\\elasticsearch-7.17.9\\logs-node-1
 </code></pre></div>
 
 <h3 id="node-2">Node 2</h3>
 <p><code>elasticsearch.yml</code></p>
-<div class="codehilite"><pre><span></span><code><span class="nt">cluster.name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mjn-cluster</span>
-<span class="nt">node.name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">node-2</span>
-<span class="nt">http.port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9201</span>
-<span class="nt">transport.port</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">9301</span>
-<span class="nt">discovery.seed_hosts</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"127.0.0.1:9300"</span><span class="p p-Indicator">]</span>
-<span class="nt">cluster.initial_master_nodes</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">"node-1"</span><span class="p p-Indicator">,</span><span class="s">"node-2"</span><span class="p p-Indicator">]</span>
-<span class="nt">path.data</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">C:\\mjn\\elasticsearch-7.17.9\\data-node-2</span>
-<span class="nt">path.logs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">C:\\mjn\\elasticsearch-7.17.9\\logs-node-2</span>
+<div class="codehilite"><pre><span></span><code>cluster.name: mjn-cluster
+node.name: node-2
+http.port: 9201
+transport.port: 9301
+discovery.seed_hosts: [&quot;127.0.0.1:9300&quot;]
+cluster.initial_master_nodes: [&quot;node-1&quot;,&quot;node-2&quot;]
+path.data: C:\\mjn\\elasticsearch-7.17.9\\data-node-2
+path.logs: C:\\mjn\\elasticsearch-7.17.9\\logs-node-2
 </code></pre></div>
 
 <p>I had hoped to create these as two files in the same <code>config</code> directory and specify the config file to use when starting the Elasticsearch instance - eg:</p>
@@ -154,7 +154,7 @@ elasticsearch.keystore<span class="w">             </span>jvm.options<span class
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: October 27, 2026</p>
+      <p>Last updated: December 11, 2025</p>
     </footer>
 
     <div class="scroll-container">

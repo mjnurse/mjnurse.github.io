@@ -92,7 +92,7 @@
         <div class="article-body">
           <h1><a class="link" href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-es-cp.md">es-cp: Copy Elasticsearch index to new index with same settings and mappings</a></h1>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
-<span class="nv">help_text</span><span class="o">=</span><span class="s2">"</span>
+<span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
 <span class="s2">NAME</span>
 <span class="s2">    es-cp - Elasticsearch index copy utility.</span>
 
@@ -126,19 +126,19 @@
 
 <span class="s2">AUTHOR</span>
 <span class="s2">    mjnurse.github.io - 2025</span>
-<span class="s2">"</span>
+<span class="s2">&quot;</span>
 
-<span class="nv">help_line</span><span class="o">=</span><span class="s2">"Copy Elasticsearch index to new index with same settings and mappings"</span>
-<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">"Copy Elasticsearch index to new index with same settings and mappings"</span>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Copy Elasticsearch index to new index with same settings and mappings&quot;</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Copy Elasticsearch index to new index with same settings and mappings&quot;</span>
 
 <span class="c1"># Connection settings from environment or defaults</span>
-<span class="nv">ES_HOST</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">QES_HOST</span><span class="k">:-</span><span class="nv">localhost</span><span class="si">}</span><span class="s2">"</span>
-<span class="nv">ES_PORT</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">QES_PORT</span><span class="k">:-</span><span class="nv">9200</span><span class="si">}</span><span class="s2">"</span>
+<span class="nv">ES_HOST</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">QES_HOST</span><span class="k">:-</span><span class="nv">localhost</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nv">ES_PORT</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">QES_PORT</span><span class="k">:-</span><span class="nv">9200</span><span class="si">}</span><span class="s2">&quot;</span>
 
-<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
 <span class="w">        </span>-h<span class="p">|</span>--help<span class="o">)</span><span class="w"> </span><span class="c1"># arg: Show help text.</span>
-<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$help_text</span><span class="s2">"</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
 <span class="w">            </span><span class="nb">exit</span>
 <span class="w">            </span><span class="p">;;</span>
 <span class="w">        </span>?*<span class="o">)</span>
@@ -149,41 +149,41 @@
 <span class="k">done</span>
 
 <span class="c1"># Validate arguments</span>
-<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$#</span><span class="s2">"</span><span class="w"> </span>-ne<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"-h"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"--help"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Usage: </span><span class="si">${</span><span class="nv">0</span><span class="p">/</span><span class="se">\.\/</span><span class="p">/</span><span class="si">}</span><span class="s2"> &lt;index_name&gt; &lt;new_index_name&gt;"</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Try es-cp -h' for more information"</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$#</span><span class="s2">&quot;</span><span class="w"> </span>-ne<span class="w"> </span><span class="m">2</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;-h&quot;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;--help&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="si">${</span><span class="nv">0</span><span class="p">/</span><span class="se">\.\/</span><span class="p">/</span><span class="si">}</span><span class="s2"> &lt;index_name&gt; &lt;new_index_name&gt;&quot;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Try es-cp -h&#39; for more information&quot;</span>
 <span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 <span class="k">fi</span>
 
-<span class="nv">old_index</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
-<span class="nv">new_index</span><span class="o">=</span><span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span>
+<span class="nv">old_index</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span>
+<span class="nv">new_index</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span>
 
 <span class="c1"># Check if new index already exists</span>
-<span class="k">if</span><span class="w"> </span>curl<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s2">"%{http_code}"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/</span><span class="nv">$new_index</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s2">"200"</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Error: Index '</span><span class="nv">$new_index</span><span class="s2">' already exists."</span>
+<span class="k">if</span><span class="w"> </span>curl<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;%{http_code}&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/</span><span class="nv">$new_index</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-q<span class="w"> </span><span class="s2">&quot;200&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Error: Index &#39;</span><span class="nv">$new_index</span><span class="s2">&#39; already exists.&quot;</span>
 <span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 <span class="k">fi</span>
 
 <span class="c1"># Extract settings and mappings (excluding auto-generated metadata)</span>
-<span class="nv">settings</span><span class="o">=</span><span class="k">$(</span>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">"</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/</span><span class="nv">$old_index</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s2">".\"</span><span class="nv">$old_index</span><span class="s2">\".settings.index | del(.creation_date, .uuid, .provided_name, .version)"</span><span class="k">)</span>
-<span class="nv">mappings</span><span class="o">=</span><span class="k">$(</span>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">"</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/</span><span class="nv">$old_index</span><span class="s2">/_mapping"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s2">".\"</span><span class="nv">$old_index</span><span class="s2">\".mappings"</span><span class="k">)</span>
+<span class="nv">settings</span><span class="o">=</span><span class="k">$(</span>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/</span><span class="nv">$old_index</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s2">&quot;.\&quot;</span><span class="nv">$old_index</span><span class="s2">\&quot;.settings.index | del(.creation_date, .uuid, .provided_name, .version)&quot;</span><span class="k">)</span>
+<span class="nv">mappings</span><span class="o">=</span><span class="k">$(</span>curl<span class="w"> </span>-s<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/</span><span class="nv">$old_index</span><span class="s2">/_mapping&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s2">&quot;.\&quot;</span><span class="nv">$old_index</span><span class="s2">\&quot;.mappings&quot;</span><span class="k">)</span>
 
 <span class="c1"># Create new index with same configuration</span>
-curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/</span><span class="nv">$new_index</span><span class="s2">"</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="w"> </span>@-<span class="w"> </span><span class="s">&lt;&lt;EOF</span>
+curl<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/</span><span class="nv">$new_index</span><span class="s2">&quot;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span>@-<span class="w"> </span><span class="s">&lt;&lt;EOF</span>
 <span class="s">{</span>
-<span class="s">  "settings": $settings,</span>
-<span class="s">  "mappings": $mappings</span>
+<span class="s">  &quot;settings&quot;: $settings,</span>
+<span class="s">  &quot;mappings&quot;: $mappings</span>
 <span class="s">}</span>
 <span class="s">EOF</span>
 
 <span class="c1"># Reindex all data from source to destination</span>
-curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/_reindex"</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>-d<span class="w"> </span>@-<span class="w"> </span><span class="s">&lt;&lt;EOF</span>
+curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$ES_HOST</span><span class="s2">:</span><span class="nv">$ES_PORT</span><span class="s2">/_reindex&quot;</span><span class="w"> </span>-H<span class="w"> </span><span class="s1">&#39;Content-Type: application/json&#39;</span><span class="w"> </span>-d<span class="w"> </span>@-<span class="w"> </span><span class="s">&lt;&lt;EOF</span>
 <span class="s">{</span>
-<span class="s">  "source": {</span>
-<span class="s">    "index": "$old_index"</span>
+<span class="s">  &quot;source&quot;: {</span>
+<span class="s">    &quot;index&quot;: &quot;$old_index&quot;</span>
 <span class="s">  },</span>
-<span class="s">  "dest": {</span>
-<span class="s">    "index": "$new_index"</span>
+<span class="s">  &quot;dest&quot;: {</span>
+<span class="s">    &quot;index&quot;: &quot;$new_index&quot;</span>
 <span class="s">  }</span>
 <span class="s">}</span>
 <span class="s">EOF</span>
@@ -205,7 +205,7 @@ curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </spa
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: October 19, 2026</p>
+      <p>Last updated: March 12, 2026</p>
     </footer>
 
     <div class="scroll-container">

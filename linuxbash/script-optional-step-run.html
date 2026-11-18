@@ -92,7 +92,7 @@
         <div class="article-body">
           <h1><a class="link" href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-optional-step-run.md">optional-step-run: A script which prompts a user to decide if a step should be run</a></h1>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
-<span class="nv">help_text</span><span class="o">=</span><span class="s2">"</span>
+<span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
 <span class="s2">NAME</span>
 <span class="s2">  optional-step-run - A template script which prompts a user to decide if steps should be run.</span>
 
@@ -112,13 +112,13 @@
 
 <span class="s2">AUTHOR</span>
 <span class="s2">  mjnurse.github.io - 2023</span>
-<span class="s2">"</span>
-<span class="nv">help_line</span><span class="o">=</span><span class="s2">"A script which prompts a user to decide if a step should be run"</span>
-<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">"A script which prompts a user to decide if a step should be run"</span>
+<span class="s2">&quot;</span>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;A script which prompts a user to decide if a step should be run&quot;</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;A script which prompts a user to decide if a step should be run&quot;</span>
 
-<span class="nv">try</span><span class="o">=</span><span class="s2">"Try </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h for more information"</span>
-<span class="nv">tmp</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">help_text</span><span class="p">##*USAGE</span><span class="si">}</span><span class="s2">"</span>
-<span class="nv">usage</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span>Usage:<span class="w"> </span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%OPTIONS*</span><span class="si">}</span><span class="k">)</span><span class="s2">"</span>
+<span class="nv">try</span><span class="o">=</span><span class="s2">&quot;Try </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h for more information&quot;</span>
+<span class="nv">tmp</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">help_text</span><span class="p">##*USAGE</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nv">usage</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span>Usage:<span class="w"> </span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%OPTIONS*</span><span class="si">}</span><span class="k">)</span><span class="s2">&quot;</span>
 
 <span class="nv">list_steps_yn</span><span class="o">=</span>n
 
@@ -128,7 +128,7 @@
 <span class="w">    </span><span class="p">;;</span>
 <span class="k">esac</span>
 
-<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">  </span><span class="nv">start_step</span><span class="o">=</span><span class="m">0</span>
 <span class="k">else</span>
 <span class="w">  </span><span class="nv">start_step</span><span class="o">=</span><span class="nv">$1</span>
@@ -141,8 +141,8 @@
 <span class="c1">#* &lt;step_description&gt;* - The step description.  All remaining parameter values.</span>
 <span class="c1">#*</span>
 <span class="k">function</span><span class="w"> </span>step<span class="o">()</span><span class="w"> </span><span class="o">{</span>
-<span class="w">  </span><span class="nv">line</span><span class="o">=</span><span class="s2">"STEP </span><span class="nv">$*</span><span class="s2">"</span>
-<span class="w">  </span><span class="nv">ul</span><span class="o">=</span><span class="s2">"--------------------------------------------------------------------------------"</span>
+<span class="w">  </span><span class="nv">line</span><span class="o">=</span><span class="s2">&quot;STEP </span><span class="nv">$*</span><span class="s2">&quot;</span>
+<span class="w">  </span><span class="nv">ul</span><span class="o">=</span><span class="s2">&quot;--------------------------------------------------------------------------------&quot;</span>
 <span class="w">  </span><span class="nb">echo</span>
 <span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$line</span>
 <span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$list_steps_yn</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>y<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
@@ -151,17 +151,17 @@
 <span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="si">${</span><span class="nv">ul</span><span class="p">:</span><span class="nv">0</span><span class="p">:</span><span class="si">${#</span><span class="nv">line</span><span class="si">}}</span>
 <span class="w">    </span><span class="nb">echo</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span>-lt<span class="w"> </span><span class="nv">$start_step</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Skipping Step"</span>
+<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Skipping Step&quot;</span>
 <span class="w">      </span><span class="nv">run_step</span><span class="o">=</span>n
 <span class="w">    </span><span class="k">else</span>
-<span class="w">      </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">"Press RTN to run step, s to skip, CTRL-C to exit: "</span><span class="w"> </span>x
+<span class="w">      </span><span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Press RTN to run step, s to skip, CTRL-C to exit: &quot;</span><span class="w"> </span>x
 <span class="w">      </span><span class="nb">echo</span>
 <span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="si">${</span><span class="nv">x</span><span class="p">^</span><span class="si">}</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>S<span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span><span class="w"> </span>
 <span class="w">        </span><span class="nv">run_step</span><span class="o">=</span>n
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Skipping Step"</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Skipping Step&quot;</span>
 <span class="w">      </span><span class="k">else</span>
 <span class="w">        </span><span class="nv">run_step</span><span class="o">=</span>y
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Running Step"</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Running Step&quot;</span>
 <span class="w">      </span><span class="k">fi</span>
 <span class="w">      </span><span class="nb">echo</span>
 <span class="w">    </span><span class="k">fi</span>
@@ -203,7 +203,7 @@ step<span class="w"> </span><span class="m">3</span><span class="w"> </span>This
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: October 19, 2026</p>
+      <p>Last updated: January 02, 2026</p>
     </footer>
 
     <div class="scroll-container">
