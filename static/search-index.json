@@ -591,7 +591,7 @@
     "id": "84",
     "title": "Miscellaneous Notes",
     "url": "/notes/miscellaneous_notes.html",
-    "content": "Miscellaneous Notes The notes captured in the Linux notes tool = n. 7zip 7z a -p -mhe=on archive.7z &lt;files_or_folders&gt;-mhe=on - encrypt file contents and filenames/headers. ES @esql 'SELECT id.value FROM \"mdm-example-entity-store-business-all-data\"'Elasticsearch SQL Excel =CELL(\"protect\",A1)=0Use in conditional formatting to highlight unlocked cells ALT-DOWN_ARROWOpen Drop-down in Cell Windows WIN-H - turn on dictation apt sudo apt autocleantidy the package cache sudo apt autoremoveremove ",
+    "content": "Miscellaneous Notes The notes captured in the Linux notes tool = n. 7zip 7z a -p -mhe=on archive.7z &lt;files_or_folders&gt;-mhe=on - encrypt file contents and filenames/headers ES @esql 'SELECT id.value FROM \"mdm-example-entity-store-business-all-data\"'Elasticsearch SQL Excel =CELL(\"protect\",A1)=0Use in conditional formatting to highlight unlocked cells ALT-DOWN_ARROWOpen Drop-down in Cell Windows WIN-H - turn on dictation apt sudo apt autocleantidy the package cache sudo apt autoremoveremove n",
     "type": "page"
   },
   {
