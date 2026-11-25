@@ -92,7 +92,7 @@
         <div class="article-body">
           <h1><a class="link" href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-parq-to-json.md">parq-to-json: Example Bash Script</a></h1>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
-<span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
+<span class="nv">help_text</span><span class="o">=</span><span class="s2">"</span>
 <span class="s2">NAME</span>
 <span class="s2">  bash-func - One line description.</span>
 
@@ -111,24 +111,24 @@
 
 <span class="s2">AUTHOR</span>
 <span class="s2">  mjnurse.github.io - 2020</span>
-<span class="s2">&quot;</span>
-<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;tbc&quot;</span>
-<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Example Bash Script&quot;</span>
+<span class="s2">"</span>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">"tbc"</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">"Example Bash Script"</span>
 
-<span class="nv">try</span><span class="o">=</span><span class="s2">&quot;Try </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h for more information&quot;</span>
-<span class="nv">tmp</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">help_text</span><span class="p">##*USAGE</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="nv">usage</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%OPTIONS*</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;\n&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/  */ /g&quot;</span><span class="k">)</span>
+<span class="nv">try</span><span class="o">=</span><span class="s2">"Try </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h for more information"</span>
+<span class="nv">tmp</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">help_text</span><span class="p">##*USAGE</span><span class="si">}</span><span class="s2">"</span>
+<span class="nv">usage</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Usage: </span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%OPTIONS*</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s2">"\n"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">"s/  */ /g"</span><span class="k">)</span>
 
-<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">usage</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">try</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">usage</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">try</span><span class="si">}</span><span class="s2">"</span>
 <span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 <span class="k">fi</span>
 
-<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
 <span class="w">    </span>-h<span class="p">|</span>--help<span class="o">)</span>
-<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
+<span class="w">      </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$help_text</span><span class="s2">"</span>
 <span class="w">      </span><span class="nb">exit</span>
 <span class="w">      </span><span class="p">;;</span>
 <span class="w">    </span>?*<span class="o">)</span>
@@ -138,12 +138,12 @@
 <span class="w">  </span><span class="nb">shift</span>
 <span class="k">done</span>
 
-<span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">&#39;</span>
+<span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s1">'</span>
 <span class="s1">import sys</span>
 <span class="s1">import pandas as pd</span>
 
 <span class="s1">if len(sys.argv) &lt; 2:</span>
-<span class="s1">    print(&quot;Usage: python read_parquet.py &lt;filename&gt;&quot;)</span>
+<span class="s1">    print("Usage: python read_parquet.py &lt;filename&gt;")</span>
 <span class="s1">    sys.exit(1)</span>
 
 <span class="s1">filename = sys.argv[1]</span>
@@ -151,22 +151,22 @@
 <span class="s1">if len(sys.argv) &gt; 2:</span>
 <span class="s1">    output_filename = sys.argv[2]</span>
 <span class="s1">else:</span>
-<span class="s1">    output_filename = filename.rsplit(&quot;.&quot;, 1)[0] + &quot;.json&quot;</span>
+<span class="s1">    output_filename = filename.rsplit(".", 1)[0] + ".json"</span>
 
 <span class="s1">try:</span>
 <span class="s1">    df = pd.read_parquet(filename)</span>
 <span class="s1">    print(df.head())  # or any other processing</span>
 
 <span class="s1">    # Write to JSON</span>
-<span class="s1">    df.to_json(output_filename, orient=&quot;records&quot;, lines=True)</span>
-<span class="s1">    print(f&quot;Data written to {output_filename}&quot;)</span>
+<span class="s1">    df.to_json(output_filename, orient="records", lines=True)</span>
+<span class="s1">    print(f"Data written to {output_filename}")</span>
 
 <span class="s1">except Exception as e:</span>
-<span class="s1">    print(f&quot;Error reading {filename}: {e}&quot;)</span>
+<span class="s1">    print(f"Error reading {filename}: {e}")</span>
 
-<span class="s1">&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>/tmp/parq-to-json.py
+<span class="s1">'</span><span class="w"> </span>&gt;<span class="w"> </span>/tmp/parq-to-json.py
 
-python<span class="w"> </span>/tmp/parq-to-json.py<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span>
+python<span class="w"> </span>/tmp/parq-to-json.py<span class="w"> </span><span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span>
 
 rm<span class="w"> </span>-f<span class="w"> </span>/tmp/parq-to-json.py
 </code></pre></div>
@@ -187,7 +187,7 @@ rm<span class="w"> </span>-f<span class="w"> </span>/tmp/parq-to-json.py
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: January 02, 2026</p>
+      <p>Last updated: October 19, 2026</p>
     </footer>
 
     <div class="scroll-container">

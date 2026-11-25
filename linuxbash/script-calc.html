@@ -92,7 +92,7 @@
         <div class="article-body">
           <h1><a class="link" href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-calc.md">calc: Command line calculator</a></h1>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
-<span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
+<span class="nv">help_text</span><span class="o">=</span><span class="s2">"</span>
 <span class="s2">NAME</span>
 <span class="s2">    calc - Command line calculator</span>
 
@@ -110,53 +110,53 @@
 <span class="s2">        Convert &lt;value&gt; to KB, MB, GB, TB, PB.</span>
 
 <span class="s2">DESCRIPTION</span>
-<span class="s2">    In the calculation use &#39;x&#39; for multiply, use &#39;r&#39; for the previous result.</span>
+<span class="s2">    In the calculation use 'x' for multiply, use 'r' for the previous result.</span>
 
 <span class="s2">AUTHOR</span>
 <span class="s2">    mjnurse.github.io - 2020</span>
-<span class="s2">&quot;</span>
-<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Command line calculator&quot;</span>
-<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Command line calculator&quot;</span>
-<span class="nv">pack_member</span><span class="o">=</span><span class="s2">&quot;default&quot;</span>
+<span class="s2">"</span>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">"Command line calculator"</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">"Command line calculator"</span>
+<span class="nv">pack_member</span><span class="o">=</span><span class="s2">"default"</span>
 
-<span class="nv">try</span><span class="o">=</span><span class="s2">&quot;Try </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h for more information&quot;</span>
-<span class="nv">tmp</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">help_text</span><span class="p">##*USAGE</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="nv">usage</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%OPTIONS*</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;\n&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/  */ /g&quot;</span><span class="k">)</span>
+<span class="nv">try</span><span class="o">=</span><span class="s2">"Try </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h for more information"</span>
+<span class="nv">tmp</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">help_text</span><span class="p">##*USAGE</span><span class="si">}</span><span class="s2">"</span>
+<span class="nv">usage</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Usage: </span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%OPTIONS*</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s2">"\n"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">"s/  */ /g"</span><span class="k">)</span>
 
-<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">usage</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">try</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">usage</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">  </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">try</span><span class="si">}</span><span class="s2">"</span>
 <span class="w">  </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 <span class="k">fi</span>
 
-<span class="nv">prev_res</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span>cat<span class="w"> </span>/tmp/calc<span class="k">)</span><span class="s2">&quot;</span>
-<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$prev_res</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="nv">prev_res</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span>cat<span class="w"> </span>/tmp/calc<span class="k">)</span><span class="s2">"</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$prev_res</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">  </span><span class="nv">prev_res</span><span class="o">=</span><span class="m">0</span>
 <span class="k">fi</span>
 
-<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
 <span class="w">        </span>-h<span class="p">|</span>--help<span class="o">)</span><span class="w"> </span><span class="c1"># arg: Show help text.</span>
-<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$help_text</span><span class="s2">"</span>
 <span class="w">            </span><span class="nb">exit</span>
 <span class="w">            </span><span class="p">;;</span>
 <span class="w">        </span>-i<span class="p">|</span>--interactive<span class="o">)</span><span class="w"> </span><span class="c1"># arg: Launch an interactive (bc) calculator.</span>
 <span class="w">            </span>bc<span class="w"> </span>-l
 <span class="w">            </span><span class="p">;;</span>
 <span class="w">        </span>-s<span class="p">|</span>--sizes<span class="o">)</span><span class="w"> </span><span class="c1"># arg: &lt;value&gt; Convert &lt;value&gt; to KB, MB, GB, TB, PB.</span>
-<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;B : </span><span class="nv">$2</span><span class="s2">&quot;</span>
-<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;KB: </span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;scale=2; </span><span class="nv">$2</span><span class="s2">/1024&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>bc<span class="w"> </span>-l<span class="k">)</span><span class="s2">&quot;</span>
-<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;MB: </span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;scale=2; </span><span class="nv">$2</span><span class="s2">/1024/1024&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>bc<span class="w"> </span>-l<span class="k">)</span><span class="s2">&quot;</span>
-<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;GB: </span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;scale=2; </span><span class="nv">$2</span><span class="s2">/1024/1024/1024&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>bc<span class="w"> </span>-l<span class="k">)</span><span class="s2">&quot;</span>
-<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;TB: </span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;scale=2; </span><span class="nv">$2</span><span class="s2">/1024/1024/1024/1024&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>bc<span class="w"> </span>-l<span class="k">)</span><span class="s2">&quot;</span>
-<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;PB: </span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;scale=2; </span><span class="nv">$2</span><span class="s2">/1024/1024/1024/1024/1024&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>bc<span class="w"> </span>-l<span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"B : </span><span class="nv">$2</span><span class="s2">"</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"KB: </span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"scale=2; </span><span class="nv">$2</span><span class="s2">/1024"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>bc<span class="w"> </span>-l<span class="k">)</span><span class="s2">"</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"MB: </span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"scale=2; </span><span class="nv">$2</span><span class="s2">/1024/1024"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>bc<span class="w"> </span>-l<span class="k">)</span><span class="s2">"</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"GB: </span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"scale=2; </span><span class="nv">$2</span><span class="s2">/1024/1024/1024"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>bc<span class="w"> </span>-l<span class="k">)</span><span class="s2">"</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"TB: </span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"scale=2; </span><span class="nv">$2</span><span class="s2">/1024/1024/1024/1024"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>bc<span class="w"> </span>-l<span class="k">)</span><span class="s2">"</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"PB: </span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"scale=2; </span><span class="nv">$2</span><span class="s2">/1024/1024/1024/1024/1024"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>bc<span class="w"> </span>-l<span class="k">)</span><span class="s2">"</span>
 <span class="w">            </span><span class="k">break</span>
 <span class="w">            </span><span class="p">;;</span>
 <span class="w">        </span>*<span class="o">)</span>
-<span class="w">            </span><span class="nv">formula</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$*</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/x/\*/g; s/ //g; s/r/</span><span class="si">${</span><span class="nv">prev_res</span><span class="si">}</span><span class="s2">/g&quot;</span><span class="k">)</span><span class="s2">&quot;</span>
-<span class="w">            </span><span class="nv">result</span><span class="o">=</span><span class="s2">&quot;</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$formula</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">&#39;s/^/scale=3;/ &#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>bc<span class="w"> </span>-l<span class="k">)</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="nv">formula</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$*</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">"s/x/\*/g; s/ //g; s/r/</span><span class="si">${</span><span class="nv">prev_res</span><span class="si">}</span><span class="s2">/g"</span><span class="k">)</span><span class="s2">"</span>
+<span class="w">            </span><span class="nv">result</span><span class="o">=</span><span class="s2">"</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="nv">$formula</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s1">'s/^/scale=3;/ '</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>bc<span class="w"> </span>-l<span class="k">)</span><span class="s2">"</span>
 <span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$formula</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nv">$result</span>
-<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$result</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/tmp/calc
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$result</span><span class="s2">"</span><span class="w"> </span>&gt;<span class="w"> </span>/tmp/calc
 <span class="w">            </span><span class="k">break</span>
 <span class="w">            </span><span class="p">;;</span>
 <span class="w">    </span><span class="k">esac</span>
@@ -180,7 +180,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: March 13, 2026</p>
+      <p>Last updated: October 19, 2026</p>
     </footer>
 
     <div class="scroll-container">

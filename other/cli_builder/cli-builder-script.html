@@ -97,19 +97,19 @@ This script also generates an alias file which contains a set of alias
 commands which run each command in the definition file using the associated
 shortcut prepended with an '@'.</p>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env python3</span>
-<span class="s2">&quot;&quot;&quot;CLI Builder - Generate bash CLI scripts from definition files&quot;&quot;&quot;</span>
+<span class="s2">"""CLI Builder - Generate bash CLI scripts from definition files"""</span>
 from<span class="w"> </span>datetime<span class="w"> </span>import<span class="w"> </span>datetime
 import<span class="w"> </span>re,<span class="w"> </span>sys,<span class="w"> </span>os
 from<span class="w"> </span>dataclasses<span class="w"> </span>import<span class="w"> </span>dataclass
 from<span class="w"> </span>typing<span class="w"> </span>import<span class="w"> </span>List,<span class="w"> </span>Optional
 
-<span class="nv">C_CYA</span><span class="o">=</span><span class="s2">&quot;\\x1b[96m&quot;</span><span class="w"> </span>
-<span class="nv">C_GRE</span><span class="o">=</span><span class="s2">&quot;\\x1b[92m&quot;</span><span class="w"> </span>
-<span class="nv">C_MAG</span><span class="o">=</span><span class="s2">&quot;\\x1b[95m&quot;</span>
-<span class="nv">C_WHI</span><span class="o">=</span><span class="s2">&quot;\\x1b[97m&quot;</span><span class="w"> </span>
-<span class="nv">C_DEF</span><span class="o">=</span><span class="s2">&quot;\\x1b[0m&quot;</span>
+<span class="nv">C_CYA</span><span class="o">=</span><span class="s2">"\\x1b[96m"</span><span class="w"> </span>
+<span class="nv">C_GRE</span><span class="o">=</span><span class="s2">"\\x1b[92m"</span><span class="w"> </span>
+<span class="nv">C_MAG</span><span class="o">=</span><span class="s2">"\\x1b[95m"</span>
+<span class="nv">C_WHI</span><span class="o">=</span><span class="s2">"\\x1b[97m"</span><span class="w"> </span>
+<span class="nv">C_DEF</span><span class="o">=</span><span class="s2">"\\x1b[0m"</span>
 
-<span class="nv">HELP_TEXT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>r<span class="s2">&quot;&quot;&quot;</span>
+<span class="nv">HELP_TEXT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>r<span class="s2">"""</span>
 <span class="s2">NAME</span>
 <span class="s2">  cli-builder - Generate CLI bash scripts from definition files.</span>
 
@@ -124,7 +124,7 @@ from<span class="w"> </span>typing<span class="w"> </span>import<span class="w">
 <span class="s2">  This python script generates a cli (command line interface) bash script from a definition file.</span>
 <span class="s2">  The structure of the definition file is described below.  This script also generates an alias</span>
 <span class="s2">  file which contains a set of alias commands which run each command in the definition file using</span>
-<span class="s2">  the associated shortcut prepended with an &#39;@&#39;.</span>
+<span class="s2">  the associated shortcut prepended with an '@'.</span>
 
 <span class="s2">  Definition File Structure</span>
 <span class="s2">  -------------------------</span>
@@ -149,23 +149,23 @@ from<span class="w"> </span>typing<span class="w"> </span>import<span class="w">
 <span class="s2">       below the title in the help output.</span>
 
 <span class="s2">  aliasLeadChars: - sets the leading character(s) for generated aliases (default: first char of</span>
-<span class="s2">                    definition filename).  For example, &#39;aliasLeadChars: es&#39; will generate aliases</span>
+<span class="s2">                    definition filename).  For example, 'aliasLeadChars: es' will generate aliases</span>
 <span class="s2">                    like @esli, @essi instead of @eli, @esi.</span>
 
 <span class="s2">  Indentation (Python-style continuation)</span>
 <span class="s2">  ---------------------------------------</span>
 <span class="s2">  A command definition starts at the left margin (column 0).  The Linux command(s)</span>
 <span class="s2">  that make up its body are written on the following lines, indented beneath it -</span>
-<span class="s2">  just like a Python block.  No &#39;;&#39; separators and no trailing &#39;\&#39; are needed:</span>
+<span class="s2">  just like a Python block.  No ';' separators and no trailing '\' are needed:</span>
 <span class="s2">  each indented line is a separate command, and relative indentation is preserved,</span>
 <span class="s2">  so you can indent the body of an if/while/for/case block naturally.</span>
 
 <span class="s2">  The body ends at the next line that returns to column 0 (a comment, a section</span>
-<span class="s2">  header, a blank line, or the next command definition).  &#39;## help text&#39; and</span>
-<span class="s2">  &#39;!! completion command&#39; lines may be written indented within the body.</span>
+<span class="s2">  header, a blank line, or the next command definition).  '## help text' and</span>
+<span class="s2">  '!! completion command' lines may be written indented within the body.</span>
 
-<span class="s2">    ( For backward compatibility a trailing &#39;\&#39; still joins a line to the next,</span>
-<span class="s2">      and stray &#39;;&#39; separators are still accepted. )</span>
+<span class="s2">    ( For backward compatibility a trailing '\' still joins a line to the next,</span>
+<span class="s2">      and stray ';' separators are still accepted. )</span>
 
 <span class="s2">  All other lines in the file are command definitions.  These lines are structured as follows:</span>
 
@@ -197,9 +197,9 @@ from<span class="w"> </span>typing<span class="w"> </span>import<span class="w">
 <span class="s2">    Separates the command definition with the Linux command that is run.</span>
 
 <span class="s2">  command</span>
-<span class="s2">    One or more Linux commands.  A single command may follow the &#39;::&#39; on the same</span>
+<span class="s2">    One or more Linux commands.  A single command may follow the '::' on the same</span>
 <span class="s2">    line; multiple commands are written on the following indented lines (see</span>
-<span class="s2">    &quot;</span>Indentation<span class="s2">&quot; above).  Parameter values entered after the command are specified</span>
+<span class="s2">    "</span>Indentation<span class="s2">" above).  Parameter values entered after the command are specified</span>
 <span class="s2">    using their position preceded by a \$.  e.g \$1, \$2.</span>
 
 <span class="s2">  Example</span>
@@ -211,10 +211,10 @@ from<span class="w"> </span>typing<span class="w"> </span>import<span class="w">
 
 <span class="s2">  # A multi-command body using indentation (no ; or \\ needed):</span>
 <span class="s2">  clean sort (cs) &lt;filename&gt; ::</span>
-<span class="s2">      if [[ -s &quot;</span><span class="se">\$</span><span class="m">1</span><span class="s2">&quot; ]]; then</span>
-<span class="s2">          sort -u &quot;</span><span class="se">\$</span><span class="m">1</span><span class="s2">&quot;</span>
+<span class="s2">      if [[ -s "</span><span class="se">\$</span><span class="m">1</span><span class="s2">" ]]; then</span>
+<span class="s2">          sort -u "</span><span class="se">\$</span><span class="m">1</span><span class="s2">"</span>
 <span class="s2">      else</span>
-<span class="s2">          echo &quot;</span>empty<span class="w"> </span>file<span class="s2">&quot;</span>
+<span class="s2">          echo "</span>empty<span class="w"> </span>file<span class="s2">"</span>
 <span class="s2">      fi</span>
 <span class="s2">      ## sort unique, warn on empty file</span>
 <span class="s2">  ----------------------------------------------------------------</span>
@@ -232,11 +232,11 @@ from<span class="w"> </span>typing<span class="w"> </span>import<span class="w">
 
 <span class="s2">AUTHOR</span>
 <span class="s2">  mjnurse - 2025</span>
-<span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">"""</span>
 
 @dataclass
 class<span class="w"> </span>Cmd:
-<span class="w">    </span><span class="s2">&quot;&quot;&quot;Represents a CLI command&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="s2">"""Represents a CLI command"""</span>
 <span class="w">    </span>keys:<span class="w"> </span>List<span class="o">[</span>str<span class="o">]</span>
 <span class="w">    </span>shortcut:<span class="w"> </span>str
 <span class="w">    </span>params:<span class="w"> </span>List<span class="o">[</span>tuple<span class="o">[</span>str,<span class="w"> </span>bool<span class="o">]]</span><span class="w">  </span><span class="c1"># (name, is_optional)</span>
@@ -245,22 +245,22 @@ class<span class="w"> </span>Cmd:
 <span class="w">    </span>comp:<span class="w"> </span>str
 
 <span class="w">    </span>@property
-<span class="w">    </span>def<span class="w"> </span>all_keys<span class="o">(</span>self<span class="o">)</span>:<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s1">&#39; &#39;</span>.join<span class="o">(</span>self.keys<span class="o">)</span>
+<span class="w">    </span>def<span class="w"> </span>all_keys<span class="o">(</span>self<span class="o">)</span>:<span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s1">' '</span>.join<span class="o">(</span>self.keys<span class="o">)</span>
 
 <span class="w">    </span>@property
 <span class="w">    </span>def<span class="w"> </span>num_mandatory<span class="o">(</span>self<span class="o">)</span>:<span class="w"> </span><span class="k">return</span><span class="w"> </span>sum<span class="o">(</span><span class="m">1</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>_,<span class="w"> </span>opt<span class="w"> </span><span class="k">in</span><span class="w"> </span>self.params<span class="w"> </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>opt<span class="o">)</span>
 
 <span class="w">    </span>@property
 <span class="w">    </span>def<span class="w"> </span>usage_str<span class="o">(</span>self<span class="o">)</span>:
-<span class="w">        </span><span class="nv">params_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39; &#39;</span>.join<span class="o">(</span>f<span class="s1">&#39;[{p}]&#39;</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>opt<span class="w"> </span><span class="k">else</span><span class="w"> </span>f<span class="s1">&#39;&lt;{p}&gt;&#39;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>p,<span class="w"> </span>opt<span class="w"> </span><span class="k">in</span><span class="w"> </span>self.params<span class="o">)</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span>f<span class="s2">&quot;{self.all_keys} ({self.shortcut}) {params_str}&quot;</span>.strip<span class="o">()</span>
+<span class="w">        </span><span class="nv">params_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">' '</span>.join<span class="o">(</span>f<span class="s1">'[{p}]'</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>opt<span class="w"> </span><span class="k">else</span><span class="w"> </span>f<span class="s1">'&lt;{p}&gt;'</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>p,<span class="w"> </span>opt<span class="w"> </span><span class="k">in</span><span class="w"> </span>self.params<span class="o">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span>f<span class="s2">"{self.all_keys} ({self.shortcut}) {params_str}"</span>.strip<span class="o">()</span>
 
 <span class="w">    </span>@property
 <span class="w">    </span>def<span class="w"> </span>opt_params<span class="o">(</span>self<span class="o">)</span>:
 <span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="o">[</span>p<span class="w"> </span><span class="k">for</span><span class="w"> </span>p,<span class="w"> </span>opt<span class="w"> </span><span class="k">in</span><span class="w"> </span>self.params<span class="w"> </span><span class="k">if</span><span class="w"> </span>opt<span class="o">]</span>
 
 def<span class="w"> </span>group_blocks<span class="o">(</span>lines<span class="o">)</span>:
-<span class="w">    </span><span class="s2">&quot;&quot;&quot;Group physical lines into logical blocks based on indentation.</span>
+<span class="w">    </span><span class="s2">"""Group physical lines into logical blocks based on indentation.</span>
 
 <span class="s2">    A block starts on a non-blank line at indentation level 0 (no leading</span>
 <span class="s2">    whitespace).  Any following lines that are indented (start with whitespace)</span>
@@ -268,10 +268,10 @@ def<span class="w"> </span>group_blocks<span class="o">(</span>lines<span class=
 <span class="s2">    current block.</span>
 
 <span class="s2">    Returns a list of blocks, where each block is a list of physical lines</span>
-<span class="s2">    (with the header line first).  Trailing &#39;\\&#39; line-continuation characters</span>
-<span class="s2">    are still honoured for backward compatibility: a line ending in &#39;\\&#39; is</span>
+<span class="s2">    (with the header line first).  Trailing '\\' line-continuation characters</span>
+<span class="s2">    are still honoured for backward compatibility: a line ending in '\\' is</span>
 <span class="s2">    joined to the next line regardless of its indentation.</span>
-<span class="s2">    &quot;&quot;&quot;</span>
+<span class="s2">    """</span>
 <span class="w">    </span><span class="nv">blocks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
 <span class="w">    </span><span class="nv">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>None
 
@@ -279,13 +279,13 @@ def<span class="w"> </span>group_blocks<span class="o">(</span>lines<span class=
 <span class="w">    </span><span class="k">while</span><span class="w"> </span>i<span class="w"> </span>&lt;<span class="w"> </span>len<span class="o">(</span>lines<span class="o">)</span>:
 <span class="w">        </span><span class="nv">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>lines<span class="o">[</span>i<span class="o">]</span>
 
-<span class="w">        </span><span class="c1"># Backward-compatible &#39;\&#39; continuation: join following line(s) first.</span>
-<span class="w">        </span><span class="k">while</span><span class="w"> </span>line.rstrip<span class="o">()</span>.endswith<span class="o">(</span><span class="s1">&#39;\\&#39;</span><span class="o">)</span>:
+<span class="w">        </span><span class="c1"># Backward-compatible '\' continuation: join following line(s) first.</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span>line.rstrip<span class="o">()</span>.endswith<span class="o">(</span><span class="s1">'\\'</span><span class="o">)</span>:
 <span class="w">            </span><span class="nv">joined</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>line.rstrip<span class="o">()[</span>:-1<span class="o">]</span>
-<span class="w">            </span><span class="nv">nxt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>lines<span class="o">[</span>i<span class="w"> </span>+<span class="w"> </span><span class="m">1</span><span class="o">]</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>i<span class="w"> </span>+<span class="w"> </span><span class="m">1</span><span class="w"> </span>&lt;<span class="w"> </span>len<span class="o">(</span>lines<span class="o">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
+<span class="w">            </span><span class="nv">nxt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>lines<span class="o">[</span>i<span class="w"> </span>+<span class="w"> </span><span class="m">1</span><span class="o">]</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>i<span class="w"> </span>+<span class="w"> </span><span class="m">1</span><span class="w"> </span>&lt;<span class="w"> </span>len<span class="o">(</span>lines<span class="o">)</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">''</span>
 <span class="w">            </span><span class="c1"># Preserve a single space where the two lines meet, matching the</span>
 <span class="w">            </span><span class="c1"># historical behaviour of joining continuation lines.</span>
-<span class="w">            </span><span class="nv">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>joined.rstrip<span class="o">()</span><span class="w"> </span>+<span class="w"> </span><span class="s1">&#39; &#39;</span><span class="w"> </span>+<span class="w"> </span>nxt.strip<span class="o">()</span>
+<span class="w">            </span><span class="nv">line</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>joined.rstrip<span class="o">()</span><span class="w"> </span>+<span class="w"> </span><span class="s1">' '</span><span class="w"> </span>+<span class="w"> </span>nxt.strip<span class="o">()</span>
 <span class="w">            </span>del<span class="w"> </span>lines<span class="o">[</span>i<span class="w"> </span>+<span class="w"> </span><span class="m">1</span><span class="o">]</span>
 
 <span class="w">        </span><span class="nv">stripped</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>line.strip<span class="o">()</span>
@@ -310,94 +310,94 @@ def<span class="w"> </span>group_blocks<span class="o">(</span>lines<span class=
 
 
 def<span class="w"> </span>block_min_indent<span class="o">(</span>cont_lines<span class="o">)</span>:
-<span class="w">    </span><span class="s2">&quot;&quot;&quot;Smallest leading-whitespace width among non-blank continuation lines.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="s2">"""Smallest leading-whitespace width among non-blank continuation lines."""</span>
 <span class="w">    </span><span class="nv">indents</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>len<span class="o">(</span>l<span class="o">)</span><span class="w"> </span>-<span class="w"> </span>len<span class="o">(</span>l.lstrip<span class="o">())</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>l<span class="w"> </span><span class="k">in</span><span class="w"> </span>cont_lines<span class="w"> </span><span class="k">if</span><span class="w"> </span>l.strip<span class="o">()]</span>
 <span class="w">    </span><span class="k">return</span><span class="w"> </span>min<span class="o">(</span>indents<span class="o">)</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>indents<span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="m">0</span>
 
 
 def<span class="w"> </span>parse_def<span class="o">(</span>lines,<span class="w"> </span>title,<span class="w"> </span>description,<span class="w"> </span>cli_name,<span class="w"> </span>alias_lead_chars<span class="o">)</span>:
-<span class="w">    </span><span class="s2">&quot;&quot;&quot;Parse definition file into commands and groups&quot;&quot;&quot;</span>
-<span class="w">    </span><span class="nv">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="s2">"""Parse definition file into commands and groups"""</span>
+<span class="w">    </span><span class="nv">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">""</span>
 <span class="w">    </span><span class="nv">cmds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
-<span class="w">    </span><span class="nv">title_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="nv">title_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">""</span>
 
 <span class="w">    </span><span class="k">if</span><span class="w"> </span>title:
-<span class="w">        </span><span class="nv">title_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>f<span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">echo -e &quot;{C_GRE}{&quot;-&quot;*len(title)}{C_DEF}&quot;</span>
-<span class="s1">echo -e &quot;{C_GRE}{title}{C_DEF}&quot;</span>
-<span class="s1">echo -e &quot;{C_GRE}{&quot;-&quot;*len(title)}{C_DEF}&quot;</span>
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="nv">title_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>f<span class="s1">'''</span>
+<span class="s1">echo -e "{C_GRE}{"-"*len(title)}{C_DEF}"</span>
+<span class="s1">echo -e "{C_GRE}{title}{C_DEF}"</span>
+<span class="s1">echo -e "{C_GRE}{"-"*len(title)}{C_DEF}"</span>
+<span class="s1">'''</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span>description:
-<span class="w">        </span><span class="nv">desc_lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;\n&#39;</span>.join<span class="o">(</span>f<span class="s1">&#39;echo -e &quot;{C_WHI}{line}{C_DEF}&quot;&#39;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>line<span class="w"> </span><span class="k">in</span><span class="w"> </span>description<span class="o">)</span>
-<span class="w">        </span><span class="nv">title_str</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s1">&#39;&#39;&#39;</span>
+<span class="w">        </span><span class="nv">desc_lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'\n'</span>.join<span class="o">(</span>f<span class="s1">'echo -e "{C_WHI}{line}{C_DEF}"'</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>line<span class="w"> </span><span class="k">in</span><span class="w"> </span>description<span class="o">)</span>
+<span class="w">        </span><span class="nv">title_str</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s1">'''</span>
 <span class="s1">{desc_lines}</span>
-<span class="s1">&#39;&#39;&#39;</span>
-<span class="w">    </span><span class="nv">title_str</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">echo -e &quot;{C_MAG}generated:{datetime.now().strftime(&#39;</span>%Y-%m-%d<span class="w"> </span>%H:%M<span class="s1">&#39;)}{C_DEF}&quot;</span>
+<span class="s1">'''</span>
+<span class="w">    </span><span class="nv">title_str</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s1">'''</span>
+<span class="s1">echo -e "{C_MAG}generated:{datetime.now().strftime('</span>%Y-%m-%d<span class="w"> </span>%H:%M<span class="s1">')}{C_DEF}"</span>
 <span class="s1">echo</span>
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">'''</span>
 
-<span class="w">    </span>cmds.append<span class="o">((</span><span class="s1">&#39;cmd&#39;</span>,<span class="w"> </span>Cmd<span class="o">(</span>
-<span class="w">            </span><span class="nv">keys</span><span class="o">=[</span><span class="s1">&#39;help&#39;</span><span class="o">]</span>,
-<span class="w">            </span><span class="nv">shortcut</span><span class="o">=</span>alias_lead_chars<span class="w"> </span>+<span class="w"> </span><span class="s1">&#39;he&#39;</span>,
-<span class="w">            </span><span class="nv">params</span><span class="o">=[(</span><span class="s1">&#39;filter&#39;</span>,<span class="w"> </span>True<span class="o">)]</span>,
-<span class="w">            </span><span class="nv">cmd</span><span class="o">=</span>title_str<span class="w"> </span>+<span class="w"> </span>f<span class="s1">&#39;&#39;&#39;filter=&quot;$1&quot;</span>
-<span class="s1">if [[ -n &quot;$filter&quot; ]]; then</span>
+<span class="w">    </span>cmds.append<span class="o">((</span><span class="s1">'cmd'</span>,<span class="w"> </span>Cmd<span class="o">(</span>
+<span class="w">            </span><span class="nv">keys</span><span class="o">=[</span><span class="s1">'help'</span><span class="o">]</span>,
+<span class="w">            </span><span class="nv">shortcut</span><span class="o">=</span>alias_lead_chars<span class="w"> </span>+<span class="w"> </span><span class="s1">'he'</span>,
+<span class="w">            </span><span class="nv">params</span><span class="o">=[(</span><span class="s1">'filter'</span>,<span class="w"> </span>True<span class="o">)]</span>,
+<span class="w">            </span><span class="nv">cmd</span><span class="o">=</span>title_str<span class="w"> </span>+<span class="w"> </span>f<span class="s1">'''filter="$1"</span>
+<span class="s1">if [[ -n "$filter" ]]; then</span>
 <span class="s1">  # Show all section headers but only matching commands</span>
 <span class="s1">  while IFS= read -r line; do</span>
-<span class="s1">    if [[ &quot;$line&quot; =~ ^section= ]]; then</span>
+<span class="s1">    if [[ "$line" =~ ^section= ]]; then</span>
 <span class="s1">      # Always show section headers</span>
-<span class="s1">      echo -e &quot;\\x1b[92m${{line#section=}}\\x1b[0m&quot;</span>
-<span class="s1">    elif [[ &quot;$line&quot; =~ usage= ]]; then</span>
+<span class="s1">      echo -e "\\x1b[92m${{line#section=}}\\x1b[0m"</span>
+<span class="s1">    elif [[ "$line" =~ usage= ]]; then</span>
 <span class="s1">      # Show command if it matches the filter</span>
-<span class="s1">      cmd_line=&quot;${{line#*usage=}}&quot;</span>
-<span class="s1">      if echo &quot;$cmd_line&quot; | grep -iq &quot;$filter&quot;; then</span>
-<span class="s1">        echo -e &quot;   $cmd_line&quot;</span>
+<span class="s1">      cmd_line="${{line#*usage=}}"</span>
+<span class="s1">      if echo "$cmd_line" | grep -iq "$filter"; then</span>
+<span class="s1">        echo -e "   $cmd_line"</span>
 <span class="s1">      fi</span>
 <span class="s1">    fi</span>
-<span class="s1">  done &lt; &lt;(egrep &quot;^section=|^   usage=&quot; &quot;$0&quot; | sed &#39;</span>s/<span class="se">\\</span><span class="s2">&quot;//g&#39;)</span>
+<span class="s1">  done &lt; &lt;(egrep "^section=|^   usage=" "$0" | sed '</span>s/<span class="se">\\</span><span class="s2">"//g')</span>
 <span class="s2">else</span>
 <span class="s2">  # Show everything</span>
-<span class="s2">  while IFS= read -r line; do echo -e &quot;</span><span class="si">${</span><span class="p">{line</span><span class="si">}</span><span class="o">}</span><span class="si">${</span><span class="p">{CRESET</span><span class="si">}</span><span class="o">}</span><span class="s2">&quot;; done &lt; &lt;(egrep &quot;</span>^section<span class="o">=</span><span class="p">|</span>^<span class="w">   </span><span class="nv">usage</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="nv">$0</span><span class="s2">&quot; | sed &quot;</span>s/.*usage<span class="o">=</span>/<span class="w">   </span>/<span class="p">;</span><span class="w"> </span>s/.*section<span class="o">=</span>/<span class="se">\\</span>x1b<span class="o">[</span>92m/<span class="p">;</span><span class="w"> </span>s/<span class="se">\\</span><span class="s2">&quot;//g&quot;</span><span class="o">)</span>
-<span class="k">fi</span><span class="s1">&#39;&#39;&#39;,</span>
-<span class="s1">            help=&#39;</span>Show<span class="w"> </span>help,<span class="w"> </span>optionally<span class="w"> </span>filtered<span class="w"> </span>by<span class="w"> </span>pattern<span class="s1">&#39;,</span>
-<span class="s1">            comp=&#39;&#39;</span>
-<span class="s1">        ), &#39;</span>HELP<span class="s1">&#39;))</span>
+<span class="s2">  while IFS= read -r line; do echo -e "</span><span class="si">${</span><span class="p">{line</span><span class="si">}</span><span class="o">}</span><span class="si">${</span><span class="p">{CRESET</span><span class="si">}</span><span class="o">}</span><span class="s2">"; done &lt; &lt;(egrep "</span>^section<span class="o">=</span><span class="p">|</span>^<span class="w">   </span><span class="nv">usage</span><span class="o">=</span><span class="s2">" "</span><span class="nv">$0</span><span class="s2">" | sed "</span>s/.*usage<span class="o">=</span>/<span class="w">   </span>/<span class="p">;</span><span class="w"> </span>s/.*section<span class="o">=</span>/<span class="se">\\</span>x1b<span class="o">[</span>92m/<span class="p">;</span><span class="w"> </span>s/<span class="se">\\</span><span class="s2">"//g"</span><span class="o">)</span>
+<span class="k">fi</span><span class="s1">''',</span>
+<span class="s1">            help='</span>Show<span class="w"> </span>help,<span class="w"> </span>optionally<span class="w"> </span>filtered<span class="w"> </span>by<span class="w"> </span>pattern<span class="s1">',</span>
+<span class="s1">            comp=''</span>
+<span class="s1">        ), '</span>HELP<span class="s1">'))</span>
 
 <span class="s1">    for block in group_blocks(lines):</span>
 <span class="s1">        header = block[0].strip()</span>
-<span class="s1">        # Drop comment-only continuation lines, but keep &#39;</span><span class="c1">##&#39; help directives</span>
-<span class="w">        </span><span class="c1"># (&#39;###&#39; is a comment, not help) and &#39;!!&#39; completion directives.</span>
+<span class="s1">        # Drop comment-only continuation lines, but keep '</span><span class="c1">##' help directives</span>
+<span class="w">        </span><span class="c1"># ('###' is a comment, not help) and '!!' completion directives.</span>
 <span class="w">        </span>def<span class="w"> </span>_is_comment<span class="o">(</span>l<span class="o">)</span>:
 <span class="w">            </span><span class="nv">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>l.strip<span class="o">()</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span>s.startswith<span class="o">(</span><span class="s1">&#39;#&#39;</span><span class="o">)</span><span class="w"> </span>and<span class="w"> </span>not<span class="w"> </span><span class="o">(</span>s.startswith<span class="o">(</span><span class="s1">&#39;##&#39;</span><span class="o">)</span><span class="w"> </span>and<span class="w"> </span>not<span class="w"> </span>s.startswith<span class="o">(</span><span class="s1">&#39;###&#39;</span><span class="o">))</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span>s.startswith<span class="o">(</span><span class="s1">'#'</span><span class="o">)</span><span class="w"> </span>and<span class="w"> </span>not<span class="w"> </span><span class="o">(</span>s.startswith<span class="o">(</span><span class="s1">'##'</span><span class="o">)</span><span class="w"> </span>and<span class="w"> </span>not<span class="w"> </span>s.startswith<span class="o">(</span><span class="s1">'###'</span><span class="o">))</span>
 <span class="w">        </span><span class="nv">cont_lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>l<span class="w"> </span><span class="k">for</span><span class="w"> </span>l<span class="w"> </span><span class="k">in</span><span class="w"> </span>block<span class="o">[</span><span class="m">1</span>:<span class="o">]</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>_is_comment<span class="o">(</span>l<span class="o">)]</span>
 
 <span class="w">        </span><span class="c1"># Skip comments and empty blocks</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>header<span class="w"> </span>or<span class="w"> </span>header.startswith<span class="o">(</span><span class="s1">&#39;#&#39;</span><span class="o">)</span>:
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>header<span class="w"> </span>or<span class="w"> </span>header.startswith<span class="o">(</span><span class="s1">'#'</span><span class="o">)</span>:
 <span class="w">            </span><span class="k">continue</span>
 
 <span class="w">        </span><span class="c1"># Group description</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span>header.startswith<span class="o">(</span><span class="s1">&#39;=&#39;</span><span class="o">)</span>:
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>header.startswith<span class="o">(</span><span class="s1">'='</span><span class="o">)</span>:
 <span class="w">            </span><span class="nv">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>header<span class="o">[</span><span class="m">2</span>:<span class="o">]</span>
 <span class="w">            </span><span class="k">continue</span>
 
 <span class="w">        </span><span class="c1"># Direct command insertion (may span multiple indented lines)</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span>header.startswith<span class="o">(</span><span class="s1">&#39;cmd &#39;</span><span class="o">)</span>:
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>header.startswith<span class="o">(</span><span class="s1">'cmd '</span><span class="o">)</span>:
 <span class="w">            </span><span class="nv">body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>header<span class="o">[</span><span class="m">4</span>:<span class="o">]</span>
 <span class="w">            </span><span class="k">if</span><span class="w"> </span>cont_lines:
 <span class="w">                </span><span class="nv">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>block_min_indent<span class="o">(</span>cont_lines<span class="o">)</span>
 <span class="w">                </span><span class="k">for</span><span class="w"> </span>cl<span class="w"> </span><span class="k">in</span><span class="w"> </span>cont_lines:
-<span class="w">                    </span><span class="nv">body</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s1">&#39;\n&#39;</span><span class="w"> </span>+<span class="w"> </span><span class="o">(</span>cl<span class="o">[</span>base:<span class="o">]</span>.rstrip<span class="o">()</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>cl.strip<span class="o">()</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="o">)</span>
-<span class="w">            </span>cmds.append<span class="o">((</span><span class="s1">&#39;raw&#39;</span>,<span class="w"> </span>body<span class="o">))</span>
+<span class="w">                    </span><span class="nv">body</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s1">'\n'</span><span class="w"> </span>+<span class="w"> </span><span class="o">(</span>cl<span class="o">[</span>base:<span class="o">]</span>.rstrip<span class="o">()</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>cl.strip<span class="o">()</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">''</span><span class="o">)</span>
+<span class="w">            </span>cmds.append<span class="o">((</span><span class="s1">'raw'</span>,<span class="w"> </span>body<span class="o">))</span>
 <span class="w">            </span><span class="k">continue</span>
 
-<span class="w">        </span><span class="c1"># Command definition must contain &#39;::&#39; somewhere in the block</span>
-<span class="w">        </span><span class="nv">block_has_sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;::&#39;</span><span class="w"> </span><span class="k">in</span><span class="w"> </span>header<span class="w"> </span>or<span class="w"> </span>any<span class="o">(</span><span class="s1">&#39;::&#39;</span><span class="w"> </span><span class="k">in</span><span class="w"> </span>l<span class="w"> </span><span class="k">for</span><span class="w"> </span>l<span class="w"> </span><span class="k">in</span><span class="w"> </span>cont_lines<span class="o">)</span>
+<span class="w">        </span><span class="c1"># Command definition must contain '::' somewhere in the block</span>
+<span class="w">        </span><span class="nv">block_has_sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'::'</span><span class="w"> </span><span class="k">in</span><span class="w"> </span>header<span class="w"> </span>or<span class="w"> </span>any<span class="o">(</span><span class="s1">'::'</span><span class="w"> </span><span class="k">in</span><span class="w"> </span>l<span class="w"> </span><span class="k">for</span><span class="w"> </span>l<span class="w"> </span><span class="k">in</span><span class="w"> </span>cont_lines<span class="o">)</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>block_has_sep:
 <span class="w">            </span><span class="k">continue</span>
 
-<span class="w">        </span><span class="c1"># A &#39;##&#39; help directive or &#39;!!&#39; completion directive may appear inline</span>
+<span class="w">        </span><span class="c1"># A '##' help directive or '!!' completion directive may appear inline</span>
 <span class="w">        </span><span class="c1"># on the header/command lines, or on their own indented continuation</span>
 <span class="w">        </span><span class="c1"># lines.  Pull them out of the block first, then treat everything that</span>
 <span class="w">        </span><span class="c1"># remains as the (possibly multi-line) command body.</span>
@@ -406,13 +406,13 @@ def<span class="w"> </span>parse_def<span class="o">(</span>lines,<span class="w
 
 <span class="w">        </span>def<span class="w"> </span>_extract<span class="o">(</span>text<span class="o">)</span>:
 <span class="w">            </span>nonlocal<span class="w"> </span>help_txt,<span class="w"> </span>comp_cmd
-<span class="w">            </span><span class="nv">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>re.search<span class="o">(</span>r<span class="s1">&#39;##\s*(.+)&#39;</span>,<span class="w"> </span>text<span class="o">)</span>
-<span class="w">            </span><span class="nv">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>re.search<span class="o">(</span>r<span class="s1">&#39;!!\s*([^#]+)&#39;</span>,<span class="w"> </span>text<span class="o">)</span>
+<span class="w">            </span><span class="nv">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>re.search<span class="o">(</span>r<span class="s1">'##\s*(.+)'</span>,<span class="w"> </span>text<span class="o">)</span>
+<span class="w">            </span><span class="nv">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>re.search<span class="o">(</span>r<span class="s1">'!!\s*([^#]+)'</span>,<span class="w"> </span>text<span class="o">)</span>
 <span class="w">            </span><span class="k">if</span><span class="w"> </span>h<span class="w"> </span>and<span class="w"> </span>help_txt<span class="w"> </span>is<span class="w"> </span>None:
 <span class="w">                </span><span class="nv">help_txt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>h.group<span class="o">(</span><span class="m">1</span><span class="o">)</span>.strip<span class="o">()</span>
 <span class="w">            </span><span class="k">if</span><span class="w"> </span>c<span class="w"> </span>and<span class="w"> </span>comp_cmd<span class="w"> </span>is<span class="w"> </span>None:
 <span class="w">                </span><span class="nv">comp_cmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>c.group<span class="o">(</span><span class="m">1</span><span class="o">)</span>.strip<span class="o">()</span>
-<span class="w">            </span><span class="k">return</span><span class="w"> </span>re.sub<span class="o">(</span>r<span class="s1">&#39;##.*|!!.*&#39;</span>,<span class="w"> </span><span class="s1">&#39;&#39;</span>,<span class="w"> </span>text<span class="o">)</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span>re.sub<span class="o">(</span>r<span class="s1">'##.*|!!.*'</span>,<span class="w"> </span><span class="s1">''</span>,<span class="w"> </span>text<span class="o">)</span>
 
 <span class="w">        </span><span class="nv">header</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>_extract<span class="o">(</span>header<span class="o">)</span>
 <span class="w">        </span><span class="nv">cont_clean</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
@@ -420,9 +420,9 @@ def<span class="w"> </span>parse_def<span class="o">(</span>lines,<span class="w
 <span class="w">            </span><span class="nv">leading</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>cl<span class="o">[</span>:len<span class="o">(</span>cl<span class="o">)</span><span class="w"> </span>-<span class="w"> </span>len<span class="o">(</span>cl.lstrip<span class="o">())]</span>
 <span class="w">            </span>cont_clean.append<span class="o">(</span>leading<span class="w"> </span>+<span class="w"> </span>_extract<span class="o">(</span>cl.lstrip<span class="o">())</span>.rstrip<span class="o">())</span>
 
-<span class="w">        </span><span class="c1"># Split header on the first &#39;::&#39; into the definition and the (first</span>
+<span class="w">        </span><span class="c1"># Split header on the first '::' into the definition and the (first</span>
 <span class="w">        </span><span class="c1"># line of the) command body.</span>
-<span class="w">        </span>defn,<span class="w"> </span>_,<span class="w"> </span><span class="nv">first_cmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>header.partition<span class="o">(</span><span class="s1">&#39;::&#39;</span><span class="o">)</span>
+<span class="w">        </span>defn,<span class="w"> </span>_,<span class="w"> </span><span class="nv">first_cmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>header.partition<span class="o">(</span><span class="s1">'::'</span><span class="o">)</span>
 <span class="w">        </span><span class="nv">defn</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>defn.strip<span class="o">()</span>
 
 <span class="w">        </span><span class="c1"># Assemble the multi-line command body: the remainder of the header</span>
@@ -435,234 +435,234 @@ def<span class="w"> </span>parse_def<span class="o">(</span>lines,<span class="w
 <span class="w">        </span><span class="k">if</span><span class="w"> </span>real_cont:
 <span class="w">            </span><span class="nv">base</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>block_min_indent<span class="o">(</span>real_cont<span class="o">)</span>
 <span class="w">            </span><span class="k">for</span><span class="w"> </span>cl<span class="w"> </span><span class="k">in</span><span class="w"> </span>cont_clean:
-<span class="w">                </span>cmd_lines.append<span class="o">(</span>cl<span class="o">[</span>base:<span class="o">]</span>.rstrip<span class="o">()</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>cl.strip<span class="o">()</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="o">)</span>
-<span class="w">        </span><span class="nv">cmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;\n&#39;</span>.join<span class="o">(</span>cmd_lines<span class="o">)</span>.rstrip<span class="o">()</span>
+<span class="w">                </span>cmd_lines.append<span class="o">(</span>cl<span class="o">[</span>base:<span class="o">]</span>.rstrip<span class="o">()</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>cl.strip<span class="o">()</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">''</span><span class="o">)</span>
+<span class="w">        </span><span class="nv">cmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'\n'</span>.join<span class="o">(</span>cmd_lines<span class="o">)</span>.rstrip<span class="o">()</span>
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nv">cmd</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;&#39;</span>:
-<span class="w">            </span>print<span class="o">(</span>f<span class="s1">&#39;Warning: Command missing for definition: {defn}\n&#39;</span><span class="o">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="nv">cmd</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">''</span>:
+<span class="w">            </span>print<span class="o">(</span>f<span class="s1">'Warning: Command missing for definition: {defn}\n'</span><span class="o">)</span>
 
 <span class="w">        </span><span class="c1"># Parse command definition</span>
-<span class="w">        </span><span class="nv">tokens</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>re.findall<span class="o">(</span>r<span class="s1">&#39;\w+|\([^)]+\)|&lt;[^&gt;]+&gt;|\[[^\]]+\]&#39;</span>,<span class="w"> </span>defn<span class="o">)</span>
-<span class="w">        </span>keys,<span class="w"> </span>params,<span class="w"> </span><span class="nv">shortcut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>,<span class="w"> </span><span class="o">[]</span>,<span class="w"> </span><span class="s1">&#39;&#39;</span>
+<span class="w">        </span><span class="nv">tokens</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>re.findall<span class="o">(</span>r<span class="s1">'\w+|\([^)]+\)|&lt;[^&gt;]+&gt;|\[[^\]]+\]'</span>,<span class="w"> </span>defn<span class="o">)</span>
+<span class="w">        </span>keys,<span class="w"> </span>params,<span class="w"> </span><span class="nv">shortcut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>,<span class="w"> </span><span class="o">[]</span>,<span class="w"> </span><span class="s1">''</span>
 
 <span class="w">        </span><span class="k">for</span><span class="w"> </span>tok<span class="w"> </span><span class="k">in</span><span class="w"> </span>tokens:
-<span class="w">            </span><span class="k">if</span><span class="w"> </span>tok.startswith<span class="o">(</span><span class="s1">&#39;(&#39;</span><span class="o">)</span>:
-<span class="w">                </span><span class="nv">shortcut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>alias_lead_chars<span class="w"> </span>+<span class="w"> </span>tok.strip<span class="o">(</span><span class="s1">&#39;()&#39;</span><span class="o">)</span>
-<span class="w">            </span><span class="k">elif</span><span class="w"> </span>tok.startswith<span class="o">(</span><span class="s1">&#39;[&#39;</span><span class="o">)</span>:
-<span class="w">                </span>params.append<span class="o">((</span>tok.strip<span class="o">(</span><span class="s1">&#39;[]&lt;&gt;&#39;</span><span class="o">)</span>,<span class="w"> </span>True<span class="o">))</span>
-<span class="w">            </span><span class="k">elif</span><span class="w"> </span>tok.startswith<span class="o">(</span><span class="s1">&#39;&lt;&#39;</span><span class="o">)</span>:
-<span class="w">                </span>params.append<span class="o">((</span>tok.strip<span class="o">(</span><span class="s1">&#39;&lt;&gt;&#39;</span><span class="o">)</span>,<span class="w"> </span>False<span class="o">))</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>tok.startswith<span class="o">(</span><span class="s1">'('</span><span class="o">)</span>:
+<span class="w">                </span><span class="nv">shortcut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>alias_lead_chars<span class="w"> </span>+<span class="w"> </span>tok.strip<span class="o">(</span><span class="s1">'()'</span><span class="o">)</span>
+<span class="w">            </span><span class="k">elif</span><span class="w"> </span>tok.startswith<span class="o">(</span><span class="s1">'['</span><span class="o">)</span>:
+<span class="w">                </span>params.append<span class="o">((</span>tok.strip<span class="o">(</span><span class="s1">'[]&lt;&gt;'</span><span class="o">)</span>,<span class="w"> </span>True<span class="o">))</span>
+<span class="w">            </span><span class="k">elif</span><span class="w"> </span>tok.startswith<span class="o">(</span><span class="s1">'&lt;'</span><span class="o">)</span>:
+<span class="w">                </span>params.append<span class="o">((</span>tok.strip<span class="o">(</span><span class="s1">'&lt;&gt;'</span><span class="o">)</span>,<span class="w"> </span>False<span class="o">))</span>
 <span class="w">            </span><span class="k">else</span>:
 <span class="w">                </span>keys.append<span class="o">(</span>tok<span class="o">)</span>
 
 <span class="w">        </span><span class="c1"># Auto-generate shortcut if not provided</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>shortcut:
-<span class="w">            </span><span class="nv">shortcut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>alias_lead_chars<span class="w"> </span>+<span class="w"> </span><span class="s1">&#39;&#39;</span>.join<span class="o">(</span>k<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>k<span class="w"> </span><span class="k">in</span><span class="w"> </span>keys<span class="o">[</span>:2<span class="o">])</span>
+<span class="w">            </span><span class="nv">shortcut</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>alias_lead_chars<span class="w"> </span>+<span class="w"> </span><span class="s1">''</span>.join<span class="o">(</span>k<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>k<span class="w"> </span><span class="k">in</span><span class="w"> </span>keys<span class="o">[</span>:2<span class="o">])</span>
 
-<span class="w">        </span>cmds.append<span class="o">((</span><span class="s1">&#39;cmd&#39;</span>,<span class="w"> </span>Cmd<span class="o">(</span>
+<span class="w">        </span>cmds.append<span class="o">((</span><span class="s1">'cmd'</span>,<span class="w"> </span>Cmd<span class="o">(</span>
 <span class="w">            </span><span class="nv">keys</span><span class="o">=</span>keys,
 <span class="w">            </span><span class="nv">shortcut</span><span class="o">=</span>shortcut,
 <span class="w">            </span><span class="nv">params</span><span class="o">=</span>params,
 <span class="w">            </span><span class="nv">cmd</span><span class="o">=</span>cmd,
-<span class="w">            </span><span class="nv">help</span><span class="o">=</span>help_txt<span class="w"> </span><span class="k">if</span><span class="w"> </span>help_txt<span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;&#39;</span>,
-<span class="w">            </span><span class="nv">comp</span><span class="o">=</span>comp_cmd<span class="w"> </span><span class="k">if</span><span class="w"> </span>comp_cmd<span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">&#39;&#39;</span>
+<span class="w">            </span><span class="nv">help</span><span class="o">=</span>help_txt<span class="w"> </span><span class="k">if</span><span class="w"> </span>help_txt<span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">''</span>,
+<span class="w">            </span><span class="nv">comp</span><span class="o">=</span>comp_cmd<span class="w"> </span><span class="k">if</span><span class="w"> </span>comp_cmd<span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="s1">''</span>
 <span class="w">        </span><span class="o">)</span>,<span class="w"> </span>group<span class="o">))</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span>cmds
 
 def<span class="w"> </span>gen_script<span class="o">(</span>cli_name,<span class="w"> </span>cmds,<span class="w"> </span><span class="nv">debug</span><span class="o">=</span>False<span class="o">)</span>:
-<span class="w">    </span><span class="s2">&quot;&quot;&quot;Generate bash CLI script&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="s2">"""Generate bash CLI script"""</span>
 
-<span class="w">    </span><span class="nv">script</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>f<span class="s1">&#39;&#39;&#39;#!/usr/bin/env bash</span>
+<span class="w">    </span><span class="nv">script</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>f<span class="s1">'''#!/usr/bin/env bash</span>
 <span class="s1">debug_yn=n</span>
-<span class="s1">[[ &quot;$1&quot; == &quot;-d&quot; ]] &amp;&amp; {{ debug_yn=y; shift; }}</span>
-<span class="s1">[[ &quot;${{CLI_DEBUG^^}}&quot; == &quot;TRUE&quot; ]] &amp;&amp; debug_yn=y</span>
+<span class="s1">[[ "$1" == "-d" ]] &amp;&amp; {{ debug_yn=y; shift; }}</span>
+<span class="s1">[[ "${{CLI_DEBUG^^}}" == "TRUE" ]] &amp;&amp; debug_yn=y</span>
 
-<span class="s1">C_CYA=&quot;{C_CYA}&quot; C_GRE=&quot;{C_GRE}&quot; C_MAG=&quot;{C_MAG}&quot; C_WHI=&quot;{C_WHI}&quot; C_DEF=&quot;{C_DEF}&quot;</span>
+<span class="s1">C_CYA="{C_CYA}" C_GRE="{C_GRE}" C_MAG="{C_MAG}" C_WHI="{C_WHI}" C_DEF="{C_DEF}"</span>
 
 <span class="s1"># param 1 - actual number of parameters</span>
 <span class="s1"># param 2 - required number of parameters</span>
 <span class="s1"># param 3 - incorrect parameters message</span>
 <span class="s1">check_params() {{</span>
-<span class="s1">  [[ &quot;$1&quot; &lt; &quot;$2&quot; ]] &amp;&amp; {{ echo -e &quot;$3&quot;; exit; }}</span>
+<span class="s1">  [[ "$1" &lt; "$2" ]] &amp;&amp; {{ echo -e "$3"; exit; }}</span>
 <span class="s1">}}</span>
 
 <span class="s1">print_command() {{</span>
-<span class="s1">  [[ $debug_yn == y ]] &amp;&amp; {{ echo &quot;COMMAND: $*&quot; | sed &#39;</span>s/<span class="s2">&quot;/\\&quot;</span>/g<span class="s1">&#39;; echo &quot;COMMAND: $*&quot; | sed &#39;</span>s/./-/g<span class="s1">&#39;; }}</span>
+<span class="s1">  [[ $debug_yn == y ]] &amp;&amp; {{ echo "COMMAND: $*" | sed '</span>s/<span class="s2">"/\\"</span>/g<span class="s1">'; echo "COMMAND: $*" | sed '</span>s/./-/g<span class="s1">'; }}</span>
 <span class="s1">}}</span>
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">'''</span>
 
 <span class="w">    </span>aliases,<span class="w"> </span><span class="nv">comp_opts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>,<span class="w"> </span><span class="o">[]</span>
-<span class="w">    </span><span class="nv">current_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="nv">current_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">""</span>
 
 <span class="w">    </span><span class="k">for</span><span class="w"> </span>item<span class="w"> </span><span class="k">in</span><span class="w"> </span>cmds:
-<span class="w">        </span><span class="k">if</span><span class="w"> </span>item<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;raw&#39;</span>:
-<span class="w">            </span><span class="nv">script</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>item<span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="w"> </span>+<span class="w"> </span><span class="s1">&#39;\n&#39;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>item<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'raw'</span>:
+<span class="w">            </span><span class="nv">script</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>item<span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="w"> </span>+<span class="w"> </span><span class="s1">'\n'</span>
 <span class="w">            </span><span class="k">continue</span>
 
 <span class="w">        </span>cmd,<span class="w"> </span><span class="nv">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>item<span class="o">[</span><span class="m">1</span><span class="o">]</span>,<span class="w"> </span>item<span class="o">[</span><span class="m">2</span><span class="o">]</span>
 
 <span class="w">        </span><span class="c1"># Add group header if changed</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span>group<span class="w"> </span>!<span class="o">=</span><span class="w"> </span>current_group:
-<span class="w">            </span><span class="nv">script</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s1">&#39;section=&quot;{group}&quot;\n&#39;</span>
+<span class="w">            </span><span class="nv">script</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s1">'section="{group}"\n'</span>
 <span class="w">            </span><span class="nv">current_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>group
 
 <span class="w">        </span><span class="c1"># Generate command check</span>
-<span class="w">        </span><span class="nv">keys_template</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39; &#39;</span>.join<span class="o">(</span>f<span class="s1">&#39;${i+1}&#39;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span>range<span class="o">(</span>len<span class="o">(</span>cmd.keys<span class="o">)))</span>
-<span class="w">        </span><span class="nv">usage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>f<span class="s2">&quot;{C_MAG}{cmd.all_keys} {C_CYA}({cmd.shortcut}){C_WHI}&quot;</span>
+<span class="w">        </span><span class="nv">keys_template</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">' '</span>.join<span class="o">(</span>f<span class="s1">'${i+1}'</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>i<span class="w"> </span><span class="k">in</span><span class="w"> </span>range<span class="o">(</span>len<span class="o">(</span>cmd.keys<span class="o">)))</span>
+<span class="w">        </span><span class="nv">usage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>f<span class="s2">"{C_MAG}{cmd.all_keys} {C_CYA}({cmd.shortcut}){C_WHI}"</span>
 <span class="w">        </span><span class="k">for</span><span class="w"> </span>p,<span class="w"> </span>opt<span class="w"> </span><span class="k">in</span><span class="w"> </span>cmd.params:
 <span class="w">            </span><span class="k">if</span><span class="w"> </span>opt:
-<span class="w">                </span><span class="nv">usage</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s2">&quot; [{p}]&quot;</span>
+<span class="w">                </span><span class="nv">usage</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s2">" [{p}]"</span>
 <span class="w">            </span><span class="k">else</span>:
-<span class="w">                </span><span class="nv">usage</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s2">&quot; &lt;{p}&gt;&quot;</span>
+<span class="w">                </span><span class="nv">usage</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s2">" &lt;{p}&gt;"</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span>cmd.help:
-<span class="w">            </span><span class="nv">usage</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s2">&quot;{C_GRE} # {cmd.help}&quot;</span>
-<span class="w">        </span><span class="nv">usage</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s2">&quot;{C_DEF}&quot;</span>
+<span class="w">            </span><span class="nv">usage</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s2">"{C_GRE} # {cmd.help}"</span>
+<span class="w">        </span><span class="nv">usage</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s2">"{C_DEF}"</span>
 
-<span class="w">        </span><span class="nv">script</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">if [[ &quot;{keys_template}&quot; == &quot;{cmd.all_keys}&quot; || &quot;$1&quot; == &quot;{cmd.shortcut}&quot; ]]; then</span>
-<span class="s1">   [[ &quot;$1&quot; == &quot;{cmd.shortcut}&quot; ]] &amp;&amp; shift || shift {len(cmd.keys)}</span>
-<span class="s1">   usage=&quot;{usage}&quot;</span>
-<span class="s1">   check_params $# {cmd.num_mandatory} &quot;Usage: $usage&quot;</span>
-<span class="s1">&#39;&#39;&#39;</span>
-<span class="w">        </span><span class="k">if</span><span class="w"> </span>cmd.all_keys<span class="w"> </span>not<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;h&#39;</span>,<span class="w"> </span><span class="s1">&#39;help&#39;</span><span class="o">]</span>:
+<span class="w">        </span><span class="nv">script</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s1">'''</span>
+<span class="s1">if [[ "{keys_template}" == "{cmd.all_keys}" || "$1" == "{cmd.shortcut}" ]]; then</span>
+<span class="s1">   [[ "$1" == "{cmd.shortcut}" ]] &amp;&amp; shift || shift {len(cmd.keys)}</span>
+<span class="s1">   usage="{usage}"</span>
+<span class="s1">   check_params $# {cmd.num_mandatory} "Usage: $usage"</span>
+<span class="s1">'''</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>cmd.all_keys<span class="w"> </span>not<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">[</span><span class="s1">'h'</span>,<span class="w"> </span><span class="s1">'help'</span><span class="o">]</span>:
 <span class="w">            </span><span class="c1"># Collapse the (possibly multi-line) command to a single line for the</span>
 <span class="w">            </span><span class="c1"># debug display only - this string is echoed, not executed.</span>
-<span class="w">            </span><span class="nv">display_cmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;; &#39;</span>.join<span class="o">(</span>l.strip<span class="o">()</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>l<span class="w"> </span><span class="k">in</span><span class="w"> </span>cmd.cmd.splitlines<span class="o">()</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>l.strip<span class="o">())</span>
-<span class="w">            </span><span class="nv">escaped_cmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>display_cmd.replace<span class="o">(</span><span class="s1">&#39;&quot;&#39;</span>,<span class="w"> </span><span class="s1">&#39;\\&quot;&#39;</span><span class="o">)</span>
-<span class="w">            </span><span class="nv">script</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s1">&#39;&#39;&#39;   print_command &quot; {escaped_cmd}&quot;\n&#39;&#39;&#39;</span>
+<span class="w">            </span><span class="nv">display_cmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'; '</span>.join<span class="o">(</span>l.strip<span class="o">()</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>l<span class="w"> </span><span class="k">in</span><span class="w"> </span>cmd.cmd.splitlines<span class="o">()</span><span class="w"> </span><span class="k">if</span><span class="w"> </span>l.strip<span class="o">())</span>
+<span class="w">            </span><span class="nv">escaped_cmd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>display_cmd.replace<span class="o">(</span><span class="s1">'"'</span>,<span class="w"> </span><span class="s1">'\\"'</span><span class="o">)</span>
+<span class="w">            </span><span class="nv">script</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s1">'''   print_command " {escaped_cmd}"\n'''</span>
 <span class="w">        </span><span class="c1"># Emit the real command body, preserving line breaks / indentation.</span>
-<span class="w">        </span><span class="nv">cmd_body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>cmd.cmd.replace<span class="o">(</span><span class="s1">&#39;\n&#39;</span>,<span class="w"> </span><span class="s1">&#39;\n   &#39;</span><span class="o">)</span>
-<span class="w">        </span><span class="nv">script</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s1">&#39;   {cmd_body}\n   exit\nfi\n&#39;</span>
+<span class="w">        </span><span class="nv">cmd_body</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>cmd.cmd.replace<span class="o">(</span><span class="s1">'\n'</span>,<span class="w"> </span><span class="s1">'\n   '</span><span class="o">)</span>
+<span class="w">        </span><span class="nv">script</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s1">'   {cmd_body}\n   exit\nfi\n'</span>
 
 <span class="w">        </span><span class="c1"># Add alias</span>
-<span class="w">        </span>aliases.append<span class="o">(</span>f<span class="s2">&quot;alias @{cmd.shortcut}=&#39;{cli_name} {cmd.shortcut}&#39;&quot;</span><span class="o">)</span>
+<span class="w">        </span>aliases.append<span class="o">(</span>f<span class="s2">"alias @{cmd.shortcut}='{cli_name} {cmd.shortcut}'"</span><span class="o">)</span>
 
 <span class="w">        </span><span class="c1"># Add completion</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span>cmd.comp:
-<span class="w">            </span>comp_opts.append<span class="o">(</span>f<span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">        if [[ &quot;$all&quot; == &quot;{cmd.all_keys}&quot; || &quot;$prev&quot; == &quot;{cmd.shortcut}&quot; || &quot;$prev&quot; == &quot;@{cmd.shortcut}&quot; ]]; then</span>
-<span class="s1">            COMPREPLY=( $(compgen -W &quot;$({cmd.comp})&quot; -- &quot;$cur&quot;) )</span>
-<span class="s1">        fi&#39;&#39;&#39;</span><span class="o">)</span>
+<span class="w">            </span>comp_opts.append<span class="o">(</span>f<span class="s1">'''</span>
+<span class="s1">        if [[ "$all" == "{cmd.all_keys}" || "$prev" == "{cmd.shortcut}" || "$prev" == "@{cmd.shortcut}" ]]; then</span>
+<span class="s1">            COMPREPLY=( $(compgen -W "$({cmd.comp})" -- "$cur") )</span>
+<span class="s1">        fi'''</span><span class="o">)</span>
 
 <span class="w">    </span><span class="c1"># Add help command</span>
-<span class="w">    </span><span class="nv">script</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s1">&#39;&#39;&#39;</span>
-<span class="s1">if [[ &quot;$1&quot; == &quot;&quot; ]]; then</span>
-<span class="s1">  echo &quot;No option passed&quot;</span>
+<span class="w">    </span><span class="nv">script</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s1">'''</span>
+<span class="s1">if [[ "$1" == "" ]]; then</span>
+<span class="s1">  echo "No option passed"</span>
 <span class="s1">else</span>
-<span class="s1">  echo &quot;$*: invalid option&quot;</span>
+<span class="s1">  echo "$*: invalid option"</span>
 <span class="s1">fi</span>
-<span class="s1">echo &quot;Try \&quot;{cli_name} help\&quot; for more information.&quot;</span>
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">echo "Try \"{cli_name} help\" for more information."</span>
+<span class="s1">'''</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span>script,<span class="w"> </span>aliases,<span class="w"> </span>comp_opts
 
 def<span class="w"> </span>gen_alias_file<span class="o">(</span>cli_name,<span class="w"> </span>aliases,<span class="w"> </span>comp_opts<span class="o">)</span>:
-<span class="w">    </span><span class="s2">&quot;&quot;&quot;Generate alias and completion file&quot;&quot;&quot;</span>
-<span class="w">    </span><span class="nv">alias_names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39; &#39;</span>.join<span class="o">(</span>a.split<span class="o">(</span><span class="s1">&#39;=&#39;</span><span class="o">)[</span><span class="m">0</span><span class="o">][</span><span class="m">6</span>:<span class="o">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>a<span class="w"> </span><span class="k">in</span><span class="w"> </span>aliases<span class="o">)</span>
+<span class="w">    </span><span class="s2">"""Generate alias and completion file"""</span>
+<span class="w">    </span><span class="nv">alias_names</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">' '</span>.join<span class="o">(</span>a.split<span class="o">(</span><span class="s1">'='</span><span class="o">)[</span><span class="m">0</span><span class="o">][</span><span class="m">6</span>:<span class="o">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>a<span class="w"> </span><span class="k">in</span><span class="w"> </span>aliases<span class="o">)</span>
 
-<span class="w">    </span><span class="k">return</span><span class="w"> </span>f<span class="s1">&#39;&#39;&#39;# Completion function</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>f<span class="s1">'''# Completion function</span>
 <span class="s1">_{cli_name}_complete() {{</span>
 <span class="s1">    local cur prev all</span>
-<span class="s1">    all=&quot;&quot;</span>
+<span class="s1">    all=""</span>
 <span class="s1">    for ((i = 1; i &lt; ${{#COMP_WORDS[@]}}; i++)); do</span>
-<span class="s1">        word=&quot;${{COMP_WORDS[i]}}&quot;</span>
-<span class="s1">        [[ $word != -* ]] &amp;&amp; all+=&quot;$word &quot;</span>
+<span class="s1">        word="${{COMP_WORDS[i]}}"</span>
+<span class="s1">        [[ $word != -* ]] &amp;&amp; all+="$word "</span>
 <span class="s1">    done</span>
-<span class="s1">    all=&quot;$(echo $all | xargs)&quot;</span>
-<span class="s1">    cur=&quot;${{COMP_WORDS[COMP_CWORD]}}&quot;</span>
+<span class="s1">    all="$(echo $all | xargs)"</span>
+<span class="s1">    cur="${{COMP_WORDS[COMP_CWORD]}}"</span>
 <span class="s1">    prev_step=1</span>
-<span class="s1">    prev=&quot;${{COMP_WORDS[COMP_CWORD-$prev_step]}}&quot;</span>
-<span class="s1">    while [[ &quot;${{prev:0:1}}&quot; == &quot;-&quot; ]]; do</span>
+<span class="s1">    prev="${{COMP_WORDS[COMP_CWORD-$prev_step]}}"</span>
+<span class="s1">    while [[ "${{prev:0:1}}" == "-" ]]; do</span>
 <span class="s1">        let prev_step=prev_step+1</span>
-<span class="s1">        prev=&quot;${{COMP_WORDS[COMP_CWORD-$prev_step]}}&quot;</span>
+<span class="s1">        prev="${{COMP_WORDS[COMP_CWORD-$prev_step]}}"</span>
 <span class="s1">    done</span>
-<span class="s1">{&#39;&#39;.join(comp_opts)}</span>
+<span class="s1">{''.join(comp_opts)}</span>
 <span class="s1">}}</span>
 <span class="s1">complete -F _{cli_name}_complete {cli_name} {alias_names}</span>
 
 <span class="s1"># Shortcut aliases</span>
 <span class="s1">{chr(10).join(aliases)}</span>
-<span class="s1">&#39;&#39;&#39;</span>
+<span class="s1">'''</span>
 
 def<span class="w"> </span>gen_markdown_file<span class="o">(</span>cli_name,<span class="w"> </span>cmds,<span class="w"> </span>title,<span class="w"> </span>description<span class="o">)</span>:
-<span class="w">    </span><span class="s2">&quot;&quot;&quot;Generate markdown documentation file&quot;&quot;&quot;</span>
-<span class="w">    </span><span class="nv">md_content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>f<span class="s2">&quot;# {title if title else cli_name.upper()}\n\n&quot;</span>
+<span class="w">    </span><span class="s2">"""Generate markdown documentation file"""</span>
+<span class="w">    </span><span class="nv">md_content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>f<span class="s2">"# {title if title else cli_name.upper()}\n\n"</span>
 <span class="w">    </span><span class="k">if</span><span class="w"> </span>description:
-<span class="w">        </span><span class="nv">md_content</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s1">&#39;\n&#39;</span>.join<span class="o">(</span>description<span class="o">)</span><span class="w"> </span>+<span class="w"> </span><span class="s1">&#39;\n\n&#39;</span>
-<span class="w">    </span><span class="nv">md_content</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s2">&quot;*Generated: {datetime.now().strftime(&#39;%Y-%m-%d %H:%M&#39;)}*\n\n&quot;</span>
+<span class="w">        </span><span class="nv">md_content</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s1">'\n'</span>.join<span class="o">(</span>description<span class="o">)</span><span class="w"> </span>+<span class="w"> </span><span class="s1">'\n\n'</span>
+<span class="w">    </span><span class="nv">md_content</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s2">"*Generated: {datetime.now().strftime('%Y-%m-%d %H:%M')}*\n\n"</span>
 
-<span class="w">    </span><span class="nv">current_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">    </span><span class="nv">current_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">""</span>
 
 <span class="w">    </span><span class="k">for</span><span class="w"> </span>item<span class="w"> </span><span class="k">in</span><span class="w"> </span>cmds:
-<span class="w">        </span><span class="k">if</span><span class="w"> </span>item<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;raw&#39;</span>:
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>item<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'raw'</span>:
 <span class="w">            </span><span class="k">continue</span>
 
 <span class="w">        </span>cmd,<span class="w"> </span><span class="nv">group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>item<span class="o">[</span><span class="m">1</span><span class="o">]</span>,<span class="w"> </span>item<span class="o">[</span><span class="m">2</span><span class="o">]</span>
 
 <span class="w">        </span><span class="c1"># Add group header if changed</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span>group<span class="w"> </span>!<span class="o">=</span><span class="w"> </span>current_group<span class="w"> </span>and<span class="w"> </span>group:
-<span class="w">            </span><span class="nv">md_content</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s2">&quot;\n## {group}\n\n&quot;</span>
+<span class="w">            </span><span class="nv">md_content</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s2">"\n## {group}\n\n"</span>
 <span class="w">            </span><span class="nv">current_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>group
 <span class="w">        </span><span class="k">elif</span><span class="w"> </span>group<span class="w"> </span>!<span class="o">=</span><span class="w"> </span>current_group<span class="w"> </span>and<span class="w"> </span>not<span class="w"> </span>group:
 <span class="w">            </span><span class="nv">current_group</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>group
 
 <span class="w">        </span><span class="c1"># Format command usage</span>
-<span class="w">        </span><span class="nv">usage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>f<span class="s2">&quot;{cmd.all_keys} ({cmd.shortcut})&quot;</span>
+<span class="w">        </span><span class="nv">usage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>f<span class="s2">"{cmd.all_keys} ({cmd.shortcut})"</span>
 <span class="w">        </span><span class="k">for</span><span class="w"> </span>p,<span class="w"> </span>opt<span class="w"> </span><span class="k">in</span><span class="w"> </span>cmd.params:
 <span class="w">            </span><span class="k">if</span><span class="w"> </span>opt:
-<span class="w">                </span><span class="nv">usage</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s2">&quot; [{p}]&quot;</span>
+<span class="w">                </span><span class="nv">usage</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s2">" [{p}]"</span>
 <span class="w">            </span><span class="k">else</span>:
-<span class="w">                </span><span class="nv">usage</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s2">&quot; &lt;{p}&gt;&quot;</span>
+<span class="w">                </span><span class="nv">usage</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s2">" &lt;{p}&gt;"</span>
 
 <span class="w">        </span><span class="c1"># Add command entry</span>
-<span class="w">        </span><span class="nv">md_content</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s2">&quot;**`{usage}`**&quot;</span>
+<span class="w">        </span><span class="nv">md_content</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s2">"**`{usage}`**"</span>
 <span class="w">        </span><span class="k">if</span><span class="w"> </span>cmd.help:
-<span class="w">            </span><span class="nv">md_content</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s2">&quot; - {cmd.help}&quot;</span>
-<span class="w">        </span><span class="nv">md_content</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;\n\n&quot;</span>
+<span class="w">            </span><span class="nv">md_content</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>f<span class="s2">" - {cmd.help}"</span>
+<span class="w">        </span><span class="nv">md_content</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">"\n\n"</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span>md_content
 
 def<span class="w"> </span>main<span class="o">()</span>:
-<span class="w">    </span><span class="nv">debug</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;-d&#39;</span><span class="w"> </span><span class="k">in</span><span class="w"> </span>sys.argv
+<span class="w">    </span><span class="nv">debug</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'-d'</span><span class="w"> </span><span class="k">in</span><span class="w"> </span>sys.argv
 <span class="w">    </span><span class="k">if</span><span class="w"> </span>debug:
-<span class="w">        </span>sys.argv.remove<span class="o">(</span><span class="s1">&#39;-d&#39;</span><span class="o">)</span>
+<span class="w">        </span>sys.argv.remove<span class="o">(</span><span class="s1">'-d'</span><span class="o">)</span>
 
-<span class="w">    </span><span class="k">if</span><span class="w"> </span>len<span class="o">(</span>sys.argv<span class="o">)</span><span class="w"> </span>&lt;<span class="w"> </span><span class="m">2</span><span class="w"> </span>or<span class="w"> </span>sys.argv<span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">[</span><span class="s1">&#39;-h&#39;</span>,<span class="w"> </span><span class="s1">&#39;--help&#39;</span><span class="o">]</span>:
+<span class="w">    </span><span class="k">if</span><span class="w"> </span>len<span class="o">(</span>sys.argv<span class="o">)</span><span class="w"> </span>&lt;<span class="w"> </span><span class="m">2</span><span class="w"> </span>or<span class="w"> </span>sys.argv<span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">[</span><span class="s1">'-h'</span>,<span class="w"> </span><span class="s1">'--help'</span><span class="o">]</span>:
 <span class="w">        </span>print<span class="o">(</span>HELP_TEXT<span class="o">)</span>
 <span class="w">        </span><span class="k">return</span>
 
-<span class="w">    </span>print<span class="o">(</span>f<span class="s2">&quot;CLI Builder - Generating CLI scripts\n&quot;</span><span class="o">)</span>
-<span class="w">    </span>print<span class="o">(</span>f<span class="s2">&quot;Processing: {&#39;, &#39;.join(sys.argv[1:])}\n&quot;</span><span class="o">)</span>
+<span class="w">    </span>print<span class="o">(</span>f<span class="s2">"CLI Builder - Generating CLI scripts\n"</span><span class="o">)</span>
+<span class="w">    </span>print<span class="o">(</span>f<span class="s2">"Processing: {', '.join(sys.argv[1:])}\n"</span><span class="o">)</span>
 <span class="w">    </span><span class="k">for</span><span class="w"> </span>arg<span class="w"> </span><span class="k">in</span><span class="w"> </span>sys.argv<span class="o">[</span><span class="m">1</span>:<span class="o">]</span>:
-<span class="w">        </span><span class="nv">def_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>arg.replace<span class="o">(</span><span class="s1">&#39;.def&#39;</span>,<span class="w"> </span><span class="s1">&#39;&#39;</span><span class="o">)</span>
+<span class="w">        </span><span class="nv">def_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>arg.replace<span class="o">(</span><span class="s1">'.def'</span>,<span class="w"> </span><span class="s1">''</span><span class="o">)</span>
 
-<span class="w">        </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>os.path.exists<span class="o">(</span>f<span class="s1">&#39;{def_file}.def&#39;</span><span class="o">)</span>:
-<span class="w">            </span>print<span class="o">(</span>f<span class="s1">&#39;Error: Definition file &quot;{def_file}.def&quot; missing&#39;</span><span class="o">)</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>os.path.exists<span class="o">(</span>f<span class="s1">'{def_file}.def'</span><span class="o">)</span>:
+<span class="w">            </span>print<span class="o">(</span>f<span class="s1">'Error: Definition file "{def_file}.def" missing'</span><span class="o">)</span>
 <span class="w">            </span><span class="k">return</span>
 
 <span class="w">        </span><span class="nv">cli_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>def_file
 
 <span class="w">        </span><span class="c1"># Parse definition file</span>
-<span class="w">        </span>with<span class="w"> </span>open<span class="o">(</span>f<span class="s1">&#39;{def_file}.def&#39;</span><span class="o">)</span><span class="w"> </span>as<span class="w"> </span>f:
+<span class="w">        </span>with<span class="w"> </span>open<span class="o">(</span>f<span class="s1">'{def_file}.def'</span><span class="o">)</span><span class="w"> </span>as<span class="w"> </span>f:
 <span class="w">            </span><span class="nv">lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>l.rstrip<span class="o">()</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>l<span class="w"> </span><span class="k">in</span><span class="w"> </span>f<span class="o">]</span>
 
 <span class="w">        </span><span class="c1"># Extract title, description, and aliasLeadChars (single-line, top-level</span>
 <span class="w">        </span><span class="c1"># directives).  Command grouping / line continuation is handled by</span>
 <span class="w">        </span><span class="c1"># group_blocks() inside parse_def().</span>
-<span class="w">        </span><span class="nv">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span>
+<span class="w">        </span><span class="nv">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">""</span>
 <span class="w">        </span><span class="nv">description</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
 <span class="w">        </span><span class="nv">alias_lead_chars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>cli_name<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w">  </span><span class="c1"># Default to first char of filename</span>
 <span class="w">        </span><span class="nv">remaining</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
 <span class="w">        </span><span class="k">for</span><span class="w"> </span>line<span class="w"> </span><span class="k">in</span><span class="w"> </span>lines:
-<span class="w">            </span><span class="k">if</span><span class="w"> </span>line.startswith<span class="o">(</span><span class="s1">&#39;@ &#39;</span><span class="o">)</span><span class="w"> </span>and<span class="w"> </span>not<span class="w"> </span>line.startswith<span class="o">(</span><span class="s1">&#39;@@ &#39;</span><span class="o">)</span>:
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>line.startswith<span class="o">(</span><span class="s1">'@ '</span><span class="o">)</span><span class="w"> </span>and<span class="w"> </span>not<span class="w"> </span>line.startswith<span class="o">(</span><span class="s1">'@@ '</span><span class="o">)</span>:
 <span class="w">                </span><span class="nv">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>line<span class="o">[</span><span class="m">2</span>:<span class="o">]</span>.strip<span class="o">()</span>
 <span class="w">                </span><span class="k">continue</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span>line.startswith<span class="o">(</span><span class="s1">&#39;@@ &#39;</span><span class="o">)</span>:
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>line.startswith<span class="o">(</span><span class="s1">'@@ '</span><span class="o">)</span>:
 <span class="w">                </span>description.append<span class="o">(</span>line<span class="o">[</span><span class="m">3</span>:<span class="o">]</span>.strip<span class="o">())</span>
 <span class="w">                </span><span class="k">continue</span>
-<span class="w">            </span><span class="k">if</span><span class="w"> </span>line.startswith<span class="o">(</span><span class="s1">&#39;aliasLeadChars:&#39;</span><span class="o">)</span>:
-<span class="w">                </span><span class="nv">alias_lead_chars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>line.split<span class="o">(</span><span class="s1">&#39;:&#39;</span>,<span class="w"> </span><span class="m">1</span><span class="o">)[</span><span class="m">1</span><span class="o">]</span>.strip<span class="o">()</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>line.startswith<span class="o">(</span><span class="s1">'aliasLeadChars:'</span><span class="o">)</span>:
+<span class="w">                </span><span class="nv">alias_lead_chars</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>line.split<span class="o">(</span><span class="s1">':'</span>,<span class="w"> </span><span class="m">1</span><span class="o">)[</span><span class="m">1</span><span class="o">]</span>.strip<span class="o">()</span>
 <span class="w">                </span><span class="k">continue</span>
 <span class="w">            </span>remaining.append<span class="o">(</span>line<span class="o">)</span>
 <span class="w">        </span><span class="nv">lines</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>remaining
@@ -670,30 +670,30 @@ def<span class="w"> </span>main<span class="o">()</span>:
 <span class="w">        </span><span class="nv">cmds</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>parse_def<span class="o">(</span>lines,<span class="w"> </span>title,<span class="w"> </span>description,<span class="w"> </span>cli_name,<span class="w"> </span>alias_lead_chars<span class="o">)</span>
 
 <span class="w">        </span><span class="k">if</span><span class="w"> </span>debug:
-<span class="w">            </span>print<span class="o">(</span><span class="s2">&quot;Commands&quot;</span><span class="o">)</span>
-<span class="w">            </span>print<span class="o">(</span><span class="s2">&quot;--------&quot;</span><span class="o">)</span>
+<span class="w">            </span>print<span class="o">(</span><span class="s2">"Commands"</span><span class="o">)</span>
+<span class="w">            </span>print<span class="o">(</span><span class="s2">"--------"</span><span class="o">)</span>
 <span class="w">            </span><span class="k">for</span><span class="w"> </span>item<span class="w"> </span><span class="k">in</span><span class="w"> </span>cmds:
-<span class="w">                </span><span class="k">if</span><span class="w"> </span>item<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;cmd&#39;</span>:
-<span class="w">                    </span>print<span class="o">(</span>f<span class="s2">&quot;- {item[1].all_keys} ({item[1].shortcut})&quot;</span><span class="o">)</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span>item<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'cmd'</span>:
+<span class="w">                    </span>print<span class="o">(</span>f<span class="s2">"- {item[1].all_keys} ({item[1].shortcut})"</span><span class="o">)</span>
 
 <span class="w">        </span><span class="c1"># Generate files</span>
 <span class="w">        </span>script,<span class="w"> </span>aliases,<span class="w"> </span><span class="nv">comp_opts</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>gen_script<span class="o">(</span>cli_name,<span class="w"> </span>cmds,<span class="w"> </span>debug<span class="o">)</span>
 <span class="w">        </span><span class="nv">alias_content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>gen_alias_file<span class="o">(</span>cli_name,<span class="w"> </span>aliases,<span class="w"> </span>comp_opts<span class="o">)</span>
 <span class="w">        </span><span class="nv">markdown_content</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>gen_markdown_file<span class="o">(</span>cli_name,<span class="w"> </span>cmds,<span class="w"> </span>title,<span class="w"> </span>description<span class="o">)</span>
 
-<span class="w">        </span>with<span class="w"> </span>open<span class="o">(</span>cli_name,<span class="w"> </span><span class="s1">&#39;w&#39;</span><span class="o">)</span><span class="w"> </span>as<span class="w"> </span>f:
+<span class="w">        </span>with<span class="w"> </span>open<span class="o">(</span>cli_name,<span class="w"> </span><span class="s1">'w'</span><span class="o">)</span><span class="w"> </span>as<span class="w"> </span>f:
 <span class="w">            </span>f.write<span class="o">(</span>script<span class="o">)</span>
 <span class="w">        </span>os.chmod<span class="o">(</span>cli_name,<span class="w"> </span>0o755<span class="o">)</span>
 
-<span class="w">        </span>with<span class="w"> </span>open<span class="o">(</span>f<span class="s1">&#39;{cli_name}.alias&#39;</span>,<span class="w"> </span><span class="s1">&#39;w&#39;</span><span class="o">)</span><span class="w"> </span>as<span class="w"> </span>f:
+<span class="w">        </span>with<span class="w"> </span>open<span class="o">(</span>f<span class="s1">'{cli_name}.alias'</span>,<span class="w"> </span><span class="s1">'w'</span><span class="o">)</span><span class="w"> </span>as<span class="w"> </span>f:
 <span class="w">            </span>f.write<span class="o">(</span>alias_content<span class="o">)</span>
 
-<span class="w">        </span>with<span class="w"> </span>open<span class="o">(</span>f<span class="s1">&#39;{cli_name}.md&#39;</span>,<span class="w"> </span><span class="s1">&#39;w&#39;</span><span class="o">)</span><span class="w"> </span>as<span class="w"> </span>f:
+<span class="w">        </span>with<span class="w"> </span>open<span class="o">(</span>f<span class="s1">'{cli_name}.md'</span>,<span class="w"> </span><span class="s1">'w'</span><span class="o">)</span><span class="w"> </span>as<span class="w"> </span>f:
 <span class="w">            </span>f.write<span class="o">(</span>markdown_content<span class="o">)</span>
 
-<span class="w">        </span>print<span class="o">(</span>f<span class="s2">&quot;Generated {cli_name}, {cli_name}.alias, and {cli_name}.md&quot;</span><span class="o">)</span>
+<span class="w">        </span>print<span class="o">(</span>f<span class="s2">"Generated {cli_name}, {cli_name}.alias, and {cli_name}.md"</span><span class="o">)</span>
 
-<span class="k">if</span><span class="w"> </span><span class="nv">__name__</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;__main__&#39;</span>:
+<span class="k">if</span><span class="w"> </span><span class="nv">__name__</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">'__main__'</span>:
 <span class="w">    </span>main<span class="o">()</span>
 </code></pre></div>
         </div>
@@ -713,7 +713,7 @@ def<span class="w"> </span>main<span class="o">()</span>:
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: September 14, 2026</p>
+      <p>Last updated: October 27, 2026</p>
     </footer>
 
     <div class="scroll-container">

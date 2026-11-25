@@ -104,7 +104,7 @@
 <p>To use Postgres with Jupyter notebooks, you can connect to a Postgres database from within a Jupyter notebook as follows:</p>
 <p>Add the following code snippet to a Jupyter notebook:</p>
 <div class="codehilite"><pre><span></span><code><span class="o">%</span><span class="nf">%capture</span>
-<span class="nf">%pip</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="o">-</span><span class="n">U</span><span class="w"> </span><span class="n">jupysql</span><span class="w"> </span><span class="n">pgspecial</span><span class="w"> </span><span class="s">&quot;psycopg[binary,pool]&quot;</span>
+<span class="nf">%pip</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="o">-</span><span class="n">U</span><span class="w"> </span><span class="n">jupysql</span><span class="w"> </span><span class="n">pgspecial</span><span class="w"> </span><span class="s">"psycopg[binary,pool]"</span>
 <span class="nf">%load_ext</span><span class="w"> </span><span class="n">sql</span>
 <span class="nf">%sql</span><span class="w"> </span><span class="n">postgresql</span><span class="o">+</span><span class="n">psycopg</span><span class="o">:</span><span class="c1">//postgres:postgres@db:5432/postgres</span>
 <span class="nf">%config</span><span class="w"> </span><span class="n">SqlMagic</span><span class="p">.</span><span class="n">displaylimit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">200</span>
@@ -144,8 +144,8 @@
 <div style="border:1px solid #222; border-radius:4px">
 
 <div class="codehilite"><pre><span></span><code><span class="c">%%sql</span>
-<span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="c">%sql EXPLAIN (ANALYZE, BUFFERS) SELECT * FROM test WHERE name = &#39;Alice Smith&#39;;</span>
-<span class="nb">print</span><span class="p">(</span><span class="s">&quot;\n&quot;</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">result</span><span class="p">))</span>
+<span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="c">%sql EXPLAIN (ANALYZE, BUFFERS) SELECT * FROM test WHERE name = 'Alice Smith';</span>
+<span class="nb">print</span><span class="p">(</span><span class="s">"\n"</span><span class="p">.</span><span class="n">join</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">row</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">result</span><span class="p">))</span>
 </code></pre></div>
 
 
@@ -167,7 +167,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: January 28, 2026</p>
+      <p>Last updated: October 27, 2026</p>
     </footer>
 
     <div class="scroll-container">

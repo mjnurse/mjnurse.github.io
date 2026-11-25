@@ -112,32 +112,32 @@
 <p>The Opening Balance is in a cell named <code>openingBalance</code>, the table is named <code>transactions</code>.</p>
 <h2 id="writing-and-testing-outside-excel">Writing and Testing Outside Excel</h2>
 <p>Here is the Python code that uses the <code>xlshim</code> library to read the Excel file, process the transactions and calculate a cumulative balance.</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">xlshim</span> <span class="kn">import</span> <span class="n">load</span><span class="p">,</span> <span class="n">xl</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">xlshim</span><span class="w"> </span><span class="kn">import</span> <span class="n">load</span><span class="p">,</span> <span class="n">xl</span>
 
-<span class="n">load</span><span class="p">(</span><span class="s2">&quot;example.xlsx&quot;</span><span class="p">)</span>
+<span class="n">load</span><span class="p">(</span><span class="s2">"example.xlsx"</span><span class="p">)</span>
 
-<span class="n">opening_bal</span> <span class="o">=</span> <span class="n">xl</span><span class="p">(</span><span class="s2">&quot;openingBalance&quot;</span><span class="p">)</span>  <span class="c1"># Single value from named cell</span>
-<span class="n">trans</span> <span class="o">=</span> <span class="n">xl</span><span class="p">(</span><span class="s2">&quot;transactions[#All]&quot;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;T&quot;</span><span class="p">)</span> <span class="c1"># Table with headers</span>
+<span class="n">opening_bal</span> <span class="o">=</span> <span class="n">xl</span><span class="p">(</span><span class="s2">"openingBalance"</span><span class="p">)</span>  <span class="c1"># Single value from named cell</span>
+<span class="n">trans</span> <span class="o">=</span> <span class="n">xl</span><span class="p">(</span><span class="s2">"transactions[#All]"</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">"T"</span><span class="p">)</span> <span class="c1"># Table with headers</span>
 
 <span class="c1"># Note: </span>
 <span class="c1"># - [#All] is important in the Table read otherwise the header is ignored even though headers=True</span>
-<span class="c1"># - type=&quot;T&quot; is not a Excel xl() parameter, but is needed here and is ignored in Excel is used</span>
+<span class="c1"># - type="T" is not a Excel xl() parameter, but is needed here and is ignored in Excel is used</span>
 
 <span class="n">bal</span> <span class="o">=</span> <span class="n">opening_bal</span>
 <span class="n">balances</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="c1"># Iterate through the table rows</span>
-<span class="c1"># (could simply use balance = opening_bal + trans[&quot;Amount&quot;].cumsum())</span>
+<span class="c1"># (could simply use balance = opening_bal + trans["Amount"].cumsum())</span>
 <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">trans</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-    <span class="n">bal</span> <span class="o">+=</span> <span class="n">row</span><span class="p">[</span><span class="s2">&quot;Amount&quot;</span><span class="p">]</span>
+    <span class="n">bal</span> <span class="o">+=</span> <span class="n">row</span><span class="p">[</span><span class="s2">"Amount"</span><span class="p">]</span>
     <span class="n">balances</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">bal</span><span class="p">)</span>
 
 <span class="c1"># Add to the trans data frame</span>
 <span class="c1"># (an unnecessary step here, could instead return balances)</span>
-<span class="n">trans</span><span class="p">[</span><span class="s2">&quot;balance&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">balances</span>
+<span class="n">trans</span><span class="p">[</span><span class="s2">"balance"</span><span class="p">]</span> <span class="o">=</span> <span class="n">balances</span>
 
 <span class="c1"># Return to Excel (.values return only row, no header)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">trans</span><span class="p">[</span><span class="s1">&#39;balance&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">trans</span><span class="p">[</span><span class="s1">'balance'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
 </code></pre></div>
 
 <p>When run, this produces the following output:</p>
@@ -153,15 +153,15 @@
 <p><img src="/python/images/excel-with-balances.png" width="600"></p>
 <h1 id="example-2">Example 2</h1>
 <p>Using the same Excel file, here is another example that calculates the total debits and credits and added them as a <strong>Stats</strong> table.</p>
-<div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">xlshim</span> <span class="kn">import</span> <span class="n">load</span><span class="p">,</span> <span class="n">xl</span>
+<div class="codehilite"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">xlshim</span><span class="w"> </span><span class="kn">import</span> <span class="n">load</span><span class="p">,</span> <span class="n">xl</span>
 
-<span class="n">load</span><span class="p">(</span><span class="s2">&quot;example.xlsx&quot;</span><span class="p">)</span>
+<span class="n">load</span><span class="p">(</span><span class="s2">"example.xlsx"</span><span class="p">)</span>
 
-<span class="n">opening_bal</span> <span class="o">=</span> <span class="n">xl</span><span class="p">(</span><span class="s2">&quot;openingBalance&quot;</span><span class="p">)</span>  <span class="c1"># Single value from named cell</span>
-<span class="n">trans</span> <span class="o">=</span> <span class="n">xl</span><span class="p">(</span><span class="s2">&quot;transactions[#All]&quot;</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;T&quot;</span><span class="p">)</span> <span class="c1"># Table with headers</span>
+<span class="n">opening_bal</span> <span class="o">=</span> <span class="n">xl</span><span class="p">(</span><span class="s2">"openingBalance"</span><span class="p">)</span>  <span class="c1"># Single value from named cell</span>
+<span class="n">trans</span> <span class="o">=</span> <span class="n">xl</span><span class="p">(</span><span class="s2">"transactions[#All]"</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s2">"T"</span><span class="p">)</span> <span class="c1"># Table with headers</span>
 
 <span class="c1"># Separate Credits and Debits using Vectorized Masks</span>
-<span class="n">amounts</span> <span class="o">=</span> <span class="n">trans</span><span class="p">[</span><span class="s2">&quot;Amount&quot;</span><span class="p">]</span>
+<span class="n">amounts</span> <span class="o">=</span> <span class="n">trans</span><span class="p">[</span><span class="s2">"Amount"</span><span class="p">]</span>
 <span class="n">credits</span> <span class="o">=</span> <span class="n">amounts</span><span class="p">[</span><span class="n">amounts</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
 <span class="n">debits</span> <span class="o">=</span> <span class="n">amounts</span><span class="p">[</span><span class="n">amounts</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">]</span>
 
@@ -172,9 +172,9 @@
 
 <span class="c1"># Create the stats table</span>
 <span class="n">stats</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">[</span><span class="s1">&#39;Credits&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">credits</span><span class="p">),</span> <span class="n">total_credits</span><span class="p">],</span>
-    <span class="p">[</span><span class="s1">&#39;Debits&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">debits</span><span class="p">),</span> <span class="n">total_debits</span><span class="p">],</span>
-    <span class="p">[</span><span class="s1">&#39;Closing Balance&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">closing_bal</span><span class="p">]</span>
+    <span class="p">[</span><span class="s1">'Credits'</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">credits</span><span class="p">),</span> <span class="n">total_credits</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">'Debits'</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">debits</span><span class="p">),</span> <span class="n">total_debits</span><span class="p">],</span>
+    <span class="p">[</span><span class="s1">'Closing Balance'</span><span class="p">,</span> <span class="s1">''</span><span class="p">,</span> <span class="n">closing_bal</span><span class="p">]</span>
 <span class="p">]</span>
 
 <span class="c1"># Return to Excel</span>
@@ -182,7 +182,7 @@
 </code></pre></div>
 
 <p>When run, this produces the following output:</p>
-<div class="codehilite"><pre><span></span><code>[[&#39;Credits&#39;, 6, 3703.06], [&#39;Debits&#39;, 14, -543.08], [&#39;Closing Balance&#39;, &#39;&#39;, 5693.98]]
+<div class="codehilite"><pre><span></span><code>[['Credits', 6, 3703.06], ['Debits', 14, -543.08], ['Closing Balance', '', 5693.98]]
 </code></pre></div>
 
 <p>When used in Excel, this produces the following:</p>
@@ -204,7 +204,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: December 23, 2025</p>
+      <p>Last updated: October 27, 2026</p>
     </footer>
 
     <div class="scroll-container">

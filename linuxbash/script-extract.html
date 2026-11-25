@@ -92,7 +92,7 @@
         <div class="article-body">
           <h1><a class="link" href="#" data-clipboard="code ~/mjnurse/mjnurse-website/linuxbash/script-extract.md">extract: Universal archive extractor</a></h1>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/usr/bin/env bash</span>
-<span class="nv">help_text</span><span class="o">=</span><span class="s2">&quot;</span>
+<span class="nv">help_text</span><span class="o">=</span><span class="s2">"</span>
 <span class="s2">NAME</span>
 <span class="s2">    extract - Universal archive extractor.</span>
 
@@ -108,24 +108,24 @@
 
 <span class="s2">AUTHOR</span>
 <span class="s2">    mjnurse.github.io - 2026</span>
-<span class="s2">&quot;</span>
-<span class="nv">help_line</span><span class="o">=</span><span class="s2">&quot;Universal archive extractor&quot;</span>
-<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">&quot;Universal archive extractor&quot;</span>
+<span class="s2">"</span>
+<span class="nv">help_line</span><span class="o">=</span><span class="s2">"Universal archive extractor"</span>
+<span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">"Universal archive extractor"</span>
 
-<span class="nv">try</span><span class="o">=</span><span class="s2">&quot;Try </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h for more information&quot;</span>
-<span class="nv">tmp</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">help_text</span><span class="p">##*USAGE</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="nv">usage</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Usage: </span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%OPTIONS*</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s2">&quot;\n&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">&quot;s/  */ /g&quot;</span><span class="k">)</span>
+<span class="nv">try</span><span class="o">=</span><span class="s2">"Try </span><span class="si">${</span><span class="nv">0</span><span class="p">##*/</span><span class="si">}</span><span class="s2"> -h for more information"</span>
+<span class="nv">tmp</span><span class="o">=</span><span class="s2">"</span><span class="si">${</span><span class="nv">help_text</span><span class="p">##*USAGE</span><span class="si">}</span><span class="s2">"</span>
+<span class="nv">usage</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Usage: </span><span class="si">${</span><span class="nv">tmp</span><span class="p">%%OPTIONS*</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s2">"\n"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>sed<span class="w"> </span><span class="s2">"s/  */ /g"</span><span class="k">)</span>
 
-<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">usage</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">try</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">usage</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">try</span><span class="si">}</span><span class="s2">"</span>
 <span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
 <span class="k">fi</span>
 
-<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$1</span><span class="s2">&quot;</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">&quot;&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
 <span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
 <span class="w">        </span>-h<span class="p">|</span>--help<span class="o">)</span>
-<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$help_text</span><span class="s2">&quot;</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$help_text</span><span class="s2">"</span>
 <span class="w">            </span><span class="nb">exit</span>
 <span class="w">            </span><span class="p">;;</span>
 <span class="w">        </span>?*<span class="o">)</span>
@@ -137,36 +137,36 @@
 
 <span class="nb">set</span><span class="w"> </span>-euo<span class="w"> </span>pipefail
 
-<span class="k">for</span><span class="w"> </span>file<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$@</span><span class="s2">&quot;</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;extract: &#39;</span><span class="nv">$file</span><span class="s2">&#39; not found&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+<span class="k">for</span><span class="w"> </span>file<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>!<span class="w"> </span>-f<span class="w"> </span><span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"extract: '</span><span class="nv">$file</span><span class="s2">' not found"</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
 <span class="w">        </span><span class="k">continue</span>
 <span class="w">    </span><span class="k">fi</span>
-<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Extracting: </span><span class="nv">$file</span><span class="s2">&quot;</span>
-<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span><span class="k">in</span>
-<span class="w">        </span>*.tar.bz2<span class="p">|</span>*.tbz2<span class="o">)</span><span class="w">  </span>tar<span class="w"> </span>xjf<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w">     </span><span class="p">;;</span>
-<span class="w">        </span>*.tar.gz<span class="p">|</span>*.tgz<span class="o">)</span><span class="w">    </span>tar<span class="w"> </span>xzf<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w">     </span><span class="p">;;</span>
-<span class="w">        </span>*.tar.xz<span class="p">|</span>*.txz<span class="o">)</span><span class="w">    </span>tar<span class="w"> </span>xJf<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w">     </span><span class="p">;;</span>
-<span class="w">        </span>*.tar.zst<span class="o">)</span><span class="w">         </span>tar<span class="w"> </span>--zstd<span class="w"> </span>-xf<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">;;</span>
-<span class="w">        </span>*.tar<span class="o">)</span><span class="w">             </span>tar<span class="w"> </span>xf<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w">      </span><span class="p">;;</span>
-<span class="w">        </span>*.bz2<span class="o">)</span><span class="w">             </span>bunzip2<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w">     </span><span class="p">;;</span>
-<span class="w">        </span>*.gz<span class="o">)</span><span class="w">              </span>gunzip<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w">      </span><span class="p">;;</span>
-<span class="w">        </span>*.xz<span class="o">)</span><span class="w">              </span>unxz<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w">        </span><span class="p">;;</span>
-<span class="w">        </span>*.zip<span class="o">)</span><span class="w">             </span>unzip<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w">       </span><span class="p">;;</span>
-<span class="w">        </span>*.7z<span class="o">)</span><span class="w">              </span>7z<span class="w"> </span>x<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w">        </span><span class="p">;;</span>
-<span class="w">        </span>*.rar<span class="o">)</span><span class="w">             </span>unrar<span class="w"> </span>x<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w">     </span><span class="p">;;</span>
-<span class="w">        </span>*.Z<span class="o">)</span><span class="w">               </span>uncompress<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w">  </span><span class="p">;;</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Extracting: </span><span class="nv">$file</span><span class="s2">"</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span><span class="w"> </span><span class="k">in</span>
+<span class="w">        </span>*.tar.bz2<span class="p">|</span>*.tbz2<span class="o">)</span><span class="w">  </span>tar<span class="w"> </span>xjf<span class="w"> </span><span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span><span class="w">     </span><span class="p">;;</span>
+<span class="w">        </span>*.tar.gz<span class="p">|</span>*.tgz<span class="o">)</span><span class="w">    </span>tar<span class="w"> </span>xzf<span class="w"> </span><span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span><span class="w">     </span><span class="p">;;</span>
+<span class="w">        </span>*.tar.xz<span class="p">|</span>*.txz<span class="o">)</span><span class="w">    </span>tar<span class="w"> </span>xJf<span class="w"> </span><span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span><span class="w">     </span><span class="p">;;</span>
+<span class="w">        </span>*.tar.zst<span class="o">)</span><span class="w">         </span>tar<span class="w"> </span>--zstd<span class="w"> </span>-xf<span class="w"> </span><span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span><span class="w"> </span><span class="p">;;</span>
+<span class="w">        </span>*.tar<span class="o">)</span><span class="w">             </span>tar<span class="w"> </span>xf<span class="w"> </span><span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span><span class="w">      </span><span class="p">;;</span>
+<span class="w">        </span>*.bz2<span class="o">)</span><span class="w">             </span>bunzip2<span class="w"> </span><span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span><span class="w">     </span><span class="p">;;</span>
+<span class="w">        </span>*.gz<span class="o">)</span><span class="w">              </span>gunzip<span class="w"> </span><span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span><span class="w">      </span><span class="p">;;</span>
+<span class="w">        </span>*.xz<span class="o">)</span><span class="w">              </span>unxz<span class="w"> </span><span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span><span class="w">        </span><span class="p">;;</span>
+<span class="w">        </span>*.zip<span class="o">)</span><span class="w">             </span>unzip<span class="w"> </span><span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span><span class="w">       </span><span class="p">;;</span>
+<span class="w">        </span>*.7z<span class="o">)</span><span class="w">              </span>7z<span class="w"> </span>x<span class="w"> </span><span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span><span class="w">        </span><span class="p">;;</span>
+<span class="w">        </span>*.rar<span class="o">)</span><span class="w">             </span>unrar<span class="w"> </span>x<span class="w"> </span><span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span><span class="w">     </span><span class="p">;;</span>
+<span class="w">        </span>*.Z<span class="o">)</span><span class="w">               </span>uncompress<span class="w"> </span><span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span><span class="w">  </span><span class="p">;;</span>
 <span class="w">        </span>*.deb<span class="o">)</span>
-<span class="w">            </span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">file</span><span class="p">%.deb</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">            </span>dpkg-deb<span class="w"> </span>-xv<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">file</span><span class="p">%.deb</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w">            </span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">file</span><span class="p">%.deb</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">            </span>dpkg-deb<span class="w"> </span>-xv<span class="w"> </span><span class="s2">"</span><span class="nv">$file</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">file</span><span class="p">%.deb</span><span class="si">}</span><span class="s2">"</span>
 <span class="w">            </span><span class="p">;;</span>
 <span class="w">        </span>*.rpm<span class="o">)</span>
-<span class="w">            </span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">file</span><span class="p">%.rpm</span><span class="si">}</span><span class="s2">&quot;</span>
-<span class="w">            </span><span class="nb">cd</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">file</span><span class="p">%.rpm</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rpm2cpio<span class="w"> </span><span class="s2">&quot;../</span><span class="nv">$file</span><span class="s2">&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cpio<span class="w"> </span>-idmv
+<span class="w">            </span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">file</span><span class="p">%.rpm</span><span class="si">}</span><span class="s2">"</span>
+<span class="w">            </span><span class="nb">cd</span><span class="w"> </span><span class="s2">"</span><span class="si">${</span><span class="nv">file</span><span class="p">%.rpm</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rpm2cpio<span class="w"> </span><span class="s2">"../</span><span class="nv">$file</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>cpio<span class="w"> </span>-idmv
 <span class="w">            </span><span class="nb">cd</span><span class="w"> </span>..
 <span class="w">            </span><span class="p">;;</span>
 <span class="w">        </span>*<span class="o">)</span>
-<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;extract: unknown format — &#39;</span><span class="nv">$file</span><span class="s2">&#39;&quot;</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"extract: unknown format — '</span><span class="nv">$file</span><span class="s2">'"</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
 <span class="w">            </span><span class="p">;;</span>
 <span class="w">    </span><span class="k">esac</span>
 <span class="k">done</span>
@@ -188,7 +188,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: August 07, 2026</p>
+      <p>Last updated: October 19, 2026</p>
     </footer>
 
     <div class="scroll-container">

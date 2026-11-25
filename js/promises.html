@@ -104,32 +104,32 @@
 <span class="w">  </span><span class="p">}</span>
 <span class="w">  </span><span class="c1">// So we can test both the resolve and reject paths</span>
 <span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">rndInt</span><span class="p">(</span><span class="mf">2</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mf">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">resolveFunc</span><span class="p">(</span><span class="s1">&#39;Promise - a success value&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">resolveFunc</span><span class="p">(</span><span class="s1">'Promise - a success value'</span><span class="p">);</span>
 <span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="nx">rejectFunc</span><span class="p">(</span><span class="s1">&#39;Promise - a failure value&#39;</span><span class="p">);</span>
+<span class="w">    </span><span class="nx">rejectFunc</span><span class="p">(</span><span class="s1">'Promise - a failure value'</span><span class="p">);</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 
 <span class="kd">function</span><span class="w"> </span><span class="nx">resolve</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;resolve value:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">timeMS</span><span class="p">(</span><span class="nx">startTime</span><span class="p">));</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'resolve value:'</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">timeMS</span><span class="p">(</span><span class="nx">startTime</span><span class="p">));</span>
 <span class="p">}</span>
 
 <span class="kd">function</span><span class="w"> </span><span class="nx">reject</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;reject value:&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">timeMS</span><span class="p">(</span><span class="nx">startTime</span><span class="p">));</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'reject value:'</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">,</span><span class="w"> </span><span class="nx">timeMS</span><span class="p">(</span><span class="nx">startTime</span><span class="p">));</span>
 <span class="p">}</span>
 
 <span class="kd">const</span><span class="w"> </span><span class="nx">startTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">timeMS</span><span class="p">();</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;start - create promises&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">timeMS</span><span class="p">(</span><span class="nx">startTime</span><span class="p">));</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'start - create promises'</span><span class="p">,</span><span class="w"> </span><span class="nx">timeMS</span><span class="p">(</span><span class="nx">startTime</span><span class="p">));</span>
 
 <span class="kd">const</span><span class="w"> </span><span class="nx">prom1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Promise</span><span class="p">(</span><span class="nx">prom</span><span class="p">);</span>
 <span class="kd">const</span><span class="w"> </span><span class="nx">prom2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nb">Promise</span><span class="p">(</span><span class="nx">prom</span><span class="p">);</span>
 
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;promises created&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">timeMS</span><span class="p">(</span><span class="nx">startTime</span><span class="p">));</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'promises created'</span><span class="p">,</span><span class="w"> </span><span class="nx">timeMS</span><span class="p">(</span><span class="nx">startTime</span><span class="p">));</span>
 
 <span class="nx">prom1</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span><span class="w"> </span><span class="nx">reject</span><span class="p">);</span>
 <span class="nx">prom2</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span><span class="w"> </span><span class="nx">reject</span><span class="p">);</span>
 
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;end&#39;</span><span class="p">,</span><span class="w"> </span><span class="nx">timeMS</span><span class="p">(</span><span class="nx">startTime</span><span class="p">));</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span><span class="w"> </span><span class="nx">timeMS</span><span class="p">(</span><span class="nx">startTime</span><span class="p">));</span>
 </code></pre></div>
 
 <hr>
@@ -150,7 +150,7 @@
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: December 11, 2025</p>
+      <p>Last updated: October 27, 2026</p>
     </footer>
 
     <div class="scroll-container">

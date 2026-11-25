@@ -94,42 +94,42 @@
 <p>Nothing special, just the steps from Elasticsearch.</p>
 <div class="codehilite"><pre><span></span><code><span class="ch">#!/bin/bash</span>
 
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Install Elasticsearch&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Install Elasticsearch"</span>
 
 <span class="nb">echo</span>
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Getting public signing key - GPG-KEY-elasticsearch&quot;</span>
-<span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Press RTN to continnue, CTRL-C to exit &quot;</span><span class="w"> </span>dummy
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Getting public signing key - GPG-KEY-elasticsearch"</span>
+<span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">"Press RTN to continnue, CTRL-C to exit "</span><span class="w"> </span>dummy
 
 <span class="c1"># wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo gpg --dearmor -o /usr/share/keyrings/elasticsearch-keyring.gpg</span>
 
 <span class="nb">echo</span>
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Instaling apt-transport-https&quot;</span>
-<span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Press RTN to continnue, CTRL-C to exit &quot;</span><span class="w"> </span>dummy
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Instaling apt-transport-https"</span>
+<span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">"Press RTN to continnue, CTRL-C to exit "</span><span class="w"> </span>dummy
 
 <span class="c1"># sudo apt-get install apt-transport-https</span>
 
 <span class="nb">echo</span>
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Saving the repository definition to /etc/apt/sources.list.d/elastic-8.x.list&quot;</span>
-<span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Press RTN to continnue, CTRL-C to exit &quot;</span><span class="w"> </span>dummy
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Saving the repository definition to /etc/apt/sources.list.d/elastic-8.x.list"</span>
+<span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">"Press RTN to continnue, CTRL-C to exit "</span><span class="w"> </span>dummy
 
-<span class="c1"># echo &quot;deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://artifacts.elastic.co/packages/8.x/apt stable main&quot; | sudo tee /etc/apt/sources.list.d/elastic-8.x.list</span>
+<span class="c1"># echo "deb [signed-by=/usr/share/keyrings/elasticsearch-keyring.gpg] https://artifacts.elastic.co/packages/8.x/apt stable main" | sudo tee /etc/apt/sources.list.d/elastic-8.x.list</span>
 
 <span class="nb">echo</span>
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Install elasticsearch&quot;</span>
-<span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Press RTN to continnue, CTRL-C to exit &quot;</span><span class="w"> </span>dummy
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Install elasticsearch"</span>
+<span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">"Press RTN to continnue, CTRL-C to exit "</span><span class="w"> </span>dummy
 
 <span class="c1"># sudo apt-get update &amp;&amp; sudo apt-get install elasticsearch</span>
 
 <span class="nb">echo</span>
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Configuring elasticsearch service to start automatically using systemd&quot;</span>
-<span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Press RTN to continnue, CTRL-C to exit &quot;</span><span class="w"> </span>dummy
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Configuring elasticsearch service to start automatically using systemd"</span>
+<span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">"Press RTN to continnue, CTRL-C to exit "</span><span class="w"> </span>dummy
 
 sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload
 sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>elasticsearch.service
 
 <span class="nb">echo</span>
-<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Starting elasticsearch service&quot;</span>
-<span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;Press RTN to continnue, CTRL-C to exit &quot;</span><span class="w"> </span>dummy
+<span class="nb">echo</span><span class="w"> </span><span class="s2">"Starting elasticsearch service"</span>
+<span class="nb">read</span><span class="w"> </span>-p<span class="w"> </span><span class="s2">"Press RTN to continnue, CTRL-C to exit "</span><span class="w"> </span>dummy
 
 sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>elasticsearch.service
 </code></pre></div>
@@ -152,7 +152,7 @@ sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: December 11, 2025</p>
+      <p>Last updated: October 27, 2026</p>
     </footer>
 
     <div class="scroll-container">
