@@ -112,15 +112,11 @@ halt<span class="w"> </span>mdm<span class="w"> </span><span class="o">(</span>h
 <span class="w">    </span>mjn-stop-mdm
 
 <span class="c1"># ------------------------------------------------------------------------------------------------------------</span>
-<span class="o">=</span><span class="w"> </span>ES<span class="w"> </span>/<span class="w"> </span>Postgres
+<span class="o">=</span><span class="w"> </span>HO<span class="w"> </span>Borders
 <span class="c1"># ------------------------------------------------------------------------------------------------------------</span>
 
-start<span class="w"> </span>es<span class="w"> </span><span class="o">(</span>se<span class="o">)</span><span class="w"> </span>::
-<span class="w">    </span>mjn-start-es-pg<span class="w"> </span>es
-
-start<span class="w"> </span>postgres<span class="w"> </span><span class="o">(</span>sp<span class="o">)</span><span class="w"> </span>::
-<span class="w">    </span>mjn-start-es-pg<span class="w"> </span>pg
-
+restart<span class="w"> </span>hob<span class="w"> </span><span class="o">(</span>rh<span class="o">)</span><span class="w"> </span>::
+<span class="w">    </span>docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span><span class="nv">$HOME</span>/ho-borders-poc/docker/docker-compose-apps.yml<span class="w"> </span>restart
 
 <span class="c1"># ------------------------------------------------------------------------------------------------------------</span>
 <span class="o">=</span><span class="w"> </span>CLI-BUILDER
@@ -159,15 +155,14 @@ _r_complete<span class="o">()</span><span class="w"> </span><span class="o">{</s
 <span class="w">    </span><span class="k">done</span>
 
 <span class="o">}</span>
-<span class="nb">complete</span><span class="w"> </span>-F<span class="w"> </span>_r_complete<span class="w"> </span>r<span class="w"> </span>@rhe<span class="w"> </span>@rsm<span class="w"> </span>@rrm<span class="w"> </span>@rhm<span class="w"> </span>@rse<span class="w"> </span>@rsp<span class="w"> </span>@rcba
+<span class="nb">complete</span><span class="w"> </span>-F<span class="w"> </span>_r_complete<span class="w"> </span>r<span class="w"> </span>@rhe<span class="w"> </span>@rsm<span class="w"> </span>@rrm<span class="w"> </span>@rhm<span class="w"> </span>@rrh<span class="w"> </span>@rcba
 
 <span class="c1"># Shortcut aliases</span>
 <span class="nb">alias</span><span class="w"> </span>@rhe<span class="o">=</span><span class="s1">'r rhe'</span>
 <span class="nb">alias</span><span class="w"> </span>@rsm<span class="o">=</span><span class="s1">'r rsm'</span>
 <span class="nb">alias</span><span class="w"> </span>@rrm<span class="o">=</span><span class="s1">'r rrm'</span>
 <span class="nb">alias</span><span class="w"> </span>@rhm<span class="o">=</span><span class="s1">'r rhm'</span>
-<span class="nb">alias</span><span class="w"> </span>@rse<span class="o">=</span><span class="s1">'r rse'</span>
-<span class="nb">alias</span><span class="w"> </span>@rsp<span class="o">=</span><span class="s1">'r rsp'</span>
+<span class="nb">alias</span><span class="w"> </span>@rrh<span class="o">=</span><span class="s1">'r rrh'</span>
 <span class="nb">alias</span><span class="w"> </span>@rcba<span class="o">=</span><span class="s1">'r rcba'</span>
 </code></pre></div>
 
@@ -197,7 +192,7 @@ print_command<span class="o">()</span><span class="w"> </span><span class="o">{<
 <span class="w">   </span><span class="nv">usage</span><span class="o">=</span><span class="s2">"\x1b[95mhelp \x1b[96m(rhe)\x1b[97m [filter]\x1b[92m # Show help, optionally filtered by pattern\x1b[0m"</span>
 <span class="w">   </span>check_params<span class="w"> </span><span class="nv">$#</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="s2">"Usage: </span><span class="nv">$usage</span><span class="s2">"</span>
 
-<span class="w">   </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"\x1b[95mgenerated:2026-09-14 17:03\x1b[0m"</span>
+<span class="w">   </span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">"\x1b[95mgenerated:2026-11-26 09:06\x1b[0m"</span>
 <span class="w">   </span><span class="nb">echo</span>
 <span class="w">   </span><span class="nv">filter</span><span class="o">=</span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span>
 <span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">"</span><span class="nv">$filter</span><span class="s2">"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
@@ -249,23 +244,14 @@ print_command<span class="o">()</span><span class="w"> </span><span class="o">{<
 <span class="w">   </span>mjn-stop-mdm
 <span class="w">   </span><span class="nb">exit</span>
 <span class="k">fi</span>
-<span class="nv">section</span><span class="o">=</span><span class="s2">"ES / Postgres"</span>
+<span class="nv">section</span><span class="o">=</span><span class="s2">"HO Borders"</span>
 
-<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2"> </span><span class="nv">$2</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"start es"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"rse"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">   </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"rse"</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="m">2</span>
-<span class="w">   </span><span class="nv">usage</span><span class="o">=</span><span class="s2">"\x1b[95mstart es \x1b[96m(rse)\x1b[97m\x1b[0m"</span>
+<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2"> </span><span class="nv">$2</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"restart hob"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"rrh"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<span class="w">   </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"rrh"</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="m">2</span>
+<span class="w">   </span><span class="nv">usage</span><span class="o">=</span><span class="s2">"\x1b[95mrestart hob \x1b[96m(rrh)\x1b[97m\x1b[0m"</span>
 <span class="w">   </span>check_params<span class="w"> </span><span class="nv">$#</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="s2">"Usage: </span><span class="nv">$usage</span><span class="s2">"</span>
-<span class="w">   </span>print_command<span class="w"> </span><span class="s2">" mjn-start-es-pg es"</span>
-<span class="w">   </span>mjn-start-es-pg<span class="w"> </span>es
-<span class="w">   </span><span class="nb">exit</span>
-<span class="k">fi</span>
-
-<span class="k">if</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2"> </span><span class="nv">$2</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"start postgres"</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"rsp"</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
-<span class="w">   </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"rsp"</span><span class="w"> </span><span class="o">]]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">shift</span><span class="w"> </span><span class="m">2</span>
-<span class="w">   </span><span class="nv">usage</span><span class="o">=</span><span class="s2">"\x1b[95mstart postgres \x1b[96m(rsp)\x1b[97m\x1b[0m"</span>
-<span class="w">   </span>check_params<span class="w"> </span><span class="nv">$#</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="s2">"Usage: </span><span class="nv">$usage</span><span class="s2">"</span>
-<span class="w">   </span>print_command<span class="w"> </span><span class="s2">" mjn-start-es-pg pg"</span>
-<span class="w">   </span>mjn-start-es-pg<span class="w"> </span>pg
+<span class="w">   </span>print_command<span class="w"> </span><span class="s2">" docker compose -f </span><span class="nv">$HOME</span><span class="s2">/ho-borders-poc/docker/docker-compose-apps.yml restart"</span>
+<span class="w">   </span>docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span><span class="nv">$HOME</span>/ho-borders-poc/docker/docker-compose-apps.yml<span class="w"> </span>restart
 <span class="w">   </span><span class="nb">exit</span>
 <span class="k">fi</span>
 <span class="nv">section</span><span class="o">=</span><span class="s2">"CLI-BUILDER"</span>
@@ -304,7 +290,7 @@ print_command<span class="o">()</span><span class="w"> </span><span class="o">{<
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: October 27, 2026</p>
+      <p>Last updated: November 26, 2026</p>
     </footer>
 
     <div class="scroll-container">
