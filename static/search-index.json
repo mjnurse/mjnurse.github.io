@@ -1172,7 +1172,7 @@
     "id": "167",
     "title": "trunc: Truncate lines to fit terminal width or a specified width",
     "url": "/linuxbash/script-trunc.html",
-    "content": "#!/usr/bin/env bash help_text=\" usage: trunc [options] &lt;filename&gt; -h|--help: This help text. -w|--width: Specify width (default is terminal width less 1). \" help_line=\"Truncate lines to fit terminal width or a specified width\" web_desc_line=\"Truncate lines to fit terminal width or a specified width\" case $1 in -h|--help) echo \"$help_text\" exit ;; -w|--width) w=\"$2\" shift 2 ;; esac if [ -z \"$1\" ] &amp;&amp; [ -t 0 ]; then echo \"Usage: $(basename \"$0\") &lt;filename&gt; (or pipe data in)\" &gt",
+    "content": "#!/usr/bin/env bash help_text=\" usage: trunc [options] &lt;filename&gt; -h|--help: This help text. -r|--replacement: Specify replacement string for truncated lines (default is empty). -w|--width: Specify width (default is terminal width less 1). \" help_line=\"Truncate lines to fit terminal width or a specified width\" web_desc_line=\"Truncate lines to fit terminal width or a specified width\" while [[ \"$1\" != \"\" ]]; do case $1 in -h|--help) echo \"$help_text\" exit ;; -r|--replacement) replacement=\"$2",
     "type": "page"
   },
   {
@@ -1515,7 +1515,7 @@
     "id": "216",
     "title": "Run CLI",
     "url": "/other/cli_builder/definition-file-run-r.def.html",
-    "content": "Definition file r.def The definition file contains command definitions for the CLI builder. # Run # ------------------------------------------------------------------------------------------------------------ = MDM # ------------------------------------------------------------------------------------------------------------ start mdm (sm) [&lt;streaming|ui|all|k(afka)&gt;|kapp&gt;|shaper] :: mjn-start-mdm $1 ## kapp starts kafka streaming for the application data source restart mdm (rm) [&lt;str",
+    "content": "Definition file r.def The definition file contains command definitions for the CLI builder. # Run # ------------------------------------------------------------------------------------------------------------ = General # ------------------------------------------------------------------------------------------------------------ edit run def (erd) :: code $HOME/mjnurse/cli-builder/r.def # ------------------------------------------------------------------------------------------------------------ ",
     "type": "page"
   },
   {

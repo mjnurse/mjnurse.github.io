@@ -95,22 +95,33 @@
 <span class="nv">help_text</span><span class="o">=</span><span class="s2">"</span>
 <span class="s2">usage: trunc [options] &lt;filename&gt;</span>
 <span class="s2">-h|--help:  This help text.</span>
+<span class="s2">-r|--replacement: Specify replacement string for truncated lines (default is empty).</span>
 <span class="s2">-w|--width: Specify width (default is terminal width less 1).</span>
 <span class="s2">"</span>
 
 <span class="nv">help_line</span><span class="o">=</span><span class="s2">"Truncate lines to fit terminal width or a specified width"</span>
 <span class="nv">web_desc_line</span><span class="o">=</span><span class="s2">"Truncate lines to fit terminal width or a specified width"</span>
 
-<span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
-<span class="w">    </span>-h<span class="p">|</span>--help<span class="o">)</span>
-<span class="w">        </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$help_text</span><span class="s2">"</span>
-<span class="w">        </span><span class="nb">exit</span>
-<span class="w">        </span><span class="p">;;</span>
-<span class="w">    </span>-w<span class="p">|</span>--width<span class="o">)</span>
-<span class="w">        </span><span class="nv">w</span><span class="o">=</span><span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span>
-<span class="w">        </span><span class="nb">shift</span><span class="w"> </span><span class="m">2</span>
-<span class="w">        </span><span class="p">;;</span>
-<span class="k">esac</span>
+<span class="k">while</span><span class="w"> </span><span class="o">[[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="w"> </span><span class="o">]]</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<span class="w">    </span><span class="k">case</span><span class="w"> </span><span class="nv">$1</span><span class="w"> </span><span class="k">in</span>
+<span class="w">        </span>-h<span class="p">|</span>--help<span class="o">)</span>
+<span class="w">            </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"</span><span class="nv">$help_text</span><span class="s2">"</span>
+<span class="w">            </span><span class="nb">exit</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>-r<span class="p">|</span>--replacement<span class="o">)</span>
+<span class="w">            </span><span class="nv">replacement</span><span class="o">=</span><span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span>
+<span class="w">            </span><span class="nb">shift</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>-w<span class="p">|</span>--width<span class="o">)</span>
+<span class="w">            </span><span class="nv">w</span><span class="o">=</span><span class="s2">"</span><span class="nv">$2</span><span class="s2">"</span>
+<span class="w">            </span><span class="nb">shift</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">        </span>*<span class="o">)</span><span class="w"> </span>
+<span class="w">            </span><span class="k">break</span>
+<span class="w">            </span><span class="p">;;</span>
+<span class="w">    </span><span class="k">esac</span>
+<span class="nb">shift</span>
+<span class="k">done</span>
 
 <span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-z<span class="w"> </span><span class="s2">"</span><span class="nv">$1</span><span class="s2">"</span><span class="w"> </span><span class="o">]</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">[</span><span class="w"> </span>-t<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
 <span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="s2">"Usage: </span><span class="k">$(</span>basename<span class="w"> </span><span class="s2">"</span><span class="nv">$0</span><span class="s2">"</span><span class="k">)</span><span class="s2"> &lt;filename&gt;  (or pipe data in)"</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
@@ -122,9 +133,8 @@
 <span class="w">    </span><span class="nv">w</span><span class="o">=</span><span class="k">$((</span><span class="w"> </span><span class="k">$(</span>tput<span class="w"> </span>cols<span class="k">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="k">))</span>
 <span class="k">fi</span>
 
-cat<span class="w"> </span><span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>perl<span class="w"> </span>-s<span class="w"> </span>-pe<span class="w"> </span><span class="s1">'</span>
-<span class="s1">    s/^((?:\e\[[0-9;]*[[:alpha:]]|[^\e]){$w}).*/$1/</span>
-<span class="s1">'</span><span class="w"> </span>--<span class="w"> </span>-w<span class="o">=</span><span class="s2">"</span><span class="nv">$w</span><span class="s2">"</span>
+<span class="nb">let</span><span class="w"> </span><span class="nv">w</span><span class="o">=</span>w-<span class="si">${#</span><span class="nv">replacement</span><span class="si">}</span>
+awk<span class="w"> </span>-v<span class="w"> </span><span class="nv">w</span><span class="o">=</span><span class="s2">"</span><span class="nv">$w</span><span class="s2">"</span><span class="w"> </span>-v<span class="w"> </span><span class="nv">r</span><span class="o">=</span><span class="s2">"</span><span class="nv">$replacement</span><span class="s2">"</span><span class="w"> </span><span class="s1">'length($0) &gt; w { $0 = substr($0, 1, w) r } 1'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span>
 </code></pre></div>
         </div>
       </article>
@@ -143,7 +153,7 @@ cat<span class="w"> </span><span class="s2">"</span><span class="nv">$@</span><s
           <i aria-hidden="true" class="fab fa-linkedin"></i>
         </a>
       </p>
-      <p>Last updated: October 26, 2026</p>
+      <p>Last updated: November 26, 2026</p>
     </footer>
 
     <div class="scroll-container">
